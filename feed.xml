@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2017-10-17T02:12:10-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Posting from Jekyll to GitHub Pages with Bitbucket Pipeline</title><link href="http://lgallardo.com/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" rel="alternate" type="text/html" title="Posting from Jekyll to GitHub Pages with Bitbucket Pipeline" /><published>2017-10-13T16:41:51-03:00</published><updated>2017-10-13T16:41:51-03:00</updated><id>http://lgallardo.com/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline</id><content type="html" xml:base="http://lgallardo.com/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;/images/automating-jekyll-deployment-to-github-pages-with-bitbucket-pipeline.jpg&quot; alt=&quot;Posting with pipeline&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I had some security issues with WordPress so I decided to changed my blog to something static and served from GitHub Pages. But the new site had to meet some minimum requirements:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Good looking&lt;/li&gt;
+  &lt;li&gt;Multi-language support (Spanish and English)&lt;/li&gt;
+  &lt;li&gt;Static, no scripts or databases&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Jekyll&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I had heard about this solution so I had it as a reference, like Hugo, but I saw it’s supported by GitHub Pages therefore I decided to give it a try.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;From WordPress to Jekyll&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To recover the already published posts I set an isolated Docker environment using a database dump of the site and the latest WordPress version with the needed plugins to made it work.&lt;/p&gt;
+
+&lt;p&gt;Then to export all posts I used the &lt;a href=&quot;https://github.com/benbalter/wordpress-to-jekyll-exporter/&quot;&gt;WordPress to Jekyll Exporter&lt;/a&gt; plugin.&lt;/p&gt;
+
+&lt;p&gt;To use this plugin I had to disable the qTranslate plugin, which was outdated and without support. Anyway I needed to migrate it to another solution, but with this change it was not the case anymore.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Jekyll theme: Minimal Mistakes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I tried some options but the &lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/&quot;&gt;Minimal Mistakes&lt;/a&gt; theme suit better to what I was looking for regarding looking and functionality.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Jekyll multi-language: _i18n&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For this I also tried a couple of plugins, but the one that worked better was &lt;a href=&quot;https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin&quot;&gt;jekyll-multiple-languages-plugin&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GitHub pages’ plugin support&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;GitHub Pages supports a really limited number of plugins, therefore if you need to use any custom plugin you must generate the site’s static files using Jekyll and then push them to GitHub. This way you can use any plugin regardless GitHub Pages’s support.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Automating the generation and publishing of the static files&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are several examples of how to automate the building and publishing of the static files, as described in the &lt;a href=&quot;https://github.com/untra/polyglot/wiki/Github-Pages-Support&quot;&gt;polyglot&lt;/a&gt; plugin wiki page:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; # publi.sh
+# change the branch names appropriately
+git checkout site
+rm -rf _site/
+jekyll build
+git add --all
+git commit -m &quot;`date`&quot;
+git push origin site
+git subtree push --prefix  _site/ origin gh-pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Bitbucket Pipeline&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I came up with with the idea of using Bitbucket’s Pipeline to automate the publishing, so I did a research and found this very explained article &lt;a href=&quot;https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/&quot;&gt;Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github&lt;/a&gt;, which you can check to see the details steps.&lt;/p&gt;
+
+&lt;p&gt;Almost everything I did was based on the two former articles, but it was not straightforward, I had to adapt the script because I couldn’t push to my GitHub personal account’s &lt;em&gt;gh-pages&lt;/em&gt; branch, so I defined my Pipeline this way:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; This is a sample build configuration for Ruby.
+# Check our guides at https://confluence.atlassian.com/x/8r-5Mw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: ruby:2.3.3
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - bundler --version
+          - bundle install
+          - bundle exec jekyll build -t
+  branches:
+    master:
+      - step:
+          script:
+            - bundler --version
+            - bundle install
+            - bundle exec jekyll build -t
+            - git clone https://github.com/lgallard/lgallard.github.io.git
+            - cp -r /opt/atlassian/pipelines/agent/build/_site/* lgallard.github.io/
+            - cd lgallard.github.io
+            - git config --global user.email &quot;lgallard@gmail.com&quot;
+            - git config --global user.name &quot;Luis Gallardo&quot;
+            - git config --global push.default simple
+            - git add --all
+            - git commit -m &quot;`date`&quot;
+            - git push https://$githubtoken@github.com/lgallard/lgallard.github.io.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Where &lt;em&gt;$githubtoken&lt;/em&gt; is a environment variable passed to the container, which has the token previously generated at GitHub.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Pipeline building issues&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Building the site on my local machine had no issues, but building it in the Pipeline brought this error:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle exec jekyll build
+ + bundle exec jekyll build
+Configuration file: /opt/atlassian/pipelines/agent/build/_config.yml
+            Source: /opt/atlassian/pipelines/agent/build
+       Destination: /opt/atlassian/pipelines/agent/build/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+Building site for default language: &quot;en&quot; to: /opt/atlassian/pipelines/agent/build/_site
+Loading translation from file /opt/atlassian/pipelines/agent/build/_i18n/en.yml
+  Conversion error: Jekyll::Converters::Scss encountered an error while converting 'assets/css/main.scss':
+                    Invalid US-ASCII character &quot;\xE2&quot; on line 54
+jekyll 3.6.0 | Error:  Invalid US-ASCII character &quot;\xE2&quot; on line 54
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Because it was an encoding issue I supposed there was something different in the Pipeline and my PC. I thought the Ruby Pipeline is just a Docker image of Ruby, then I checked the &lt;a href=&quot;https://hub.docker.com/_/ruby/&quot;&gt;image’s documentation&lt;/a&gt; and it turns out that it can be fixed by setting the encoding via an environment variable in &lt;em&gt;Settings &amp;gt; Pipelines &amp;gt; Environment variables&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;LANG: C.UTF-8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Site publishing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Now just by pushing the posts to the Bitbucket repo it runs the Pipeline and it publishes everything on GitHub Pages!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/bitbuket-pipeline.jpg&quot; alt=&quot;Bitbucket Pipeline&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/&quot;&gt;Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/benbalter/wordpress-to-jekyll-exporter/&quot;&gt;WordPress to Jekyll Exporter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/&quot;&gt;Minimal Mistakes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin&quot;&gt;jekyll-multiple-languages-plugin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hub.docker.com/_/ruby/&quot;&gt;Docker ruby&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Luis Gallardo</name></author><category term="Docker" /><category term="Git" /><category term="Gihub" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">Using AWS Lambda to copy RDS snapshots between regions</title><link href="http://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/" rel="alternate" type="text/html" title="Using AWS Lambda to copy RDS snapshots between regions" /><published>2017-02-10T21:31:10-03:00</published><updated>2017-02-10T21:31:10-03:00</updated><id>http://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones</id><content type="html" xml:base="http://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">&lt;center&gt;&lt;img src=&quot;/images/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones.jpg&quot; alt=&quot;AWS Lambda&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;At work we needed to make MySQL database on RDS backups between regions without having a running instance in the destination region, I mean, no read replicas wanted. Someone suggested to use a cron to copy the backups between regions. I thought this had to been done so I decided to do a research and I ran into this excellent post that explains how to make the copy using Lambda functions with Python: &lt;a href=&quot;https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/&quot;&gt;Copying RDS snapshot to another region for cross-region recovery&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This function get the last snapshots for all RDS databases in the source region and copies them to the destination region. Then it deletes old snapshots in the destination region to save space. The function can be triggered using CloudWatch or RDS events, for example when the database backup is finished.&lt;/p&gt;
+
+&lt;p&gt;Paulina Budzon, the post author, commented that the function can be improved so I made some changes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Added database list to be backup-ed, instead of all databases in RDS&lt;/li&gt;
+  &lt;li&gt;Changed variable naming to avoid reference to the destination region&lt;/li&gt;
+  &lt;li&gt;Removed source region example reference in SourceDBSnapshotIdentifier string&lt;/li&gt;
+  &lt;li&gt;Added variables for source and destination regions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I shared the code here but it can be got from my fork &lt;a href=&quot;https://github.com/lgallard/aws-maintenance&quot;&gt;https://github.com/lgallard/aws-maintenance&lt;/a&gt;, or you can get it from Paulina’s &lt;a href=&quot;https://github.com/pbudzon/aws-maintenance&quot;&gt;https://github.com/pbudzon/aws-maintenance&lt;/a&gt;, because she merged my  pull request.&lt;/p&gt;
+
+&lt;p&gt;I hope it helps somebody else:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import boto3
+ import operator
+
+aws_account = 'XXXX'
+ source = 'us-east-1'
+ destination = 'sa-east-1'
+ databases = ['mysqldb01', 'pgdb01']
+
+def copy_latest_snapshot():
+ client = boto3.client('rds', source)
+ foreign_client = boto3.client('rds', destination)
+
+response = client.describe_db_snapshots(
+ SnapshotType='automated',
+ IncludeShared=False,
+ IncludePublic=False
+ )
+
+if len(response['DBSnapshots']) == 0:
+ raise Exception(&quot;No automated snapshots found&quot;)
+
+snapshots_per_project = {}
+
+for snapshot in response['DBSnapshots']:
+ if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' :
+ continue
+
+if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys():
+ snapshots_per_project[snapshot['DBInstanceIdentifier']] = {}
+
+snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[
+ 'SnapshotCreateTime']
+
+for project in snapshots_per_project:
+ sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True)
+
+copy_name = project + &quot;-&quot; + sorted_list[0][1].strftime(&quot;%Y-%m-%d&quot;)
+
+print(&quot;Checking if &quot; + copy_name + &quot; is copied&quot;)
+
+try:
+ foreign_client.describe_db_snapshots(
+ DBSnapshotIdentifier=copy_name
+ )
+ except:
+ response = foreign_client.copy_db_snapshot(
+ SourceDBSnapshotIdentifier='arn:aws:rds:' + source + ':' + aws_account + ':snapshot:' + sorted_list[0][0],
+ TargetDBSnapshotIdentifier=copy_name,
+ CopyTags=True
+ )
+
+if response['DBSnapshot']['Status'] != &quot;pending&quot; and response['DBSnapshot']['Status'] != &quot;available&quot;:
+ raise Exception(&quot;Copy operation for &quot; + copy_name + &quot; failed!&quot;)
+ print(&quot;Copied &quot; + copy_name)
+
+continue
+
+print(&quot;Already copied&quot;)
+
+def remove_old_snapshots():
+ client = boto3.client('rds', source)
+ foreign_client = boto3.client('rds', destination)
+
+response = foreign_client.describe_db_snapshots(
+ SnapshotType='manual'
+ )
+
+if len(response['DBSnapshots']) == 0:
+ raise Exception(&quot;No manual snapshots in &quot;+ destination + &quot; found&quot;)
+
+snapshots_per_project = {}
+ for snapshot in response['DBSnapshots']:
+ if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' :
+ continue
+
+if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys():
+ snapshots_per_project[snapshot['DBInstanceIdentifier']] = {}
+
+snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[
+ 'SnapshotCreateTime']
+
+for project in snapshots_per_project:
+ if len(snapshots_per_project[project]) &amp;amp;gt; 1:
+ sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True)
+ to_remove = [i[0] for i in sorted_list[1:]]
+
+for snapshot in to_remove:
+ print(&quot;Removing &quot; + snapshot)
+ foreign_client.delete_db_snapshot(
+ DBSnapshotIdentifier=snapshot
+ )
+
+def lambda_handler(event, context):
+ copy_latest_snapshot()
+ remove_old_snapshots()
+
+if __name__ == '__main__':
+ lambda_handler(None, None)&amp;lt;/pre&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/&quot;&gt;Copying RDS snapshot to another region for cross-region recovery&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Lambda" /><category term="RDS" /><summary type="html">At work we needed to make MySQL database on RDS backups between regions without having a running instance in the destination region, I mean, no read replicas wanted. Someone suggested to use a cron to copy the backups between regions. I thought this had to been done so I decided to do a research and I ran into this excellent post that explains how to make the copy using Lambda functions with Python: Copying RDS snapshot to another region for cross-region recovery This function get the last snapshots for all RDS databases in the source region and copies them to the destination region. Then it deletes old snapshots in the destination region to save space. The function can be triggered using CloudWatch or RDS events, for example when the database backup is finished. Paulina Budzon, the post author, commented that the function can be improved so I made some changes: Added database list to be backup-ed, instead of all databases in RDS Changed variable naming to avoid reference to the destination region Removed source region example reference in SourceDBSnapshotIdentifier string Added variables for source and destination regions I shared the code here but it can be got from my fork https://github.com/lgallard/aws-maintenance, or you can get it from Paulina’s https://github.com/pbudzon/aws-maintenance, because she merged my  pull request. I hope it helps somebody else: import boto3 import operator aws_account = 'XXXX' source = 'us-east-1' destination = 'sa-east-1' databases = ['mysqldb01', 'pgdb01'] def copy_latest_snapshot(): client = boto3.client('rds', source) foreign_client = boto3.client('rds', destination) response = client.describe_db_snapshots( SnapshotType='automated', IncludeShared=False, IncludePublic=False ) if len(response['DBSnapshots']) == 0: raise Exception(&quot;No automated snapshots found&quot;) snapshots_per_project = {} for snapshot in response['DBSnapshots']: if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' : continue if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys(): snapshots_per_project[snapshot['DBInstanceIdentifier']] = {} snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[ 'SnapshotCreateTime'] for project in snapshots_per_project: sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True) copy_name = project + &quot;-&quot; + sorted_list[0][1].strftime(&quot;%Y-%m-%d&quot;) print(&quot;Checking if &quot; + copy_name + &quot; is copied&quot;) try: foreign_client.describe_db_snapshots( DBSnapshotIdentifier=copy_name ) except: response = foreign_client.copy_db_snapshot( SourceDBSnapshotIdentifier='arn:aws:rds:' + source + ':' + aws_account + ':snapshot:' + sorted_list[0][0], TargetDBSnapshotIdentifier=copy_name, CopyTags=True ) if response['DBSnapshot']['Status'] != &quot;pending&quot; and response['DBSnapshot']['Status'] != &quot;available&quot;: raise Exception(&quot;Copy operation for &quot; + copy_name + &quot; failed!&quot;) print(&quot;Copied &quot; + copy_name) continue print(&quot;Already copied&quot;) def remove_old_snapshots(): client = boto3.client('rds', source) foreign_client = boto3.client('rds', destination) response = foreign_client.describe_db_snapshots( SnapshotType='manual' ) if len(response['DBSnapshots']) == 0: raise Exception(&quot;No manual snapshots in &quot;+ destination + &quot; found&quot;) snapshots_per_project = {} for snapshot in response['DBSnapshots']: if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' : continue if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys(): snapshots_per_project[snapshot['DBInstanceIdentifier']] = {} snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[ 'SnapshotCreateTime'] for project in snapshots_per_project: if len(snapshots_per_project[project]) &amp;amp;gt; 1: sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True) to_remove = [i[0] for i in sorted_list[1:]] for snapshot in to_remove: print(&quot;Removing &quot; + snapshot) foreign_client.delete_db_snapshot( DBSnapshotIdentifier=snapshot ) def lambda_handler(event, context): copy_latest_snapshot() remove_old_snapshots() if __name__ == '__main__': lambda_handler(None, None)&amp;lt;/pre&amp;gt; Reference: Copying RDS snapshot to another region for cross-region recovery</summary></entry><entry><title type="html">How to load the VirtualBox driver</title><link href="http://lgallardo.com/2016/09/13/como-cargar-el-driver-de-virtualbox/" rel="alternate" type="text/html" title="How to load the VirtualBox driver" /><published>2016-09-13T16:00:36-03:00</published><updated>2016-09-13T16:00:36-03:00</updated><id>http://lgallardo.com/2016/09/13/como-cargar-el-driver-de-virtualbox</id><content type="html" xml:base="http://lgallardo.com/2016/09/13/como-cargar-el-driver-de-virtualbox/">&lt;center&gt;&lt;img src=&quot;https://c1.staticflickr.com/9/8671/29551547051_d7a2292b5e_o.png&quot; alt=&quot;VirtualBox&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;If for any reason (for instance Genymotion complaining about not finding VirtualBox) and you need to reload the VirtualBox driver keep in mind that the script that do this has been moved in newest Debian/Ubuntu versions, so if you used to run this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/etc/init.d/vboxdrv.sh setup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you must reload the module this way:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/usr/lib/virtualbox/vboxdrv.sh setup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="VirtualBox" /><summary type="html">If for any reason (for instance Genymotion complaining about not finding VirtualBox) and you need to reload the VirtualBox driver keep in mind that the script that do this has been moved in newest Debian/Ubuntu versions, so if you used to run this:</summary></entry><entry><title type="html">How to update Linux time zones</title><link href="http://lgallardo.com/2016/04/29/how-to-change-linux-time-zone/" rel="alternate" type="text/html" title="How to update Linux time zones" /><published>2016-04-29T09:41:51-03:00</published><updated>2016-04-29T09:41:51-03:00</updated><id>http://lgallardo.com/2016/04/29/how-to-change-linux-time-zone</id><content type="html" xml:base="http://lgallardo.com/2016/04/29/how-to-change-linux-time-zone/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;https://c2.staticflickr.com/2/1606/26688168326_0f3fab18f2_o.jpg&quot; alt=&quot;time zone map&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;On May 1st, Venezuela will change its time zone to UTC-4, therefore in Linux you must update your tzdata package to be ready to this change. To do so just just follow these steps:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Debian/Ubuntu&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aptitude update
+aptitude safe-upgrade tzdata
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Red Hat&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yum check-update
+yum update tzdata
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In order to check whether the update has the time zone changes you can run this command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;zdump -v /usr/share/zoneinfo/right/America/Caracas  | grep 2016
+
+/usr/share/zoneinfo/right/America/Caracas  Sun May  1 06:59:59 2016 UT = Sun May  1 02:29:59 2016 VET isdst=0 gmtoff=-16200
+/usr/share/zoneinfo/right/America/Caracas  Sun May  1 07:00:00 2016 UT = Sun May  1 03:00:00 2016 VET isdst=0 gmtoff=-14400
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://access.redhat.com/solutions/28425&quot;&gt;How to check if the Time Zone database&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="CentOS" /><category term="Debian" /><category term="RedHat" /><category term="SuSE" /><category term="Ubuntu" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Solutions Architect</title><link href="http://lgallardo.com/2016/02/13/aws-certified-solutions-architect/" rel="alternate" type="text/html" title="AWS Certified Solutions Architect" /><published>2016-02-13T20:47:55-03:00</published><updated>2016-02-13T20:47:55-03:00</updated><id>http://lgallardo.com/2016/02/13/aws-certified-solutions-architect</id><content type="html" xml:base="http://lgallardo.com/2016/02/13/aws-certified-solutions-architect/">&lt;center&gt;&lt;img src=&quot;https://c2.staticflickr.com/2/1470/24999196475_0d0bd86cee.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;At work we are migrating many services to Amazon’s cloud, therefore we need to formalize the AWS knowledge. In that sense we found an online course site called Linux Academy, which I consider helped us with the certification and to understand AWS in general, but it wasn’t the only resource we used, thus we complemented with quizzes, and the AWS documentation.&lt;/p&gt;
+
+&lt;p&gt;If you are interested in achieve this certification and the resources we used, here you are some links:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/aws-certified-solutions-architect-associate/&quot; target=&quot;_blank&quot;&gt;Udemy – A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Quizzes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-i&quot; target=&quot;_blank&quot;&gt;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-i&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-ii&quot; target=&quot;_blank&quot;&gt;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-ii&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://surajbatuwana.blogspot.com/p/aws-certification-sample-questions.html&quot; target=&quot;_blank&quot;&gt;http://surajbatuwana.blogspot.com/p/aws-certification-sample-questions.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;AWS Documentation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Including Apache HTTP Client on Android Studio</title><link href="http://lgallardo.com/2015/06/17/como-agregar-apache-http-client-en-android-studio/" rel="alternate" type="text/html" title="Including Apache HTTP Client on Android Studio" /><published>2015-06-17T18:30:21-03:00</published><updated>2015-06-17T18:30:21-03:00</updated><id>http://lgallardo.com/2015/06/17/como-agregar-apache-http-client-en-android-studio</id><content type="html" xml:base="http://lgallardo.com/2015/06/17/como-agregar-apache-http-client-en-android-studio/">&lt;center&gt;&lt;img src=&quot;https://farm6.staticflickr.com/5563/18277722324_95356227e2.jpg&quot; alt=&quot;Android Studio - Apache HTTP Client&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to use Apache HTTP Client (httpclient y httpmime) in Eclipse I used to download the Android port and then include the dependencies specifying the jar files: /home/lgallard//Android/libs/httpcore-4.3.2.jar /home/lgallard//Android/libs/httpmime-4.3.5.jar I kept this practice after migrating my projects to Android Studio, but I used Gradle to resolve the remaining libraries. Then to uniform everything, I did a research on how to include them. Just add the following lines to your app’s build.gradle file:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apply plugin: 'com.android.application'
+
+android {
+
+    dependencies {
+        compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
+        compile (group: 'org.apache.httpcomponents' , name: 'httpmime' , version: '4.3.5') {
+        exclude module: 'org.apache.httpcomponents:httpclient'}
+    }
+
+    android {
+        useLibrary 'org.apache.http.legacy'
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then sync gradle and compile your project again.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;http://stackoverflow.com/questions/26024908/apache-httpclient-android-gradle&quot;&gt;Apache HttpClient Android (Gradle)&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Android" /><summary type="html">In order to use Apache HTTP Client (httpclient y httpmime) in Eclipse I used to download the Android port and then include the dependencies specifying the jar files: /home/lgallard//Android/libs/httpcore-4.3.2.jar /home/lgallard//Android/libs/httpmime-4.3.5.jar I kept this practice after migrating my projects to Android Studio, but I used Gradle to resolve the remaining libraries. Then to uniform everything, I did a research on how to include them. Just add the following lines to your app’s build.gradle file:</summary></entry><entry><title type="html">Installing Java on Debian</title><link href="http://lgallardo.com/2015/06/15/como-instalar-oracle-java-en-debian/" rel="alternate" type="text/html" title="Installing Java on Debian" /><published>2015-06-15T07:10:40-03:00</published><updated>2015-06-15T07:10:40-03:00</updated><id>http://lgallardo.com/2015/06/15/como-instalar-oracle-java-en-debian</id><content type="html" xml:base="http://lgallardo.com/2015/06/15/como-instalar-oracle-java-en-debian/">&lt;center&gt;&lt;img src=&quot;https://farm3.staticflickr.com/2520/3945758216_56dd43253e_o.png&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you need to install Oracle Java on Debian, you can follow the next steps once the binary file had been downloaded from &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/&quot; target=&quot;_blank&quot;&gt;Oracles’s download page&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;Once it has been downloaded, proceed to extract it into the &lt;em&gt;/opt&lt;/em&gt; directory:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# tar xvzf jdk-8u45-linux-x64.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;First let’s check the current java version:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# java -version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;java version “1.7.0_79”
+OpenJDK Runtime Environment (IcedTea 2.5.5) (7u79-2.5.5-0ubuntu0.14.04.2)
+OpenJDK 64-Bit Server VM (build 24.79-b02, mixed mode&lt;span style=&quot;line-height: 1.5;&quot;&gt;)&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Here you can see it points to OpenJDK’s 1.7.0_79 version. Now let’s add a path to the version to use:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_45/bin/java 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Last line adds the &lt;em&gt;/opt/jdk1.8.0_45/bin/java&lt;/em&gt; path to &lt;em&gt;/usr/bin/java java&lt;/em&gt;  binary, in other words, it creates a symbolic link to use in case that options is chosen. Let’s set an alternative that points to the new path:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# update-alternatives --config java
+ 
+  Selection Path Priority Status
+------------------------------------------------------------
+* 0 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java 1071 auto mode
+ 1 /opt/jdk1.8.0_45/bin/java 1 manual mode
+ 2 /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java 1061 manual mode
+ 3 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java 1071 manual mode
+
+ 
+ Enter to keep the current selection[+], or type selection number:
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After choosing the option 1, check the &lt;em&gt;java&lt;/em&gt; version one more time:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# java -version
+
+java version &quot;1.8.0_45&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_45-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now the binary points to the Oracle’s version. You can check it with the symbolic links:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ls -l /usr/bin/java
+lrwxrwxrwx 1 root root 22 jun  9  2014 /usr/bin/java -&amp;gt; /etc/alternatives/java
+
+# ls -l /etc/alternatives/java
+lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&amp;gt; /opt/jdk1.8.0_45/bin/java
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Debian" /><category term="Java" /><summary type="html"></summary></entry><entry><title type="html">How to enable the Web UI on qBittorrent</title><link href="http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent/" rel="alternate" type="text/html" title="How to enable the Web UI on qBittorrent" /><published>2014-09-29T12:36:15-03:00</published><updated>2014-09-29T12:36:15-03:00</updated><id>http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent</id><content type="html" xml:base="http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent/">&lt;p&gt;If you want to manage your qBittorrent server using a web interface, follow these steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;On the menu bar, go to &lt;strong&gt;Tools &amp;gt; Options&lt;/strong&gt; &lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3880/15391118211_5b67aecd29_z.jpg&quot; alt=&quot;qBittorrent WEB UI&quot; width=&quot;640&quot; height=&quot;351&quot; /&gt;&lt;/center&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In the new window, choose &lt;strong&gt;Web UI&lt;/strong&gt; option&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;Check &lt;strong&gt;Enable the Web User Interface (Remote control)&lt;/strong&gt; option&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;Choose a port (default &lt;strong&gt;8080&lt;/strong&gt;)&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;Set username and password (default &lt;strong&gt;username: admin&lt;/strong&gt; / &lt;strong&gt;password: adminadmin&lt;/strong&gt;)&lt;br /&gt;&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3863/15207705338_5225186c65_z.jpg&quot; alt=&quot;WEB UI&quot; width=&quot;640&quot; height=&quot;487&quot; /&gt;&lt;/center&gt;&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;Click on &lt;strong&gt;Ok&lt;/strong&gt; to save settings.&lt;br /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now in a browser you can check your qBittorrent server if you put your server’s IP address and port, example: 192.168.1.100:8080 as show below:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3919/15208201407_ca174f0bc9_z.jpg&quot; alt=&quot;qBittorrent Web UI&quot; width=&quot;640&quot; height=&quot;505&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also access it from your Android device by installing &lt;a title=&quot;qBittorrent Client&quot; href=&quot;https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclient&quot; target=&quot;_blank&quot;&gt;qBittorrent Client&lt;/a&gt; or &lt;a title=&quot;qBittorrent Client Pro&quot; href=&quot;https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclientpro&quot; target=&quot;_blank&quot;&gt;qBittorrent Client Pro&lt;/a&gt;:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3841/14860260518_17f133401d.jpg&quot; alt=&quot;qBitttoren Client Pro&quot; width=&quot;300&quot; height=&quot;500&quot; /&gt;&lt;/center&gt;</content><author><name>Luis Gallardo</name></author><category term="qBittorrent" /><summary type="html">If you want to manage your qBittorrent server using a web interface, follow these steps:</summary></entry><entry><title type="html">How to extend a volume on LVM</title><link href="http://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/" rel="alternate" type="text/html" title="How to extend a volume on LVM" /><published>2014-08-26T14:45:02-03:00</published><updated>2014-08-26T14:45:02-03:00</updated><id>http://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm</id><content type="html" xml:base="http://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/">&lt;center&gt;&lt;img src=&quot;/images/como-extender-un-volumen-en-lvm.jpg&quot; alt=&quot;&quot; width=&quot;233&quot; height=&quot;204&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# fdisk -l /dev/sdb
+
+Disk /dev/sdb: 483.2 GB, 483183820800 bytes
+ 255 heads, 63 sectors/track, 58743 cylinders, total 943718400 sectors
+ Units = sectors of 1 * 512 = 512 bytes
+ Sector size (logical/physical): 512 bytes / 512 bytes
+ I/O size (minimum/optimal): 512 bytes / 512 bytes
+ Disk identifier: 0x0001178e
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After expanding the volume you must make the system to rescan the volume:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# echo 1 &amp;amp;gt; /sys/block/sdb/device/rescan
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then check the disk geometry one more time:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# fdisk -l /dev/sdb
+
+Disk /dev/sdb: 536.9 GB, 536870912000 bytes
+ 255 heads, 63 sectors/track, 65270 cylinders, total 1048576000 sectors
+ Units = sectors of 1 * 512 = 512 bytes
+ Sector size (logical/physical): 512 bytes / 512 bytes
+ I/O size (minimum/optimal): 512 bytes / 512 bytes
+ Disk identifier: 0x0001178e
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see, the disk size grew up but this is only known by the operating system, because the LVM still has the same information since the physical volume hasn’t been expanded yet:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# pvs
+ PV VG Fmt Attr PSize PFree
+ /dev/sda5 debian lvm2 a-- 3.76g 0
+ /dev/sda6 debian lvm2 a-- 13.00g 0
+ /dev/sdb svn_vg lvm2 a-- 450.00g 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you extend the physical volume with the following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# pvresize /dev/sdb
+ Physical volume &quot;/dev/sdb&quot; changed
+ 1 physical volume(s) resized / 0 physical volume(s) not resized
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And check the physical volume sizes you will see the added space:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# pvs
+ PV VG Fmt Attr PSize PFree
+ /dev/sda5 debian lvm2 a-- 3.76g 0
+ /dev/sda6 debian lvm2 a-- 13.00g 0
+ /dev/sdb svn_vg lvm2 a-- 500.00g 50.00g
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you have to extend the logical volume and the system file size on the fly. You can do both actions using just one command:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# lvresize -r -L +50G /dev/mapper/svn_vg-svn
+
+Extending logical volume svn to 500.00 GiB
+ Logical volume svn successfully resized
+ resize2fs 1.42.5 (29-Jul-2012)
+ Filesystem at /dev/mapper/svn_vg-svn is mounted on /var/data/svn; on-line resizing required
+ old_desc_blocks = 29, new_desc_blocks = 32
+ Performing an on-line resize of /dev/mapper/svn_vg-svn to 131070976 (4k) blocks.
+ The filesystem on /dev/mapper/svn_vg-svn is now 131070976 blocks long.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, check the free space available to see the added 50 GB in the system file:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# df -h
+ Filesystem Size Used Avail Use% Mounted on
+ rootfs 993M 287M 655M 31% /
+ udev 10M 0 10M 0% /dev
+ tmpfs 397M 228K 397M 1% /run
+ /dev/mapper/debian-root 993M 287M 655M 31% /
+ tmpfs 5.0M 0 5.0M 0% /run/lock
+ tmpfs 794M 0 794M 0% /run/shm
+ /dev/sda1 228M 34M 183M 16% /boot
+ /dev/mapper/debian-home 2.0G 39M 1.9G 3% /home
+ /dev/mapper/debian-tmp 3.9G 7.1M 3.7G 1% /tmp
+ /dev/mapper/debian-usr 2.0G 869M 1.1G 46% /usr
+ /dev/mapper/debian-var 6.7G 2.1G 4.3G 33% /var
+ /dev/mapper/svn_vg-svn 493G 432G 62G 88% /var/data/svn
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="SystemAdmin" /><category term="LVM" /><summary type="html">Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:</summary></entry><entry><title type="html">Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets</title><link href="http://lgallardo.com/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/" rel="alternate" type="text/html" title="Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets" /><published>2014-05-28T17:00:33-03:00</published><updated>2014-05-28T17:00:33-03:00</updated><id>http://lgallardo.com/2014/05/28/habilitar-html5-para-tv-en-plugin-video-sidebar-widgets-de-wordpress</id><content type="html" xml:base="http://lgallardo.com/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">&lt;h2 id=&quot;the-problem&quot;&gt;The problem&lt;/h2&gt;
+
+&lt;p&gt;Visiting my blog from a tablet I noticed that theBlip.Tv videos I set in _Video Sidebar Widgets _were not shown. Doing a research I realized the plugin loaded the old flash-based player  instead of the HTML5 version, so videos coudn’t be played from mobile devices with not flash support, which are the majority of the handheld systems nowadays.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-solution&quot;&gt;The solution&lt;/h2&gt;
+
+&lt;p&gt;I just had to add some conditionals in files &lt;em&gt;helper-functions.php&lt;/em&gt; and &lt;em&gt;class-videosidebarwidget.php&lt;/em&gt; to consider the Blipblip.tv case and thus I added the HTM5 player. In particular, I added the following lines to &lt;em&gt;helper-functions.php:&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;elseif($admin==&quot;true&quot;){
+ if($source == &quot;Blip&quot;){
+ echo &quot;\n&amp;amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot; 
+ frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt;
+ &amp;amp;lt;/iframe&amp;amp;gt; 
+ 
+ &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot; 
+ style=\&quot;display:none\&quot;&amp;amp;gt;
+ &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; 
+ }else{ 
+ // echo video in admin
+ echo &quot;\n&amp;amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;;
+ echo $flashvar;
+ echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;;
+ echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;;
+ echo $flashvar2;
+ echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;;
+ }
+}else{
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And in file &lt;em&gt;class-videosidebarwidget.php&lt;/em&gt; I edited the below code:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;br class=&quot;Apple-interchange-newline&quot; /&amp;gt; case 'Blip':
+ $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;;
+ &amp;lt;strong&amp;gt;$rv_flashvar&amp;lt;/strong&amp;gt; = &quot;&quot;;
+ $rv_flashvar2 = &quot;&quot;;
+ $rv_cap = $Embed_cap;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And I added the following lines:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if($select_source == &quot;Blip&quot;){ 
+ echo &quot;\n&amp;amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot; 
+ frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt;
+ &amp;amp;lt;/iframe&amp;amp;gt;
+ 
+ &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot; 
+ style=\&quot;display:none\&quot;&amp;amp;gt;
+ &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;;
+}else{
+ echo &quot;\n&amp;amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;;
+ echo $rv_flashvar;
+ echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;;
+ echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;;
+ echo $rv_flashvar2;
+ echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;;
+ }
+ if(!empty($rv_cap)){echo &quot;&amp;amp;lt;p class=\&quot;VideoCaption\&quot;&amp;amp;gt;$rv_cap&amp;amp;lt;/p&amp;amp;gt;\n\n&quot;;};
+ 
+ 
+ echo $after_widget;
+ }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After these changes random HTM5 videos are loaded without problems.&lt;/p&gt;
+
+&lt;h2 id=&quot;plugin-support&quot;&gt;Plugin support&lt;/h2&gt;
+
+&lt;p&gt;By the way, I tried to contact the plugin developer to include these changes and he said he had not time for doing it. It a shame it’s not open-sourced so somebody else can maintain the code.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="PHP" /><category term="WordPress" /><summary type="html">The problem Visiting my blog from a tablet I noticed that theBlip.Tv videos I set in _Video Sidebar Widgets _were not shown. Doing a research I realized the plugin loaded the old flash-based player  instead of the HTML5 version, so videos coudn’t be played from mobile devices with not flash support, which are the majority of the handheld systems nowadays. The solution I just had to add some conditionals in files helper-functions.php and class-videosidebarwidget.php to consider the Blipblip.tv case and thus I added the HTM5 player. In particular, I added the following lines to helper-functions.php: elseif($admin==&quot;true&quot;){ if($source == &quot;Blip&quot;){ echo &quot;\n&amp;amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot; frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt; &amp;amp;lt;/iframe&amp;amp;gt; &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot; style=\&quot;display:none\&quot;&amp;amp;gt; &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; }else{ // echo video in admin echo &quot;\n&amp;amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;; echo $flashvar; echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $flashvar2; echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;; } }else{ And in file class-videosidebarwidget.php I edited the below code: &amp;lt;br class=&quot;Apple-interchange-newline&quot; /&amp;gt; case 'Blip': $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;; &amp;lt;strong&amp;gt;$rv_flashvar&amp;lt;/strong&amp;gt; = &quot;&quot;; $rv_flashvar2 = &quot;&quot;; $rv_cap = $Embed_cap; And I added the following lines: if($select_source == &quot;Blip&quot;){ echo &quot;\n&amp;amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot; frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt; &amp;amp;lt;/iframe&amp;amp;gt; &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot; style=\&quot;display:none\&quot;&amp;amp;gt; &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; }else{ echo &quot;\n&amp;amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;; echo $rv_flashvar; echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $rv_flashvar2; echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;; } if(!empty($rv_cap)){echo &quot;&amp;amp;lt;p class=\&quot;VideoCaption\&quot;&amp;amp;gt;$rv_cap&amp;amp;lt;/p&amp;amp;gt;\n\n&quot;;}; echo $after_widget; } After these changes random HTM5 videos are loaded without problems. Plugin support By the way, I tried to contact the plugin developer to include these changes and he said he had not time for doing it. It a shame it’s not open-sourced so somebody else can maintain the code.</summary></entry></feed>
