@@ -325,7 +325,7 @@
       <section class="page__content" itemprop="text">
         <center><img src="/images/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones.jpg" alt="AWS Lambda" /></center>
 
-<p>At work we needed to make MySQL database on RDS backups between regions without having a running instance in the destination region, I mean, no read replicas wanted. Someone suggested to use a cron to copy the backups between regions. I thought this had to been done so I decided to do a research and I ran into this excellent post that explains how to make the copy using Lambda functions with Python: <a href="https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/">Copying RDS snapshot to another region for cross-region recovery</a></p>
+<p>At work we needed to make MySQL database on RDS backups between regions without having a running instance in the destination region, I mean, no read replicas wanted. Someone suggested to use a cron to copy the backups between regions. I thought this had to been done so I decided to do a research and I ran into this excellent post that explains how to make the copy using Lambda functions with Python: <a href="https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/" target="_blank">Copying RDS snapshot to another region for cross-region recovery</a></p>
 
 <p>This function get the last snapshots for all RDS databases in the source region and copies them to the destination region. Then it deletes old snapshots in the destination region to save space. The function can be triggered using CloudWatch or RDS events, for example when the database backup is finished.</p>
 
@@ -443,7 +443,7 @@ if __name__ == '__main__':
 
 </code></pre></div></div>
 
-<p><strong>Reference:</strong> <a href="https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/">Copying RDS snapshot to another region for cross-region recovery</a></p>
+<p><strong>Reference:</strong> <a href="https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/" target="_blank">Copying RDS snapshot to another region for cross-region recovery</a></p>
 
         
       </section>

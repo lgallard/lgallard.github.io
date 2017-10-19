@@ -342,17 +342,17 @@
 
 <p>To recover the already published posts I set an isolated Docker environment using a database dump of the site and the latest WordPress version with the needed plugins to made it work.</p>
 
-<p>Then to export all posts I used the <a href="https://github.com/benbalter/wordpress-to-jekyll-exporter/">WordPress to Jekyll Exporter</a> plugin.</p>
+<p>Then to export all posts I used the <a href="https://github.com/benbalter/wordpress-to-jekyll-exporter/" target="_blank">WordPress to Jekyll Exporter</a> plugin.</p>
 
 <p>To use this plugin I had to disable the qTranslate plugin, which was outdated and without support. Anyway I needed to migrate it to another solution, but with this change it was not the case anymore.</p>
 
 <p><strong>Jekyll theme: Minimal Mistakes</strong></p>
 
-<p>I tried some options but the <a href="https://github.com/mmistakes/minimal-mistakes/">Minimal Mistakes</a> theme suit better to what I was looking for regarding looking and functionality.</p>
+<p>I tried some options but the <a href="https://github.com/mmistakes/minimal-mistakes/" target="_blank">Minimal Mistakes</a> theme suit better to what I was looking for regarding looking and functionality.</p>
 
 <p><strong>Jekyll multi-language: _i18n</strong></p>
 
-<p>For this I also tried a couple of plugins, but the one that worked better was <a href="https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin">jekyll-multiple-languages-plugin</a>.</p>
+<p>For this I also tried a couple of plugins, but the one that worked better was <a href="https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin" target="_blank">jekyll-multiple-languages-plugin</a>.</p>
 
 <p><strong>GitHub pages’ plugin support</strong></p>
 
@@ -360,7 +360,7 @@
 
 <p><strong>Automating the generation and publishing of the static files</strong></p>
 
-<p>There are several examples of how to automate the building and publishing of the static files, as described in the <a href="https://github.com/untra/polyglot/wiki/Github-Pages-Support">polyglot</a> plugin wiki page:</p>
+<p>There are several examples of how to automate the building and publishing of the static files, as described in the <a href="https://github.com/untra/polyglot/wiki/Github-Pages-Support" target="_blank">polyglot</a> plugin wiki page:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # publi.sh
 # change the branch names appropriately
@@ -375,7 +375,7 @@ git subtree push --prefix  _site/ origin gh-pages
 
 <p><strong>Bitbucket Pipeline</strong></p>
 
-<p>I came up with with the idea of using Bitbucket’s Pipeline to automate the publishing, so I did a research and found this very explained article <a href="https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/">Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github</a>, which you can check to see the details steps.</p>
+<p>I came up with with the idea of using Bitbucket’s Pipeline to automate the publishing, so I did a research and found this very explained article <a href="https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/" target="_blank">Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github</a>, which you can check to see the details steps.</p>
 
 <p>Almost everything I did was based on the two former articles, but it was not straightforward, I had to adapt the script because I couldn’t push to my GitHub personal account’s <em>gh-pages</em> branch, so I defined my Pipeline this way:</p>
 
@@ -430,8 +430,7 @@ Loading translation from file /opt/atlassian/pipelines/agent/build/_i18n/en.yml
                     Invalid US-ASCII character "\xE2" on line 54
 jekyll 3.6.0 | Error:  Invalid US-ASCII character "\xE2" on line 54
 </code></pre></div></div>
-
-<p>Because it was an encoding issue I supposed there was something different in the Pipeline and my PC. I thought the Ruby Pipeline is just a Docker image of Ruby, then I checked the <a href="https://hub.docker.com/_/ruby/">image’s documentation</a> and it turns out that it can be fixed by setting the encoding via an environment variable in <em>Settings &gt; Pipelines &gt; Environment variables</em>:</p>
+<p>Because it was an encoding issue I supposed there was something different in the Pipeline and my PC. I thought the Ruby Pipeline is just a Docker image of Ruby, then I checked the <a href="https://hub.docker.com/_/ruby/" target="_blank">image’s documentation</a> and it turns out that it can be fixed by setting the encoding via an environment variable in <em>Settings &gt; Pipelines &gt; Environment variables</em>:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LANG: C.UTF-8
 </code></pre></div></div>
@@ -445,11 +444,11 @@ jekyll 3.6.0 | Error:  Invalid US-ASCII character "\xE2" on line 54
 <p><strong>References:</strong></p>
 
 <ol>
-  <li><a href="https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/">Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github</a></li>
-  <li><a href="https://github.com/benbalter/wordpress-to-jekyll-exporter/">WordPress to Jekyll Exporter</a></li>
-  <li><a href="https://github.com/mmistakes/minimal-mistakes/">Minimal Mistakes</a></li>
-  <li><a href="https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin">jekyll-multiple-languages-plugin</a></li>
-  <li><a href="https://hub.docker.com/_/ruby/">Docker ruby</a></li>
+  <li><a href="https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/" target="_blank">Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github</a></li>
+  <li><a href="https://github.com/benbalter/wordpress-to-jekyll-exporter/" target="_blank">WordPress to Jekyll Exporter</a></li>
+  <li><a href="https://github.com/mmistakes/minimal-mistakes/" target="_blank">Minimal Mistakes</a></li>
+  <li><a href="https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin" target="_blank">jekyll-multiple-languages-plugin</a></li>
+  <li><a href="https://hub.docker.com/_/ruby/" target="_blank">Docker ruby</a></li>
 </ol>
 
         
