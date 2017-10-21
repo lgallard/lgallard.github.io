@@ -1,115 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2017-10-19T19:14:34-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html"></title><link href="http://lgallardo.com/es/_i18n/es/2013-12-29-mi-primera-aplicacion-en-android-batteryreporter/" rel="alternate" type="text/html" title="" /><published>2017-10-19T19:14:34-03:00</published><updated>2017-10-19T19:14:34-03:00</updated><id>http://lgallardo.com/es/_i18n/es/2013-12-29-mi-primera-aplicacion-en-android-batteryreporter</id><content type="html" xml:base="http://lgallardo.com/es/_i18n/es/2013-12-29-mi-primera-aplicacion-en-android-batteryreporter/">&lt;p style=&quot;text-align: center;&quot;&gt;
-  &lt;a title=&quot;batteryreporter&quot; href=&quot;http://farm4.static.flickr.com/3812/11639022884_3eb95e6a15.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img class=&quot;aligncenter&quot; alt=&quot;batteryreporter&quot; src=&quot;http://farm4.staticflickr.com/3812/11639022884_3eb95e6a15_n.jpg&quot; width=&quot;192&quot; height=&quot;320&quot; /&gt;&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Desde hace un tiempo estaba con la idea de aprender a desarrollar aplicaciones para Android, y en lo que vi que ofertaron un curso en &lt;a href=&quot;https://class.coursera.org/androidapps101-001/wiki/HomePage&quot; target=&quot;_blank&quot;&gt;Coursera de desarrollo de aplicaciones Android&lt;/a&gt; vi la oportunidad para hacerlo. Debo confesar que no es “copiar y pegar” (aunque se consigue códigos de ejemplos) y que se debe aprender nuevos conceptos, ya que aun y cuando hayas programado con anterioridad (incluso en Java) ahora debes aprender cómo se hace “a lo Android”.&lt;/p&gt;
-
-&lt;p&gt;Después de seguir los vídeos, leer y leer, ya hice mi primera aplicación en Android, que de hecho es parte de una asignación que exigen en el curso. Es una aplicación sencilla que lee el estado de la batería del dispositivo, y reporta si se está cargando así como el porcentaje de carga del mismo.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;El código (MainActivity.java)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Aquí les dejo el código java de la aplicación:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lgallardo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batteryreporter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BatteryManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Bundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Activity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IntentFilter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Menu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ImageView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TextView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MainActivity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Activity&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Override&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onCreate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Bundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;savedInstanceState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;onCreate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;savedInstanceState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;setContentView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;activity_main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Override&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onCreateOptionsMenu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Menu&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;menu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Inflate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;menu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;this&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;adds&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;action&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;present&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;getMenuInflater&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inflate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;menu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;menu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;View&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;TextView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;statusValueTextView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;chargingValueTextView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;levelValueTextView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;ImageView&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;iconImageView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
- &lt;span class=&quot;k&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;charging&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;level&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;batteryPct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reference&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;Resources&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getResources&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TextViews&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;statusValueTextView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TextView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;statusValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;chargingValueTextView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TextView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;chargingValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
- &lt;span class=&quot;n&quot;&gt;levelValueTextView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TextView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;levelValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
- &lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ImageView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;icon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
- &lt;span class=&quot;n&quot;&gt;iconImageView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ImageView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imageView1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
- &lt;span class=&quot;p&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;battery&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'s status
- IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
- Intent batteryStatus = registerReceiver(null, ifilter);
-
-// Check if the battery is charging or is charged?
- int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
- boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING
- || status == BatteryManager.BATTERY_STATUS_FULL;
-
-// Update UI status
- statusValueTextView.setText(Integer.toString(status));
-
-// Update UI charging
- if (isCharging) {
- charging = res.getString(R.string.yes);
-
-// Get charging method
- int chargePlug = batteryStatus.getIntExtra(
- BatteryManager.EXTRA_PLUGGED, -1);
- boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
- // boolean acCharge = chargePlug ==
- // BatteryManager.BATTERY_PLUGGED_AC;
-
-if (usbCharge) {
- charging = charging + &quot; &quot; + res.getString(R.string.usb);
- } else {
- charging = charging + &quot; &quot; + res.getString(R.string.ac);
- }
-
- iconImageView.setImageResource(R.drawable.charging);
-
-} else {
- charging = res.getString(R.string.no);
- iconImageView.setImageResource(R.drawable.discharging);
- }
-
-chargingValueTextView.setText(charging);
-
-// Update UI level
- level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
- scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
- batteryPct = 100 * level / (float) scale;
-
-levelValueTextView.setText(Float.toString(batteryPct)+&quot;%&quot;);
-
-}
-
-}
-
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html">Publicando de Jekyll a Github Pages con Bitbucket Pipeline</title><link href="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" rel="alternate" type="text/html" title="Publicando de Jekyll a Github Pages con Bitbucket Pipeline" /><published>2017-10-13T16:41:51-03:00</published><updated>2017-10-13T16:41:51-03:00</updated><id>http://lgallardo.com/es/2017/10/13/posting-jekyll-to-github-pages-with-bitbucket-pipeline</id><content type="html" xml:base="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;/images/automating-jekyll-deployment-to-github-pages-with-bitbucket-pipeline.jpg&quot; alt=&quot;Posting with pipeline&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2017-10-21T00:04:26-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Publicando de Jekyll a Github Pages con Bitbucket Pipeline</title><link href="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" rel="alternate" type="text/html" title="Publicando de Jekyll a Github Pages con Bitbucket Pipeline" /><published>2017-10-13T16:41:51-03:00</published><updated>2017-10-13T16:41:51-03:00</updated><id>http://lgallardo.com/es/2017/10/13/posting-jekyll-to-github-pages-with-bitbucket-pipeline</id><content type="html" xml:base="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;/images/automating-jekyll-deployment-to-github-pages-with-bitbucket-pipeline.jpg&quot; alt=&quot;Posting with pipeline&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Debido a unos problemas de seguridad que tuve con WordPress decidí cambiar el blog a algo estático servido desde Github Pages. Pero el nuevo sitio tenía que cumplir algunos requerimientos mínimos:&lt;/p&gt;
@@ -607,4 +496,84 @@ Extending logical volume svn to 500.00 GiB
  /dev/mapper/debian-usr 2.0G 869M 1.1G 46% /usr
  /dev/mapper/debian-var 6.7G 2.1G 4.3G 33% /var
  /dev/mapper/svn_vg-svn 493G 432G 62G 88% /var/data/svn
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Administración" /><category term="LVM" /><summary type="html">A veces es necesario extender un volumen lógico, expandiendo el volumen físico donde está alojado. Si este es el caso, puedes seguir este ejemplo que extiende un volumen de 450 GB a 500 GB: Primero consultamos a geometry del disco</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Administración" /><category term="LVM" /><summary type="html">A veces es necesario extender un volumen lógico, expandiendo el volumen físico donde está alojado. Si este es el caso, puedes seguir este ejemplo que extiende un volumen de 450 GB a 500 GB: Primero consultamos a geometry del disco</summary></entry><entry><title type="html">Habilitar HTML5 para Blipblip.tv en plugin Video Sidebar Widgets de WordPress</title><link href="http://lgallardo.com/es/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/" rel="alternate" type="text/html" title="Habilitar HTML5 para Blipblip.tv en plugin Video Sidebar Widgets de WordPress" /><published>2014-05-28T17:00:33-03:00</published><updated>2014-05-28T17:00:33-03:00</updated><id>http://lgallardo.com/es/2014/05/28/habilitar-html5-para-tv-en-plugin-video-sidebar-widgets-de-wordpress</id><content type="html" xml:base="http://lgallardo.com/es/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">&lt;h2 id=&quot;el-problema&quot;&gt;El problema&lt;/h2&gt;
+
+&lt;p&gt;Viendo mi blog desde una tableta me percaté que los videos de Blipblip.tv que configuré en el &lt;em&gt;Video Sidebar Widgets&lt;/em&gt; no se mostraban. Investigando me di cuenta que el plugin carga la versión anterior del reproductor de Blipblip.tv basado en Flash y no HTML5, por lo que lo videos no se podían apreciar desde dispositivos móviles que no soportasen Flash, los cuales ya son la mayoría.&lt;/p&gt;
+
+&lt;h2 id=&quot;la-solución&quot;&gt;La solución&lt;/h2&gt;
+
+&lt;p&gt;Simplemente en los archivos &lt;em&gt;helper-functions.php&lt;/em&gt; y &lt;em&gt;class-videosidebarwidget.php&lt;/em&gt; agregué condicionales para el caso Blipblip.tv y en concordancia agregué el player con HTML5. En particular, agregué las siguientes líneas en el archivo &lt;em&gt;helper-functions.php:&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;elseif($admin==&quot;true&quot;){
+ if($source == &quot;Blip&quot;){
+ echo &quot;\n&amp;amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot; 
+ frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt;
+ &amp;amp;lt;/iframe&amp;amp;gt; 
+ 
+ &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot; 
+ style=\&quot;display:none\&quot;&amp;amp;gt;
+ &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; 
+ }else{ 
+ // echo video in admin
+ echo &quot;\n&amp;amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;;
+ echo $flashvar;
+ echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;;
+ echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;;
+ echo $flashvar2;
+ echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;;
+ }
+}else{
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Y en el archivo &lt;em&gt;class-videosidebarwidget.php&lt;/em&gt; modifiqué lo siguiente:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+case 'Blip':
+ $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;;
+ &amp;lt;strong&amp;gt;$rv_flashvar&amp;lt;/strong&amp;gt; = &quot;&quot;;
+ $rv_flashvar2 = &quot;&quot;;
+ $rv_cap = $Embed_cap;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Y agregué estas líneas:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if($select_source == &quot;Blip&quot;){ 
+ echo &quot;\n&amp;amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot; 
+ frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt;
+ &amp;amp;lt;/iframe&amp;amp;gt;
+ 
+ &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot; 
+ style=\&quot;display:none\&quot;&amp;amp;gt;
+ &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;;
+}else{
+ echo &quot;\n&amp;amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;;
+ echo $rv_flashvar;
+ echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;;
+ echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;;
+ echo $rv_flashvar2;
+ echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;;
+ echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;;
+ }
+ if(!empty($rv_cap)){echo &quot;&amp;amp;lt;p class=\&quot;VideoCaption\&quot;&amp;amp;gt;$rv_cap&amp;amp;lt;/p&amp;amp;gt;\n\n&quot;;};
+ 
+ 
+ echo $after_widget;
+ }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Luego de esto, los videos aleatorios con HTML5 se cargan sin problemas.&lt;/p&gt;
+
+&lt;h2 id=&quot;soporte-del-plugin&quot;&gt;Soporte del plugin&lt;/h2&gt;
+
+&lt;p&gt;Por cierto que contacté al desarrollador del plugin para que agregue estos cambios y me informó que estaba muy ocupado para hacerlo. Lástima que no lo sede al dominio público para que otro lo siga manteniendo.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="PHP" /><category term="WordPress" /><summary type="html">El problema Viendo mi blog desde una tableta me percaté que los videos de Blipblip.tv que configuré en el Video Sidebar Widgets no se mostraban. Investigando me di cuenta que el plugin carga la versión anterior del reproductor de Blipblip.tv basado en Flash y no HTML5, por lo que lo videos no se podían apreciar desde dispositivos móviles que no soportasen Flash, los cuales ya son la mayoría. La solución Simplemente en los archivos helper-functions.php y class-videosidebarwidget.php agregué condicionales para el caso Blipblip.tv y en concordancia agregué el player con HTML5. En particular, agregué las siguientes líneas en el archivo helper-functions.php: elseif($admin==&quot;true&quot;){ if($source == &quot;Blip&quot;){ echo &quot;\n&amp;amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot; frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt; &amp;amp;lt;/iframe&amp;amp;gt; &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot; style=\&quot;display:none\&quot;&amp;amp;gt; &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; }else{ // echo video in admin echo &quot;\n&amp;amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;; echo $flashvar; echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $flashvar2; echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;; } }else{ Y en el archivo class-videosidebarwidget.php modifiqué lo siguiente: case 'Blip': $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;; &amp;lt;strong&amp;gt;$rv_flashvar&amp;lt;/strong&amp;gt; = &quot;&quot;; $rv_flashvar2 = &quot;&quot;; $rv_cap = $Embed_cap; Y agregué estas líneas: if($select_source == &quot;Blip&quot;){ echo &quot;\n&amp;amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot; frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt; &amp;amp;lt;/iframe&amp;amp;gt; &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot; style=\&quot;display:none\&quot;&amp;amp;gt; &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; }else{ echo &quot;\n&amp;amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;; echo $rv_flashvar; echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $rv_flashvar2; echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;; } if(!empty($rv_cap)){echo &quot;&amp;amp;lt;p class=\&quot;VideoCaption\&quot;&amp;amp;gt;$rv_cap&amp;amp;lt;/p&amp;amp;gt;\n\n&quot;;}; echo $after_widget; } Luego de esto, los videos aleatorios con HTML5 se cargan sin problemas. Soporte del plugin Por cierto que contacté al desarrollador del plugin para que agregue estos cambios y me informó que estaba muy ocupado para hacerlo. Lástima que no lo sede al dominio público para que otro lo siga manteniendo.</summary></entry></feed>
