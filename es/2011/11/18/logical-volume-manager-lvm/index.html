@@ -188,15 +188,7 @@
   <li>107 GB para /home (/dev/sda3), es decir,  el resto del disco.</li>
 </ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Hasta aquí todo bien, pero qué pasa si el día de mañana el tamaño de la RAM aumenta a 2 GB? Para invernar habrá que aumentar la swap, y como ya se particionó todo el disco y no se dejó espacio lo que queda es reparticionar el disco, bien sea redimensionando con utilidades que lo permitan, siempre y cuando el sistema de archivo también lo permita (por ejemplo, los sistemas ext[2</td>
-      <td>3</td>
-      <td>4] permite redimensionamiento).</td>
-    </tr>
-  </tbody>
-</table>
+<p>Hasta aquí todo bien, pero qué pasa si el día de mañana el tamaño de la RAM aumenta a 2 GB? Para invernar habrá que aumentar la swap, y como ya se particionó todo el disco y no se dejó espacio lo que queda es reparticionar el disco, bien sea redimensionando con utilidades que lo permitan, siempre y cuando el sistema de archivo también lo permita (por ejemplo, los sistemas ext2/ext3/ext4 permite redimensionamiento).</p>
 
 <p>¿No existe algo más flexible? Si, se llama LVM (Logical Volume Manager) , y en esencia permite redimensionar en caliente las particiones, para por ejemplo, quitar 1GB de /home (/dev/sda3) y dárselo a la swap (/dev/sda1).</p>
 
