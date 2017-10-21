@@ -334,15 +334,7 @@
   <li>107 GB for /home (/dev/sda3), meaning, the remaining space.</li>
 </ul>
 
-<table>
-  <tbody>
-    <tr>
-      <td>So far so go, but what if the RAM is increased to 2 GB? In order to hibernate the system you must increase the swap, and because the whole hard drive was partitioned leaving no space there isn’t other way than repartitioning the hard drive using a utility, if the file system allows it  (for instance,  ext[2</td>
-      <td>3</td>
-      <td>4] file systems let you resize them).</td>
-    </tr>
-  </tbody>
-</table>
+<p>So far so go, but what if the RAM is increased to 2 GB? In order to hibernate the system you must increase the swap, and because the whole hard drive was partitioned leaving no space there isn’t other way than repartitioning the hard drive using a utility, if the file system allows it  (for instance,  ext2/ext3/ext4 file systems let you resize them).</p>
 
 <p>There isn’t anything more flexible? Yes, it’s called LVM (Logical Volume Manager), and basically it lets you hot resizing of partitions. For example, you can release 1GB from /home (/dev/sda3) and give it to the swap partition (/dev/sda1).</p>
 
