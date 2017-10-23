@@ -19,7 +19,7 @@
 
 
 
-<title>Installing VirtualBox Guest Additions - lgallardo.com</title>
+<title>Redemption: Bye bye Windows XP…Howdy Ubuntu 9.10 - lgallardo.com</title>
 
 
 
@@ -33,11 +33,11 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="lgallardo.com">
-<meta property="og:title" content="Installing VirtualBox Guest Additions">
+<meta property="og:title" content="Redemption: Bye bye Windows XP…Howdy Ubuntu 9.10">
 
 
-  <link rel="canonical" href="http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/">
-  <meta property="og:url" content="http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/">
+  <link rel="canonical" href="http://lgallardo.com/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/">
+  <meta property="og:url" content="http://lgallardo.com/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/">
 
 
 
@@ -46,9 +46,9 @@
 
 
   <meta name="twitter:site" content="@lgallard">
-  <meta name="twitter:title" content="Installing VirtualBox Guest Additions">
+  <meta name="twitter:title" content="Redemption: Bye bye Windows XP…Howdy Ubuntu 9.10">
   <meta name="twitter:description" content="">
-  <meta name="twitter:url" content="http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/">
+  <meta name="twitter:url" content="http://lgallardo.com/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/">
 
   
     <meta name="twitter:card" content="summary">
@@ -70,7 +70,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2009-12-13T21:30:08-03:00">
+  <meta property="article:published_time" content="2009-12-03T12:43:48-03:00">
 
 
 
@@ -132,7 +132,7 @@
     <!-- start custom head snippets -->
 <!-- 
   
-  <a href="/es/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/" >Español</a>
+  <a href="/es/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/" >Español</a>
 
 -->
 <!-- insert favicons. use http://realfavicongenerator.net/ -->
@@ -161,7 +161,7 @@
           
           
             
-            <a href="/es/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/" >Español</a>
+            <a href="/es/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/" >Español</a>
           
         </ul>
         <button><div class="navicon"></div></button>
@@ -300,15 +300,15 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Installing VirtualBox Guest Additions">
+    <meta itemprop="headline" content="Redemption: Bye bye Windows XP…Howdy Ubuntu 9.10">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="December 13, 2009">
+    <meta itemprop="datePublished" content="December 03, 2009">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Installing VirtualBox Guest Additions
+          <h1 class="page__title" itemprop="headline">Redemption: Bye bye Windows XP…Howdy Ubuntu 9.10
 </h1>
           
             <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
@@ -323,27 +323,15 @@
       
 
       <section class="page__content" itemprop="text">
-        <center><img title="Instalación de Guest Additions" src="/images/instalacion-de-los-guest-additions-de-virtualbox.jpg" alt="Guest Additions" /></center>
+        <center><img src="/images/redencion-adios-windows-xp-hola-ubuntu-9-10.jpg" alt="Ubuntu Netbook Remix" />
+</center>
 <p><br /></p>
 
-<p>After installing your virtual machine in VirtualBox you should install the <em>Guest Additions</em>…what is that for? It lets you use your virtual machine at fullscreen and it also adds extras kernel modules to get better performance. So, let’s see how to install it…</p>
+<p>As I said in other <a href="http://lgallardo.com/2009/11/22/%c2%bfpor-que-no-usar-windows/" target="_blank">post</a> , I have installed Windows on my sister’s computer at least four times due to viruses. I installed it one more time and I also installed Ubuntu Netbook Remix. I told her to use Linux to avoid viruses, but I didn’t expect she would use it (I had installed it twice but she was using Windows anyways).</p>
 
-<h2 id="installing-pre-requisites">Installing pre-requisites</h2>
+<p>But now I know she is using it because she called me the other day to tell me she couldn’t print a document at a ciber (due to Openoffice’s odt format, which I explained to her), and today she asked me how to connect the computer to Internet using her Movistar modem (I had set it up, I just explained her where to cick).<br /></p>
 
-<p>Due to you are going to compile a kernel module, you’ll need a compiler, some header files and other stuff. But don’t be afraid, you only have to type this in a terminal of your virtual machine as root:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install build-essential linux-headers-<span class="k">$(</span>uname <span class="nt">-r</span><span class="k">)</span>
-</code></pre></div></div>
-
-<h2 id="installing-the-guest-additions">Installing the Guest Additions</h2>
-
-<p>Now you have to mount the <em>Guest Additions</em> cdrom. Go to <em>Devices &gt; Install Guest Additions</em> as shown on the above picture. Once you’ve mounted the <em>Guest Additions</em> go to <em>/media/cdrom</em> directory on your virtual machine and execute the installer:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /media/cdrom
-sh ./VBoxLinux-Addtions-x86.run
-</code></pre></div></div>
-
-<p>Finally reboot your virtual machine to apply changes.</p>
+<p>This is a big achievement because I teach Linux to people related to the area that comes almost converted…</p>
 
         
       </section>
@@ -364,15 +352,7 @@ sh ./VBoxLinux-Addtions-x86.run
     
       
       
-      <a href="http://lgallardo.com/tags/debian" class="page__taxonomy-item" rel="tag">Debian</a><span class="sep">, </span>
-    
-      
-      
-      <a href="http://lgallardo.com/tags/sysadmin" class="page__taxonomy-item" rel="tag">SysAdmin</a><span class="sep">, </span>
-    
-      
-      
-      <a href="http://lgallardo.com/tags/virtualbox" class="page__taxonomy-item" rel="tag">VirtualBox</a>
+      <a href="http://lgallardo.com/tags/ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
     
     </span>
   </p>
@@ -400,7 +380,7 @@ sh ./VBoxLinux-Addtions-x86.run
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2009-12-13T21:30:08-03:00">December 13, 2009</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2009-12-03T12:43:48-03:00">December 03, 2009</time></p>
         
       </footer>
 
@@ -409,24 +389,24 @@ sh ./VBoxLinux-Addtions-x86.run
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Installing+VirtualBox+Guest+Additions%20http%3A%2F%2Flgallardo.com%2F2009%2F12%2F14%2Finstalacion-de-los-guest-additions-de-virtualbox%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Redemption%3A+Bye+bye+Windows+XP%26%238230%3BHowdy+Ubuntu+9.10%20http%3A%2F%2Flgallardo.com%2F2009%2F12%2F03%2Fredencion-adios-windows-xp-hola-ubuntu-9-10%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F14%2Finstalacion-de-los-guest-additions-de-virtualbox%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F03%2Fredencion-adios-windows-xp-hola-ubuntu-9-10%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F14%2Finstalacion-de-los-guest-additions-de-virtualbox%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F03%2Fredencion-adios-windows-xp-hola-ubuntu-9-10%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F14%2Finstalacion-de-los-guest-additions-de-virtualbox%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F03%2Fredencion-adios-windows-xp-hola-ubuntu-9-10%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="http://lgallardo.com/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/" class="pagination--pager" title="Redemption: Bye bye Windows XP…Howdy Ubuntu 9.10
+      <a href="http://lgallardo.com/2009/11/22/%C2%BFpor-que-no-usar-windows/" class="pagination--pager" title="Why not to use Windows?
 ">Previous</a>
     
     
-      <a href="http://lgallardo.com/2010/01/14/compilar-el-kernel-a-lo-tradicional/" class="pagination--pager" title="Kernel compiling the old-fashion way
+      <a href="http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/" class="pagination--pager" title="Installing VirtualBox Guest Additions
 ">Next</a>
     
   </nav>
@@ -608,8 +588,8 @@ If for any reason (for instance Genymotion complaining about not finding Virtual
       
   <script>
     var disqus_config = function () {
-      this.page.url = "http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "http://lgallardo.com/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
