@@ -19,7 +19,7 @@
 
 
 
-<title>Installing VirtualBox Guest Additions - lgallardo.com</title>
+<title>Epson Stylus CX5600 all-in-one scanner on Linux - lgallardo.com</title>
 
 
 
@@ -33,11 +33,11 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="lgallardo.com">
-<meta property="og:title" content="Installing VirtualBox Guest Additions">
+<meta property="og:title" content="Epson Stylus CX5600 all-in-one scanner on Linux">
 
 
-  <link rel="canonical" href="http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/">
-  <meta property="og:url" content="http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/">
+  <link rel="canonical" href="http://lgallardo.com/2009/12/05/escaner-multifuncional-epson-stylus-cx5600-en-linux/">
+  <meta property="og:url" content="http://lgallardo.com/2009/12/05/escaner-multifuncional-epson-stylus-cx5600-en-linux/">
 
 
 
@@ -46,9 +46,9 @@
 
 
   <meta name="twitter:site" content="@lgallard">
-  <meta name="twitter:title" content="Installing VirtualBox Guest Additions">
+  <meta name="twitter:title" content="Epson Stylus CX5600 all-in-one scanner on Linux">
   <meta name="twitter:description" content="">
-  <meta name="twitter:url" content="http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/">
+  <meta name="twitter:url" content="http://lgallardo.com/2009/12/05/escaner-multifuncional-epson-stylus-cx5600-en-linux/">
 
   
     <meta name="twitter:card" content="summary">
@@ -70,7 +70,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2009-12-13T21:30:08-03:00">
+  <meta property="article:published_time" content="2009-12-04T21:30:02-03:00">
 
 
 
@@ -132,7 +132,7 @@
     <!-- start custom head snippets -->
 <!-- 
   
-  <a href="/es/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/" >Español</a>
+  <a href="/es/2009/12/05/escaner-multifuncional-epson-stylus-cx5600-en-linux/" >Español</a>
 
 -->
 <!-- insert favicons. use http://realfavicongenerator.net/ -->
@@ -161,7 +161,7 @@
           
           
             
-            <a href="/es/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/" >Español</a>
+            <a href="/es/2009/12/05/escaner-multifuncional-epson-stylus-cx5600-en-linux/" >Español</a>
           
         </ul>
         <button><div class="navicon"></div></button>
@@ -300,15 +300,15 @@
 
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Installing VirtualBox Guest Additions">
+    <meta itemprop="headline" content="Epson Stylus CX5600 all-in-one scanner on Linux">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="December 13, 2009">
+    <meta itemprop="datePublished" content="December 04, 2009">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 class="page__title" itemprop="headline">Installing VirtualBox Guest Additions
+          <h1 class="page__title" itemprop="headline">Epson Stylus CX5600 all-in-one scanner on Linux
 </h1>
           
             <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
@@ -316,34 +316,102 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <center><img title="Instalación de Guest Additions" src="/images/instalacion-de-los-guest-additions-de-virtualbox.jpg" alt="Guest Additions" /></center>
+        <center><img src="/images/escaner-multifuncional-epson-stylus-cx5600-en-linux.jpg" /></center>
 <p><br /></p>
 
-<p>After installing your virtual machine in VirtualBox you should install the <em>Guest Additions</em>…what is that for? It lets you use your virtual machine at fullscreen and it also adds extras kernel modules to get better performance. So, let’s see how to install it…</p>
+<p>I convinced my sister to use Linux after the fourth Windows XP installation (due to viruses). But she complained about not having installed her Epson Stylus CX5600 scanner on Linux, so after doing a research here you are what you need to set it up…</p>
 
-<h2 id="installing-pre-requisites">Installing pre-requisites</h2>
+<h2 id="installing-sane">Installing SANE</h2>
 
-<p>Due to you are going to compile a kernel module, you’ll need a compiler, some header files and other stuff. But don’t be afraid, you only have to type this in a terminal of your virtual machine as root:</p>
+<p>In order to handle your Epson Stylus CX5600 scanner you have to install SANE (Scanner Access Now Easy) which is an API for handling raster scanner on Linux (and others OS like Windows, OS/2, etc). So, type the following command in a terminal:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install build-essential linux-headers-<span class="k">$(</span>uname <span class="nt">-r</span><span class="k">)</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install sane sane-utils
 </code></pre></div></div>
 
-<h2 id="installing-the-guest-additions">Installing the Guest Additions</h2>
+<h2 id="installing-the-drivers">Installing the drivers</h2>
 
-<p>Now you have to mount the <em>Guest Additions</em> cdrom. Go to <em>Devices &gt; Install Guest Additions</em> as shown on the above picture. Once you’ve mounted the <em>Guest Additions</em> go to <em>/media/cdrom</em> directory on your virtual machine and execute the installer:</p>
+<p>Oddly Ubuntu 9.10 doesn’t  detected the scanner by default. In fact you have to download some .rpm files available from <a href="http://www.avasys.jp/lx-bin2/linux_e/spc/DL1.do" target="_blank">Avasys</a> site and convert them to .deb files using <em>alien</em>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /media/cdrom
-sh ./VBoxLinux-Addtions-x86.run
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alien <span class="nt">-c</span> iscan-2.10.0-1.i386.rpm
+alien <span class="nt">-c</span> iscan-plugin-cx4400-2.0.0-0.c2.i386.rpm
 </code></pre></div></div>
 
-<p>Finally reboot your virtual machine to apply changes.</p>
+<p>Install the debianized packages using <em>dpkg</em>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dpkg <span class="nt">-i</span> iscan_2.10.0-2_i386.deb
+dpkg <span class="nt">-i</span> iscan-plugin-cx4400_2.0.0-1_i386.deb
+</code></pre></div></div>
+
+<p>Check if the scanner is detected using <em>lsusb</em> command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# lsusb
+Bus 002 Device 002: ID 04b8:083f Seiko Epson Corp. Stylus DX4450
+Bus 002 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 001 Device 002: ID 058f:6366 Alcor Micro Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+</code></pre></div></div>
+
+<p>With that information edit the <em>/etc/sane.d/epkowa.conf</em> file adding the following line (vendor id and product id):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb 0x04b8 0x083f
+</code></pre></div></div>
+
+<p>Now edit the <em>/etc/sane.d/dll.conf</em> file commenting <em>epson</em> and <em>epson2</em> lines and adding or uncomenting <em>epkowa</em>. So you’ll have something like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#epson</span>
+<span class="c">#epson2</span>
+epkowa
+</code></pre></div></div>
+
+<p>At this point you will be able to use your scanner. You can use <em>xsane</em>, <em>flegita</em> or <em>skanlite</em> to scan your images.</p>
+
+<h2 id="only-root-can-use-the-scanner">Only root can use the scanner</h2>
+
+<p>If the scanner only works with <em>root</em> even though your account belongs to the <em>saned</em> group, this might be a permission problem related to <em>udev</em>. For instance,  I got the scanner’s usb address:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# lsusb
+ Bus 002 Device 002: ID 04b8:083f Seiko Epson Corp. Stylus DX4450
+</code></pre></div></div>
+
+<p>With that information, I checked how <em>udev</em> mapped  the device:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# <span class="nb">ls</span> <span class="nt">-l</span> /dev/bus/usb/002/002
+crw-rw-r--+ 1 root root 189, 129 2009-12-01 21:37 /dev/bus/usb/002/002
+</code></pre></div></div>
+
+<p>This is the problem. It should have mapped it with the <em>saned</em> group instead of <em>root</em>. To fix it, edit the <em>/lib/udev/rules.d/40-libsane.rules</em> file and add the following lines:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Epson CX5600</span>
+ATTRS<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">"04b8"</span>, ATTRS<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">"083f"</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">"0664"</span>, <span class="nv">GROUP</span><span class="o">=</span><span class="s2">"saned"</span>, ENV<span class="o">{</span>libsane_matched<span class="o">}=</span><span class="s2">"yes"</span>
+</code></pre></div></div>
+
+<p>To apply changes, unplug and plug your scanner. Check the new ownership by listing the <em>/dev/bus</em> directory again, but you have to look whether the device id has been changed:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# lsusb
+Bus 002 Device 003: ID 04b8:083f Seiko Epson Corp. Stylus DX4450
+</code></pre></div></div>
+
+<p>If it changed, use the new device id to check the ownership:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# <span class="nb">ls</span> <span class="nt">-l</span> /dev/bus/usb/002/003
+crw-rw-r--+ 1 root saned 189, 129 2009-12-01 21:37 /dev/bus/usb/002/003
+</code></pre></div></div>
+
+<p>As you can see, now it belongs to the <em>saned</em> group, meaning that all member of <em>saned</em> group will be able to use the scanner :)</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="http://www.ubuntu-es.org/?q=node/69308" target="_blank">cx5600 en Ubuntu (instalación de Scanner)</a></li>
+  <li><a href="http://ubuntuforums.org/showthread.php?t=1285100" target="_blank">Scanner Issue – Ubuntu forgets /dev/bus/usb permissions change</a></li>
+</ul>
 
         
       </section>
@@ -364,15 +432,7 @@ sh ./VBoxLinux-Addtions-x86.run
     
       
       
-      <a href="http://lgallardo.com/tags/debian" class="page__taxonomy-item" rel="tag">Debian</a><span class="sep">, </span>
-    
-      
-      
-      <a href="http://lgallardo.com/tags/sysadmin" class="page__taxonomy-item" rel="tag">SysAdmin</a><span class="sep">, </span>
-    
-      
-      
-      <a href="http://lgallardo.com/tags/virtualbox" class="page__taxonomy-item" rel="tag">VirtualBox</a>
+      <a href="http://lgallardo.com/tags/ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
     
     </span>
   </p>
@@ -400,7 +460,7 @@ sh ./VBoxLinux-Addtions-x86.run
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2009-12-13T21:30:08-03:00">December 13, 2009</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2009-12-04T21:30:02-03:00">December 04, 2009</time></p>
         
       </footer>
 
@@ -409,24 +469,24 @@ sh ./VBoxLinux-Addtions-x86.run
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Installing+VirtualBox+Guest+Additions%20http%3A%2F%2Flgallardo.com%2F2009%2F12%2F14%2Finstalacion-de-los-guest-additions-de-virtualbox%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Epson+Stylus+CX5600+all-in-one+scanner+on+Linux%20http%3A%2F%2Flgallardo.com%2F2009%2F12%2F05%2Fescaner-multifuncional-epson-stylus-cx5600-en-linux%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F14%2Finstalacion-de-los-guest-additions-de-virtualbox%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F05%2Fescaner-multifuncional-epson-stylus-cx5600-en-linux%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F14%2Finstalacion-de-los-guest-additions-de-virtualbox%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F05%2Fescaner-multifuncional-epson-stylus-cx5600-en-linux%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F14%2Finstalacion-de-los-guest-additions-de-virtualbox%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flgallardo.com%2F2009%2F12%2F05%2Fescaner-multifuncional-epson-stylus-cx5600-en-linux%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="http://lgallardo.com/2009/12/05/escaner-multifuncional-epson-stylus-cx5600-en-linux/" class="pagination--pager" title="Epson Stylus CX5600 all-in-one scanner on Linux
+      <a href="http://lgallardo.com/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/" class="pagination--pager" title="Redemption: Bye bye Windows XP…Howdy Ubuntu 9.10
 ">Previous</a>
     
     
-      <a href="http://lgallardo.com/2010/01/14/compilar-el-kernel-a-lo-tradicional/" class="pagination--pager" title="Kernel compiling the old-fashion way
+      <a href="http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/" class="pagination--pager" title="Installing VirtualBox Guest Additions
 ">Next</a>
     
   </nav>
@@ -608,8 +668,8 @@ If for any reason (for instance Genymotion complaining about not finding Virtual
       
   <script>
     var disqus_config = function () {
-      this.page.url = "http://lgallardo.com/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox/";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/2009/12/14/instalacion-de-los-guest-additions-de-virtualbox"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "http://lgallardo.com/2009/12/05/escaner-multifuncional-epson-stylus-cx5600-en-linux/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2009/12/05/escaner-multifuncional-epson-stylus-cx5600-en-linux"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
