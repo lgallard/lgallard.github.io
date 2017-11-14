@@ -333,7 +333,7 @@
 
 Filesystem Size Used Avail Use% Mounted on
 
-/dev/sdb1 788G 726G &lt;strong&gt;23G&lt;/strong&gt; 98% /var/data
+/dev/sdb1 788G 726G 23G 98% /var/data
 </code></pre></div></div>
 
 <p>Si sacamos la cuenta debería ser  788 GB – 726 GB = 62 GB…pero <em>df</em> (es decir Linux) reporta que hay disponibles 23 GB. ¿Dónde están los otros 39 GB?</p>
@@ -369,7 +369,7 @@ Filesystem Size Used Avail Use% Mounted on
  
 Filesystem Size Used Avail Use% Mounted on
 
-/dev/sdb1 788G 726G &lt;strong&gt;63G&lt;/strong&gt; 93% /var/data
+/dev/sdb1 788G 726G 63G 93% /var/data
 </code></pre></div></div>
 
 <p>Ahora las cuentas si dan…por cierto, y cómo podríamos saber el espacio reservado sin usar <em>df</em>? Existen dos formas:</p>
