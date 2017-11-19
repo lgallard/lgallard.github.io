@@ -1,7 +1,8 @@
 #!/bin/bash
 
 rm lgallard.github.io/ -rf
-bundle exec jekyll build -t --incremental
+#bundle exec jekyll build -t --incremental
+bundle exec jekyll build -t 
 git clone https://github.com/lgallard/lgallard.github.io.git
 cp -r _site/* lgallard.github.io/
 cd lgallard.github.io/
