@@ -1,4 +1,209 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2017-11-15T15:46:05-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Publicando de Jekyll a Github Pages con Bitbucket Pipeline</title><link href="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" rel="alternate" type="text/html" title="Publicando de Jekyll a Github Pages con Bitbucket Pipeline" /><published>2017-10-13T16:41:51-03:00</published><updated>2017-10-13T16:41:51-03:00</updated><id>http://lgallardo.com/es/2017/10/13/posting-jekyll-to-github-pages-with-bitbucket-pipeline</id><content type="html" xml:base="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;/images/automating-jekyll-deployment-to-github-pages-with-bitbucket-pipeline.jpg&quot; alt=&quot;Posting with pipeline&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2017-11-19T15:09:11-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Trabajando con módulos en Terraform</title><link href="http://lgallardo.com/es/2017/11/19/terraform-modules/" rel="alternate" type="text/html" title="Trabajando con módulos en Terraform" /><published>2017-11-19T02:00:07-03:00</published><updated>2017-11-19T02:00:07-03:00</updated><id>http://lgallardo.com/es/2017/11/19/working-with-terraform-modules</id><content type="html" xml:base="http://lgallardo.com/es/2017/11/19/terraform-modules/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;AWS Lambda&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;En este artículo verás cómo reutilizar tu código de Terraform usando módulos para evitar tener que rescribir el mismo código una y otra vez. También aprenderás como versionar tus módulos y cómo usar versiones específicas.&lt;/p&gt;
+
+&lt;h1 id=&quot;cómo-defino-un-módulo&quot;&gt;¿Cómo defino un módulo?&lt;/h1&gt;
+&lt;p&gt;Solo coloca todos tus archivos .tf en una carpeta, por ejemplo:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mymodule/
+├── main.tf
+├── outputs.tf
+├── README.md
+└── variables.tf
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Luego cópiala dentro de una carpeta &lt;em&gt;modules&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;cómo-uso-el-módulo&quot;&gt;¿Cómo uso el módulo?&lt;/h1&gt;
+&lt;p&gt;Usa el parámetro &lt;em&gt;source&lt;/em&gt; para especificar la ruta de tu módulo como se muestra a continuación:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
+
+  source = &quot;./modules/mymodule&quot;
+
+  var1 = &quot;Hello World&quot;
+  var2 = 1999
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;variables-del-módulo&quot;&gt;Variables del módulo&lt;/h1&gt;
+&lt;p&gt;Como puedes ver este módulo recibe dos argumentos, los cuales pueden ser definidos en el archivo &lt;em&gt;variables.tf&lt;/em&gt; de &lt;em&gt;mymodule&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;variable &quot;var1&quot; {
+  description = &quot;A string var&quot;
+}
+
+variable &quot;var2&quot; {
+  description = &quot;A numerical var&quot;
+default = 1989
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;salidas-del-módulo&quot;&gt;Salidas del módulo&lt;/h1&gt;
+&lt;p&gt;Los módulos también tienen salidas que pueden ser usadas por otros módulos y recursos. Puedes definir las salidas en el archivo &lt;em&gt;outputs.tf&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+output &quot;id&quot; {
+  description = &quot;This is the mymodule's id&quot;
+}
+
+output &quot;name&quot; {
+  description = &quot;This is the mymodule's name&quot;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;sources-de-los-módulos&quot;&gt;Sources de los módulos&lt;/h1&gt;
+&lt;p&gt;Los ejemplos de arriba usan el parámetro &lt;em&gt;source&lt;/em&gt; para obtener el módulo de la carpeta local pero también puedes usar otras fuentes como un repositorio git, mercurial, urls HTTPS, buckets S3 or el Registro de módulos de Terraform.&lt;/p&gt;
+
+&lt;p&gt;Por ejemplo, en vez de usar una carpeta lcoal puedes usar un repositorio git para versionar tu módulo y llamarlo de esta forma:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
+
+  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git&quot;
+
+  var1 = &quot;Hello World&quot;
+  var2 = 1999
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;branch-y-versión-del-repositorio-del-módulo&quot;&gt;Branch y versión del repositorio del módulo&lt;/h1&gt;
+&lt;p&gt;Puedes también apuntar a un branch o versión específica en un repositorio git usando el query &lt;em&gt;?ref&lt;/em&gt;. Por ejemplo para especificar el branch &lt;em&gt;dev&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
+
+  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git?ref=dev&quot;
+
+  var1 = &quot;Hello World&quot;
+  var2 = 1999
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Para apuntar a la versión 0.0.2 usalo así:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
+
+  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git?ref=0.0.2&quot;
+
+  var1 = &quot;Hello World&quot;
+  var2 = 1999
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;cuál-es-el-problema-con-este-enfoque&quot;&gt;¿Cuál es el problema con este enfoque?&lt;/h2&gt;
+&lt;p&gt;Si quieres actualizar el módulo y lo has usado varias veces en un proyecto, debes editar a a mano la definición en cada lugar.&lt;/p&gt;
+
+&lt;h1 id=&quot;versión-del-módulo&quot;&gt;Versión del módulo&lt;/h1&gt;
+&lt;p&gt;Si estás usando una versión de Terraform v0.11.0+  puedes especificar la versión del módulo. Esto ayuda a apuntar a una versión específica, por ejemplo a una estable del módulo. Esto solo funciona si estás usando un registro de módulo como el &lt;a href=&quot;https://www.terraform.io/docs/registry/index.html&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
+  source  = &quot;hashicorp/mymodule&quot;
+  version = &quot;0.0.2&quot;
+
+  var1 = &quot;Hello World&quot;
+  var2 = 1999
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;cuál-es-el-problema-con-este-enfoque-1&quot;&gt;¿Cuál es el problema con este enfoque?&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;El registro de Terraform es público. Para usar el registro privado (&lt;a href=&quot;https://www.terraform.io/docs/registry/private.html&quot; target=&quot;_blank&quot;&gt;Private Registry&lt;/a&gt;) debes usar la versión Enterpise&lt;/li&gt;
+  &lt;li&gt;Solo disponible para las versiones v0.11.0+ de Terraform&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;usando-un-terrafile&quot;&gt;Usando un Terrafile&lt;/h1&gt;
+&lt;p&gt;Hay otro enfoque para superar los problemas de las versiones, el cual consiste en escribir un archivo para definir los módulos a usar desde un repositorio git, por branch o versión. Este archivo es conocido como &lt;em&gt;Terrafile&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+# VPC
+tf_aws_vpc:
+  source : &quot;git@github.com:terraform-community-modules/tf_aws_vpc.git&quot;
+  version: &quot;master&quot;
+
+tf_my_module:
+  source: &quot;git@bitbucket.org:mygitrepo/mymodule.git&quot;
+  version: &quot;0.0.2&quot;                   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Estos módulos se descargaran en la carpeta &lt;em&gt;modules&lt;/em&gt;: y luego puedes referenciarlos en tu módulo usando esta carpeta local_:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
+
+  source = &quot;./modules/mymodule&quot;
+
+  var1 = &quot;Hello World&quot;
+  var2 = 1999
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para obtener los módulos usa este Rakefile:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'yaml'&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'fileutils'&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# You may want to change this.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;modules_path&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;'vendor/modules'&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# You may want to change this.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;terrafile_path&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;'Terrafile'&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;read_terrafile&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terrafile_path&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;load_file&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terrafile_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;fail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'[*] Terrafile does not exist'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create_modules_directory&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Creating Terraform modules directory at '&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'&quot;&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;FileUtils&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;makedirs&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;delete_cached_terraform_modules&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Deleting cached Terraform modules at '&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'&quot;&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;FileUtils&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rm_rf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Fetch the Terraform modules listed in the Terrafile'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:get_modules&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;terrafile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;read_terrafile&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;create_modules_directory&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;delete_cached_terraform_modules&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;terrafile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;module_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'source'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'version'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Checking out &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; of &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; ...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;colorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mkdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;chdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;sb&quot;&gt;`git clone -b &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;module_name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &amp;amp;&amp;gt; /dev/null`&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Y descárgalos usando la función &lt;em&gt;get_modules&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rake get_modules
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finalmente obten los módulos en Terraform:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;terraform get
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/modules/usage.html&quot; target=&quot;_blank&quot;&gt;Terraform - Module Usage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/modules/sources.html&quot;&gt;Terraform - Module Sources&lt;/a&gt;){:target=”_blank”}&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/registry/index.html&quot; target=&quot;_blank&quot;&gt;Terraform Public Registry&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/registry/private.html&quot; target=&quot;_blank&quot;&gt;Terraform Private Registry&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bensnape.com/2016/01/14/terraform-design-patterns-the-terrafile/&quot; target=&quot;_blank&quot;&gt;Terraform Design Patterns: the Terrafile&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Publicando de Jekyll a Github Pages con Bitbucket Pipeline</title><link href="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" rel="alternate" type="text/html" title="Publicando de Jekyll a Github Pages con Bitbucket Pipeline" /><published>2017-10-13T16:41:51-03:00</published><updated>2017-10-13T16:41:51-03:00</updated><id>http://lgallardo.com/es/2017/10/13/posting-jekyll-to-github-pages-with-bitbucket-pipeline</id><content type="html" xml:base="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;/images/automating-jekyll-deployment-to-github-pages-with-bitbucket-pipeline.jpg&quot; alt=&quot;Posting with pipeline&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Debido a unos problemas de seguridad que tuve con WordPress decidí cambiar el blog a algo estático servido desde Github Pages. Pero el nuevo sitio tenía que cumplir algunos requerimientos mínimos:&lt;/p&gt;
@@ -496,84 +701,4 @@ Extending logical volume svn to 500.00 GiB
  /dev/mapper/debian-usr 2.0G 869M 1.1G 46% /usr
  /dev/mapper/debian-var 6.7G 2.1G 4.3G 33% /var
  /dev/mapper/svn_vg-svn 493G 432G 62G 88% /var/data/svn
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Administración" /><category term="LVM" /><summary type="html">A veces es necesario extender un volumen lógico, expandiendo el volumen físico donde está alojado. Si este es el caso, puedes seguir este ejemplo que extiende un volumen de 450 GB a 500 GB: Primero consultamos a geometry del disco</summary></entry><entry><title type="html">Habilitar HTML5 para Blipblip.tv en plugin Video Sidebar Widgets de WordPress</title><link href="http://lgallardo.com/es/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/" rel="alternate" type="text/html" title="Habilitar HTML5 para Blipblip.tv en plugin Video Sidebar Widgets de WordPress" /><published>2014-05-28T17:00:33-03:00</published><updated>2014-05-28T17:00:33-03:00</updated><id>http://lgallardo.com/es/2014/05/28/habilitar-html5-para-tv-en-plugin-video-sidebar-widgets-de-wordpress</id><content type="html" xml:base="http://lgallardo.com/es/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">&lt;h2 id=&quot;el-problema&quot;&gt;El problema&lt;/h2&gt;
-
-&lt;p&gt;Viendo mi blog desde una tableta me percaté que los videos de Blipblip.tv que configuré en el &lt;em&gt;Video Sidebar Widgets&lt;/em&gt; no se mostraban. Investigando me di cuenta que el plugin carga la versión anterior del reproductor de Blipblip.tv basado en Flash y no HTML5, por lo que lo videos no se podían apreciar desde dispositivos móviles que no soportasen Flash, los cuales ya son la mayoría.&lt;/p&gt;
-
-&lt;h2 id=&quot;la-solución&quot;&gt;La solución&lt;/h2&gt;
-
-&lt;p&gt;Simplemente en los archivos &lt;em&gt;helper-functions.php&lt;/em&gt; y &lt;em&gt;class-videosidebarwidget.php&lt;/em&gt; agregué condicionales para el caso Blipblip.tv y en concordancia agregué el player con HTML5. En particular, agregué las siguientes líneas en el archivo &lt;em&gt;helper-functions.php:&lt;/em&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;elseif($admin==&quot;true&quot;){
- if($source == &quot;Blip&quot;){
- echo &quot;\n&amp;amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot; 
- frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt;
- &amp;amp;lt;/iframe&amp;amp;gt; 
- 
- &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot; 
- style=\&quot;display:none\&quot;&amp;amp;gt;
- &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; 
- }else{ 
- // echo video in admin
- echo &quot;\n&amp;amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;;
- echo $flashvar;
- echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;;
- echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;;
- echo $flashvar2;
- echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;;
- }
-}else{
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Y en el archivo &lt;em&gt;class-videosidebarwidget.php&lt;/em&gt; modifiqué lo siguiente:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-case 'Blip':
- $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;;
- &amp;lt;strong&amp;gt;$rv_flashvar&amp;lt;/strong&amp;gt; = &quot;&quot;;
- $rv_flashvar2 = &quot;&quot;;
- $rv_cap = $Embed_cap;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Y agregué estas líneas:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if($select_source == &quot;Blip&quot;){ 
- echo &quot;\n&amp;amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot; 
- frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt;
- &amp;amp;lt;/iframe&amp;amp;gt;
- 
- &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot; 
- style=\&quot;display:none\&quot;&amp;amp;gt;
- &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;;
-}else{
- echo &quot;\n&amp;amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;;
- echo $rv_flashvar;
- echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;;
- echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;;
- echo $rv_flashvar2;
- echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;;
- echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;;
- }
- if(!empty($rv_cap)){echo &quot;&amp;amp;lt;p class=\&quot;VideoCaption\&quot;&amp;amp;gt;$rv_cap&amp;amp;lt;/p&amp;amp;gt;\n\n&quot;;};
- 
- 
- echo $after_widget;
- }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Luego de esto, los videos aleatorios con HTML5 se cargan sin problemas.&lt;/p&gt;
-
-&lt;h2 id=&quot;soporte-del-plugin&quot;&gt;Soporte del plugin&lt;/h2&gt;
-
-&lt;p&gt;Por cierto que contacté al desarrollador del plugin para que agregue estos cambios y me informó que estaba muy ocupado para hacerlo. Lástima que no lo sede al dominio público para que otro lo siga manteniendo.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="PHP" /><category term="WordPress" /><summary type="html">El problema Viendo mi blog desde una tableta me percaté que los videos de Blipblip.tv que configuré en el Video Sidebar Widgets no se mostraban. Investigando me di cuenta que el plugin carga la versión anterior del reproductor de Blipblip.tv basado en Flash y no HTML5, por lo que lo videos no se podían apreciar desde dispositivos móviles que no soportasen Flash, los cuales ya son la mayoría. La solución Simplemente en los archivos helper-functions.php y class-videosidebarwidget.php agregué condicionales para el caso Blipblip.tv y en concordancia agregué el player con HTML5. En particular, agregué las siguientes líneas en el archivo helper-functions.php: elseif($admin==&quot;true&quot;){ if($source == &quot;Blip&quot;){ echo &quot;\n&amp;amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot; frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt; &amp;amp;lt;/iframe&amp;amp;gt; &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot; style=\&quot;display:none\&quot;&amp;amp;gt; &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; }else{ // echo video in admin echo &quot;\n&amp;amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;; echo $flashvar; echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $flashvar2; echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;; } }else{ Y en el archivo class-videosidebarwidget.php modifiqué lo siguiente: case 'Blip': $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;; &amp;lt;strong&amp;gt;$rv_flashvar&amp;lt;/strong&amp;gt; = &quot;&quot;; $rv_flashvar2 = &quot;&quot;; $rv_cap = $Embed_cap; Y agregué estas líneas: if($select_source == &quot;Blip&quot;){ echo &quot;\n&amp;amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot; frameborder=\&quot;0\&quot; allowfullscreen&amp;amp;gt; &amp;amp;lt;/iframe&amp;amp;gt; &amp;amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot; style=\&quot;display:none\&quot;&amp;amp;gt; &amp;amp;lt;/embed&amp;amp;gt;\n\n&quot;; }else{ echo &quot;\n&amp;amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;; echo $rv_flashvar; echo &quot;&amp;amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $rv_flashvar2; echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/embed&amp;amp;gt;\n&quot;; echo &quot;&amp;amp;lt;/object&amp;amp;gt;\n\n&quot;; } if(!empty($rv_cap)){echo &quot;&amp;amp;lt;p class=\&quot;VideoCaption\&quot;&amp;amp;gt;$rv_cap&amp;amp;lt;/p&amp;amp;gt;\n\n&quot;;}; echo $after_widget; } Luego de esto, los videos aleatorios con HTML5 se cargan sin problemas. Soporte del plugin Por cierto que contacté al desarrollador del plugin para que agregue estos cambios y me informó que estaba muy ocupado para hacerlo. Lástima que no lo sede al dominio público para que otro lo siga manteniendo.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Administración" /><category term="LVM" /><summary type="html">A veces es necesario extender un volumen lógico, expandiendo el volumen físico donde está alojado. Si este es el caso, puedes seguir este ejemplo que extiende un volumen de 450 GB a 500 GB: Primero consultamos a geometry del disco</summary></entry></feed>
