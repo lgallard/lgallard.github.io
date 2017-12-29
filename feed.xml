@@ -1,4 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2017-12-03T14:55:43-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Working with Terraform modules</title><link href="http://lgallardo.com/2017/11/19/terraform-modules/" rel="alternate" type="text/html" title="Working with Terraform modules" /><published>2017-11-18T21:00:10-03:00</published><updated>2017-11-18T21:00:10-03:00</updated><id>http://lgallardo.com/2017/11/19/working-with-terraform-modules</id><content type="html" xml:base="http://lgallardo.com/2017/11/19/terraform-modules/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform logo&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2017-12-29T15:45:25-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AWS Certified Solutions Architect - Professional</title><link href="http://lgallardo.com/2016/02/13/aws-certified-solutions-architect-professional/" rel="alternate" type="text/html" title="AWS Certified Solutions Architect - Professional" /><published>2017-12-29T12:00:55-03:00</published><updated>2017-12-29T12:00:55-03:00</updated><id>http://lgallardo.com/2016/02/13/aws-certified-solutions-architect-professional</id><content type="html" xml:base="http://lgallardo.com/2016/02/13/aws-certified-solutions-architect-professional/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Solutions_Architect_Professional_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recientemente aprobé la certificación AWS Certified Solutions Architect - Professional y quería dejar mis comentarios respecto al examen:&lt;/p&gt;
+
+&lt;p&gt;Fueron 77 preguntas para 2 horas 50 minutos. Muchas estaban relacionadas con CloudFormation, OpsWorks y BeanStalk. En particular cómo desplegar aplicaciones y cuándo usar una u otra tecnología. Otra porción considerable estaba enfocada a DirectConnect, y sus casos de usos. Otro tema recurrente fue DR, plantean varios escenarios con distintos RTO y RPO para que elijan el servicio AWS correcto o la arquitectura que más se adecua.&lt;/p&gt;
+
+&lt;p&gt;En general el examen es largo y tiene  enunciados extensos y con respuestas también extensas. Los comentarios que puedes conseguir en Internet es que el examen no tiene la mejor redacción del mundo y que en general para quienes el inglés no es su lengua nativa puede llegar a ser confuso, por lo que seguro te tocará leer varias preguntas mas de una vez.&lt;/p&gt;
+
+&lt;p&gt;Mis recomendaciones para ganar tiempo en este examen son:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Las preguntas fáciles respóndelas rápidamente, no te quedes mucho tiempo pensando en si es la respuesta correcta porque seguro lo es.&lt;/li&gt;
+  &lt;li&gt;Solo marcar las preguntas en las que realmente tienes dudas, así al momento de revisarlas puedes enfocarte en solo esas y si queda tiempo empezar a revisar el resto&lt;/li&gt;
+  &lt;li&gt;Piensen que es una certificación de Amazon, en ese sentido siempre preguntarse cuál servicio de Amazon corresponde.&lt;/li&gt;
+  &lt;li&gt;Descartar cosas que se pueden hacer a nivel de S.O. si un servicio de Amazon lo provee, y solo considerarlo cuando no hay mas opción.&lt;/li&gt;
+  &lt;li&gt;Siempre que lean scalable piensen en SQS/DynamoDB, cost-saving = S3/S3 RRS, y así.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Si estás interesado en esta certificación y te recomiendo algunos enlaces:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cursos en línea&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/course/aws-certified-solutions-architect-professional&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Documentación de AWS&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Trabajando con módulos en Terraform</title><link href="http://lgallardo.com/2017/12/20/how-to-get-the-latest-ubuntu-ami-using-awscli/" rel="alternate" type="text/html" title="Trabajando con módulos en Terraform" /><published>2017-12-19T21:00:10-03:00</published><updated>2017-12-19T21:00:10-03:00</updated><id>http://lgallardo.com/2017/12/20/how-to-get-the-latest-ubuntu-ami-using-awscli</id><content type="html" xml:base="http://lgallardo.com/2017/12/20/how-to-get-the-latest-ubuntu-ami-using-awscli/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
+
+&lt;p&gt;I got the AMI using the awscli for the us-east-1 region, but you are right I missed the ENA support parameter.&lt;/p&gt;
+
+&lt;p&gt;To summarize, as long as the instance type is C4/C5, the kernel module ixgbevf is loaded (ENA), and AMI virtualization type is hvm, then enhanced networking should be enabled.&lt;/p&gt;
+
+&lt;p&gt;To get the latest AMI for Ubuntu trusty 14.04 with ENA enabled on us-east-1 I ended up with this AWS CLI:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws ec2 describe-images \
+--owners 099720109477 \
+--filters Name=root-device-type,Values=ebs \
+Name=architecture,Values=x86_64 \
+Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' \
+Name=ena-support,Values=true \
+--query 'sort_by(Images, &amp;amp;Name)[-1].[ImageId,CreationDate]' \
+--output text --region us-east-1
+
+ami-f0f8d695	2017-11-21T15:21:29.000Z
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Another useful resource is the &lt;a href=&quot;https://cloud-images.ubuntu.com/locator/ec2/&quot;&gt;Amazon EC2 AMI Locator&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;how-to-get-the-owner-id&quot;&gt;How to get the owner id?&lt;/h1&gt;
+
+&lt;p&gt;Check this article&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;References:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html&lt;/li&gt;
+  &lt;li&gt;https://aws.amazon.com/premiumsupport/knowledge-center/enable-configure-enhanced-networking/&lt;/li&gt;
+  &lt;li&gt;http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking-ena.html&lt;/li&gt;
+  &lt;li&gt;https://aws.amazon.com/ec2/instance-types/&lt;/li&gt;
+  &lt;li&gt;https://gist.github.com/vancluever/7676b4dafa97826ef0e9&lt;/li&gt;
+  &lt;li&gt;https://cloud-images.ubuntu.com/locator/ec2/&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Working with Terraform modules</title><link href="http://lgallardo.com/2017/11/19/terraform-modules/" rel="alternate" type="text/html" title="Working with Terraform modules" /><published>2017-11-18T21:00:10-03:00</published><updated>2017-11-18T21:00:10-03:00</updated><id>http://lgallardo.com/2017/11/19/working-with-terraform-modules</id><content type="html" xml:base="http://lgallardo.com/2017/11/19/terraform-modules/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform logo&quot; /&gt;&lt;/center&gt;
 
 &lt;p&gt;In this post you’ll see how reuse your Terraform code using modules to avoid writing the same code over and over. Also you will lear how to version your modules and how to use a specific version.&lt;/p&gt;
 
@@ -599,110 +668,4 @@ lrwxrwxrwx 1 root root 22 jun  9  2014 /usr/bin/java -&amp;gt; /etc/alternativ
 
 # ls -l /etc/alternatives/java
 lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&amp;gt; /opt/jdk1.8.0_45/bin/java
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Debian" /><category term="Java" /><summary type="html"></summary></entry><entry><title type="html">How to enable the Web UI on qBittorrent</title><link href="http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent/" rel="alternate" type="text/html" title="How to enable the Web UI on qBittorrent" /><published>2014-09-29T12:36:15-03:00</published><updated>2014-09-29T12:36:15-03:00</updated><id>http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent</id><content type="html" xml:base="http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent/">&lt;p&gt;If you want to manage your qBittorrent server using a web interface, follow these steps:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;On the menu bar, go to &lt;strong&gt;Tools &amp;gt; Options&lt;/strong&gt; &lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3880/15391118211_5b67aecd29_z.jpg&quot; alt=&quot;qBittorrent WEB UI&quot; width=&quot;640&quot; height=&quot;351&quot; /&gt;&lt;/center&gt;&lt;br /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In the new window, choose &lt;strong&gt;Web UI&lt;/strong&gt; option&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Check &lt;strong&gt;Enable the Web User Interface (Remote control)&lt;/strong&gt; option&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Choose a port (default &lt;strong&gt;8080&lt;/strong&gt;)&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Set username and password (default &lt;strong&gt;username: admin&lt;/strong&gt; / &lt;strong&gt;password: adminadmin&lt;/strong&gt;)&lt;br /&gt;&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3863/15207705338_5225186c65_z.jpg&quot; alt=&quot;WEB UI&quot; width=&quot;640&quot; height=&quot;487&quot; /&gt;&lt;/center&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Click on &lt;strong&gt;Ok&lt;/strong&gt; to save settings.&lt;br /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Now in a browser you can check your qBittorrent server if you put your server’s IP address and port, example: 192.168.1.100:8080 as show below:&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3919/15208201407_ca174f0bc9_z.jpg&quot; alt=&quot;qBittorrent Web UI&quot; width=&quot;640&quot; height=&quot;505&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can also access it from your Android device by installing &lt;a title=&quot;qBittorrent Client&quot; href=&quot;https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclient&quot; target=&quot;_blank&quot;&gt;qBittorrent Client&lt;/a&gt; or &lt;a title=&quot;qBittorrent Client Pro&quot; href=&quot;https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclientpro&quot; target=&quot;_blank&quot;&gt;qBittorrent Client Pro&lt;/a&gt;:&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3841/14860260518_17f133401d.jpg&quot; alt=&quot;qBitttoren Client Pro&quot; width=&quot;300&quot; height=&quot;500&quot; /&gt;&lt;/center&gt;</content><author><name>Luis Gallardo</name></author><category term="qBittorrent" /><summary type="html">If you want to manage your qBittorrent server using a web interface, follow these steps:</summary></entry><entry><title type="html">How to extend a volume on LVM</title><link href="http://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/" rel="alternate" type="text/html" title="How to extend a volume on LVM" /><published>2014-08-26T14:45:02-03:00</published><updated>2014-08-26T14:45:02-03:00</updated><id>http://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm</id><content type="html" xml:base="http://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/">&lt;center&gt;&lt;img src=&quot;/images/como-extender-un-volumen-en-lvm.jpg&quot; alt=&quot;&quot; width=&quot;233&quot; height=&quot;204&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# fdisk -l /dev/sdb
-
-Disk /dev/sdb: 483.2 GB, 483183820800 bytes
- 255 heads, 63 sectors/track, 58743 cylinders, total 943718400 sectors
- Units = sectors of 1 * 512 = 512 bytes
- Sector size (logical/physical): 512 bytes / 512 bytes
- I/O size (minimum/optimal): 512 bytes / 512 bytes
- Disk identifier: 0x0001178e
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;After expanding the volume you must make the system to rescan the volume:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# echo 1 &amp;amp;gt; /sys/block/sdb/device/rescan
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Then check the disk geometry one more time:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# fdisk -l /dev/sdb
-
-Disk /dev/sdb: 536.9 GB, 536870912000 bytes
- 255 heads, 63 sectors/track, 65270 cylinders, total 1048576000 sectors
- Units = sectors of 1 * 512 = 512 bytes
- Sector size (logical/physical): 512 bytes / 512 bytes
- I/O size (minimum/optimal): 512 bytes / 512 bytes
- Disk identifier: 0x0001178e
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see, the disk size grew up but this is only known by the operating system, because the LVM still has the same information since the physical volume hasn’t been expanded yet:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# pvs
- PV VG Fmt Attr PSize PFree
- /dev/sda5 debian lvm2 a-- 3.76g 0
- /dev/sda6 debian lvm2 a-- 13.00g 0
- /dev/sdb svn_vg lvm2 a-- 450.00g 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If you extend the physical volume with the following command:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# pvresize /dev/sdb
- Physical volume &quot;/dev/sdb&quot; changed
- 1 physical volume(s) resized / 0 physical volume(s) not resized
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And check the physical volume sizes you will see the added space:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# pvs
- PV VG Fmt Attr PSize PFree
- /dev/sda5 debian lvm2 a-- 3.76g 0
- /dev/sda6 debian lvm2 a-- 13.00g 0
- /dev/sdb svn_vg lvm2 a-- 500.00g 50.00g
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now you have to extend the logical volume and the system file size on the fly. You can do both actions using just one command:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# lvresize -r -L +50G /dev/mapper/svn_vg-svn
-
-Extending logical volume svn to 500.00 GiB
- Logical volume svn successfully resized
- resize2fs 1.42.5 (29-Jul-2012)
- Filesystem at /dev/mapper/svn_vg-svn is mounted on /var/data/svn; on-line resizing required
- old_desc_blocks = 29, new_desc_blocks = 32
- Performing an on-line resize of /dev/mapper/svn_vg-svn to 131070976 (4k) blocks.
- The filesystem on /dev/mapper/svn_vg-svn is now 131070976 blocks long.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally, check the free space available to see the added 50 GB in the system file:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# df -h
- Filesystem Size Used Avail Use% Mounted on
- rootfs 993M 287M 655M 31% /
- udev 10M 0 10M 0% /dev
- tmpfs 397M 228K 397M 1% /run
- /dev/mapper/debian-root 993M 287M 655M 31% /
- tmpfs 5.0M 0 5.0M 0% /run/lock
- tmpfs 794M 0 794M 0% /run/shm
- /dev/sda1 228M 34M 183M 16% /boot
- /dev/mapper/debian-home 2.0G 39M 1.9G 3% /home
- /dev/mapper/debian-tmp 3.9G 7.1M 3.7G 1% /tmp
- /dev/mapper/debian-usr 2.0G 869M 1.1G 46% /usr
- /dev/mapper/debian-var 6.7G 2.1G 4.3G 33% /var
- /dev/mapper/svn_vg-svn 493G 432G 62G 88% /var/data/svn
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="SystemAdmin" /><category term="LVM" /><summary type="html">Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Debian" /><category term="Java" /><summary type="html"></summary></entry></feed>
