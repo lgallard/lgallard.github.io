@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-01-24T17:57:24-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AWS Certified Solutions Architect - Professional</title><link href="http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional/" rel="alternate" type="text/html" title="AWS Certified Solutions Architect - Professional" /><published>2017-12-29T12:00:55-03:00</published><updated>2017-12-29T12:00:55-03:00</updated><id>http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional</id><content type="html" xml:base="http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Solutions_Architect_Professional_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-01-26T13:28:23-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">How to get the latest Ubuntu AMI</title><link href="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="How to get the latest Ubuntu AMI" /><published>2018-01-24T21:00:10-03:00</published><updated>2018-01-24T21:00:10-03:00</updated><id>http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:&lt;/p&gt;
+
+&lt;h1 id=&quot;using-the-aws-cli&quot;&gt;Using the AWS CLI&lt;/h1&gt;
+
+&lt;p&gt;My first approach was to use the the AWS CLI as shown below:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws ec2 describe-images \
+--owners 099720109477 \
+--filters Name=root-device-type,Values=ebs \
+Name=architecture,Values=x86_64 \
+Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' \
+Name=ena-support,Values=true \
+--query 'sort_by(Images, &amp;amp;Name)[-1].[ImageId,CreationDate]' \
+--output text --region us-east-1
+
+ami-f0f8d695	2017-11-21T15:21:29.000Z
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In this example, 099720109477 stands for Ubuntu’s owner ID.&lt;/p&gt;
+
+&lt;h1 id=&quot;ubuntu-amazon-ec2-ami-locator&quot;&gt;Ubuntu Amazon EC2 AMI Locator&lt;/h1&gt;
+
+&lt;p&gt;I also ran into the &lt;a href=&quot;https://cloud-images.ubuntu.com/&quot; target=&quot;_blank&quot;&gt;Amazon EC2 AMI Locator&lt;/a&gt; which can be a useful resource, specially if you dont have access to the AWS CLI.&lt;/p&gt;
+
+&lt;h1 id=&quot;packer-source-ami-filter&quot;&gt;Packer source ami filter:&lt;/h1&gt;
+
+&lt;p&gt;With Packer you can use the &lt;a href=&quot;https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter&quot; target=&quot;_blank&quot;&gt;&lt;em&gt;source_ami_filter&lt;/em&gt; &lt;/a&gt; passing similar parameters like in the AWS CLI:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+  &quot;builders&quot;: [
+    {
+      &quot;type&quot;: &quot;amazon-ebs&quot;,
+      &quot;region&quot;: &quot;us-east-1&quot;,
+      &quot;instance_type&quot;: &quot;c3.xlarge&quot;,
+      &quot;ena_support&quot;: true,
+      &quot;source_ami_filter&quot;: {
+        &quot;filters&quot;: {
+        &quot;virtualization-type&quot;: &quot;hvm&quot;,
+        &quot;name&quot;: &quot;ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*&quot;,
+        &quot;root-device-type&quot;: &quot;ebs&quot;
+        },
+        &quot;owners&quot;: [&quot;099720109477&quot;],
+        &quot;most_recent&quot;: true
+      },
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;References:&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/vancluever/7676b4dafa97826ef0e9&quot; target=&quot;_blank&quot;&gt;Find the most recent Ubuntu AMI using aws-cli&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloud-images.ubuntu.com/&quot; target=&quot;_blank&quot;&gt;Amazon EC2 AMI Locator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter&quot;&gt;source_ami_filter&lt;/a&gt; {:target=”_blank”}&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Packer" /><category term="Ubuntu" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Solutions Architect - Professional</title><link href="http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional/" rel="alternate" type="text/html" title="AWS Certified Solutions Architect - Professional" /><published>2017-12-29T12:00:55-03:00</published><updated>2017-12-29T12:00:55-03:00</updated><id>http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional</id><content type="html" xml:base="http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Solutions_Architect_Professional_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recientemente aprobé la certificación AWS Certified Solutions Architect - Professional y quería dejar mis comentarios respecto al examen:&lt;/p&gt;
@@ -634,24 +692,4 @@ lrwxrwxrwx 1 root root 22 jun  9  2014 /usr/bin/java -&amp;gt; /etc/alternativ
 
 # ls -l /etc/alternatives/java
 lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&amp;gt; /opt/jdk1.8.0_45/bin/java
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Debian" /><category term="Java" /><summary type="html"></summary></entry><entry><title type="html">How to enable the Web UI on qBittorrent</title><link href="http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent/" rel="alternate" type="text/html" title="How to enable the Web UI on qBittorrent" /><published>2014-09-29T12:36:15-03:00</published><updated>2014-09-29T12:36:15-03:00</updated><id>http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent</id><content type="html" xml:base="http://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent/">&lt;p&gt;If you want to manage your qBittorrent server using a web interface, follow these steps:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;On the menu bar, go to &lt;strong&gt;Tools &amp;gt; Options&lt;/strong&gt; &lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3880/15391118211_5b67aecd29_z.jpg&quot; alt=&quot;qBittorrent WEB UI&quot; width=&quot;640&quot; height=&quot;351&quot; /&gt;&lt;/center&gt;&lt;br /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In the new window, choose &lt;strong&gt;Web UI&lt;/strong&gt; option&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Check &lt;strong&gt;Enable the Web User Interface (Remote control)&lt;/strong&gt; option&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Choose a port (default &lt;strong&gt;8080&lt;/strong&gt;)&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Set username and password (default &lt;strong&gt;username: admin&lt;/strong&gt; / &lt;strong&gt;password: adminadmin&lt;/strong&gt;)&lt;br /&gt;&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3863/15207705338_5225186c65_z.jpg&quot; alt=&quot;WEB UI&quot; width=&quot;640&quot; height=&quot;487&quot; /&gt;&lt;/center&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Click on &lt;strong&gt;Ok&lt;/strong&gt; to save settings.&lt;br /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Now in a browser you can check your qBittorrent server if you put your server’s IP address and port, example: 192.168.1.100:8080 as show below:&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3919/15208201407_ca174f0bc9_z.jpg&quot; alt=&quot;qBittorrent Web UI&quot; width=&quot;640&quot; height=&quot;505&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can also access it from your Android device by installing &lt;a title=&quot;qBittorrent Client&quot; href=&quot;https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclient&quot; target=&quot;_blank&quot;&gt;qBittorrent Client&lt;/a&gt; or &lt;a title=&quot;qBittorrent Client Pro&quot; href=&quot;https://play.google.com/store/apps/details?id=com.lgallardo.qbittorrentclientpro&quot; target=&quot;_blank&quot;&gt;qBittorrent Client Pro&lt;/a&gt;:&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;https://farm4.staticflickr.com/3841/14860260518_17f133401d.jpg&quot; alt=&quot;qBitttoren Client Pro&quot; width=&quot;300&quot; height=&quot;500&quot; /&gt;&lt;/center&gt;</content><author><name>Luis Gallardo</name></author><category term="qBittorrent" /><summary type="html">If you want to manage your qBittorrent server using a web interface, follow these steps:</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Debian" /><category term="Java" /><summary type="html"></summary></entry></feed>
