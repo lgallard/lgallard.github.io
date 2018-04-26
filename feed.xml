@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-01-26T13:28:23-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">How to get the latest Ubuntu AMI</title><link href="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="How to get the latest Ubuntu AMI" /><published>2018-01-24T21:00:10-03:00</published><updated>2018-01-24T21:00:10-03:00</updated><id>http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-04-26T10:31:19-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">How to install qBittorrent on LbreElEC</title><link href="http://lgallardo.com/2018/02/01/how-to-install-qbitorrent-on-libreelec/" rel="alternate" type="text/html" title="How to install qBittorrent on LbreElEC" /><published>2018-01-31T21:00:10-03:00</published><updated>2018-01-31T21:00:10-03:00</updated><id>http://lgallardo.com/2018/02/01/how-to-install-qbittorrent-on-libreelec</id><content type="html" xml:base="http://lgallardo.com/2018/02/01/how-to-install-qbitorrent-on-libreelec/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you need to install qBittorrent on your LibreELEC just follow theses steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;On LibreELEC install the Docker add&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Enable ssh on OpenELEC:&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pull the qBittorrent’s Docker image&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the container&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;That’s it! Now you can connect to your qBittorrent using your Raspberry IP address and port, for example using qBitorrent Controller for Android.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="docker" /><category term="qbittorrent" /><category term="libreelec" /><summary type="html"></summary></entry><entry><title type="html">How to get the latest Ubuntu AMI</title><link href="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="How to get the latest Ubuntu AMI" /><published>2018-01-24T21:00:10-03:00</published><updated>2018-01-24T21:00:10-03:00</updated><id>http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:&lt;/p&gt;
@@ -636,60 +656,4 @@ android {
 
 &lt;p&gt;Then sync gradle and compile your project again.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;http://stackoverflow.com/questions/26024908/apache-httpclient-android-gradle&quot;&gt;Apache HttpClient Android (Gradle)&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Android" /><summary type="html">In order to use Apache HTTP Client (httpclient y httpmime) in Eclipse I used to download the Android port and then include the dependencies specifying the jar files: /home/lgallard//Android/libs/httpcore-4.3.2.jar /home/lgallard//Android/libs/httpmime-4.3.5.jar I kept this practice after migrating my projects to Android Studio, but I used Gradle to resolve the remaining libraries. Then to uniform everything, I did a research on how to include them. Just add the following lines to your app’s build.gradle file:</summary></entry><entry><title type="html">Installing Java on Debian</title><link href="http://lgallardo.com/2015/06/15/como-instalar-oracle-java-en-debian/" rel="alternate" type="text/html" title="Installing Java on Debian" /><published>2015-06-15T07:10:40-03:00</published><updated>2015-06-15T07:10:40-03:00</updated><id>http://lgallardo.com/2015/06/15/como-instalar-oracle-java-en-debian</id><content type="html" xml:base="http://lgallardo.com/2015/06/15/como-instalar-oracle-java-en-debian/">&lt;center&gt;&lt;img src=&quot;https://farm3.staticflickr.com/2520/3945758216_56dd43253e_o.png&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;If you need to install Oracle Java on Debian, you can follow the next steps once the binary file had been downloaded from &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/&quot; target=&quot;_blank&quot;&gt;Oracles’s download page&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;Once it has been downloaded, proceed to extract it into the &lt;em&gt;/opt&lt;/em&gt; directory:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# tar xvzf jdk-8u45-linux-x64.tar.gz
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;First let’s check the current java version:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# java -version
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;java version “1.7.0_79”
-OpenJDK Runtime Environment (IcedTea 2.5.5) (7u79-2.5.5-0ubuntu0.14.04.2)
-OpenJDK 64-Bit Server VM (build 24.79-b02, mixed mode&lt;span style=&quot;line-height: 1.5;&quot;&gt;)&lt;/span&gt;&lt;/p&gt;
-
-&lt;p&gt;Here you can see it points to OpenJDK’s 1.7.0_79 version. Now let’s add a path to the version to use:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_45/bin/java 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Last line adds the &lt;em&gt;/opt/jdk1.8.0_45/bin/java&lt;/em&gt; path to &lt;em&gt;/usr/bin/java java&lt;/em&gt;  binary, in other words, it creates a symbolic link to use in case that options is chosen. Let’s set an alternative that points to the new path:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# update-alternatives --config java
- 
-  Selection Path Priority Status
-------------------------------------------------------------
-* 0 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java 1071 auto mode
- 1 /opt/jdk1.8.0_45/bin/java 1 manual mode
- 2 /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java 1061 manual mode
- 3 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java 1071 manual mode
-
- 
- Enter to keep the current selection[+], or type selection number:
- 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;After choosing the option 1, check the &lt;em&gt;java&lt;/em&gt; version one more time:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# java -version
-
-java version &quot;1.8.0_45&quot;
-Java(TM) SE Runtime Environment (build 1.8.0_45-b14)
-Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now the binary points to the Oracle’s version. You can check it with the symbolic links:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ls -l /usr/bin/java
-lrwxrwxrwx 1 root root 22 jun  9  2014 /usr/bin/java -&amp;gt; /etc/alternatives/java
-
-# ls -l /etc/alternatives/java
-lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&amp;gt; /opt/jdk1.8.0_45/bin/java
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Debian" /><category term="Java" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;http://stackoverflow.com/questions/26024908/apache-httpclient-android-gradle&quot;&gt;Apache HttpClient Android (Gradle)&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Android" /><summary type="html">In order to use Apache HTTP Client (httpclient y httpmime) in Eclipse I used to download the Android port and then include the dependencies specifying the jar files: /home/lgallard//Android/libs/httpcore-4.3.2.jar /home/lgallard//Android/libs/httpmime-4.3.5.jar I kept this practice after migrating my projects to Android Studio, but I used Gradle to resolve the remaining libraries. Then to uniform everything, I did a research on how to include them. Just add the following lines to your app’s build.gradle file:</summary></entry></feed>
