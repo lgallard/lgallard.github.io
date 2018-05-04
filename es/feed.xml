@@ -1,4 +1,128 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2018-04-26T10:40:46-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">¿Cómo obtener la última AMI de Ubuntu?</title><link href="http://lgallardo.com/es/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="¿Cómo obtener la última AMI de Ubuntu?" /><published>2018-01-24T21:00:10-03:00</published><updated>2018-01-24T21:00:10-03:00</updated><id>http://lgallardo.com/es/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="http://lgallardo.com/es/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2018-05-04T14:45:23-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Usando ASG Lifecycle hooks para dispara funciones Lambda</title><link href="http://lgallardo.com/es/2018/04/27/asg-lifcecyle-hooks/" rel="alternate" type="text/html" title="Usando ASG Lifecycle hooks para dispara funciones Lambda" /><published>2018-05-03T21:00:55-03:00</published><updated>2018-05-03T21:00:55-03:00</updated><id>http://lgallardo.com/es/2018/04/27/lifecycle-hooks-lambda</id><content type="html" xml:base="http://lgallardo.com/es/2018/04/27/asg-lifcecyle-hooks/">&lt;center&gt;
+&lt;img alt=&quot;AWS ASG Lifecycle hooks&quot; src=&quot;/images/lifecycle_hooks.jpg&quot; /&gt;
+&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recientemente necesitaba ejecutar algunas acciones después que unas instancia EC2 fuese creada por una Auto Scaling Group. Al principio pensé en usar el userdata pero necesitaba crear unas alarmas en CloudWatch basadas en la misma instancia, y estas alarmas debían ser creadas dinámicamente como se hacían previamente con Terraform.&lt;/p&gt;
+
+&lt;h1 id=&quot;lifecycle-hooks&quot;&gt;Lifecycle hooks&lt;/h1&gt;
+
+&lt;p&gt;Los Auto Scaling Groups tienen &lt;em&gt;Lifecycle hooks&lt;/em&gt; que puedes usar para disparar funciones lambdas al momento de iniciar o terminar una instancia para ejecutar acciones basadas en los datos contenidos en estos Lifecycle hooks. Por ejemplo puedes crear una regla de CloudWatch para usar el mensaje del evento y obtener la identificación de la instancia o el campo metadata del lifecycle hook. Un ejemplo de cómo luce este mensaje se muestra a continuación:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+    &quot;EC2InstanceId&quot;: &quot;i-0030f3ac294a5764a&quot;,
+    &quot;AutoScalingGroupName&quot;: &quot;sync-service&quot;,
+    &quot;LifecycleActionToken&quot;: &quot;802cc943-c45a-c8c8-b25d-111222333440&quot;,
+    &quot;LifecycleHookName&quot;: &quot;sync-service-StatusCheckFailed-0-launching-hook&quot;,
+    &quot;NotificationMetadata&quot;: {
+        &quot;EvaluationPeriods&quot;: 5,
+        &quot;Missing_data&quot;: &quot;breaching&quot;,
+        &quot;AlarmActions&quot;: &quot;arn:aws:sns:us-east-1:111111111111:sns-topic&quot;,
+        &quot;AlarmDescription&quot;: &quot;The instance has not passed both instance and system status checks&quot;,
+        &quot;Namespace&quot;: &quot;AWS/EC2&quot;,
+        &quot;Period&quot;: 60,
+        &quot;ComparisonOperator&quot;: &quot;GreaterThanThreshold&quot;,
+        &quot;AlarmName&quot;: &quot;sync-status-check&quot;,
+        &quot;Statistic&quot;: &quot;Average&quot;,
+        &quot;Threshold&quot;: 0,
+        &quot;MetricName&quot;: &quot;StatusCheckFailed&quot;
+    },
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Aquí &lt;em&gt;NotificationMetadata&lt;/em&gt; contiene un JSON con la definición de la alarma la cual será consumida por la función lambda para crearla.&lt;/p&gt;
+
+&lt;h1 id=&quot;disparando-la-función-lambda-usando-un-evento-de-cloudwatch&quot;&gt;Disparando la función lambda usando un evento de CloudWatch&lt;/h1&gt;
+
+&lt;p&gt;Puedes hacer que CloudWatch responda a eventos del Auto Scaling Group y disparar un función lambda para pasar el mensaje.&lt;/p&gt;
+
+&lt;center&gt;
+&lt;img alt=&quot;AWS Lambda console&quot; src=&quot;/images/asg_create_alarms_lambda_console.jpg&quot; /&gt;
+&lt;/center&gt;
+
+&lt;h1 id=&quot;función-lambda&quot;&gt;Función Lambda&lt;/h1&gt;
+
+&lt;p&gt;Aquí coloco un ejemplo de la función lambda que obtiene el id de la instancia y el campo metadata del lifecycle:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;boto3&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;logging&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Create AWS clients&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boto3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'cloudwatch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getLogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setLevel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Retrieves instance id from CloudWatch event&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_instance_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'detail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'EC2InstanceId'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;KeyError&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'detail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'NotificationMetadata'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;KeyError&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lambda_handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boto3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;instanceid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_instance_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;instance-id: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instanceid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;metadata: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Create Metric&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put_metric_alarm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;AlarmName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'AlarmName'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instanceid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;AlarmDescription&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'AlarmDescription'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ActionsEnabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;AlarmActions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'AlarmActions'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;MetricName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'MetricName'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Namespace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Namespace'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Statistic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Statistic'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Dimensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'Name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'InstanceId'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'Value'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instanceid&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Period&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Period'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;EvaluationPeriods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'EvaluationPeriods'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Threshold&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Threshold'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;TreatMissingData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Missing_data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ComparisonOperator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ComparisonOperator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;iam-roles-y-policies&quot;&gt;IAM Roles y Policies&lt;/h1&gt;
+&lt;p&gt;Recuerda crear el ROLE y adjuntarle las policies necesarias a to función lambda.&lt;/p&gt;
+
+&lt;h1 id=&quot;referencias&quot;&gt;Referencias:&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/blogs/compute/using-aws-lambda-with-auto-scaling-lifecycle-hooks/&quot; target=&quot;_blank&quot;&gt;Using AWS Lambda with Auto Scaling Lifecycle Hooks&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/aws-samples/aws-lambda-lifecycle-hooks-function&quot; target=&quot;_blank&quot;&gt;aws-lambda-lifecycle-hooks-function&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/autoscaling/ec2/userguide/cloud-watch-events.html&quot; target=&quot;_blank&quot;&gt;Getting CloudWatch Events When Your Auto Scaling Group Scales&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/thigley986/Lambda-AWS-Automated-Alarm-Creation&quot; target=&quot;_blank&quot;&gt;Lambda-AWS-Automated-Alarm-Creation&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">¿Cómo obtener la última AMI de Ubuntu?</title><link href="http://lgallardo.com/es/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="¿Cómo obtener la última AMI de Ubuntu?" /><published>2018-01-24T21:00:10-03:00</published><updated>2018-01-24T21:00:10-03:00</updated><id>http://lgallardo.com/es/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="http://lgallardo.com/es/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recientemente necesitaba obtener la última AMI de Ubuntu Trusty 14.04 con soporte ENA habilitado
@@ -637,58 +761,4 @@ android {
 
 &lt;p&gt;Finalmente sincroniza gradle y compila nuevamente tu proyecto.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Referencia:&lt;/strong&gt; &lt;a href=&quot;http://stackoverflow.com/questions/26024908/apache-httpclient-android-gradle&quot;&gt;Apache HttpClient Android (Gradle)&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Android" /><summary type="html">Para usar en Eclipse las librerías de Apache HTTP Client (httpclient y httpmime) simplemente bajaba el port para Android y luego incluía las dependencias especificando los archivos jar: /home/lgallard//Android/libs/httpcore-4.3.2.jar /home/lgallard//Android/libs/httpmime-4.3.5.jar Esta práctica la arrastré al migrar mis proyectos a Android Studio, pero el resto de las librerías si las resolvía con Gradle. Entonces para uniformizar todo, decidí investigar un poco cómo incluir las librerías de Apache HTTP Client. Basta con agregar las siguientes líneas en el archivo build.gradle de tu aplicación:</summary></entry><entry><title type="html">Cómo instalar Oracle Java en Debian</title><link href="http://lgallardo.com/es/2015/06/15/como-instalar-oracle-java-en-debian/" rel="alternate" type="text/html" title="Cómo instalar Oracle Java en Debian" /><published>2015-06-15T07:10:40-03:00</published><updated>2015-06-15T07:10:40-03:00</updated><id>http://lgallardo.com/es/2015/06/15/como-instalar-oracle-java-en-debian</id><content type="html" xml:base="http://lgallardo.com/es/2015/06/15/como-instalar-oracle-java-en-debian/">&lt;center&gt;&lt;img src=&quot;https://farm3.staticflickr.com/2520/3945758216_56dd43253e_o.png&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Si necesitas instalar la versión de Java de Oracle en Debian, puede seguir los siguientes pasos para realizarlo una vez que hayas descargado el binario desde la &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/&quot; target=&quot;_blank&quot;&gt;página de descarga de Oracle&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;Una vez descargado el  procedemos a extraerlo en el directorio &lt;em&gt;/opt&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# tar xvzf jdk-8u45-linux-x64.tar.gz&amp;lt;/pre&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Primero vamos a consultar la versión de &lt;em&gt;java&lt;/em&gt; actual:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;java -version&amp;lt;/pre&amp;gt;
- 
-java version &quot;1.7.0_79&quot;
-OpenJDK Runtime Environment (IcedTea 2.5.5) (7u79-2.5.5-0ubuntu0.14.04.2)
-OpenJDK 64-Bit Server VM (build 24.79-b02, mixed mode)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Aquí puede verse que la versión a la que se hace referencia actualmente es la 1.7.0_79 de OpenJDK. Ahora vamos agregar la ruta de la nueva versión a usar:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_45/bin/java 1&amp;lt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Esta última orden agrega la ruta &lt;em&gt;/opt/jdk1.8.0_45/bin/java&lt;/em&gt; al binario &lt;em&gt;/usr/bin/java java&lt;/em&gt;, es decir, este será el enlace simbólico a usar en caso de seleccionar esta opción. Vamos a configurar los &lt;em&gt;alternatives&lt;/em&gt; para que apunte a la nueva ruta:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# update-alternatives --config java
- 
-   Selection Path Priority Status
-------------------------------------------------------------
-* 0 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java 1071 auto mode
- 1 /opt/jdk1.8.0_45/bin/java 1 manual mode
- 2 /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java 1061 manual mode
- 3 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java 1071 manual mode
-
-Enter to keep the current selection[+], or type selection number: 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Luego de seleccionar la opción 1, verificamos  la versión de &lt;em&gt;java&lt;/em&gt; una vez más:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;java -version
-
-java version &quot;1.8.0_45&quot;
-Java(TM) SE Runtime Environment (build 1.8.0_45-b14)
-Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ahora el binario de java apunta a la versión de Oracle. Cosa que podemos verificar consultando los enlaces simbólicos:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ls -l /usr/bin/java
-lrwxrwxrwx 1 root root 22 jun  9  2014 /usr/bin/java -&amp;gt;; /etc/alternatives/java
-
-# ls -l /etc/alternatives/java
-lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&amp;gt;; /opt/jdk1.8.0_45/bin/java
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="Debian" /><category term="Java" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;Referencia:&lt;/strong&gt; &lt;a href=&quot;http://stackoverflow.com/questions/26024908/apache-httpclient-android-gradle&quot;&gt;Apache HttpClient Android (Gradle)&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Android" /><summary type="html">Para usar en Eclipse las librerías de Apache HTTP Client (httpclient y httpmime) simplemente bajaba el port para Android y luego incluía las dependencias especificando los archivos jar: /home/lgallard//Android/libs/httpcore-4.3.2.jar /home/lgallard//Android/libs/httpmime-4.3.5.jar Esta práctica la arrastré al migrar mis proyectos a Android Studio, pero el resto de las librerías si las resolvía con Gradle. Entonces para uniformizar todo, decidí investigar un poco cómo incluir las librerías de Apache HTTP Client. Basta con agregar las siguientes líneas en el archivo build.gradle de tu aplicación:</summary></entry></feed>
