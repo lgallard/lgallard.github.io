@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-05-10T17:18:09-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Using ASG Lifecycle hooks to trigger Lambda functions</title><link href="http://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/" rel="alternate" type="text/html" title="Using ASG Lifecycle hooks to trigger Lambda functions" /><published>2018-05-03T21:00:55-03:00</published><updated>2018-05-03T21:00:55-03:00</updated><id>http://lgallardo.com/2018/05/04/lifecycle-hooks-lambda</id><content type="html" xml:base="http://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/">&lt;center&gt;&lt;img alt=&quot;AWS ASG Lifecycle hooks&quot; src=&quot;/images/lifecycle_hooks.jpg&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-05-10T18:45:28-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Using ASG Lifecycle hooks to trigger Lambda functions</title><link href="http://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/" rel="alternate" type="text/html" title="Using ASG Lifecycle hooks to trigger Lambda functions" /><published>2018-05-03T21:00:55-03:00</published><updated>2018-05-03T21:00:55-03:00</updated><id>http://lgallardo.com/2018/05/04/lifecycle-hooks-lambda</id><content type="html" xml:base="http://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/">&lt;center&gt;&lt;img alt=&quot;AWS ASG Lifecycle hooks&quot; src=&quot;/images/lifecycle_hooks.jpg&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently I needed to execute some actions after a EC2 instance was created by an Auto Scaling Group. At first a thought in using the userdata or cloud-init but I needed to create alarms in CloudWatch based on the instance itself, and those alarms must be created dynamically as I used to do with Terraform.&lt;/p&gt;
@@ -118,27 +118,7 @@
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;https://github.com/thigley986/Lambda-AWS-Automated-Alarm-Creation&quot; target=&quot;_blank&quot;&gt;Lambda-AWS-Automated-Alarm-Creation&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">How to install qBittorrent on LbreElEC</title><link href="http://lgallardo.com/2018/02/01/how-to-install-qbitorrent-on-libreelec/" rel="alternate" type="text/html" title="How to install qBittorrent on LbreElEC" /><published>2018-01-31T21:00:10-03:00</published><updated>2018-01-31T21:00:10-03:00</updated><id>http://lgallardo.com/2018/02/01/how-to-install-qbittorrent-on-libreelec</id><content type="html" xml:base="http://lgallardo.com/2018/02/01/how-to-install-qbitorrent-on-libreelec/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;If you need to install qBittorrent on your LibreELEC just follow theses steps:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;On LibreELEC install the Docker add&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Enable ssh on OpenELEC:&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Pull the qBittorrent’s Docker image&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Run the container&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;That’s it! Now you can connect to your qBittorrent using your Raspberry IP address and port, for example using qBitorrent Controller for Android.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="docker" /><category term="qbittorrent" /><category term="libreelec" /><summary type="html"></summary></entry><entry><title type="html">How to get the latest Ubuntu AMI</title><link href="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="How to get the latest Ubuntu AMI" /><published>2018-01-24T21:00:10-03:00</published><updated>2018-01-24T21:00:10-03:00</updated><id>http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">How to get the latest Ubuntu AMI</title><link href="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="How to get the latest Ubuntu AMI" /><published>2018-01-24T21:00:10-03:00</published><updated>2018-01-24T21:00:10-03:00</updated><id>http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:&lt;/p&gt;
@@ -752,4 +732,28 @@ yum update tzdata
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Including Apache HTTP Client on Android Studio</title><link href="http://lgallardo.com/2015/06/17/como-agregar-apache-http-client-en-android-studio/" rel="alternate" type="text/html" title="Including Apache HTTP Client on Android Studio" /><published>2015-06-17T18:30:21-03:00</published><updated>2015-06-17T18:30:21-03:00</updated><id>http://lgallardo.com/2015/06/17/como-agregar-apache-http-client-en-android-studio</id><content type="html" xml:base="http://lgallardo.com/2015/06/17/como-agregar-apache-http-client-en-android-studio/">&lt;center&gt;&lt;img src=&quot;https://farm6.staticflickr.com/5563/18277722324_95356227e2.jpg&quot; alt=&quot;Android Studio - Apache HTTP Client&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to use Apache HTTP Client (httpclient y httpmime) in Eclipse I used to download the Android port and then include the dependencies specifying the jar files: /home/lgallard//Android/libs/httpcore-4.3.2.jar /home/lgallard//Android/libs/httpmime-4.3.5.jar I kept this practice after migrating my projects to Android Studio, but I used Gradle to resolve the remaining libraries. Then to uniform everything, I did a research on how to include them. Just add the following lines to your app’s build.gradle file:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apply plugin: 'com.android.application'
+
+android {
+
+    dependencies {
+        compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
+        compile (group: 'org.apache.httpcomponents' , name: 'httpmime' , version: '4.3.5') {
+        exclude module: 'org.apache.httpcomponents:httpclient'}
+    }
+
+    android {
+        useLibrary 'org.apache.http.legacy'
+    }
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then sync gradle and compile your project again.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;http://stackoverflow.com/questions/26024908/apache-httpclient-android-gradle&quot;&gt;Apache HttpClient Android (Gradle)&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Android" /><summary type="html">In order to use Apache HTTP Client (httpclient y httpmime) in Eclipse I used to download the Android port and then include the dependencies specifying the jar files: /home/lgallard//Android/libs/httpcore-4.3.2.jar /home/lgallard//Android/libs/httpmime-4.3.5.jar I kept this practice after migrating my projects to Android Studio, but I used Gradle to resolve the remaining libraries. Then to uniform everything, I did a research on how to include them. Just add the following lines to your app’s build.gradle file:</summary></entry></feed>
