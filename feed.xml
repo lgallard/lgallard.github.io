@@ -1,4 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-05-25T13:40:24-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AWS Certified SysOps Administrator - Associate</title><link href="http://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/" rel="alternate" type="text/html" title="AWS Certified SysOps Administrator - Associate" /><published>2018-05-24T21:00:00-03:00</published><updated>2018-05-24T21:00:00-03:00</updated><id>http://lgallardo.com/2018/05/25/aws-certified-sysops-administrator-associate</id><content type="html" xml:base="http://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_SysOps_Administrator_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-07-13T12:11:53-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AWS Certified Developer - Associate</title><link href="http://lgallardo.com/2018/07/13/2018-07-13-aws-certified-developer-associate/" rel="alternate" type="text/html" title="AWS Certified Developer - Associate" /><published>2018-07-12T21:00:00-03:00</published><updated>2018-07-12T21:00:00-03:00</updated><id>http://lgallardo.com/2018/07/13/aws-certified-developer-associate</id><content type="html" xml:base="http://lgallardo.com/2018/07/13/2018-07-13-aws-certified-developer-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Developer_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Last month I approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified  Developer- Associate&lt;/code&gt; certification  and want to leave my comments regarding the exam:&lt;/p&gt;
+
+&lt;p&gt;It had 55 questions to be answered in 80 minutes. This is the easiest exam of all, but you must study and know the AWS technologies and when to use them from a developer perspective. The exam has two big topics:  DynamoDB and SQS.&lt;/p&gt;
+
+&lt;h1 id=&quot;dynamodb&quot;&gt;DynamoDB&lt;/h1&gt;
+&lt;p&gt;Be ready to calculate read and write throughput capacity without blinking an eye. Know the service’s limits, for instance how many indexes are allow per table, number of tables per region, etc. It’s important to know the difference between Scan and Query, LSI and GSI, GetItem and GetBatchItem, strong and eventually consistency, how to group the data to avoid bottlenecks, and the core concepts such as primary, hash and sort keys.&lt;/p&gt;
+
+&lt;h1 id=&quot;sqs&quot;&gt;SQS&lt;/h1&gt;
+&lt;p&gt;It’s important to know th difference between visibility and delay timeouts. Also know the min, max and default values for long polling, retention, visibility and delay.  Another key concept is short and long polling. Also study the API commands for changing the default values, for instance, to change the visibility timeout.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-remaining&quot;&gt;The remaining&lt;/h1&gt;
+
+&lt;p&gt;The exam has more general questions regarding the AWS basic concepts, such as CPS, NAT instances, NACK, SGs, ELBs, etc.&lt;/p&gt;
+
+&lt;h1 id=&quot;my-tips-for-saving-time-on-this-exam-are&quot;&gt;My tips for saving time on this exam are:&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Answer the easy question quick, don’t stay long thing whether is right answer because probably it is.&lt;/li&gt;
+  &lt;li&gt;Only mark for review those question where you really have a doubt, so you can check them later and if there’s time left be able to review them all.&lt;/li&gt;
+  &lt;li&gt;Think it is a Amazon certification and in that matter always wonder what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Take into account that it’s a Amazon certification and in that matter always think what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Discard things that can be done at the OS level if an Amazon service provides it, and only consider it when there is no other option.&lt;/li&gt;
+  &lt;li&gt;Whenever you read scalable think of SQS / DynamoDB, cost-saving = S3 / S3 RRS, and so on.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are interested in this certification and I recommend you some links:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/aws-certified-sysops-administrator-associate&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;AWS Documentation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified SysOps Administrator - Associate</title><link href="http://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/" rel="alternate" type="text/html" title="AWS Certified SysOps Administrator - Associate" /><published>2018-05-24T21:00:00-03:00</published><updated>2018-05-24T21:00:00-03:00</updated><id>http://lgallardo.com/2018/05/25/aws-certified-sysops-administrator-associate</id><content type="html" xml:base="http://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_SysOps_Administrator_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;I just approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified SysOps Administrator - Associate certification&lt;/code&gt;  and want to leave my comments regarding the exam:&lt;/p&gt;
@@ -737,33 +781,4 @@ yum update tzdata
 /usr/share/zoneinfo/right/America/Caracas  Sun May  1 07:00:00 2016 UT = Sun May  1 03:00:00 2016 VET isdst=0 gmtoff=-14400
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://access.redhat.com/solutions/28425&quot;&gt;How to check if the Time Zone database&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="CentOS" /><category term="Debian" /><category term="RedHat" /><category term="SuSE" /><category term="Ubuntu" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Solutions Architect</title><link href="http://lgallardo.com/2016/02/13/aws-certified-solutions-architect/" rel="alternate" type="text/html" title="AWS Certified Solutions Architect" /><published>2016-02-13T20:47:55-03:00</published><updated>2016-02-13T20:47:55-03:00</updated><id>http://lgallardo.com/2016/02/13/aws-certified-solutions-architect</id><content type="html" xml:base="http://lgallardo.com/2016/02/13/aws-certified-solutions-architect/">&lt;center&gt;&lt;img src=&quot;https://c2.staticflickr.com/2/1470/24999196475_0d0bd86cee.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;At work we are migrating many services to Amazon’s cloud, therefore we need to formalize the AWS knowledge. In that sense we found an online course site called Linux Academy, which I consider helped us with the certification and to understand AWS in general, but it wasn’t the only resource we used, thus we complemented with quizzes, and the AWS documentation.&lt;/p&gt;
-
-&lt;p&gt;If you are interested in achieve this certification and the resources we used, here you are some links:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/aws-certified-solutions-architect-associate/&quot; target=&quot;_blank&quot;&gt;Udemy – A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Quizzes&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-i&quot; target=&quot;_blank&quot;&gt;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-i&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-ii&quot; target=&quot;_blank&quot;&gt;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-ii&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://surajbatuwana.blogspot.com/p/aws-certification-sample-questions.html&quot; target=&quot;_blank&quot;&gt;http://surajbatuwana.blogspot.com/p/aws-certification-sample-questions.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;AWS Documentation&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://access.redhat.com/solutions/28425&quot;&gt;How to check if the Time Zone database&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="CentOS" /><category term="Debian" /><category term="RedHat" /><category term="SuSE" /><category term="Ubuntu" /><summary type="html"></summary></entry></feed>
