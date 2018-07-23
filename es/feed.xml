@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2018-07-20T16:34:49-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">echo dot</title><link href="http://lgallardo.com/es/2018/07/20/2018-07-20-echo-dot/" rel="alternate" type="text/html" title="echo dot" /><published>2018-07-19T21:00:00-03:00</published><updated>2018-07-19T21:00:00-03:00</updated><id>http://lgallardo.com/es/2018/07/20/echo-dot</id><content type="html" xml:base="http://lgallardo.com/es/2018/07/20/2018-07-20-echo-dot/">&lt;center&gt;&lt;img src=&quot;/images/echo-dot.jpg&quot; alt=&quot;echo dot&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2018-07-23T16:38:31-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Consultando AWS Logs desde la línea de órdenes</title><link href="http://lgallardo.com/es/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Consultando AWS Logs desde la línea de órdenes" /><published>2018-07-19T21:00:00-03:00</published><updated>2018-07-19T21:00:00-03:00</updated><id>http://lgallardo.com/es/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="http://lgallardo.com/es/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Uno de los desarrolladores de la empresa me preguntó si había forma de ver las bitácoras de las funciones Lambda desde la línea de órdenes, para no tener la necesidad de entrar a la consola de AWS y verlos en CloudWatch Logs.
+Después de investigar un poco conseguí un proyecto en Github llamado &lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;awslogs&lt;/a&gt; que hace justamente esto. A continuación veremos cómo instalarlo y usarlo desde un entorno virtual de Python:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;virualenv awslogs
+source awslogs/bin/activate
+
+pip install awslogs
+pip install awscli
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Lo primero que debemos saber son los grupos donde están definidos los logs de nuestras funciones Lambda, para ello usamos la CLI de AWS:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+aws logs describe-log-grups --region us-east-1
+{
+    &quot;logGroups&quot;: [
+        {
+            &quot;arn&quot;: &quot;arn:aws:logs:us-east-1:123456789123:log-group:/aws/lambda/get_transcription:*&quot;, 
+            &quot;creationTime&quot;: 1531834572841, 
+            &quot;metricFilterCount&quot;: 0, 
+            &quot;logGroupName&quot;: &quot;/aws/lambda/get_transcription&quot;, 
+            &quot;storedBytes&quot;: 0
+        },
+        {
+            &quot;arn&quot;: &quot;arn:aws:logs:us-east-1:264349563434:log-group:/aws/lambda/validate_time:*&quot;, 
+            &quot;creationTime&quot;: 1532118107128, 
+            &quot;metricFilterCount&quot;: 0, 
+            &quot;logGroupName&quot;: &quot;/aws/lambda/validate_time&quot;, 
+            &quot;storedBytes&quot;: 0
+        }
+    ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora para verlos las bitácoras de, por ejemplo, la función &lt;code class=&quot;highlighter-rouge&quot;&gt;get_transcription&lt;/code&gt; desde la línea de órdenes podemos ejecutar:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;awslogs get  /aws/lambda/get_transcription --aws-region us-east-1  --watch  | cut -d &quot; &quot; -f 3-20
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Y la salida sería algo como esto:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;START RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1 Version: $LATEST
+[DEBUG]	2018-07-23T15:39:50.422Z	a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Searching id: e321-eaefe4311ca1
+tuple indices must be integers or slices, not str: TypeError
+recent call last):
+File &quot;/var/task/app/services/get_transcription.py&quot;, line 100, in lambda_handler
+  date_text = field['transcription']
+indices must be integers or slices, not str
+END RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1
+REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Billed Duration: 300 ms 	Memory Size: 128 MB	Max Memory Used: 33 MB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;referencias&quot;&gt;Referencias:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;jorgebastida/awslogs&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/apeckham/9bcb464096997c1b0d41&quot; target=&quot;_blank&quot;&gt;View aws lambda logs on the command line&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">echo dot</title><link href="http://lgallardo.com/es/2018/07/20/2018-07-20-echo-dot/" rel="alternate" type="text/html" title="echo dot" /><published>2018-07-19T21:00:00-03:00</published><updated>2018-07-19T21:00:00-03:00</updated><id>http://lgallardo.com/es/2018/07/20/echo-dot</id><content type="html" xml:base="http://lgallardo.com/es/2018/07/20/2018-07-20-echo-dot/">&lt;center&gt;&lt;img src=&quot;/images/echo-dot.jpg&quot; alt=&quot;echo dot&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Como estoy trabajando en algunos proyectos en la empresa con Alexa, me dieron un echo dot.&lt;/p&gt;
@@ -634,130 +694,4 @@ jekyll 3.6.0 | Error:  Invalid US-ASCII character &quot;\xE2&quot; on line 54
   &lt;li&gt;&lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/&quot; target=&quot;_blank&quot;&gt;Minimal Mistakes&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin&quot; target=&quot;_blank&quot;&gt;jekyll-multiple-languages-plugin&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://hub.docker.com/_/ruby/&quot; target=&quot;_blank&quot;&gt;Docker ruby&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Luis Gallardo</name></author><category term="Docker" /><category term="Git" /><category term="Gihub" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">Usando AWS Lambda para copiar snapshots de RDS entre regiones</title><link href="http://lgallardo.com/es/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/" rel="alternate" type="text/html" title="Usando AWS Lambda para copiar snapshots de RDS entre regiones" /><published>2017-02-10T21:31:10-03:00</published><updated>2017-02-10T21:31:10-03:00</updated><id>http://lgallardo.com/es/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones</id><content type="html" xml:base="http://lgallardo.com/es/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">&lt;center&gt;&lt;img src=&quot;/images/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones.jpg&quot; alt=&quot;AWS Lambda&quot; /&gt;&lt;/center&gt;
-
-&lt;p&gt;En el trabajo surgió la necesidad de hacer respaldos de una base de datos MySQL en RDS entre regiones, pero sin tener una instancia corriendo en la región de destino, es decir, no se quería read replicas. Lo que primero que sugirieron fue usar algún tipo de cron que copiara los respaldos entre regiones. Como seguramente esto ya se había hecho decidí investigar un poco y me conseguí con este excelente artículo que explica cómo hacer la copia usando una función Lambda en Python: &lt;a href=&quot;https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/&quot; target=&quot;_blank&quot;&gt;Copying RDS snapshot to another region for cross-region recovery&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Esta función busca el último snapshot de todas las instancias RDS en la región origen y los copia a la región destino. Por último, la función borra los snapshots anteriores en la región destino para así ahorrar espacio.&lt;/p&gt;
-
-&lt;p&gt;La función se puede disparar a través de CloudWacth o incluso eventos de RDS, como por ejemplo cuando se termina de hacer un respaldo en la base de datos.&lt;/p&gt;
-
-&lt;p&gt;Paulina Budzon, la autora del artículo, comenta que la función podía mejorase, por lo que aproveché de hacerle algunos ajustes:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Added database list to be backup-ed, instead of all databases in RDS&lt;/li&gt;
-  &lt;li&gt;Changed variable naming to avoid reference to the destination region&lt;/li&gt;
-  &lt;li&gt;Removed source region example reference in SourceDBSnapshotIdentifier string&lt;/li&gt;
-  &lt;li&gt;Added variables for source and destination regions&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;Coloco el código acá, pero también puede verse en el fork del proyecto que hice &lt;a href=&quot;https://github.com/lgallard/aws-maintenance&quot;&gt;https://github.com/lgallard/aws-maintenance&lt;/a&gt;, o directamente en el de Paulina &lt;a href=&quot;https://github.com/pbudzon/aws-maintenance&quot;&gt;https://github.com/pbudzon/aws-maintenance&lt;/a&gt;, el cual ya tiene el merge del pull request:&lt;/p&gt;
-
-&lt;p&gt; &lt;/p&gt;
-
-&lt;p&gt;Espero que le sea de utilidad a alguien:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import boto3
- import operator
-
-aws_account = 'XXXX'
- source = 'us-east-1'
- destination = 'sa-east-1'
- databases = ['mysqldb01', 'pgdb01']
-
-def copy_latest_snapshot():
- client = boto3.client('rds', source)
- foreign_client = boto3.client('rds', destination)
-
-response = client.describe_db_snapshots(
- SnapshotType='automated',
- IncludeShared=False,
- IncludePublic=False
- )
-
-if len(response['DBSnapshots']) == 0:
- raise Exception(&quot;No automated snapshots found&quot;)
-
-snapshots_per_project = {}
-
-for snapshot in response['DBSnapshots']:
- if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' :
- continue
-
-if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys():
- snapshots_per_project[snapshot['DBInstanceIdentifier']] = {}
-
-snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[
- 'SnapshotCreateTime']
-
-for project in snapshots_per_project:
- sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True)
-
-copy_name = project + &quot;-&quot; + sorted_list[0][1].strftime(&quot;%Y-%m-%d&quot;)
-
-print(&quot;Checking if &quot; + copy_name + &quot; is copied&quot;)
-
-try:
- foreign_client.describe_db_snapshots(
- DBSnapshotIdentifier=copy_name
- )
- except:
- response = foreign_client.copy_db_snapshot(
- SourceDBSnapshotIdentifier='arn:aws:rds:' + source + ':' + aws_account + ':snapshot:' + sorted_list[0][0],
- TargetDBSnapshotIdentifier=copy_name,
- CopyTags=True
- )
-
-if response['DBSnapshot']['Status'] != &quot;pending&quot; and response['DBSnapshot']['Status'] != &quot;available&quot;:
- raise Exception(&quot;Copy operation for &quot; + copy_name + &quot; failed!&quot;)
- print(&quot;Copied &quot; + copy_name)
-
-continue
-
-print(&quot;Already copied&quot;)
-
-def remove_old_snapshots():
- client = boto3.client('rds', source)
- foreign_client = boto3.client('rds', destination)
-
-response = foreign_client.describe_db_snapshots(
- SnapshotType='manual'
- )
-
-if len(response['DBSnapshots']) == 0:
- raise Exception(&quot;No manual snapshots in &quot;+ destination + &quot; found&quot;)
-
-snapshots_per_project = {}
- for snapshot in response['DBSnapshots']:
- if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' :
- continue
-
-if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys():
- snapshots_per_project[snapshot['DBInstanceIdentifier']] = {}
-
-snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[
- 'SnapshotCreateTime']
-
-for project in snapshots_per_project:
- if len(snapshots_per_project[project]) &amp;amp;gt; 1:
- sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True)
- to_remove = [i[0] for i in sorted_list[1:]]
-
-for snapshot in to_remove:
- print(&quot;Removing &quot; + snapshot)
- foreign_client.delete_db_snapshot(
- DBSnapshotIdentifier=snapshot
- )
-
-def lambda_handler(event, context):
- copy_latest_snapshot()
- remove_old_snapshots()
-
-if __name__ == '__main__':
- lambda_handler(None, None)&amp;lt;/pre&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Referencia: &lt;/strong&gt;&lt;a href=&quot;https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/&quot; target=&quot;_blank&quot;&gt;Copying RDS snapshot to another region for cross-region recovery&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Lambda" /><category term="RDS" /><summary type="html">En el trabajo surgió la necesidad de hacer respaldos de una base de datos MySQL en RDS entre regiones, pero sin tener una instancia corriendo en la región de destino, es decir, no se quería read replicas. Lo que primero que sugirieron fue usar algún tipo de cron que copiara los respaldos entre regiones. Como seguramente esto ya se había hecho decidí investigar un poco y me conseguí con este excelente artículo que explica cómo hacer la copia usando una función Lambda en Python: Copying RDS snapshot to another region for cross-region recovery Esta función busca el último snapshot de todas las instancias RDS en la región origen y los copia a la región destino. Por último, la función borra los snapshots anteriores en la región destino para así ahorrar espacio. La función se puede disparar a través de CloudWacth o incluso eventos de RDS, como por ejemplo cuando se termina de hacer un respaldo en la base de datos. Paulina Budzon, la autora del artículo, comenta que la función podía mejorase, por lo que aproveché de hacerle algunos ajustes: Added database list to be backup-ed, instead of all databases in RDS Changed variable naming to avoid reference to the destination region Removed source region example reference in SourceDBSnapshotIdentifier string Added variables for source and destination regions   Coloco el código acá, pero también puede verse en el fork del proyecto que hice https://github.com/lgallard/aws-maintenance, o directamente en el de Paulina https://github.com/pbudzon/aws-maintenance, el cual ya tiene el merge del pull request:   Espero que le sea de utilidad a alguien: import boto3 import operator aws_account = 'XXXX' source = 'us-east-1' destination = 'sa-east-1' databases = ['mysqldb01', 'pgdb01'] def copy_latest_snapshot(): client = boto3.client('rds', source) foreign_client = boto3.client('rds', destination) response = client.describe_db_snapshots( SnapshotType='automated', IncludeShared=False, IncludePublic=False ) if len(response['DBSnapshots']) == 0: raise Exception(&quot;No automated snapshots found&quot;) snapshots_per_project = {} for snapshot in response['DBSnapshots']: if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' : continue if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys(): snapshots_per_project[snapshot['DBInstanceIdentifier']] = {} snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[ 'SnapshotCreateTime'] for project in snapshots_per_project: sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True) copy_name = project + &quot;-&quot; + sorted_list[0][1].strftime(&quot;%Y-%m-%d&quot;) print(&quot;Checking if &quot; + copy_name + &quot; is copied&quot;) try: foreign_client.describe_db_snapshots( DBSnapshotIdentifier=copy_name ) except: response = foreign_client.copy_db_snapshot( SourceDBSnapshotIdentifier='arn:aws:rds:' + source + ':' + aws_account + ':snapshot:' + sorted_list[0][0], TargetDBSnapshotIdentifier=copy_name, CopyTags=True ) if response['DBSnapshot']['Status'] != &quot;pending&quot; and response['DBSnapshot']['Status'] != &quot;available&quot;: raise Exception(&quot;Copy operation for &quot; + copy_name + &quot; failed!&quot;) print(&quot;Copied &quot; + copy_name) continue print(&quot;Already copied&quot;) def remove_old_snapshots(): client = boto3.client('rds', source) foreign_client = boto3.client('rds', destination) response = foreign_client.describe_db_snapshots( SnapshotType='manual' ) if len(response['DBSnapshots']) == 0: raise Exception(&quot;No manual snapshots in &quot;+ destination + &quot; found&quot;) snapshots_per_project = {} for snapshot in response['DBSnapshots']: if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' : continue if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys(): snapshots_per_project[snapshot['DBInstanceIdentifier']] = {} snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[ 'SnapshotCreateTime'] for project in snapshots_per_project: if len(snapshots_per_project[project]) &amp;amp;gt; 1: sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True) to_remove = [i[0] for i in sorted_list[1:]] for snapshot in to_remove: print(&quot;Removing &quot; + snapshot) foreign_client.delete_db_snapshot( DBSnapshotIdentifier=snapshot ) def lambda_handler(event, context): copy_latest_snapshot() remove_old_snapshots() if __name__ == '__main__': lambda_handler(None, None)&amp;lt;/pre&amp;gt; Referencia: Copying RDS snapshot to another region for cross-region recovery</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>Luis Gallardo</name></author><category term="Docker" /><category term="Git" /><category term="Gihub" /><category term="Bitbucket" /><summary type="html"></summary></entry></feed>
