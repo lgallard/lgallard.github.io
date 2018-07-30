@@ -1,4 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2018-07-23T16:38:31-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Consultando AWS Logs desde la línea de órdenes</title><link href="http://lgallardo.com/es/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Consultando AWS Logs desde la línea de órdenes" /><published>2018-07-19T21:00:00-03:00</published><updated>2018-07-19T21:00:00-03:00</updated><id>http://lgallardo.com/es/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="http://lgallardo.com/es/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2018-07-30T07:26:57-03:00</updated><id>http://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Bloques de configuración dinámicos en Terraform</title><link href="http://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Bloques de configuración dinámicos en Terraform" /><published>2018-07-29T21:00:00-03:00</published><updated>2018-07-29T21:00:00-03:00</updated><id>http://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="http://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Una de las cosas que tenía pendiente por resolver era el hecho de que en Terraform hay bloques de configuración que dependiendo de las opciones puede que tengan parámetros distintos o que incluso no acepte los mismos parámetros.&lt;/p&gt;
+
+&lt;p&gt;Para eso, y guiándome de un código de un &lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;módulo de la  comunidad&lt;/a&gt;, logré sortear este problema usando &lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;locals values de Terraform&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tomando un ejemplo de esto tenemos el bloque &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts&lt;/code&gt; del recurso &lt;a href=&quot;https://www.terraform.io/docs/providers/aws/r/codebuild_project.html&quot; target=&quot;_blank&quot;&gt;aws_codebuild_project de Terraform&lt;/a&gt;, el cual puede tener parámetros algunos parámetros si el tipo es &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt; o &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt;. Por ejemplo, si definimos un bloque de la siguiente manera no será fácil la parametrización del mismo:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
+
+[...]
+
+  artifacts{
+      type           = &quot;${var.codebuild_artifacts_type}&quot;
+      location       = &quot;${var.codebuild_artifacts_location}&quot;
+      name           = &quot;${var.codebuild_artifacts_name}&quot;
+      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
+      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
+      path           = &quot;${var.codebuild_artifacts_path}&quot;
+
+  }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Si por ejemplo intentamos colocar el &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; fallará porque aunque se coloquen valores “vacíos” para el resto de los parámetros, estos argumentos no están soportados. Para resolver esto hay que crear una definición del bloque con &lt;code class=&quot;highlighter-rouge&quot;&gt;locals&lt;/code&gt; según el tipo proporcionado por &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; y usar esto como un índice:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
+
+[...]
+
+  artifacts = [&quot;${local.codebuild_artifacts}&quot;]
+
+}
+
+locals {
+  codebuild_artifacts_def = {
+    &quot;S3&quot; = [{
+      type           = &quot;${var.codebuild_artifacts_type}&quot;
+      location       = &quot;${var.codebuild_artifacts_location}&quot;
+      name           = &quot;${var.codebuild_artifacts_name}&quot;
+      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
+      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
+      path           = &quot;${var.codebuild_artifacts_path}&quot;
+    }]
+
+    &quot;CODEPIPELINE&quot; = [{
+      type           = &quot;${var.codebuild_artifacts_type}&quot;
+      location       = &quot;${var.codebuild_artifacts_location}&quot;
+      name           = &quot;${var.codebuild_artifacts_name}&quot;
+      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
+      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
+      path           = &quot;${var.codebuild_artifacts_path}&quot;
+    }]
+
+    &quot;NO_ARTIFACTS&quot; = [{
+      type = &quot;${var.codebuild_artifacts_type}&quot;
+    }]
+  }
+
+  # Retuned map
+  codebuild_artifacts = &quot;${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto crea un bloque diferente dependiendo del tipo definido en la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;codebuild_artifacts_type&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;referencias&quot;&gt;Referencias:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;locals values de Terraform&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;módulo de la  comunidad de terraform-aws-codebuild&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Consultando AWS Logs desde la línea de órdenes</title><link href="http://lgallardo.com/es/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Consultando AWS Logs desde la línea de órdenes" /><published>2018-07-19T21:00:00-03:00</published><updated>2018-07-19T21:00:00-03:00</updated><id>http://lgallardo.com/es/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="http://lgallardo.com/es/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Uno de los desarrolladores de la empresa me preguntó si había forma de ver las bitácoras de las funciones Lambda desde la línea de órdenes, para no tener la necesidad de entrar a la consola de AWS y verlos en CloudWatch Logs.
@@ -568,130 +640,4 @@ tf_my_module:
   &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/registry/index.html&quot; target=&quot;_blank&quot;&gt;Terraform Public Registry&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/registry/private.html&quot; target=&quot;_blank&quot;&gt;Terraform Private Registry&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://bensnape.com/2016/01/14/terraform-design-patterns-the-terrafile/&quot; target=&quot;_blank&quot;&gt;Terraform Design Patterns: the Terrafile&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Publicando de Jekyll a Github Pages con Bitbucket Pipeline</title><link href="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" rel="alternate" type="text/html" title="Publicando de Jekyll a Github Pages con Bitbucket Pipeline" /><published>2017-10-13T16:41:51-03:00</published><updated>2017-10-13T16:41:51-03:00</updated><id>http://lgallardo.com/es/2017/10/13/posting-jekyll-to-github-pages-with-bitbucket-pipeline</id><content type="html" xml:base="http://lgallardo.com/es/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;/images/automating-jekyll-deployment-to-github-pages-with-bitbucket-pipeline.jpg&quot; alt=&quot;Posting with pipeline&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Debido a unos problemas de seguridad que tuve con WordPress decidí cambiar el blog a algo estático servido desde Github Pages. Pero el nuevo sitio tenía que cumplir algunos requerimientos mínimos:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Debe tener buen aspecto&lt;/li&gt;
-  &lt;li&gt;Posibilidad de tener múltiples idiomas (español e inglés)&lt;/li&gt;
-  &lt;li&gt;Estático, nada de de scripts ni base de datos&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;Jekyll&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Ya había escuchado de esta solución por lo que tenía como una referencia, así como Hugo, pero como vi que está soportado por Github Pages decidí darle una oportunidad.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;De Wordpress a Jekyll&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Para recuperar las entradas del blog ya publicadas levanté un ambiente aislado con Docker usando un dump de la base de datos del sitio y la última versión de Wordpress con los plugins requeridos en cada caso.&lt;/p&gt;
-
-&lt;p&gt;Luego para exportar las entradas usé el plugin &lt;a href=&quot;https://github.com/benbalter/wordpress-to-jekyll-exporter/&quot; target=&quot;_blank&quot;&gt;WordPress to Jekyll Exporter&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Lo único que tuve que hacer para poder usar este plugin fue deshabilitar el plugin qTranslate, el cual ya estaba bastante desactualizado y sin soporte y de todas maneras lo tenía que migrar a alguna otra opción&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Jekyll theme: Minimal Mistakes&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Busqué varias opciones pero el tema &lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/&quot; target=&quot;_blank&quot;&gt;Minimal Mistakes&lt;/a&gt; fue el qué más se adaptó a lo que estaba buscando en cuanto a aspecto y funcionalidad.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Jekyll multi-lenguage: _i18n&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Aquí también probé un par de plugins, pero el que mejor me funcionó fue &lt;a href=&quot;https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin&quot; target=&quot;_blank&quot;&gt;jekyll-multiple-languages-plugin&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Plugins en Github pages&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Github Pages soporta un número limitado de plugins, por lo que si se necesita usar algún plugin personalizado la solución es generar localmente los estáticos del sitio con Jekyll y luego publicarlos en Github Pages. De esta forma se pueden usar todos los plugins necesarios sin necesidad de que estén suportados en Github Pages.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Automatizando la generación de los estáticos y publicación&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Existen varios ejemplos de cómo automatizar la construcción y publicación, como lo comentan en el plugin &lt;a href=&quot;https://github.com/untra/polyglot/wiki/Github-Pages-Support&quot; target=&quot;_blank&quot;&gt;polyglot&lt;/a&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; # publi.sh
-# change the branch names appropriately
-git checkout site
-rm -rf _site/
-jekyll build
-git add --all
-git commit -m &quot;`date`&quot;
-git push origin site
-git subtree push --prefix  _site/ origin gh-pages
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Bitbucket Pipeline&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Pero para la automatización se me ocurrió usar el Pipeline de Bitbucket e investigando me conseguí con este artículo bien explicado &lt;a href=&quot;https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/&quot; target=&quot;_blank&quot;&gt;Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github&lt;/a&gt;, el cual pueden consultar para los pasos bien detallados.&lt;/p&gt;
-
-&lt;p&gt;Si bien muchas de las cosas la saqué de estos dos artículos anteriores, no fue tan directo por lo que tuve que adaptar el script debido a que no pude hacer push al branch &lt;em&gt;gh-pages&lt;/em&gt; con mi cuenta personal de Github, así mi Pipeline quedó definido de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; This is a sample build configuration for Ruby.
-# Check our guides at https://confluence.atlassian.com/x/8r-5Mw for more examples.
-# Only use spaces to indent your .yml configuration.
-# -----
-# You can specify a custom docker image from Docker Hub as your build environment.
-image: ruby:2.3.3
-
-pipelines:
-  default:
-    - step:
-        script: # Modify the commands below to build your repository.
-          - bundler --version
-          - bundle install
-          - bundle exec jekyll build -t
-  branches:
-    master:
-      - step:
-          script:
-            - bundler --version
-            - bundle install
-            - bundle exec jekyll build -t
-            - git clone https://github.com/lgallard/lgallard.github.io.git
-            - cp -r /opt/atlassian/pipelines/agent/build/_site/* lgallard.github.io/
-            - cd lgallard.github.io
-            - git config --global user.email &quot;lgallard@gmail.com&quot;
-            - git config --global user.name &quot;Luis Gallardo&quot;
-            - git config --global push.default simple
-            - git add --all
-            - git commit -m &quot;`date`&quot;
-            - git push https://$githubtoken@github.com/lgallard/lgallard.github.io.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Donde &lt;em&gt;$githubtoken&lt;/em&gt; es una variable de entorno que se le pasa al contenedor con el token generado previamente en Github.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Problema al construir el Pipeline&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Cuando construía mi sitio localmente desde mi máquina no tenía ningún problema, pero al momento de correr el Pipeline siempre me arrojaba el siguiente error:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle exec jekyll build
- + bundle exec jekyll build
-Configuration file: /opt/atlassian/pipelines/agent/build/_config.yml
-            Source: /opt/atlassian/pipelines/agent/build
-       Destination: /opt/atlassian/pipelines/agent/build/_site
- Incremental build: disabled. Enable with --incremental
-      Generating... 
-Building site for default language: &quot;en&quot; to: /opt/atlassian/pipelines/agent/build/_site
-Loading translation from file /opt/atlassian/pipelines/agent/build/_i18n/en.yml
-  Conversion error: Jekyll::Converters::Scss encountered an error while converting 'assets/css/main.scss':
-                    Invalid US-ASCII character &quot;\xE2&quot; on line 54
-jekyll 3.6.0 | Error:  Invalid US-ASCII character &quot;\xE2&quot; on line 54
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Como el error era de encoding supuse que había algo distinto en el ambiente del Pipeline y mi PC. Entonces como el Pipeline de Ruby a la larga es solo una imagen de Docker de Ruby que se toma desde Dockerhub busqué en la &lt;a href=&quot;https://hub.docker.com/_/ruby/&quot; target=&quot;_blank&quot;&gt;documentación de la imagen&lt;/a&gt; y se resolvía solo pasando el encoding como variable al contenedor en Settings &amp;gt; Pipelines &amp;gt; Environment variables:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;LANG: C.UTF-8
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Publicación del sitio&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Ahora solo con hacer push de las entradas en el repo de Bitbucket corre el Pipeline y se publica todo en Github Pages!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/bitbuket-pipeline.jpg&quot; alt=&quot;Bitbucket Pipeline&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Referencias:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/&quot; target=&quot;_blank&quot;&gt;Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/benbalter/wordpress-to-jekyll-exporter/&quot; target=&quot;_blank&quot;&gt;WordPress to Jekyll Exporter&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/&quot; target=&quot;_blank&quot;&gt;Minimal Mistakes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin&quot; target=&quot;_blank&quot;&gt;jekyll-multiple-languages-plugin&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hub.docker.com/_/ruby/&quot; target=&quot;_blank&quot;&gt;Docker ruby&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Luis Gallardo</name></author><category term="Docker" /><category term="Git" /><category term="Gihub" /><category term="Bitbucket" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><summary type="html"></summary></entry></feed>
