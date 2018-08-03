@@ -36,8 +36,8 @@
 <meta property="og:title" content="Cómo instalar VMWare Tools en Red Hat y CentOS">
 
 
-  <link rel="canonical" href="http://lgallardo.com/es/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
-  <meta property="og:url" content="http://lgallardo.com/es/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
+  <link rel="canonical" href="https://lgallardo.com/es/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
+  <meta property="og:url" content="https://lgallardo.com/es/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
 
 
 
@@ -48,7 +48,7 @@
   <meta name="twitter:site" content="@lgallard">
   <meta name="twitter:title" content="Cómo instalar VMWare Tools en Red Hat y CentOS">
   <meta name="twitter:description" content="Si necesitas instalar los VMWare Tools en máquinas virtuales corriendo Red Hat o CentOS como sistemas operativo, puedes seguir  el procedimiento descrito a continuación:ProcedimientoPrimero que nada en VMWare vSphere ubica la máquina virtual a la que deseas instalarle los VMWare tools y haz clic en donde dice “Install VMWare Tools” como se muestraen la siguiente imagen:Aparecerá una ventana de diálogo que indica que se montará el disco con los VMWare Tools en el sistema hacendo clic en el botón “mount”. Luego en la máquina virtual donde deseas instalar los VMWare Tools debes hacer lo siguiente desde un terminal de texto:# mount /dev/cdrom /mnt/mount: block device /dev/sr0 is write-protected, mounting read-only# cp /mnt/VMwareTools-9.0.0-782409.tar.gz /opt/# cd /opt/# tar xvzf VMwareTools-9.0.0-782409.tar.gz# cd vmware-tools-distrib/#./vmware-install.plEste último es un script donde te realizarán una serie de preguntas relacionadas a la instalación de los VMWare Tools. En general las opciones por omisión son suficientes, pero si requieres modificar algún comportamiento puedes camiar el valor según tu conveniencia:Creating a new VMware Tools installer database using the tar4 format.Installing VMware Tools.In which directory do you want to install the binary files?[/usr/bin]What is the directory that contains the init directories (rc0.d/ to rc6.d/)?[/etc/rc.d]What is the directory that contains the init scripts?[/etc/rc.d/init.d]In which directory do you want to install the daemon files?[/usr/sbin]In which directory do you want to install the library files?[/usr/lib/vmware-tools]The path &quot;/usr/lib/vmware-tools&quot; does not exist currently. This program isgoing to create it, including needed parent directories. Is this what you want?[yes]In which directory do you want to install the documentation files?[/usr/share/doc/vmware-tools]The path &quot;/usr/share/doc/vmware-tools&quot; does not exist currently. This programis going to create it, including needed parent directories. Is this what youwant? [yes]The installation of VMware Tools 9.0.0 build-782409 for Linux completedsuccessfully. You can decide to remove this software from your system at anytime by invoking the following command: &quot;/usr/bin/vmware-uninstall-tools.pl&quot;.Before running VMware Tools for the first time, you need to configure it byinvoking the following command: &quot;/usr/bin/vmware-config-tools.pl&quot;. Do you wantthis program to invoke the command for you now? [yes]Initializing...Making sure services for VMware Tools are stopped.The VMware FileSystem Sync Driver (vmsync) allows external third-party backupsoftware that is integrated with vSphere to create backups of the virtualmachine. Do you wish to enable this feature? [no]Found a compatible pre-built module for vmci. Installing it...Found a compatible pre-built module for vsock. Installing it...The module vmxnet3 has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmxnet3 to override.The module pvscsi has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=pvscsi to override.The module vmmemctl has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmmemctl to override.The VMware Host-Guest Filesystem allows for shared folders between the host OSand the guest OS in a Fusion or Workstation virtual environment. Do you wishto enable this feature? [no]Found a compatible pre-built module for vmxnet. Installing it...The vmblock enables dragging or copying files between host and guest in aFusion or Workstation virtual environment. Do you wish to enable this feature?[no]!!! [EXPERIMENTAL] !!!VMware automatic kernel modules enables automatic building and installation ofVMware kernel modules at boot that are not already present. By selecting yes,you will be enabling this experimental feature. You can always disable thisfeature by re-running vmware-config-tools.pl.Would you like to enable VMware automatic kernel modules?[no]No X install found.Creating a new initrd boot image for the kernel.vmware-tools start/runningThe configuration of VMware Tools 9.0.0 build-782409 for Linux for this runningkernel completed successfully.You must restart your X session before any mouse or graphics changes takeeffect.You can now run VMware Tools by invoking &quot;/usr/bin/vmware-toolbox-cmd&quot; from thecommand line.To enable advanced X features (e.g., guest resolution fit, drag and drop, andfile and text copy/paste), you will need to do one (or more) of the following:1. Manually start /usr/bin/vmware-user2. Log out and log back into your desktop session; and,3. Restart your X session.Enjoy,--the VMware teamFound VMware Tools CDROM mounted at /mnt. Ejecting device /dev/sr0 ...No eject (or equivilant) command could be located.Eject Failed: If possible manually eject the Tools installer from the guestcdrom mounted at /mnt before canceling tools install on the host.Al finalizar el script ya están instalados los VMWare Tools en la máquina virtual. Ahora se puede desmontar el ISO haciendo:# umount /mntLuego en VSphere, puedes verificar que efectivamente están corriendo los VMWare Tools como se muestra en la primera imagen de este artículo.">
-  <meta name="twitter:url" content="http://lgallardo.com/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
+  <meta name="twitter:url" content="https://lgallardo.com/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
 
   
     <meta name="twitter:card" content="summary">
@@ -84,7 +84,7 @@
       "@context" : "http://schema.org",
       "@type" : "Person",
       "name" : "Luis M. Gallardo D.",
-      "url" : "http://lgallardo.com/es",
+      "url" : "https://lgallardo.com/es",
       "sameAs" : null
     }
   </script>
@@ -97,7 +97,7 @@
 <!-- end SEO -->
 
 
-<link href="http://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -109,7 +109,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="http://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -151,14 +151,14 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="http://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
         <ul class="visible-links">
           
             
-            <li class="masthead__menu-item"><a href="http://lgallardo.com/es/categories/">Categories</a></li>
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/categories/">Categories</a></li>
           
             
-            <li class="masthead__menu-item"><a href="http://lgallardo.com/es/tags/">Tags</a></li>
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/tags/">Tags</a></li>
           
           
             
@@ -188,7 +188,7 @@
   
     <div class="author__avatar">
       
-        <img src="http://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -488,15 +488,15 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
       
       
-      <a href="http://lgallardo.com/es/tags/centos" class="page__taxonomy-item" rel="tag">CentOS</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/es/tags/centos" class="page__taxonomy-item" rel="tag">CentOS</a><span class="sep">, </span>
     
       
       
-      <a href="http://lgallardo.com/es/tags/redhat" class="page__taxonomy-item" rel="tag">RedHat</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/es/tags/redhat" class="page__taxonomy-item" rel="tag">RedHat</a><span class="sep">, </span>
     
       
       
-      <a href="http://lgallardo.com/es/tags/vmware" class="page__taxonomy-item" rel="tag">VMWare</a>
+      <a href="https://lgallardo.com/es/tags/vmware" class="page__taxonomy-item" rel="tag">VMWare</a>
     
     </span>
   </p>
@@ -517,7 +517,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
       
       
-      <a href="http://lgallardo.com/es/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
+      <a href="https://lgallardo.com/es/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -533,24 +533,24 @@ cdrom mounted at /mnt before canceling tools install on the host.
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=C%C3%B3mo+instalar+VMWare+Tools+en+Red+Hat+y+CentOS%20http%3A%2F%2Flgallardo.com%2Fes%2F2014%2F05%2F22%2Fcomo-instalar-vmware-tools-en-red-hat-y-centos%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=C%C3%B3mo+instalar+VMWare+Tools+en+Red+Hat+y+CentOS%20https%3A%2F%2Flgallardo.com%2Fes%2F2014%2F05%2F22%2Fcomo-instalar-vmware-tools-en-red-hat-y-centos%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flgallardo.com%2Fes%2F2014%2F05%2F22%2Fcomo-instalar-vmware-tools-en-red-hat-y-centos%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2014%2F05%2F22%2Fcomo-instalar-vmware-tools-en-red-hat-y-centos%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=http%3A%2F%2Flgallardo.com%2Fes%2F2014%2F05%2F22%2Fcomo-instalar-vmware-tools-en-red-hat-y-centos%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2014%2F05%2F22%2Fcomo-instalar-vmware-tools-en-red-hat-y-centos%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flgallardo.com%2Fes%2F2014%2F05%2F22%2Fcomo-instalar-vmware-tools-en-red-hat-y-centos%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2014%2F05%2F22%2Fcomo-instalar-vmware-tools-en-red-hat-y-centos%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="http://lgallardo.com/es/2014/05/03/curso-programming-mobile-applications-for-android-handheld-systems/" class="pagination--pager" title="Curso Programming Mobile Applications for Android Handheld Systems
+      <a href="https://lgallardo.com/es/2014/05/03/curso-programming-mobile-applications-for-android-handheld-systems/" class="pagination--pager" title="Curso Programming Mobile Applications for Android Handheld Systems
 ">Previous</a>
     
     
-      <a href="http://lgallardo.com/es/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/" class="pagination--pager" title="Habilitar HTML5 para Blipblip.tv en plugin Video Sidebar Widgets de WordPress
+      <a href="https://lgallardo.com/es/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/" class="pagination--pager" title="Habilitar HTML5 para Blipblip.tv en plugin Video Sidebar Widgets de WordPress
 ">Next</a>
     
   </nav>
@@ -583,7 +583,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="permalink">Bloques de configuración dinámicos en Terraform
+        <a href="https://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="permalink">Bloques de configuración dinámicos en Terraform
 </a>
       
     </h2>
@@ -612,7 +612,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://lgallardo.com/es/2018/07/25/awslogs-cli/" rel="permalink">Consultando AWS Logs desde la línea de órdenes
+        <a href="https://lgallardo.com/es/2018/07/25/awslogs-cli/" rel="permalink">Consultando AWS Logs desde la línea de órdenes
 </a>
       
     </h2>
@@ -641,7 +641,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://lgallardo.com/es/2018/07/20/2018-07-20-echo-dot/" rel="permalink">echo dot
+        <a href="https://lgallardo.com/es/2018/07/20/2018-07-20-echo-dot/" rel="permalink">echo dot
 </a>
       
     </h2>
@@ -670,7 +670,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="http://lgallardo.com/es/2018/07/15/2018-07-15-acloudguru-member/" rel="permalink">A Cloud Guru Member
+        <a href="https://lgallardo.com/es/2018/07/15/2018-07-15-acloudguru-member/" rel="permalink">A Cloud Guru Member
 </a>
       
     </h2>
@@ -715,7 +715,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
     
     
-    <li><a href="http://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -725,7 +725,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     </div>
 
     
-  <script src="http://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
 
 
 
@@ -734,7 +734,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
       
   <script>
     var disqus_config = function () {
-      this.page.url = "http://lgallardo.com/es/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.url = "https://lgallardo.com/es/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/";  // Replace PAGE_URL with your page's canonical URL variable
       this.page.identifier = "/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
