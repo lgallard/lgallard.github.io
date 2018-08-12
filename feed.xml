@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-08-03T19:12:18-03:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Dynamic configuration blocks in Terraform</title><link href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Dynamic configuration blocks in Terraform" /><published>2018-07-29T21:00:00-03:00</published><updated>2018-07-29T21:00:00-03:00</updated><id>https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-08-12T07:28:57-03:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-11T21:00:00-03:00</published><updated>2018-08-11T21:00:00-03:00</updated><id>https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I recently approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified DevOps Engineer - Professional&lt;/code&gt; certification and wanted to leave my comments on the exam:&lt;/p&gt;
+
+&lt;p&gt;It was 80 questions to answer in 170 minutes. This exam is the most difficult because you need to know about the previous contents of Developer and SysOps certifications. You generally need to know AWS technology and when to use it from the DevOps perspective for deploying applications on AWS. In particular, the key topics here are CloudFormation, OpsWorks, Elastic Beanstalk and Auto Scaling Groups.&lt;/p&gt;
+
+&lt;h1 id=&quot;cloudformation&quot;&gt;CloudFormation&lt;/h1&gt;
+&lt;p&gt;At a minimum, you should know how a CloudFormation template is composed, how to update a stack, how to prevent it from being updated, difference between WaitCondition and Creation Policy, how to rolling update ASGs, resource types.&lt;/p&gt;
+
+&lt;h1 id=&quot;opsworks&quot;&gt;OpsWorks&lt;/h1&gt;
+&lt;p&gt;Here you should be clear about the concepts of Stack, Layer, and Application. Knowing what Lyfecyles events are and how or when they run. It is of the utmost importance to know the “deployment” command and to note that it is not only useful for deploying applications. It’s also important to remember that with OpsWorks you can add existing infrastructure to stacks (which you can’t do in CloudFormation or Elastic Beanstalk) and that you can only associate one RDS instance per stack.&lt;/p&gt;
+
+&lt;h1 id=&quot;elastic-beanstalk&quot;&gt;Elastic Beanstalk&lt;/h1&gt;
+&lt;p&gt;Understand the use cases of the service, remember that you can use Docker in EB, so you can practically run anything in containers. Learn how to create settings from the .ebextenstions, as well as how to save settings and precedence between different ways to do so. Important that you know the types of deployment that you can perform with EB, and in particular that it is one of those that allows you to make Blue/Green deployments integrated into the service, but that on the contrary you must use Route 53 if you want to make an A/B deployment.&lt;/p&gt;
+
+&lt;h1 id=&quot;auto-scaling-groups&quot;&gt;Auto Scaling Groups&lt;/h1&gt;
+&lt;p&gt;Regarding Auto Scaling Groups you should know the Termination policies, and which ones are useful for deploying applications. Studies Lifecycle Hooks and in particular all states through which an instance passes, and use cases when it is in &lt;code class=&quot;highlighter-rouge&quot;&gt;pending: wait&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;terminating: wait&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-remaining&quot;&gt;The remaining&lt;/h1&gt;
+&lt;p&gt;The rest of the exam focuses on evaluating your knowledge of deployment types on AWS, as well as topics for Developer and SysOps certifications, such as DynamoDB or CloudWatch.&lt;/p&gt;
+
+&lt;h1 id=&quot;my-tips-for-saving-time-on-this-exam-are&quot;&gt;My tips for saving time on this exam are:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Answer the easy question quick, don’t stay long thing whether is right answer because probably it is.&lt;/li&gt;
+  &lt;li&gt;Only mark for review those question where you really have a doubt, so you can check them later and if there’s time left be able to review them all.&lt;/li&gt;
+  &lt;li&gt;Think it is a Amazon certification and in that matter always wonder what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Take into account that it’s a Amazon certification and in that matter always think what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Discard things that can be done at the OS level if an Amazon service provides it, and only consider it when there is no other option.&lt;/li&gt;
+  &lt;li&gt;Whenever you read scalable think of SQS / DynamoDB, cost-saving = S3 / S3 RRS, and so on.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are interested in this certification and I recommend you some links:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/aws-certified-devops-engineer-professional&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Documentación de AWS&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Dynamic configuration blocks in Terraform</title><link href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Dynamic configuration blocks in Terraform" /><published>2018-07-29T21:00:00-03:00</published><updated>2018-07-29T21:00:00-03:00</updated><id>https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;One of the things I had to resolve was the fact that in Terraform there are configuration blocks that, depending on the options may have different parameters or may not even accept the same parameters.&lt;/p&gt;
@@ -433,215 +481,4 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Working with Terraform modules</title><link href="https://lgallardo.com/2017/11/19/terraform-modules/" rel="alternate" type="text/html" title="Working with Terraform modules" /><published>2017-11-18T21:00:10-03:00</published><updated>2017-11-18T21:00:10-03:00</updated><id>https://lgallardo.com/2017/11/19/working-with-terraform-modules</id><content type="html" xml:base="https://lgallardo.com/2017/11/19/terraform-modules/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform logo&quot; /&gt;&lt;/center&gt;
-
-&lt;p&gt;In this post you’ll see how reuse your Terraform code using modules to avoid writing the same code over and over. Also you will lear how to version your modules and how to use a specific version.&lt;/p&gt;
-
-&lt;h1 id=&quot;how-to-define-a-module&quot;&gt;How to define a module?&lt;/h1&gt;
-
-&lt;p&gt;Just put all your .tf files into a folder, for example:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mymodule/
-├── main.tf
-├── outputs.tf
-├── README.md
-└── variables.tf
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Then copy it into a &lt;em&gt;modules&lt;/em&gt; folder.&lt;/p&gt;
-
-&lt;h1 id=&quot;how-to-use-the-module&quot;&gt;How to use the module?&lt;/h1&gt;
-&lt;p&gt;Use the &lt;em&gt;source&lt;/em&gt; parameter to specify the path of your module as shown below:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;./modules/mymodule&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;modules-variables&quot;&gt;Module’s variables&lt;/h1&gt;
-&lt;p&gt;As you can see this module receives two arguments, which can be defined in the &lt;em&gt;mymodule&lt;/em&gt;’s &lt;em&gt;variables.tf&lt;/em&gt; file.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;variable &quot;var1&quot; {
-  description = &quot;A string var&quot;
-}
-
-variable &quot;var2&quot; {
-  description = &quot;A numerical var&quot;
-default = 1989
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;modules-outputs&quot;&gt;Module’s outputs&lt;/h1&gt;
-&lt;p&gt;Modules also have outputs that can be used by other modules and resources. You can define them in the outputs.tf file:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-output &quot;id&quot; {
-  description = &quot;This is the mymodule's id&quot;
-}
-
-output &quot;name&quot; {
-  description = &quot;This is the mymodule's name&quot;
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h1 id=&quot;modules-sources&quot;&gt;Modules Sources&lt;/h1&gt;
-
-&lt;p&gt;The above examples use the &lt;em&gt;source&lt;/em&gt; parameter to retrieve the module from a local folder, but you can also use other sources like a git repository, mercurial repository, HTTP urls, S3 bucket or the Terraform Registry.&lt;/p&gt;
-
-&lt;p&gt;For example, instead of using a folder you can use a git repository to version your module and call it this way:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;module-repo-branch-and-version&quot;&gt;Module repo branch and version&lt;/h1&gt;
-&lt;p&gt;You can also point to a specific branch or version in a git repository using the &lt;em&gt;?ref&lt;/em&gt; query. For example to specify the &lt;em&gt;dev&lt;/em&gt; branch:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git?ref=dev&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To point to version 0.0.2 use it like this:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git?ref=0.0.2&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;whats-the-problem-with-this-approach&quot;&gt;What’s the problem with this approach?&lt;/h2&gt;
-
-&lt;p&gt;If you want to upgrade the module version and you have used it several times in your project you must edit it in every place you defined it by hand.&lt;/p&gt;
-
-&lt;h1 id=&quot;module-version&quot;&gt;Module version&lt;/h1&gt;
-&lt;p&gt;If your are using Terraform version v0.11.0+ you can use a specific version for a module. This help you to point to a specific version, for example to a an stable version of the module. This only works if you are using a module registry like the &lt;a href=&quot;https://www.terraform.io/docs/registry/index.html&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-  source  = &quot;hashicorp/mymodule&quot;
-  version = &quot;0.0.2&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;whats-the-problem-with-this-approach-1&quot;&gt;What’s the problem with this approach?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;The Terraform Registry is a public registry. For private use you must use the &lt;a href=&quot;https://www.terraform.io/docs/registry/private.html&quot; target=&quot;_blank&quot;&gt;Private Registry&lt;/a&gt; available ine the Enterprise version.&lt;/li&gt;
-  &lt;li&gt;Only available for Terraform version v0.11.0+&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;using-a-terrafile&quot;&gt;Using a Terrafile&lt;/h1&gt;
-&lt;p&gt;There’s another approach to overcome the version pitfalls which is to write a file to define the modules to use from a git repository, by branch or version. This file si called the &lt;em&gt;Terrafile&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
-# VPC
-tf_aws_vpc:
-  source : &quot;git@github.com:terraform-community-modules/tf_aws_vpc.git&quot;
-  version: &quot;master&quot;
-
-tf_my_module:
-  source: &quot;git@bitbucket.org:mygitrepo/mymodule.git&quot;
-  version: &quot;0.0.2&quot;                   
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;These modules will be downloaded into a &lt;em&gt;modules&lt;/em&gt; folder and then you can reference your module using this local folder:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;./modules/mymodule&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To get the modules you can use the this Rakefile:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'yaml'&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'fileutils'&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# You may want to change this.&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;modules_path&lt;/span&gt;
-  &lt;span class=&quot;s1&quot;&gt;'vendor/modules'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# You may want to change this.&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;terrafile_path&lt;/span&gt;
-  &lt;span class=&quot;s1&quot;&gt;'Terrafile'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;read_terrafile&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terrafile_path&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;load_file&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terrafile_path&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;fail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'[*] Terrafile does not exist'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create_modules_directory&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Creating Terraform modules directory at '&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'&quot;&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;FileUtils&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;makedirs&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;delete_cached_terraform_modules&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Deleting cached Terraform modules at '&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'&quot;&lt;/span&gt;
-  &lt;span class=&quot;no&quot;&gt;FileUtils&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rm_rf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Fetch the Terraform modules listed in the Terrafile'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:get_modules&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;terrafile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;read_terrafile&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;create_modules_directory&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;delete_cached_terraform_modules&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;terrafile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;module_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'source'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'version'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Checking out &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; of &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; ...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;colorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mkdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;chdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;sb&quot;&gt;`git clone -b &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;module_name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &amp;amp;&amp;gt; /dev/null`&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And download them using the &lt;em&gt;get_modules&lt;/em&gt; function:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rake get_modules
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally get the modules in Terraform&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;terraform get
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/modules/usage.html&quot; target=&quot;_blank&quot;&gt;Terraform - Module Usage&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/modules/sources.html&quot; target=&quot;_blank&quot;&gt;Terraform - Module Sources&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/registry/index.html&quot; target=&quot;_blank&quot;&gt;Terraform Public Registry&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/registry/private.html&quot; target=&quot;_blank&quot;&gt;Terraform Private Registry&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://bensnape.com/2016/01/14/terraform-design-patterns-the-terrafile/&quot; target=&quot;_blank&quot;&gt;Terraform Design Patterns: the Terrafile&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
