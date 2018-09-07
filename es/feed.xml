@@ -1,4 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2018-08-12T07:31:22-03:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-11T21:00:00-03:00</published><updated>2018-08-11T21:00:00-03:00</updated><id>https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2018-09-07T18:09:50-03:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AWS CodePipeline con Bitbucket</title><link href="https://lgallardo.com/es/2018/09/07/codepipeline-bitbucket" rel="alternate" type="text/html" title="AWS CodePipeline con Bitbucket" /><published>2018-08-11T21:00:00-03:00</published><updated>2018-08-11T21:00:00-03:00</updated><id>https://lgallardo.com/es/2018/09/07/codepipeline-bitbucket</id><content type="html" xml:base="https://lgallardo.com/es/2018/09/07/codepipeline-bitbucket">&lt;center&gt;&lt;img src=&quot;/images/CodePipeline_bitbucket.jpg&quot; alt=&quot;AWS CodePipeline and Bitbucket&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;En el trabajo necesitaba desplegar una aplicación usando AWS CodePipeline pero el repositorio donde se encuentra el código está en Bitbucket. Esto representó un desafío interesante porque AWS Pipeline no soporta Bitbucket, a diferencia de AWS CodeBuild que si lo soporta.&lt;/p&gt;
+
+&lt;p&gt;Si se investiga un poco en internet se pueden encontrar soluciones alternativas a este problema, como por ejemplo tener un webhook en el repositorio que llame a una función lambda y que genere un archivo en un bucket y que sea el disparador de AWS CodePipeline[1]. Otra posible solución es usar Bitbucket Pipelines para crear el objeto a colocar en el bucket, o incluso hacer un espejo del contenido del repositorio de Bitbucket en AWS CodeCommit.&lt;/p&gt;
+
+&lt;p&gt;Como no me terminaron de convencer estas soluciones alternativas, estuve pensando una solución donde todo quedara en AWS y que no tuviese que configurar los repositorios, y la clave fue el soporte que si tiene AWS CodeBuild con Bitbucket. Entonces, en vez de usar el pipeline de Bitbucket para generar la fuente de AWS CodePipeline, con AWS CodeBuild genero un archivo zip con el código fuente de la aplicación la cual luego es usada como entrada.&lt;/p&gt;
+
+&lt;p&gt;En particular esta aplicación es una imagen Docker que se genera con AWS CodeBuild y luego se guarda en AWS ECR, Este CodeBuild genera como artefacto de salida la definición de la tarea de ECS, la cual es tomada como entrada en la face de despliegue de ECS, actualizando el servicio y por ende la aplicación:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/aws_codepipeline_succeded.jpg&quot; alt=&quot;AWS Codebuild trigger&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;no-todo-es-perfecto&quot;&gt;No todo es perfecto&lt;/h1&gt;
+
+&lt;p&gt;Enumero algunas cosas que se debe considerar con esta solución:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Para que CodeBuild acceda a los repositorios privados de Bitbucket se debe autenticar con un usuario desde la consola web de AWS. Si están pensando en automatizar la creación de este disparador consideren usar una cuenta de servicio que tenga acceso de solo lectura sobre el repositorio.&lt;/li&gt;
+  &lt;li&gt;El proyecto de AWS CodeBuild que sirve de disparador no se ejecutará automáticamente al actualizar el repositorio, por lo que tienen que iniciar el proyecto. Si quieren que esto sea automático o lo más parecido posible, pueden configurar una tarea programada en el proyecto:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/aws_codebuild_trigger.jpg&quot; alt=&quot;AWS Codebuild trigger&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/&quot; target=&quot;_blank&quot;&gt;Integrating Git with AWS CodePipeline&lt;/a&gt;,&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Codebuild" /><category term="CodePipeline" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-11T21:00:00-03:00</published><updated>2018-08-11T21:00:00-03:00</updated><id>https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recientemente aprobé la certificación &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified DevOps Engineer - Professional&lt;/code&gt; y quería dejar mis comentarios respecto al examen:&lt;/p&gt;
@@ -448,39 +474,4 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
   &lt;li&gt;&lt;a href=&quot;https://gist.github.com/vancluever/7676b4dafa97826ef0e9&quot; target=&quot;_blank&quot;&gt;Find the most recent Ubuntu AMI using aws-cli&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://cloud-images.ubuntu.com/&quot; target=&quot;_blank&quot;&gt;Amazon EC2 AMI Locator&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter&quot;&gt;source_ami_filter&lt;/a&gt; {:target=”_blank”}&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Packer" /><category term="Ubuntu" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Solutions Architect - Professional</title><link href="https://lgallardo.com/es/2017/12/29/aws-certified-solutions-architect-professional/" rel="alternate" type="text/html" title="AWS Certified Solutions Architect - Professional" /><published>2017-12-29T12:00:55-03:00</published><updated>2017-12-29T12:00:55-03:00</updated><id>https://lgallardo.com/es/2017/12/29/aws-certified-solutions-architect-professional</id><content type="html" xml:base="https://lgallardo.com/es/2017/12/29/aws-certified-solutions-architect-professional/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Solutions_Architect_Professional_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recientemente aprobé la certificación AWS Certified Solutions Architect - Professional y quería dejar mis comentarios respecto al examen:&lt;/p&gt;
-
-&lt;p&gt;Fueron 77 preguntas para 2 horas 50 minutos. Muchas estaban relacionadas con CloudFormation, OpsWorks y BeanStalk. En particular cómo desplegar aplicaciones y cuándo usar una u otra tecnología. Otra porción considerable estaba enfocada a DirectConnect, y sus casos de usos. Otro tema recurrente fue DR, plantean varios escenarios con distintos RTO y RPO para que elijan el servicio AWS correcto o la arquitectura que más se adecua.&lt;/p&gt;
-
-&lt;p&gt;En general el examen es largo y tiene  enunciados extensos y con respuestas también extensas. Los comentarios que puedes conseguir en Internet es que el examen no tiene la mejor redacción del mundo y que en general para quienes el inglés no es su lengua nativa puede llegar a ser confuso, por lo que seguro te tocará leer varias preguntas mas de una vez.&lt;/p&gt;
-
-&lt;p&gt;Mis recomendaciones para ganar tiempo en este examen son:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Las preguntas fáciles respóndelas rápidamente, no te quedes mucho tiempo pensando en si es la respuesta correcta porque seguro lo es.&lt;/li&gt;
-  &lt;li&gt;Solo marcar las preguntas en las que realmente tienes dudas, así al momento de revisarlas puedes enfocarte en solo esas y si queda tiempo empezar a revisar el resto&lt;/li&gt;
-  &lt;li&gt;Piensen que es una certificación de Amazon, en ese sentido siempre preguntarse cuál servicio de Amazon corresponde.&lt;/li&gt;
-  &lt;li&gt;Descartar cosas que se pueden hacer a nivel de S.O. si un servicio de Amazon lo provee, y solo considerarlo cuando no hay mas opción.&lt;/li&gt;
-  &lt;li&gt;Siempre que lean scalable piensen en SQS/DynamoDB, cost-saving = S3/S3 RRS, y así.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Si estás interesado en esta certificación te recomiendo algunos enlaces:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Cursos en línea&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/course/aws-certified-solutions-architect-professional&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Documentación de AWS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Packer" /><category term="Ubuntu" /><summary type="html"></summary></entry></feed>
