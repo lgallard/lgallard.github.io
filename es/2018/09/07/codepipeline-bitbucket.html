@@ -329,7 +329,7 @@
 
 <p>En el trabajo necesitaba desplegar una aplicación usando AWS CodePipeline pero el repositorio donde se encuentra el código está en Bitbucket. Esto representó un desafío interesante porque AWS Pipeline no soporta Bitbucket, a diferencia de AWS CodeBuild que si lo soporta.</p>
 
-<p>Si se investiga un poco en internet se pueden encontrar soluciones alternativas a este problema, como por ejemplo tener un webhook en el repositorio que llame a una función lambda y que genere un archivo en un bucket y que sea el disparador de AWS CodePipeline[1]. Otra posible solución es usar Bitbucket Pipelines para crear el objeto a colocar en el bucket, o incluso hacer un espejo del contenido del repositorio de Bitbucket en AWS CodeCommit.</p>
+<p>Si se investiga un poco en internet se pueden encontrar soluciones alternativas a este problema, como por ejemplo tener un webhook en el repositorio que llame a una función lambda y que genere un archivo en un bucket y que sea el disparador de AWS CodePipeline [1]. Otra posible solución es usar Bitbucket Pipelines para crear el objeto a colocar en el bucket, o incluso hacer un espejo del contenido del repositorio de Bitbucket en AWS CodeCommit.</p>
 
 <p>Como no me terminaron de convencer estas soluciones alternativas, estuve pensando una solución donde todo quedara en AWS y que no tuviese que configurar los repositorios, y la clave fue el soporte que si tiene AWS CodeBuild con Bitbucket. Entonces, en vez de usar el pipeline de Bitbucket para generar la fuente de AWS CodePipeline, con AWS CodeBuild genero un archivo zip con el código fuente de la aplicación la cual luego es usada como entrada.</p>
 
