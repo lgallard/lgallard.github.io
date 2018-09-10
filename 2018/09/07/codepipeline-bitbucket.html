@@ -341,8 +341,8 @@
 
 <p>I list a few things to consider with this solution:</p>
 
-<p>1.For CodeBuild to access private Bitbucket repositories, you must authenticate with a user from the AWS web console. If you are considering how to create this release, consider using a service account that has read-only access to the repository.</p>
 <ol>
+  <li>For CodeBuild to access private Bitbucket repositories, you must authenticate with a user from the AWS web console. If you are considering how to create this release, consider using a service account that has read-only access to the repository.</li>
   <li>The AWS CodeBuild project trigger will not run automatically when you update the repository, so you need to start the project. If you want this to be automatic or as close as possible, you can set up a scheduled task in your project:</li>
 </ol>
 
