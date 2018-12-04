@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-12-03T18:44:39+00:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AWS CodePipeline with Bitbucket</title><link href="https://lgallardo.com/2018/09/07/codepipeline-bitbucket" rel="alternate" type="text/html" title="AWS CodePipeline with Bitbucket" /><published>2018-09-07T00:00:00+00:00</published><updated>2018-09-07T00:00:00+00:00</updated><id>https://lgallardo.com/2018/09/07/codepipeline-bitbucket</id><content type="html" xml:base="https://lgallardo.com/2018/09/07/codepipeline-bitbucket">&lt;center&gt;&lt;img src=&quot;/images/CodePipeline_bitbucket.jpg&quot; alt=&quot;AWS CodePipeline and Bitbucket&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-12-04T06:50:22-06:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Using Alexa ASK SDK from Lambda Layers</title><link href="https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers" rel="alternate" type="text/html" title="Using Alexa ASK SDK from Lambda Layers" /><published>2018-12-03T18:00:00-06:00</published><updated>2018-12-03T18:00:00-06:00</updated><id>https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers</id><content type="html" xml:base="https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers">&lt;center&gt;&lt;img src=&quot;/images/alexa_lambda_layers.jpg&quot; alt=&quot;Alexa + lambda + Layers&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;lambda-layers&quot;&gt;Lambda Layers&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html&quot; target=&quot;_blank&quot;&gt;Lambda Layers&lt;/a&gt; was recently incorporated into AWS, which basically allows you to share libraries and codes between Lambda functions. This makes it possible to speed up development since now it is not necessary to pack all libraries with the Lambda function, as we used to do with Alexa’s ASK, but now these libraries can be uploaded independently in Lambda Layers and used directly in our functions.&lt;/p&gt;
+
+&lt;h1 id=&quot;alexas-ask-sdk&quot;&gt;Alexa’s ASK SDK&lt;/h1&gt;
+&lt;p&gt;To prepare Alexa’s ASK for Lambda Layers we can follow the following steps:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;virtualenv python
+source python/bin/activate
+pip install ask-sdk
+zip -r ask-sdk.zip python/lib/python3.6/site-packages/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you can use the Alexa’s ASK SDK from your lambda functions without having to upload it in each deployment.&lt;/p&gt;
+
+&lt;h1 id=&quot;uploading-the-ask-sdk-to-lambda-layers&quot;&gt;Uploading the ASK SDK to Lambda Layers&lt;/h1&gt;
+
+&lt;p&gt;The first thing we must do is to create the Lambda Layers from the console:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/create_layer.jpg&quot; alt=&quot;Create Layer&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then you must fill out the form and select the .zip that you created to upload it, and finally you must indicate the runtime with which it is compatible.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/ask_sdk_lambda_layer.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once created, we can see the description and the version:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/ask_sdk_lambda_layer2.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;how-to-include-the-ask-sdk-from-lambda-layers&quot;&gt;How to include the ASK SDK from Lambda Layers?&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Got to your Lambda function and right under yout function name you can click on &lt;strong&gt;&lt;em&gt;Layers&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;From the below section &lt;strong&gt;&lt;em&gt;Referenced layers&lt;/em&gt;&lt;/strong&gt; click on the &lt;strong&gt;&lt;em&gt;Add a layer&lt;/em&gt;&lt;/strong&gt; button&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/add_layer1.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Select the &lt;strong&gt;&lt;em&gt;ask-sdk&lt;/em&gt;&lt;/strong&gt; layer from the drop-down menu, and click on &lt;strong&gt;&lt;em&gt;Add&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/add_layer2.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see below, the Lambda Layer with the Alexa’s ASK SDK can now be used in this Lambda function:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/add_layer3.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can select this same Layer for other Lambda functions that use the same ASK SDK and runtime without having to be uploading it in each deployment.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="Lambda" /><category term="Layers" /><summary type="html"></summary></entry><entry><title type="html">AWS CodePipeline with Bitbucket</title><link href="https://lgallardo.com/2018/09/07/codepipeline-bitbucket" rel="alternate" type="text/html" title="AWS CodePipeline with Bitbucket" /><published>2018-09-06T19:00:00-05:00</published><updated>2018-09-06T19:00:00-05:00</updated><id>https://lgallardo.com/2018/09/07/codepipeline-bitbucket</id><content type="html" xml:base="https://lgallardo.com/2018/09/07/codepipeline-bitbucket">&lt;center&gt;&lt;img src=&quot;/images/CodePipeline_bitbucket.jpg&quot; alt=&quot;AWS CodePipeline and Bitbucket&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;At work I needed to deploy an application using AWS CodePipeline but the repository where the code is located is in Bitbucket. This was an inconvenient task because AWS Pipeline does not support Bitbucket, as does AWS Codebuild.&lt;/p&gt;
@@ -24,7 +84,7 @@
 &lt;center&gt;&lt;img src=&quot;/images/aws_codebuild_trigger.jpg&quot; alt=&quot;AWS Codebuild trigger&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;[1] &lt;a href=&quot;https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/&quot; target=&quot;_blank&quot;&gt;Integrating Git with AWS CodePipeline&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Codebuild" /><category term="CodePipeline" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-12T00:00:00+00:00</published><updated>2018-08-12T00:00:00+00:00</updated><id>https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;[1] &lt;a href=&quot;https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/&quot; target=&quot;_blank&quot;&gt;Integrating Git with AWS CodePipeline&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Codebuild" /><category term="CodePipeline" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-11T19:00:00-05:00</published><updated>2018-08-11T19:00:00-05:00</updated><id>https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;I recently approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified DevOps Engineer - Professional&lt;/code&gt; certification and wanted to leave my comments on the exam:&lt;/p&gt;
@@ -72,7 +132,7 @@
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Dynamic configuration blocks in Terraform</title><link href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Dynamic configuration blocks in Terraform" /><published>2018-07-30T00:00:00+00:00</published><updated>2018-07-30T00:00:00+00:00</updated><id>https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Dynamic configuration blocks in Terraform</title><link href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Dynamic configuration blocks in Terraform" /><published>2018-07-29T19:00:00-05:00</published><updated>2018-07-29T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;One of the things I had to resolve was the fact that in Terraform there are configuration blocks that, depending on the options may have different parameters or may not even accept the same parameters.&lt;/p&gt;
@@ -144,7 +204,7 @@ locals {
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;locals values de Terraform&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuild community module&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Getting AWS Logs from the CLI</title><link href="https://lgallardo.com/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Getting AWS Logs from the CLI" /><published>2018-07-20T00:00:00+00:00</published><updated>2018-07-20T00:00:00+00:00</updated><id>https://lgallardo.com/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="https://lgallardo.com/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Getting AWS Logs from the CLI</title><link href="https://lgallardo.com/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Getting AWS Logs from the CLI" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="https://lgallardo.com/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;One of the company’s developers asked me if there was any way to view the Lambda function logs from the command line, so I wouldn’t have to go into the AWS console and see them in CloudWatch Logs. After some research I got a project in Github called &lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;awslogs&lt;/a&gt; that does just this. Here’s how to install and use it from a Python virtual environment:&lt;/p&gt;
@@ -203,19 +263,19 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;jorgebastida/awslogs&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://gist.github.com/apeckham/9bcb464096997c1b0d41&quot; target=&quot;_blank&quot;&gt;View aws lambda logs on the command line&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">echo dot</title><link href="https://lgallardo.com/2018/07/20/2018-07-20-echo-dot/" rel="alternate" type="text/html" title="echo dot" /><published>2018-07-20T00:00:00+00:00</published><updated>2018-07-20T00:00:00+00:00</updated><id>https://lgallardo.com/2018/07/20/echo-dot</id><content type="html" xml:base="https://lgallardo.com/2018/07/20/2018-07-20-echo-dot/">&lt;center&gt;&lt;img src=&quot;/images/echo-dot.jpg&quot; alt=&quot;echo dot&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">echo dot</title><link href="https://lgallardo.com/2018/07/20/2018-07-20-echo-dot/" rel="alternate" type="text/html" title="echo dot" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/20/echo-dot</id><content type="html" xml:base="https://lgallardo.com/2018/07/20/2018-07-20-echo-dot/">&lt;center&gt;&lt;img src=&quot;/images/echo-dot.jpg&quot; alt=&quot;echo dot&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Since I’m working on some projects in the company with Alexa, I got a echo dot.&lt;/p&gt;
 
 &lt;p&gt;My idea is to review the possibilities that this platform can provide, and now with more reason as it was announced that &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/843d8579-18a3-4344-8c85-4ae36c400eaa/alexa-skills-kit-and-alexa-voice-service-expand-to-italy-and-spain&quot; target=&quot;_blank&quot;&gt;support for Spanish will come at the end of this year&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Another thing I’m reviewing is related to the &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/3a8f27f3-d724-4e0b-bc72-0dcddd0b2eab/announcing-an-easier-way-to-build-alexa-skills-using-python&quot; target=&quot;_blank&quot;&gt;Python SDK&lt;/a&gt;, which was recently released in beta.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="echo" /><summary type="html"></summary></entry><entry><title type="html">A Cloud Guru Member</title><link href="https://lgallardo.com/2018/07/15/2018-07-15-acloudguru-member/" rel="alternate" type="text/html" title="A Cloud Guru Member" /><published>2018-07-15T00:00:00+00:00</published><updated>2018-07-15T00:00:00+00:00</updated><id>https://lgallardo.com/2018/07/15/acloud-guru-member</id><content type="html" xml:base="https://lgallardo.com/2018/07/15/2018-07-15-acloudguru-member/">&lt;center&gt;&lt;img src=&quot;/images/acloudguru-member.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;585&quot; height=&quot;807&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;Another thing I’m reviewing is related to the &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/3a8f27f3-d724-4e0b-bc72-0dcddd0b2eab/announcing-an-easier-way-to-build-alexa-skills-using-python&quot; target=&quot;_blank&quot;&gt;Python SDK&lt;/a&gt;, which was recently released in beta.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="echo" /><summary type="html"></summary></entry><entry><title type="html">A Cloud Guru Member</title><link href="https://lgallardo.com/2018/07/15/2018-07-15-acloudguru-member/" rel="alternate" type="text/html" title="A Cloud Guru Member" /><published>2018-07-14T19:00:00-05:00</published><updated>2018-07-14T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/15/acloud-guru-member</id><content type="html" xml:base="https://lgallardo.com/2018/07/15/2018-07-15-acloudguru-member/">&lt;center&gt;&lt;img src=&quot;/images/acloudguru-member.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;585&quot; height=&quot;807&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;I received my swag: t-shirt and sticker pack from A Cloud Guru this week. How I got these items? I became a member and now I have access to all courses and materias, and can enjoy these gifts :)&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://acloud.guru/membership&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - Become a member&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Developer - Associate</title><link href="https://lgallardo.com/2018/07/13/2018-07-13-aws-certified-developer-associate/" rel="alternate" type="text/html" title="AWS Certified Developer - Associate" /><published>2018-07-13T00:00:00+00:00</published><updated>2018-07-13T00:00:00+00:00</updated><id>https://lgallardo.com/2018/07/13/aws-certified-developer-associate</id><content type="html" xml:base="https://lgallardo.com/2018/07/13/2018-07-13-aws-certified-developer-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Developer_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://acloud.guru/membership&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - Become a member&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Developer - Associate</title><link href="https://lgallardo.com/2018/07/13/2018-07-13-aws-certified-developer-associate/" rel="alternate" type="text/html" title="AWS Certified Developer - Associate" /><published>2018-07-12T19:00:00-05:00</published><updated>2018-07-12T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/13/aws-certified-developer-associate</id><content type="html" xml:base="https://lgallardo.com/2018/07/13/2018-07-13-aws-certified-developer-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Developer_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Last month I approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified  Developer- Associate&lt;/code&gt; certification  and want to leave my comments regarding the exam:&lt;/p&gt;
@@ -259,7 +319,7 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified SysOps Administrator - Associate</title><link href="https://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/" rel="alternate" type="text/html" title="AWS Certified SysOps Administrator - Associate" /><published>2018-05-25T00:00:00+00:00</published><updated>2018-05-25T00:00:00+00:00</updated><id>https://lgallardo.com/2018/05/25/aws-certified-sysops-administrator-associate</id><content type="html" xml:base="https://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_SysOps_Administrator_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified SysOps Administrator - Associate</title><link href="https://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/" rel="alternate" type="text/html" title="AWS Certified SysOps Administrator - Associate" /><published>2018-05-24T19:00:00-05:00</published><updated>2018-05-24T19:00:00-05:00</updated><id>https://lgallardo.com/2018/05/25/aws-certified-sysops-administrator-associate</id><content type="html" xml:base="https://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_SysOps_Administrator_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;I just approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified SysOps Administrator - Associate&lt;/code&gt; certification and want to leave my comments regarding the exam:&lt;/p&gt;
@@ -293,7 +353,7 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Using ASG Lifecycle hooks to trigger Lambda functions</title><link href="https://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/" rel="alternate" type="text/html" title="Using ASG Lifecycle hooks to trigger Lambda functions" /><published>2018-05-04T00:00:55+00:00</published><updated>2018-05-04T00:00:55+00:00</updated><id>https://lgallardo.com/2018/05/04/lifecycle-hooks-lambda</id><content type="html" xml:base="https://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/">&lt;center&gt;&lt;img alt=&quot;AWS ASG Lifecycle hooks&quot; src=&quot;/images/lifecycle_hooks.jpg&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Using ASG Lifecycle hooks to trigger Lambda functions</title><link href="https://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/" rel="alternate" type="text/html" title="Using ASG Lifecycle hooks to trigger Lambda functions" /><published>2018-05-03T19:00:55-05:00</published><updated>2018-05-03T19:00:55-05:00</updated><id>https://lgallardo.com/2018/05/04/lifecycle-hooks-lambda</id><content type="html" xml:base="https://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/">&lt;center&gt;&lt;img alt=&quot;AWS ASG Lifecycle hooks&quot; src=&quot;/images/lifecycle_hooks.jpg&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently I needed to execute some actions after a EC2 instance was created by an Auto Scaling Group. At first a thought in using the userdata or cloud-init but I needed to create alarms in CloudWatch based on the instance itself, and those alarms must be created dynamically as I used to do with Terraform.&lt;/p&gt;
@@ -413,62 +473,4 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;https://github.com/thigley986/Lambda-AWS-Automated-Alarm-Creation&quot; target=&quot;_blank&quot;&gt;Lambda-AWS-Automated-Alarm-Creation&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">How to get the latest Ubuntu AMI</title><link href="https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="How to get the latest Ubuntu AMI" /><published>2018-01-25T00:00:10+00:00</published><updated>2018-01-25T00:00:10+00:00</updated><id>https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:&lt;/p&gt;
-
-&lt;h1 id=&quot;using-the-aws-cli&quot;&gt;Using the AWS CLI&lt;/h1&gt;
-
-&lt;p&gt;My first approach was to use the the AWS CLI as shown below:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws ec2 describe-images \
---owners 099720109477 \
---filters Name=root-device-type,Values=ebs \
-Name=architecture,Values=x86_64 \
-Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' \
-Name=ena-support,Values=true \
---query 'sort_by(Images, &amp;amp;Name)[-1].[ImageId,CreationDate]' \
---output text --region us-east-1
-
-ami-f0f8d695	2017-11-21T15:21:29.000Z
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In this example, 099720109477 stands for Ubuntu’s owner ID.&lt;/p&gt;
-
-&lt;h1 id=&quot;ubuntu-amazon-ec2-ami-locator&quot;&gt;Ubuntu Amazon EC2 AMI Locator&lt;/h1&gt;
-
-&lt;p&gt;I also ran into the &lt;a href=&quot;https://cloud-images.ubuntu.com/&quot; target=&quot;_blank&quot;&gt;Amazon EC2 AMI Locator&lt;/a&gt; which can be a useful resource, specially if you dont have access to the AWS CLI.&lt;/p&gt;
-
-&lt;h1 id=&quot;packer-source-ami-filter&quot;&gt;Packer source ami filter:&lt;/h1&gt;
-
-&lt;p&gt;With Packer you can use the &lt;a href=&quot;https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter&quot; target=&quot;_blank&quot;&gt;&lt;em&gt;source_ami_filter&lt;/em&gt; &lt;/a&gt; passing similar parameters like in the AWS CLI:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
-  &quot;builders&quot;: [
-    {
-      &quot;type&quot;: &quot;amazon-ebs&quot;,
-      &quot;region&quot;: &quot;us-east-1&quot;,
-      &quot;instance_type&quot;: &quot;c3.xlarge&quot;,
-      &quot;ena_support&quot;: true,
-      &quot;source_ami_filter&quot;: {
-        &quot;filters&quot;: {
-        &quot;virtualization-type&quot;: &quot;hvm&quot;,
-        &quot;name&quot;: &quot;ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*&quot;,
-        &quot;root-device-type&quot;: &quot;ebs&quot;
-        },
-        &quot;owners&quot;: [&quot;099720109477&quot;],
-        &quot;most_recent&quot;: true
-      },
-    }
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;References:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/vancluever/7676b4dafa97826ef0e9&quot; target=&quot;_blank&quot;&gt;Find the most recent Ubuntu AMI using aws-cli&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cloud-images.ubuntu.com/&quot; target=&quot;_blank&quot;&gt;Amazon EC2 AMI Locator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter&quot;&gt;source_ami_filter&lt;/a&gt; {:target=”_blank”}&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Packer" /><category term="Ubuntu" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
