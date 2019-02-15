@@ -1,0 +1,791 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Setting OpenVPN on OpenWrt - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title" content="Setting OpenVPN on OpenWrt">
+
+
+  <link rel="canonical" href="http://0.0.0.0:4000/2011/09/08/configurar-openvpn-en-openwrt/">
+  <meta property="og:url" content="http://0.0.0.0:4000/2011/09/08/configurar-openvpn-en-openwrt/">
+
+
+
+  <meta property="og:description" content="">
+
+
+
+  <meta name="twitter:site" content="@lgallard">
+  <meta name="twitter:title" content="Setting OpenVPN on OpenWrt">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:url" content="http://0.0.0.0:4000/2011/09/08/configurar-openvpn-en-openwrt/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+    <meta name="twitter:creator" content="@Luis Gallardo">
+  
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2011-09-08T11:19:33-05:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "http://0.0.0.0:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://0.0.0.0:4000/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://0.0.0.0:4000/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2011/09/08/configurar-openvpn-en-openwrt/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="http://0.0.0.0:4000/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="http://0.0.0.0:4000/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://0.0.0.0:4000/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2011/09/08/configurar-openvpn-en-openwrt/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="http://0.0.0.0:4000/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Buenos Aires, Argentina</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Setting OpenVPN on OpenWrt">
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="September 08, 2011">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Setting OpenVPN on OpenWrt
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <center><img title="OpenVPN on OpenWrt" alt="" src="/images/6124989098_eec49b6b3d.jpg" width="450" height="342" /></center>
+<p><br /></p>
+
+<p>Due to my home router is connected 24×7 it makes it the ideal place to install a VPN server. In my case I had installed OpenWrt on my router TP-LINK TL-WR1043ND (to install OpenWrt on this router you can read the article about <a href="http://lgallardo.com/2011/05/22/instalacion-de-openwrt-en-tp-link-tl-wr1043nd/" target="_blank">Installing OpenWrt on router TP-LINK TL-WR1043ND</a>). This post it’s general enough and explains how to install OpenVP on OpenWrt, no matter what model router with OpenWrt you have.</p>
+
+<h1 id="installing-openvpn-on-openwrt">Installing OpenVPN on OpenWrt</h1>
+
+<p>On the router just install OpenVPN package:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opkg install openvpn
+</code></pre></div></div>
+
+<h1 id="certificates-pc">Certificates (PC)</h1>
+
+<p>Client and server certificates will be done on a PC with Linux, on Debian to be exact. The idea is to avoid installing software in the limited router’s rom.To get what will need install the following package:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install openvpn
+</code></pre></div></div>
+
+<ul>
+  <li>Make the woring directory and the base files to use:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /etc/openvpn/easy-rsa/
+cp <span class="nt">-r</span> /usr/share/doc/openvpn/examples/easy-rsa/2.0/<span class="k">*</span> /etc/openvpn/easy-rsa/
+</code></pre></div></div>
+
+<ul>
+  <li>Edit file  <em>/etc/openvpn/easy-rsa/vars</em>, which lets you make a unique certificate using the values provided:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">KEY_COUNTRY</span><span class="o">=</span><span class="s2">"VE"</span> 
+<span class="nb">export </span><span class="nv">KEY_PROVINCE</span><span class="o">=</span><span class="s2">"DC"</span> 
+<span class="nb">export </span><span class="nv">KEY_CITY</span><span class="o">=</span><span class="s2">"Caracas"</span> 
+<span class="nb">export </span><span class="nv">KEY_ORG</span><span class="o">=</span><span class="s2">"Mi organización"</span> 
+<span class="nb">export </span><span class="nv">KEY_EMAIL</span><span class="o">=</span><span class="s2">"micorre@dominio.org"</span>
+</code></pre></div></div>
+<ul>
+  <li>Go to the working directory and load the file you just edited:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/openvpn/easy-rsa/
+<span class="nb">source </span>vars
+</code></pre></div></div>
+
+<p>Now lets create the certificates for the server and clients.</p>
+
+<h2 id="certificates-for-the-server">Certificates for the server</h2>
+
+<p>In order to make the certificates for the server you must do the following steps:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./clean-all
+./build-dh
+./pkitool <span class="nt">--initca</span>
+./pkitool <span class="nt">--server</span> server
+<span class="nb">cd </span>keys
+openvpn <span class="nt">--genkey</span> <span class="nt">--secret</span> ta.key
+</code></pre></div></div>
+
+<h2 id="certificates-for-the-clients">Certificates for the clients</h2>
+
+<p>In order to generate the certificate for the client just do this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/openvpn/easy-rsa/
+<span class="nb">source </span>vars
+./pkitool hostname
+</code></pre></div></div>
+
+<p>Here <em>hostname</em> is the name of the host where the certificate will be installed (random part).</p>
+
+<h1 id="settings-the-vpn">Settings the VPN</h1>
+
+<p>Now let’s see how to set the VPN, both in the server and client side.</p>
+
+<h2 id="setting-the-server-router">Setting the server (router)</h2>
+
+<ul>
+  <li>Copy the generated certificates for the server to router:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp server.crt server.key ca.crt dh1024.pem ta.key root@192.168.1.1:/etc/openvpn/
+</code></pre></div></div>
+
+<p style="padding-left: 30px;">
+  Here 192.168.1.1 is the router&#8217;s IP address for this example.
+</p>
+
+<ul>
+  <li>Although you can be tempted to use a config file borrow form other OpenVPN server, it’s better to use the one provided by OpenWrt and just adapt it to your needs. So, edit file <em>/etc/config/openvpn</em> with the followin values (I just put the not commented lines to save space).</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config openvpn sample_server
+    option <span class="nb">enable </span>1
+    option port 1194
+    option proto udp
+    option dev tun
+    option ca /etc/openvpn/ca.crt
+    option cert /etc/openvpn/server.crt
+    option key /etc/openvpn/server.key
+    option dh /etc/openvpn/dh1024.pem
+    option server <span class="s2">"10.8.0.0 255.255.255.0"</span>
+    option ifconfig_pool_persist /tmp/ipp.txt
+    option client_to_client 1
+    option keepalive <span class="s2">"10 120"</span>
+    option tls_auth <span class="s2">"/etc/openvpn/ta.key 0"</span>
+    option comp_lzo 1
+    option persist_key 1
+    option persist_tun 1
+    option status /tmp/openvpn-status.log
+    option verb 3
+</code></pre></div></div>
+
+<h2 id="setting-the-clients-pcs">Setting the clients (PCs)</h2>
+
+<ul>
+  <li>Copy the certificates and keys generated for each client, for example for the PC <em>hostname</em>, as explained next:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/openvpn/easy-rsa/keys/ca.crt
+/etc/openvpn/easy-rsa/keys/hostname.crt
+/etc/openvpn/easy-rsa/keys/hostname.key
+/etc/openvpn/easy-rsa/keys/ta.key
+</code></pre></div></div>
+
+<ul>
+  <li>If you haven’t install OpenVPN on the clients, you can do it::</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install openvpn
+</code></pre></div></div>
+
+<ul>
+  <li>Copy the example file for the client’ s configuration:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/
+</code></pre></div></div>
+
+<ul>
+  <li>Edit the file with the following values:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client 
+dev tun 
+proto udp 
+remote 192.168.1.30 1194
+resolv-retry infinite 
+nobind 
+persist-key 
+persist-tun 
+ca /mnt/datos/OpenVpn/easy-rsa/keys/ca.crt 
+cert /mnt/datos/OpenVpn/easy-rsa/keys/hostname.crt 
+key /mnt/datos/OpenVpn/easy-rsa/keys/hostname.key 
+ns-cert-type server 
+tls-auth /mnt/datos/OpenVpn/easy-rsa/keys/ta.key 1 
+comp-lzo 
+verb 3
+</code></pre></div></div>
+
+<p>Here the <em>remote</em> directive has a fixed IP, but you can set a dynamic domain name on <em>dyndns</em> or <em>no-ip</em> instead of a private address.</p>
+
+<h1 id="enabling-the-service">Enabling the service</h1>
+
+<p>Now you must enable the service in both sides, in the server (OpenWrt) and in the clients (PCs). For each of them:</p>
+
+<h2 id="enable-the-service-in-the-server-router">Enable the service in the server (router)</h2>
+
+<p>Run the following in OpenWrt:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/init.d/openvpn <span class="nb">enable</span>
+/etc/init.d/openvpn start
+</code></pre></div></div>
+
+<h2 id="enabling-the-service-in-the-clients-pcs">Enabling the service in the clients (PCs)</h2>
+
+<p>Now you must enable the OpenVPN service in every client. In general terms it will depen on the distro you will be using. In Debian you can enable the service as follow:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update-rc.d openvpn defaults
+/etc/init.d/openvpn start
+</code></pre></div></div>
+
+<p>After all this your server will have a <em>tun</em> interface with the address 10.8.0,1 and clients will have an interface with a IP address like 10.8.0.x.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://help.ubuntu.com/12.04/serverguide/openvpn.html" target="_blank">Ubuntu’s OpenVPN documentation</a></li>
+  <li><a href="http://wiki.openwrt.org/doc/howto/vpn.openvpn" target="_blank">OpenWrt’s Easy OpenVPN server setup guide</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://0.0.0.0:4000/tags/openwrt" class="page__taxonomy-item" rel="tag">OpenWrt</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="http://0.0.0.0:4000/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2011-09-08T11:19:33-05:00">September 08, 2011</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Setting+OpenVPN+on+OpenWrt%20http%3A%2F%2F0.0.0.0%3A4000%2F2011%2F09%2F08%2Fconfigurar-openvpn-en-openwrt%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2F2011%2F09%2F08%2Fconfigurar-openvpn-en-openwrt%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=http%3A%2F%2F0.0.0.0%3A4000%2F2011%2F09%2F08%2Fconfigurar-openvpn-en-openwrt%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2F2011%2F09%2F08%2Fconfigurar-openvpn-en-openwrt%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="http://0.0.0.0:4000/2010/01/14/compilar-el-kernel-a-lo-tradicional/" class="pagination--pager" title="Kernel compiling the old-fashion way
+">Previous</a>
+    
+    
+      <a href="http://0.0.0.0:4000/2011/11/18/logical-volume-manager-lvm/" class="pagination--pager" title="Logical Volume Manager (LVM)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://0.0.0.0:4000/2018/12/04/using-alexa-ask-from-lambda-layers" rel="permalink">Using Alexa ASK SDK from Lambda Layers
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://0.0.0.0:4000/2018/09/07/codepipeline-bitbucket" rel="permalink">AWS CodePipeline with Bitbucket
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://0.0.0.0:4000/2018/08/12/aws-certified-devops-engineer-professional" rel="permalink">AWS Certified DevOps Engineer - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="http://0.0.0.0:4000/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="permalink">Dynamic configuration blocks in Terraform
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="http://0.0.0.0:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="http://0.0.0.0:4000/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "http://0.0.0.0:4000/2011/09/08/configurar-openvpn-en-openwrt/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2011/09/08/configurar-openvpn-en-openwrt"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>

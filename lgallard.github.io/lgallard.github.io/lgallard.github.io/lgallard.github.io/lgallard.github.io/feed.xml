@@ -1,4 +1,359 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="http://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-05-10T17:18:09-03:00</updated><id>http://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Using ASG Lifecycle hooks to trigger Lambda functions</title><link href="http://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/" rel="alternate" type="text/html" title="Using ASG Lifecycle hooks to trigger Lambda functions" /><published>2018-05-03T21:00:55-03:00</published><updated>2018-05-03T21:00:55-03:00</updated><id>http://lgallardo.com/2018/05/04/lifecycle-hooks-lambda</id><content type="html" xml:base="http://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/">&lt;center&gt;&lt;img alt=&quot;AWS ASG Lifecycle hooks&quot; src=&quot;/images/lifecycle_hooks.jpg&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2018-12-04T06:50:22-06:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Using Alexa ASK SDK from Lambda Layers</title><link href="https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers" rel="alternate" type="text/html" title="Using Alexa ASK SDK from Lambda Layers" /><published>2018-12-03T18:00:00-06:00</published><updated>2018-12-03T18:00:00-06:00</updated><id>https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers</id><content type="html" xml:base="https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers">&lt;center&gt;&lt;img src=&quot;/images/alexa_lambda_layers.jpg&quot; alt=&quot;Alexa + lambda + Layers&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;lambda-layers&quot;&gt;Lambda Layers&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html&quot; target=&quot;_blank&quot;&gt;Lambda Layers&lt;/a&gt; was recently incorporated into AWS, which basically allows you to share libraries and codes between Lambda functions. This makes it possible to speed up development since now it is not necessary to pack all libraries with the Lambda function, as we used to do with Alexa’s ASK, but now these libraries can be uploaded independently in Lambda Layers and used directly in our functions.&lt;/p&gt;
+
+&lt;h1 id=&quot;alexas-ask-sdk&quot;&gt;Alexa’s ASK SDK&lt;/h1&gt;
+&lt;p&gt;To prepare Alexa’s ASK for Lambda Layers we can follow the following steps:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;virtualenv python
+source python/bin/activate
+pip install ask-sdk
+zip -r ask-sdk.zip python/lib/python3.6/site-packages/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you can use the Alexa’s ASK SDK from your lambda functions without having to upload it in each deployment.&lt;/p&gt;
+
+&lt;h1 id=&quot;uploading-the-ask-sdk-to-lambda-layers&quot;&gt;Uploading the ASK SDK to Lambda Layers&lt;/h1&gt;
+
+&lt;p&gt;The first thing we must do is to create the Lambda Layers from the console:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/create_layer.jpg&quot; alt=&quot;Create Layer&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then you must fill out the form and select the .zip that you created to upload it, and finally you must indicate the runtime with which it is compatible.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/ask_sdk_lambda_layer.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once created, we can see the description and the version:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/ask_sdk_lambda_layer2.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;how-to-include-the-ask-sdk-from-lambda-layers&quot;&gt;How to include the ASK SDK from Lambda Layers?&lt;/h1&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Got to your Lambda function and right under yout function name you can click on &lt;strong&gt;&lt;em&gt;Layers&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;From the below section &lt;strong&gt;&lt;em&gt;Referenced layers&lt;/em&gt;&lt;/strong&gt; click on the &lt;strong&gt;&lt;em&gt;Add a layer&lt;/em&gt;&lt;/strong&gt; button&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/add_layer1.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Select the &lt;strong&gt;&lt;em&gt;ask-sdk&lt;/em&gt;&lt;/strong&gt; layer from the drop-down menu, and click on &lt;strong&gt;&lt;em&gt;Add&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/add_layer2.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see below, the Lambda Layer with the Alexa’s ASK SDK can now be used in this Lambda function:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/add_layer3.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can select this same Layer for other Lambda functions that use the same ASK SDK and runtime without having to be uploading it in each deployment.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="Lambda" /><category term="Layers" /><summary type="html"></summary></entry><entry><title type="html">AWS CodePipeline with Bitbucket</title><link href="https://lgallardo.com/2018/09/07/codepipeline-bitbucket" rel="alternate" type="text/html" title="AWS CodePipeline with Bitbucket" /><published>2018-09-06T19:00:00-05:00</published><updated>2018-09-06T19:00:00-05:00</updated><id>https://lgallardo.com/2018/09/07/codepipeline-bitbucket</id><content type="html" xml:base="https://lgallardo.com/2018/09/07/codepipeline-bitbucket">&lt;center&gt;&lt;img src=&quot;/images/CodePipeline_bitbucket.jpg&quot; alt=&quot;AWS CodePipeline and Bitbucket&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;At work I needed to deploy an application using AWS CodePipeline but the repository where the code is located is in Bitbucket. This was an inconvenient task because AWS Pipeline does not support Bitbucket, as does AWS Codebuild.&lt;/p&gt;
+
+&lt;p&gt;If you do some research on the internet, you can find alternative solutions to this problem, such as having a webhook in the repository that calls a lambda function and generates a file in a bucket and this is the trigger for AWS CodePipeline [1]. Another possible solution is to use Bitbucket Pipelines to create the object to be placed in the bucket, or even mirror the contents of the Bitbucket repository in AWS CodeCommit.&lt;/p&gt;
+
+&lt;p&gt;Because these workarounds didn’t convince me, I was thinking about a solution where everything was left on AWS and that I didn’t have to configure repositories, and the key was the support that if AWS CodeBuild has Bitbucket. So instead of using the Bitbucket’s pipelines to generate the source of AWS CodePipeline, with AWS CodeBuild I generate a zip file with the source code of the application which is then used as input.&lt;/p&gt;
+
+&lt;p&gt;In particular this application is a Docker image that is generated with AWS CodeBuild and then saved in AWS ECR. This CodeBuild generates as output artifact the definition of the ECS task, which is taken as input in the ECS deployment face, updating the service and therefore the application:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/aws_codepipeline_succeded.jpg&quot; alt=&quot;AWS Codebuild trigger&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;not-everything-is-perfect&quot;&gt;Not everything is perfect.&lt;/h1&gt;
+
+&lt;p&gt;I list a few things to consider with this solution:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;For CodeBuild to access private Bitbucket repositories, you must authenticate with a user from the AWS web console. If you are considering how to create this release, consider using a service account that has read-only access to the repository.&lt;/li&gt;
+  &lt;li&gt;The AWS CodeBuild project trigger will not run automatically when you update the repository, so you need to start the project. If you want this to be automatic or as close as possible, you can set up a scheduled task in your project:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/aws_codebuild_trigger.jpg&quot; alt=&quot;AWS Codebuild trigger&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;[1] &lt;a href=&quot;https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/&quot; target=&quot;_blank&quot;&gt;Integrating Git with AWS CodePipeline&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Codebuild" /><category term="CodePipeline" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-11T19:00:00-05:00</published><updated>2018-08-11T19:00:00-05:00</updated><id>https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I recently approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified DevOps Engineer - Professional&lt;/code&gt; certification and wanted to leave my comments on the exam:&lt;/p&gt;
+
+&lt;p&gt;It was 80 questions to answer in 170 minutes. This exam is the most difficult because you need to know about the previous contents of Developer and SysOps certifications. You generally need to know AWS technology and when to use it from the DevOps perspective for deploying applications on AWS. In particular, the key topics here are CloudFormation, OpsWorks, Elastic Beanstalk and Auto Scaling Groups.&lt;/p&gt;
+
+&lt;h1 id=&quot;cloudformation&quot;&gt;CloudFormation&lt;/h1&gt;
+&lt;p&gt;At a minimum, you should know how a CloudFormation template is composed, how to update a stack, how to prevent it from being updated, difference between WaitCondition and Creation Policy, how to rolling update ASGs, resource types.&lt;/p&gt;
+
+&lt;h1 id=&quot;opsworks&quot;&gt;OpsWorks&lt;/h1&gt;
+&lt;p&gt;Here you should be clear about the concepts of Stack, Layer, and Application. Knowing what Lyfecyles events are and how or when they run. It is of the utmost importance to know the “deployment” command and to note that it is not only useful for deploying applications. It’s also important to remember that with OpsWorks you can add existing infrastructure to stacks (which you can’t do in CloudFormation or Elastic Beanstalk) and that you can only associate one RDS instance per stack.&lt;/p&gt;
+
+&lt;h1 id=&quot;elastic-beanstalk&quot;&gt;Elastic Beanstalk&lt;/h1&gt;
+&lt;p&gt;Understand the use cases of the service, remember that you can use Docker in EB, so you can practically run anything in containers. Learn how to create settings from the .ebextenstions, as well as how to save settings and precedence between different ways to do so. Important that you know the types of deployment that you can perform with EB, and in particular that it is one of those that allows you to make Blue/Green deployments integrated into the service, but that on the contrary you must use Route 53 if you want to make an A/B deployment.&lt;/p&gt;
+
+&lt;h1 id=&quot;auto-scaling-groups&quot;&gt;Auto Scaling Groups&lt;/h1&gt;
+&lt;p&gt;Regarding Auto Scaling Groups you should know the Termination policies, and which ones are useful for deploying applications. Studies Lifecycle Hooks and in particular all states through which an instance passes, and use cases when it is in &lt;code class=&quot;highlighter-rouge&quot;&gt;pending: wait&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;terminating: wait&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-remaining&quot;&gt;The remaining&lt;/h1&gt;
+&lt;p&gt;The rest of the exam focuses on evaluating your knowledge of deployment types on AWS, as well as topics for Developer and SysOps certifications, such as DynamoDB or CloudWatch.&lt;/p&gt;
+
+&lt;h1 id=&quot;my-tips-for-saving-time-on-this-exam-are&quot;&gt;My tips for saving time on this exam are:&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Answer the easy question quick, don’t stay long thing whether is right answer because probably it is.&lt;/li&gt;
+  &lt;li&gt;Only mark for review those question where you really have a doubt, so you can check them later and if there’s time left be able to review them all.&lt;/li&gt;
+  &lt;li&gt;Think it is a Amazon certification and in that matter always wonder what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Take into account that it’s a Amazon certification and in that matter always think what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Discard things that can be done at the OS level if an Amazon service provides it, and only consider it when there is no other option.&lt;/li&gt;
+  &lt;li&gt;Whenever you read scalable think of SQS / DynamoDB, cost-saving = S3 / S3 RRS, and so on.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are interested in this certification and I recommend you some links:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/aws-certified-devops-engineer-professional&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Documentación de AWS&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Dynamic configuration blocks in Terraform</title><link href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Dynamic configuration blocks in Terraform" /><published>2018-07-29T19:00:00-05:00</published><updated>2018-07-29T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the things I had to resolve was the fact that in Terraform there are configuration blocks that, depending on the options may have different parameters or may not even accept the same parameters.&lt;/p&gt;
+
+&lt;p&gt;To do that, and by following a code from a &lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;community module&lt;/a&gt;, I managed to overcome this problem using &lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;Terraform’s locals values&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Taking an example of this we have the &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts&lt;/code&gt; block of the &lt;a href=&quot;https://www.terraform.io/docs/providers/aws/r/codebuild_project.html&quot;&gt;Terraform aws_codebuild_project resource&lt;/a&gt;, which may have some parameters if the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt;. For example, if you define a block as follows, it will not be easy to parameterize it:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
+
+[...]
+
+  artifacts{
+      type           = &quot;${var.codebuild_artifacts_type}&quot;
+      location       = &quot;${var.codebuild_artifacts_location}&quot;
+      name           = &quot;${var.codebuild_artifacts_name}&quot;
+      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
+      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
+      path           = &quot;${var.codebuild_artifacts_path}&quot;
+
+  }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If we try to place the &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt;, for example, it will fail because even if “empty” values are placed for the other parameters, these arguments are not supported. To resolve this you have to create a block definition with &lt;code class=&quot;highlighter-rouge&quot;&gt;locals&lt;/code&gt; according to the type provided by &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; and use this as an index:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
+
+[...]
+
+  artifacts = [&quot;${local.codebuild_artifacts}&quot;]
+
+}
+
+locals {
+  codebuild_artifacts_def = {
+    &quot;S3&quot; = [{
+      type           = &quot;${var.codebuild_artifacts_type}&quot;
+      location       = &quot;${var.codebuild_artifacts_location}&quot;
+      name           = &quot;${var.codebuild_artifacts_name}&quot;
+      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
+      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
+      path           = &quot;${var.codebuild_artifacts_path}&quot;
+    }]
+
+    &quot;CODEPIPELINE&quot; = [{
+      type           = &quot;${var.codebuild_artifacts_type}&quot;
+      location       = &quot;${var.codebuild_artifacts_location}&quot;
+      name           = &quot;${var.codebuild_artifacts_name}&quot;
+      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
+      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
+      path           = &quot;${var.codebuild_artifacts_path}&quot;
+    }]
+
+    &quot;NO_ARTIFACTS&quot; = [{
+      type = &quot;${var.codebuild_artifacts_type}&quot;
+    }]
+  }
+
+  # Retuned map
+  codebuild_artifacts = &quot;${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This creates a different block depending on the type defined in the variable &lt;code class=&quot;highlighter-rouge&quot;&gt;codebuild_artifacts_type&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;locals values de Terraform&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuild community module&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Getting AWS Logs from the CLI</title><link href="https://lgallardo.com/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Getting AWS Logs from the CLI" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="https://lgallardo.com/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the company’s developers asked me if there was any way to view the Lambda function logs from the command line, so I wouldn’t have to go into the AWS console and see them in CloudWatch Logs. After some research I got a project in Github called &lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;awslogs&lt;/a&gt; that does just this. Here’s how to install and use it from a Python virtual environment:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;virualenv awslogs
+source awslogs/bin/activate
+
+pip install awslogs
+pip install awscli
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The first thing we need to know are the groups where the logs of our Lambda functions are defined, for this we use the AWS CLI:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+aws logs describe-log-grups --region us-east-1
+{
+    &quot;logGroups&quot;: [
+        {
+            &quot;arn&quot;: &quot;arn:aws:logs:us-east-1:123456789123:log-group:/aws/lambda/get_transcription:*&quot;, 
+            &quot;creationTime&quot;: 1531834572841, 
+            &quot;metricFilterCount&quot;: 0, 
+            &quot;logGroupName&quot;: &quot;/aws/lambda/get_transcription&quot;, 
+            &quot;storedBytes&quot;: 0
+        },
+        {
+            &quot;arn&quot;: &quot;arn:aws:logs:us-east-1:264349563434:log-group:/aws/lambda/validate_time:*&quot;, 
+            &quot;creationTime&quot;: 1532118107128, 
+            &quot;metricFilterCount&quot;: 0, 
+            &quot;logGroupName&quot;: &quot;/aws/lambda/validate_time&quot;, 
+            &quot;storedBytes&quot;: 0
+        }
+    ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now to view the logs of, for example, the function &lt;code class=&quot;highlighter-rouge&quot;&gt;get_transcription&lt;/code&gt; from the command line we can execute:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;awslogs get  /aws/lambda/get_transcription --aws-region us-east-1  --watch  | cut -d &quot; &quot; -f 3-20
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And the result would be something like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;START RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1 Version: $LATEST
+[DEBUG]	2018-07-23T15:39:50.422Z	a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Searching id: e321-eaefe4311ca1
+tuple indices must be integers or slices, not str: TypeError
+recent call last):
+File &quot;/var/task/app/services/get_transcription.py&quot;, line 100, in lambda_handler
+  date_text = field['transcription']
+indices must be integers or slices, not str
+END RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1
+REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Billed Duration: 300 ms 	Memory Size: 128 MB	Max Memory Used: 33 MB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;jorgebastida/awslogs&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/apeckham/9bcb464096997c1b0d41&quot; target=&quot;_blank&quot;&gt;View aws lambda logs on the command line&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">echo dot</title><link href="https://lgallardo.com/2018/07/20/2018-07-20-echo-dot/" rel="alternate" type="text/html" title="echo dot" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/20/echo-dot</id><content type="html" xml:base="https://lgallardo.com/2018/07/20/2018-07-20-echo-dot/">&lt;center&gt;&lt;img src=&quot;/images/echo-dot.jpg&quot; alt=&quot;echo dot&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Since I’m working on some projects in the company with Alexa, I got a echo dot.&lt;/p&gt;
+
+&lt;p&gt;My idea is to review the possibilities that this platform can provide, and now with more reason as it was announced that &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/843d8579-18a3-4344-8c85-4ae36c400eaa/alexa-skills-kit-and-alexa-voice-service-expand-to-italy-and-spain&quot; target=&quot;_blank&quot;&gt;support for Spanish will come at the end of this year&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Another thing I’m reviewing is related to the &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/3a8f27f3-d724-4e0b-bc72-0dcddd0b2eab/announcing-an-easier-way-to-build-alexa-skills-using-python&quot; target=&quot;_blank&quot;&gt;Python SDK&lt;/a&gt;, which was recently released in beta.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="echo" /><summary type="html"></summary></entry><entry><title type="html">A Cloud Guru Member</title><link href="https://lgallardo.com/2018/07/15/2018-07-15-acloudguru-member/" rel="alternate" type="text/html" title="A Cloud Guru Member" /><published>2018-07-14T19:00:00-05:00</published><updated>2018-07-14T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/15/acloud-guru-member</id><content type="html" xml:base="https://lgallardo.com/2018/07/15/2018-07-15-acloudguru-member/">&lt;center&gt;&lt;img src=&quot;/images/acloudguru-member.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;585&quot; height=&quot;807&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I received my swag: t-shirt and sticker pack from A Cloud Guru this week. How I got these items? I became a member and now I have access to all courses and materias, and can enjoy these gifts :)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://acloud.guru/membership&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - Become a member&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Developer - Associate</title><link href="https://lgallardo.com/2018/07/13/2018-07-13-aws-certified-developer-associate/" rel="alternate" type="text/html" title="AWS Certified Developer - Associate" /><published>2018-07-12T19:00:00-05:00</published><updated>2018-07-12T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/13/aws-certified-developer-associate</id><content type="html" xml:base="https://lgallardo.com/2018/07/13/2018-07-13-aws-certified-developer-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Developer_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Last month I approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified  Developer- Associate&lt;/code&gt; certification  and want to leave my comments regarding the exam:&lt;/p&gt;
+
+&lt;p&gt;It had 55 questions to be answered in 80 minutes. This is the easiest exam of all, but you must study and know the AWS technologies and when to use them from a developer perspective. The exam has two big topics:  DynamoDB and SQS.&lt;/p&gt;
+
+&lt;h1 id=&quot;dynamodb&quot;&gt;DynamoDB&lt;/h1&gt;
+&lt;p&gt;Be ready to calculate read and write throughput capacity without blinking an eye. Know the service’s limits, for instance how many indexes are allow per table, number of tables per region, etc. It’s important to know the difference between Scan and Query, LSI and GSI, GetItem and GetBatchItem, strong and eventually consistency, how to group the data to avoid bottlenecks, and the core concepts such as primary, hash and sort keys.&lt;/p&gt;
+
+&lt;h1 id=&quot;sqs&quot;&gt;SQS&lt;/h1&gt;
+&lt;p&gt;It’s important to know th difference between visibility and delay timeouts. Also know the min, max and default values for long polling, retention, visibility and delay.  Another key concept is short and long polling. Also study the API commands for changing the default values, for instance, to change the visibility timeout.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-remaining&quot;&gt;The remaining&lt;/h1&gt;
+
+&lt;p&gt;The exam has more general questions regarding the AWS basic concepts, such as CPS, NAT instances, NACK, SGs, ELBs, etc.&lt;/p&gt;
+
+&lt;h1 id=&quot;my-tips-for-saving-time-on-this-exam-are&quot;&gt;My tips for saving time on this exam are:&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Answer the easy question quick, don’t stay long thing whether is right answer because probably it is.&lt;/li&gt;
+  &lt;li&gt;Only mark for review those question where you really have a doubt, so you can check them later and if there’s time left be able to review them all.&lt;/li&gt;
+  &lt;li&gt;Think it is a Amazon certification and in that matter always wonder what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Take into account that it’s a Amazon certification and in that matter always think what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Discard things that can be done at the OS level if an Amazon service provides it, and only consider it when there is no other option.&lt;/li&gt;
+  &lt;li&gt;Whenever you read scalable think of SQS / DynamoDB, cost-saving = S3 / S3 RRS, and so on.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are interested in this certification and I recommend you some links:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/aws-certified-sysops-administrator-associate&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;AWS Documentation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified SysOps Administrator - Associate</title><link href="https://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/" rel="alternate" type="text/html" title="AWS Certified SysOps Administrator - Associate" /><published>2018-05-24T19:00:00-05:00</published><updated>2018-05-24T19:00:00-05:00</updated><id>https://lgallardo.com/2018/05/25/aws-certified-sysops-administrator-associate</id><content type="html" xml:base="https://lgallardo.com/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_SysOps_Administrator_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I just approved the &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified SysOps Administrator - Associate&lt;/code&gt; certification and want to leave my comments regarding the exam:&lt;/p&gt;
+
+&lt;p&gt;It had 55 questions to be answered in 80 minutes. In general, the exam is not difficult if you know the AWS technologies and when to use them. Because it’s the new exam model I didn’t see any SQS question but there were others related to AWS Config, AWS Inspector and AWS System Manager, thus is a good idea to know what those services do.&lt;/p&gt;
+
+&lt;p&gt;My tips for saving time on this exam are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Answer the easy question quick, don’t stay long thing whether is right answer because probably it is.&lt;/li&gt;
+  &lt;li&gt;Only mark for review those question where you really have a doubt, so you can check them later and if there’s time left be able to review them all.&lt;/li&gt;
+  &lt;li&gt;Think it is a Amazon certification and in that matter always wonder what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Take into account that it’s a Amazon certification and in that matter always think what Amazon service to use.&lt;/li&gt;
+  &lt;li&gt;Discard things that can be done at the OS level if an Amazon service provides it, and only consider it when there is no other option.&lt;/li&gt;
+  &lt;li&gt;Whenever you read scalable think of SQS / DynamoDB, cost-saving = S3 / S3 RRS, and so on.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are interested in this certification and I recommend you some links:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/aws-certified-sysops-administrator-associate&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;AWS Documentation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Using ASG Lifecycle hooks to trigger Lambda functions</title><link href="https://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/" rel="alternate" type="text/html" title="Using ASG Lifecycle hooks to trigger Lambda functions" /><published>2018-05-03T19:00:55-05:00</published><updated>2018-05-03T19:00:55-05:00</updated><id>https://lgallardo.com/2018/05/04/lifecycle-hooks-lambda</id><content type="html" xml:base="https://lgallardo.com/2018/05/04/asg-lifcecyle-hooks/">&lt;center&gt;&lt;img alt=&quot;AWS ASG Lifecycle hooks&quot; src=&quot;/images/lifecycle_hooks.jpg&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently I needed to execute some actions after a EC2 instance was created by an Auto Scaling Group. At first a thought in using the userdata or cloud-init but I needed to create alarms in CloudWatch based on the instance itself, and those alarms must be created dynamically as I used to do with Terraform.&lt;/p&gt;
@@ -118,638 +473,4 @@
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;https://github.com/thigley986/Lambda-AWS-Automated-Alarm-Creation&quot; target=&quot;_blank&quot;&gt;Lambda-AWS-Automated-Alarm-Creation&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">How to install qBittorrent on LbreElEC</title><link href="http://lgallardo.com/2018/02/01/how-to-install-qbitorrent-on-libreelec/" rel="alternate" type="text/html" title="How to install qBittorrent on LbreElEC" /><published>2018-01-31T21:00:10-03:00</published><updated>2018-01-31T21:00:10-03:00</updated><id>http://lgallardo.com/2018/02/01/how-to-install-qbittorrent-on-libreelec</id><content type="html" xml:base="http://lgallardo.com/2018/02/01/how-to-install-qbitorrent-on-libreelec/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;If you need to install qBittorrent on your LibreELEC just follow theses steps:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;On LibreELEC install the Docker add&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Enable ssh on OpenELEC:&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Pull the qBittorrent’s Docker image&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Run the container&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;That’s it! Now you can connect to your qBittorrent using your Raspberry IP address and port, for example using qBitorrent Controller for Android.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="docker" /><category term="qbittorrent" /><category term="libreelec" /><summary type="html"></summary></entry><entry><title type="html">How to get the latest Ubuntu AMI</title><link href="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/" rel="alternate" type="text/html" title="How to get the latest Ubuntu AMI" /><published>2018-01-24T21:00:10-03:00</published><updated>2018-01-24T21:00:10-03:00</updated><id>http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami</id><content type="html" xml:base="http://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">&lt;center&gt;&lt;img src=&quot;/images/packer.jpg&quot; alt=&quot;Logo Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:&lt;/p&gt;
-
-&lt;h1 id=&quot;using-the-aws-cli&quot;&gt;Using the AWS CLI&lt;/h1&gt;
-
-&lt;p&gt;My first approach was to use the the AWS CLI as shown below:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws ec2 describe-images \
---owners 099720109477 \
---filters Name=root-device-type,Values=ebs \
-Name=architecture,Values=x86_64 \
-Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' \
-Name=ena-support,Values=true \
---query 'sort_by(Images, &amp;amp;Name)[-1].[ImageId,CreationDate]' \
---output text --region us-east-1
-
-ami-f0f8d695	2017-11-21T15:21:29.000Z
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In this example, 099720109477 stands for Ubuntu’s owner ID.&lt;/p&gt;
-
-&lt;h1 id=&quot;ubuntu-amazon-ec2-ami-locator&quot;&gt;Ubuntu Amazon EC2 AMI Locator&lt;/h1&gt;
-
-&lt;p&gt;I also ran into the &lt;a href=&quot;https://cloud-images.ubuntu.com/&quot; target=&quot;_blank&quot;&gt;Amazon EC2 AMI Locator&lt;/a&gt; which can be a useful resource, specially if you dont have access to the AWS CLI.&lt;/p&gt;
-
-&lt;h1 id=&quot;packer-source-ami-filter&quot;&gt;Packer source ami filter:&lt;/h1&gt;
-
-&lt;p&gt;With Packer you can use the &lt;a href=&quot;https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter&quot; target=&quot;_blank&quot;&gt;&lt;em&gt;source_ami_filter&lt;/em&gt; &lt;/a&gt; passing similar parameters like in the AWS CLI:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
-  &quot;builders&quot;: [
-    {
-      &quot;type&quot;: &quot;amazon-ebs&quot;,
-      &quot;region&quot;: &quot;us-east-1&quot;,
-      &quot;instance_type&quot;: &quot;c3.xlarge&quot;,
-      &quot;ena_support&quot;: true,
-      &quot;source_ami_filter&quot;: {
-        &quot;filters&quot;: {
-        &quot;virtualization-type&quot;: &quot;hvm&quot;,
-        &quot;name&quot;: &quot;ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*&quot;,
-        &quot;root-device-type&quot;: &quot;ebs&quot;
-        },
-        &quot;owners&quot;: [&quot;099720109477&quot;],
-        &quot;most_recent&quot;: true
-      },
-    }
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;References:&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/vancluever/7676b4dafa97826ef0e9&quot; target=&quot;_blank&quot;&gt;Find the most recent Ubuntu AMI using aws-cli&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cloud-images.ubuntu.com/&quot; target=&quot;_blank&quot;&gt;Amazon EC2 AMI Locator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter&quot;&gt;source_ami_filter&lt;/a&gt; {:target=”_blank”}&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Packer" /><category term="Ubuntu" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Solutions Architect - Professional</title><link href="http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional/" rel="alternate" type="text/html" title="AWS Certified Solutions Architect - Professional" /><published>2017-12-29T12:00:55-03:00</published><updated>2017-12-29T12:00:55-03:00</updated><id>http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional</id><content type="html" xml:base="http://lgallardo.com/2017/12/29/aws-certified-solutions-architect-professional/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Solutions_Architect_Professional_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recientemente aprobé la certificación AWS Certified Solutions Architect - Professional y quería dejar mis comentarios respecto al examen:&lt;/p&gt;
-
-&lt;p&gt;Fueron 77 preguntas para 2 horas 50 minutos. Muchas estaban relacionadas con CloudFormation, OpsWorks y BeanStalk. En particular cómo desplegar aplicaciones y cuándo usar una u otra tecnología. Otra porción considerable estaba enfocada a DirectConnect, y sus casos de usos. Otro tema recurrente fue DR, plantean varios escenarios con distintos RTO y RPO para que elijan el servicio AWS correcto o la arquitectura que más se adecua.&lt;/p&gt;
-
-&lt;p&gt;En general el examen es largo y tiene  enunciados extensos y con respuestas también extensas. Los comentarios que puedes conseguir en Internet es que el examen no tiene la mejor redacción del mundo y que en general para quienes el inglés no es su lengua nativa puede llegar a ser confuso, por lo que seguro te tocará leer varias preguntas mas de una vez.&lt;/p&gt;
-
-&lt;p&gt;Mis recomendaciones para ganar tiempo en este examen son:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Las preguntas fáciles respóndelas rápidamente, no te quedes mucho tiempo pensando en si es la respuesta correcta porque seguro lo es.&lt;/li&gt;
-  &lt;li&gt;Solo marcar las preguntas en las que realmente tienes dudas, así al momento de revisarlas puedes enfocarte en solo esas y si queda tiempo empezar a revisar el resto&lt;/li&gt;
-  &lt;li&gt;Piensen que es una certificación de Amazon, en ese sentido siempre preguntarse cuál servicio de Amazon corresponde.&lt;/li&gt;
-  &lt;li&gt;Descartar cosas que se pueden hacer a nivel de S.O. si un servicio de Amazon lo provee, y solo considerarlo cuando no hay mas opción.&lt;/li&gt;
-  &lt;li&gt;Siempre que lean scalable piensen en SQS/DynamoDB, cost-saving = S3/S3 RRS, y así.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Si estás interesado en esta certificación te recomiendo algunos enlaces:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Cursos en línea&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/course/aws-certified-solutions-architect-professional&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Documentación de AWS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Working with Terraform modules</title><link href="http://lgallardo.com/2017/11/19/terraform-modules/" rel="alternate" type="text/html" title="Working with Terraform modules" /><published>2017-11-18T21:00:10-03:00</published><updated>2017-11-18T21:00:10-03:00</updated><id>http://lgallardo.com/2017/11/19/working-with-terraform-modules</id><content type="html" xml:base="http://lgallardo.com/2017/11/19/terraform-modules/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform logo&quot; /&gt;&lt;/center&gt;
-
-&lt;p&gt;In this post you’ll see how reuse your Terraform code using modules to avoid writing the same code over and over. Also you will lear how to version your modules and how to use a specific version.&lt;/p&gt;
-
-&lt;h1 id=&quot;how-to-define-a-module&quot;&gt;How to define a module?&lt;/h1&gt;
-
-&lt;p&gt;Just put all your .tf files into a folder, for example:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mymodule/
-├── main.tf
-├── outputs.tf
-├── README.md
-└── variables.tf
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Then copy it into a &lt;em&gt;modules&lt;/em&gt; folder.&lt;/p&gt;
-
-&lt;h1 id=&quot;how-to-use-the-module&quot;&gt;How to use the module?&lt;/h1&gt;
-&lt;p&gt;Use the &lt;em&gt;source&lt;/em&gt; parameter to specify the path of your module as shown below:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;./modules/mymodule&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;modules-variables&quot;&gt;Module’s variables&lt;/h1&gt;
-&lt;p&gt;As you can see this module receives two arguments, which can be defined in the &lt;em&gt;mymodule&lt;/em&gt;’s &lt;em&gt;variables.tf&lt;/em&gt; file.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;variable &quot;var1&quot; {
-  description = &quot;A string var&quot;
-}
-
-variable &quot;var2&quot; {
-  description = &quot;A numerical var&quot;
-default = 1989
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;modules-outputs&quot;&gt;Module’s outputs&lt;/h1&gt;
-&lt;p&gt;Modules also have outputs that can be used by other modules and resources. You can define them in the outputs.tf file:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-output &quot;id&quot; {
-  description = &quot;This is the mymodule's id&quot;
-}
-
-output &quot;name&quot; {
-  description = &quot;This is the mymodule's name&quot;
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h1 id=&quot;modules-sources&quot;&gt;Modules Sources&lt;/h1&gt;
-
-&lt;p&gt;The above examples use the &lt;em&gt;source&lt;/em&gt; parameter to retrieve the module from a local folder, but you can also use other sources like a git repository, mercurial repository, HTTP urls, S3 bucket or the Terraform Registry.&lt;/p&gt;
-
-&lt;p&gt;For example, instead of using a folder you can use a git repository to version your module and call it this way:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;module-repo-branch-and-version&quot;&gt;Module repo branch and version&lt;/h1&gt;
-&lt;p&gt;You can also point to a specific branch or version in a git repository using the &lt;em&gt;?ref&lt;/em&gt; query. For example to specify the &lt;em&gt;dev&lt;/em&gt; branch:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git?ref=dev&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To point to version 0.0.2 use it like this:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;git@bitbucket.org:mygitrepo/mymodule.git?ref=0.0.2&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;whats-the-problem-with-this-approach&quot;&gt;What’s the problem with this approach?&lt;/h2&gt;
-
-&lt;p&gt;If you want to upgrade the module version and you have used it several times in your project you must edit it in every place you defined it by hand.&lt;/p&gt;
-
-&lt;h1 id=&quot;module-version&quot;&gt;Module version&lt;/h1&gt;
-&lt;p&gt;If your are using Terraform version v0.11.0+ you can use a specific version for a module. This help you to point to a specific version, for example to a an stable version of the module. This only works if you are using a module registry like the &lt;a href=&quot;https://www.terraform.io/docs/registry/index.html&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-  source  = &quot;hashicorp/mymodule&quot;
-  version = &quot;0.0.2&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;whats-the-problem-with-this-approach-1&quot;&gt;What’s the problem with this approach?&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;The Terraform Registry is a public registry. For private use you must use the &lt;a href=&quot;https://www.terraform.io/docs/registry/private.html&quot; target=&quot;_blank&quot;&gt;Private Registry&lt;/a&gt; available ine the Enterprise version.&lt;/li&gt;
-  &lt;li&gt;Only available for Terraform version v0.11.0+&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;using-a-terrafile&quot;&gt;Using a Terrafile&lt;/h1&gt;
-&lt;p&gt;There’s another approach to overcome the version pitfalls which is to write a file to define the modules to use from a git repository, by branch or version. This file si called the &lt;em&gt;Terrafile&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
-# VPC
-tf_aws_vpc:
-  source : &quot;git@github.com:terraform-community-modules/tf_aws_vpc.git&quot;
-  version: &quot;master&quot;
-
-tf_my_module:
-  source: &quot;git@bitbucket.org:mygitrepo/mymodule.git&quot;
-  version: &quot;0.0.2&quot;                   
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;These modules will be downloaded into a &lt;em&gt;modules&lt;/em&gt; folder and then you can reference your module using this local folder:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;example&quot; {
-
-  source = &quot;./modules/mymodule&quot;
-
-  var1 = &quot;Hello World&quot;
-  var2 = 1999
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To get the modules you can use the this Rakefile:&lt;/p&gt;
-
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'yaml'&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'fileutils'&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# You may want to change this.&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;modules_path&lt;/span&gt;
-  &lt;span class=&quot;s1&quot;&gt;'vendor/modules'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# You may want to change this.&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;terrafile_path&lt;/span&gt;
-  &lt;span class=&quot;s1&quot;&gt;'Terrafile'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;read_terrafile&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terrafile_path&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;load_file&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;terrafile_path&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;fail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'[*] Terrafile does not exist'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create_modules_directory&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Creating Terraform modules directory at '&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'&quot;&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;FileUtils&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;makedirs&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;delete_cached_terraform_modules&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Deleting cached Terraform modules at '&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'&quot;&lt;/span&gt;
-  &lt;span class=&quot;no&quot;&gt;FileUtils&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rm_rf&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Fetch the Terraform modules listed in the Terrafile'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:get_modules&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;terrafile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;read_terrafile&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;create_modules_directory&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;delete_cached_terraform_modules&lt;/span&gt;
-
-  &lt;span class=&quot;n&quot;&gt;terrafile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;module_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'source'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;repository_details&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'version'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;[*] Checking out &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; of &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; ...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;colorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mkdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exist?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;chdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;modules_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;sb&quot;&gt;`git clone -b &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;module_name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt; &amp;amp;&amp;gt; /dev/null`&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And download them using the &lt;em&gt;get_modules&lt;/em&gt; function:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rake get_modules
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally get the modules in Terraform&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;terraform get
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/modules/usage.html&quot; target=&quot;_blank&quot;&gt;Terraform - Module Usage&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/modules/sources.html&quot; target=&quot;_blank&quot;&gt;Terraform - Module Sources&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/registry/index.html&quot; target=&quot;_blank&quot;&gt;Terraform Public Registry&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/registry/private.html&quot; target=&quot;_blank&quot;&gt;Terraform Private Registry&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://bensnape.com/2016/01/14/terraform-design-patterns-the-terrafile/&quot; target=&quot;_blank&quot;&gt;Terraform Design Patterns: the Terrafile&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Posting from Jekyll to GitHub Pages with Bitbucket Pipeline</title><link href="http://lgallardo.com/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" rel="alternate" type="text/html" title="Posting from Jekyll to GitHub Pages with Bitbucket Pipeline" /><published>2017-10-13T16:41:51-03:00</published><updated>2017-10-13T16:41:51-03:00</updated><id>http://lgallardo.com/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline</id><content type="html" xml:base="http://lgallardo.com/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;/images/automating-jekyll-deployment-to-github-pages-with-bitbucket-pipeline.jpg&quot; alt=&quot;Posting with pipeline&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;I had some security issues with WordPress so I decided to changed my blog to something static and served from GitHub Pages. But the new site had to meet some minimum requirements:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Good looking&lt;/li&gt;
-  &lt;li&gt;Multi-language support (Spanish and English)&lt;/li&gt;
-  &lt;li&gt;Static, no scripts or databases&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;Jekyll&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I had heard about this solution so I had it as a reference, like Hugo, but I saw it’s supported by GitHub Pages therefore I decided to give it a try.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;From WordPress to Jekyll&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;To recover the already published posts I set an isolated Docker environment using a database dump of the site and the latest WordPress version with the needed plugins to made it work.&lt;/p&gt;
-
-&lt;p&gt;Then to export all posts I used the &lt;a href=&quot;https://github.com/benbalter/wordpress-to-jekyll-exporter/&quot; target=&quot;_blank&quot;&gt;WordPress to Jekyll Exporter&lt;/a&gt; plugin.&lt;/p&gt;
-
-&lt;p&gt;To use this plugin I had to disable the qTranslate plugin, which was outdated and without support. Anyway I needed to migrate it to another solution, but with this change it was not the case anymore.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Jekyll theme: Minimal Mistakes&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I tried some options but the &lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/&quot; target=&quot;_blank&quot;&gt;Minimal Mistakes&lt;/a&gt; theme suit better to what I was looking for regarding looking and functionality.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Jekyll multi-language: _i18n&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;For this I also tried a couple of plugins, but the one that worked better was &lt;a href=&quot;https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin&quot; target=&quot;_blank&quot;&gt;jekyll-multiple-languages-plugin&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;GitHub pages’ plugin support&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;GitHub Pages supports a really limited number of plugins, therefore if you need to use any custom plugin you must generate the site’s static files using Jekyll and then push them to GitHub. This way you can use any plugin regardless GitHub Pages’s support.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Automating the generation and publishing of the static files&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;There are several examples of how to automate the building and publishing of the static files, as described in the &lt;a href=&quot;https://github.com/untra/polyglot/wiki/Github-Pages-Support&quot; target=&quot;_blank&quot;&gt;polyglot&lt;/a&gt; plugin wiki page:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; # publi.sh
-# change the branch names appropriately
-git checkout site
-rm -rf _site/
-jekyll build
-git add --all
-git commit -m &quot;`date`&quot;
-git push origin site
-git subtree push --prefix  _site/ origin gh-pages
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Bitbucket Pipeline&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I came up with with the idea of using Bitbucket’s Pipeline to automate the publishing, so I did a research and found this very explained article &lt;a href=&quot;https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/&quot; target=&quot;_blank&quot;&gt;Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github&lt;/a&gt;, which you can check to see the details steps.&lt;/p&gt;
-
-&lt;p&gt;Almost everything I did was based on the two former articles, but it was not straightforward, I had to adapt the script because I couldn’t push to my GitHub personal account’s &lt;em&gt;gh-pages&lt;/em&gt; branch, so I defined my Pipeline this way:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; This is a sample build configuration for Ruby.
-# Check our guides at https://confluence.atlassian.com/x/8r-5Mw for more examples.
-# Only use spaces to indent your .yml configuration.
-# -----
-# You can specify a custom docker image from Docker Hub as your build environment.
-image: ruby:2.3.3
-
-pipelines:
-  default:
-    - step:
-        script: # Modify the commands below to build your repository.
-          - bundler --version
-          - bundle install
-          - bundle exec jekyll build -t
-  branches:
-    master:
-      - step:
-          script:
-            - bundler --version
-            - bundle install
-            - bundle exec jekyll build -t
-            - git clone https://github.com/lgallard/lgallard.github.io.git
-            - cp -r /opt/atlassian/pipelines/agent/build/_site/* lgallard.github.io/
-            - cd lgallard.github.io
-            - git config --global user.email &quot;lgallard@gmail.com&quot;
-            - git config --global user.name &quot;Luis Gallardo&quot;
-            - git config --global push.default simple
-            - git add --all
-            - git commit -m &quot;`date`&quot;
-            - git push https://$githubtoken@github.com/lgallard/lgallard.github.io.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Where &lt;em&gt;$githubtoken&lt;/em&gt; is a environment variable passed to the container, which has the token previously generated at GitHub.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Pipeline building issues&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Building the site on my local machine had no issues, but building it in the Pipeline brought this error:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle exec jekyll build
- + bundle exec jekyll build
-Configuration file: /opt/atlassian/pipelines/agent/build/_config.yml
-            Source: /opt/atlassian/pipelines/agent/build
-       Destination: /opt/atlassian/pipelines/agent/build/_site
- Incremental build: disabled. Enable with --incremental
-      Generating... 
-Building site for default language: &quot;en&quot; to: /opt/atlassian/pipelines/agent/build/_site
-Loading translation from file /opt/atlassian/pipelines/agent/build/_i18n/en.yml
-  Conversion error: Jekyll::Converters::Scss encountered an error while converting 'assets/css/main.scss':
-                    Invalid US-ASCII character &quot;\xE2&quot; on line 54
-jekyll 3.6.0 | Error:  Invalid US-ASCII character &quot;\xE2&quot; on line 54
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Because it was an encoding issue I supposed there was something different in the Pipeline and my PC. I thought the Ruby Pipeline is just a Docker image of Ruby, then I checked the &lt;a href=&quot;https://hub.docker.com/_/ruby/&quot; target=&quot;_blank&quot;&gt;image’s documentation&lt;/a&gt; and it turns out that it can be fixed by setting the encoding via an environment variable in &lt;em&gt;Settings &amp;gt; Pipelines &amp;gt; Environment variables&lt;/em&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;LANG: C.UTF-8
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Site publishing&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Now just by pushing the posts to the Bitbucket repo it runs the Pipeline and it publishes everything on GitHub Pages!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/bitbuket-pipeline.jpg&quot; alt=&quot;Bitbucket Pipeline&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://seenukarthi.com/pipeline/2017/06/22/jekyll-github-cicd-bitbucket-pipeline/&quot; target=&quot;_blank&quot;&gt;Continuous Deployment for Jekyll using Bitbucket Pipeline to deploy in Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/benbalter/wordpress-to-jekyll-exporter/&quot; target=&quot;_blank&quot;&gt;WordPress to Jekyll Exporter&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes/&quot; target=&quot;_blank&quot;&gt;Minimal Mistakes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/Anthony-Gaudino/jekyll-multiple-languages-plugin&quot; target=&quot;_blank&quot;&gt;jekyll-multiple-languages-plugin&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hub.docker.com/_/ruby/&quot; target=&quot;_blank&quot;&gt;Docker ruby&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Luis Gallardo</name></author><category term="Docker" /><category term="Git" /><category term="Gihub" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">Using AWS Lambda to copy RDS snapshots between regions</title><link href="http://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/" rel="alternate" type="text/html" title="Using AWS Lambda to copy RDS snapshots between regions" /><published>2017-02-10T21:31:10-03:00</published><updated>2017-02-10T21:31:10-03:00</updated><id>http://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones</id><content type="html" xml:base="http://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">&lt;center&gt;&lt;img src=&quot;/images/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones.jpg&quot; alt=&quot;AWS Lambda&quot; /&gt;&lt;/center&gt;
-
-&lt;p&gt;At work we needed to make MySQL database on RDS backups between regions without having a running instance in the destination region, I mean, no read replicas wanted. Someone suggested to use a cron to copy the backups between regions. I thought this had to been done so I decided to do a research and I ran into this excellent post that explains how to make the copy using Lambda functions with Python: &lt;a href=&quot;https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/&quot; target=&quot;_blank&quot;&gt;Copying RDS snapshot to another region for cross-region recovery&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This function get the last snapshots for all RDS databases in the source region and copies them to the destination region. Then it deletes old snapshots in the destination region to save space. The function can be triggered using CloudWatch or RDS events, for example when the database backup is finished.&lt;/p&gt;
-
-&lt;p&gt;Paulina Budzon, the post author, commented that the function can be improved so I made some changes:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Added database list to be backup-ed, instead of all databases in RDS&lt;/li&gt;
-  &lt;li&gt;Changed variable naming to avoid reference to the destination region&lt;/li&gt;
-  &lt;li&gt;Removed source region example reference in SourceDBSnapshotIdentifier string&lt;/li&gt;
-  &lt;li&gt;Added variables for source and destination regions&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I shared the code here but it can be got from my fork &lt;a href=&quot;https://github.com/lgallard/aws-maintenance&quot;&gt;https://github.com/lgallard/aws-maintenance&lt;/a&gt;, or you can get it from Paulina’s &lt;a href=&quot;https://github.com/pbudzon/aws-maintenance&quot;&gt;https://github.com/pbudzon/aws-maintenance&lt;/a&gt;, because she merged my  pull request.&lt;/p&gt;
-
-&lt;p&gt;I hope it helps somebody else:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import boto3
- import operator
-
-aws_account = 'XXXX'
- source = 'us-east-1'
- destination = 'sa-east-1'
- databases = ['mysqldb01', 'pgdb01']
-
-def copy_latest_snapshot():
- client = boto3.client('rds', source)
- foreign_client = boto3.client('rds', destination)
-
-response = client.describe_db_snapshots(
- SnapshotType='automated',
- IncludeShared=False,
- IncludePublic=False
- )
-
-if len(response['DBSnapshots']) == 0:
- raise Exception(&quot;No automated snapshots found&quot;)
-
-snapshots_per_project = {}
-
-for snapshot in response['DBSnapshots']:
- if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' :
- continue
-
-if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys():
- snapshots_per_project[snapshot['DBInstanceIdentifier']] = {}
-
-snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[
- 'SnapshotCreateTime']
-
-for project in snapshots_per_project:
- sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True)
-
-copy_name = project + &quot;-&quot; + sorted_list[0][1].strftime(&quot;%Y-%m-%d&quot;)
-
-print(&quot;Checking if &quot; + copy_name + &quot; is copied&quot;)
-
-try:
- foreign_client.describe_db_snapshots(
- DBSnapshotIdentifier=copy_name
- )
- except:
- response = foreign_client.copy_db_snapshot(
- SourceDBSnapshotIdentifier='arn:aws:rds:' + source + ':' + aws_account + ':snapshot:' + sorted_list[0][0],
- TargetDBSnapshotIdentifier=copy_name,
- CopyTags=True
- )
-
-if response['DBSnapshot']['Status'] != &quot;pending&quot; and response['DBSnapshot']['Status'] != &quot;available&quot;:
- raise Exception(&quot;Copy operation for &quot; + copy_name + &quot; failed!&quot;)
- print(&quot;Copied &quot; + copy_name)
-
-continue
-
-print(&quot;Already copied&quot;)
-
-def remove_old_snapshots():
- client = boto3.client('rds', source)
- foreign_client = boto3.client('rds', destination)
-
-response = foreign_client.describe_db_snapshots(
- SnapshotType='manual'
- )
-
-if len(response['DBSnapshots']) == 0:
- raise Exception(&quot;No manual snapshots in &quot;+ destination + &quot; found&quot;)
-
-snapshots_per_project = {}
- for snapshot in response['DBSnapshots']:
- if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' :
- continue
-
-if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys():
- snapshots_per_project[snapshot['DBInstanceIdentifier']] = {}
-
-snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[
- 'SnapshotCreateTime']
-
-for project in snapshots_per_project:
- if len(snapshots_per_project[project]) &amp;amp;gt; 1:
- sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True)
- to_remove = [i[0] for i in sorted_list[1:]]
-
-for snapshot in to_remove:
- print(&quot;Removing &quot; + snapshot)
- foreign_client.delete_db_snapshot(
- DBSnapshotIdentifier=snapshot
- )
-
-def lambda_handler(event, context):
- copy_latest_snapshot()
- remove_old_snapshots()
-
-if __name__ == '__main__':
- lambda_handler(None, None)&amp;lt;/pre&amp;gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/&quot; target=&quot;_blank&quot;&gt;Copying RDS snapshot to another region for cross-region recovery&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Lambda" /><category term="RDS" /><summary type="html">At work we needed to make MySQL database on RDS backups between regions without having a running instance in the destination region, I mean, no read replicas wanted. Someone suggested to use a cron to copy the backups between regions. I thought this had to been done so I decided to do a research and I ran into this excellent post that explains how to make the copy using Lambda functions with Python: Copying RDS snapshot to another region for cross-region recovery This function get the last snapshots for all RDS databases in the source region and copies them to the destination region. Then it deletes old snapshots in the destination region to save space. The function can be triggered using CloudWatch or RDS events, for example when the database backup is finished. Paulina Budzon, the post author, commented that the function can be improved so I made some changes: Added database list to be backup-ed, instead of all databases in RDS Changed variable naming to avoid reference to the destination region Removed source region example reference in SourceDBSnapshotIdentifier string Added variables for source and destination regions I shared the code here but it can be got from my fork https://github.com/lgallard/aws-maintenance, or you can get it from Paulina’s https://github.com/pbudzon/aws-maintenance, because she merged my  pull request. I hope it helps somebody else: import boto3 import operator aws_account = 'XXXX' source = 'us-east-1' destination = 'sa-east-1' databases = ['mysqldb01', 'pgdb01'] def copy_latest_snapshot(): client = boto3.client('rds', source) foreign_client = boto3.client('rds', destination) response = client.describe_db_snapshots( SnapshotType='automated', IncludeShared=False, IncludePublic=False ) if len(response['DBSnapshots']) == 0: raise Exception(&quot;No automated snapshots found&quot;) snapshots_per_project = {} for snapshot in response['DBSnapshots']: if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' : continue if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys(): snapshots_per_project[snapshot['DBInstanceIdentifier']] = {} snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[ 'SnapshotCreateTime'] for project in snapshots_per_project: sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True) copy_name = project + &quot;-&quot; + sorted_list[0][1].strftime(&quot;%Y-%m-%d&quot;) print(&quot;Checking if &quot; + copy_name + &quot; is copied&quot;) try: foreign_client.describe_db_snapshots( DBSnapshotIdentifier=copy_name ) except: response = foreign_client.copy_db_snapshot( SourceDBSnapshotIdentifier='arn:aws:rds:' + source + ':' + aws_account + ':snapshot:' + sorted_list[0][0], TargetDBSnapshotIdentifier=copy_name, CopyTags=True ) if response['DBSnapshot']['Status'] != &quot;pending&quot; and response['DBSnapshot']['Status'] != &quot;available&quot;: raise Exception(&quot;Copy operation for &quot; + copy_name + &quot; failed!&quot;) print(&quot;Copied &quot; + copy_name) continue print(&quot;Already copied&quot;) def remove_old_snapshots(): client = boto3.client('rds', source) foreign_client = boto3.client('rds', destination) response = foreign_client.describe_db_snapshots( SnapshotType='manual' ) if len(response['DBSnapshots']) == 0: raise Exception(&quot;No manual snapshots in &quot;+ destination + &quot; found&quot;) snapshots_per_project = {} for snapshot in response['DBSnapshots']: if snapshot['DBInstanceIdentifier'] not in databases or snapshot['Status'] != 'available' : continue if snapshot['DBInstanceIdentifier'] not in snapshots_per_project.keys(): snapshots_per_project[snapshot['DBInstanceIdentifier']] = {} snapshots_per_project[snapshot['DBInstanceIdentifier']][snapshot['DBSnapshotIdentifier']] = snapshot[ 'SnapshotCreateTime'] for project in snapshots_per_project: if len(snapshots_per_project[project]) &amp;amp;gt; 1: sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True) to_remove = [i[0] for i in sorted_list[1:]] for snapshot in to_remove: print(&quot;Removing &quot; + snapshot) foreign_client.delete_db_snapshot( DBSnapshotIdentifier=snapshot ) def lambda_handler(event, context): copy_latest_snapshot() remove_old_snapshots() if __name__ == '__main__': lambda_handler(None, None)&amp;lt;/pre&amp;gt; Reference: Copying RDS snapshot to another region for cross-region recovery</summary></entry><entry><title type="html">How to load the VirtualBox driver</title><link href="http://lgallardo.com/2016/09/13/como-cargar-el-driver-de-virtualbox/" rel="alternate" type="text/html" title="How to load the VirtualBox driver" /><published>2016-09-13T16:00:36-03:00</published><updated>2016-09-13T16:00:36-03:00</updated><id>http://lgallardo.com/2016/09/13/como-cargar-el-driver-de-virtualbox</id><content type="html" xml:base="http://lgallardo.com/2016/09/13/como-cargar-el-driver-de-virtualbox/">&lt;center&gt;&lt;img src=&quot;https://c1.staticflickr.com/9/8671/29551547051_d7a2292b5e_o.png&quot; alt=&quot;VirtualBox&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;If for any reason (for instance Genymotion complaining about not finding VirtualBox) and you need to reload the VirtualBox driver keep in mind that the script that do this has been moved in newest Debian/Ubuntu versions, so if you used to run this:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/etc/init.d/vboxdrv.sh setup
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now you must reload the module this way:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/usr/lib/virtualbox/vboxdrv.sh setup
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Gallardo</name></author><category term="VirtualBox" /><summary type="html">If for any reason (for instance Genymotion complaining about not finding VirtualBox) and you need to reload the VirtualBox driver keep in mind that the script that do this has been moved in newest Debian/Ubuntu versions, so if you used to run this:</summary></entry><entry><title type="html">How to update Linux time zones</title><link href="http://lgallardo.com/2016/04/29/how-to-change-linux-time-zone/" rel="alternate" type="text/html" title="How to update Linux time zones" /><published>2016-04-29T09:41:51-03:00</published><updated>2016-04-29T09:41:51-03:00</updated><id>http://lgallardo.com/2016/04/29/how-to-change-linux-time-zone</id><content type="html" xml:base="http://lgallardo.com/2016/04/29/how-to-change-linux-time-zone/">&lt;center&gt;&lt;img align=&quot;center&quot; src=&quot;https://c2.staticflickr.com/2/1606/26688168326_0f3fab18f2_o.jpg&quot; alt=&quot;time zone map&quot; /&gt;&lt;/center&gt;
-
-&lt;p&gt;On May 1st, Venezuela will change its time zone to UTC-4, therefore in Linux you must update your tzdata package to be ready to this change. To do so just just follow these steps:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Debian/Ubuntu&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aptitude update
-aptitude safe-upgrade tzdata
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Red Hat&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yum check-update
-yum update tzdata
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In order to check whether the update has the time zone changes you can run this command:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;zdump -v /usr/share/zoneinfo/right/America/Caracas  | grep 2016
-
-/usr/share/zoneinfo/right/America/Caracas  Sun May  1 06:59:59 2016 UT = Sun May  1 02:29:59 2016 VET isdst=0 gmtoff=-16200
-/usr/share/zoneinfo/right/America/Caracas  Sun May  1 07:00:00 2016 UT = Sun May  1 03:00:00 2016 VET isdst=0 gmtoff=-14400
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://access.redhat.com/solutions/28425&quot;&gt;How to check if the Time Zone database&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="CentOS" /><category term="Debian" /><category term="RedHat" /><category term="SuSE" /><category term="Ubuntu" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Solutions Architect</title><link href="http://lgallardo.com/2016/02/13/aws-certified-solutions-architect/" rel="alternate" type="text/html" title="AWS Certified Solutions Architect" /><published>2016-02-13T20:47:55-03:00</published><updated>2016-02-13T20:47:55-03:00</updated><id>http://lgallardo.com/2016/02/13/aws-certified-solutions-architect</id><content type="html" xml:base="http://lgallardo.com/2016/02/13/aws-certified-solutions-architect/">&lt;center&gt;&lt;img src=&quot;https://c2.staticflickr.com/2/1470/24999196475_0d0bd86cee.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;At work we are migrating many services to Amazon’s cloud, therefore we need to formalize the AWS knowledge. In that sense we found an online course site called Linux Academy, which I consider helped us with the certification and to understand AWS in general, but it wasn’t the only resource we used, thus we complemented with quizzes, and the AWS documentation.&lt;/p&gt;
-
-&lt;p&gt;If you are interested in achieve this certification and the resources we used, here you are some links:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/aws-certified-solutions-architect-associate/&quot; target=&quot;_blank&quot;&gt;Udemy – A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Quizzes&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-i&quot; target=&quot;_blank&quot;&gt;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-i&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-ii&quot; target=&quot;_blank&quot;&gt;http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-ii&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://surajbatuwana.blogspot.com/p/aws-certification-sample-questions.html&quot; target=&quot;_blank&quot;&gt;http://surajbatuwana.blogspot.com/p/aws-certification-sample-questions.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;AWS Documentation&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
