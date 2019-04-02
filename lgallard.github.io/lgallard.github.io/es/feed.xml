@@ -1,4 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://0.0.0.0:4000/es/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2019-02-15T12:23:38-06:00</updated><id>http://0.0.0.0:4000/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Usando el ASK SDK de Alexa desde Lambda Layers</title><link href="http://0.0.0.0:4000/es/2018/12/04/using-alexa-ask-from-lambda-layers" rel="alternate" type="text/html" title="Usando el ASK SDK de Alexa desde Lambda Layers" /><published>2018-12-03T18:00:00-06:00</published><updated>2018-12-03T18:00:00-06:00</updated><id>http://0.0.0.0:4000/es/2018/12/04/using-alexa-ask-from-lambda-layers</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/12/04/using-alexa-ask-from-lambda-layers">&lt;center&gt;&lt;img src=&quot;/images/alexa_lambda_layers.jpg&quot; alt=&quot;Alexa + lambda + Layers&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2019-02-26T13:14:48-06:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Pyenv al rescate</title><link href="https://lgallardo.com/es/2019/02/26/pyenv-to-the-rescue" rel="alternate" type="text/html" title="Pyenv al rescate" /><published>2019-02-25T18:00:00-06:00</published><updated>2019-02-25T18:00:00-06:00</updated><id>https://lgallardo.com/es/2019/02/26/pyenv-to-the-rescue</id><content type="html" xml:base="https://lgallardo.com/es/2019/02/26/pyenv-to-the-rescue">&lt;center&gt;&lt;img src=&quot;/images/Python-logo-150.jpg&quot; alt=&quot;Python&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;el-problema&quot;&gt;El problema&lt;/h1&gt;
+
+&lt;p&gt;Hace poco cambié a &lt;em&gt;Debian testing&lt;/em&gt; nuevamente para entre otras cosas poder usar Python 3.6. Empecé a trabajar con esta versión, a crear mis Lambda Layers y todo bien hasta que &lt;em&gt;Debian testing&lt;/em&gt; cambió a Python 3.7. Bueno, me dije a mí mismo, no hay drama con &lt;code class=&quot;highlighter-rouge&quot;&gt;alternative&lt;/code&gt; puedo cambiar versiones de Python sin problemas o de última decirle a &lt;code class=&quot;highlighter-rouge&quot;&gt;virtualenv&lt;/code&gt; que use un intérprete u otro.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# update-alternatives --config python
+There are 3 choices for the alternative python (providing /usr/bin/python).
+
+  Selection    Path                Priority   Status
+------------------------------------------------------------
+  0            /usr/bin/python3.6   3         auto mode
+  1            /usr/bin/python2     1         manual mode
+  2            /usr/bin/python3     2         manual mode
+* 3            /usr/bin/python3.6   3         manual mode
+
+Press &amp;lt;enter&amp;gt; to keep the current choice[*], or type selection number: 3
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Pero incluso usando &lt;code class=&quot;highlighter-rouge&quot;&gt;alternative&lt;/code&gt; o forzando el intérprete para usar Python 3.6 al parecer queda algo siempre apuntando a Python 3.7:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ virtualenv -p /usr/bin/python3.6 test
+Running virtualenv with interpreter /usr/bin/python3.6
+Traceback (most recent call last):
+  File &quot;/home/lgallard/.local/lib/python3.7/site-packages/virtualenv.py&quot;, line 22, in &amp;lt;module&amp;gt;
+    import distutils.spawn
+ModuleNotFoundError: No module named 'distutils.spawn'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h1 id=&quot;pyenv-al-rescate&quot;&gt;pyenv al rescate&lt;/h1&gt;
+
+&lt;p&gt;Existe una manejador de versiones de Python llamado &lt;a href=&quot;https://github.com/pyenv/pyenv#choosing-the-python-version&quot; target=&quot;_blank&quot;&gt;pyenv&lt;/a&gt; el cual permite configurar el entorno a usar tanto local como de forma global.&lt;/p&gt;
+
+&lt;p&gt;Por ejemplo, para instalar la versión de Python 3.6.8 basta con hacer:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pyenv install 3.6.8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Podemos verificar las versiones de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ pyenv versions
+  system
+* 3.6.8 (set by /home/lgallard/.pyenv/version)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Luego para usar la versión instalada con pyenv, basta con pasarle la ruta:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ virtualenv -p ~/.pyenv/versions/3.6.8/bin/python test
+Running virtualenv with interpreter /home/lgallard/.pyenv/versions/3.6.8/bin/python
+Using base prefix '/home/lgallard/.pyenv/versions/3.6.8'
+New python executable in /home/lgallard/test/bin/python
+Installing setuptools, pip, wheel...
+done.
+
+./test/bin/python --version
+Python 3.6.8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;De esta forma pude seguir usando la versión especifica de Python que necesitaba.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Referencias:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/pyenv/pyenv#choosing-the-python-version&quot; target=&quot;_blank&quot;&gt;pyenv&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/23842713/using-python-3-in-virtualenv&quot; target=&quot;_blank&quot;&gt;Using Python 3 in virtualenv&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Python" /><summary type="html"></summary></entry><entry><title type="html">Usando el ASK SDK de Alexa desde Lambda Layers</title><link href="https://lgallardo.com/es/2018/12/04/using-alexa-ask-from-lambda-layers" rel="alternate" type="text/html" title="Usando el ASK SDK de Alexa desde Lambda Layers" /><published>2018-12-03T18:00:00-06:00</published><updated>2018-12-03T18:00:00-06:00</updated><id>https://lgallardo.com/es/2018/12/04/using-alexa-ask-from-lambda-layers</id><content type="html" xml:base="https://lgallardo.com/es/2018/12/04/using-alexa-ask-from-lambda-layers">&lt;center&gt;&lt;img src=&quot;/images/alexa_lambda_layers.jpg&quot; alt=&quot;Alexa + lambda + Layers&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;lambda-layers&quot;&gt;Lambda Layers&lt;/h1&gt;
@@ -58,7 +127,7 @@ zip -r ask-sdk.zip python/lib/python3.6/site-packages/
 &lt;center&gt;&lt;img src=&quot;/images/add_layer3.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;Puedes seleccionar este mismo Layer para las otras funciones Lambda que usen el mismo ASK SDK y runtime sin tener que estar subiéndolo en cada despliegue.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="Lambda" /><category term="Layers" /><summary type="html"></summary></entry><entry><title type="html">AWS CodePipeline con Bitbucket</title><link href="http://0.0.0.0:4000/es/2018/09/07/codepipeline-bitbucket" rel="alternate" type="text/html" title="AWS CodePipeline con Bitbucket" /><published>2018-09-06T19:00:00-05:00</published><updated>2018-09-06T19:00:00-05:00</updated><id>http://0.0.0.0:4000/es/2018/09/07/codepipeline-bitbucket</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/09/07/codepipeline-bitbucket">&lt;center&gt;&lt;img src=&quot;/images/CodePipeline_bitbucket.jpg&quot; alt=&quot;AWS CodePipeline and Bitbucket&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;Puedes seleccionar este mismo Layer para las otras funciones Lambda que usen el mismo ASK SDK y runtime sin tener que estar subiéndolo en cada despliegue.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="Lambda" /><category term="Layers" /><summary type="html"></summary></entry><entry><title type="html">AWS CodePipeline con Bitbucket</title><link href="https://lgallardo.com/es/2018/09/07/codepipeline-bitbucket" rel="alternate" type="text/html" title="AWS CodePipeline con Bitbucket" /><published>2018-09-06T19:00:00-05:00</published><updated>2018-09-06T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/09/07/codepipeline-bitbucket</id><content type="html" xml:base="https://lgallardo.com/es/2018/09/07/codepipeline-bitbucket">&lt;center&gt;&lt;img src=&quot;/images/CodePipeline_bitbucket.jpg&quot; alt=&quot;AWS CodePipeline and Bitbucket&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;En el trabajo necesitaba desplegar una aplicación usando AWS CodePipeline pero el repositorio donde se encuentra el código está en Bitbucket. Esto representó un desafío interesante porque AWS Pipeline no soporta Bitbucket, a diferencia de AWS CodeBuild que si lo soporta.&lt;/p&gt;
@@ -84,7 +153,7 @@ zip -r ask-sdk.zip python/lib/python3.6/site-packages/
 &lt;center&gt;&lt;img src=&quot;/images/aws_codebuild_trigger.jpg&quot; alt=&quot;AWS Codebuild trigger&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;[1] &lt;a href=&quot;https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/&quot; target=&quot;_blank&quot;&gt;Integrating Git with AWS CodePipeline&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Codebuild" /><category term="CodePipeline" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="http://0.0.0.0:4000/es/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-11T19:00:00-05:00</published><updated>2018-08-11T19:00:00-05:00</updated><id>http://0.0.0.0:4000/es/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;[1] &lt;a href=&quot;https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/&quot; target=&quot;_blank&quot;&gt;Integrating Git with AWS CodePipeline&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Codebuild" /><category term="CodePipeline" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-11T19:00:00-05:00</published><updated>2018-08-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recientemente aprobé la certificación &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified DevOps Engineer - Professional&lt;/code&gt; y quería dejar mis comentarios respecto al examen:&lt;/p&gt;
@@ -132,7 +201,7 @@ zip -r ask-sdk.zip python/lib/python3.6/site-packages/
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Bloques de configuración dinámicos en Terraform</title><link href="http://0.0.0.0:4000/es/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Bloques de configuración dinámicos en Terraform" /><published>2018-07-29T19:00:00-05:00</published><updated>2018-07-29T19:00:00-05:00</updated><id>http://0.0.0.0:4000/es/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Bloques de configuración dinámicos en Terraform</title><link href="https://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Bloques de configuración dinámicos en Terraform" /><published>2018-07-29T19:00:00-05:00</published><updated>2018-07-29T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="https://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Una de las cosas que tenía pendiente por resolver era el hecho de que en Terraform hay bloques de configuración que dependiendo de las opciones puede que tengan parámetros distintos o que incluso no acepte los mismos parámetros.&lt;/p&gt;
@@ -204,7 +273,7 @@ locals {
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;locals values de Terraform&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;módulo de la  comunidad de terraform-aws-codebuild&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Consultando AWS Logs desde la línea de órdenes</title><link href="http://0.0.0.0:4000/es/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Consultando AWS Logs desde la línea de órdenes" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>http://0.0.0.0:4000/es/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Consultando AWS Logs desde la línea de órdenes</title><link href="https://lgallardo.com/es/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Consultando AWS Logs desde la línea de órdenes" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="https://lgallardo.com/es/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Uno de los desarrolladores de la empresa me preguntó si había forma de ver las bitácoras de las funciones Lambda desde la línea de órdenes, para no tener la necesidad de entrar a la consola de AWS y verlos en CloudWatch Logs.
@@ -264,19 +333,19 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;jorgebastida/awslogs&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://gist.github.com/apeckham/9bcb464096997c1b0d41&quot; target=&quot;_blank&quot;&gt;View aws lambda logs on the command line&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">echo dot</title><link href="http://0.0.0.0:4000/es/2018/07/20/2018-07-20-echo-dot/" rel="alternate" type="text/html" title="echo dot" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>http://0.0.0.0:4000/es/2018/07/20/echo-dot</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/07/20/2018-07-20-echo-dot/">&lt;center&gt;&lt;img src=&quot;/images/echo-dot.jpg&quot; alt=&quot;echo dot&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">echo dot</title><link href="https://lgallardo.com/es/2018/07/20/2018-07-20-echo-dot/" rel="alternate" type="text/html" title="echo dot" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/07/20/echo-dot</id><content type="html" xml:base="https://lgallardo.com/es/2018/07/20/2018-07-20-echo-dot/">&lt;center&gt;&lt;img src=&quot;/images/echo-dot.jpg&quot; alt=&quot;echo dot&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Como estoy trabajando en algunos proyectos en la empresa con Alexa, me dieron un echo dot.&lt;/p&gt;
 
 &lt;p&gt;Mi idea es revisar las posibilidades que puede proporcionar esta plataforma, y ahora con más razón ya que se anunció que &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/843d8579-18a3-4344-8c85-4ae36c400eaa/alexa-skills-kit-and-alexa-voice-service-expand-to-italy-and-spain&quot; target=&quot;_blank&quot;&gt;viene el soporte para español a finales de este año&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Otra de las cosas que estoy revisando están relacionadas con el &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/3a8f27f3-d724-4e0b-bc72-0dcddd0b2eab/announcing-an-easier-way-to-build-alexa-skills-using-python&quot; target=&quot;_blank&quot;&gt;SDK de Python&lt;/a&gt;, el cual sacaron recientemente en beta.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="echo" /><summary type="html"></summary></entry><entry><title type="html">A Cloud Guru Member</title><link href="http://0.0.0.0:4000/es/2018/07/15/2018-07-15-acloudguru-member/" rel="alternate" type="text/html" title="A Cloud Guru Member" /><published>2018-07-14T19:00:00-05:00</published><updated>2018-07-14T19:00:00-05:00</updated><id>http://0.0.0.0:4000/es/2018/07/15/acloud-guru-member</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/07/15/2018-07-15-acloudguru-member/">&lt;center&gt;&lt;img src=&quot;/images/acloudguru-member.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;585&quot; height=&quot;807&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;Otra de las cosas que estoy revisando están relacionadas con el &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/3a8f27f3-d724-4e0b-bc72-0dcddd0b2eab/announcing-an-easier-way-to-build-alexa-skills-using-python&quot; target=&quot;_blank&quot;&gt;SDK de Python&lt;/a&gt;, el cual sacaron recientemente en beta.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="echo" /><summary type="html"></summary></entry><entry><title type="html">A Cloud Guru Member</title><link href="https://lgallardo.com/es/2018/07/15/2018-07-15-acloudguru-member/" rel="alternate" type="text/html" title="A Cloud Guru Member" /><published>2018-07-14T19:00:00-05:00</published><updated>2018-07-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/07/15/acloud-guru-member</id><content type="html" xml:base="https://lgallardo.com/es/2018/07/15/2018-07-15-acloudguru-member/">&lt;center&gt;&lt;img src=&quot;/images/acloudguru-member.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;585&quot; height=&quot;807&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Esta semana me llegó mi camisa y etiquetas de la gente de A Cloud. ¿Cómo obtuve estos artículos? Me hice con la membresía anual y ahora tengo acceso a todo sus cursos, y ahora puedo disfrutar de estos regalos :)&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Referencia:&lt;/strong&gt; &lt;a href=&quot;https://acloud.guru/membership&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - Become a member&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Developer - Associate</title><link href="http://0.0.0.0:4000/es/2018/07/13/2018-07-13-aws-certified-developer-associate/" rel="alternate" type="text/html" title="AWS Certified Developer - Associate" /><published>2018-07-12T19:00:00-05:00</published><updated>2018-07-12T19:00:00-05:00</updated><id>http://0.0.0.0:4000/es/2018/07/13/aws-certified-developer-associate</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/07/13/2018-07-13-aws-certified-developer-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Developer_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;strong&gt;Referencia:&lt;/strong&gt; &lt;a href=&quot;https://acloud.guru/membership&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - Become a member&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Developer - Associate</title><link href="https://lgallardo.com/es/2018/07/13/2018-07-13-aws-certified-developer-associate/" rel="alternate" type="text/html" title="AWS Certified Developer - Associate" /><published>2018-07-12T19:00:00-05:00</published><updated>2018-07-12T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/07/13/aws-certified-developer-associate</id><content type="html" xml:base="https://lgallardo.com/es/2018/07/13/2018-07-13-aws-certified-developer-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Developer_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;El mes pasado aprobé la certificación &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified  Developer- Associate&lt;/code&gt; quería dejar mis comentarios respecto al examen:&lt;/p&gt;
@@ -318,7 +387,7 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified SysOps Administrator - Associate</title><link href="http://0.0.0.0:4000/es/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/" rel="alternate" type="text/html" title="AWS Certified SysOps Administrator - Associate" /><published>2018-05-24T19:00:00-05:00</published><updated>2018-05-24T19:00:00-05:00</updated><id>http://0.0.0.0:4000/es/2018/05/25/aws-certified-sysops-administrator-associate</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_SysOps_Administrator_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified SysOps Administrator - Associate</title><link href="https://lgallardo.com/es/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/" rel="alternate" type="text/html" title="AWS Certified SysOps Administrator - Associate" /><published>2018-05-24T19:00:00-05:00</published><updated>2018-05-24T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/05/25/aws-certified-sysops-administrator-associate</id><content type="html" xml:base="https://lgallardo.com/es/2018/05/25/2017-12-29-aws-certified-sysops-administrator-associate/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_SysOps_Administrator_Associate_certificate.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recientemente aprobé la certificación &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified SysOps Administrator - Associate&lt;/code&gt; y quería dejar mis comentarios respecto al examen:&lt;/p&gt;
@@ -351,128 +420,4 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Usando ASG Lifecycle hooks para disparar funciones Lambda</title><link href="http://0.0.0.0:4000/es/2018/05/04/asg-lifcecyle-hooks/" rel="alternate" type="text/html" title="Usando ASG Lifecycle hooks para disparar funciones Lambda" /><published>2018-05-03T19:00:55-05:00</published><updated>2018-05-03T19:00:55-05:00</updated><id>http://0.0.0.0:4000/es/2018/05/04/lifecycle-hooks-lambda</id><content type="html" xml:base="http://0.0.0.0:4000/es/2018/05/04/asg-lifcecyle-hooks/">&lt;center&gt;
-&lt;img alt=&quot;AWS ASG Lifecycle hooks&quot; src=&quot;/images/lifecycle_hooks.jpg&quot; /&gt;
-&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recientemente necesitaba ejecutar algunas acciones después que una instancia EC2 fuese creada por una Auto Scaling Group. Al principio pensé en usar el userdata pero necesitaba crear unas alarmas en CloudWatch basadas en la misma instancia, y estas alarmas debían ser creadas dinámicamente como se hacían previamente con Terraform.&lt;/p&gt;
-
-&lt;h1 id=&quot;lifecycle-hooks&quot;&gt;Lifecycle hooks&lt;/h1&gt;
-
-&lt;p&gt;Los Auto Scaling Groups tienen &lt;em&gt;Lifecycle hooks&lt;/em&gt; que puedes usar para disparar funciones lambdas al momento de iniciar o terminar una instancia para ejecutar acciones basadas en los datos contenidos en estos Lifecycle hooks. Por ejemplo puedes crear una regla de CloudWatch para usar el mensaje del evento y obtener la identificación de la instancia o el campo metadata del lifecycle hook. Un ejemplo de cómo luce este mensaje se muestra a continuación:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
-    &quot;EC2InstanceId&quot;: &quot;i-0030f3ac294a5764a&quot;,
-    &quot;AutoScalingGroupName&quot;: &quot;sync-service&quot;,
-    &quot;LifecycleActionToken&quot;: &quot;802cc943-c45a-c8c8-b25d-111222333440&quot;,
-    &quot;LifecycleHookName&quot;: &quot;sync-service-StatusCheckFailed-0-launching-hook&quot;,
-    &quot;NotificationMetadata&quot;: {
-        &quot;EvaluationPeriods&quot;: 5,
-        &quot;Missing_data&quot;: &quot;breaching&quot;,
-        &quot;AlarmActions&quot;: &quot;arn:aws:sns:us-east-1:111111111111:sns-topic&quot;,
-        &quot;AlarmDescription&quot;: &quot;The instance has not passed both instance and system status checks&quot;,
-        &quot;Namespace&quot;: &quot;AWS/EC2&quot;,
-        &quot;Period&quot;: 60,
-        &quot;ComparisonOperator&quot;: &quot;GreaterThanThreshold&quot;,
-        &quot;AlarmName&quot;: &quot;sync-status-check&quot;,
-        &quot;Statistic&quot;: &quot;Average&quot;,
-        &quot;Threshold&quot;: 0,
-        &quot;MetricName&quot;: &quot;StatusCheckFailed&quot;
-    },
-    
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Aquí &lt;em&gt;NotificationMetadata&lt;/em&gt; contiene un JSON con la definición de la alarma la cual será consumida por la función lambda para crearla.&lt;/p&gt;
-
-&lt;h1 id=&quot;disparando-la-función-lambda-usando-un-evento-de-cloudwatch&quot;&gt;Disparando la función lambda usando un evento de CloudWatch&lt;/h1&gt;
-
-&lt;p&gt;Puedes hacer que CloudWatch responda a eventos del Auto Scaling Group y disparar un función lambda para pasar el mensaje.&lt;/p&gt;
-
-&lt;center&gt;
-&lt;img alt=&quot;AWS Lambda console&quot; src=&quot;/images/asg_create_alarms_lambda_console.jpg&quot; /&gt;
-&lt;/center&gt;
-
-&lt;h1 id=&quot;función-lambda&quot;&gt;Función Lambda&lt;/h1&gt;
-
-&lt;p&gt;Aquí coloco un ejemplo de la función lambda que obtiene el id de la instancia y el campo metadata del lifecycle:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;boto3&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;logging&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# Create AWS clients&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;cw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boto3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'cloudwatch'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getLogger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setLevel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logging&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INFO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# Retrieves instance id from CloudWatch event&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_instance_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'detail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'EC2InstanceId'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;KeyError&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'detail'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'NotificationMetadata'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;KeyError&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lambda_handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boto3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;instanceid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_instance_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;instance-id: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instanceid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;LOGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;metadata: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;# Create Metric&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;cw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put_metric_alarm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;AlarmName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'AlarmName'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instanceid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;AlarmDescription&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'AlarmDescription'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ActionsEnabled&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;AlarmActions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'AlarmActions'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;MetricName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'MetricName'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Namespace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Namespace'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Statistic&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Statistic'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Dimensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;'Name'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'InstanceId'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;'Value'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;instanceid&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Period&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Period'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;EvaluationPeriods&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'EvaluationPeriods'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;Threshold&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Threshold'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;TreatMissingData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Missing_data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ComparisonOperator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ComparisonOperator'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;iam-roles-y-policies&quot;&gt;IAM Roles y Policies&lt;/h1&gt;
-&lt;p&gt;Recuerda crear el ROLE y adjuntarle las policies necesarias a to función lambda.&lt;/p&gt;
-
-&lt;h1 id=&quot;referencias&quot;&gt;Referencias:&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/blogs/compute/using-aws-lambda-with-auto-scaling-lifecycle-hooks/&quot; target=&quot;_blank&quot;&gt;Using AWS Lambda with Auto Scaling Lifecycle Hooks&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://github.com/aws-samples/aws-lambda-lifecycle-hooks-function&quot; target=&quot;_blank&quot;&gt;aws-lambda-lifecycle-hooks-function&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/autoscaling/ec2/userguide/cloud-watch-events.html&quot; target=&quot;_blank&quot;&gt;Getting CloudWatch Events When Your Auto Scaling Group Scales&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://github.com/thigley986/Lambda-AWS-Automated-Alarm-Creation&quot; target=&quot;_blank&quot;&gt;Lambda-AWS-Automated-Alarm-Creation&lt;/a&gt;&lt;/p&gt;
-  &lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
