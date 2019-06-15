@@ -390,7 +390,7 @@ locals {
   codebuild_artifacts = "${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}"
 }
 </code></pre></div></div>
-
+<p><br /></p>
 <h1 id="dynamic-blocks-in-terraform-012x">Dynamic blocks in Terraform 0.12.x</h1>
 
 <p>Terraform 0.12.x proposes <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">dynamic blocks</a> to solve this and other cases related to blocks. To use dynamic blocks you have to use <code class="highlighter-rouge">dynamic</code> and<code class="highlighter-rouge"> for-each</code>. For example, for the above definition:</p>

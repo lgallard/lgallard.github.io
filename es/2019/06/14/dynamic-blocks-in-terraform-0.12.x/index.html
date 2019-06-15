@@ -327,7 +327,7 @@
         <center><img src="/images/terraform.jpg" alt="Terraform" /></center>
 <p><br /></p>
 
-<p>Hace un tiempo escribí sobre cómo hacer bloques dinámicos en Terraform 0.11.x, que si bien resolvía el problema generaba otros debido a que era no era una solución oficial.</p>
+<p>Hace un tiempo escribí sobre <a href="https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform/">cómo hacer bloques dinámicos en Terraform 0.11.x</a>/){:target=”_blank”}, que si bien resolvía el problema generaba otros debido a que era no era una solución oficial.</p>
 
 <p>En esencia lo que hacía era definir los bloques de forma dinámica usando una asiganción a una lista de maps. Es decir, en vez de hacer esto:</p>
 
@@ -360,7 +360,7 @@
 
 </code></pre></div></div>
 
-<p>Donde <code class="highlighter-rouge">local.codebuild_artifacts</code> se construida a partir de una lista de maps, que dependiendo del del tipo definido en la variable <code class="highlighter-rouge">codebuild_artifacts_type</code> creaba un bloque diferente:</p>
+<p>Donde <code class="highlighter-rouge">local.codebuild_artifacts</code> se construida a partir de una lista de maps, que dependiendo del tipo definido en la variable <code class="highlighter-rouge">codebuild_artifacts_type</code> creaba un bloque diferente:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 locals {
@@ -394,6 +394,7 @@ locals {
   codebuild_artifacts = "${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}"
 }
 </code></pre></div></div>
+<p><br /></p>
 
 <h1 id="bloques-dinámicos-en-terraform-012x">Bloques dinámicos en Terraform 0.12.x</h1>
 

@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2019-06-15T09:17:22-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Bloques dinámicos en Terraform 0.12.x</title><link href="https://lgallardo.com/es/2019/06/14/dynamic-blocks-in-terraform-0.12.x/" rel="alternate" type="text/html" title="Bloques dinámicos en Terraform 0.12.x" /><published>2019-06-13T19:00:00-05:00</published><updated>2019-06-13T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/06/14/dynamic-blocks-in-terraform-0.12.x</id><content type="html" xml:base="https://lgallardo.com/es/2019/06/14/dynamic-blocks-in-terraform-0.12.x/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2019-06-15T09:37:57-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Bloques dinámicos en Terraform 0.12.x</title><link href="https://lgallardo.com/es/2019/06/14/dynamic-blocks-in-terraform-0.12.x/" rel="alternate" type="text/html" title="Bloques dinámicos en Terraform 0.12.x" /><published>2019-06-13T19:00:00-05:00</published><updated>2019-06-13T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/06/14/dynamic-blocks-in-terraform-0.12.x</id><content type="html" xml:base="https://lgallardo.com/es/2019/06/14/dynamic-blocks-in-terraform-0.12.x/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;Hace un tiempo escribí sobre cómo hacer bloques dinámicos en Terraform 0.11.x, que si bien resolvía el problema generaba otros debido a que era no era una solución oficial.&lt;/p&gt;
+&lt;p&gt;Hace un tiempo escribí sobre &lt;a href=&quot;https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform/&quot;&gt;cómo hacer bloques dinámicos en Terraform 0.11.x&lt;/a&gt;/){:target=”_blank”}, que si bien resolvía el problema generaba otros debido a que era no era una solución oficial.&lt;/p&gt;
 
 &lt;p&gt;En esencia lo que hacía era definir los bloques de forma dinámica usando una asiganción a una lista de maps. Es decir, en vez de hacer esto:&lt;/p&gt;
 
@@ -34,7 +34,7 @@
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Donde &lt;code class=&quot;highlighter-rouge&quot;&gt;local.codebuild_artifacts&lt;/code&gt; se construida a partir de una lista de maps, que dependiendo del del tipo definido en la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;codebuild_artifacts_type&lt;/code&gt; creaba un bloque diferente:&lt;/p&gt;
+&lt;p&gt;Donde &lt;code class=&quot;highlighter-rouge&quot;&gt;local.codebuild_artifacts&lt;/code&gt; se construida a partir de una lista de maps, que dependiendo del tipo definido en la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;codebuild_artifacts_type&lt;/code&gt; creaba un bloque diferente:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 locals {
@@ -68,6 +68,7 @@ locals {
   codebuild_artifacts = &quot;${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}&quot;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;bloques-dinámicos-en-terraform-012x&quot;&gt;Bloques dinámicos en Terraform 0.12.x&lt;/h1&gt;
 
