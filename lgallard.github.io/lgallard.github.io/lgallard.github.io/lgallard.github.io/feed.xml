@@ -1,4 +1,159 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2019-06-15T08:16:44-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Guru of the week</title><link href="https://lgallardo.com/2019/05/13/2019-05-13-guru-of-the-week" rel="alternate" type="text/html" title="Guru of the week" /><published>2019-05-12T19:00:00-05:00</published><updated>2019-05-12T19:00:00-05:00</updated><id>https://lgallardo.com/2019/05/13/a-cloud-guru-of-the-week</id><content type="html" xml:base="https://lgallardo.com/2019/05/13/2019-05-13-guru-of-the-week">&lt;center&gt;&lt;img src=&quot;/images/guru-of-the-week-1.jpg&quot; alt=&quot;Guru of the week&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2019-06-15T08:19:53-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Bloques dinámicos en Terraform 0.12.x</title><link href="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/" rel="alternate" type="text/html" title="Bloques dinámicos en Terraform 0.12.x" /><published>2019-06-13T19:00:00-05:00</published><updated>2019-06-13T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x</id><content type="html" xml:base="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Some time ago I wrote about &lt;a href=&quot;https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform/&quot; target=&quot;_blank&quot;&gt;how to make dynamic blocks in Terraform 0.11.x&lt;/a&gt;, that although it solved the problem, it generated others because it wasn’t an official solution and the interpretation by Terraform was not consistent.&lt;/p&gt;
+
+&lt;p&gt;The workaround essentially consisted of defining the blocks dynamically using an assignment to a map list. That is, instead of doing this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
+
+  artifacts{
+      type           = &quot;${var.codebuild_artifacts_type}&quot;
+      location       = &quot;${var.codebuild_artifacts_location}&quot;
+      name           = &quot;${var.codebuild_artifacts_name}&quot;
+      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
+      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
+      path           = &quot;${var.codebuild_artifacts_path}&quot;
+
+  }
+
+  ...
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It was replaced by this other:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
+
+  artifacts = [&quot;${local.codebuild_artifacts}&quot;]
+
+  ...
+
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;highlighter-rouge&quot;&gt;local.codebuild_artifacts&lt;/code&gt; built the block from a map list, which depending on the type defined in the variable &lt;code class=&quot;highlighter-rouge&quot;&gt;codebuild_artifacts_type&lt;/code&gt; it created a different block:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+locals {
+  codebuild_artifacts_def = {
+    &quot;S3&quot; = [{
+      type                = &quot;${var.codebuild_artifacts_type}&quot;
+      location            = &quot;${var.codebuild_artifacts_location}&quot;
+      name                = &quot;${var.codebuild_artifacts_name}&quot;
+      namespace_type      = &quot;${var.codebuild_artifacts_namespace_type}&quot;
+      packaging           = &quot;${var.codebuild_artifacts_packaging}&quot;
+      path                = &quot;${var.codebuild_artifacts_path}&quot;
+      encryption_disabled = var.codebuild_artifacts_encryption_disabled
+    }]
+
+    &quot;CODEPIPELINE&quot; = [{
+      type        Some time ago I wrote about [how to make dynamic blocks in Terraform 0.11.x] (https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform/) {: target = &quot;_blank &quot;}, that although it solved the problem generated others because it was not an official solution and the interpretation by Terraform was not consistent.        = &quot;${var.codebuild_artifacts_type}&quot;
+      name                = &quot;${var.codebuild_artifacts_name}&quot;
+      encryption_disabled = var.codebuild_artifacts_encryption_disabled
+    }]
+
+    &quot;NO_ARTIFACTS&quot; = [{
+      type = &quot;${var.codebuild_artifacts_type}&quot;
+    }]
+  }
+
+  # Retuned map
+  codebuild_artifacts = &quot;${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;dynamic-blocks-in-terraform-012x&quot;&gt;Dynamic blocks in Terraform 0.12.x&lt;/h1&gt;
+
+&lt;p&gt;Terraform 0.12.x proposes &lt;a href=&quot;https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each&quot; target=&quot;_blank&quot;&gt;dynamic blocks&lt;/a&gt; to solve this and other cases related to blocks. To use dynamic blocks you have to use &lt;code class=&quot;highlighter-rouge&quot;&gt;dynamic&lt;/code&gt; and&lt;code class=&quot;highlighter-rouge&quot;&gt; for-each&lt;/code&gt;. For example, for the above definition:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  dynamic &quot;artifacts&quot; {
+    for_each = [local.codebuild_artifacts]
+    content {
+      type                = artifacts.value.type
+      encryption_disabled = lookup(artifacts.value, &quot;encryption_disabled&quot;, null)
+      location            = lookup(artifacts.value, &quot;location&quot;, null)
+      name                = lookup(artifacts.value, &quot;name&quot;, null)
+      namespace_type      = lookup(artifacts.value, &quot;namespace_type&quot;, null)
+      packaging           = lookup(artifacts.value, &quot;packaging&quot;, null)
+      path                = lookup(artifacts.value, &quot;path&quot;, null)
+    }
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This way the &lt;code class=&quot;highlighter-rouge&quot;&gt;local.codebuild_artifacts&lt;/code&gt; definition is simplify:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;locals {
+  codebuild_artifacts = {
+    type                = var.codebuild_artifacts_type
+    location            = var.codebuild_artifacts_location
+    name                = var.codebuild_artifacts_name
+    namespace_type      = var.codebuild_artifacts_namespace_type
+    packaging           = var.codebuild_artifacts_packaging
+    path                = var.codebuild_artifacts_path
+    encryption_disabled = var.codebuild_artifacts_encryption_disabled
+  }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;where-is-the-magic&quot;&gt;Where is the magic?&lt;/h2&gt;
+
+&lt;p&gt;First, in the &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; data type, which tells Terraform to ignore the attribute if the&lt;code class=&quot;highlighter-rouge&quot;&gt; lookup&lt;/code&gt; function doesn’t find the index on the map. Let’s take a look at the the first lines in the &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt; block, which is what is replaced in the &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts&lt;/code&gt; block in each iteration:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    content {
+      type                = artifacts.value.type
+      encryption_disabled = lookup(artifacts.value, &quot;encryption_disabled&quot;, null)
+      location            = lookup(artifacts.value, &quot;location&quot;, null)
+      ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here you can see that:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The attribute &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is always defined according to the value of&lt;code class=&quot;highlighter-rouge&quot;&gt; artifacts.value.type&lt;/code&gt;, so it’s not taken from the map.&lt;/li&gt;
+  &lt;li&gt;The attribute &lt;code class=&quot;highlighter-rouge&quot;&gt;encryption_disabled&lt;/code&gt; is assigned if something like&lt;code class=&quot;highlighter-rouge&quot;&gt; artifacts.value ['encryption_disabled'] &lt;/code&gt;is found in the map. If the index doesn’t exist, it’s assigned to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and therefore it won’t be taken into account by Terraform.&lt;/li&gt;
+  &lt;li&gt;And so on for the rest of the attributes, such as &lt;code class=&quot;highlighter-rouge&quot;&gt;location&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This allows having definitions of dynamic blocks, but you have to take into account that some values must be defined together. For example, for the &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt; type you must define the following variables:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;codebuild_artifacts_type
+codebuild_artifacts_location
+codebuild_artifacts_name
+codebuild_artifacts_namespace_type
+codebuild_artifacts_packaging
+codebuild_artifacts_path
+codebuild_artifacts_encryption_disabled
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;While for &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; just define this one:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;codebuild_artifacts_type
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;On the other hand, the magic is completed by the fact that we are not using an assignment for the a &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacs&lt;/code&gt; block but rather the dynamic block definition. In other words, instead of this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; artifacts = [&quot;${local.codebuild_artifacts}&quot;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The dynamic block definition is used:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  dynamic &quot;artifacts&quot; {
+    for_each = [local.codebuild_artifacts]
+    content {
+      ...
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lgallardo.com/2018/07/30/{:target=&amp;quot;_blank&amp;quot;}dynamic-configuration-blocks-in-terraform/&quot; target=&quot;_blank&quot;&gt;Dynamic blocks in Terraform (0.11.x)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each&quot; target=&quot;_blank&quot;&gt;HashiCorp Terraform 0.12 Preview: For and For-Each&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Guru of the week</title><link href="https://lgallardo.com/2019/05/13/2019-05-13-guru-of-the-week" rel="alternate" type="text/html" title="Guru of the week" /><published>2019-05-12T19:00:00-05:00</published><updated>2019-05-12T19:00:00-05:00</updated><id>https://lgallardo.com/2019/05/13/a-cloud-guru-of-the-week</id><content type="html" xml:base="https://lgallardo.com/2019/05/13/2019-05-13-guru-of-the-week">&lt;center&gt;&lt;img src=&quot;/images/guru-of-the-week-1.jpg&quot; alt=&quot;Guru of the week&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Last week I answered &lt;a href=&quot;https://acloud.guru/forums/guru-of-the-week/discussion/-Ldw3i4mdiMIpJGY6tem/%5Baws%5D_-_guru_of_the_week_quest&quot; target=&quot;_blank&quot;&gt;this Guru of the Week question&lt;/a&gt; and I won!. Some questions can be tricky, but the key is to think what service or technology solves the problem better.&lt;/p&gt;
@@ -458,9 +613,4 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
 
 &lt;p&gt;My idea is to review the possibilities that this platform can provide, and now with more reason as it was announced that &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/843d8579-18a3-4344-8c85-4ae36c400eaa/alexa-skills-kit-and-alexa-voice-service-expand-to-italy-and-spain&quot; target=&quot;_blank&quot;&gt;support for Spanish will come at the end of this year&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Another thing I’m reviewing is related to the &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/3a8f27f3-d724-4e0b-bc72-0dcddd0b2eab/announcing-an-easier-way-to-build-alexa-skills-using-python&quot; target=&quot;_blank&quot;&gt;Python SDK&lt;/a&gt;, which was recently released in beta.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="echo" /><summary type="html"></summary></entry><entry><title type="html">A Cloud Guru Member</title><link href="https://lgallardo.com/2018/07/15/2018-07-15-acloudguru-member/" rel="alternate" type="text/html" title="A Cloud Guru Member" /><published>2018-07-14T19:00:00-05:00</published><updated>2018-07-14T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/15/acloud-guru-member</id><content type="html" xml:base="https://lgallardo.com/2018/07/15/2018-07-15-acloudguru-member/">&lt;center&gt;&lt;img src=&quot;/images/acloudguru-member.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;585&quot; height=&quot;807&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;I received my swag: t-shirt and sticker pack from A Cloud Guru this week. How I got these items? I became a member and now I have access to all courses and materias, and can enjoy these gifts :)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt; &lt;a href=&quot;https://acloud.guru/membership&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - Become a member&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;Another thing I’m reviewing is related to the &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/3a8f27f3-d724-4e0b-bc72-0dcddd0b2eab/announcing-an-easier-way-to-build-alexa-skills-using-python&quot; target=&quot;_blank&quot;&gt;Python SDK&lt;/a&gt;, which was recently released in beta.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="echo" /><summary type="html"></summary></entry></feed>
