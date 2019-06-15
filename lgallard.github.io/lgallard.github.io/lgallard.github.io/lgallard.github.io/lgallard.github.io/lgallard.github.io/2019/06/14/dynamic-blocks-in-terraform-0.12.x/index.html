@@ -70,7 +70,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2010-06-13T19:00:00-05:00">
+  <meta property="article:published_time" content="2019-06-13T19:00:00-05:00">
 
 
 
@@ -302,7 +302,7 @@
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Bloques dinámicos en Terraform 0.12.x">
     <meta itemprop="description" content="">
-    <meta itemprop="datePublished" content="June 14, 2010">
+    <meta itemprop="datePublished" content="June 14, 2019">
     
 
     <div class="page__inner-wrap">
@@ -326,9 +326,9 @@
         <center><img src="/images/terraform.jpg" alt="Terraform" /></center>
 <p><br /></p>
 
-<p>Some time ago I wrote about [how to make dynamic blocks in Terraform 0.11.x] (https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform/){:target=”_blank”}, that although it solved the problem generated others because it was not an official solution and the interpretation by Terraform was not consistent.</p>
+<p>Some time ago I wrote about <a href="https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform/" target="_blank">how to make dynamic blocks in Terraform 0.11.x</a>, that although it solved the problem, it generated others because it wasn’t an official solution and the interpretation by Terraform was not consistent.</p>
 
-<p>The unofficial solution essentially consisted of defining the blocks dynamically using an assignment to a map list. That is, instead of doing this:</p>
+<p>The workaround essentially consisted of defining the blocks dynamically using an assignment to a map list. That is, instead of doing this:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 resource "aws_codebuild_project" "codebuild" {
@@ -346,8 +346,8 @@ resource "aws_codebuild_project" "codebuild" {
   ...
 
 }
-
 </code></pre></div></div>
+
 <p>It was replaced by this other:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
@@ -393,7 +393,7 @@ locals {
 
 <h1 id="dynamic-blocks-in-terraform-012x">Dynamic blocks in Terraform 0.12.x</h1>
 
-<p>Terraform 0.12.x proposes [dynamic blocks] (https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each){:target=”_blank”} to solve this and other cases related to blocks. To use dynamic blocks you have to use <code class="highlighter-rouge">dynamic</code> and<code class="highlighter-rouge"> for-each</code>. For example, for the above definition:</p>
+<p>Terraform 0.12.x proposes <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">dynamic blocks</a> to solve this and other cases related to blocks. To use dynamic blocks you have to use <code class="highlighter-rouge">dynamic</code> and<code class="highlighter-rouge"> for-each</code>. For example, for the above definition:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
     for_each = [local.codebuild_artifacts]
@@ -439,12 +439,12 @@ locals {
 <p>Here you can see that:</p>
 
 <ol>
-  <li>The attribute <code class="highlighter-rouge">type</code> is always defined according to the value of<code class="highlighter-rouge"> artifacts.value.type</code>. That is, it isn’t found in the map.</li>
+  <li>The attribute <code class="highlighter-rouge">type</code> is always defined according to the value of<code class="highlighter-rouge"> artifacts.value.type</code>, so it’s not taken from the map.</li>
   <li>The attribute <code class="highlighter-rouge">encryption_disabled</code> is assigned if something like<code class="highlighter-rouge"> artifacts.value ['encryption_disabled'] </code>is found in the map. If the index doesn’t exist, it’s assigned to <code class="highlighter-rouge">null</code> and therefore it won’t be taken into account by Terraform.</li>
   <li>And so on for the rest of the attributes, such as <code class="highlighter-rouge">location</code>.</li>
 </ol>
 
-<p>This allows having definitions of dynamic blocks, but taking into account that certain values must be defined together. For example, for the <code class="highlighter-rouge">S3</code> type you must define the variables:</p>
+<p>This allows having definitions of dynamic blocks, but you have to take into account that some values must be defined together. For example, for the <code class="highlighter-rouge">S3</code> type you must define the following variables:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebuild_artifacts_type
 codebuild_artifacts_location
@@ -454,15 +454,18 @@ codebuild_artifacts_packaging
 codebuild_artifacts_path
 codebuild_artifacts_encryption_disabled
 </code></pre></div></div>
-<p>While for <code class="highlighter-rouge">NO_ARTIFACTS</code> it’s enough with:</p>
+
+<p>While for <code class="highlighter-rouge">NO_ARTIFACTS</code> just define this one:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebuild_artifacts_type
 </code></pre></div></div>
 
-<p>On the other hand, the magic is completed by the fact that it’s not using ashing for the <code class="highlighter-rouge">artifacs</code> block but rather the block definition. I mean, instead of this</p>
+<p>On the other hand, the magic is completed by the fact that we are not using an assignment for the a <code class="highlighter-rouge">artifacs</code> block but rather the dynamic block definition. In other words, instead of this:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> artifacts = ["${local.codebuild_artifacts}"]
 </code></pre></div></div>
+
+<p>The dynamic block definition is used:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
     for_each = [local.codebuild_artifacts]
@@ -473,8 +476,7 @@ codebuild_artifacts_encryption_disabled
 
 <h2 id="references">References:</h2>
 <ul>
-  <li><a href="https://lgallardo.com/es/2018/07/30/{:target=&quot;_blank&quot;}dynamic-configuration-blocks-in-terraform/" target="_blank">Bloques dinámicos en Terraform (0.11.x)</a></li>
-  <li><a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">bloques dinámicos</a></li>
+  <li><a href="https://lgallardo.com/2018/07/30/{:target=&quot;_blank&quot;}dynamic-configuration-blocks-in-terraform/" target="_blank">Dynamic blocks in Terraform (0.11.x)</a></li>
   <li><a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">HashiCorp Terraform 0.12 Preview: For and For-Each</a></li>
 </ul>
 
@@ -530,7 +532,7 @@ codebuild_artifacts_encryption_disabled
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2010-06-13T19:00:00-05:00">June 14, 2010</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-06-13T19:00:00-05:00">June 14, 2019</time></p>
         
       </footer>
 
@@ -552,12 +554,11 @@ codebuild_artifacts_encryption_disabled
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/2010/01/14/compilar-el-kernel-a-lo-tradicional/" class="pagination--pager" title="Kernel compiling the old-fashion way
+      <a href="https://lgallardo.com/2019/05/13/2019-05-13-guru-of-the-week" class="pagination--pager" title="Guru of the week
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/2011/09/08/configurar-openvpn-en-openwrt/" class="pagination--pager" title="Setting OpenVPN on OpenWrt
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -698,6 +699,7 @@ codebuild_artifacts_encryption_disabled
         
       </div>
     </div>
+  
   
 </div>
 
