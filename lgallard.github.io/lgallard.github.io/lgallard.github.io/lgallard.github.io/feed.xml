@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2019-06-15T09:57:18-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Dynamic blocks in Terraform 0.12.x</title><link href="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/" rel="alternate" type="text/html" title="Dynamic blocks in Terraform 0.12.x" /><published>2019-06-13T19:00:00-05:00</published><updated>2019-06-13T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x</id><content type="html" xml:base="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2019-06-26T15:50:45-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">How to migrate Terraform remote tfstates remotos</title><link href="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/" rel="alternate" type="text/html" title="How to migrate Terraform remote tfstates remotos" /><published>2019-06-24T19:00:00-05:00</published><updated>2019-06-24T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates</id><content type="html" xml:base="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/">&lt;center&gt;&lt;img src=&quot;/images/terraform-remote-states.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;In Terraform you can rename and move resources and modules in the same state, whether it is local or remote. But when you want to migrate resources or modules between remote states, you have to take other considerations.&lt;/p&gt;
+
+&lt;p&gt;To solve this, you have to bring the remote configuration, then move the resource locally, and once it has been moved, upload the change to the remote tftstate.&lt;/p&gt;
+
+&lt;p&gt;Let’s see how to do this:&lt;/p&gt;
+
+&lt;p&gt;1) Pull the destination remote tfstate:
+  &lt;/p&gt;
+
+&lt;p&gt;To move the resources from one tstate to another, you need to have the tfstate destination locally&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform state pull &amp;gt; dev.tfstate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;2) Move the resource or module to this local tfstate&lt;/p&gt;
+
+&lt;p&gt;In this example we want to move the &lt;code class=&quot;highlighter-rouge&quot;&gt;module.lambda.module.your_funtion&lt;/code&gt; resource to &lt;code class=&quot;highlighter-rouge&quot;&gt;module.your_function&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform state mv -state-out=dev.tfstate module.lambda.module.your_function module.your_function
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3) Upload the change to the remote tftstate&lt;/p&gt;
+
+&lt;p&gt;The resource was moved from one state to another, but it was done locally. To persist in the destination remote tftstate it must be uploadedr:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform state push dev.tfstate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In some cases the use of the &lt;code class=&quot;highlighter-rouge&quot;&gt;-force&lt;/code&gt; option may be required, for example when there were problems with the initialization of the module, so the previous command would be as follows:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform state push -force dev.tfstate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, and once you have verified that everything is correct, you can delete the local tftstate :&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ rm dev.tfstate*
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@lynnlin827/moving-terraform-resources-states-from-one-remote-state-to-another-c76f8b76a996&quot; target=&quot;_blank&quot;&gt;Moving Terraform Resources’ States from One Remote State to Another&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/50400007/terraform-how-to-migrate-state-between-projects&quot; target=&quot;_blank&quot;&gt;Terraform: How to migrate state between projects?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Dynamic blocks in Terraform 0.12.x</title><link href="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/" rel="alternate" type="text/html" title="Dynamic blocks in Terraform 0.12.x" /><published>2019-06-13T19:00:00-05:00</published><updated>2019-06-13T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x</id><content type="html" xml:base="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Some time ago I wrote about &lt;a href=&quot;https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform&quot; target=&quot;_blank&quot;&gt;how to make dynamic blocks in Terraform 0.11.x&lt;/a&gt;, that although it solved the problem, it generated others because it wasn’t an official solution and the interpretation by Terraform was not consistent.&lt;/p&gt;
@@ -606,11 +651,4 @@ REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Bille
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;jorgebastida/awslogs&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://gist.github.com/apeckham/9bcb464096997c1b0d41&quot; target=&quot;_blank&quot;&gt;View aws lambda logs on the command line&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">echo dot</title><link href="https://lgallardo.com/2018/07/20/2018-07-20-echo-dot/" rel="alternate" type="text/html" title="echo dot" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/20/echo-dot</id><content type="html" xml:base="https://lgallardo.com/2018/07/20/2018-07-20-echo-dot/">&lt;center&gt;&lt;img src=&quot;/images/echo-dot.jpg&quot; alt=&quot;echo dot&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Since I’m working on some projects in the company with Alexa, I got a echo dot.&lt;/p&gt;
-
-&lt;p&gt;My idea is to review the possibilities that this platform can provide, and now with more reason as it was announced that &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/843d8579-18a3-4344-8c85-4ae36c400eaa/alexa-skills-kit-and-alexa-voice-service-expand-to-italy-and-spain&quot; target=&quot;_blank&quot;&gt;support for Spanish will come at the end of this year&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Another thing I’m reviewing is related to the &lt;a href=&quot;https://developer.amazon.com/blogs/alexa/post/3a8f27f3-d724-4e0b-bc72-0dcddd0b2eab/announcing-an-easier-way-to-build-alexa-skills-using-python&quot; target=&quot;_blank&quot;&gt;Python SDK&lt;/a&gt;, which was recently released in beta.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="echo" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
