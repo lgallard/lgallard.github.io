@@ -36,8 +36,8 @@
 <meta property="og:title" content="Using AWS Lambda to copy RDS snapshots between regions">
 
 
-  <link rel="canonical" href="https://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">
-  <meta property="og:url" content="https://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">
+  <link rel="canonical" href="http://0.0.0.0:4000/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">
+  <meta property="og:url" content="http://0.0.0.0:4000/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">
 
 
 
@@ -48,7 +48,7 @@
   <meta name="twitter:site" content="@lgallard">
   <meta name="twitter:title" content="Using AWS Lambda to copy RDS snapshots between regions">
   <meta name="twitter:description" content="At work we needed to make MySQL database on RDS backups between regions without having a running instance in the destination region, I mean, no read replicas wanted. Someone suggested to use a cron to copy the backups between regions. I thought this had to been done so I decided to do a research and I ran into this excellent post that explains how to make the copy using Lambda functions with Python: Copying RDS snapshot to another region for cross-region recoveryThis function get the last snapshots for all RDS databases in the source region and copies them to the destination region. Then it deletes old snapshots in the destination region to save space. The function can be triggered using CloudWatch or RDS events, for example when the database backup is finished.Paulina Budzon, the post author, commented that the function can be improved so I made some changes:  Added database list to be backup-ed, instead of all databases in RDS  Changed variable naming to avoid reference to the destination region  Removed source region example reference in SourceDBSnapshotIdentifier string  Added variables for source and destination regionsI shared the code here but it can be got from my fork https://github.com/lgallard/aws-maintenance, or you can get it from Paulina’s https://github.com/pbudzon/aws-maintenance, because she merged my  pull request.I hope it helps somebody else:import boto3 import operatoraws_account = &#39;XXXX&#39; source = &#39;us-east-1&#39; destination = &#39;sa-east-1&#39; databases = [&#39;mysqldb01&#39;, &#39;pgdb01&#39;]def copy_latest_snapshot(): client = boto3.client(&#39;rds&#39;, source) foreign_client = boto3.client(&#39;rds&#39;, destination)response = client.describe_db_snapshots( SnapshotType=&#39;automated&#39;, IncludeShared=False, IncludePublic=False )if len(response[&#39;DBSnapshots&#39;]) == 0: raise Exception(&quot;No automated snapshots found&quot;)snapshots_per_project = {}for snapshot in response[&#39;DBSnapshots&#39;]: if snapshot[&#39;DBInstanceIdentifier&#39;] not in databases or snapshot[&#39;Status&#39;] != &#39;available&#39; : continueif snapshot[&#39;DBInstanceIdentifier&#39;] not in snapshots_per_project.keys(): snapshots_per_project[snapshot[&#39;DBInstanceIdentifier&#39;]] = {}snapshots_per_project[snapshot[&#39;DBInstanceIdentifier&#39;]][snapshot[&#39;DBSnapshotIdentifier&#39;]] = snapshot[ &#39;SnapshotCreateTime&#39;]for project in snapshots_per_project: sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True)copy_name = project + &quot;-&quot; + sorted_list[0][1].strftime(&quot;%Y-%m-%d&quot;)print(&quot;Checking if &quot; + copy_name + &quot; is copied&quot;)try: foreign_client.describe_db_snapshots( DBSnapshotIdentifier=copy_name ) except: response = foreign_client.copy_db_snapshot( SourceDBSnapshotIdentifier=&#39;arn:aws:rds:&#39; + source + &#39;:&#39; + aws_account + &#39;:snapshot:&#39; + sorted_list[0][0], TargetDBSnapshotIdentifier=copy_name, CopyTags=True )if response[&#39;DBSnapshot&#39;][&#39;Status&#39;] != &quot;pending&quot; and response[&#39;DBSnapshot&#39;][&#39;Status&#39;] != &quot;available&quot;: raise Exception(&quot;Copy operation for &quot; + copy_name + &quot; failed!&quot;) print(&quot;Copied &quot; + copy_name)continueprint(&quot;Already copied&quot;)def remove_old_snapshots(): client = boto3.client(&#39;rds&#39;, source) foreign_client = boto3.client(&#39;rds&#39;, destination)response = foreign_client.describe_db_snapshots( SnapshotType=&#39;manual&#39; )if len(response[&#39;DBSnapshots&#39;]) == 0: raise Exception(&quot;No manual snapshots in &quot;+ destination + &quot; found&quot;)snapshots_per_project = {} for snapshot in response[&#39;DBSnapshots&#39;]: if snapshot[&#39;DBInstanceIdentifier&#39;] not in databases or snapshot[&#39;Status&#39;] != &#39;available&#39; : continueif snapshot[&#39;DBInstanceIdentifier&#39;] not in snapshots_per_project.keys(): snapshots_per_project[snapshot[&#39;DBInstanceIdentifier&#39;]] = {}snapshots_per_project[snapshot[&#39;DBInstanceIdentifier&#39;]][snapshot[&#39;DBSnapshotIdentifier&#39;]] = snapshot[ &#39;SnapshotCreateTime&#39;]for project in snapshots_per_project: if len(snapshots_per_project[project]) &amp;gt; 1: sorted_list = sorted(snapshots_per_project[project].items(), key=operator.itemgetter(1), reverse=True) to_remove = [i[0] for i in sorted_list[1:]]for snapshot in to_remove: print(&quot;Removing &quot; + snapshot) foreign_client.delete_db_snapshot( DBSnapshotIdentifier=snapshot )def lambda_handler(event, context): copy_latest_snapshot() remove_old_snapshots()if __name__ == &#39;__main__&#39;: lambda_handler(None, None)&lt;/pre&gt;Reference: Copying RDS snapshot to another region for cross-region recovery">
-  <meta name="twitter:url" content="https://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">
+  <meta name="twitter:url" content="http://0.0.0.0:4000/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/">
 
   
     <meta name="twitter:card" content="summary">
@@ -84,7 +84,7 @@
       "@context" : "http://schema.org",
       "@type" : "Person",
       "name" : "Luis M. Gallardo D.",
-      "url" : "https://lgallardo.com",
+      "url" : "http://0.0.0.0:4000",
       "sameAs" : null
     }
   </script>
@@ -97,7 +97,7 @@
 <!-- end SEO -->
 
 
-<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="http://0.0.0.0:4000/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -109,7 +109,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+<link rel="stylesheet" href="http://0.0.0.0:4000/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -150,14 +150,14 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <a class="site-title" href="http://0.0.0.0:4000/">lgallardo.com</a>
         <ul class="visible-links">
           
             
-            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+            <li class="masthead__menu-item"><a href="http://0.0.0.0:4000/categories/">Categories</a></li>
           
             
-            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+            <li class="masthead__menu-item"><a href="http://0.0.0.0:4000/tags/">Tags</a></li>
           
           
             
@@ -187,7 +187,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="http://0.0.0.0:4000/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -464,15 +464,15 @@ if __name__ == '__main__':
     
       
       
-      <a href="https://lgallardo.com/tags/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+      <a href="http://0.0.0.0:4000/tags/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/tags/lambda" class="page__taxonomy-item" rel="tag">Lambda</a><span class="sep">, </span>
+      <a href="http://0.0.0.0:4000/tags/lambda" class="page__taxonomy-item" rel="tag">Lambda</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/tags/rds" class="page__taxonomy-item" rel="tag">RDS</a>
+      <a href="http://0.0.0.0:4000/tags/rds" class="page__taxonomy-item" rel="tag">RDS</a>
     
     </span>
   </p>
@@ -493,11 +493,11 @@ if __name__ == '__main__':
     
       
       
-      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
+      <a href="http://0.0.0.0:4000/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/categories/programming" class="page__taxonomy-item" rel="tag">Programming</a>
+      <a href="http://0.0.0.0:4000/categories/programming" class="page__taxonomy-item" rel="tag">Programming</a>
     
     </span>
   </p>
@@ -513,24 +513,24 @@ if __name__ == '__main__':
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Using+AWS+Lambda+to+copy+RDS+snapshots+between+regions%20https%3A%2F%2Flgallardo.com%2F2017%2F02%2F11%2Fusando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Using+AWS+Lambda+to+copy+RDS+snapshots+between+regions%20http%3A%2F%2F0.0.0.0%3A4000%2F2017%2F02%2F11%2Fusando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2017%2F02%2F11%2Fusando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F0.0.0.0%3A4000%2F2017%2F02%2F11%2Fusando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2017%2F02%2F11%2Fusando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=http%3A%2F%2F0.0.0.0%3A4000%2F2017%2F02%2F11%2Fusando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2017%2F02%2F11%2Fusando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2F0.0.0.0%3A4000%2F2017%2F02%2F11%2Fusando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/2016/09/13/como-cargar-el-driver-de-virtualbox/" class="pagination--pager" title="How to load the VirtualBox driver
+      <a href="http://0.0.0.0:4000/2016/09/13/como-cargar-el-driver-de-virtualbox/" class="pagination--pager" title="How to load the VirtualBox driver
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" class="pagination--pager" title="Posting from Jekyll to GitHub Pages with Bitbucket Pipeline
+      <a href="http://0.0.0.0:4000/2017/10/13/posting-from-jekyll-to-github-pages-with-bitbucket-pipeline/" class="pagination--pager" title="Posting from Jekyll to GitHub Pages with Bitbucket Pipeline
 ">Next</a>
     
   </nav>
@@ -563,7 +563,7 @@ if __name__ == '__main__':
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers" rel="permalink">Using Alexa ASK SDK from Lambda Layers
+        <a href="http://0.0.0.0:4000/2018/12/04/using-alexa-ask-from-lambda-layers" rel="permalink">Using Alexa ASK SDK from Lambda Layers
 </a>
       
     </h2>
@@ -592,7 +592,7 @@ if __name__ == '__main__':
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2018/09/07/codepipeline-bitbucket" rel="permalink">AWS CodePipeline with Bitbucket
+        <a href="http://0.0.0.0:4000/2018/09/07/codepipeline-bitbucket" rel="permalink">AWS CodePipeline with Bitbucket
 </a>
       
     </h2>
@@ -621,7 +621,7 @@ if __name__ == '__main__':
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2018/08/12/aws-certified-devops-engineer-professional" rel="permalink">AWS Certified DevOps Engineer - Professional
+        <a href="http://0.0.0.0:4000/2018/08/12/aws-certified-devops-engineer-professional" rel="permalink">AWS Certified DevOps Engineer - Professional
 </a>
       
     </h2>
@@ -650,7 +650,7 @@ if __name__ == '__main__':
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="permalink">Dynamic configuration blocks in Terraform
+        <a href="http://0.0.0.0:4000/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="permalink">Dynamic configuration blocks in Terraform
 </a>
       
     </h2>
@@ -695,7 +695,7 @@ if __name__ == '__main__':
     
     
     
-    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="http://0.0.0.0:4000/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -705,7 +705,7 @@ if __name__ == '__main__':
     </div>
 
     
-  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+  <script src="http://0.0.0.0:4000/assets/js/main.min.js"></script>
 
 
 
@@ -714,7 +714,7 @@ if __name__ == '__main__':
       
   <script>
     var disqus_config = function () {
-      this.page.url = "https://lgallardo.com/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.url = "http://0.0.0.0:4000/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones/";  // Replace PAGE_URL with your page's canonical URL variable
       this.page.identifier = "/2017/02/11/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
