@@ -327,7 +327,7 @@
         <center><img src="/images/terraform.jpg" alt="Terraform" /></center>
 <p><br /></p>
 
-<p>Hace un tiempo escribí sobre <a href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform">cómo hacer bloques dinámicos en Terraform 0.11.x</a>/){:target=”_blank”}, que si bien resolvía el problema generaba otros debido a que era no era una solución oficial.</p>
+<p>Hace un tiempo escribí sobre <a href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform" target="_blank">cómo hacer bloques dinámicos en Terraform 0.11.x</a>, que si bien resolvía el problema generaba otros debido a que era no era una solución oficial.</p>
 
 <p>En esencia lo que hacía era definir los bloques de forma dinámica usando una asiganción a una lista de maps. Es decir, en vez de hacer esto:</p>
 
@@ -430,7 +430,7 @@ locals {
 
 </code></pre></div></div>
 
-<h2 id="dónde-está-la-magia">¿Dónde está la magia?</h2>
+<p><strong>¿Dónde está la magia?</strong></p>
 
 <p>Primero, en el tipo de datos <code class="highlighter-rouge">null</code>, el cual le dice a Terraform que ignore el atributo si la función <code class="highlighter-rouge">lookup</code> no encuentra el índice en el map.</p>
 
