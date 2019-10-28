@@ -1,4 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2019-06-26T15:58:45-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">How to migrate Terraform remote tfstates</title><link href="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/" rel="alternate" type="text/html" title="How to migrate Terraform remote tfstates" /><published>2019-06-24T19:00:00-05:00</published><updated>2019-06-24T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates</id><content type="html" xml:base="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/">&lt;center&gt;&lt;img src=&quot;/images/terraform-remote-states.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2019-07-05T16:33:29-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Alexa skill: Días Festivos</title><link href="https://lgallardo.com/2019/07/05/holidays-alexa-skill" rel="alternate" type="text/html" title="Alexa skill: Días Festivos" /><published>2019-07-04T19:00:00-05:00</published><updated>2019-07-04T19:00:00-05:00</updated><id>https://lgallardo.com/2019/07/05/holidays-alexa-skill</id><content type="html" xml:base="https://lgallardo.com/2019/07/05/holidays-alexa-skill">&lt;center&gt;&lt;img src=&quot;/images/first_skill.jpg&quot; alt=&quot;Skill - Días Festivos&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The countries where you can check the holidays are &lt;strong&gt;Argentina&lt;/strong&gt;,Australia, Austria, Belarus, Belgium, Brazil, Bulgaria, Canada, &lt;strong&gt;Colombia&lt;/strong&gt;, Croatia, Czech, Denmark, Finland, France, Germany, Hungary, India, Ireland, Isle Of Man, Italy, Japan, Lithuania, Luxembourg, &lt;strong&gt;México&lt;/strong&gt;, Netherlands, New Zealand,, Norway, Poland, Portugal, Russia, Scotland, Slovenia, Slovakia, South Africa, &lt;strong&gt;Spain&lt;/strong&gt;, Sweden, Switzerland, Ukraine, &lt;strong&gt;United Kingdom&lt;/strong&gt;, &lt;strong&gt;United States&lt;/strong&gt;, Wales.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If your country is not listed, the skill will use &lt;strong&gt;Spain&lt;/strong&gt; as the default country.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;To install the skill go to the Alexa app and enable the skill &lt;strong&gt;&lt;em&gt;Días festivos&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-it-work&quot;&gt;How does it work?&lt;/h2&gt;
+
+&lt;p&gt;Like any skill, ask Alexa to open the skill:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Alexa, open the skill Días festivos&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;After the welcome message you can ask:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;¿Cuándo es el próximo feriado?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You can also ask Alexa directly in this way:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Alexa, pregúntale a días festivos cuando cae navidad
+Alexa, pregúntale a días festivos cuántos días feriados tiene febrero
+Alexa, cuándo es el próximo feriado&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;what-else-does-the-skill-do&quot;&gt;What else does the skill do?&lt;/h2&gt;
+
+&lt;p&gt;I hope to add more features, and in the future expand the list of countries.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><summary type="html"></summary></entry><entry><title type="html">How to migrate Terraform remote tfstates</title><link href="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/" rel="alternate" type="text/html" title="How to migrate Terraform remote tfstates" /><published>2019-06-24T19:00:00-05:00</published><updated>2019-06-24T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates</id><content type="html" xml:base="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/">&lt;center&gt;&lt;img src=&quot;/images/terraform-remote-states.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;In Terraform you can rename and move resources and modules in the same state, whether it is local or remote. But when you want to migrate resources or modules between remote states, you have to take other considerations.&lt;/p&gt;
@@ -592,63 +626,4 @@ locals {
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;locals values de Terraform&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuild community module&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Getting AWS Logs from the CLI</title><link href="https://lgallardo.com/2018/07/25/awslogs-cli/" rel="alternate" type="text/html" title="Getting AWS Logs from the CLI" /><published>2018-07-19T19:00:00-05:00</published><updated>2018-07-19T19:00:00-05:00</updated><id>https://lgallardo.com/2018/07/25/awslogs-from-cli</id><content type="html" xml:base="https://lgallardo.com/2018/07/25/awslogs-cli/">&lt;center&gt;&lt;img src=&quot;/images/lambda-logs.jpg&quot; alt=&quot;Lambda logs&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;One of the company’s developers asked me if there was any way to view the Lambda function logs from the command line, so I wouldn’t have to go into the AWS console and see them in CloudWatch Logs. After some research I got a project in Github called &lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;awslogs&lt;/a&gt; that does just this. Here’s how to install and use it from a Python virtual environment:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;virualenv awslogs
-source awslogs/bin/activate
-
-pip install awslogs
-pip install awscli
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The first thing we need to know are the groups where the logs of our Lambda functions are defined, for this we use the AWS CLI:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-aws logs describe-log-grups --region us-east-1
-{
-    &quot;logGroups&quot;: [
-        {
-            &quot;arn&quot;: &quot;arn:aws:logs:us-east-1:123456789123:log-group:/aws/lambda/get_transcription:*&quot;, 
-            &quot;creationTime&quot;: 1531834572841, 
-            &quot;metricFilterCount&quot;: 0, 
-            &quot;logGroupName&quot;: &quot;/aws/lambda/get_transcription&quot;, 
-            &quot;storedBytes&quot;: 0
-        },
-        {
-            &quot;arn&quot;: &quot;arn:aws:logs:us-east-1:264349563434:log-group:/aws/lambda/validate_time:*&quot;, 
-            &quot;creationTime&quot;: 1532118107128, 
-            &quot;metricFilterCount&quot;: 0, 
-            &quot;logGroupName&quot;: &quot;/aws/lambda/validate_time&quot;, 
-            &quot;storedBytes&quot;: 0
-        }
-    ]
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now to view the logs of, for example, the function &lt;code class=&quot;highlighter-rouge&quot;&gt;get_transcription&lt;/code&gt; from the command line we can execute:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;awslogs get  /aws/lambda/get_transcription --aws-region us-east-1  --watch  | cut -d &quot; &quot; -f 3-20
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;And the result would be something like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;START RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1 Version: $LATEST
-[DEBUG]	2018-07-23T15:39:50.422Z	a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Searching id: e321-eaefe4311ca1
-tuple indices must be integers or slices, not str: TypeError
-recent call last):
-File &quot;/var/task/app/services/get_transcription.py&quot;, line 100, in lambda_handler
-  date_text = field['transcription']
-indices must be integers or slices, not str
-END RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1
-REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Billed Duration: 300 ms 	Memory Size: 128 MB	Max Memory Used: 33 MB
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/jorgebastida/awslogs&quot; target=&quot;_blank&quot;&gt;jorgebastida/awslogs&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/apeckham/9bcb464096997c1b0d41&quot; target=&quot;_blank&quot;&gt;View aws lambda logs on the command line&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry></feed>
