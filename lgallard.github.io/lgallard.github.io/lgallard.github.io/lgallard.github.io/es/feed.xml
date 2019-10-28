@@ -1,4 +1,329 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2019-07-05T16:46:15-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Skill de Alexa: Días Festivos</title><link href="https://lgallardo.com/es/2019/07/05/holidays-alexa-skill" rel="alternate" type="text/html" title="Skill de Alexa: Días Festivos" /><published>2019-07-04T19:00:00-05:00</published><updated>2019-07-04T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/07/05/holidays-alexa-skill</id><content type="html" xml:base="https://lgallardo.com/es/2019/07/05/holidays-alexa-skill">&lt;center&gt;&lt;img src=&quot;/images/first_skill.jpg&quot; alt=&quot;Skill - Días Festivos&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2019-10-18T14:26:04-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for AWS Backup</title><link href="https://lgallardo.com/es/2019/10/18/terraform-aws-backup-module-published-in-terraform-registry" rel="alternate" type="text/html" title="Terraform module for AWS Backup" /><published>2019-10-17T19:00:00-05:00</published><updated>2019-10-17T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/10/18/terraform-mpdule-for-aws-backup</id><content type="html" xml:base="https://lgallardo.com/es/2019/10/18/terraform-aws-backup-module-published-in-terraform-registry">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-backup-terraform-registry.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Acabo de publicar mi primer módulo Terraform de código abierto llamado &lt;strong&gt;terraform-aws-backup&lt;/strong&gt; en github, así que decidí compartirlo también en el Registro público de Terraform.&lt;/p&gt;
+
+&lt;p&gt;Puedes verificar mi módulo &lt;strong&gt;terraform-aws-backup&lt;/strong&gt; en el &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; o clonarlo de &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup.git&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:&lt;/p&gt;
+
+&lt;h1 id=&quot;terraform-aws-backup&quot;&gt;terraform-aws-backup&lt;/h1&gt;
+
+&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/backup/&quot; target=&quot;_blank&quot;&gt;AWS Backup&lt;/a&gt; plans.  AWS Backup is a fully managed backup service that makes it easy to centralize and automate the back up of data across AWS services (EBS volumes, RDS databases, DynamoDB tables, EFS file systems, and Storage Gateway volumes).&lt;/p&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;You can use this module to create a simple plan using the module’s &lt;code class=&quot;highlighter-rouge&quot;&gt;rule_*&lt;/code&gt; variables. You can also  use the &lt;code class=&quot;highlighter-rouge&quot;&gt;rules&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;selections&lt;/code&gt; list of maps variables to build a more complete plan by defining several rules and selections at once.&lt;/p&gt;
+
+&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/tree/master/examples&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; for the  &lt;strong&gt;simple plan&lt;/strong&gt;, the &lt;strong&gt;simple plan with list&lt;/strong&gt; and the &lt;strong&gt;complete plan&lt;/strong&gt; snippets.&lt;/p&gt;
+
+&lt;h3 id=&quot;example-complete-plan&quot;&gt;Example (complete plan)&lt;/h3&gt;
+
+&lt;p&gt;This example creates a plan with two rules and two selections at once. It also defines a vault key which is used by the first rule because no &lt;code class=&quot;highlighter-rouge&quot;&gt;target_vault_name&lt;/code&gt; was given (null). Whereas the second rule is using the “Default” vault key.&lt;/p&gt;
+
+&lt;p&gt;The first selection has two assignments, the first defined by a resource ARN and the second one defined by a tag condition. The second selection has just one assignment defined by a resource ARN.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_backup_example&quot; {
+
+  source = &quot;../modules/terraform-aws-backup&quot;
+
+  # Vault
+  vault_name = &quot;vault-3&quot;
+
+  # Plan
+  plan_name = &quot;complete-plan&quot;
+
+  # Multiple rules using a list of maps
+  rules = [
+    {
+      name              = &quot;rule-1&quot;
+      schedule          = &quot;cron(0 12 * * ? *)&quot;
+      target_vault_name = null
+      start_window      = 120
+      completion_window = 360
+      lifecycle = {
+        cold_storage_after = 0
+        delete_after       = 90
+      },
+      recovery_point_tags = {
+        Environment = &quot;production&quot;
+      }
+    },
+    {
+      name                = &quot;rule-2&quot;
+      target_vault_name   = &quot;Default&quot;
+      schedule            = null
+      start_window        = 120
+      completion_window   = 360
+      lifecycle           = {}
+      recovery_point_tags = {}
+    },
+  ]
+
+  # Multiple selections
+  #  - Selection-1: By resources and tag
+  #  - Selection-2: Only by resources
+  selections = [
+    {
+      name      = &quot;selection-1&quot;
+      resources = [&quot;arn:aws:dynamodb:us-east-1:123456789101:table/mydynamodb-table1&quot;]
+      selection_tag = {
+        type  = &quot;STRINGEQUALS&quot;
+        key   = &quot;Environment&quot;
+        value = &quot;production&quot;
+      }
+    },
+    {
+      name          = &quot;selection-2&quot;
+      resources     = [&quot;arn:aws:dynamodb:us-east-1:123456789101:table/mydynamodb-table2&quot;]
+      selection_tag = {}
+    },
+  ]
+
+  tags = {
+    Owner       = &quot;backup team&quot;
+    Environment = &quot;production&quot;
+    Terraform   = true
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Default&lt;/th&gt;
+      &lt;th&gt;Required&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;plan_name&lt;/td&gt;
+      &lt;td&gt;The display name of a backup plan&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rule_completion_window&lt;/td&gt;
+      &lt;td&gt;The amount of time AWS Backup attempts a backup before canceling the job and returning an error&lt;/td&gt;
+      &lt;td&gt;`number`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rule_lifecycle_cold_storage_after&lt;/td&gt;
+      &lt;td&gt;Specifies the number of days after creation that a recovery point is moved to cold storage&lt;/td&gt;
+      &lt;td&gt;`number`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rule_lifecycle_delete_after&lt;/td&gt;
+      &lt;td&gt;Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than `cold_storage_after`&lt;/td&gt;
+      &lt;td&gt;`number`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rule_name&lt;/td&gt;
+      &lt;td&gt;An display name for a backup rule&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rule_recovery_point_tags&lt;/td&gt;
+      &lt;td&gt;Metadata that you can assign to help organize the resources that you create&lt;/td&gt;
+      &lt;td&gt;`map(string)`&lt;/td&gt;
+      &lt;td&gt;`{}`&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rule_schedule&lt;/td&gt;
+      &lt;td&gt;A CRON expression specifying when AWS Backup initiates a backup job&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rule_start_window&lt;/td&gt;
+      &lt;td&gt;The amount of time in minutes before beginning a backup&lt;/td&gt;
+      &lt;td&gt;`number`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rules&lt;/td&gt;
+      &lt;td&gt;A list of rule maps&lt;/td&gt;
+      &lt;td&gt;`list`&lt;/td&gt;
+      &lt;td&gt;`[]`&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selection_name&lt;/td&gt;
+      &lt;td&gt;The display name of a resource selection document&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selection_resources&lt;/td&gt;
+      &lt;td&gt;An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan&lt;/td&gt;
+      &lt;td&gt;`list`&lt;/td&gt;
+      &lt;td&gt;`[]`&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selection_tag_key&lt;/td&gt;
+      &lt;td&gt;The key in a key-value pair&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selection_tag_type&lt;/td&gt;
+      &lt;td&gt;An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selection_tag_value&lt;/td&gt;
+      &lt;td&gt;The value in a key-value pair&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selections&lt;/td&gt;
+      &lt;td&gt;A list of selction maps&lt;/td&gt;
+      &lt;td&gt;`list`&lt;/td&gt;
+      &lt;td&gt;`[]`&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tags&lt;/td&gt;
+      &lt;td&gt;A mapping of tags to assign to the resource&lt;/td&gt;
+      &lt;td&gt;`map(string)`&lt;/td&gt;
+      &lt;td&gt;`{}`&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vault_kms_key_arn&lt;/td&gt;
+      &lt;td&gt;The server-side encryption key that is used to protect your backups&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vault_name&lt;/td&gt;
+      &lt;td&gt;Name of the backup vault to create. If not given, AWS use default&lt;/td&gt;
+      &lt;td&gt;`string`&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;plan_arn&lt;/td&gt;
+      &lt;td&gt;The ARN of the backup plan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;plan_id&lt;/td&gt;
+      &lt;td&gt;The id of the backup plan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;plan_version&lt;/td&gt;
+      &lt;td&gt;Unique, randomly generated, Unicode, UTF-8 encoded string that serves as the version ID of the backup plan&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vault_arn&lt;/td&gt;
+      &lt;td&gt;The ARN of the vault&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vault_id&lt;/td&gt;
+      &lt;td&gt;The name of the vault&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;known-issues&quot;&gt;Known issues&lt;/h2&gt;
+
+&lt;p&gt;During the developing of the module I found some issues reported to the The AWS provider:&lt;/p&gt;
+
+&lt;h3 id=&quot;related-backup-plan-selections-must-be-deleted-prior-to-backup-plan-deletion&quot;&gt;Related backup plan selections must be deleted prior to backup plan deletion&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform destroy
+...
+module.aws_backup_example.aws_iam_policy.ab_tag_policy: Destruction complete after 2s
+module.aws_backup_example.aws_iam_role.ab_role: Destruction complete after 1s
+
+Error: error deleting Backup Plan: InvalidRequestException: Related backup plan selections must be deleted prior to backup plan deletion
+	status code: 400, request id: 4a6637c8-2d46-4714-9929-4df3f694979b
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When trying to destroy a plan, terraform complains about deleting the selections first, even though terraform tries to delete them in the right order:&lt;/p&gt;
+
+&lt;p&gt;This issue was reported as &lt;a href=&quot;https://github.com/terraform-providers/terraform-provider-aws/issues/10414&quot; target=&quot;_blank&quot;&gt;&lt;em&gt;Backup Plan deletion fails randomly&lt;/em&gt;&lt;/a&gt; for the AWS Provider.&lt;/p&gt;
+
+&lt;p&gt;This happens because thee AWS provider tries to delete the plan without waiting for the selections destroyal confirmation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Workaround:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I included and script in the examples that destroys the selections first and then destroys the plan:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cat terraform_destroy_aws_backup.sh
+
+ #!/bin/sh
+targets=&quot;&quot;
+for i in `terraform state list | grep &quot;selection&quot;`; do targets=&quot;${targets} --target=${i}&quot;; done
+
+# Destroy selections
+terraform destroy ${targets}
+
+# Destroy all
+terraform destroy
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;error-creating-backup-selection-iam-role-is-not-authorized-to-call-taggetresources&quot;&gt;Error creating Backup Selection: IAM Role is not authorized to call tag:GetResources&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: error creating Backup Selection: InvalidParameterValueException: IAM Role arn:aws:iam::111111111111:role/aws-backup-plan-complete-plan-role is not authorized to call tag:GetResources
+	status code: 400, request id: 07ab775d-8885-4240-bb99-41305df969e0
+
+  on .terraform/modules/aws_backup_example/selection.tf line 1, in resource &quot;aws_backup_selection&quot; &quot;ab_selection&quot;:
+   1: resource &quot;aws_backup_selection&quot; &quot;ab_selection&quot; {
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This issue was reported as &lt;a href=&quot;https://github.com/terraform-providers/terraform-provider-aws/issues/10511&quot; target=&quot;_blank&quot;&gt;aws_backup_selection.selection: error creating Backup Selection: InvalidParameterValueException&lt;/a&gt; for the AWS Provider.&lt;/p&gt;
+
+&lt;p&gt;I faced this when applying and destroying the same plan several times, for instance when I ws developing the module.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Workaround:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I couldn’t find any workaround for this. Just destroy all wait some time and apply again.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at github&lt;/a&gt;moving-terraform-resources-states-from-one-remote-state-to-another-c76f8b76a996){:target=”_blank”}&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at Terraform registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Skill de Alexa: Días Festivos</title><link href="https://lgallardo.com/es/2019/07/05/holidays-alexa-skill" rel="alternate" type="text/html" title="Skill de Alexa: Días Festivos" /><published>2019-07-04T19:00:00-05:00</published><updated>2019-07-04T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/07/05/holidays-alexa-skill</id><content type="html" xml:base="https://lgallardo.com/es/2019/07/05/holidays-alexa-skill">&lt;center&gt;&lt;img src=&quot;/images/first_skill.jpg&quot; alt=&quot;Skill - Días Festivos&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Hoy recibí la aprobación de publicación de mi primera skill de Alexa en español. El nombre de la skill es &lt;strong&gt;&lt;em&gt;Días Festivos&lt;/em&gt;&lt;/strong&gt;, y permite saber cuándo es el próximo día feriado de un mes en particular, preguntar por algunas festividades como por ejemplo, cuándo cae Navidad, o cuántos días feriado tiene un mes.&lt;/p&gt;
@@ -562,76 +887,4 @@ zip -r ask-sdk.zip python/lib/python3.6/site-packages/
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Bloques de configuración dinámicos en Terraform</title><link href="https://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform/" rel="alternate" type="text/html" title="Bloques de configuración dinámicos en Terraform" /><published>2018-07-29T19:00:00-05:00</published><updated>2018-07-29T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform</id><content type="html" xml:base="https://lgallardo.com/es/2018/07/30/dynamic-configuration-blocks-in-terraform/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Una de las cosas que tenía pendiente por resolver era el hecho de que en Terraform hay bloques de configuración que dependiendo de las opciones puede que tengan parámetros distintos o que incluso no acepte los mismos parámetros.&lt;/p&gt;
-
-&lt;p&gt;Para eso, y guiándome de un código de un &lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;módulo de la  comunidad&lt;/a&gt;, logré sortear este problema usando &lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;locals values de Terraform&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Tomando un ejemplo de esto tenemos el bloque &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts&lt;/code&gt; del recurso &lt;a href=&quot;https://www.terraform.io/docs/providers/aws/r/codebuild_project.html&quot; target=&quot;_blank&quot;&gt;aws_codebuild_project de Terraform&lt;/a&gt;, el cual puede tener parámetros algunos parámetros si el tipo es &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt; o &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt;. Por ejemplo, si definimos un bloque de la siguiente manera no será fácil la parametrización del mismo:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
-
-[...]
-
-  artifacts{
-      type           = &quot;${var.codebuild_artifacts_type}&quot;
-      location       = &quot;${var.codebuild_artifacts_location}&quot;
-      name           = &quot;${var.codebuild_artifacts_name}&quot;
-      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
-      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
-      path           = &quot;${var.codebuild_artifacts_path}&quot;
-
-  }
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Si por ejemplo intentamos colocar el &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; fallará porque aunque se coloquen valores “vacíos” para el resto de los parámetros, estos argumentos no están soportados. Para resolver esto hay que crear una definición del bloque con &lt;code class=&quot;highlighter-rouge&quot;&gt;locals&lt;/code&gt; según el tipo proporcionado por &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; y usar esto como un índice:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
-
-[...]
-
-  artifacts = [&quot;${local.codebuild_artifacts}&quot;]
-
-}
-
-locals {
-  codebuild_artifacts_def = {
-    &quot;S3&quot; = [{
-      type           = &quot;${var.codebuild_artifacts_type}&quot;
-      location       = &quot;${var.codebuild_artifacts_location}&quot;
-      name           = &quot;${var.codebuild_artifacts_name}&quot;
-      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
-      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
-      path           = &quot;${var.codebuild_artifacts_path}&quot;
-    }]
-
-    &quot;CODEPIPELINE&quot; = [{
-      type           = &quot;${var.codebuild_artifacts_type}&quot;
-      location       = &quot;${var.codebuild_artifacts_location}&quot;
-      name           = &quot;${var.codebuild_artifacts_name}&quot;
-      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
-      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
-      path           = &quot;${var.codebuild_artifacts_path}&quot;
-    }]
-
-    &quot;NO_ARTIFACTS&quot; = [{
-      type = &quot;${var.codebuild_artifacts_type}&quot;
-    }]
-  }
-
-  # Retuned map
-  codebuild_artifacts = &quot;${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}&quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Esto crea un bloque diferente dependiendo del tipo definido en la variable &lt;code class=&quot;highlighter-rouge&quot;&gt;codebuild_artifacts_type&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias:&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/docs/configuration/locals.html&quot; target=&quot;_blank&quot;&gt;locals values de Terraform&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/cloudposse/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;módulo de la  comunidad de terraform-aws-codebuild&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
