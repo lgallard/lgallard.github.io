@@ -1,4 +1,426 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2019-10-18T14:47:14-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for AWS Backup</title><link href="https://lgallardo.com/es/2019/10/18/terraform-module-for-aws-backup" rel="alternate" type="text/html" title="Terraform module for AWS Backup" /><published>2019-10-17T19:00:00-05:00</published><updated>2019-10-17T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/10/18/terraform-module-for-aws-backup</id><content type="html" xml:base="https://lgallardo.com/es/2019/10/18/terraform-module-for-aws-backup">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-backup-terraform-registry.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2019-10-28T16:16:43-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for Amazon Elasticsearch Service</title><link href="https://lgallardo.com/es/2019/10/28/terraform-module-for-amazon-elasticsearch" rel="alternate" type="text/html" title="Terraform module for Amazon Elasticsearch Service" /><published>2019-10-27T19:00:00-05:00</published><updated>2019-10-27T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/10/28/terraform-module-for-amazon-elasticsearch</id><content type="html" xml:base="https://lgallardo.com/es/2019/10/28/terraform-module-for-amazon-elasticsearch">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-elasticsearch.jpg&quot; alt=&quot;terraform-aws-elasticsearch&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Dejo por acá otro módulo de Terraform que acabo depublicar como código abierto, el cual permite crear clusters de Amazon Elasticsearch Service. El módulo está diseñado siguiendo las mejores prácticas y los principios del Well-Architected Framework de AWS.&lt;/p&gt;
+
+&lt;p&gt;Puedes verificar el módulo &lt;strong&gt;terraform-aws-elasticsearch&lt;/strong&gt; en el &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/elasticsearch/aws/0.1.0&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; o clonarlo de &lt;a href=&quot;https://github.com/lgallard/terraform-aws-elasticsearch&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:&lt;/p&gt;
+
+&lt;h1 id=&quot;terraform-aws-elasticsearch&quot;&gt;terraform-aws-elasticsearch&lt;/h1&gt;
+
+&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/elasticsearch-service/&quot;&gt;Amazon Elasticsearch Service&lt;/a&gt; clusters, following the Well-Architected Framework and best AWS practices.&lt;/p&gt;
+
+&lt;p&gt;Amazon Elasticsearch Service is a fully managed service that makes it easy to deploy, operate, and scale Elasticsearch clusters in the AWS Cloud. Elasticsearch is a popular open-source search and analytics engine for use cases such as log analytics, real-time application monitoring, and clickstream analysis. With Amazon ES, you get direct access to the Elasticsearch APIs; existing code and applications work seamlessly with the service.&lt;/p&gt;
+
+&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;/h2&gt;
+
+&lt;p&gt;Check the &lt;a href=&quot;/examples/&quot;&gt;examples&lt;/a&gt; folder where you can see how to configure a public ES cluster, and another example showing how to set it with VPC options.&lt;/p&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;You can use this module to create your Amazon ES cluster by defining each parameters blocks as follows:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_es&quot; {
+
+  source = &quot;git::https://github.com/lgallard/terraform-aws-elasticsearch.git&quot;
+
+  domain_name           = &quot;elasticsearch_public&quot;
+  elasticsearch_version = &quot;7.1&quot;
+
+  cluster_config = {
+    dedicated_master_enabled = &quot;true&quot;
+    instance_count           = &quot;3&quot;
+    instance_type            = &quot;r5.large.elasticsearch&quot;
+    zone_awareness_enabled   = &quot;true&quot;
+    availability_zone_count  = &quot;3&quot;
+  }
+
+  ebs_options = {
+    ebs_enabled = &quot;true&quot;
+    volume_size = &quot;25&quot;
+  }
+
+  encrypt_at_rest = {
+    enabled    = &quot;true&quot;
+    kms_key_id = &quot;alias/aws/es&quot;
+  }
+
+  log_publishing_options = {
+    enabled                  = &quot;true&quot;
+    log_type                 = &quot;INDEX_SLOW_LOGS&quot;
+  }
+
+  advanced_options = {
+    &quot;rest.action.multi.allow_explicit_index&quot; = &quot;true&quot;
+  }
+
+  node_to_node_encryption_enabled                = &quot;true&quot;
+  snapshot_options_automated_snapshot_start_hour = &quot;23&quot;
+
+  tags = {
+    Owner = &quot;sysops&quot;
+    env   = &quot;dev&quot;
+  }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You can also define the above ElasticSearch cluster using just the module variables. Instead of defining a &lt;code class=&quot;highlighter-rouge&quot;&gt;cluster_config&lt;/code&gt; block (list of map), you can set each of the &lt;code class=&quot;highlighter-rouge&quot;&gt;cluster_config_*&lt;/code&gt; variables, as shown below:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_es&quot; {
+
+  source = &quot;git::https://github.com/lgallard/terraform-aws-elasticsearch.git&quot;
+
+  domain_name           = &quot;elasticsearch_public&quot;
+  elasticsearch_version = &quot;7.1&quot;
+
+  cluster_config_dedicated_master_enabled = true
+  cluster_config_instance_count           = &quot;3&quot;
+  cluster_config_instance_type            = &quot;r5.large.elasticsearch&quot;
+  cluster_config_zone_awareness_enabled   = &quot;true&quot;
+  cluster_config_availability_zone_count  = &quot;3&quot;
+
+  ebs_options_ebs_enabled = true
+  ebs_options_volume_size = &quot;25&quot;
+
+  encrypt_at_rest_enabled    = true
+  encrypt_at_rest_kms_key_id = &quot;alias/aws/es&quot;
+
+  log_publishing_options_enabled  = true
+  log_publishing_options_log_type = &quot;INDEX_SLOW_LOGS&quot;
+
+  advanced_options = {
+    &quot;rest.action.multi.allow_explicit_index&quot; = &quot;true&quot;
+  }
+
+  node_to_node_encryption_enabled                = &quot;true&quot;
+  snapshot_options_automated_snapshot_start_hour = &quot;23&quot;
+
+  tags = {
+    Owner = &quot;sysops&quot;
+    env   = &quot;dev&quot;
+  }
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Default&lt;/th&gt;
+      &lt;th&gt;Required&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;access_policies&lt;/td&gt;
+      &lt;td&gt;IAM policy document specifying the access policies for the domain&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;advanced_options&lt;/td&gt;
+      &lt;td&gt;Key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply&lt;/td&gt;
+      &lt;td&gt;map(string)&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster_config&lt;/td&gt;
+      &lt;td&gt;Cluster configuration of the domain&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster_config_availability_zone_count&lt;/td&gt;
+      &lt;td&gt;Number of Availability Zones for the domain to use with&lt;/td&gt;
+      &lt;td&gt;number&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster_config_dedicated_master_count&lt;/td&gt;
+      &lt;td&gt;Number of dedicated master nodes in the cluster&lt;/td&gt;
+      &lt;td&gt;number&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster_config_dedicated_master_enabled&lt;/td&gt;
+      &lt;td&gt;Indicates whether dedicated master nodes are enabled for the cluster&lt;/td&gt;
+      &lt;td&gt;bool&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster_config_dedicated_master_type&lt;/td&gt;
+      &lt;td&gt;Instance type of the dedicated master nodes in the cluster&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;r5.large.elasticsearch&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster_config_instance_count&lt;/td&gt;
+      &lt;td&gt;Number of instances in the cluster&lt;/td&gt;
+      &lt;td&gt;number&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster_config_instance_type&lt;/td&gt;
+      &lt;td&gt;Instance type of data nodes in the cluster&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;r5.large.elasticsearch&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cluster_config_zone_awareness_enabled&lt;/td&gt;
+      &lt;td&gt;Indicates whether zone awareness is enabled. To enable awareness with three Availability Zones&lt;/td&gt;
+      &lt;td&gt;bool&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cognito_options&lt;/td&gt;
+      &lt;td&gt;Options for Amazon Cognito Authentication for Kibana&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cognito_options_enabled&lt;/td&gt;
+      &lt;td&gt;Specifies whether Amazon Cognito authentication with Kibana is enabled or not&lt;/td&gt;
+      &lt;td&gt;bool&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cognito_options_identity_pool_id&lt;/td&gt;
+      &lt;td&gt;ID of the Cognito Identity Pool to use&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cognito_options_role_arn&lt;/td&gt;
+      &lt;td&gt;ARN of the IAM role that has the AmazonESCognitoAccess policy attached&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cognito_options_user_pool_id&lt;/td&gt;
+      &lt;td&gt;ID of the Cognito User Pool to use&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;domain_name&lt;/td&gt;
+      &lt;td&gt;Name of the domain&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ebs_enabled&lt;/td&gt;
+      &lt;td&gt;Whether EBS volumes are attached to data nodes in the domain&lt;/td&gt;
+      &lt;td&gt;bool&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ebs_options&lt;/td&gt;
+      &lt;td&gt;EBS related options, may be required based on chosen instance size&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ebs_options_iops&lt;/td&gt;
+      &lt;td&gt;The baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the Provisioned IOPS EBS volume type&lt;/td&gt;
+      &lt;td&gt;number&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ebs_options_volume_size&lt;/td&gt;
+      &lt;td&gt;The size of EBS volumes attached to data nodes (in GB). Required if ebs_enabled is set to true&lt;/td&gt;
+      &lt;td&gt;number&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;10&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ebs_options_volume_type&lt;/td&gt;
+      &lt;td&gt;The type of EBS volumes attached to data nodes&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;gp2&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;elasticsearch_version&lt;/td&gt;
+      &lt;td&gt;The version of Elasticsearch to deploy.&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;7.1&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;encrypt_at_rest&lt;/td&gt;
+      &lt;td&gt;Encrypt at rest options. Only available for certain instance types&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;encrypt_at_rest_enabled&lt;/td&gt;
+      &lt;td&gt;Whether to enable encryption at rest&lt;/td&gt;
+      &lt;td&gt;bool&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;encrypt_at_rest_kms_key_id&lt;/td&gt;
+      &lt;td&gt;The KMS key id to encrypt the Elasticsearch domain with. If not specified then it defaults to using the aws/es service KMS key&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;alias/aws/es&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;log_publishing_options&lt;/td&gt;
+      &lt;td&gt;Options for publishing slow logs to CloudWatch Logs&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;log_publishing_options_cloudwatch_log_group_arn&lt;/td&gt;
+      &lt;td&gt;iARN of the Cloudwatch log group to which log needs to be published&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;log_publishing_options_enabled&lt;/td&gt;
+      &lt;td&gt;Specifies whether given log publishing option is enabled or not&lt;/td&gt;
+      &lt;td&gt;bool&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;log_publishing_options_log_type&lt;/td&gt;
+      &lt;td&gt;A type of Elasticsearch log. Valid values: INDEX_SLOW_LOGS, SEARCH_SLOW_LOGS, ES_APPLICATION_LOGS&lt;/td&gt;
+      &lt;td&gt;string&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;INDEX\_SLOW\_LOGS&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;node_to_node_encryption&lt;/td&gt;
+      &lt;td&gt;Node-to-node encryption options&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;node_to_node_encryption_enabled&lt;/td&gt;
+      &lt;td&gt;Whether to enable node-to-node encryption&lt;/td&gt;
+      &lt;td&gt;bool&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;snapshot_options&lt;/td&gt;
+      &lt;td&gt;Snapshot related options&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;snapshot_options_automated_snapshot_start_hour&lt;/td&gt;
+      &lt;td&gt;Hour during which the service takes an automated daily snapshot of the indices in the domain&lt;/td&gt;
+      &lt;td&gt;number&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tags&lt;/td&gt;
+      &lt;td&gt;A mapping of tags to assign to the resource&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_options&lt;/td&gt;
+      &lt;td&gt;VPC related options, see below. Adding or removing this configuration forces a new resource&lt;/td&gt;
+      &lt;td&gt;map&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_options_security_group_ids&lt;/td&gt;
+      &lt;td&gt;List of VPC Security Group IDs to be applied to the Elasticsearch domain endpoints. If omitted, the default Security Group for the VPC will be used&lt;/td&gt;
+      &lt;td&gt;list&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_options_subnet_ids&lt;/td&gt;
+      &lt;td&gt;List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in&lt;/td&gt;
+      &lt;td&gt;list&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;arn&lt;/td&gt;
+      &lt;td&gt;Amazon Resource Name (ARN) of the domain&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;domain_id&lt;/td&gt;
+      &lt;td&gt;Unique identifier for the domain&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;endpoint&lt;/td&gt;
+      &lt;td&gt;Domain-specific endpoint used to submit index, search, and data upload requests&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;kibana_endpoint&lt;/td&gt;
+      &lt;td&gt;Domain-specific endpoint for kibana without https scheme&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_options_availability_zones&lt;/td&gt;
+      &lt;td&gt;If the domain was created inside a VPC, the names of the availability zones the configured subnet_ids were created inside&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_options_vpc_id&lt;/td&gt;
+      &lt;td&gt;If the domain was created inside a VPC, the ID of the VPC&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-elasticsearch&quot; target=&quot;_blank&quot;&gt;terraform-aws-elastichsearch module at github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/elasticsearch/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-elasticsearch module at Terraform registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for AWS Backup</title><link href="https://lgallardo.com/es/2019/10/18/terraform-module-for-aws-backup" rel="alternate" type="text/html" title="Terraform module for AWS Backup" /><published>2019-10-17T19:00:00-05:00</published><updated>2019-10-17T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/10/18/terraform-module-for-aws-backup</id><content type="html" xml:base="https://lgallardo.com/es/2019/10/18/terraform-module-for-aws-backup">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-backup-terraform-registry.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Acabo de publicar mi primer módulo Terraform de código abierto llamado &lt;strong&gt;terraform-aws-backup&lt;/strong&gt; en github, así que decidí compartirlo también en el Registro público de Terraform.&lt;/p&gt;
@@ -319,9 +741,10 @@ terraform destroy
 
 &lt;p&gt;I couldn’t find any workaround for this. Just destroy all wait some time and apply again.&lt;/p&gt;
 
-&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at github&lt;/a&gt;moving-terraform-resources-states-from-one-remote-state-to-another-c76f8b76a996){:target=”_blank”}&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at github&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at Terraform registry&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Skill de Alexa: Días Festivos</title><link href="https://lgallardo.com/es/2019/07/05/holidays-alexa-skill" rel="alternate" type="text/html" title="Skill de Alexa: Días Festivos" /><published>2019-07-04T19:00:00-05:00</published><updated>2019-07-04T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/07/05/holidays-alexa-skill</id><content type="html" xml:base="https://lgallardo.com/es/2019/07/05/holidays-alexa-skill">&lt;center&gt;&lt;img src=&quot;/images/first_skill.jpg&quot; alt=&quot;Skill - Días Festivos&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -839,52 +1262,4 @@ zip -r ask-sdk.zip python/lib/python3.6/site-packages/
 &lt;center&gt;&lt;img src=&quot;/images/aws_codebuild_trigger.jpg&quot; alt=&quot;AWS Codebuild trigger&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;[1] &lt;a href=&quot;https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/&quot; target=&quot;_blank&quot;&gt;Integrating Git with AWS CodePipeline&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Codebuild" /><category term="CodePipeline" /><category term="Bitbucket" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified DevOps Engineer - Professional</title><link href="https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional" rel="alternate" type="text/html" title="AWS Certified DevOps Engineer - Professional" /><published>2018-08-11T19:00:00-05:00</published><updated>2018-08-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional</id><content type="html" xml:base="https://lgallardo.com/es/2018/08/12/aws-certified-devops-engineer-professional">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_DevOps_Engineer_Professional.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recientemente aprobé la certificación &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified DevOps Engineer - Professional&lt;/code&gt; y quería dejar mis comentarios respecto al examen:&lt;/p&gt;
-
-&lt;p&gt;Fueron 80 preguntas para responder en 170 minutos. Este examen es el más difícil ya que debes saber sobre los contenidos anteriores de Developer y SysOps. En general debes saber las tecnología de AWS y cuándo usarlas desde la perspectiva de DevOps para el despliegue de aplicaciones sobre AWS. En particular los temas claves acá son CloudFormation, OpsWorks, Elastic Beanstalk y Auto Scaling Groups&lt;/p&gt;
-
-&lt;h1 id=&quot;cloudformation&quot;&gt;CloudFormation&lt;/h1&gt;
-&lt;p&gt;Como mínimo debes saber cómo se compone una plantilla de CloudFormation, cómo actualizar un stack, cómo evitar que se actualice, diferencia entre WaitCondition y Creation Policy, cómo hacer rolling update de los ASGs, tipos de recursos.&lt;/p&gt;
-
-&lt;h1 id=&quot;opsworks&quot;&gt;OpsWorks&lt;/h1&gt;
-&lt;p&gt;Aquí debes tener claro los conceptos de Stack, Layer, y Application. Saber qué son los Lyfecyles events y cómo o cuándo se ejecutan.Es de suma importancia saber el comando “deployment” y tener en cuenta que no solo sirve para hacer despliegue de aplicaciones. También es importante que recuerdes que con OpsWorks puedes agregar infraestructura existen a los stacks (cosa que no puedes hacer en CloudFormation o Elastic Beanstalk) y que solo puedes asociar una instancia RDS por stack.&lt;/p&gt;
-
-&lt;h1 id=&quot;elastic-beanstalk&quot;&gt;Elastic Beanstalk&lt;/h1&gt;
-&lt;p&gt;Entiende los casos de uso del servicio, recuerda que puede usar Docker en EB, por lo que prácticamente puedes ejecutar cualquier cosa en contenedores. Estudia cómo crear configuraciones desde el .ebextenstions, así como también cómo guardar configuraciones y la precedencia entre las distintas formas de hacerlo. Importante que sepas los tipos de despliegue que puedes realizar con EB, y en particular que es uno de los que permite hacer despliegues Blue/Green de forma integrada al servicio, pero que por el contrario debes usar Route 53 si quiere hacer un despliegue A/B.&lt;/p&gt;
-
-&lt;h1 id=&quot;auto-scaling-groups&quot;&gt;Auto Scaling Groups&lt;/h1&gt;
-&lt;p&gt;De los Auto Scaling Groups debes saber las Termination policies, y cuáles son útiles para hacer despliegues de aplicaciones. También estudia los Lifecycle Hooks y en particular todos los estados por el que pasa una instancia, y los casos de uso cuando está en &lt;code class=&quot;highlighter-rouge&quot;&gt;pending:wait&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;terminating:wait&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;lo-demás&quot;&gt;Lo demás&lt;/h1&gt;
-&lt;p&gt;El resto del examen se enfoca en evaluarte tus conocimientos de los tipos de despliegue en AWS, así como temas de las certificaciones de Developer y SysOps, como pueden ser DynamoDB o CloudWatch.&lt;/p&gt;
-
-&lt;h1 id=&quot;mis-recomendaciones-para-ganar-tiempo-en-este-examen-son&quot;&gt;Mis recomendaciones para ganar tiempo en este examen son:&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Las preguntas fáciles respóndelas rápidamente, no te quedes mucho tiempo pensando en si es la respuesta correcta porque seguro lo es.&lt;/li&gt;
-  &lt;li&gt;Solo marcar las preguntas en las que realmente tienes dudas, así al momento de revisarlas puedes enfocarte en solo esas y si queda tiempo empezar a revisar el resto&lt;/li&gt;
-  &lt;li&gt;Piensen que es una certificación de Amazon, en ese sentido siempre preguntarse cuál servicio de Amazon corresponde.&lt;/li&gt;
-  &lt;li&gt;Descartar cosas que se pueden hacer a nivel de S.O. si un servicio de Amazon lo provee, y solo considerarlo cuando no hay mas opción.&lt;/li&gt;
-  &lt;li&gt;Siempre que lean scalable piensen en SQS/DynamoDB, cost-saving = S3/S3 RRS, y así.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Si estás interesado en esta certificación te recomiendo algunos enlaces:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Cursos en línea&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://linuxacademy.com&quot; target=&quot;_blank&quot;&gt;Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/aws-certified-devops-engineer-professional&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cloudacademy.com/aws-certifications-training/&quot; target=&quot;_blank&quot;&gt;Cloud Academy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Documentación de AWS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>
+&lt;p&gt;[1] &lt;a href=&quot;https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/&quot; target=&quot;_blank&quot;&gt;Integrating Git with AWS CodePipeline&lt;/a&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Codebuild" /><category term="CodePipeline" /><category term="Bitbucket" /><summary type="html"></summary></entry></feed>
