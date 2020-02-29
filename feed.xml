@@ -1,4 +1,192 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2019-11-23T11:56:15-06:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for Amazon Cognito User Pools</title><link href="https://lgallardo.com/2019/11/23/terraform-module-for-amazon-cognito-user-pool" rel="alternate" type="text/html" title="Terraform module for Amazon Cognito User Pools" /><published>2019-11-22T18:00:00-06:00</published><updated>2019-11-22T18:00:00-06:00</updated><id>https://lgallardo.com/2019/11/23/terraform-module-for-amazon-cognito-user-pool</id><content type="html" xml:base="https://lgallardo.com/2019/11/23/terraform-module-for-amazon-cognito-user-pool">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-cognito-user-pool.jpg&quot; alt=&quot;terraform-aws-cognito-user-pool&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2020-02-29T10:42:51-06:00</updated><id>http://0.0.0.0:4000/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for Amazon Route53 Resolver Rules</title><link href="http://0.0.0.0:4000/2020/02/29/terraform-module-for-route53-resolver-rules" rel="alternate" type="text/html" title="Terraform module for Amazon Route53 Resolver Rules" /><published>2020-02-28T18:00:00-06:00</published><updated>2020-02-28T18:00:00-06:00</updated><id>http://0.0.0.0:4000/2020/02/29/terraform-module-for-route53-resolver-rules</id><content type="html" xml:base="http://0.0.0.0:4000/2020/02/29/terraform-module-for-route53-resolver-rules">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-route53-resolver-rules.jpg&quot; alt=&quot;AWS Route53 Resolver Rules&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;center&gt;&lt;img src=&quot;/images/Resolver-outbound-endpoint.jpg&quot; alt=&quot;Resolver outbound endpoint&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I wrote this module to be able to create AWS Route53 Resolver rules for outbound endpoints in a more convenient way.&lt;/p&gt;
+
+&lt;p&gt;You can check the module &lt;strong&gt;terraform-aws-route53-resolver-rules&lt;/strong&gt; at the &lt;a href=&quot;hhttps://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; or clone it from &lt;a href=&quot;https://github.com/lgallard/terraform-aws-route53-resolver-rules&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want to take a sneak of the module, I also left the README in this post:&lt;/p&gt;
+
+&lt;h1 id=&quot;terraform-aws-route53-resolver-rules&quot;&gt;terraform-aws-route53-resolver-rules&lt;/h1&gt;
+
+&lt;p&gt;Terraform module to create &lt;a href=&quot;https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html/&quot;&gt;AWS Route53 Resolver Rules&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;Before you start to forward queries, you must create  Resolver outbound endpoints in the connected VPCs. These endpoints provide a path for inbound or outbound queries. To accomplish this you can create the endpoints using the &lt;a href=&quot;https://www.terraform.io/docs/providers/aws/r/route53_resolver_endpoint.html&quot;&gt;aws_route54_resolver_endpoint&lt;/a&gt; resource or use a module like the &lt;a href=&quot;https://github.com/rhythmictech/terraform-aws-route53-endpoint&quot;&gt;terraform-aws-route53-endpoint&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Check the &lt;a href=&quot;examples/&quot;&gt;examples&lt;/a&gt; folder for the &lt;strong&gt;simple&lt;/strong&gt; and the &lt;strong&gt;complete&lt;/strong&gt; snippets.&lt;/p&gt;
+
+&lt;h3 id=&quot;example-complete&quot;&gt;Example (complete)&lt;/h3&gt;
+
+&lt;p&gt;This example creates two rules in a outbound endpoint, using all the parameter expected for building the rules:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Outbound endpoint using the rhythmictech/terraform-aws-route53-endpoint module
+module &quot;r53-outboud&quot; {
+  source            = &quot;git::https://github.com/rhythmictech/terraform-aws-route53-endpoint&quot;
+  direction         = &quot;outbound&quot;
+  allowed_resolvers = [&quot;192.168.0.0/24&quot;]
+  vpc_id            = &quot;vpc-0fffff0123456789&quot;
+  ip_addresses      = [
+    {
+      ip        = &quot;172.30.1.10&quot;
+      subnet_id = &quot;subnet-abcd123456789aaaa&quot;
+    },
+    {
+      ip        = &quot;172.30.2.10&quot;
+      subnet_id = &quot;subnet-abcd123456789bbbb&quot;
+    }
+  ]
+}
+
+# AWS Route 53 Resolver rules
+module &quot;r53-resolver-rules&quot; {
+  source               = &quot;git::https://github.com/lgallard/terraform-aws-route53-resolver-rules.git&quot;
+  resolver_endpoint_id = module.r53-outboud.endpoint_ids
+
+  rules = [
+    { rule_name   = &quot;r53r-rule-1&quot;
+      domain_name = &quot;bar.foo.&quot;
+      ram_name    = &quot;ram-r53r-1&quot;
+      vpc_ids     = [&quot;vpc-0fffff0123456789&quot;]
+      ips         = [&quot;192.168.10.10&quot;, &quot;192.168.10.11:54&quot;]
+      principals  = [&quot;123456789101&quot;, &quot;101987654321&quot;]
+    },
+    {
+      rule_name   = &quot;r53r-rule-2&quot;
+      domain_name = &quot;example.com.&quot;
+      ram_name    = &quot;ram-r53r-2&quot;
+      vpc_ids     = [&quot;vpc-0fffff0123456789&quot;]
+      ips         = [&quot;192.168.10.10&quot;, &quot;192.168.10.11:54&quot;]
+      principals  = [&quot;123456789101&quot;, &quot;101987654321&quot;]
+    }
+  ]
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You can define IP and ports using the &lt;em&gt;IP:PORT&lt;/em&gt; syntax, as shown above.&lt;/p&gt;
+
+&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Default&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;resolver_endpoint_id&lt;/td&gt;
+      &lt;td&gt;The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rules&lt;/td&gt;
+      &lt;td&gt;List of rules&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tags&lt;/td&gt;
+      &lt;td&gt;Map of tags to apply to supported resources&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;br /&gt;
+Each rule accept the following parameters:&lt;/p&gt;
+
+&lt;h3 id=&quot;rules&quot;&gt;Rules&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Type&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Default&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;domain_name&lt;/td&gt;
+      &lt;td&gt;Domain name to forward requests for&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ips&lt;/td&gt;
+      &lt;td&gt;List of IPs and ports to forward DNS requests to. Use &lt;em&gt;IP:PORT&lt;/em&gt; syntax, or just the IP&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;principals&lt;/td&gt;
+      &lt;td&gt;List of account IDs to share the resolver rule with&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ram_name&lt;/td&gt;
+      &lt;td&gt;RAM share name&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;r53-&lt;code class=&quot;highlighter-rouge&quot;&gt;domain_name&lt;/code&gt;-rule&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;resolver_endpoint_id&lt;/td&gt;
+      &lt;td&gt;Resolver endpoint id&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rule_name&lt;/td&gt;
+      &lt;td&gt;Route53 resolver rule name&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;domain_name&lt;/code&gt;-rule&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tags&lt;/td&gt;
+      &lt;td&gt;Map of tags to apply to supported resources&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;map(string)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_ids&lt;/td&gt;
+      &lt;td&gt;List of VPC ids to associate to the rule&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-route53-resolver-rules.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-route53-resolver-rules module at github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-route53-resolver-rules at Terraform registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for Amazon Cognito User Pools</title><link href="http://0.0.0.0:4000/2019/11/23/terraform-module-for-amazon-cognito-user-pool" rel="alternate" type="text/html" title="Terraform module for Amazon Cognito User Pools" /><published>2019-11-22T18:00:00-06:00</published><updated>2019-11-22T18:00:00-06:00</updated><id>http://0.0.0.0:4000/2019/11/23/terraform-module-for-amazon-cognito-user-pool</id><content type="html" xml:base="http://0.0.0.0:4000/2019/11/23/terraform-module-for-amazon-cognito-user-pool">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-cognito-user-pool.jpg&quot; alt=&quot;terraform-aws-cognito-user-pool&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;I share here another Terraform module that I just published as open source, which allows you to create Amazon Cognito User Pools with its attributes and resouces such as &lt;strong&gt;app clients&lt;/strong&gt;, &lt;strong&gt;domain&lt;/strong&gt; y &lt;strong&gt;resource server&lt;/strong&gt;.&lt;/p&gt;
@@ -244,7 +432,7 @@ module “aws_cognito_user_pool_complete” {&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-cognito-user-pool&quot; target=&quot;_blank&quot;&gt;terraform-aws-cognito-user-pool module at github&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-cognito-user-pool at Terraform registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for Amazon Elasticsearch Service</title><link href="https://lgallardo.com/2019/10/28/terraform-module-for-amazon-elasticsearch" rel="alternate" type="text/html" title="Terraform module for Amazon Elasticsearch Service" /><published>2019-10-27T19:00:00-05:00</published><updated>2019-10-27T19:00:00-05:00</updated><id>https://lgallardo.com/2019/10/28/terraform-module-for-amazon-elasticsearch</id><content type="html" xml:base="https://lgallardo.com/2019/10/28/terraform-module-for-amazon-elasticsearch">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-elasticsearch.jpg&quot; alt=&quot;terraform-aws-elasticsearch&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for Amazon Elasticsearch Service</title><link href="http://0.0.0.0:4000/2019/10/28/terraform-module-for-amazon-elasticsearch" rel="alternate" type="text/html" title="Terraform module for Amazon Elasticsearch Service" /><published>2019-10-27T19:00:00-05:00</published><updated>2019-10-27T19:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/10/28/terraform-module-for-amazon-elasticsearch</id><content type="html" xml:base="http://0.0.0.0:4000/2019/10/28/terraform-module-for-amazon-elasticsearch">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-elasticsearch.jpg&quot; alt=&quot;terraform-aws-elasticsearch&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;I share here another Terraform module that I just published as open source, which allows you to create Amazon Elasticsearch Service clusters. The module is designed following the best practices and principles of the AWS Well-Architected Framework.&lt;/p&gt;
@@ -666,7 +854,7 @@ module “aws_cognito_user_pool_complete” {&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-elasticsearch&quot; target=&quot;_blank&quot;&gt;terraform-aws-elastichsearch module at github&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/elasticsearch/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-elasticsearch module at Terraform registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for AWS Backup</title><link href="https://lgallardo.com/2019/10/18/terraform-module-for-aws-backup" rel="alternate" type="text/html" title="Terraform module for AWS Backup" /><published>2019-10-17T19:00:00-05:00</published><updated>2019-10-17T19:00:00-05:00</updated><id>https://lgallardo.com/2019/10/18/terraform-module-for-aws-backup</id><content type="html" xml:base="https://lgallardo.com/2019/10/18/terraform-module-for-aws-backup">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-backup-terraform-registry.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for AWS Backup</title><link href="http://0.0.0.0:4000/2019/10/18/terraform-module-for-aws-backup" rel="alternate" type="text/html" title="Terraform module for AWS Backup" /><published>2019-10-17T19:00:00-05:00</published><updated>2019-10-17T19:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/10/18/terraform-module-for-aws-backup</id><content type="html" xml:base="http://0.0.0.0:4000/2019/10/18/terraform-module-for-aws-backup">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-backup-terraform-registry.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;I just published my first open-sourced Terraform module called &lt;strong&gt;terraform-aws-backup&lt;/strong&gt; at github, so I decided to share it as well in the public Terraform Registry.&lt;/p&gt;
@@ -992,7 +1180,7 @@ terraform destroy
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at github&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at Terraform registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Alexa skill: Días Festivos</title><link href="https://lgallardo.com/2019/07/05/holidays-alexa-skill" rel="alternate" type="text/html" title="Alexa skill: Días Festivos" /><published>2019-07-04T19:00:00-05:00</published><updated>2019-07-04T19:00:00-05:00</updated><id>https://lgallardo.com/2019/07/05/holidays-alexa-skill</id><content type="html" xml:base="https://lgallardo.com/2019/07/05/holidays-alexa-skill">&lt;center&gt;&lt;img src=&quot;/images/first_skill.jpg&quot; alt=&quot;Skill - Días Festivos&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Alexa skill: Días Festivos</title><link href="http://0.0.0.0:4000/2019/07/05/holidays-alexa-skill" rel="alternate" type="text/html" title="Alexa skill: Días Festivos" /><published>2019-07-04T19:00:00-05:00</published><updated>2019-07-04T19:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/07/05/holidays-alexa-skill</id><content type="html" xml:base="http://0.0.0.0:4000/2019/07/05/holidays-alexa-skill">&lt;center&gt;&lt;img src=&quot;/images/first_skill.jpg&quot; alt=&quot;Skill - Días Festivos&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Today I received the approval of the publication of my first Alexa skill in Spanish. The name of the skill is &lt;strong&gt;&lt;em&gt;Días Festivos&lt;/em&gt;&lt;/strong&gt;, and lets you know when is the next holiday of a particular month, ask for some holidays such as when Christmas falls, or how many holidays have a month.&lt;/p&gt;
@@ -1028,7 +1216,7 @@ Alexa, cuándo es el próximo feriado&lt;/p&gt;
 
 &lt;h2 id=&quot;what-else-does-the-skill-do&quot;&gt;What else does the skill do?&lt;/h2&gt;
 
-&lt;p&gt;I hope to add more features, and in the future expand the list of countries.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><summary type="html"></summary></entry><entry><title type="html">How to migrate Terraform remote tfstates</title><link href="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/" rel="alternate" type="text/html" title="How to migrate Terraform remote tfstates" /><published>2019-06-24T19:00:00-05:00</published><updated>2019-06-24T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates</id><content type="html" xml:base="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/">&lt;center&gt;&lt;img src=&quot;/images/terraform-remote-states.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;I hope to add more features, and in the future expand the list of countries.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><summary type="html"></summary></entry><entry><title type="html">How to migrate Terraform remote tfstates</title><link href="http://0.0.0.0:4000/2019/06/25/how-to-migrate-terraform-remote-tfstates/" rel="alternate" type="text/html" title="How to migrate Terraform remote tfstates" /><published>2019-06-24T19:00:00-05:00</published><updated>2019-06-24T19:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/06/25/how-to-migrate-terraform-remote-tfstates</id><content type="html" xml:base="http://0.0.0.0:4000/2019/06/25/how-to-migrate-terraform-remote-tfstates/">&lt;center&gt;&lt;img src=&quot;/images/terraform-remote-states.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;In Terraform you can rename and move resources and modules in the same state, whether it is local or remote. But when you want to migrate resources or modules between remote states, you have to take other considerations.&lt;/p&gt;
@@ -1073,7 +1261,7 @@ Alexa, cuándo es el próximo feriado&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://medium.com/@lynnlin827/moving-terraform-resources-states-from-one-remote-state-to-another-c76f8b76a996&quot; target=&quot;_blank&quot;&gt;Moving Terraform Resources’ States from One Remote State to Another&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/50400007/terraform-how-to-migrate-state-between-projects&quot; target=&quot;_blank&quot;&gt;Terraform: How to migrate state between projects?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Dynamic blocks in Terraform 0.12.x</title><link href="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/" rel="alternate" type="text/html" title="Dynamic blocks in Terraform 0.12.x" /><published>2019-06-13T19:00:00-05:00</published><updated>2019-06-13T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x</id><content type="html" xml:base="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Dynamic blocks in Terraform 0.12.x</title><link href="http://0.0.0.0:4000/2019/06/14/dynamic-blocks-in-terraform-0.12.x/" rel="alternate" type="text/html" title="Dynamic blocks in Terraform 0.12.x" /><published>2019-06-13T19:00:00-05:00</published><updated>2019-06-13T19:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/06/14/dynamic-blocks-in-terraform-0.12.x</id><content type="html" xml:base="http://0.0.0.0:4000/2019/06/14/dynamic-blocks-in-terraform-0.12.x/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Some time ago I wrote about &lt;a href=&quot;https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform&quot; target=&quot;_blank&quot;&gt;how to make dynamic blocks in Terraform 0.11.x&lt;/a&gt;, that although it solved the problem, it generated others because it wasn’t an official solution and the interpretation by Terraform was not consistent.&lt;/p&gt;
@@ -1228,7 +1416,7 @@ codebuild_artifacts_encryption_disabled
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform&quot; target=&quot;_blank&quot;&gt;Dynamic blocks in Terraform 0.11.x&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each&quot; target=&quot;_blank&quot;&gt;HashiCorp Terraform 0.12 Preview: For and For-Each&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Guru of the week</title><link href="https://lgallardo.com/2019/05/13/2019-05-13-guru-of-the-week" rel="alternate" type="text/html" title="Guru of the week" /><published>2019-05-12T19:00:00-05:00</published><updated>2019-05-12T19:00:00-05:00</updated><id>https://lgallardo.com/2019/05/13/a-cloud-guru-of-the-week</id><content type="html" xml:base="https://lgallardo.com/2019/05/13/2019-05-13-guru-of-the-week">&lt;center&gt;&lt;img src=&quot;/images/guru-of-the-week-1.jpg&quot; alt=&quot;Guru of the week&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Guru of the week</title><link href="http://0.0.0.0:4000/2019/05/13/2019-05-13-guru-of-the-week" rel="alternate" type="text/html" title="Guru of the week" /><published>2019-05-12T19:00:00-05:00</published><updated>2019-05-12T19:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/05/13/a-cloud-guru-of-the-week</id><content type="html" xml:base="http://0.0.0.0:4000/2019/05/13/2019-05-13-guru-of-the-week">&lt;center&gt;&lt;img src=&quot;/images/guru-of-the-week-1.jpg&quot; alt=&quot;Guru of the week&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Last week I answered &lt;a href=&quot;https://acloud.guru/forums/guru-of-the-week/discussion/-Ldw3i4mdiMIpJGY6tem/%5Baws%5D_-_guru_of_the_week_quest&quot; target=&quot;_blank&quot;&gt;this Guru of the Week question&lt;/a&gt; and I won!. Some questions can be tricky, but the key is to think what service or technology solves the problem better.&lt;/p&gt;
@@ -1246,7 +1434,7 @@ codebuild_artifacts_encryption_disabled
   &lt;li&gt;&lt;a href=&quot;https://acloud.guru/forums/guru-of-the-week/&quot; target=&quot;_blank&quot;&gt;Guru of the Week questions&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://facebook/acloudgutu&quot; target=&quot;_blank&quot;&gt;Guru of the Week questions - Facebook&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://acloud.guru&quot; target=&quot;_blank&quot;&gt;A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Alexa Skill Builder - Specialty</title><link href="https://lgallardo.com/2019/04/19/2019-04-19-aws-certified-alexa-skill-builder-specialty/" rel="alternate" type="text/html" title="AWS Certified Alexa Skill Builder - Specialty" /><published>2019-04-18T19:00:00-05:00</published><updated>2019-04-18T19:00:00-05:00</updated><id>https://lgallardo.com/2019/04/19/aws-certified-alexa-skill-builder-specialty</id><content type="html" xml:base="https://lgallardo.com/2019/04/19/2019-04-19-aws-certified-alexa-skill-builder-specialty/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Alexa_Skill_Builder_Specialty.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">AWS Certified Alexa Skill Builder - Specialty</title><link href="http://0.0.0.0:4000/2019/04/19/2019-04-19-aws-certified-alexa-skill-builder-specialty/" rel="alternate" type="text/html" title="AWS Certified Alexa Skill Builder - Specialty" /><published>2019-04-18T19:00:00-05:00</published><updated>2019-04-18T19:00:00-05:00</updated><id>http://0.0.0.0:4000/2019/04/19/aws-certified-alexa-skill-builder-specialty</id><content type="html" xml:base="http://0.0.0.0:4000/2019/04/19/2019-04-19-aws-certified-alexa-skill-builder-specialty/">&lt;center&gt;&lt;img src=&quot;/images/AWS_Certified_Alexa_Skill_Builder_Specialty.jpg&quot; alt=&quot;AWS CSA&quot; width=&quot;500&quot; height=&quot;386&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;In January I took the beta test for &lt;code class=&quot;highlighter-rouge&quot;&gt;AWS Certified Alexa Skill Builder Specialty&lt;/code&gt; and yesterday I got the results. I had been programming Alexa Skills and when I saw the blueprint of the exam it caught my attention that a lot of the content I already knew in one way or another.&lt;/p&gt;
@@ -1348,7 +1536,7 @@ codebuild_artifacts_encryption_disabled
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Pyenv to the rescue</title><link href="https://lgallardo.com/2019/02/26/pyenv-to-the-rescue" rel="alternate" type="text/html" title="Pyenv to the rescue" /><published>2019-02-25T18:00:00-06:00</published><updated>2019-02-25T18:00:00-06:00</updated><id>https://lgallardo.com/2019/02/26/pyenv-to-the-rescue</id><content type="html" xml:base="https://lgallardo.com/2019/02/26/pyenv-to-the-rescue">&lt;center&gt;&lt;img src=&quot;/images/Python-logo-150.jpg&quot; alt=&quot;Python&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Pyenv to the rescue</title><link href="http://0.0.0.0:4000/2019/02/26/pyenv-to-the-rescue" rel="alternate" type="text/html" title="Pyenv to the rescue" /><published>2019-02-25T18:00:00-06:00</published><updated>2019-02-25T18:00:00-06:00</updated><id>http://0.0.0.0:4000/2019/02/26/pyenv-to-the-rescue</id><content type="html" xml:base="http://0.0.0.0:4000/2019/02/26/pyenv-to-the-rescue">&lt;center&gt;&lt;img src=&quot;/images/Python-logo-150.jpg&quot; alt=&quot;Python&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;the-problem&quot;&gt;The problem&lt;/h1&gt;
@@ -1416,64 +1604,4 @@ Python 3.6.8
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/pyenv/pyenv#choosing-the-python-version&quot; target=&quot;_blank&quot;&gt;pyenv&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/23842713/using-python-3-in-virtualenv&quot; target=&quot;_blank&quot;&gt;Using Python 3 in virtualenv&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Python" /><summary type="html"></summary></entry><entry><title type="html">Using Alexa ASK SDK from Lambda Layers</title><link href="https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers" rel="alternate" type="text/html" title="Using Alexa ASK SDK from Lambda Layers" /><published>2018-12-03T18:00:00-06:00</published><updated>2018-12-03T18:00:00-06:00</updated><id>https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers</id><content type="html" xml:base="https://lgallardo.com/2018/12/04/using-alexa-ask-from-lambda-layers">&lt;center&gt;&lt;img src=&quot;/images/alexa_lambda_layers.jpg&quot; alt=&quot;Alexa + lambda + Layers&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;lambda-layers&quot;&gt;Lambda Layers&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html&quot; target=&quot;_blank&quot;&gt;Lambda Layers&lt;/a&gt; was recently incorporated into AWS, which basically allows you to share libraries and codes between Lambda functions. This makes it possible to speed up development since now it is not necessary to pack all libraries with the Lambda function, as we used to do with Alexa’s ASK, but now these libraries can be uploaded independently in Lambda Layers and used directly in our functions.&lt;/p&gt;
-
-&lt;h1 id=&quot;alexas-ask-sdk&quot;&gt;Alexa’s ASK SDK&lt;/h1&gt;
-&lt;p&gt;To prepare Alexa’s ASK for Lambda Layers we can follow the following steps:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;virtualenv python
-source python/bin/activate
-pip install ask-sdk
-zip -r ask-sdk.zip python/lib/python3.6/site-packages/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now you can use the Alexa’s ASK SDK from your lambda functions without having to upload it in each deployment.&lt;/p&gt;
-
-&lt;h1 id=&quot;uploading-the-ask-sdk-to-lambda-layers&quot;&gt;Uploading the ASK SDK to Lambda Layers&lt;/h1&gt;
-
-&lt;p&gt;The first thing we must do is to create the Lambda Layers from the console:&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/create_layer.jpg&quot; alt=&quot;Create Layer&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Then you must fill out the form and select the .zip that you created to upload it, and finally you must indicate the runtime with which it is compatible.&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/ask_sdk_lambda_layer.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Once created, we can see the description and the version:&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/ask_sdk_lambda_layer2.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;how-to-include-the-ask-sdk-from-lambda-layers&quot;&gt;How to include the ASK SDK from Lambda Layers?&lt;/h1&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Got to your Lambda function and right under yout function name you can click on &lt;strong&gt;&lt;em&gt;Layers&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;From the below section &lt;strong&gt;&lt;em&gt;Referenced layers&lt;/em&gt;&lt;/strong&gt; click on the &lt;strong&gt;&lt;em&gt;Add a layer&lt;/em&gt;&lt;/strong&gt; button&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/add_layer1.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Select the &lt;strong&gt;&lt;em&gt;ask-sdk&lt;/em&gt;&lt;/strong&gt; layer from the drop-down menu, and click on &lt;strong&gt;&lt;em&gt;Add&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/add_layer2.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see below, the Lambda Layer with the Alexa’s ASK SDK can now be used in this Lambda function:&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/add_layer3.jpg&quot; alt=&quot;Add SDK&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can select this same Layer for other Lambda functions that use the same ASK SDK and runtime without having to be uploading it in each deployment.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><category term="Lambda" /><category term="Layers" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Python" /><summary type="html"></summary></entry></feed>
