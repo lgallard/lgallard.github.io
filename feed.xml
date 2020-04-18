@@ -1,4 +1,592 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2020-03-01T12:58:32-06:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for Amazon Route53 Resolver Rules</title><link href="https://lgallardo.com/2020/02/29/terraform-module-for-route53-resolver-rules" rel="alternate" type="text/html" title="Terraform module for Amazon Route53 Resolver Rules" /><published>2020-02-28T18:00:00-06:00</published><updated>2020-02-28T18:00:00-06:00</updated><id>https://lgallardo.com/2020/02/29/terraform-module-for-route53-resolver-rules</id><content type="html" xml:base="https://lgallardo.com/2020/02/29/terraform-module-for-route53-resolver-rules">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-route53-resolver-rules.jpg&quot; alt=&quot;AWS Route53 Resolver Rules&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2020-04-17T23:34:30-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for Amazon CodeBuild</title><link href="https://lgallardo.com/2020/04/18/terraform-module-for-amazon-codebuild" rel="alternate" type="text/html" title="Terraform module for Amazon CodeBuild" /><published>2020-04-17T19:00:00-05:00</published><updated>2020-04-17T19:00:00-05:00</updated><id>https://lgallardo.com/2020/04/18/terraform-module-for-amazon-codebuild</id><content type="html" xml:base="https://lgallardo.com/2020/04/18/terraform-module-for-amazon-codebuild">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-codebuild.jpg&quot; alt=&quot;AWS CodeBuild&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I just published a Terraform module called terraform-aws-codebuild at github, so I decided to share it as well in the public Terraform Registry.&lt;/p&gt;
+
+&lt;p&gt;You can check the module &lt;strong&gt;terraform-aws-codebuild&lt;/strong&gt; at the &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/codebuild/aws/&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; or clone it from &lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want to take a sneak of the module, I also left the README in this post:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://lgallardo.com/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/p&gt;
+&lt;h1 id=&quot;terraform-aws-codebuild&quot;&gt;terraform-aws-codebuild&lt;/h1&gt;
+&lt;p&gt;Terraform module for creating &lt;a href=&quot;https://aws.amazon.com/codebuild/&quot; target=&quot;_blank&quot;&gt;AWS CodeBuild&lt;/a&gt; Projects. AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.&lt;/p&gt;
+
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;You can  define CodeBuild projects using object variables (made of maps, lists, booleans, etc.), or you can define projects using the classic module’s variables approach (eg. &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts_*&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;cache_*&lt;/code&gt;, etc.).&lt;/p&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild/tree/master/examples/&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; folder you can check both approaches in detail and another example with VPC support.&lt;/p&gt;
+
+&lt;h2 id=&quot;example-using-objects&quot;&gt;Example using objects&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;myapp-project&quot; {
+
+  source = &quot;git::https://github.com/lgallard/terraform-aws-codebuild.git&quot;
+
+  name        = &quot;my-app&quot;
+  description = &quot;Codebuild for deploying myapp&quot;
+
+  # CodeBuild Source
+  codebuild_source_version = &quot;master&quot;
+  codebuild_source = {
+    type            = &quot;GITHUB&quot;
+    location        = &quot;https://github.com/lgallard/codebuild-example.git&quot;
+    git_clone_depth = 1
+
+    git_submodules_config = {
+      fetch_submodules = true
+    }
+  }
+
+  # Environment
+  environment = {
+    compute_type    = &quot;BUILD_GENERAL1_SMALL&quot;
+    image           = &quot;aws/codebuild/standard:2.0&quot;
+    type            = &quot;LINUX_CONTAINER&quot;
+    privileged_mode = true
+
+    # Environment variables
+    variables = [
+      {
+        name  = &quot;REGISTRY_URL&quot;
+        value = &quot;012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr&quot;
+      },
+      {
+        name  = &quot;AWS_DEFAULT_REGION&quot;
+        value = &quot;us-east-1&quot;
+      },
+    ]
+  }
+
+  # Artifacts
+  artifacts = {
+    location  = aws_s3_bucket.myapp-project.bucket
+    type      = &quot;S3&quot;
+    path      = &quot;/&quot;
+    packaging = &quot;ZIP&quot;
+  }
+
+  # Cache
+  cache = {
+    type     = &quot;S3&quot;
+    location = aws_s3_bucket.myapp-project.bucket
+  }
+
+  # Logs
+  s3_logs = {
+    status   = &quot;ENABLED&quot;
+    location = &quot;${aws_s3_bucket.myapp-project.id}/build-log&quot;
+  }
+
+  # Tags
+  tags = {
+    Environment = &quot;dev&quot;
+    owner       = &quot;development-team&quot;
+  }
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;example-using-variables&quot;&gt;Example using variables&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;myapp-project&quot; {
+
+  source = &quot;git::https://github.com/lgallard/terraform-aws-codebuild.git&quot;
+
+  name        = &quot;my-app-var&quot;
+  description = &quot;Codebuild for deploying myapp (variables)&quot;
+
+  # CodeBuild Source
+  codebuild_source_version = &quot;master&quot;
+
+  codebuild_source_type                                   = &quot;GITHUB&quot;
+  codebuild_source_location                               = &quot;https://github.com/lgallard/codebuild-example.git&quot;
+  codebuild_source_git_clone_depth                        = 1
+  codebuild_source_git_submodules_config_fetch_submodules = true
+
+  # Environment
+  environment_compute_type    = &quot;BUILD_GENERAL1_SMALL&quot;
+  environment_image           = &quot;aws/codebuild/standard:2.0&quot;
+  environment_type            = &quot;LINUX_CONTAINER&quot;
+  environment_privileged_mode = true
+
+  # Environment variables
+  environment_variables = [
+    {
+      name  = &quot;REGISTRY_URL&quot;
+      value = &quot;012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr&quot;
+    },
+    {
+      name  = &quot;AWS_DEFAULT_REGION&quot;
+      value = &quot;us-east-1&quot;
+    },
+  ]
+
+  # Artifacts
+  artifacts_location  = aws_s3_bucket.myapp-project.bucket
+  artifacts_type      = &quot;S3&quot;
+  artifacts_path      = &quot;/&quot;
+  artifacts_packaging = &quot;ZIP&quot;
+
+  # Cache
+  cache_type     = &quot;S3&quot;
+  cache_location = aws_s3_bucket.myapp-project.bucket
+
+  # Logs
+  s3_logs_status   = &quot;ENABLED&quot;
+  s3_logs_location = &quot;${aws_s3_bucket.myapp-project.id}/build-var-log&quot;
+
+
+  # Tags
+  tags = {
+    Environment = &quot;dev&quot;
+    owner       = &quot;development-team&quot;
+  }
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Default&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts&lt;/td&gt;
+      &lt;td&gt;Information about the project’s build output artifacts.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_artifact_identifier&lt;/td&gt;
+      &lt;td&gt;The artifact identifier. Must be the same specified inside AWS CodeBuild buildspec.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_encryption_disabled&lt;/td&gt;
+      &lt;td&gt;If set to true, output artifacts will not be encrypted. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; then this value will be ignored.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_location&lt;/td&gt;
+      &lt;td&gt;Information about the build output artifact location. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; then this value will be ignored. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the name of the output bucket.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_name&lt;/td&gt;
+      &lt;td&gt;The name of the project. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the name of the output artifact object.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_namespace_type&lt;/td&gt;
+      &lt;td&gt;The namespace to use in storing build artifacts. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, then valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_ID&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NONE&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_override_artifact_name&lt;/td&gt;
+      &lt;td&gt;If set to true, a name specified in the build spec file overrides the artifact name.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_packaging&lt;/td&gt;
+      &lt;td&gt;The type of build output artifact to create. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;NONE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ZIP&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_path&lt;/td&gt;
+      &lt;td&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the path to the output artifact&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;artifacts_type&lt;/td&gt;
+      &lt;td&gt;The build output artifact’s type. Valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;NO_ARTIFACTS&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;badge_enabled&lt;/td&gt;
+      &lt;td&gt;Generates a publicly-accessible URL for the projects build badge. Available as badge_url attribute when enabled.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;build_timeout&lt;/td&gt;
+      &lt;td&gt;How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed.The default is 60 minutes.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;60&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cache&lt;/td&gt;
+      &lt;td&gt;Information about the cache storage for the project.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cache_location&lt;/td&gt;
+      &lt;td&gt;The location where the AWS CodeBuild project stores cached resources. For type S3 the value must be a valid S3 bucket name/prefix. (Required when cache &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;)&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cache_modes&lt;/td&gt;
+      &lt;td&gt;Specifies settings that AWS CodeBuild uses to store and reuse build dependencies. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_SOURCE_CACHE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_DOCKER_LAYER_CACHE&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_CUSTOM_CACHE&lt;/code&gt;. (Required when cache type is &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL&lt;/code&gt;)&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cache_type&lt;/td&gt;
+      &lt;td&gt;The type of storage that will be used for the AWS CodeBuild project cache. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_CACHE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;NO_CACHE&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cloudwatch_logs&lt;/td&gt;
+      &lt;td&gt;Configuration for the builds to store log data to CloudWatch.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cloudwatch_logs_group_name&lt;/td&gt;
+      &lt;td&gt;The group name of the logs in CloudWatch Logs.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cloudwatch_logs_status&lt;/td&gt;
+      &lt;td&gt;Current status of logs in CloudWatch Logs for a build project. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;ENABLED&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DISABLED.&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;ENABLED&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cloudwatch_logs_stream_name&lt;/td&gt;
+      &lt;td&gt;The stream name of the logs in CloudWatch Logs.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source&lt;/td&gt;
+      &lt;td&gt;Information about the project’s input source code.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_auth&lt;/td&gt;
+      &lt;td&gt;Information about the authorization settings for AWS CodeBuild to access the source code to be built.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_auth_resource&lt;/td&gt;
+      &lt;td&gt;The resource value that applies to the specified authorization type.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_auth_type&lt;/td&gt;
+      &lt;td&gt;The authorization type to use. The only valid value is OAUTH&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;OAUTH&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_buildspec&lt;/td&gt;
+      &lt;td&gt;The build spec declaration to use for this build project’s related builds. This must be set when type is iNO_SOURCE&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_git_clone_depth&lt;/td&gt;
+      &lt;td&gt;Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_git_submodules_config&lt;/td&gt;
+      &lt;td&gt;Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_git_submodules_config_fetch_submodules&lt;/td&gt;
+      &lt;td&gt;If set to true, fetches Git submodules for the AWS CodeBuild build project.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_insecure_ssl&lt;/td&gt;
+      &lt;td&gt;Ignore SSL warnings when connecting to source control.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_location&lt;/td&gt;
+      &lt;td&gt;The location of the source code from git or s3.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_report_build_status&lt;/td&gt;
+      &lt;td&gt;Set to true to report the status of a build’s start and finish to your source provider. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;BITBUCKET&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_type&lt;/td&gt;
+      &lt;td&gt;The type of repository that contains the source code to be built. Valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB_ENTERPRISE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BITBUCKET&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_SOURCE&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;CODEPIPELINE&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;codebuild_source_version&lt;/td&gt;
+      &lt;td&gt;A version of the build input to be built for this project. If not specified, the latest version is used.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;description&lt;/td&gt;
+      &lt;td&gt;A short description of the project.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;encryption_key&lt;/td&gt;
+      &lt;td&gt;The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project’s build output artifacts.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment&lt;/td&gt;
+      &lt;td&gt;Information about the project’s build environment.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment_certificate&lt;/td&gt;
+      &lt;td&gt;The ARN of the S3 bucket, path prefix and object key that contains the PEM-encoded certificate.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment_compute_type&lt;/td&gt;
+      &lt;td&gt;Information about the compute resources the build project will use. Available values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_SMALL&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_MEDIUM&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_LARGE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_2XLARGE&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_SMALL&lt;/code&gt; is only valid if type is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_CONTAINER&lt;/code&gt;. When type is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_GPU_CONTAINER&lt;/code&gt;, compute_type need to be &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_LARGE&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;BUILD_GENERAL1_MEDIUM&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment_image&lt;/td&gt;
+      &lt;td&gt;The Docker image to use for this build project. Valid values include Docker images provided by CodeBuild (e.g &lt;code class=&quot;highlighter-rouge&quot;&gt;aws/codebuild/standard:2.0&lt;/code&gt;), Docker Hub images (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;hashicorp/terraform:latest&lt;/code&gt;), and full Docker repository URIs such as those for ECR (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;137112412989.dkr.ecr.us-west-2.amazonaws.com/amazonlinux:latest&lt;/code&gt;)&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;aws/codebuild/standard:2.0&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment_image_pull_credentials_type&lt;/td&gt;
+      &lt;td&gt;The type of credentials AWS CodeBuild uses to pull images in your build. Available values for this parameter are &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEBUID&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;SERVICE_ROLE&lt;/code&gt;. When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;CODEBUILD&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment_privileged_mode&lt;/td&gt;
+      &lt;td&gt;If set to true, enables running the Docker daemon inside a Docker container.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment_registry_credential&lt;/td&gt;
+      &lt;td&gt;Information about credentials for access to a private Docker registry. Registry Credential config blocks are documented below.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment_type&lt;/td&gt;
+      &lt;td&gt;The type of build environment to use for related builds. Available values are: &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_CONTAINER&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_GPU_CONTAINER&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;WINDOWS_CONTAINER&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ARM_CONTAINER&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;LINUX_CONTAINER&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;environment_variables&lt;/td&gt;
+      &lt;td&gt;A list of sets of environment variables to make available to builds for this build project.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;name&lt;/td&gt;
+      &lt;td&gt;The projects name.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;queued_timeout&lt;/td&gt;
+      &lt;td&gt;How long in minutes, from 5 to 480 (8 hours), a build is allowed to be queued before it times out.The default is 8 hours.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;480&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;s3_logs&lt;/td&gt;
+      &lt;td&gt;Configuration for the builds to store log data to S3.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;s3_logs_encryption_disabled&lt;/td&gt;
+      &lt;td&gt;Set to true if you do not want S3 logs encrypted.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;s3_logs_location&lt;/td&gt;
+      &lt;td&gt;The name of the S3 bucket and the path prefix for S3 logs. Must be set if status is ENABLED, otherwise it must be empty.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;s3_logs_status&lt;/td&gt;
+      &lt;td&gt;Current status of logs in S3 for a build project. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;ENABLED&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DISABLED.&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;DISABLED&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tags&lt;/td&gt;
+      &lt;td&gt;A mapping of tags to assign to the resource.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_config&lt;/td&gt;
+      &lt;td&gt;Configuration for the builds to run inside a VPC.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_config_security_group_ids&lt;/td&gt;
+      &lt;td&gt;The security group IDs to assign to running builds.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list(string)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_config_subnets&lt;/td&gt;
+      &lt;td&gt;The subnet IDs within which to run builds.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list(string)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vpc_config_vpc_id&lt;/td&gt;
+      &lt;td&gt;The ID of the VPC within which to run builds.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;arn&lt;/td&gt;
+      &lt;td&gt;The ARN of the CodeBuild project&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;id&lt;/td&gt;
+      &lt;td&gt;The name (if imported via name) or ARN (if created via Terraform or imported via ARN) of the CodeBuild project.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;name&lt;/td&gt;
+      &lt;td&gt;The name of the CodeBuild project&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;service_role_arn&lt;/td&gt;
+      &lt;td&gt;Amazon Resource Name (ARN) of the Service Role for CodeBuild.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;service_role_id&lt;/td&gt;
+      &lt;td&gt;ID of the Service Role created for CodeBuild.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;service_role_name&lt;/td&gt;
+      &lt;td&gt;Name of the Service Role created for CodeBuild.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuildmodule at github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/codebuild/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuildat Terraform registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for Amazon Route53 Resolver Rules</title><link href="https://lgallardo.com/2020/02/29/terraform-module-for-route53-resolver-rules" rel="alternate" type="text/html" title="Terraform module for Amazon Route53 Resolver Rules" /><published>2020-02-28T18:00:00-06:00</published><updated>2020-02-28T18:00:00-06:00</updated><id>https://lgallardo.com/2020/02/29/terraform-module-for-route53-resolver-rules</id><content type="html" xml:base="https://lgallardo.com/2020/02/29/terraform-module-for-route53-resolver-rules">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-route53-resolver-rules.jpg&quot; alt=&quot;AWS Route53 Resolver Rules&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;center&gt;&lt;img src=&quot;/images/Resolver-outbound-endpoint.jpg&quot; alt=&quot;Resolver outbound endpoint&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -1536,72 +2124,4 @@ codebuild_artifacts_encryption_disabled
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Pyenv to the rescue</title><link href="https://lgallardo.com/2019/02/26/pyenv-to-the-rescue" rel="alternate" type="text/html" title="Pyenv to the rescue" /><published>2019-02-25T18:00:00-06:00</published><updated>2019-02-25T18:00:00-06:00</updated><id>https://lgallardo.com/2019/02/26/pyenv-to-the-rescue</id><content type="html" xml:base="https://lgallardo.com/2019/02/26/pyenv-to-the-rescue">&lt;center&gt;&lt;img src=&quot;/images/Python-logo-150.jpg&quot; alt=&quot;Python&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;the-problem&quot;&gt;The problem&lt;/h1&gt;
-
-&lt;p&gt;I recently switched to &lt;em&gt;Debian testing&lt;/em&gt; again so as to be able to use Python 3.6 among other things. I started working with this version, creating my Lambda Layers and everything was fine until &lt;em&gt;Debian testing&lt;/em&gt; switched to Python 3.7. Well, I told myself, there is no drama, using &lt;code class=&quot;highlighter-rouge&quot;&gt;alternative&lt;/code&gt; I can switch versions of Python smoothly or set  &lt;code class=&quot;highlighter-rouge&quot;&gt;virtualenv&lt;/code&gt; to use one interpreter or another.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;:~# update-alternatives --config python
-There are 3 choices for the alternative python (providing /usr/bin/python).
-
-  Selection    Path                Priority   Status
-------------------------------------------------------------
-  0            /usr/bin/python3.6   3         auto mode
-  1            /usr/bin/python2     1         manual mode
-  2            /usr/bin/python3     2         manual mode
-* 3            /usr/bin/python3.6   3         manual mode
-
-Press &amp;lt;enter&amp;gt; to keep the current choice[*], or type selection number: 3
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;But even using &lt;code class=&quot;highlighter-rouge&quot;&gt;alternative&lt;/code&gt; or forcing the interpreter to use Python 3.6 it seems there is always something pointing to Python 3.7:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ virtualenv -p /usr/bin/python3.6 test
-Running virtualenv with interpreter /usr/bin/python3.6
-Traceback (most recent call last):
-  File &quot;/home/lgallard/.local/lib/python3.7/site-packages/virtualenv.py&quot;, line 22, in &amp;lt;module&amp;gt;
-    import distutils.spawn
-ModuleNotFoundError: No module named 'distutils.spawn'
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h1 id=&quot;pyenv-to-the-rescue&quot;&gt;pyenv to the rescue&lt;/h1&gt;
-
-&lt;p&gt;There is a version manager of Python called &lt;a href=&quot;https://github.com/pyenv/pyenv#choosing-the-python-version&quot; target=&quot;_blank&quot;&gt;pyenv&lt;/a&gt; which allows you to configure the environment to use both locally and globally.&lt;/p&gt;
-
-&lt;p&gt;For example, to install Python version 3.6.8 just do&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pyenv install 3.6.8
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We can verify the versions as follows:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ pyenv versions
-  system
-* 3.6.8 (set by /home/lgallard/.pyenv/version)
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Then to use the version installed with pyenv, just pass the path:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ virtualenv -p ~/.pyenv/versions/3.6.8/bin/python test
-Running virtualenv with interpreter /home/lgallard/.pyenv/versions/3.6.8/bin/python
-Using base prefix '/home/lgallard/.pyenv/versions/3.6.8'
-New python executable in /home/lgallard/test/bin/python
-Installing setuptools, pip, wheel...
-done.
-
-./test/bin/python --version
-Python 3.6.8
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This way I was able to keep using the specific Python version I needed.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/pyenv/pyenv#choosing-the-python-version&quot; target=&quot;_blank&quot;&gt;pyenv&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/23842713/using-python-3-in-virtualenv&quot; target=&quot;_blank&quot;&gt;Using Python 3 in virtualenv&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Python" /><summary type="html"></summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><summary type="html"></summary></entry></feed>

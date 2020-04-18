@@ -330,17 +330,17 @@
 
 <p>I wrote this module to be able to create AWS Route53 Resolver rules for outbound endpoints in a more convenient way.</p>
 
-<p>You can check the module <strong>terraform-aws-route53-resolver-rules</strong> at the <a href="hhttps://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/" target="_blank">Terraform Registry</a> or clone it from <a href="https://github.com/lgallard/terraform-aws-route53-resolver-rules" target="_blank">github</a>.</p>
+<p>You can check the module <strong>terraform-aws-route53-resolver-rules</strong> at the <a href="https://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/" target="_blank">Terraform Registry</a> or clone it from <a href="https://github.com/lgallard/terraform-aws-route53-resolver-rules" target="_blank">github</a>.</p>
 
 <p>If you want to take a sneak of the module, I also left the README in this post:</p>
 
 <h1 id="terraform-aws-route53-resolver-rules">terraform-aws-route53-resolver-rules</h1>
 
-<p>Terraform module to create <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html/">AWS Route53 Resolver Rules</a>.</p>
+<p>Terraform module to create <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html">AWS Route53 Resolver Rules</a>.</p>
 
 <h2 id="usage">Usage</h2>
 
-<p>Before you start to forward queries, you must create  Resolver outbound endpoints in the connected VPCs. These endpoints provide a path for inbound or outbound queries. To accomplish this you can create the endpoints using the <a href="https://www.terraform.io/docs/providers/aws/r/route53_resolver_endpoint.html">aws_route54_resolver_endpoint</a> resource or use a module like the <a href="https://github.com/rhythmictech/terraform-aws-route53-endpoint">terraform-aws-route53-endpoint</a></p>
+<p>Before you start to forward queries, you must create  Resolver outbound endpoints in the connected VPCs. These endpoints provide a path for inbound or outbound queries. To accomplish this you can create the endpoints using the <a href="https://www.terraform.io/docs/providers/aws/r/route53_resolver_endpoint.html">aws_route53_resolver_endpoint</a> resource or use a module like the <a href="https://github.com/rhythmictech/terraform-aws-route53-endpoint">terraform-aws-route53-endpoint</a></p>
 
 <p>Check the <a href="examples/">examples</a> folder for the <strong>simple</strong> and the <strong>complete</strong> snippets.</p>
 
