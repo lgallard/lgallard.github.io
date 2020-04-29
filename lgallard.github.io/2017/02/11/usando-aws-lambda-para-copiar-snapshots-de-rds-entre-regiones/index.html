@@ -324,7 +324,6 @@
 
       <section class="page__content" itemprop="text">
         <center><img src="/images/usando-aws-lambda-para-copiar-snapshots-de-rds-entre-regiones.jpg" alt="AWS Lambda" /></center>
-
 <p>At work we needed to make MySQL database on RDS backups between regions without having a running instance in the destination region, I mean, no read replicas wanted. Someone suggested to use a cron to copy the backups between regions. I thought this had to been done so I decided to do a research and I ran into this excellent post that explains how to make the copy using Lambda functions with Python: <a href="https://mysteriouscode.io/blog/copying-rds-snapshot-to-another-region-for-cross-region-recovery/" target="_blank">Copying RDS snapshot to another region for cross-region recovery</a></p>
 
 <p>This function get the last snapshots for all RDS databases in the source region and copies them to the destination region. Then it deletes old snapshots in the destination region to save space. The function can be triggered using CloudWatch or RDS events, for example when the database backup is finished.</p>
@@ -563,6 +562,34 @@ if __name__ == '__main__':
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="https://lgallardo.com/2020/04/28/2020-04-28-hashicorp-certified-terraform-associate/" rel="permalink">HashiCorp Certified: Terraform Associate
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+ 
+HashiCorp recently announced the general availability of some of their Cloud Certifications like Terraform and Vault (and others to come like Consul). As ...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="https://lgallardo.com/2020/04/18/terraform-module-for-amazon-codebuild" rel="permalink">Terraform module for Amazon CodeBuild
 </a>
       
@@ -578,6 +605,7 @@ if __name__ == '__main__':
     
     <p class="archive__item-excerpt" itemprop="description">
 
+I just published a Terraform module called terraform-aws-codebuild at Github, so I decided to share it as well in the public Terraform Registry.
 
 </p>
   </article>
@@ -609,6 +637,7 @@ if __name__ == '__main__':
 
 
 
+I wrote this module to be able to create AWS Route53 Resolver rules for outbound endpoints in a more convenient way.
 
 </p>
   </article>
@@ -638,37 +667,7 @@ if __name__ == '__main__':
     
     <p class="archive__item-excerpt" itemprop="description">
 
-
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/2019/10/28/terraform-module-for-amazon-elasticsearch" rel="permalink">Terraform module for Amazon Elasticsearch Service
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  6 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-
-
-</p>
+I share here another Terraform module that I just published as open source, which allows you to create Amazon Cognito User Pools with its attributes and re...</p>
   </article>
 </div>
         
