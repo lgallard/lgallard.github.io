@@ -8,9 +8,8 @@ export JEKYLL_VERSION=3.8
 docker run --volume="$PWD:/srv/jekyll" -it jekyll/jekyll:$JEKYLL_VERSION jekyll build -t --incremental
 #!/bin/bash
 
-git rm lgallard.github.io/
+rm lgallard.github.io/ -rf
 git clone https://github.com/lgallard/lgallard.github.io.git
-git rm lgallard.github.io/lgallard.github.io -rf
 cp -r _site/* lgallard.github.io/
 cd lgallard.github.io/
 git add --all

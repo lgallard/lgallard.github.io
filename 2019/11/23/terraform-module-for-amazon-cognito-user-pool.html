@@ -515,7 +515,7 @@ I share here another Terraform module that I just published as open source, whic
 </code></pre></div></div>
 
 <h2 id="know-issue">Know issue</h2>
-<p>###removing all lambda triggers</p>
+<h3 id="removing-all-lambda-triggers">Removing all lambda triggers</h3>
 
 <p>If you define lambda triggers using the <code class="highlighter-rouge">lambda_config</code> block or any <code class="highlighter-rouge">lambda_config_*</code> variable and you want to remove all triggers, define the lambda_config block with an empty map <code class="highlighter-rouge">{}</code> and apply the plan. Then comment the <code class="highlighter-rouge">lambda_config</code> block or define it as <code class="highlighter-rouge">null</code> and apply the plan again.</p>
 
@@ -525,7 +525,7 @@ I share here another Terraform module that I just published as open source, whic
 
 <ul>
   <li><a href="https://github.com/lgallard/terraform-aws-cognito-user-pool" target="_blank">terraform-aws-cognito-user-pool module at Github</a></li>
-  <li><a href="https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/" target="_blank">terraform-aws-cognito-user-pool at Terraform Registry</a></li>
+  <li><a href="https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/" target="_blank">terraform-aws-cognito-user-pool module at Terraform Registry</a></li>
 </ul>
 
         
@@ -638,6 +638,36 @@ I share here another Terraform module that I just published as open source, whic
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager" rel="permalink">Terraform module for Secrets Manager
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+I just published a Terraform module called terraform-aws-secrets-manager at Github, so I decided to share it as well in the public Terraform Registry.
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="https://lgallardo.com/2020/04/28/2020-04-28-hashicorp-certified-terraform-associate/" rel="permalink">HashiCorp Certified: Terraform Associate
 </a>
       
@@ -719,37 +749,8 @@ I wrote this module to be able to create AWS Route53 Resolver rules for outbound
   </article>
 </div>
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/2019/10/28/terraform-module-for-amazon-elasticsearch" rel="permalink">Terraform module for Amazon Elasticsearch Service
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  5 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-
-I share here another Terraform module that I just published as open source, which allows you to create Amazon Elasticsearch Service clusters. The module is...</p>
-  </article>
-</div>
-        
       </div>
     </div>
-  
   
 </div>
 

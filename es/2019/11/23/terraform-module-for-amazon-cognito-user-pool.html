@@ -1054,7 +1054,7 @@ Les comparto otro módulo Terraform que acabo de publicar como código abierto, 
 </table>
 
 <h2 id="know-issue">Know issue</h2>
-<p>###removing all lambda triggers</p>
+<h3 id="removing-all-lambda-triggers">Removing all lambda triggers</h3>
 
 <p>If you define lambda triggers using the <code class="highlighter-rouge">lambda_config</code> block or any <code class="highlighter-rouge">lambda_config_*</code> variable and you want to remove all triggers, define the lambda_config block with an empty map <code class="highlighter-rouge">{}</code> and apply the plan. Then comment the <code class="highlighter-rouge">lambda_config</code> block or define it as <code class="highlighter-rouge">null</code> and apply the plan again.</p>
 
@@ -1064,7 +1064,7 @@ Les comparto otro módulo Terraform que acabo de publicar como código abierto, 
 
 <ul>
   <li><a href="https://github.com/lgallard/terraform-aws-cognito-user-pool" target="_blank">terraform-aws-cognito-user-pool module at Github</a></li>
-  <li><a href="https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/" target="_blank">terraform-aws-cognito-user-pool at Terraform Registry</a></li>
+  <li><a href="https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/" target="_blank">terraform-aws-cognito-user-pool module at Terraform Registry</a></li>
 </ul>
 
         
@@ -1177,6 +1177,34 @@ Les comparto otro módulo Terraform que acabo de publicar como código abierto, 
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="https://lgallardo.com/es/2020/06/26/terraform-module-for-amazon-secrets-manager" rel="permalink">Módulo de Terraform para Secrets Manager
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Acabo de publicar un módulo Terraform llamado terraform-aws-secrets-manager en Github, así que decidí compartirlo también en el Registro público de Terrafo...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="https://lgallardo.com/es/2020/04/28/2020-04-28-hashicorp-certified-terraform-associate/" rel="permalink">HashiCorp Certified: Terraform Associate
 </a>
       
@@ -1258,37 +1286,8 @@ Escribí este módulo para poder crear reglas de AWS Route53 Resolver para endpo
   </article>
 </div>
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/2019/10/28/terraform-module-for-amazon-elasticsearch" rel="permalink">Módulo de Terraform para Amazon Elasticsearch Service
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  5 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-
-Dejo por acá otro módulo de Terraform que acabo de publicar como código abierto, el cual permite crear clusters de Amazon Elasticsearch Service. El módulo ...</p>
-  </article>
-</div>
-        
       </div>
     </div>
-  
   
 </div>
 
