@@ -1,4 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2020-06-27T12:51:05-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for Secrets Manager</title><link href="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager" rel="alternate" type="text/html" title="Terraform module for Secrets Manager" /><published>2020-06-25T19:00:00-05:00</published><updated>2020-06-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager</id><content type="html" xml:base="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-secrets-manager.jpg&quot; alt=&quot;AWS Secrets Manager&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2020-07-28T10:34:58-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Certified Kubernetes Application Developer (CKAD)</title><link href="https://lgallardo.com/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="alternate" type="text/html" title="Certified Kubernetes Application Developer (CKAD)" /><published>2020-07-25T19:00:00-05:00</published><updated>2020-07-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/07/26/certified-kubernetes-application-developer-ckad</id><content type="html" xml:base="https://lgallardo.com/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;I recently approved the &lt;strong&gt;Certified Kubernetes Application Developer (CKAD)&lt;/strong&gt; exam by The Linux Foundation, so I decided to share my experience and some recommendations to prepare for the exam.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-exam&quot;&gt;The exam&lt;/h1&gt;
+
+&lt;p&gt;The exam is 100% practical with 19 questions that must be solved in 2 hours, supervised by a proctor who verifies that you are alone during the exam, and that you comply with &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;all rules&lt;/a&gt; (for example in my case he asked me to close all doors that gave access to my dining room, where I took the exam).&lt;/p&gt;
+
+&lt;p&gt;Some questions will be easy, others will have several steps to follow, so you must manage your time very well. Questions will be shown in a panel on the left side and you will have access to a terminal where you must execute the commands to solve them.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/exam_ui.jpg&quot; alt=&quot;Exam UI&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;There will be questions to create resources and others to identify and solve problems (troubleshooting). You can copy and paste from the instructions, in addition to having access to a place for notes, for example to keep track of pending questions.&lt;/p&gt;
+
+&lt;p&gt;You will be able to consult the Kubernetes documentation from these sites &lt;a href=&quot;https://kubernetes.io/docs/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/docs/&lt;/a&gt;, &lt;a href=&quot;https://github.com/kubernetes/&quot; target=&quot;_blank&quot;&gt;https://github.com/kubernetes/&lt;/a&gt;, &lt;a href=&quot;https://kubernetes.io/blog/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/blog/&lt;/a&gt;, opening one and only one additional tab to the exam.&lt;/p&gt;
+
+&lt;p&gt;You can take the exam with Chrome, so yo can access the sites mentioned above from your bookmarks (yes, it’s allowed)&lt;/p&gt;
+
+&lt;h1 id=&quot;my-experience&quot;&gt;My experience&lt;/h1&gt;
+&lt;p&gt;I had some expectation because it’s a practical exam, and since it was the first of this style that I took, I didn’t know what to expect or how I was going to be able to handle time.&lt;/p&gt;
+
+&lt;p&gt;During the exam, several things happened to me that delayed me, for example, when I used a Vim’s key combination to move between windows, I accidentally closed the exam, so I had to reconnect and contact the proctor.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, that day my Internet provider had problems and made my connection very slow, so changes in the yaml files were seen with delays of approximately 5 seconds.&lt;/p&gt;
+
+&lt;p&gt;At some point the connection was completely lost, and the exam was closed, so I had to log in again and coordinate with the proctor.&lt;/p&gt;
+
+&lt;p&gt;Another thing that happened was that the alarm on my nearby cell phone went off (I took the exam at 5:00 AM) so I asked the proctor for permission to turn it off, therefore he had to pause the exam.&lt;/p&gt;
+
+&lt;p&gt;All these disconnections and pauses don’t stop the time, when the exam begins you have exactly 2 hours.
+ exactas.&lt;/p&gt;
+
+&lt;p&gt;Another drawback I had was that I did not have a clock to keep track of the time in the examination interface, but rather a progress bar that was sometimes missing, so the proctor reminded me of the remaining time every so often, interrupting my concentration.&lt;/p&gt;
+
+&lt;h1 id=&quot;how-to-prepare&quot;&gt;How to prepare?&lt;/h1&gt;
+&lt;p&gt;There are several free and other paid resources, all valid to prepare, but practical experience is essential. I list some of them:&lt;/p&gt;
+
+&lt;h2 id=&quot;books&quot;&gt;Books&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton: This book is good for an overview of Kubernetes, and is an extension of Nigel’s course (see below).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;: This is an excellent book to learn Kubernetes, it covers various topics of CKAD and also of CKA.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;online-courses&quot;&gt;Online courses&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;: This course is very well designed and explains in detail and with many animations the concepts necessary to learn how to deploy applications in a Kubernetes cluster. Additionally, it gives access to a platform named &lt;em&gt;&lt;strong&gt;Kloud Kode&lt;/strong&gt;&lt;/em&gt; created with &lt;em&gt;&lt;strong&gt;Teachable&lt;/strong&gt;&lt;/em&gt; and with &lt;em&gt;&lt;strong&gt;Katacoda&lt;/strong&gt;&lt;/em&gt; environments designed for each topic covered, two exam-type labs (with a high degree of difficulty) and two exams to practice and prepare to work under the pressure of the real exam. .&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;: If you have a LinuxAcademy subscription you can follow this course. Keep two things in mind: 1) It focuses on editing yamls and little on how to generate them. 2) The exam mocks they have to practice are not so difficult and they may be insufficient to pass without having practiced beyond them. It’s recommended to do the labs, exams and other questions to exercise (see below)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;: This course is to have an overview of Kubernetes, for example of its architecture (API Server, Kubelet, etc.) as well as to take the first steps in application deployments. No practical labs included.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;: This course is to start with Kubernetes, to have the fundamental concepts. Ideal for those who have not had contact with Kubernetes. No practical labs included.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;practice-environments&quot;&gt;Practice environments&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;: This platform allows you to interact with a cluster with just one node, from a web console, similar to what we would get in the exam. The interesting thing is that there are scenarios created by other users that can be used to learn basic concepts, such as secrets, configmaps, volumes, etc. Please note that each scneario lasts a maximum of one hour.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;: With this option you can install a virtual machine to have your own cluster with a node.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;exercises-to-practice&quot;&gt;Exercises to practice&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;:
+A set of exercises that will help you prepare for the exam and can also help you learn and practice with Kubernetes.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;:This is another set of exercises that serve to prepare you and have all the concepts fresh before going to the exam..&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;: This page presents some challenges to complete and some tips for the exam. They also offer an exam simulator at a cost of €30 (I didn’t subscribe, so I don’t know exactly what the simulator is like or if it really has similar exam questions).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;endnotes&quot;&gt;Endnotes&lt;/h1&gt;
+&lt;p&gt;Again I recommend you to practice enough before taking the exam, even if you have experience with Kubernetes. Time management is important, so you must be prepared to use the Kubernetes documentation quickly (from the documentation page or from the console with kubectl), be prepared to generate yamls (not edit them), and handle nerves and pressure.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;Exam Rules and Policies&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for Secrets Manager</title><link href="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager" rel="alternate" type="text/html" title="Terraform module for Secrets Manager" /><published>2020-06-25T19:00:00-05:00</published><updated>2020-06-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager</id><content type="html" xml:base="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-secrets-manager.jpg&quot; alt=&quot;AWS Secrets Manager&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;
 I just published a Terraform module called &lt;strong&gt;terraform-aws-secrets-manager&lt;/strong&gt; at Github, so I decided to share it as well in the public Terraform Registry.&lt;/p&gt;
 
@@ -2184,158 +2268,4 @@ In Terraform you can rename and move resources and modules in the same state, wh
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://medium.com/@lynnlin827/moving-terraform-resources-states-from-one-remote-state-to-another-c76f8b76a996&quot; target=&quot;_blank&quot;&gt;Moving Terraform Resources’ States from One Remote State to Another&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/50400007/terraform-how-to-migrate-state-between-projects&quot; target=&quot;_blank&quot;&gt;Terraform: How to migrate state between projects?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">In Terraform you can rename and move resources and modules in the same state, whether it is local or remote. But when you want to migrate resources or modules between remote states, you have to take other considerations.</summary></entry><entry><title type="html">Dynamic blocks in Terraform 0.12.x</title><link href="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/" rel="alternate" type="text/html" title="Dynamic blocks in Terraform 0.12.x" /><published>2019-06-13T19:00:00-05:00</published><updated>2019-06-13T19:00:00-05:00</updated><id>https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x</id><content type="html" xml:base="https://lgallardo.com/2019/06/14/dynamic-blocks-in-terraform-0.12.x/">&lt;center&gt;&lt;img src=&quot;/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Some time ago I wrote about &lt;a href=&quot;https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform&quot; target=&quot;_blank&quot;&gt;how to make dynamic blocks in Terraform 0.11.x&lt;/a&gt;, that although it solved the problem, it generated others because it wasn’t an official solution and the interpretation by Terraform was not consistent.&lt;/p&gt;
-
-&lt;p&gt;The workaround essentially consisted of defining the blocks dynamically using an assignment to a map list. That is, instead of doing this:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
-
-  artifacts{
-      type           = &quot;${var.codebuild_artifacts_type}&quot;
-      location       = &quot;${var.codebuild_artifacts_location}&quot;
-      name           = &quot;${var.codebuild_artifacts_name}&quot;
-      namespace_type = &quot;${var.codebuild_artifacts_namespace_type}&quot;
-      packaging      = &quot;${var.codebuild_artifacts_packaging}&quot;
-      path           = &quot;${var.codebuild_artifacts_path}&quot;
-
-  }
-
-  ...
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It was replaced by this other:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;resource &quot;aws_codebuild_project&quot; &quot;codebuild&quot; {
-
-  artifacts = [&quot;${local.codebuild_artifacts}&quot;]
-
-  ...
-
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Where &lt;code class=&quot;highlighter-rouge&quot;&gt;local.codebuild_artifacts&lt;/code&gt; built the block from a map list, which depending on the type defined in the variable &lt;code class=&quot;highlighter-rouge&quot;&gt;codebuild_artifacts_type&lt;/code&gt; it created a different block:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-locals {
-  codebuild_artifacts_def = {
-    &quot;S3&quot; = [{
-      type                = &quot;${var.codebuild_artifacts_type}&quot;
-      location            = &quot;${var.codebuild_artifacts_location}&quot;
-      name                = &quot;${var.codebuild_artifacts_name}&quot;
-      namespace_type      = &quot;${var.codebuild_artifacts_namespace_type}&quot;
-      packaging           = &quot;${var.codebuild_artifacts_packaging}&quot;
-      path                = &quot;${var.codebuild_artifacts_path}&quot;
-      encryption_disabled = var.codebuild_artifacts_encryption_disabled
-    }]
-
-    &quot;CODEPIPELINE&quot; = [{
-      type        Some time ago I wrote about [how to make dynamic blocks in Terraform 0.11.x] (https://lgallardo.com/en/2018/07/30/dynamic-configuration-blocks-in-terraform/) {: target = &quot;_blank &quot;}, that although it solved the problem generated others because it was not an official solution and the interpretation by Terraform was not consistent.        = &quot;${var.codebuild_artifacts_type}&quot;
-      name                = &quot;${var.codebuild_artifacts_name}&quot;
-      encryption_disabled = var.codebuild_artifacts_encryption_disabled
-    }]
-
-    &quot;NO_ARTIFACTS&quot; = [{
-      type = &quot;${var.codebuild_artifacts_type}&quot;
-    }]
-  }
-
-  # Retuned map
-  codebuild_artifacts = &quot;${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}&quot;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h1 id=&quot;dynamic-blocks-in-terraform-012x&quot;&gt;Dynamic blocks in Terraform 0.12.x&lt;/h1&gt;
-
-&lt;p&gt;Terraform 0.12.x proposes &lt;a href=&quot;https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each&quot; target=&quot;_blank&quot;&gt;dynamic blocks&lt;/a&gt; to solve this and other cases related to blocks. To use dynamic blocks you have to use &lt;code class=&quot;highlighter-rouge&quot;&gt;dynamic&lt;/code&gt; and&lt;code class=&quot;highlighter-rouge&quot;&gt; for-each&lt;/code&gt;. For example, for the above definition:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  dynamic &quot;artifacts&quot; {
-    for_each = [local.codebuild_artifacts]
-    content {
-      type                = artifacts.value.type
-      encryption_disabled = lookup(artifacts.value, &quot;encryption_disabled&quot;, null)
-      location            = lookup(artifacts.value, &quot;location&quot;, null)
-      name                = lookup(artifacts.value, &quot;name&quot;, null)
-      namespace_type      = lookup(artifacts.value, &quot;namespace_type&quot;, null)
-      packaging           = lookup(artifacts.value, &quot;packaging&quot;, null)
-      path                = lookup(artifacts.value, &quot;path&quot;, null)
-    }
-  }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This way the &lt;code class=&quot;highlighter-rouge&quot;&gt;local.codebuild_artifacts&lt;/code&gt; definition is simplify:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;locals {
-  codebuild_artifacts = {
-    type                = var.codebuild_artifacts_type
-    location            = var.codebuild_artifacts_location
-    name                = var.codebuild_artifacts_name
-    namespace_type      = var.codebuild_artifacts_namespace_type
-    packaging           = var.codebuild_artifacts_packaging
-    path                = var.codebuild_artifacts_path
-    encryption_disabled = var.codebuild_artifacts_encryption_disabled
-  }
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Where is the magic?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;First, in the &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; data type, which tells Terraform to ignore the attribute if the&lt;code class=&quot;highlighter-rouge&quot;&gt; lookup&lt;/code&gt; function doesn’t find the index on the map. Let’s take a look at the the first lines in the &lt;code class=&quot;highlighter-rouge&quot;&gt;content&lt;/code&gt; block, which is what is replaced in the &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts&lt;/code&gt; block in each iteration:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    content {
-      type                = artifacts.value.type
-      encryption_disabled = lookup(artifacts.value, &quot;encryption_disabled&quot;, null)
-      location            = lookup(artifacts.value, &quot;location&quot;, null)
-      ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Here you can see that:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The attribute &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is always defined according to the value of&lt;code class=&quot;highlighter-rouge&quot;&gt; artifacts.value.type&lt;/code&gt;, so it’s not taken from the map.&lt;/li&gt;
-  &lt;li&gt;The attribute &lt;code class=&quot;highlighter-rouge&quot;&gt;encryption_disabled&lt;/code&gt; is assigned if something like&lt;code class=&quot;highlighter-rouge&quot;&gt; artifacts.value ['encryption_disabled'] &lt;/code&gt;is found in the map. If the index doesn’t exist, it’s assigned to &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and therefore it won’t be taken into account by Terraform.&lt;/li&gt;
-  &lt;li&gt;And so on for the rest of the attributes, such as &lt;code class=&quot;highlighter-rouge&quot;&gt;location&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This allows having definitions of dynamic blocks, but you have to take into account that some values must be defined together. For example, for the &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt; type you must define the following variables:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;codebuild_artifacts_type
-codebuild_artifacts_location
-codebuild_artifacts_name
-codebuild_artifacts_namespace_type
-codebuild_artifacts_packaging
-codebuild_artifacts_path
-codebuild_artifacts_encryption_disabled
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;While for &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; just define this one:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;codebuild_artifacts_type
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;On the other hand, the magic is completed by the fact that we are not using an assignment for the a &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacs&lt;/code&gt; block but rather the dynamic block definition. In other words, instead of this:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; artifacts = [&quot;${local.codebuild_artifacts}&quot;]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The dynamic block definition is used:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  dynamic &quot;artifacts&quot; {
-    for_each = [local.codebuild_artifacts]
-    content {
-      ...
-  }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References:&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform&quot; target=&quot;_blank&quot;&gt;Dynamic blocks in Terraform 0.11.x&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each&quot; target=&quot;_blank&quot;&gt;HashiCorp Terraform 0.12 Preview: For and For-Each&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">Some time ago I wrote about how to make dynamic blocks in Terraform 0.11.x, that although it solved the problem, it generated others because it wasn’t an official solution and the interpretation by Terraform was not consistent.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">In Terraform you can rename and move resources and modules in the same state, whether it is local or remote. But when you want to migrate resources or modules between remote states, you have to take other considerations.</summary></entry></feed>
