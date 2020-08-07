@@ -1,0 +1,632 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>AWS Certified Solutions Architect - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="En la empresa estamos llevando muchos servicios a la nube de Amazon, y por ende buscamos formalizar los conocimientos de AWS. En ese sentido conseguimos un sitio de cursos en línea llamado Linux Academy, el cual considero nos ayudó mucho con la certificación y en general a entender AWS, pero no fue el único recurso que usamos ya que completamos con preguntas tipo examen, y la documentación de AWS.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title" content="AWS Certified Solutions Architect">
+
+
+  <link rel="canonical" href="https://lgallardo.com/es/2016/02/13/aws-certified-solutions-architect/">
+  <meta property="og:url" content="https://lgallardo.com/es/2016/02/13/aws-certified-solutions-architect/">
+
+
+
+  <meta property="og:description" content="En la empresa estamos llevando muchos servicios a la nube de Amazon, y por ende buscamos formalizar los conocimientos de AWS. En ese sentido conseguimos un sitio de cursos en línea llamado Linux Academy, el cual considero nos ayudó mucho con la certificación y en general a entender AWS, pero no fue el único recurso que usamos ya que completamos con preguntas tipo examen, y la documentación de AWS.">
+
+
+
+  <meta name="twitter:site" content="@lgallard">
+  <meta name="twitter:title" content="AWS Certified Solutions Architect">
+  <meta name="twitter:description" content="En la empresa estamos llevando muchos servicios a la nube de Amazon, y por ende buscamos formalizar los conocimientos de AWS. En ese sentido conseguimos un sitio de cursos en línea llamado Linux Academy, el cual considero nos ayudó mucho con la certificación y en general a entender AWS, pero no fue el único recurso que usamos ya que completamos con preguntas tipo examen, y la documentación de AWS.">
+  <meta name="twitter:url" content="https://lgallardo.com/2016/02/13/aws-certified-solutions-architect/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+    <meta name="twitter:creator" content="@Luis Gallardo">
+  
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2016-02-13T17:47:55-06:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com/es",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+
+  
+  <a href="/2016/02/13/aws-certified-solutions-architect/" >English</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/2016/02/13/aws-certified-solutions-architect/" >English</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Buenos Aires, Argentina</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AWS Certified Solutions Architect">
+    <meta itemprop="description" content="En la empresa estamos llevando muchos servicios a la nube de Amazon, y por ende buscamos formalizar los conocimientos de AWS. En ese sentido conseguimos un sitio de cursos en línea llamado Linux Academy, el cual considero nos ayudó mucho con la certificación y en general a entender AWS, pero no fue el único recurso que usamos ya que completamos con preguntas tipo examen, y la documentación de AWS.">
+    <meta itemprop="datePublished" content="February 13, 2016">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">AWS Certified Solutions Architect
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <center><img src="/images/AWS_Certified_Solutions_Architect_Associate certificate.jpg" alt="AWS CSA" width="500" height="386" /></center>
+<p><br />
+En la empresa estamos llevando muchos servicios a la nube de Amazon, y por ende buscamos formalizar los conocimientos de AWS. En ese sentido conseguimos un sitio de cursos en línea llamado Linux Academy, el cual considero nos ayudó mucho con la certificación y en general a entender AWS, pero no fue el único recurso que usamos ya que completamos con preguntas tipo examen, y la documentación de AWS.</p>
+
+<p>Si éstas interesado en esta certificación y en los recursos que comento, aquí te dejo algunos enlaces:</p>
+
+<p><strong>Cursos en línea</strong></p>
+
+<ul>
+  <li><a href="http://linuxacademy.com" target="_blank">Linux Academy</a></li>
+  <li><a href="https://www.udemy.com/aws-certified-solutions-architect-associate/" target="_blank">Udemy – A Cloud Guru</a></li>
+  <li><a href="https://cloudacademy.com/aws-certifications-training/" target="_blank">Cloud Academy</a></li>
+</ul>
+
+<p><strong>Preguntas tipo examen</strong></p>
+
+<ul>
+  <li><a href="http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-i" target="_blank">http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-i</a></li>
+  <li><a href="http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-ii" target="_blank">http://blog.cloudthat.com/sample-questions-for-amazon-web-services-certified-solution-architect-certification-aws-architect-certification-part-ii</a></li>
+  <li><a href="http://surajbatuwana.blogspot.com/p/aws-certification-sample-questions.html" target="_blank">http://surajbatuwana.blogspot.com/p/aws-certification-sample-questions.html</a></li>
+</ul>
+
+<p><strong>Documentación de AWS</strong></p>
+
+<ul>
+  <li><a href="https://aws.amazon.com/whitepapers/" target="_blank">Whitepapers</a></li>
+  <li><a href="https://aws.amazon.com/documentation/" target="_blank">Documentation</a></li>
+  <li><a href="https://aws.amazon.com/faqs/" target="_blank">FAQs</a></li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/aws" class="page__taxonomy-item" rel="tag">AWS</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2016-02-13T17:47:55-06:00">February 13, 2016</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=AWS+Certified+Solutions+Architect%20https%3A%2F%2Flgallardo.com%2Fes%2F2016%2F02%2F13%2Faws-certified-solutions-architect%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2016%2F02%2F13%2Faws-certified-solutions-architect%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2016%2F02%2F13%2Faws-certified-solutions-architect%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2016%2F02%2F13%2Faws-certified-solutions-architect%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/es/2015/06/17/como-agregar-apache-http-client-en-android-studio/" class="pagination--pager" title="Cómo agregar Apache HTTP Client en Android Studio
+">Previous</a>
+    
+    
+      <a href="https://lgallardo.com/es/2016/04/29/how-to-change-linux-time-zone/" class="pagination--pager" title="Cómo actualizar el huso horario en Linux
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="permalink">Certified Kubernetes Application Developer (CKAD)
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2020/06/26/terraform-module-for-amazon-secrets-manager" rel="permalink">Módulo de Terraform para Secrets Manager
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Acabo de publicar un módulo Terraform llamado terraform-aws-secrets-manager en Github, así que decidí compartirlo también en el Registro público de Terrafo...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2020/04/28/2020-04-28-hashicorp-certified-terraform-associate/" rel="permalink">HashiCorp Certified: Terraform Associate
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+HashiCorp anunció recientemente la disponibilidad general de algunas de sus Certificaciones Cloud como Terraform y Vault (y otras que vendrán como la de Co...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2020/04/18/2020-04-18-terraform-module-for-amazon-codebuild/" rel="permalink">Módulo de Terraform para Amazon CodeBuild
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+Acabo de publicar un módulo Terraform llamado terraform-aws-codebuild en Github, así que decidí compartirlo también en el Registro público de Terraform.
+
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lgallardo.com/es/2016/02/13/aws-certified-solutions-architect/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2016/02/13/aws-certified-solutions-architect"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>

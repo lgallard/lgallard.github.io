@@ -1,11 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2020-07-28T11:28:03-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Certified Kubernetes Application Developer (CKAD)</title><link href="https://lgallardo.com/es/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="alternate" type="text/html" title="Certified Kubernetes Application Developer (CKAD)" /><published>2020-07-25T19:00:00-05:00</published><updated>2020-07-25T19:00:00-05:00</updated><id>https://lgallardo.com/es/2020/07/26/certified-kubernetes-application-developer-ckad</id><content type="html" xml:base="https://lgallardo.com/es/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2020-08-07T11:45:00-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Ratón Logitech MX Anywhere 2s Flounder on Linux</title><link href="https://lgallardo.com/es/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" rel="alternate" type="text/html" title="Ratón Logitech MX Anywhere 2s Flounder on Linux" /><published>2020-08-05T19:00:00-05:00</published><updated>2020-08-05T19:00:00-05:00</updated><id>https://lgallardo.com/es/2020/08/06/logitech-mx-anywhere-2s-flounder-on-linux</id><content type="html" xml:base="https://lgallardo.com/es/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/">&lt;center&gt;&lt;img src=&quot;/images/logitech-mouse.jpg&quot; alt=&quot;Logitech Mx Anywhere 2s Flounder on Linux&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Me compré un ratón Logitech Mx Anywhere 2s Flounder para poder liberar un puerto USB, y tener la posibilidad de configurar más bototones adicionales al del ratón que tenía.&lt;/p&gt;
+
+&lt;p&gt;El ratón al conectarlo funciona a la primera sin necesidad de hacer ninguna magia. Los dos botones del lado derecho del ratón se configuan para Adelante y Atrás (Forward y Back) en el navegador y cualquier aplicación en general.&lt;/p&gt;
+
+&lt;p&gt;Para Windows y para Mac viene con un software del fabricante que permite personalizar estos botones (con soporte para gestos también), pero para Linux no tienen disponible el software.&lt;/p&gt;
+
+&lt;p&gt;Si quieres mapear estos botones en Linux debes utilizar algo como &lt;code class=&quot;highlighter-rouge&quot;&gt;xbindkeys&lt;/code&gt; o &lt;code class=&quot;highlighter-rouge&quot;&gt;xmodmap&lt;/code&gt;. A continuación explico lo que tuve que hacer para ponerlo a andar como quería.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-instalación-del-software-necesario&quot;&gt;1. Instalación del software necesario&lt;/h2&gt;
+
+&lt;p&gt;Necesitará &lt;code class=&quot;highlighter-rouge&quot;&gt;xbindkeys&lt;/code&gt; para asignar las teclas y &lt;code class=&quot;highlighter-rouge&quot;&gt;xdotool&lt;/code&gt; para ejecutar acciones de teclado.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;apt install xbindkeys xdotool&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2-detectando-los-botones&quot;&gt;2. Detectando los botones&lt;/h2&gt;
+
+&lt;p&gt;Puede averiguar qué teclas están asociadas a su mouse usando &lt;strong&gt;xev&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xev | grep button&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Esto abrirá una ventana chica en blanco que es donde deberas colocar el puntero del ratón y presionar os botones para obtener los valores asociados a cada key:&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/xev.jpg&quot; alt=&quot;xev&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yo probé todos los botones y sus valores correspondientes se muestran en la primera imagen de este artículo mas arriba. En total son 9 posibles botones / valores.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-mapeo-de-botones&quot;&gt;3. Mapeo de botones&lt;/h2&gt;
+
+&lt;p&gt;Debes crear un archivo para &lt;strong&gt;xbindkeys&lt;/strong&gt; con los valores por omisión, el cual es un archivo con algunos ejemplos comentados:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xbindkeys --defaults &amp;gt; ~/.xbindkeysrc&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Y agregar luego el mapeo que desees. En mi caso agregué en el  &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.xbindkeysrc&lt;/code&gt; lo sigueiente:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;guake&quot;
+  b:9
+
+&quot;xdotool key Super_L&quot;
+  b:8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Por último debes ejecutar la orden &lt;code class=&quot;highlighter-rouge&quot;&gt;xbindkeys&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ xbindkeys&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora al oprimir en el botón 9 (Adelante) correrá &lt;strong&gt;Guake&lt;/strong&gt;, mientras que si oprimo el botón 8 (Back) le indico que presione &lt;code class=&quot;highlighter-rouge&quot;&gt;Super_L&lt;/code&gt; (tecla Start o también mal conocida como la tecla de Windows).&lt;/p&gt;
+
+&lt;p&gt;La orden &lt;code class=&quot;highlighter-rouge&quot;&gt;xbindkeys&lt;/code&gt; puedes agregarla en tus scripts de inicio de sesión o en las aplicaciones de inicio de to majejador de escritorio.&lt;/p&gt;
+
+&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.logitech.com/en-roeu/product/mx-anywhere-2s-flow.910-005153.html#specs&quot; target=&quot;_blank&quot;&gt;Logitech MX Anywhere 2S  &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/101105/how-to-assign-back-and-forward-actions-to-logitech-anywhere-mouse-mx-horizo&quot; target=&quot;_blank&quot;&gt;How to assign “back” and “forward” actions to Logitech Anywhere Mouse MX’ horizontal scroll wheel?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Xbindkeys#Identifying_keycodes&quot; target=&quot;_blank&quot;&gt;Xbindkeys (ArchLinux)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Linux" /><category term="Debian" /><summary type="html"></summary></entry><entry><title type="html">Certified Kubernetes Application Developer (CKAD)</title><link href="https://lgallardo.com/es/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="alternate" type="text/html" title="Certified Kubernetes Application Developer (CKAD)" /><published>2020-07-25T19:00:00-05:00</published><updated>2020-07-25T19:00:00-05:00</updated><id>https://lgallardo.com/es/2020/07/26/certified-kubernetes-application-developer-ckad</id><content type="html" xml:base="https://lgallardo.com/es/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recientemente aprobé el examen &lt;strong&gt;Certified Kubernetes Application Developer (CKAD&lt;/strong&gt;) elaborado por The Linux Foundation. Comparto mi experiencia y algunas recomendaciones para prepararse para el examen.&lt;/p&gt;
 
 &lt;h1 id=&quot;el-examen&quot;&gt;El examen&lt;/h1&gt;
 
-&lt;p&gt;El examen es 100% práctico con 19 preguntas que se deben resolver en 2 horas, con un supervisor (proctor) que verifica que estés solo durante el examen, así como que cumplas &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;todas las reglas &lt;/a&gt; para presentar (por ejemplo en mi caso me pidieron cerrar todas las puertas que daban acceso a mi comedor, que fue donde presenté el examen)&lt;/p&gt;
+&lt;p&gt;El examen es 100% práctico con 19 preguntas que se deben resolver en 2 horas, con un supervisor (proctor) que verifica que estés solo durante el examen, así como que cumplas &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;todas las reglas&lt;/a&gt; para presentar (por ejemplo en mi caso me pidieron cerrar todas las puertas que daban acceso a mi comedor, que fue donde presenté el examen)&lt;/p&gt;
 
 &lt;p&gt;Algunas preguntas serán fáciles, otras tendrán varios pasos a seguir, por lo que debes administrar muy bien el tiempo. La preguntas se te mostrarán en un panel del lado izquierdo y tendrás acceso a un terminal donde deberás ejecutar las órdenes para resolverlas.&lt;/p&gt;
 
@@ -2760,47 +2818,4 @@ Alexa, cuándo es el próximo feriado&lt;/p&gt;
 
 &lt;h1 id=&quot;y-qué-mas-hace-la-skill&quot;&gt;¿Y qué mas hace la skill?&lt;/h1&gt;
 
-&lt;p&gt;Espero agregarle mas funcionalidades, y en un futuro expandir el listado de países.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><summary type="html">Hoy recibí la aprobación de publicación de mi primera skill de Alexa en español. El nombre de la skill es Días Festivos, y permite saber cuándo es el próximo día feriado de un mes en particular, preguntar por algunas festividades como por ejemplo, cuándo cae Navidad, o cuántos días feriado tiene un mes.</summary></entry><entry><title type="html">Cómo migrar tfstates remotos en Terraform</title><link href="https://lgallardo.com/es/2019/06/25/how-to-migrate-terraform-remote-tfstates/" rel="alternate" type="text/html" title="Cómo migrar tfstates remotos en Terraform" /><published>2019-06-24T19:00:00-05:00</published><updated>2019-06-24T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/06/25/how-to-migrate-terraform-remote-tfstates</id><content type="html" xml:base="https://lgallardo.com/es/2019/06/25/how-to-migrate-terraform-remote-tfstates/">&lt;center&gt;&lt;img src=&quot;/images/terraform-remote-states.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-En Terraform uno tiene la posibilidad de renombrar y mover recursos y módulos en un mismo tfstate tanto si es local como remoto. Pero cuando se quiere migrar de recursos o módulos entre tftstates remotos hay que tomar otras consideraciones.&lt;/p&gt;
-
-&lt;p&gt;Para resolver esto lo que se tiene que hacer es traerse la configuración remota, luego mover el recurso de forma local, y una vez que se haya movido, subir el cambio al tftstate remoto.&lt;/p&gt;
-
-&lt;p&gt;Veamos el procedimiento:&lt;/p&gt;
-
-&lt;p&gt;1) Traerse el tfstate remoto de destino:
-  &lt;/p&gt;
-
-&lt;p&gt;Para mover los recursos de un tfstate a otro se necesita tener de forma local el tfstate destino:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform state pull &amp;gt; dev.tfstate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;2) Mover el recurso o módulo a este tfstate local&lt;/p&gt;
-
-&lt;p&gt;En este ejemplo se desea mover el recurso &lt;code class=&quot;highlighter-rouge&quot;&gt;module.lambda.module.your_funtion&lt;/code&gt; a &lt;code class=&quot;highlighter-rouge&quot;&gt;module.your_function&lt;/code&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform state mv -state-out=dev.tfstate module.lambda.module.your_function module.your_function
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;3) Subir el cambio al tftstate remoto&lt;/p&gt;
-
-&lt;p&gt;El recurso se movió de un estado a otro, pero se hizo de forma local. Para que quede en el tftstate remoto de destino se debe subir:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform state push dev.tfstate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;En algunos casos puede requerirse el uso de la opción &lt;code class=&quot;highlighter-rouge&quot;&gt;-force&lt;/code&gt;, por ejemplo cuando se tuvo problemas con la inicialización del módulo , por lo que la orden anterior quedaría de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform state push -force dev.tfstate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Por último, y una vez que haya comprobado que todo está correctamente, puede borrar el tftstate local:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ rm dev.tfstate*
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias:&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/@lynnlin827/moving-terraform-resources-states-from-one-remote-state-to-another-c76f8b76a996&quot; target=&quot;_blank&quot;&gt;Moving Terraform Resources’ States from One Remote State to Another&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/50400007/terraform-how-to-migrate-state-between-projects&quot; target=&quot;_blank&quot;&gt;Terraform: How to migrate state between projects?&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">En Terraform uno tiene la posibilidad de renombrar y mover recursos y módulos en un mismo tfstate tanto si es local como remoto. Pero cuando se quiere migrar de recursos o módulos entre tftstates remotos hay que tomar otras consideraciones.</summary></entry></feed>
+&lt;p&gt;Espero agregarle mas funcionalidades, y en un futuro expandir el listado de países.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Alexa" /><summary type="html">Hoy recibí la aprobación de publicación de mi primera skill de Alexa en español. El nombre de la skill es Días Festivos, y permite saber cuándo es el próximo día feriado de un mes en particular, preguntar por algunas festividades como por ejemplo, cuándo cae Navidad, o cuántos días feriado tiene un mes.</summary></entry></feed>
