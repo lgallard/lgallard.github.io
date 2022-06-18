@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2021-04-19T09:58:20-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Módulo de Terraform para AWS ECR</title><link href="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr" rel="alternate" type="text/html" title="Módulo de Terraform para AWS ECR" /><published>2021-04-14T19:00:00-05:00</published><updated>2021-04-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2021-06-15T19:58:59-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Repositorio local de Helm</title><link href="https://lgallardo.com/es/2021/06/15/helm-local-repo/" rel="alternate" type="text/html" title="Repositorio local de Helm" /><published>2021-06-14T19:00:00-05:00</published><updated>2021-06-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2021/06/15/helm3-local-repo</id><content type="html" xml:base="https://lgallardo.com/es/2021/06/15/helm-local-repo/">&lt;center&gt;&lt;img src=&quot;/images/helm.jpg&quot; alt=&quot;Repositorio local para Helm 3&quot; width=&quot;304&quot; height=&quot;351&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h1 id=&quot;repositorio-local-para-helm-3&quot;&gt;Repositorio local para Helm 3&lt;/h1&gt;
+&lt;p&gt;En Helm 3, el soporte del comando &lt;strong&gt;helm serve&lt;/strong&gt; se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes instalar el complemento &lt;strong&gt;helm servecm&lt;/strong&gt;, que usa &lt;strong&gt;ChartMuseum&lt;/strong&gt; para publicar los charts en tu medio de almacenamiento local (también se admiten otros medios de almacenamientos, como los buckets de S3).&lt;/p&gt;
+
+&lt;p&gt;En esta artículo aprenderá cómo instalar y publicar un repositorio local en Helm 3.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Instala &lt;strong&gt;ChartMuseum&lt;/strong&gt;&lt;br /&gt;
+En primer lugar, debes instalar &lt;strong&gt;ChartMuseum&lt;/strong&gt;. En la página del proyecto encontrará diferentes formas de instalarlo, pero yo lo instalo como una aplicación Go de la siguiente manera:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;GO111MODULE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;on&quot;&lt;/span&gt; go get github.com/helm/chartmuseum@v0.13.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instala  &lt;strong&gt;helm servecm plugin&lt;/strong&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;Entonces necesitas instalar &lt;strong&gt;servecm&lt;/strong&gt; como un complemento de helm:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm plugin install https://github.com/jdolitsky/helm-servecm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Instala &lt;strong&gt;helm push plugin&lt;/strong&gt;&lt;br /&gt;
+Para alojar tus charts, usarás &lt;strong&gt;ChartMuseum&lt;/strong&gt; y &lt;strong&gt;helm servecm&lt;/strong&gt; pluing, pero aún tendrás que publicarlos en &lt;strong&gt;ChartMuseum&lt;/strong&gt;. Puedes hacerlo manualmente o usar otro complemento llamado &lt;strong&gt;helm push&lt;/strong&gt; que lo hace por ti:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm plugin install https://github.com/chartmuseum/helm-push.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Agrega el repo local repo en helm:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm repo add local http://127.0.0.1:8879/charts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Corre &lt;strong&gt;helm servecm plugin&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;El siguiente paso es correr el plugin &lt;strong&gt;helm servecm&lt;/strong&gt;:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm servecm &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8879 &lt;span class=&quot;nt&quot;&gt;--storage&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--storage-local-rootdir&lt;/span&gt; ./local &lt;span class=&quot;nt&quot;&gt;--context-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/charts 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Ahora puedes publicar tus charts en  http://127.0.0.1:8879/charts&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Publica tu chart en tu repositorio local:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm push your-chart &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;En este punto ya podrás utilizar tus charts locales en tu clúster ejecutando:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm install  your-chart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://helm.sh/docs/faq/#removal-of-helm-serve&quot; target=&quot;_blank&quot;&gt;Removal of helm serve&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/jdolitsky/helm-servecm&quot; target=&quot;_blank&quot;&gt;helm servecm plugin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/helm/chartmuseum&quot; target=&quot;_blank&quot;&gt;ChartMuseum&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/chartmuseum/helm-push&quot; target=&quot;_blank&quot;&gt;helm push plugin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html">Repositorio local para Helm 3 En Helm 3, el soporte del comando helm serve se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes instalar el complemento helm servecm, que usa ChartMuseum para publicar los charts en tu medio de almacenamiento local (también se admiten otros medios de almacenamientos, como los buckets de S3).</summary></entry><entry><title type="html">Módulo de Terraform para AWS ECR</title><link href="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr" rel="alternate" type="text/html" title="Módulo de Terraform para AWS ECR" /><published>2021-04-14T19:00:00-05:00</published><updated>2021-04-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;
 Les comparto acá otro módulo de Terraform que publiqué como código Open Source, el cual permite crear registries en AWS ECR.&lt;/p&gt;
 
@@ -2380,425 +2443,4 @@ Les comparto otro módulo Terraform que acabo de publicar como código abierto, 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-cognito-user-pool&quot; target=&quot;_blank&quot;&gt;terraform-aws-cognito-user-pool module at Github&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-cognito-user-pool module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">Les comparto otro módulo Terraform que acabo de publicar como código abierto, el cual permite crear Cognito User Pools con sus atributos, así como recursos tales como app clients, domain y resource server.</summary></entry><entry><title type="html">Módulo de Terraform para Amazon Elasticsearch Service</title><link href="https://lgallardo.com/es/2019/10/28/terraform-module-for-amazon-elasticsearch" rel="alternate" type="text/html" title="Módulo de Terraform para Amazon Elasticsearch Service" /><published>2019-10-27T19:00:00-05:00</published><updated>2019-10-27T19:00:00-05:00</updated><id>https://lgallardo.com/es/2019/10/28/terraform-module-for-amazon-elasticsearch</id><content type="html" xml:base="https://lgallardo.com/es/2019/10/28/terraform-module-for-amazon-elasticsearch">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-elasticsearch.jpg&quot; alt=&quot;terraform-aws-elasticsearch&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Dejo por acá otro módulo de Terraform que acabo de publicar como código abierto, el cual permite crear clusters de Amazon Elasticsearch Service. El módulo está diseñado siguiendo las mejores prácticas y los principios del Well-Architected Framework de AWS.&lt;/p&gt;
-
-&lt;p&gt;Puedes verificar el módulo &lt;strong&gt;terraform-aws-elasticsearch&lt;/strong&gt; en el &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/elasticsearch/aws/0.1.0&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; o clonarlo de &lt;a href=&quot;https://github.com/lgallard/terraform-aws-elasticsearch&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:&lt;/p&gt;
-
-&lt;h1 id=&quot;terraform-aws-elasticsearch&quot;&gt;terraform-aws-elasticsearch&lt;/h1&gt;
-
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/elasticsearch-service/&quot;&gt;Amazon Elasticsearch Service&lt;/a&gt; clusters, following the Well-Architected Framework and best AWS practices.&lt;/p&gt;
-
-&lt;p&gt;Amazon Elasticsearch Service is a fully managed service that makes it easy to deploy, operate, and scale Elasticsearch clusters in the AWS Cloud. Elasticsearch is a popular open-source search and analytics engine for use cases such as log analytics, real-time application monitoring, and clickstream analysis. With Amazon ES, you get direct access to the Elasticsearch APIs; existing code and applications work seamlessly with the service.&lt;/p&gt;
-
-&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;/h2&gt;
-
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-elasticsearch/tree/master/examples&quot;&gt;examples&lt;/a&gt; folder where you can see how to configure a public ES cluster, and another example showing how to set it with VPC options.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;You can use this module to create your Amazon ES cluster by defining each parameters blocks as follows:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_es&quot; {
-
-  source = &quot;git::https://github.com/lgallard/terraform-aws-elasticsearch.git&quot;
-
-  domain_name           = &quot;elasticsearch_public&quot;
-  elasticsearch_version = &quot;7.1&quot;
-
-  cluster_config = {
-    dedicated_master_enabled = &quot;true&quot;
-    instance_count           = &quot;3&quot;
-    instance_type            = &quot;r5.large.elasticsearch&quot;
-    zone_awareness_enabled   = &quot;true&quot;
-    availability_zone_count  = &quot;3&quot;
-  }
-
-  ebs_options = {
-    ebs_enabled = &quot;true&quot;
-    volume_size = &quot;25&quot;
-  }
-
-  encrypt_at_rest = {
-    enabled    = &quot;true&quot;
-    kms_key_id = &quot;alias/aws/es&quot;
-  }
-
-  log_publishing_options = {
-    enabled                  = &quot;true&quot;
-    log_type                 = &quot;INDEX_SLOW_LOGS&quot;
-  }
-
-  advanced_options = {
-    &quot;rest.action.multi.allow_explicit_index&quot; = &quot;true&quot;
-  }
-
-  node_to_node_encryption_enabled                = &quot;true&quot;
-  snapshot_options_automated_snapshot_start_hour = &quot;23&quot;
-
-  tags = {
-    Owner = &quot;sysops&quot;
-    env   = &quot;dev&quot;
-  }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You can also define the above ElasticSearch cluster using just the module variables. Instead of defining a &lt;code class=&quot;highlighter-rouge&quot;&gt;cluster_config&lt;/code&gt; block (list of map), you can set each of the &lt;code class=&quot;highlighter-rouge&quot;&gt;cluster_config_*&lt;/code&gt; variables, as shown below:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_es&quot; {
-
-  source = &quot;git::https://github.com/lgallard/terraform-aws-elasticsearch.git&quot;
-
-  domain_name           = &quot;elasticsearch_public&quot;
-  elasticsearch_version = &quot;7.1&quot;
-
-  cluster_config_dedicated_master_enabled = true
-  cluster_config_instance_count           = &quot;3&quot;
-  cluster_config_instance_type            = &quot;r5.large.elasticsearch&quot;
-  cluster_config_zone_awareness_enabled   = &quot;true&quot;
-  cluster_config_availability_zone_count  = &quot;3&quot;
-
-  ebs_options_ebs_enabled = true
-  ebs_options_volume_size = &quot;25&quot;
-
-  encrypt_at_rest_enabled    = true
-  encrypt_at_rest_kms_key_id = &quot;alias/aws/es&quot;
-
-  log_publishing_options_enabled  = true
-  log_publishing_options_log_type = &quot;INDEX_SLOW_LOGS&quot;
-
-  advanced_options = {
-    &quot;rest.action.multi.allow_explicit_index&quot; = &quot;true&quot;
-  }
-
-  node_to_node_encryption_enabled                = &quot;true&quot;
-  snapshot_options_automated_snapshot_start_hour = &quot;23&quot;
-
-  tags = {
-    Owner = &quot;sysops&quot;
-    env   = &quot;dev&quot;
-  }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;access_policies&lt;/td&gt;
-      &lt;td&gt;IAM policy document specifying the access policies for the domain&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;advanced_options&lt;/td&gt;
-      &lt;td&gt;Key-value string pairs to specify advanced configuration options. Note that the values for these configuration options must be strings (wrapped in quotes) or they may be wrong and cause a perpetual diff, causing Terraform to want to recreate your Elasticsearch domain on every apply&lt;/td&gt;
-      &lt;td&gt;map(string)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cluster_config&lt;/td&gt;
-      &lt;td&gt;Cluster configuration of the domain&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cluster_config_availability_zone_count&lt;/td&gt;
-      &lt;td&gt;Number of Availability Zones for the domain to use with&lt;/td&gt;
-      &lt;td&gt;number&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cluster_config_dedicated_master_count&lt;/td&gt;
-      &lt;td&gt;Number of dedicated master nodes in the cluster&lt;/td&gt;
-      &lt;td&gt;number&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cluster_config_dedicated_master_enabled&lt;/td&gt;
-      &lt;td&gt;Indicates whether dedicated master nodes are enabled for the cluster&lt;/td&gt;
-      &lt;td&gt;bool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cluster_config_dedicated_master_type&lt;/td&gt;
-      &lt;td&gt;Instance type of the dedicated master nodes in the cluster&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;r5.large.elasticsearch&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cluster_config_instance_count&lt;/td&gt;
-      &lt;td&gt;Number of instances in the cluster&lt;/td&gt;
-      &lt;td&gt;number&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cluster_config_instance_type&lt;/td&gt;
-      &lt;td&gt;Instance type of data nodes in the cluster&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;r5.large.elasticsearch&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cluster_config_zone_awareness_enabled&lt;/td&gt;
-      &lt;td&gt;Indicates whether zone awareness is enabled. To enable awareness with three Availability Zones&lt;/td&gt;
-      &lt;td&gt;bool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cognito_options&lt;/td&gt;
-      &lt;td&gt;Options for Amazon Cognito Authentication for Kibana&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cognito_options_enabled&lt;/td&gt;
-      &lt;td&gt;Specifies whether Amazon Cognito authentication with Kibana is enabled or not&lt;/td&gt;
-      &lt;td&gt;bool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cognito_options_identity_pool_id&lt;/td&gt;
-      &lt;td&gt;ID of the Cognito Identity Pool to use&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cognito_options_role_arn&lt;/td&gt;
-      &lt;td&gt;ARN of the IAM role that has the AmazonESCognitoAccess policy attached&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cognito_options_user_pool_id&lt;/td&gt;
-      &lt;td&gt;ID of the Cognito User Pool to use&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_name&lt;/td&gt;
-      &lt;td&gt;Name of the domain&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ebs_enabled&lt;/td&gt;
-      &lt;td&gt;Whether EBS volumes are attached to data nodes in the domain&lt;/td&gt;
-      &lt;td&gt;bool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ebs_options&lt;/td&gt;
-      &lt;td&gt;EBS related options, may be required based on chosen instance size&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ebs_options_iops&lt;/td&gt;
-      &lt;td&gt;The baseline input/output (I/O) performance of EBS volumes attached to data nodes. Applicable only for the Provisioned IOPS EBS volume type&lt;/td&gt;
-      &lt;td&gt;number&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ebs_options_volume_size&lt;/td&gt;
-      &lt;td&gt;The size of EBS volumes attached to data nodes (in GB). Required if ebs_enabled is set to true&lt;/td&gt;
-      &lt;td&gt;number&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;10&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ebs_options_volume_type&lt;/td&gt;
-      &lt;td&gt;The type of EBS volumes attached to data nodes&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;gp2&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;elasticsearch_version&lt;/td&gt;
-      &lt;td&gt;The version of Elasticsearch to deploy.&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;7.1&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;encrypt_at_rest&lt;/td&gt;
-      &lt;td&gt;Encrypt at rest options. Only available for certain instance types&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;encrypt_at_rest_enabled&lt;/td&gt;
-      &lt;td&gt;Whether to enable encryption at rest&lt;/td&gt;
-      &lt;td&gt;bool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;encrypt_at_rest_kms_key_id&lt;/td&gt;
-      &lt;td&gt;The KMS key id to encrypt the Elasticsearch domain with. If not specified then it defaults to using the aws/es service KMS key&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;alias/aws/es&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;log_publishing_options&lt;/td&gt;
-      &lt;td&gt;Options for publishing slow logs to CloudWatch Logs&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;log_publishing_options_cloudwatch_log_group_arn&lt;/td&gt;
-      &lt;td&gt;iARN of the Cloudwatch log group to which log needs to be published&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;log_publishing_options_enabled&lt;/td&gt;
-      &lt;td&gt;Specifies whether given log publishing option is enabled or not&lt;/td&gt;
-      &lt;td&gt;bool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;log_publishing_options_log_type&lt;/td&gt;
-      &lt;td&gt;A type of Elasticsearch log. Valid values: INDEX_SLOW_LOGS, SEARCH_SLOW_LOGS, ES_APPLICATION_LOGS&lt;/td&gt;
-      &lt;td&gt;string&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;INDEX\_SLOW\_LOGS&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;node_to_node_encryption&lt;/td&gt;
-      &lt;td&gt;Node-to-node encryption options&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;node_to_node_encryption_enabled&lt;/td&gt;
-      &lt;td&gt;Whether to enable node-to-node encryption&lt;/td&gt;
-      &lt;td&gt;bool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;snapshot_options&lt;/td&gt;
-      &lt;td&gt;Snapshot related options&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;snapshot_options_automated_snapshot_start_hour&lt;/td&gt;
-      &lt;td&gt;Hour during which the service takes an automated daily snapshot of the indices in the domain&lt;/td&gt;
-      &lt;td&gt;number&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;A mapping of tags to assign to the resource&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_options&lt;/td&gt;
-      &lt;td&gt;VPC related options, see below. Adding or removing this configuration forces a new resource&lt;/td&gt;
-      &lt;td&gt;map&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_options_security_group_ids&lt;/td&gt;
-      &lt;td&gt;List of VPC Security Group IDs to be applied to the Elasticsearch domain endpoints. If omitted, the default Security Group for the VPC will be used&lt;/td&gt;
-      &lt;td&gt;list&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_options_subnet_ids&lt;/td&gt;
-      &lt;td&gt;List of VPC Subnet IDs for the Elasticsearch domain endpoints to be created in&lt;/td&gt;
-      &lt;td&gt;list&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;arn&lt;/td&gt;
-      &lt;td&gt;Amazon Resource Name (ARN) of the domain&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_id&lt;/td&gt;
-      &lt;td&gt;Unique identifier for the domain&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;endpoint&lt;/td&gt;
-      &lt;td&gt;Domain-specific endpoint used to submit index, search, and data upload requests&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;kibana_endpoint&lt;/td&gt;
-      &lt;td&gt;Domain-specific endpoint for kibana without https scheme&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_options_availability_zones&lt;/td&gt;
-      &lt;td&gt;If the domain was created inside a VPC, the names of the availability zones the configured subnet_ids were created inside&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_options_vpc_id&lt;/td&gt;
-      &lt;td&gt;If the domain was created inside a VPC, the ID of the VPC&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-elasticsearch&quot; target=&quot;_blank&quot;&gt;terraform-aws-elastichsearch module at github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/elasticsearch/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-elasticsearch module at Terraform registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">Dejo por acá otro módulo de Terraform que acabo de publicar como código abierto, el cual permite crear clusters de Amazon Elasticsearch Service. El módulo está diseñado siguiendo las mejores prácticas y los principios del Well-Architected Framework de AWS.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">Les comparto otro módulo Terraform que acabo de publicar como código abierto, el cual permite crear Cognito User Pools con sus atributos, así como recursos tales como app clients, domain y resource server.</summary></entry></feed>
