@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="">
+<meta name="description" content="One of the most useful tools when managing a 3D printer is OctoPrint, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).">
 
 
 
@@ -41,13 +41,13 @@
 
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="One of the most useful tools when managing a 3D printer is OctoPrint, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).">
 
 
 
   <meta name="twitter:site" content="@lgallard">
   <meta name="twitter:title" content="OctoPrint with multiple 3D printers">
-  <meta name="twitter:description" content="">
+  <meta name="twitter:description" content="One of the most useful tools when managing a 3D printer is OctoPrint, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).">
   <meta name="twitter:url" content="https://lgallardo.com/2022/09/25/octoprint-multiple-printers">
 
   
@@ -300,7 +300,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="OctoPrint with multiple 3D printers">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="One of the most useful tools when managing a 3D printer is OctoPrint, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).">
     <meta itemprop="datePublished" content="September 25, 2022">
     
 
@@ -322,12 +322,10 @@
       
 
       <section class="page__content" itemprop="text">
-        <p><img src="/assets/images/OctoPrint.jpg" alt="OctoPrints" style="display:block; margin-left:auto; margin-right:auto" /><br /></p>
-
-<p>One of the most useful tools when managing a 3D printer is <a href="https://octoprint.org" target="_blank">OctoPrint</a>, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).</p>
+        <p><img src="/assets/images/OctoPrint.jpg" alt="OctoPrints" style="display:block; margin-left:auto; margin-right:auto" /><br />
+One of the most useful tools when managing a 3D printer is <a href="https://octoprint.org" target="_blank">OctoPrint</a>, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).</p>
 
 <h2 id="multiple-printers">Multiple printers</h2>
-
 <p>But what if we have more than one printer? Can <strong>OctoPrint</strong> manage more than one printer?</p>
 
 <p>The short answer is: NO! The software itself is not designed for multiple printers, but you can find alternative ways to have more than one instance of <strong>OctoPrint</strong> running on your device or computer.</p>
@@ -335,13 +333,11 @@
 <p>There are several ways to do this, for example you can <a href="http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up- octoprint-for-multiple-printers" target="_blank">modify the OctoPi scripts to add more instances</a>, create scripts that launch multiple instances of the same program, but the option I ended up using was Docker containers.</p>
 
 <h2 id="raspberry-pi--ubuntu">Raspberry Pi + Ubuntu</h2>
-
 <p>In my case I have a <strong>Raspberry Pi 4</strong>, with 8 GB of RAM, more than enough to run multiple instances of <strong>OctoPrint</strong>.</p>
 
 <p>I originally had a specific operating system installed on my Raspberry called <a href="https://github.com/guysoft/OctoPi">OctoPi</a>, a Debian derivative with <strong>OctoPrint</strong> as the main program that is launched when the Raspberry Pi is turned on, but as I wanted to use containers I decided to use Ubuntu, which general purposed distribution where you can surely find everything you need to work with containers.</p>
 
 <h2 id="requirements-and-components">Requirements and components:</h2>
-
 <p>For this setup I used the following:</p>
 
 <ul>
@@ -356,7 +352,6 @@
 </ul>
 
 <h2 id="ubuntu-installation">Ubuntu Installation</h2>
-
 <p>Nowadays is easier than ever to install <strong>Ubuntu</strong> on the Raspberry Pi, you just have to download <strong>Raspberry Pi Imager,</strong> which will generate the image on your SD card, select the operating system, which in this case is <strong>Ubuntu 22.04 LTS</strong> and you’re done.  <strong>Raspberry Pi Imager</strong> is avialable for Linux, Mac and Windows, so you can generate the image on the operating system that suits you best.</p>
 
 <p><img src="/assets/images/Raspberry-Pi-Imager.jpg" alt="Raspberry Pi Imager" />
@@ -369,11 +364,9 @@
 <p>For the headless setup the trick is to let the <strong>Ubuntu</strong> initialization scripts run and then connect via ssh. Now if you see that you can’t connect via ssh you can look for an HDMI cable and a keyboard to check what might be going on.</p>
 
 <h2 id="software-installation-on-ubuntu">Software installation on Ubuntu</h2>
-
 <p>Apart from <strong>Docker</strong> we are going to need <strong>docker-compose</strong>, and the utilities that will help us install them.</p>
 
 <h2 id="docker-and-docker-compose">Docker and docker-compose</h2>
-
 <p>To install docker you need to download it using the script. You will need to loging in as the administrator user with the root account:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pi@octopi:~<span class="nv">$ </span><span class="nb">sudo </span>su
@@ -387,7 +380,6 @@ root@octopi:~# apt install docker-compose
 </code></pre></div></div>
 
 <h2 id="octoprint-with-one-printer">Octoprint with one printer</h2>
-
 <p>The first thing you need is to create a folder for OctoPrint, and then go into it:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# mkdir octoprint
@@ -455,7 +447,7 @@ Creating octoprint_geniuspro_1 ... done
 
 <p>With this we can access the OctoPrint web interface from the Raspberry Pi on the port that we had indicated,  in my case the url is http://192.168.68.102:5000:</p>
 
-<p><img src="assets/images/octoprint-multi-web.jpg" alt="Image" /></p>
+<p><img src="assets/images/octoprint-multi-web.jpg" alt="OctoPrint Web 1" /></p>
 
 <h2 id="adding-a-second-printer">Adding a second printer</h2>
 
@@ -514,10 +506,9 @@ Creating octoprint_sidewinderx2_1 ... done
 
 <p>This will now allow access to the second instance of OctoPrint on port 5001:</p>
 
-<p><img src="assets/images/octoprint-multi-web2.png" alt="Image" /></p>
+<p><img src="assets/images/octoprint-multi-web2.png" alt="OctoPrint Web 2" /></p>
 
 <h2 id="how-to-differentiate-printers">How to differentiate printers?</h2>
-
 <p>In the example above I used the devices <code class="highlighter-rouge">/dev/ttyACM0</code> and <code class="highlighter-rouge">/dev/ttyACM1</code> to reference my first printer, the Artillery Genius Pro, and my second printer, the Artillery SideWinder X2, but the operating system not always takes that order, since it will depend on which one you had turned on first. In order to identify the printers regardless of the connection order we can create a symbolic link using <code class="highlighter-rouge">udev</code> with the manufacturer and product information.</p>
 
 <p>For this, you have first list the USB devices:</p>
@@ -652,7 +643,6 @@ services:
 </code></pre></div></div>
 
 <h2 id="webcams">Webcams</h2>
-
 <p>Unlike printers which have different serial numbers, I have two <strong>Logitech C270</strong> webcams that are exactly the same model. How can we  differente them? How can we make the OS to take the right camera?</p>
 
 <p>Again we do the analysis with <code class="highlighter-rouge">lsusb</code>:</p>
@@ -759,20 +749,18 @@ services:
 </code></pre></div></div>
 
 <h2 id="performance-with-two-instances-of-octoprint">Performance with two instances of OctoPrint</h2>
-
 <p>Probably you are wondering about the consumption of these containers in the operating system and if the Raspberry can handle it. Here is an image of <code class="highlighter-rouge">htop</code> with the two containers above printing to each of the printers at the same time.</p>
 
-<p><img src="assets/images/octoprint-htop.jpg" alt="Image" /></p>
+<p><img src="assets/images/octoprint-htop.jpg" alt="htop" /></p>
 
 <p>Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizarías un poco.</p>
 
 <p>As you can see the Raspberry has a lot of resources available, since of the 8GB of RAM it is only consuming 0.5 GB including the operating system. From this we can draw two conclusions: the first one is that more printers can be added without problems, the only limit is the number of USB ports offered by the Raspberry (4 in my model), but you could add a USB hub to add more ports; and the second conclusion is that for two printers you could use a Raspberry with less RAM, for example 2 GB or 4 GB, and thus you would save a little.</p>
 
 <h2 id="what-does-the-raspberry-pi-and-printers-look-like">What does the Raspberry Pi and printers look like?</h2>
-
 <p>To finish this article I leave you a photo of my printers connected to the RaspBerry Pi:</p>
 
-<p><img src="assets/images/3dprinters.jpg" alt="Image" /></p>
+<p><img src="assets/images/3dprinters.jpg" alt="3D printers" /></p>
 
 <p>On the smaller printer you can see a small gray box that is the Raspberry Pi, next to the two web cameras.</p>
 
@@ -785,7 +773,7 @@ services:
   <li><a href="https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit" target="_blank">Installing OctoPrint using Docker in Linux (instructions)</a></li>
   <li><a href="https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149" target="_bla￼nk">USB webcams known to work with mjpg-streamer</a>.</li>
   <li><a href="https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters" target="_blank">How to distinguish between identical USB-to-serial adapters?</a></li>
-  <li><a href="https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux">Udev Rule to discern 2 identical webcams on Linux</a>){:target=”_blank”}</li>
+  <li><a href="https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux" target="_blank">Udev Rule to discern 2 identical webcams on Linux</a></li>
 </ul>
 
         
