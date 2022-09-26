@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="">
+<meta name="description" content="Una de las herramientas más útiles a la hora de gestionar una impresora 3D es OctoPrint, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).">
 
 
 
@@ -41,13 +41,13 @@
 
 
 
-  <meta property="og:description" content="">
+  <meta property="og:description" content="Una de las herramientas más útiles a la hora de gestionar una impresora 3D es OctoPrint, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).">
 
 
 
   <meta name="twitter:site" content="@lgallard">
   <meta name="twitter:title" content="Octoprint con múltiple impresoras 3D">
-  <meta name="twitter:description" content="">
+  <meta name="twitter:description" content="Una de las herramientas más útiles a la hora de gestionar una impresora 3D es OctoPrint, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).">
   <meta name="twitter:url" content="https://lgallardo.com/2022/09/25/octoprint-multiple-printers">
 
   
@@ -301,7 +301,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Octoprint con múltiple impresoras 3D">
-    <meta itemprop="description" content="">
+    <meta itemprop="description" content="Una de las herramientas más útiles a la hora de gestionar una impresora 3D es OctoPrint, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).">
     <meta itemprop="datePublished" content="September 25, 2022">
     
 
@@ -323,12 +323,10 @@
       
 
       <section class="page__content" itemprop="text">
-        <p><img src="/assets/images/OctoPrint.jpg" alt="OctoPrints" style="display:block; margin-left:auto; margin-right:auto" /><br /></p>
-
-<p>Una de las herramientas más útiles a la hora de gestionar una impresora 3D es <a href="https://octoprint.org" target="_blank">OctoPrint</a>, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).</p>
+        <p><img src="/assets/images/OctoPrint.jpg" alt="OctoPrints" style="display:block; margin-left:auto; margin-right:auto" /><br />
+Una de las herramientas más útiles a la hora de gestionar una impresora 3D es <a href="https://octoprint.org" target="_blank">OctoPrint</a>, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).</p>
 
 <h2 id="múltiples-impresoras">Múltiples impresoras</h2>
-
 <p>¿Pero qué pasa si tenemos más de una impresora? ¿Puede <strong>OctoPrint</strong> gestionar mas de una impresora?</p>
 
 <p>La respuesta corta es: NO! El software en sí no está diseñado para múltiples impresoras, pero se puede buscar formas alternativas para tener más de una instancia de <strong>OctoPrint</strong> corriendo en nuestro dispositivo o computadora.</p>
@@ -336,13 +334,11 @@
 <p>Existen varias formas para esto, por ejemplo se puede <a href="http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers" target="_blank">modificar los scripts de OctoPi para agregar más instancias</a>,  crear scripts que lancen varias instancias del mismo programa , pero la opción que terminé usando  fue la de contenedores Docker.</p>
 
 <h2 id="raspberry-pi--ubuntu">Raspberry Pi + Ubuntu</h2>
-
 <p>En mi caso tengo una <strong>Raspberry Pi 4</strong>, de 8 GB de RAM, más que suficiente para correr múltiples instancias de <strong>OctoPrint</strong>.</p>
 
 <p>En principio tenía instalado en mi Raspberry un sistema operativo específico llamado <a href="https://github.com/guysoft/OctoPi">OctoPi</a>, un derivado de Debian con <strong>OctoPrint</strong> como el programa principal que se lanza cuando se enciende el dispositivo, pero al querer tener containers pensé en usar Ubuntu que es una distribución menos especializada y donde seguramente se puede encontrar todo lo necesario para trabajar con contenedores.</p>
 
 <h2 id="requisitos-y-componentes">Requisitos y componentes:</h2>
-
 <p>Para esta configuración usé lo siguiente:</p>
 
 <ul>
@@ -357,7 +353,6 @@
 </ul>
 
 <h2 id="instalación-de-ubuntu">Instalación de Ubuntu</h2>
-
 <p>Para instalar <strong>Ubuntu</strong> en la Raspberry Pi ahora es más sencillo que nunca, solo tienes que descargar <strong>Raspberry Pi Imager,</strong> el cual generará la imagen en tu tarjeta SD, seleccionar el sistema operativo, que en este caso es <strong>Ubuntu 22.04 LTS</strong> y listo. Hay versiones de Raspberry Pi Imager para Linux, Mac y Windows, así que podrás generar la imagen en el sistema operativo que más te convenga.</p>
 
 <p><img src="/assets/images/Raspberry-Pi-Imager.jpg" alt="Raspberry Pi Imager" />
@@ -370,11 +365,9 @@
 <p>Para la configuración headless el truco es dejar que corran los scripts de inicialización de <strong>Ubuntu</strong> y luego conectarte por ssh. Ahora si ves que no puedes conectarte por ssh puedes buscar un cable HDMI y un teclado para revisar qué pueda estar pasando.</p>
 
 <h2 id="instalación-del-software-en-ubuntu">Instalación del software en Ubuntu</h2>
-
 <p>Aparte de <strong>Docker</strong> vamos a necesitar, <strong>docker-compose</strong>, y los utilitarios que nos ayudarán a instalarlos.</p>
 
 <h2 id="docker-y-docker-compose">Docker y docker-compose</h2>
-
 <p>Para instalar docker debemos descargarlo usando el script. Neceistaremos entrar como usuario administrador con la cuenta root;</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pi@octopi:~<span class="nv">$ </span><span class="nb">sudo </span>su
@@ -388,7 +381,6 @@ root@octopi:~# apt install docker-compose
 </code></pre></div></div>
 
 <h2 id="octoprint-con-una-impresora">Octoprint con una impresora</h2>
-
 <p>Lo primero que haremos es crear un carpeta para OctoPrint, y luego entrar en ella:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# mkdir octoprint
@@ -409,7 +401,7 @@ root@octopi:~# chmod <span class="nt">-R</span> 777 geniuspro/
 /root/octoprint
 </code></pre></div></div>
 
-<p>Ya con esto podemos indicar luego que los archivos de esta primera instancia de OctoPrint residirán en <code class="highlighter-rouge">/root/octoprint/geniuspro</code></p>
+<p>Ya con esto podemos indicar luego que los archivos de esta primera instancia de OctoPrint residirán en <code class="highlighter-rouge">/root/octoprint/geniuspro</code>.</p>
 
 <p>Ahora para configurar la impresora vamos a usar <code class="highlighter-rouge">docker-compose</code> por lo que creamos el archivo <code class="highlighter-rouge">docker-compose.yml</code> con la siguiente información:</p>
 
@@ -456,10 +448,9 @@ Creating octoprint_geniuspro_1 ... done
 
 <p>Ya con esto podemos acceder a la interfaz web de OctoPrint desde la ip de la Raspberry en el puerto que le habíamos indicado, que en mi caso la url es http://192.168.68.102:5000:</p>
 
-<p><img src="assets/images/octoprint-multi-web.jpg" alt="Image" /></p>
+<p><img src="assets/images/octoprint-multi-web.jpg" alt="OctoPrint Web 1" /></p>
 
 <h2 id="agregar-una-segunda-impresora">Agregar una segunda impresora</h2>
-
 <p>Para agregar una segunda impresora solo hay que replicar la configuración que teníamos antes, pero especificando la nueva impresora y la cámara de video correspondiente. Entonces para mi Artillery Sidewinder X2 esto sería:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
@@ -515,10 +506,9 @@ Creating octoprint_sidewinderx2_1 ... done
 
 <p>Con esto ya se podrá acceder a la segunda instancia de OctoPrint en el puerto 5001:</p>
 
-<p><img src="assets/images/octoprint-multi-web2.png" alt="Image" /></p>
+<p><img src="assets/images/octoprint-multi-web2.png" alt="OctoPrint Web 2" /></p>
 
 <h2 id="cómo-diferenciar-las-impresoras">¿Cómo diferenciar las impresoras?</h2>
-
 <p>En el anterior ejemplo usé los dipositivos <code class="highlighter-rouge">/dev/ttyACM0</code> y <code class="highlighter-rouge">/dev/ttyACM1</code>  para hacer refeencia a mi primera impresora, la Artillery Genius Pro, y a la segunda impresora la Artillery SideWinder X2, pero el sistema operativo no siempre las tomará en ese orden, ya que dependerá de cuál encienda primero . Para poder identificar las impresoras sin importar el orden de conexión podemos crear un enlace simbólico usando <code class="highlighter-rouge">udev</code> con la información del fabricante y del producto.</p>
 
 <p>Para esto primero hay que listar los dispositivos USB:</p>
@@ -653,7 +643,6 @@ services:
 </code></pre></div></div>
 
 <h2 id="cámaras-de-video">Cámaras de video</h2>
-
 <p>A diferencia de las impresoras las cuales tienen un serial distintos, tengo dos cámaras de video <strong>Logitech C270</strong> que son exaxtamente iguales. ¿Cómo hacemos para diferenciarlas? ¿Cómo podemos hacer que siempre tome la cámara correcta?</p>
 
 <p>Nuevamente hacemos el análisis con  <code class="highlighter-rouge">lsusb</code>:</p>
@@ -758,10 +747,9 @@ services:
 </code></pre></div></div>
 
 <h2 id="desempeño-con-dos-instancias-de-octoprint">Desempeño con dos instancias de OctoPrint</h2>
-
 <p>Seguramente te estarás preguntando sobre el consumo de estos contenedores en el sistema operativo y si las Raspberry puede manejarlo. Aquí te dejo una imagen de <code class="highlighter-rouge">htop</code> con los dos contenedores arriba imprimiendo en cada una de las impresoras a la vez.</p>
 
-<p><img src="assets/images/octoprint-htop.jpg" alt="Image" /></p>
+<p><img src="assets/images/octoprint-htop.jpg" alt="htop" /></p>
 
 <p>Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizarías un poco.</p>
 
@@ -769,7 +757,7 @@ services:
 
 <p>Para cerrar este artículo les dejo una foto de mis impresoras conectadas a la RaspBerry Pi:</p>
 
-<p><img src="assets/images/3dprinters.jpg" alt="Image" /></p>
+<p><img src="assets/images/3dprinters.jpg" alt="3D printers" /></p>
 
 <p>En la impresora más chica puede verse una caja pequeña gris que es la Raspberry Pi, junto a las dos cámaras web.</p>
 
@@ -782,7 +770,7 @@ services:
   <li><a href="https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit" target="_blank">Installing OctoPrint using Docker in Linux (instructions)</a></li>
   <li><a href="https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149" target="_bla￼nk">USB webcams known to work with mjpg-streamer</a>.</li>
   <li><a href="https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters" target="_blank">How to distinguish between identical USB-to-serial adapters?</a></li>
-  <li><a href="https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux">Udev Rule to discern 2 identical webcams on Linux</a>){:target=”_blank”}</li>
+  <li><a href="https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux" target="_blank">Udev Rule to discern 2 identical webcams on Linux</a></li>
 </ul>
 
         

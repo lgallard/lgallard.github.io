@@ -355,12 +355,11 @@ Una de las herramientas más útiles a la hora de gestionar una impresora 3D es 
 <h2 id="instalación-de-ubuntu">Instalación de Ubuntu</h2>
 <p>Para instalar <strong>Ubuntu</strong> en la Raspberry Pi ahora es más sencillo que nunca, solo tienes que descargar <strong>Raspberry Pi Imager,</strong> el cual generará la imagen en tu tarjeta SD, seleccionar el sistema operativo, que en este caso es <strong>Ubuntu 22.04 LTS</strong> y listo. Hay versiones de Raspberry Pi Imager para Linux, Mac y Windows, así que podrás generar la imagen en el sistema operativo que más te convenga.</p>
 
-<p><img src="/assets/images/Raspberry-Pi-Imager.jpg" alt="Raspberry Pi Imager" />
-{:style=”display:block; margin-left:auto; margin-right:auto”}<br /></p>
+<p><img src="/assets/images/Raspberry-Pi-Imager.jpg" alt="Raspberry Pi Imager" /></p>
 
 <p>Desde este mismo software vas a tener la posibilidad de configurar la contraseña de la red WiFi en caso de que la estés usando la Raspberry de forma inalámbrica y que no quieras usar un televisor y un teclado (headless), o tocar la SD para configurar la red. Como yo lo estoy usando headless, fue lo que hice y luego me conecté por <strong>ssh</strong>.</p>
 
-<p><img src="assets/images/OctoPi-WiFi-Setting.jpg" alt="WiFi Settings" /></p>
+<p><img src="/assets/images/OctoPi-WiFi-Setting.jpg" alt="WiFi Settings" /></p>
 
 <p>Para la configuración headless el truco es dejar que corran los scripts de inicialización de <strong>Ubuntu</strong> y luego conectarte por ssh. Ahora si ves que no puedes conectarte por ssh puedes buscar un cable HDMI y un teclado para revisar qué pueda estar pasando.</p>
 
@@ -506,7 +505,7 @@ Creating octoprint_sidewinderx2_1 ... done
 
 <p>Con esto ya se podrá acceder a la segunda instancia de OctoPrint en el puerto 5001:</p>
 
-<p><img src="assets/images/octoprint-multi-web2.png" alt="OctoPrint Web 2" /></p>
+<p><img src="/assets/images/octoprint-multi-web2.png" alt="OctoPrint Web 2" /></p>
 
 <h2 id="cómo-diferenciar-las-impresoras">¿Cómo diferenciar las impresoras?</h2>
 <p>En el anterior ejemplo usé los dipositivos <code class="highlighter-rouge">/dev/ttyACM0</code> y <code class="highlighter-rouge">/dev/ttyACM1</code>  para hacer refeencia a mi primera impresora, la Artillery Genius Pro, y a la segunda impresora la Artillery SideWinder X2, pero el sistema operativo no siempre las tomará en ese orden, ya que dependerá de cuál encienda primero . Para poder identificar las impresoras sin importar el orden de conexión podemos crear un enlace simbólico usando <code class="highlighter-rouge">udev</code> con la información del fabricante y del producto.</p>
@@ -749,7 +748,7 @@ services:
 <h2 id="desempeño-con-dos-instancias-de-octoprint">Desempeño con dos instancias de OctoPrint</h2>
 <p>Seguramente te estarás preguntando sobre el consumo de estos contenedores en el sistema operativo y si las Raspberry puede manejarlo. Aquí te dejo una imagen de <code class="highlighter-rouge">htop</code> con los dos contenedores arriba imprimiendo en cada una de las impresoras a la vez.</p>
 
-<p><img src="assets/images/octoprint-htop.jpg" alt="htop" /></p>
+<p><img src="/assets/images/octoprint-htop.jpg" alt="htop" /></p>
 
 <p>Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizarías un poco.</p>
 
@@ -757,7 +756,7 @@ services:
 
 <p>Para cerrar este artículo les dejo una foto de mis impresoras conectadas a la RaspBerry Pi:</p>
 
-<p><img src="assets/images/3dprinters.jpg" alt="3D printers" /></p>
+<p><img src="/assets/images/3dprinters.jpg" alt="3D printers" /></p>
 
 <p>En la impresora más chica puede verse una caja pequeña gris que es la Raspberry Pi, junto a las dos cámaras web.</p>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2022-09-25T18:31:21-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">OctoPrint with multiple 3D printers</title><link href="https://lgallardo.com/2022/09/25/octoprint-multiple-printers" rel="alternate" type="text/html" title="OctoPrint with multiple 3D printers" /><published>2022-09-24T19:00:00-05:00</published><updated>2022-09-24T19:00:00-05:00</updated><id>https://lgallardo.com/2022/09/25/octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/2022/09/25/octoprint-multiple-printers">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2022-09-25T18:53:40-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">OctoPrint with multiple 3D printers</title><link href="https://lgallardo.com/2022/09/25/octoprint-multiple-printers" rel="alternate" type="text/html" title="OctoPrint with multiple 3D printers" /><published>2022-09-24T19:00:00-05:00</published><updated>2022-09-24T19:00:00-05:00</updated><id>https://lgallardo.com/2022/09/25/octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/2022/09/25/octoprint-multiple-printers">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
 One of the most useful tools when managing a 3D printer is &lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).&lt;/p&gt;
 
 &lt;h2 id=&quot;multiple-printers&quot;&gt;Multiple printers&lt;/h2&gt;
@@ -30,12 +30,11 @@ One of the most useful tools when managing a 3D printer is &lt;a href=&quot;http
 &lt;h2 id=&quot;ubuntu-installation&quot;&gt;Ubuntu Installation&lt;/h2&gt;
 &lt;p&gt;Nowadays is easier than ever to install &lt;strong&gt;Ubuntu&lt;/strong&gt; on the Raspberry Pi, you just have to download &lt;strong&gt;Raspberry Pi Imager,&lt;/strong&gt; which will generate the image on your SD card, select the operating system, which in this case is &lt;strong&gt;Ubuntu 22.04 LTS&lt;/strong&gt; and you’re done.  &lt;strong&gt;Raspberry Pi Imager&lt;/strong&gt; is avialable for Linux, Mac and Windows, so you can generate the image on the operating system that suits you best.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/Raspberry-Pi-Imager.jpg&quot; alt=&quot;Raspberry Pi Imager&quot; /&gt;
-{:style=”display:block; margin-left:auto; margin-right:auto”}&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/Raspberry-Pi-Imager.jpg&quot; alt=&quot;Raspberry Pi Imager&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;From this very software you will have the possibility to configure the password of the WiFi network in case you are using the Raspberry wirelessly, so you don’t need  to use a television set and a keyboard (headless), or manipulate the SD card to configure the networking. Since I’m using it headless, that’s what I did and then I connected via &lt;strong&gt;ssh&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/OctoPi-WiFi-Setting.jpg&quot; alt=&quot;WiFi Settings&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPi-WiFi-Setting.jpg&quot; alt=&quot;WiFi Settings&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;For the headless setup the trick is to let the &lt;strong&gt;Ubuntu&lt;/strong&gt; initialization scripts run and then connect via ssh. Now if you see that you can’t connect via ssh you can look for an HDMI cable and a keyboard to check what might be going on.&lt;/p&gt;
 
@@ -123,7 +122,7 @@ Creating octoprint_geniuspro_1 ... done
 
 &lt;p&gt;With this we can access the OctoPrint web interface from the Raspberry Pi on the port that we had indicated,  in my case the url is http://192.168.68.102:5000:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/octoprint-multi-web.jpg&quot; alt=&quot;OctoPrint Web 1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-multi-web.jpg&quot; alt=&quot;OctoPrint Web 1&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;adding-a-second-printer&quot;&gt;Adding a second printer&lt;/h2&gt;
 
@@ -182,7 +181,7 @@ Creating octoprint_sidewinderx2_1 ... done
 
 &lt;p&gt;This will now allow access to the second instance of OctoPrint on port 5001:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/octoprint-multi-web2.png&quot; alt=&quot;OctoPrint Web 2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-multi-web2.png&quot; alt=&quot;OctoPrint Web 2&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;how-to-differentiate-printers&quot;&gt;How to differentiate printers?&lt;/h2&gt;
 &lt;p&gt;In the example above I used the devices &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt; to reference my first printer, the Artillery Genius Pro, and my second printer, the Artillery SideWinder X2, but the operating system not always takes that order, since it will depend on which one you had turned on first. In order to identify the printers regardless of the connection order we can create a symbolic link using &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; with the manufacturer and product information.&lt;/p&gt;
@@ -427,7 +426,7 @@ services:
 &lt;h2 id=&quot;performance-with-two-instances-of-octoprint&quot;&gt;Performance with two instances of OctoPrint&lt;/h2&gt;
 &lt;p&gt;Probably you are wondering about the consumption of these containers in the operating system and if the Raspberry can handle it. Here is an image of &lt;code class=&quot;highlighter-rouge&quot;&gt;htop&lt;/code&gt; with the two containers above printing to each of the printers at the same time.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/octoprint-htop.jpg&quot; alt=&quot;htop&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-htop.jpg&quot; alt=&quot;htop&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizarías un poco.&lt;/p&gt;
 
@@ -436,7 +435,7 @@ services:
 &lt;h2 id=&quot;what-does-the-raspberry-pi-and-printers-look-like&quot;&gt;What does the Raspberry Pi and printers look like?&lt;/h2&gt;
 &lt;p&gt;To finish this article I leave you a photo of my printers connected to the RaspBerry Pi:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/images/3dprinters.jpg&quot; alt=&quot;3D printers&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/3dprinters.jpg&quot; alt=&quot;3D printers&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;On the smaller printer you can see a small gray box that is the Raspberry Pi, next to the two web cameras.&lt;/p&gt;
 

@@ -354,12 +354,11 @@ One of the most useful tools when managing a 3D printer is <a href="https://octo
 <h2 id="ubuntu-installation">Ubuntu Installation</h2>
 <p>Nowadays is easier than ever to install <strong>Ubuntu</strong> on the Raspberry Pi, you just have to download <strong>Raspberry Pi Imager,</strong> which will generate the image on your SD card, select the operating system, which in this case is <strong>Ubuntu 22.04 LTS</strong> and you’re done.  <strong>Raspberry Pi Imager</strong> is avialable for Linux, Mac and Windows, so you can generate the image on the operating system that suits you best.</p>
 
-<p><img src="/assets/images/Raspberry-Pi-Imager.jpg" alt="Raspberry Pi Imager" />
-{:style=”display:block; margin-left:auto; margin-right:auto”}<br /></p>
+<p><img src="/assets/images/Raspberry-Pi-Imager.jpg" alt="Raspberry Pi Imager" /></p>
 
 <p>From this very software you will have the possibility to configure the password of the WiFi network in case you are using the Raspberry wirelessly, so you don’t need  to use a television set and a keyboard (headless), or manipulate the SD card to configure the networking. Since I’m using it headless, that’s what I did and then I connected via <strong>ssh</strong>.</p>
 
-<p><img src="assets/images/OctoPi-WiFi-Setting.jpg" alt="WiFi Settings" /></p>
+<p><img src="/assets/images/OctoPi-WiFi-Setting.jpg" alt="WiFi Settings" /></p>
 
 <p>For the headless setup the trick is to let the <strong>Ubuntu</strong> initialization scripts run and then connect via ssh. Now if you see that you can’t connect via ssh you can look for an HDMI cable and a keyboard to check what might be going on.</p>
 
@@ -447,7 +446,7 @@ Creating octoprint_geniuspro_1 ... done
 
 <p>With this we can access the OctoPrint web interface from the Raspberry Pi on the port that we had indicated,  in my case the url is http://192.168.68.102:5000:</p>
 
-<p><img src="assets/images/octoprint-multi-web.jpg" alt="OctoPrint Web 1" /></p>
+<p><img src="/assets/images/octoprint-multi-web.jpg" alt="OctoPrint Web 1" /></p>
 
 <h2 id="adding-a-second-printer">Adding a second printer</h2>
 
@@ -506,7 +505,7 @@ Creating octoprint_sidewinderx2_1 ... done
 
 <p>This will now allow access to the second instance of OctoPrint on port 5001:</p>
 
-<p><img src="assets/images/octoprint-multi-web2.png" alt="OctoPrint Web 2" /></p>
+<p><img src="/assets/images/octoprint-multi-web2.png" alt="OctoPrint Web 2" /></p>
 
 <h2 id="how-to-differentiate-printers">How to differentiate printers?</h2>
 <p>In the example above I used the devices <code class="highlighter-rouge">/dev/ttyACM0</code> and <code class="highlighter-rouge">/dev/ttyACM1</code> to reference my first printer, the Artillery Genius Pro, and my second printer, the Artillery SideWinder X2, but the operating system not always takes that order, since it will depend on which one you had turned on first. In order to identify the printers regardless of the connection order we can create a symbolic link using <code class="highlighter-rouge">udev</code> with the manufacturer and product information.</p>
@@ -751,7 +750,7 @@ services:
 <h2 id="performance-with-two-instances-of-octoprint">Performance with two instances of OctoPrint</h2>
 <p>Probably you are wondering about the consumption of these containers in the operating system and if the Raspberry can handle it. Here is an image of <code class="highlighter-rouge">htop</code> with the two containers above printing to each of the printers at the same time.</p>
 
-<p><img src="assets/images/octoprint-htop.jpg" alt="htop" /></p>
+<p><img src="/assets/images/octoprint-htop.jpg" alt="htop" /></p>
 
 <p>Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizarías un poco.</p>
 
@@ -760,7 +759,7 @@ services:
 <h2 id="what-does-the-raspberry-pi-and-printers-look-like">What does the Raspberry Pi and printers look like?</h2>
 <p>To finish this article I leave you a photo of my printers connected to the RaspBerry Pi:</p>
 
-<p><img src="assets/images/3dprinters.jpg" alt="3D printers" /></p>
+<p><img src="/assets/images/3dprinters.jpg" alt="3D printers" /></p>
 
 <p>On the smaller printer you can see a small gray box that is the Raspberry Pi, next to the two web cameras.</p>
 
