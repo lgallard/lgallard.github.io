@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2022-09-25T19:53:54-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">OctoPrint with multiple 3D printers</title><link href="https://lgallardo.com/2022/09/25/octoprint-multiple-printers" rel="alternate" type="text/html" title="OctoPrint with multiple 3D printers" /><published>2022-09-24T19:00:00-05:00</published><updated>2022-09-24T19:00:00-05:00</updated><id>https://lgallardo.com/2022/09/25/octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/2022/09/25/octoprint-multiple-printers">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2022-09-26T08:48:04-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">OctoPrint with multiple 3D printers</title><link href="https://lgallardo.com/2022/09/25/octoprint-multiple-printers" rel="alternate" type="text/html" title="OctoPrint with multiple 3D printers" /><published>2022-09-24T19:00:00-05:00</published><updated>2022-09-24T19:00:00-05:00</updated><id>https://lgallardo.com/2022/09/25/octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/2022/09/25/octoprint-multiple-printers">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
 One of the most useful tools when managing a 3D printer is &lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).&lt;/p&gt;
 
 &lt;h2 id=&quot;multiple-printers&quot;&gt;Multiple printers&lt;/h2&gt;
@@ -11,7 +11,7 @@ One of the most useful tools when managing a 3D printer is &lt;a href=&quot;http
 &lt;h2 id=&quot;raspberry-pi--ubuntu&quot;&gt;Raspberry Pi + Ubuntu&lt;/h2&gt;
 &lt;p&gt;In my case I have a &lt;strong&gt;Raspberry Pi 4&lt;/strong&gt;, with 8 GB of RAM, more than enough to run multiple instances of &lt;strong&gt;OctoPrint&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;I originally had a specific operating system installed on my Raspberry called &lt;a href=&quot;https://github.com/guysoft/OctoPi&quot;&gt;OctoPi&lt;/a&gt;, a Debian derivative with &lt;strong&gt;OctoPrint&lt;/strong&gt; as the main program that is launched when the Raspberry Pi is turned on, but as I wanted to use containers I decided to use Ubuntu, which general purposed distribution where you can surely find everything you need to work with containers.&lt;/p&gt;
+&lt;p&gt;I originally had a specific operating system installed on my Raspberry called &lt;a href=&quot;https://github.com/guysoft/OctoPi&quot; target=&quot;_blank&quot;&gt;OctoPi&lt;/a&gt;, a Debian derivative with &lt;strong&gt;OctoPrint&lt;/strong&gt; as the main program that is launched when the Raspberry Pi is turned on, but as I wanted to use containers I decided to use Ubuntu, which general purposed distribution where you can surely find everything you need to work with containers.&lt;/p&gt;
 
 &lt;h2 id=&quot;requirements-and-components&quot;&gt;Requirements and components:&lt;/h2&gt;
 &lt;p&gt;For this setup I used the following:&lt;/p&gt;
@@ -54,7 +54,7 @@ root@octopi:~# apt update
 root@octopi:~# apt install docker-compose
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;octoprint-with-one-printer&quot;&gt;Octoprint with one printer&lt;/h2&gt;
+&lt;h2 id=&quot;octoprint-with-one-printer&quot;&gt;OctoPrint with one printer&lt;/h2&gt;
 &lt;p&gt;The first thing you need is to create a folder for OctoPrint, and then go into it:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# mkdir octoprint
@@ -89,7 +89,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyACM0:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyACM0:/dev/ttyACM0
       - /dev/video0:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -113,7 +113,7 @@ services:
 
 &lt;p&gt;Finally, &lt;code class=&quot;highlighter-rouge&quot;&gt;environment&lt;/code&gt; has the streamer parameters, like webcam device from the container. In this case both the OS and the container match the path &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;. Here you also need to provide you webcam parameters, in my case I indicated that the resolution is 1280x960 at 30 frames per second, which is what corresponds to my Logitech C270. For other models you can consult the &lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot;&gt;supported cameras list page&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Once the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yaml&lt;/code&gt; file has been created with the information shown above, all you have to do is start the service with Docker:&lt;/p&gt;
+&lt;p&gt;Once the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; file has been created with the information shown above, all you have to do is start the service with Docker:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# docker-compose up -d
   
@@ -138,7 +138,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyACM0:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyACM0:/dev/ttyACM0
       - /dev/video0:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -156,7 +156,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyACM1:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyACM1:/dev/ttyACM0
       - /dev/video2:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -286,7 +286,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyGeniusPro:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyGeniusPro:/dev/ttyACM0
       - /dev/video0:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -304,7 +304,7 @@ services:
       - 5001:5000
       - 8081:8080
     devices:
-      - /dev/ttySidewinderX2:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttySidewinderX2:/dev/ttyACM0
       - /dev/video2:/dev/video0
     volumes:
       - /root/octoprint/sidewinderx2:/octoprint
@@ -332,8 +332,6 @@ Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
 Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ambas cámaras están en el mismos bus pero identificadas como dispositivos USB diferentes, lo cual podemos aprovechar. En este caso no usaremos el id del producto para diferencialrlas sino el id de dispositivo USB.  Tomaremos como referecia el subsystem &lt;code class=&quot;highlighter-rouge&quot;&gt;video4linux&lt;/code&gt; en vez de &lt;code class=&quot;highlighter-rouge&quot;&gt;tty&lt;/code&gt;, por lo que estaremos usando &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNELS&lt;/code&gt; en vez de &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNEL&lt;/code&gt; para diferenciar las cámaras. Por ejemplo, para saber en qué dispositivo USB está  la cámara en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt; podemos ejecutar lo siguiente:&lt;/p&gt;
 
 &lt;p&gt;Both cameras are on the same bus but identified as different USB devices, which we can take advantage of. In this case we will not use the product id to differentiate them but the USB device id. We’ll be referencing the &lt;code class=&quot;highlighter-rouge&quot;&gt;video4linux&lt;/code&gt; subsystem instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;tty&lt;/code&gt;, so we’ll be using &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNELS&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNEL&lt;/code&gt; to differentiate cameras. For example, to find out which USB device the camera in &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt; is on, we can run the following:&lt;/p&gt;
 
@@ -393,7 +391,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyGeniusPro:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyGeniusPro:/dev/ttyACM0
       - /dev/videoGeniusPro:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -411,7 +409,7 @@ services:
       - 5001:5000
       - 8081:8080
     devices:
-      - /dev/ttySidewinderX2:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttySidewinderX2:/dev/ttyACM0
       - /dev/videoSidewinderX2:/dev/video0
     volumes:
       - /root/octoprint/sidewinderx2:/octoprint
@@ -427,8 +425,6 @@ services:
 &lt;p&gt;Probably you are wondering about the consumption of these containers in the operating system and if the Raspberry can handle it. Here is an image of &lt;code class=&quot;highlighter-rouge&quot;&gt;htop&lt;/code&gt; with the two containers above printing to each of the printers at the same time.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-htop.jpg&quot; alt=&quot;htop&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizarías un poco.&lt;/p&gt;
 
 &lt;p&gt;As you can see the Raspberry has a lot of resources available, since of the 8GB of RAM it is only consuming 0.5 GB including the operating system. From this we can draw two conclusions: the first one is that more printers can be added without problems, the only limit is the number of USB ports offered by the Raspberry (4 in my model), but you could add a USB hub to add more ports; and the second conclusion is that for two printers you could use a Raspberry with less RAM, for example 2 GB or 4 GB, and thus you would save a little.&lt;/p&gt;
 

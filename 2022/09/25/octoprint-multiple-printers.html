@@ -315,7 +315,7 @@
 
 
 
-  14 minute read
+  12 minute read
 </p>
           
         </header>
@@ -335,7 +335,7 @@ One of the most useful tools when managing a 3D printer is <a href="https://octo
 <h2 id="raspberry-pi--ubuntu">Raspberry Pi + Ubuntu</h2>
 <p>In my case I have a <strong>Raspberry Pi 4</strong>, with 8 GB of RAM, more than enough to run multiple instances of <strong>OctoPrint</strong>.</p>
 
-<p>I originally had a specific operating system installed on my Raspberry called <a href="https://github.com/guysoft/OctoPi">OctoPi</a>, a Debian derivative with <strong>OctoPrint</strong> as the main program that is launched when the Raspberry Pi is turned on, but as I wanted to use containers I decided to use Ubuntu, which general purposed distribution where you can surely find everything you need to work with containers.</p>
+<p>I originally had a specific operating system installed on my Raspberry called <a href="https://github.com/guysoft/OctoPi" target="_blank">OctoPi</a>, a Debian derivative with <strong>OctoPrint</strong> as the main program that is launched when the Raspberry Pi is turned on, but as I wanted to use containers I decided to use Ubuntu, which general purposed distribution where you can surely find everything you need to work with containers.</p>
 
 <h2 id="requirements-and-components">Requirements and components:</h2>
 <p>For this setup I used the following:</p>
@@ -378,7 +378,7 @@ root@octopi:~# apt update
 root@octopi:~# apt install docker-compose
 </code></pre></div></div>
 
-<h2 id="octoprint-with-one-printer">Octoprint with one printer</h2>
+<h2 id="octoprint-with-one-printer">OctoPrint with one printer</h2>
 <p>The first thing you need is to create a folder for OctoPrint, and then go into it:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# mkdir octoprint
@@ -413,7 +413,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyACM0:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyACM0:/dev/ttyACM0
       - /dev/video0:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -437,7 +437,7 @@ services:
 
 <p>Finally, <code class="highlighter-rouge">environment</code> has the streamer parameters, like webcam device from the container. In this case both the OS and the container match the path <code class="highlighter-rouge">/dev/video0</code>. Here you also need to provide you webcam parameters, in my case I indicated that the resolution is 1280x960 at 30 frames per second, which is what corresponds to my Logitech C270. For other models you can consult the <a href="https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149">supported cameras list page</a>.</p>
 
-<p>Once the <code class="highlighter-rouge">docker-compose.yaml</code> file has been created with the information shown above, all you have to do is start the service with Docker:</p>
+<p>Once the <code class="highlighter-rouge">docker-compose.yml</code> file has been created with the information shown above, all you have to do is start the service with Docker:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
   
@@ -462,7 +462,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyACM0:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyACM0:/dev/ttyACM0
       - /dev/video0:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -480,7 +480,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyACM1:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyACM1:/dev/ttyACM0
       - /dev/video2:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -610,7 +610,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyGeniusPro:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyGeniusPro:/dev/ttyACM0
       - /dev/video0:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -628,7 +628,7 @@ services:
       - 5001:5000
       - 8081:8080
     devices:
-      - /dev/ttySidewinderX2:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttySidewinderX2:/dev/ttyACM0
       - /dev/video2:/dev/video0
     volumes:
       - /root/octoprint/sidewinderx2:/octoprint
@@ -656,8 +656,6 @@ Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
 Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 </code></pre></div></div>
-
-<p>Ambas cámaras están en el mismos bus pero identificadas como dispositivos USB diferentes, lo cual podemos aprovechar. En este caso no usaremos el id del producto para diferencialrlas sino el id de dispositivo USB.  Tomaremos como referecia el subsystem <code class="highlighter-rouge">video4linux</code> en vez de <code class="highlighter-rouge">tty</code>, por lo que estaremos usando <code class="highlighter-rouge">KERNELS</code> en vez de <code class="highlighter-rouge">KERNEL</code> para diferenciar las cámaras. Por ejemplo, para saber en qué dispositivo USB está  la cámara en <code class="highlighter-rouge">/dev/video0</code> podemos ejecutar lo siguiente:</p>
 
 <p>Both cameras are on the same bus but identified as different USB devices, which we can take advantage of. In this case we will not use the product id to differentiate them but the USB device id. We’ll be referencing the <code class="highlighter-rouge">video4linux</code> subsystem instead of <code class="highlighter-rouge">tty</code>, so we’ll be using <code class="highlighter-rouge">KERNELS</code> instead of <code class="highlighter-rouge">KERNEL</code> to differentiate cameras. For example, to find out which USB device the camera in <code class="highlighter-rouge">/dev/video0</code> is on, we can run the following:</p>
 
@@ -717,7 +715,7 @@ services:
       - 5000:5000
       - 8080:8080
     devices:
-      - /dev/ttyGeniusPro:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttyGeniusPro:/dev/ttyACM0
       - /dev/videoGeniusPro:/dev/video0
     volumes:
       - /root/octoprint/geniuspro:/octoprint
@@ -735,7 +733,7 @@ services:
       - 5001:5000
       - 8081:8080
     devices:
-      - /dev/ttySidewinderX2:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/ttySidewinderX2:/dev/ttyACM0
       - /dev/videoSidewinderX2:/dev/video0
     volumes:
       - /root/octoprint/sidewinderx2:/octoprint
@@ -751,8 +749,6 @@ services:
 <p>Probably you are wondering about the consumption of these containers in the operating system and if the Raspberry can handle it. Here is an image of <code class="highlighter-rouge">htop</code> with the two containers above printing to each of the printers at the same time.</p>
 
 <p><img src="/assets/images/octoprint-htop.jpg" alt="htop" /></p>
-
-<p>Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizarías un poco.</p>
 
 <p>As you can see the Raspberry has a lot of resources available, since of the 8GB of RAM it is only consuming 0.5 GB including the operating system. From this we can draw two conclusions: the first one is that more printers can be added without problems, the only limit is the number of USB ports offered by the Raspberry (4 in my model), but you could add a USB hub to add more ports; and the second conclusion is that for two printers you could use a Raspberry with less RAM, for example 2 GB or 4 GB, and thus you would save a little.</p>
 
