@@ -656,7 +656,6 @@ Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
 Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 </code></pre></div></div>
-
 <p>Both cameras are on the same bus but identified as different USB devices, which we can take advantage of. In this case we will not use the product id to differentiate them but the USB device id. We’ll be referencing the <code class="highlighter-rouge">video4linux</code> subsystem instead of <code class="highlighter-rouge">tty</code>, so we’ll be using <code class="highlighter-rouge">KERNELS</code> instead of <code class="highlighter-rouge">KERNEL</code> to differentiate cameras. For example, to find out which USB device the camera in <code class="highlighter-rouge">/dev/video0</code> is on, we can run the following:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
@@ -860,7 +859,8 @@ services:
 ">Previous</a>
     
     
-      <a href="#" class="pagination--pager disabled">Next</a>
+      <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" class="pagination--pager" title="AWS (re)Certified Solutions Architect - Professional
+">Next</a>
     
   </nav>
 
@@ -882,6 +882,34 @@ services:
     <div class="page__related">
       <h4 class="page__related-title">You May Also Enjoy</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+
+</p>
+  </article>
+</div>
         
           
 
@@ -964,36 +992,6 @@ In Helm 3 the support of helm serve command was removed due to some design issue
   </article>
 </div>
         
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/2021/04/15/terraform-module-for-aws-ecr" rel="permalink">Terraform module for AWS ECR
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-
-I share here another Terraform module I published as open source code, which allows you to create registries in AWS ECR.
-
-</p>
-  </article>
-</div>
-        
       </div>
     </div>
   
@@ -1024,7 +1022,7 @@ I share here another Terraform module I published as open source code, which all
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2022 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2023 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
