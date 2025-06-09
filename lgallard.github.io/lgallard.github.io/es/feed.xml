@@ -1,4 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/">&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png&quot; alt=&quot;BugBot y Copilot: Revisores IA&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/">![BugBot y Copilot: Revisores IA](/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png){:style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot;}
+
+Recientemente, mientras trabajaba en mis módulos de Terraform, se me ocurrió una idea: **¿Y si uso BugBot para revisar el trabajo de los Coding Agents de Copilot?** Como ya estaba usando Copilot Coding Agents para automatizar PRs y refactorizaciones, decidí probar BugBot como revisor adicional.
+
+## El experimento
+
+Asigné tareas a Copilot Coding Agents para implementar nuevas funcionalidades y correcciones en mis repositorios. Una vez listos los PRs, ejecuté BugBot para revisar los cambios. Los resultados fueron fascinantes:
+
+![PR de Copilot con revisión de BugBot](/assets/images/coding-agents-bugbot-2025-06-09_00-46.png)
+
+BugBot detectó rápidamente problemas que la propia revisión de Copilot no había visto, especialmente en casos límite y uso de variables. Su capacidad de detección de bugs está en otro nivel comparado con las revisiones integradas de Copilot.
+
+![Reporte detallado de BugBot](/assets/images/coding-agents-bugbot-2025-06-09_00-47.png)
+
+Por ejemplo, BugBot señaló una validación regex demasiado restrictiva y variables no utilizadas en un PR generado por Copilot. Proporcionó retroalimentación accionable, que luego trasladé a Copilot para su corrección.
+
+![BugBot y Copilot: Revisores IA](/assets/images/coding-agents-bugbot2025-06-09_00-48.png)
+
+## Puntos destacados
+
+1. **BugBot destaca en la detección de bugs:** Encontró problemas sutiles en los PRs de Copilot Coding Agents, proporcionando explicaciones y sugerencias detalladas.
+2. **Copilot Coding Agents destaca en la implementación:** Propone e implementa soluciones rápidamente, y puede interpretar y actuar sobre la retroalimentación de BugBot.
+3. **La IA no es infalible:** Incluso usando ambas herramientas, pueden pasar bugs o código desactualizado. Por ejemplo, Copilot generó un workflow usando una GitHub Action obsoleta, y BugBot tampoco lo detectó.
+
+![Error de workflow: Acción de GitHub obsoleta](/assets/images/coding-agents-bugbot-2025-06-09_01-01.png)
+
+## Conclusión
+
+Combinar Copilot Coding Agents y BugBot crea un potente flujo de trabajo de revisión e implementación impulsado por IA. Cada herramienta tiene sus fortalezas: BugBot para la detección profunda de bugs, Copilot para la entrega rápida de soluciones. Sin embargo, la supervisión humana sigue siendo esencial para detectar casos límite y cambios en las plataformas.
+
+
+
+&gt; **Nota:** BugBot es un servicio de pago para revisiones automáticas de código. Mis pruebas y experimentos aquí descritos se realizaron durante el periodo de prueba gratuita, lo que me permitió evaluar sus capacidades sin incurrir en costos.
+
+## Referencias
+
+- [GitHub Copilot](https://github.com/features/copilot)
+- [Cursor BugBot](https://www.cursor.so/bugbot)
+- [feat: Add support for repository replication ](https://github.com/lgallard/terraform-aws-ecr/pull/55)</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/">&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png&quot; alt=&quot;BugBot y Copilot: Revisores IA&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recientemente, mientras trabajaba en mis módulos de Terraform, se me ocurrió una idea: &lt;strong&gt;¿Y si uso BugBot para revisar el trabajo de los Coding Agents de Copilot?&lt;/strong&gt; Como ya estaba usando Copilot Coding Agents para automatizar PRs y refactorizaciones, decidí probar BugBot como revisor adicional.&lt;/p&gt;
 
@@ -14,213 +52,178 @@
 
 &lt;p&gt;Por ejemplo, BugBot señaló una validación regex demasiado restrictiva y variables no utilizadas en un PR generado por Copilot. Proporcionó retroalimentación accionable, que luego trasladé a Copilot para su corrección.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot2025-06-09_00-48.png&quot; alt=&quot;BugBot y Copilot: Revisores IA&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot2025-06-09_00-48.png&quot; alt=&quot;BugBot y Copilot: Revisores IA&quot; /&gt;&lt;/p&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/">![GitHub Copilot Background Agents](/assets/images/copilot-coding-agent.png){:style=&quot;display:block; margin-left:auto; margin-right:auto;&quot;}
 
-&lt;h2 id=&quot;puntos-destacados&quot;&gt;Puntos destacados&lt;/h2&gt;
+Recientemente tuve la oportunidad de probar los GitHub Copilot Coding Agents (Background Agents) en uno de mis proyectos personales: el módulo [terraform-aws-backup](https://github.com/lgallard/terraform-aws-backup). Este módulo está diseñado para ayudar a los usuarios a gestionar planes de AWS Backup usando Terraform.
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;BugBot destaca en la detección de bugs:&lt;/strong&gt; Encontró problemas sutiles en los PRs de Copilot Coding Agents, proporcionando explicaciones y sugerencias detalladas.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Copilot Coding Agents destaca en la implementación:&lt;/strong&gt; Propone e implementa soluciones rápidamente, y puede interpretar y actuar sobre la retroalimentación de BugBot.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;La IA no es infalible:&lt;/strong&gt; Incluso usando ambas herramientas, pueden pasar bugs o código desactualizado. Por ejemplo, Copilot generó un workflow usando una GitHub Action obsoleta, y BugBot tampoco lo detectó.&lt;/li&gt;
-&lt;/ol&gt;
+## El problema
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_01-01.png&quot; alt=&quot;Error de workflow: Acción de GitHub obsoleta&quot; /&gt;&lt;/p&gt;
+Un usuario abrió [un issue](https://github.com/lgallard/terraform-aws-backup/issues/114) solicitando soporte para múltiples planes de backup por vault. Esto requería un refactor importante del módulo, ya que previamente solo soportaba un plan por vault. Decidí asignar el issue a Copilot para ver cómo manejaba un refactor real de infraestructura como código (IaC).
 
-&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
+![Asignación del issue a Copilot](/assets/images/copilot-assigned-by-lgallard.png)
 
-&lt;p&gt;Combinar Copilot Coding Agents y BugBot crea un potente flujo de trabajo de revisión e implementación impulsado por IA. Cada herramienta tiene sus fortalezas: BugBot para la detección profunda de bugs, Copilot para la entrega rápida de soluciones. Sin embargo, la supervisión humana sigue siendo esencial para detectar casos límite y cambios en las plataformas.&lt;/p&gt;
+## La solución de Copilot
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Nota:&lt;/strong&gt; BugBot es un servicio de pago para revisiones automáticas de código. Mis pruebas y experimentos aquí descritos se realizaron durante el periodo de prueba gratuita, lo que me permitió evaluar sus capacidades sin incurrir en costos.&lt;/p&gt;
-&lt;/blockquote&gt;
+Copilot Background Agents tomó el issue y propuso un pull request ([PR #115](https://github.com/lgallard/terraform-aws-backup/pull/115)) que introdujo una nueva variable `plans` (un mapa de mapas) para soportar múltiples planes de backup. El PR incluyó todos los cambios de código necesarios, actualizaciones de documentación y mantuvo la compatibilidad hacia atrás con el enfoque de un solo plan.
 
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
+Interactué con Copilot directamente desde GitHub, haciendo preguntas y solicitando cambios. Por ejemplo, verifiqué la compatibilidad hacia atrás y reporté un caso especial relacionado con la migración del estado de Terraform. Copilot respondió a mis comentarios, resolvió los problemas y actualizó el PR en consecuencia.
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/features/copilot&quot;&gt;GitHub Copilot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cursor.so/bugbot&quot;&gt;Cursor BugBot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/pull/55&quot;&gt;feat: Add support for repository replication &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup/">&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-coding-agent.png&quot; alt=&quot;GitHub Copilot Background Agents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto;&quot; /&gt;&lt;/p&gt;
+![Conversación en el PR de Copilot](/assets/images/copilot-pr.png)
 
-&lt;p&gt;Recientemente tuve la oportunidad de probar los GitHub Copilot Coding Agents (Background Agents) en uno de mis proyectos personales: el módulo &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup&lt;/a&gt;. Este módulo está diseñado para ayudar a los usuarios a gestionar planes de AWS Backup usando Terraform.&lt;/p&gt;
+## Puntos destacados
 
-&lt;h2 id=&quot;el-problema&quot;&gt;El problema&lt;/h2&gt;
+- **Automatización de extremo a extremo:** Casi todo el proceso ocurrió dentro de GitHub, con mínima intervención humana.
+- **Rapidez:** Todo el proceso de refactor y revisión tomó unos 35 minutos, de los cuales Copilot realizó la mayor parte en solo 13 minutos.
+- **Flexibilidad de dispositivos:** Gestioné el proceso desde mi iPad mini usando Arc, sin necesidad de un IDE local.
+- **Retroalimentación iterativa:** Copilot manejó varias rondas de feedback, incluyendo reportes de errores y ajustes de código.
 
-&lt;p&gt;Un usuario abrió &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/issues/114&quot;&gt;un issue&lt;/a&gt; solicitando soporte para múltiples planes de backup por vault. Esto requería un refactor importante del módulo, ya que previamente solo soportaba un plan por vault. Decidí asignar el issue a Copilot para ver cómo manejaba un refactor real de infraestructura como código (IaC).&lt;/p&gt;
+## Desventajas
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-assigned-by-lgallard.png&quot; alt=&quot;Asignación del issue a Copilot&quot; /&gt;&lt;/p&gt;
+- **Selección de modelo:** No había opción para elegir qué modelo de IA usaba Copilot para la tarea.
+- **Pruebas necesarias:** Como con cualquier generación automática de código, fue necesario probar y validar manualmente antes de hacer merge.
+- **Manejo de imágenes:** Copilot no pudo leer imágenes pegadas en los comentarios, así que los errores debían proporcionarse en texto.
 
-&lt;h2 id=&quot;la-solución-de-copilot&quot;&gt;La solución de Copilot&lt;/h2&gt;
+## Conclusión
 
-&lt;p&gt;Copilot Background Agents tomó el issue y propuso un pull request (&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/pull/115&quot;&gt;PR #115&lt;/a&gt;) que introdujo una nueva variable &lt;code class=&quot;highlighter-rouge&quot;&gt;plans&lt;/code&gt; (un mapa de mapas) para soportar múltiples planes de backup. El PR incluyó todos los cambios de código necesarios, actualizaciones de documentación y mantuvo la compatibilidad hacia atrás con el enfoque de un solo plan.&lt;/p&gt;
+GitHub Copilot Background Agents demostró ser una herramienta valiosa para tareas automatizadas y desatendidas como el refactor de módulos. Aunque es importante probar y validar el código generado, Copilot puede acelerar significativamente los flujos de trabajo de desarrollo, especialmente para infraestructura como código.
 
-&lt;p&gt;Interactué con Copilot directamente desde GitHub, haciendo preguntas y solicitando cambios. Por ejemplo, verifiqué la compatibilidad hacia atrás y reporté un caso especial relacionado con la migración del estado de Terraform. Copilot respondió a mis comentarios, resolvió los problemas y actualizó el PR en consecuencia.&lt;/p&gt;
+## Referencias
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-pr.png&quot; alt=&quot;Conversación en el PR de Copilot&quot; /&gt;&lt;/p&gt;
+- [terraform-aws-backup module en GitHub](https://github.com/lgallard/terraform-aws-backup)
+- [terraform-aws-backup module en Terraform Registry](https://registry.terraform.io/modules/lgallard/backup/aws)
+- [GitHub Copilot Background Agents](https://docs.github.com/en/copilot)</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/">![Anbernic 35xxH](/assets/images/anbernic-35xxh.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}&lt;br/&gt;
+Hoy en día, el mercado está inundado de una variedad de dispositivos portátiles para la emulación retro, provenientes de varias compañías chinas como [Retroid](https://www.goretroid.com/), [Powkiddy](https://powkiddy.com/), y [Anbernic](https://anbernic.com/). Estos dispositivos varían en factores de forma, desde pantallas compactas hasta capacidades de cómputo más potentes y sistemas operativos, algunos de los cuales son de código abierto, mientras que otros son propietarios y mantenidos por los fabricantes mismos.
 
-&lt;h2 id=&quot;puntos-destacados&quot;&gt;Puntos destacados&lt;/h2&gt;
+Después de ver innumerables videos en YouTube, comparar especificaciones y explorar consolas retro en AliExpress con precios inferiores a $100, me encontré con la **Anbernic 35xxH**. Este modelo, con una pantalla de 3.5 pulgadas, es desarrollado por Anbernic. Es similar a la **Anbernic 35xx Plus** pero tiene una orientación horizontal. El nombre del modelo '35xxh' indica una pantalla de 3.5 pulgadas ('35xx') y una disposición horizontal ('h').
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Automatización de extremo a extremo:&lt;/strong&gt; Casi todo el proceso ocurrió dentro de GitHub, con mínima intervención humana.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Rapidez:&lt;/strong&gt; Todo el proceso de refactor y revisión tomó unos 35 minutos, de los cuales Copilot realizó la mayor parte en solo 13 minutos.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Flexibilidad de dispositivos:&lt;/strong&gt; Gestioné el proceso desde mi iPad mini usando Arc, sin necesidad de un IDE local.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Retroalimentación iterativa:&lt;/strong&gt; Copilot manejó varias rondas de feedback, incluyendo reportes de errores y ajustes de código.&lt;/li&gt;
-&lt;/ul&gt;
+Como mencioné anteriormente, algunos sistemas operativos son desarrollados por los fabricantes de los dispositivos, como Anbernic, que ofrece un OS propietario. Aunque este sistema operativo cumple su propósito, no está exento de limitaciones. Por ejemplo, la manera en que se muestran y organizan los juegos puede ser confusa y engorrosa, y algunos emuladores funcionan mejor en RetroArch que en los emuladores independientes incluidos con el OS.
 
-&lt;h2 id=&quot;desventajas&quot;&gt;Desventajas&lt;/h2&gt;
+En busca de una interfaz más amigable para el usuario, me decanté por [Batocera](https://batocera.org/), un proyecto de código abierto mantenido por la comunidad. Batocera ofrece una interfaz de usuario más intuitiva y visualmente atractiva.
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Selección de modelo:&lt;/strong&gt; No había opción para elegir qué modelo de IA usaba Copilot para la tarea.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Pruebas necesarias:&lt;/strong&gt; Como con cualquier generación automática de código, fue necesario probar y validar manualmente antes de hacer merge.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Manejo de imágenes:&lt;/strong&gt; Copilot no pudo leer imágenes pegadas en los comentarios, así que los errores debían proporcionarse en texto.&lt;/li&gt;
-&lt;/ul&gt;
+![Anbernic 35xxh](/assets/images/batocera-anbernic-35xxh.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}&lt;br/&gt;
 
-&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
+Para aquellos interesados en usar Batocera en su **Anbernic 35xxH**, existe un repositorio donde pueden descargar la imagen de Batocera, llamada [Batocera Lite Beta para RG35XX Plus y RG35XX H](https://github.com/rg35xx-cfw/rg35xx-cfw.github.io/discussions/104){:target=&quot;_blank&quot;}.
 
-&lt;p&gt;GitHub Copilot Background Agents demostró ser una herramienta valiosa para tareas automatizadas y desatendidas como el refactor de módulos. Aunque es importante probar y validar el código generado, Copilot puede acelerar significativamente los flujos de trabajo de desarrollo, especialmente para infraestructura como código.&lt;/p&gt;
+**References**
+  * &lt;a href=&quot;https://www.goretroid.com/&quot; target=&quot;_blank&quot;&gt;Retroid&lt;/a&gt;
+  * &lt;a href=&quot;https://powkiddy.com/&quot; target=&quot;_blank&quot;&gt;Powkiddy&lt;/a&gt;
+  * &lt;a href=&quot;https://anbernic.com/&quot; target=&quot;_blank&quot;&gt;Anbernic&lt;/a&gt;
+  * &lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2023-12-18-aws-certified-solutions-architect-professional-2023.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2023-12-18-aws-certified-solutions-architect-professional-2023.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2023-12-18-aws-certified-solutions-architect-professional-2023.md/">![OctoPrints](/assets/images/aws-csap-2023.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}&lt;br/&gt;
+Este artículo es para comentar mi experiecia con el examen para AWS Certified Solutions Architect - Professional (recertificación):
 
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
+Si  vas a presentar el examen por primera vez o como mi caso buscas una recertificación, te recomiendo que revises los nuevos contenidos y que chequees qué ha cambiado respecto al examen anterior. Ejemplo de estos pueden ser AWS SSO por AWS Identity Center. También te recomiendo que sepas de qué van nuevos servicios como AWS Elastic Desaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, entre otros.
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup module en GitHub&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot;&gt;terraform-aws-backup module en Terraform Registry&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/copilot&quot;&gt;GitHub Copilot Background Agents&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera/">&lt;p&gt;&lt;img src=&quot;/assets/images/anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Hoy en día, el mercado está inundado de una variedad de dispositivos portátiles para la emulación retro, provenientes de varias compañías chinas como &lt;a href=&quot;https://www.goretroid.com/&quot;&gt;Retroid&lt;/a&gt;, &lt;a href=&quot;https://powkiddy.com/&quot;&gt;Powkiddy&lt;/a&gt;, y &lt;a href=&quot;https://anbernic.com/&quot;&gt;Anbernic&lt;/a&gt;. Estos dispositivos varían en factores de forma, desde pantallas compactas hasta capacidades de cómputo más potentes y sistemas operativos, algunos de los cuales son de código abierto, mientras que otros son propietarios y mantenidos por los fabricantes mismos.&lt;/p&gt;
-
-&lt;p&gt;Después de ver innumerables videos en YouTube, comparar especificaciones y explorar consolas retro en AliExpress con precios inferiores a $100, me encontré con la &lt;strong&gt;Anbernic 35xxH&lt;/strong&gt;. Este modelo, con una pantalla de 3.5 pulgadas, es desarrollado por Anbernic. Es similar a la &lt;strong&gt;Anbernic 35xx Plus&lt;/strong&gt; pero tiene una orientación horizontal. El nombre del modelo ‘35xxh’ indica una pantalla de 3.5 pulgadas (‘35xx’) y una disposición horizontal (‘h’).&lt;/p&gt;
-
-&lt;p&gt;Como mencioné anteriormente, algunos sistemas operativos son desarrollados por los fabricantes de los dispositivos, como Anbernic, que ofrece un OS propietario. Aunque este sistema operativo cumple su propósito, no está exento de limitaciones. Por ejemplo, la manera en que se muestran y organizan los juegos puede ser confusa y engorrosa, y algunos emuladores funcionan mejor en RetroArch que en los emuladores independientes incluidos con el OS.&lt;/p&gt;
-
-&lt;p&gt;En busca de una interfaz más amigable para el usuario, me decanté por &lt;a href=&quot;https://batocera.org/&quot;&gt;Batocera&lt;/a&gt;, un proyecto de código abierto mantenido por la comunidad. Batocera ofrece una interfaz de usuario más intuitiva y visualmente atractiva.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/batocera-anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxh&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Para aquellos interesados en usar Batocera en su &lt;strong&gt;Anbernic 35xxH&lt;/strong&gt;, existe un repositorio donde pueden descargar la imagen de Batocera, llamada &lt;a href=&quot;https://github.com/rg35xx-cfw/rg35xx-cfw.github.io/discussions/104&quot; target=&quot;_blank&quot;&gt;Batocera Lite Beta para RG35XX Plus y RG35XX H&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.goretroid.com/&quot; target=&quot;_blank&quot;&gt;Retroid&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://powkiddy.com/&quot; target=&quot;_blank&quot;&gt;Powkiddy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://anbernic.com/&quot; target=&quot;_blank&quot;&gt;Anbernic&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2023-12-18-aws-certified-solutions-architect-professional-2023/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2023-12-18-aws-certified-solutions-architect-professional-2023</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2023-12-18-aws-certified-solutions-architect-professional-2023/">&lt;p&gt;&lt;img src=&quot;/assets/images/aws-csap-2023.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Este artículo es para comentar mi experiecia con el examen para AWS Certified Solutions Architect - Professional (recertificación):&lt;/p&gt;
-
-&lt;p&gt;Si  vas a presentar el examen por primera vez o como mi caso buscas una recertificación, te recomiendo que revises los nuevos contenidos y que chequees qué ha cambiado respecto al examen anterior. Ejemplo de estos pueden ser AWS SSO por AWS Identity Center. También te recomiendo que sepas de qué van nuevos servicios como AWS Elastic Desaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, entre otros.&lt;/p&gt;
-
-&lt;p&gt;Fueron 75 preguntas en 180 minutos. Como ya es clásico en las certificaciones profresionales de AWS, el examen es largo y tiene  enunciados extensos y con respuestas también extensas. Para quienes el inglés no es su lengua nativa puede llegar a ser confuso, por lo que seguro te tocará leer varias preguntas mas de una vez (y sus opcione).
+Fueron 75 preguntas en 180 minutos. Como ya es clásico en las certificaciones profresionales de AWS, el examen es largo y tiene  enunciados extensos y con respuestas también extensas. Para quienes el inglés no es su lengua nativa puede llegar a ser confuso, por lo que seguro te tocará leer varias preguntas mas de una vez (y sus opcione).
 Si  vas a presentar el examen por primera vex o como mi caso buscas una recertificación, te recomiendo que revises los nuevos contenidos y que chequees qué ha cambiado respecto al examen anterior. Ejemplo de estos pueden ser AWS SSO por AWS Identity Center. También te recomiendo que sepas de qué van nuevos servicios como AWS Elastic Desaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, entre otros.
-Mis recomendaciones para ganar tiempo en este examen son:&lt;/p&gt;
+Mis recomendaciones para ganar tiempo en este examen son:
 
-&lt;ul&gt;
-  &lt;li&gt;Las preguntas fáciles respóndelas rápidamente, no te quedes mucho tiempo pensando en si es la respuesta correcta porque seguro lo es.&lt;/li&gt;
-  &lt;li&gt;Marcar las preguntas en las que realmente tienes dudas, así al momento de revisarlas puedes enfocarte en solo esas y si queda tiempo empezar a revisar el resto.&lt;/li&gt;
-  &lt;li&gt;Las preguntas con opciones míltiples márcalas para revisión, incluso si crees que están correctas. Te conviene estar 100% seguro de las opciones porque si te equivocas en una la respuesta puede ser considerada como inclorrecta.&lt;/li&gt;
-  &lt;li&gt;Lee bien las preguntas porque el eneunciado contiene la información que te va a ayudar a descartar opciones, o eligier las opciones correctas.&lt;/li&gt;
-  &lt;li&gt;Piensen que es una certificación de Amazon, en ese sentido siempre preguntarse cuál servicio de Amazon corresponde.&lt;/li&gt;
-  &lt;li&gt;Descartar cosas que se pueden hacer a nivel de S.O. si un servicio de Amazon lo provee, y solo considerarlo cuando no hay mas opción.&lt;/li&gt;
-  &lt;li&gt;No todo se resuelve con Lambda + SQS, aunque suene correcto. Revisa qué opciones o servicios cumplen con lo que se esté solicitando y no dejarse marear por ociones que en principio parecen correctas.&lt;/li&gt;
-&lt;/ul&gt;
+* Las preguntas fáciles respóndelas rápidamente, no te quedes mucho tiempo pensando en si es la respuesta correcta porque seguro lo es.
+* Marcar las preguntas en las que realmente tienes dudas, así al momento de revisarlas puedes enfocarte en solo esas y si queda tiempo empezar a revisar el resto.
+* Las preguntas con opciones míltiples márcalas para revisión, incluso si crees que están correctas. Te conviene estar 100% seguro de las opciones porque si te equivocas en una la respuesta puede ser considerada como inclorrecta.
+* Lee bien las preguntas porque el eneunciado contiene la información que te va a ayudar a descartar opciones, o eligier las opciones correctas.
+* Piensen que es una certificación de Amazon, en ese sentido siempre preguntarse cuál servicio de Amazon corresponde. 
+* Descartar cosas que se pueden hacer a nivel de S.O. si un servicio de Amazon lo provee, y solo considerarlo cuando no hay mas opción.
+* No todo se resuelve con Lambda + SQS, aunque suene correcto. Revisa qué opciones o servicios cumplen con lo que se esté solicitando y no dejarse marear por ociones que en principio parecen correctas.
 
-&lt;p&gt;Si estás interesado en esta certificación te recomiendo algunos enlaces:&lt;/p&gt;
+Si estás interesado en esta certificación te recomiendo algunos enlaces:
 
-&lt;p&gt;&lt;strong&gt;Cursos en línea&lt;/strong&gt;&lt;/p&gt;
+**Cursos en línea**
 
-&lt;p&gt;Para este examen seguí fiel a AWS A Cloud Guru, pero para ser sinceros me parece que los conteidos los tratan superficialmente y el curso tal cual como está hoy en día parece un Frankeinstain ya que hay al menos dos instructores con formatos de contenidos distintos, como si hubiesen agarrado lo mejor de los curso de Linux Academy con los de A Cloud Guru . De Igual forma, si estás interesado acá lo tienes disponible:&lt;/p&gt;
+Para este examen seguí fiel a AWS A Cloud Guru, pero para ser sinceros me parece que los conteidos los tratan superficialmente y el curso tal cual como está hoy en día parece un Frankeinstain ya que hay al menos dos instructores con formatos de contenidos distintos, como si hubiesen agarrado lo mejor de los curso de Linux Academy con los de A Cloud Guru . De Igual forma, si estás interesado acá lo tienes disponible:
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.pluralsight.com/courses/aws-certified-solutions-architect-professional-sap-c02&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - AWS Certified Solutions Architect Professional&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+  * &lt;a href=&quot;https://www.pluralsight.com/courses/aws-certified-solutions-architect-professional-sap-c02&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - AWS Certified Solutions Architect Professional&lt;/a&gt;
 
-&lt;p&gt;&lt;strong&gt;Documentación de AWS&lt;/strong&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2022-09-25-octoprint-multiple-printers/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2022-09-25-octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2022-09-25-octoprint-multiple-printers/">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Una de las herramientas más útiles a la hora de gestionar una impresora 3D es &lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).&lt;/p&gt;
 
-&lt;h2 id=&quot;múltiples-impresoras&quot;&gt;Múltiples impresoras&lt;/h2&gt;
-&lt;p&gt;¿Pero qué pasa si tenemos más de una impresora? ¿Puede &lt;strong&gt;OctoPrint&lt;/strong&gt; gestionar mas de una impresora?&lt;/p&gt;
+**Documentación de AWS**
 
-&lt;p&gt;La respuesta corta es: NO! El software en sí no está diseñado para múltiples impresoras, pero se puede buscar formas alternativas para tener más de una instancia de &lt;strong&gt;OctoPrint&lt;/strong&gt; corriendo en nuestro dispositivo o computadora.&lt;/p&gt;
+  * &lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;
+  * &lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;
+  * &lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2022-09-25-octoprint-multiple-printers.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2022-09-25-octoprint-multiple-printers.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2022-09-25-octoprint-multiple-printers.md/">![OctoPrints](/assets/images/OctoPrint.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}&lt;br/&gt;
+Una de las herramientas más útiles a la hora de gestionar una impresora 3D es [OctoPrint](https://octoprint.org){:target=&quot;_blank&quot;}, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).
 
-&lt;p&gt;Existen varias formas para esto, por ejemplo se puede &lt;a href=&quot;http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers&quot; target=&quot;_blank&quot;&gt;modificar los scripts de OctoPi para agregar más instancias&lt;/a&gt;,  crear scripts que lancen varias instancias del mismo programa , pero la opción que terminé usando  fue la de contenedores Docker.&lt;/p&gt;
+## Múltiples impresoras
+¿Pero qué pasa si tenemos más de una impresora? ¿Puede **OctoPrint** gestionar mas de una impresora?
+ 
+La respuesta corta es: NO! El software en sí no está diseñado para múltiples impresoras, pero se puede buscar formas alternativas para tener más de una instancia de **OctoPrint** corriendo en nuestro dispositivo o computadora.
+  
+Existen varias formas para esto, por ejemplo se puede [modificar los scripts de OctoPi para agregar más instancias](http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers){:target=&quot;_blank&quot;},  crear scripts que lancen varias instancias del mismo programa , pero la opción que terminé usando  fue la de contenedores Docker.
+ 
+## Raspberry Pi + Ubuntu
+ En mi caso tengo una **Raspberry Pi 4**, de 8 GB de RAM, más que suficiente para correr múltiples instancias de **OctoPrint**. 
+ 
+En principio tenía instalado en mi Raspberry un sistema operativo específico llamado [OctoPi](https://github.com/guysoft/OctoPi){:target=&quot;_blank&quot;}, un derivado de Debian con **OctoPrint** como el programa principal que se lanza cuando se enciende el dispositivo, pero al querer tener contenedores pensé en usar Ubuntu que es una distribución menos especializada y donde seguramente se puede encontrar todo lo necesario para trabajar con contenedores.
+ 
+## Requisitos y componentes:
+Para esta configuración usé lo siguiente:
 
-&lt;h2 id=&quot;raspberry-pi--ubuntu&quot;&gt;Raspberry Pi + Ubuntu&lt;/h2&gt;
-&lt;p&gt;En mi caso tengo una &lt;strong&gt;Raspberry Pi 4&lt;/strong&gt;, de 8 GB de RAM, más que suficiente para correr múltiples instancias de &lt;strong&gt;OctoPrint&lt;/strong&gt;.&lt;/p&gt;
+* Impresora 3D - Artillery Genius Pro
+* Impresora 3D - Artillery SideWinder X2
+* 2x WebCam - Logitech C270 (una por impresora)
+* Raspberry Pi 4 - 8G RAM
+* SD Card 64 GB
+* Ubuntu 22.04 LTS  ARM 64 bits
+* Docker 20.10.17
+* OctoPrint lastest (1.8.3)
 
-&lt;p&gt;En principio tenía instalado en mi Raspberry un sistema operativo específico llamado &lt;a href=&quot;https://github.com/guysoft/OctoPi&quot; target=&quot;_blank&quot;&gt;OctoPi&lt;/a&gt;, un derivado de Debian con &lt;strong&gt;OctoPrint&lt;/strong&gt; como el programa principal que se lanza cuando se enciende el dispositivo, pero al querer tener contenedores pensé en usar Ubuntu que es una distribución menos especializada y donde seguramente se puede encontrar todo lo necesario para trabajar con contenedores.&lt;/p&gt;
+## Instalación de Ubuntu
+Para instalar **Ubuntu** en la Raspberry Pi ahora es más sencillo que nunca, solo tienes que descargar **Raspberry Pi Imager,** el cual generará la imagen en tu tarjeta SD, seleccionar el sistema operativo, que en este caso es **Ubuntu 22.04 LTS** y listo. Hay versiones de Raspberry Pi Imager para Linux, Mac y Windows, así que podrás generar la imagen en el sistema operativo que más te convenga.
 
-&lt;h2 id=&quot;requisitos-y-componentes&quot;&gt;Requisitos y componentes:&lt;/h2&gt;
-&lt;p&gt;Para esta configuración usé lo siguiente:&lt;/p&gt;
+![Raspberry Pi Imager](/assets/images/Raspberry-Pi-Imager.jpg)
 
-&lt;ul&gt;
-  &lt;li&gt;Impresora 3D - Artillery Genius Pro&lt;/li&gt;
-  &lt;li&gt;Impresora 3D - Artillery SideWinder X2&lt;/li&gt;
-  &lt;li&gt;2x WebCam - Logitech C270 (una por impresora)&lt;/li&gt;
-  &lt;li&gt;Raspberry Pi 4 - 8G RAM&lt;/li&gt;
-  &lt;li&gt;SD Card 64 GB&lt;/li&gt;
-  &lt;li&gt;Ubuntu 22.04 LTS  ARM 64 bits&lt;/li&gt;
-  &lt;li&gt;Docker 20.10.17&lt;/li&gt;
-  &lt;li&gt;OctoPrint lastest (1.8.3)&lt;/li&gt;
-&lt;/ul&gt;
+Desde este mismo software vas a tener la posibilidad de configurar la contraseña de la red WiFi en caso de que la estés usando la Raspberry de forma inalámbrica y que no quieras usar un televisor y un teclado (headless), o tocar la SD para configurar la red. Como yo lo estoy usando headless, fue lo que hice y luego me conecté por **ssh**.
 
-&lt;h2 id=&quot;instalación-de-ubuntu&quot;&gt;Instalación de Ubuntu&lt;/h2&gt;
-&lt;p&gt;Para instalar &lt;strong&gt;Ubuntu&lt;/strong&gt; en la Raspberry Pi ahora es más sencillo que nunca, solo tienes que descargar &lt;strong&gt;Raspberry Pi Imager,&lt;/strong&gt; el cual generará la imagen en tu tarjeta SD, seleccionar el sistema operativo, que en este caso es &lt;strong&gt;Ubuntu 22.04 LTS&lt;/strong&gt; y listo. Hay versiones de Raspberry Pi Imager para Linux, Mac y Windows, así que podrás generar la imagen en el sistema operativo que más te convenga.&lt;/p&gt;
+![WiFi Settings](/assets/images/OctoPi-WiFi-Setting.jpg)
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/Raspberry-Pi-Imager.jpg&quot; alt=&quot;Raspberry Pi Imager&quot; /&gt;&lt;/p&gt;
+Para la configuración headless el truco es dejar que corran los scripts de inicialización de **Ubuntu** y luego conectarte por ssh. Ahora si ves que no puedes conectarse por ssh puedes buscar un cable HDMI y un teclado para revisar qué pueda estar pasando.
 
-&lt;p&gt;Desde este mismo software vas a tener la posibilidad de configurar la contraseña de la red WiFi en caso de que la estés usando la Raspberry de forma inalámbrica y que no quieras usar un televisor y un teclado (headless), o tocar la SD para configurar la red. Como yo lo estoy usando headless, fue lo que hice y luego me conecté por &lt;strong&gt;ssh&lt;/strong&gt;.&lt;/p&gt;
+## Instalación del software en Ubuntu
+Aparte de **Docker** vamos a necesitar, **docker-compose**, y los utilitarios que nos ayudarán a instalarlos.
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPi-WiFi-Setting.jpg&quot; alt=&quot;WiFi Settings&quot; /&gt;&lt;/p&gt;
+## Docker y docker-compose
+Para instalar docker debemos descargarlo usando el script. Necesitaremos entrar como usuario administrador con la cuenta root:
 
-&lt;p&gt;Para la configuración headless el truco es dejar que corran los scripts de inicialización de &lt;strong&gt;Ubuntu&lt;/strong&gt; y luego conectarte por ssh. Ahora si ves que no puedes conectarse por ssh puedes buscar un cable HDMI y un teclado para revisar qué pueda estar pasando.&lt;/p&gt;
-
-&lt;h2 id=&quot;instalación-del-software-en-ubuntu&quot;&gt;Instalación del software en Ubuntu&lt;/h2&gt;
-&lt;p&gt;Aparte de &lt;strong&gt;Docker&lt;/strong&gt; vamos a necesitar, &lt;strong&gt;docker-compose&lt;/strong&gt;, y los utilitarios que nos ayudarán a instalarlos.&lt;/p&gt;
-
-&lt;h2 id=&quot;docker-y-docker-compose&quot;&gt;Docker y docker-compose&lt;/h2&gt;
-&lt;p&gt;Para instalar docker debemos descargarlo usando el script. Necesitaremos entrar como usuario administrador con la cuenta root:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pi@octopi:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;su
+```bash
+pi@octopi:~$ sudo su
 root@octopi:~# 
 
 root@octopi:~# apt install curl
-root@octopi:~# curl &lt;span class=&quot;nt&quot;&gt;-sSL&lt;/span&gt; https://get.docker.com | sh
+root@octopi:~# curl -sSL https://get.docker.com | sh
 
 root@octopi:~# apt update
 root@octopi:~# apt install docker-compose
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;h2 id=&quot;octoprint-con-una-impresora&quot;&gt;OctoPrint con una impresora&lt;/h2&gt;
-&lt;p&gt;Lo primero que haremos es crear un carpeta para OctoPrint, y luego entrar en ella:&lt;/p&gt;
+## OctoPrint con una impresora
+Lo primero que haremos es crear un carpeta para OctoPrint, y luego entrar en ella:
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# mkdir octoprint
+```bash
+root@octopi:~# mkdir octoprint
 root@octopi:~# 
-root@octopi:~# &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;octoprint/
+root@octopi:~# cd octoprint/
 root@octopi:~/octoprint#
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Vamos a empezar con una impresora, en este caso empezaré con la &lt;code class=&quot;highlighter-rouge&quot;&gt;Artillery Genius Pro&lt;/code&gt;.  Para esto creamos una carpeta que identifique a esta impresora:&lt;/p&gt;
+Vamos a empezar con una impresora, en este caso empezaré con la `Artillery Genius Pro`.  Para esto creamos una carpeta que identifique a esta impresora:
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# mkdir geniuspro
-root@octopi:~# chmod &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; 777 geniuspro/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```bash
+root@octopi:~# mkdir geniuspro
+root@octopi:~# chmod -R 777 geniuspro/
+```
 
-&lt;p&gt;Es importante saber la ruta actual porque luego la usaremos en la definición del contenedor junto con el nombre de esta carpeta. Para ello ejecutamos la siguiente orden:&lt;/p&gt;
+Es importante saber la ruta actual porque luego la usaremos en la definición del contenedor junto con el nombre de esta carpeta. Para ello ejecutamos la siguiente orden:
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# &lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
+```bash
+root@octopi:~# pwd
 /root/octoprint
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Ya con esto podemos indicar luego que los archivos de esta primera instancia de OctoPrint residirán en &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt;.&lt;/p&gt;
+Ya con esto podemos indicar luego que los archivos de esta primera instancia de OctoPrint residirán en `/root/octoprint/geniuspro`.
 
-&lt;p&gt;Ahora para configurar la impresora vamos a usar &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt; por lo que creamos el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; con la siguiente información:&lt;/p&gt;
+Ahora para configurar la impresora vamos a usar `docker-compose` por lo que creamos el archivo `docker-compose.yml` con la siguiente información:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+```
+version: '2.4'
 
 services:
   geniuspro:
@@ -240,35 +243,37 @@ services:
       - ENABLE_MJPG_STREAMER=true
       - CAMERA_DEV=/dev/video0
       - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Este archivo define varias cosas relacionadas a OctoPrint, como la cámara web y la impresora como tal. Por ejemplo, con &lt;code class=&quot;highlighter-rouge&quot;&gt;image&lt;/code&gt; indicamos cuál es la imagen Docker a usar para el servicio &lt;code class=&quot;highlighter-rouge&quot;&gt;geniuspro&lt;/code&gt;.&lt;/p&gt;
+Este archivo define varias cosas relacionadas a OctoPrint, como la cámara web y la impresora como tal. Por ejemplo, con `image` indicamos cuál es la imagen Docker a usar para el servicio `geniuspro`.  
 
-&lt;p&gt;En esta definición hay que destacar los puertos, los cuales serán usados para acceder a los servicios, siendo el &lt;code class=&quot;highlighter-rouge&quot;&gt;5000&lt;/code&gt; para la interfaz web y el &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt; para el streaming de video de la cámara web.&lt;/p&gt;
+En esta definición hay que destacar los puertos, los cuales serán usados para acceder a los servicios, siendo el `5000` para la interfaz web y el `8080` para el streaming de video de la cámara web.
 
-&lt;p&gt;Por otro lado se define como dispositivo la impresora en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;, y la cámara web en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;&lt;/p&gt;
+Por otro lado se define como dispositivo la impresora en `/dev/ttyACM0`, y la cámara web en `/dev/video0`
 
-&lt;p&gt;Algo a tener en cuenta y que se diferencia del &lt;a href=&quot;https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit&quot; target=&quot;_bla￼nk&quot;&gt;ejemplo en cuál me basé&lt;/a&gt;, es que el streamer ahora es parte de la imagen Docker y es atendido en el puerto &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt;, por los que no hace falta tener una definición aparte a otra imagen Docker apuntando al streamer.&lt;/p&gt;
+Algo a tener en cuenta y que se diferencia del [ejemplo en cuál me basé](https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit){:target=&quot;_bla￼nk&quot;}, es que el streamer ahora es parte de la imagen Docker y es atendido en el puerto `8080`, por los que no hace falta tener una definición aparte a otra imagen Docker apuntando al streamer.
 
-&lt;p&gt;Luego en &lt;code class=&quot;highlighter-rouge&quot;&gt;volumes&lt;/code&gt; es donde se hace la referencia al directorio de la impresora que habíamos creado en la ruta  &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt;, que será mapeada  dentro del contenedor en  la carpeta &lt;code class=&quot;highlighter-rouge&quot;&gt;/octoprint&lt;/code&gt;. Es decir, cuando levantemos el contenedor todos los archivos de OctoPrint para esta impresora quedarán en la ruta &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt; del sistema operativo.&lt;/p&gt;
+Luego en `volumes` es donde se hace la referencia al directorio de la impresora que habíamos creado en la ruta  `/root/octoprint/geniuspro`, que será mapeada  dentro del contenedor en  la carpeta `/octoprint`. Es decir, cuando levantemos el contenedor todos los archivos de OctoPrint para esta impresora quedarán en la ruta `/root/octoprint/geniuspro` del sistema operativo.
 
-&lt;p&gt;Por último, en &lt;code class=&quot;highlighter-rouge&quot;&gt;environment&lt;/code&gt; definimos los parámetros para el streamer, pasando la información del dispositivo de la cámara web referido desde el contenedor, que en este caso coincide con el del sistema operativo afitrión, es decir, &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;. También le proporcionamos los parámetros de la cámara, en mi caso le indico que la resolución es de 1280x960 a 30 frames por segundos, que es lo que corresponde com mi Logitech C270. Para otros modelos puedes consultar el &lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;listado desde la  página de cámaras soportadas&lt;/a&gt;.&lt;/p&gt;
+Por último, en `environment` definimos los parámetros para el streamer, pasando la información del dispositivo de la cámara web referido desde el contenedor, que en este caso coincide con el del sistema operativo afitrión, es decir, `/dev/video0`. También le proporcionamos los parámetros de la cámara, en mi caso le indico que la resolución es de 1280x960 a 30 frames por segundos, que es lo que corresponde com mi Logitech C270. Para otros modelos puedes consultar el [listado desde la  página de cámaras soportadas](https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149){:target=&quot;_bla￼nk&quot;}.
 
-&lt;p&gt;Una vez creado el archivo  &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; con la información mostrada arriba, solo basta con levantar el servicio con Docker:&lt;/p&gt;
+Una vez creado el archivo  `docker-compose.yml` con la información mostrada arriba, solo basta con levantar el servicio con Docker:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# docker-compose up -d
+```
+root@octopi:~/octoprint# docker-compose up -d
   
 Creating octoprint_geniuspro_1 ... done
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Ya con esto podemos acceder a la interfaz web de OctoPrint desde la ip de la Raspberry en el puerto que le habíamos indicado, que en mi caso la url es http://192.168.68.102:5000:&lt;/p&gt;
+Ya con esto podemos acceder a la interfaz web de OctoPrint desde la ip de la Raspberry en el puerto que le habíamos indicado, que en mi caso la url es http://192.168.68.102:5000:
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-multi-web.jpg&quot; alt=&quot;OctoPrint Web 1&quot; /&gt;&lt;/p&gt;
+![OctoPrint Web 1](/assets/images/octoprint-multi-web.jpg)
 
-&lt;h2 id=&quot;agregar-una-segunda-impresora&quot;&gt;Agregar una segunda impresora&lt;/h2&gt;
-&lt;p&gt;Para agregar una segunda impresora solo hay que replicar la configuración que teníamos antes, pero especificando la nueva impresora y la cámara de video correspondiente. Entonces para mi Artillery Sidewinder X2 esto sería:&lt;/p&gt;
+## Agregar una segunda impresora 
+Para agregar una segunda impresora solo hay que replicar la configuración que teníamos antes, pero especificando la nueva impresora y la cámara de video correspondiente. Entonces para mi Artillery Sidewinder X2 esto sería:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+```
+version: '2.4'
 
 services:
   geniuspro:
@@ -307,28 +312,30 @@ services:
       - CAMERA_DEV=/dev/video0
       - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Aquí hay que aclarar que en el apartado devices físicamente la impresora está identificada en la Raspberry como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;, pero al crear el contenedor internamente se identificará como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;. Lo mismo pasa con la cámara de video, donde físicamente se identifca como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video2&lt;/code&gt; pero internamente el contenedor la verá como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;.&lt;/p&gt;
+Aquí hay que aclarar que en el apartado devices físicamente la impresora está identificada en la Raspberry como `/dev/ttyACM1`, pero al crear el contenedor internamente se identificará como `/dev/ttyACM0`. Lo mismo pasa con la cámara de video, donde físicamente se identifca como `/dev/video2` pero internamente el contenedor la verá como `/dev/video0`.
 
-&lt;p&gt;Una vez creada la configuración se debe levantar el contendor de la siguiente manera:&lt;/p&gt;
+Una vez creada la configuración se debe levantar el contendor de la siguiente manera: 
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# docker-compose up -d
+```
+root@octopi:~/octoprint# docker-compose up -d
   
 octoprint_geniuspro_1 is up-to-date
 Creating octoprint_sidewinderx2_1 ... done
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Con esto ya se podrá acceder a la segunda instancia de OctoPrint en el puerto 5001:&lt;/p&gt;
+Con esto ya se podrá acceder a la segunda instancia de OctoPrint en el puerto 5001:
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-multi-web2.jpg&quot; alt=&quot;OctoPrint Web 2&quot; /&gt;&lt;/p&gt;
+![OctoPrint Web 2](/assets/images/octoprint-multi-web2.jpg)
 
-&lt;h2 id=&quot;cómo-diferenciar-las-impresoras&quot;&gt;¿Cómo diferenciar las impresoras?&lt;/h2&gt;
-&lt;p&gt;En el anterior ejemplo usé los dipositivos &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;  para hacer referencia a mi primera impresora, la Artillery Genius Pro, y a la segunda impresora la Artillery SideWinder X2, pero el sistema operativo no siempre las tomará en ese orden, ya que dependerá de cuál encienda primero . Para poder identificar las impresoras sin importar el orden de conexión podemos crear un enlace simbólico usando &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; con la información del fabricante y del producto.&lt;/p&gt;
+## ¿Cómo diferenciar las impresoras?
+En el anterior ejemplo usé los dipositivos `/dev/ttyACM0` y `/dev/ttyACM1`  para hacer referencia a mi primera impresora, la Artillery Genius Pro, y a la segunda impresora la Artillery SideWinder X2, pero el sistema operativo no siempre las tomará en ese orden, ya que dependerá de cuál encienda primero . Para poder identificar las impresoras sin importar el orden de conexión podemos crear un enlace simbólico usando `udev` con la información del fabricante y del producto.
 
-&lt;p&gt;Para esto primero hay que listar los dispositivos USB:&lt;/p&gt;
+Para esto primero hay que listar los dispositivos USB:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# lsusb
+```
+root@octopi:~/octoprint# lsusb
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
@@ -337,11 +344,12 @@ Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
 Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
 Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Acá hay dos dispositivos de &lt;strong&gt;STMicroelectronics Virtual COM Port&lt;/strong&gt;, que corresponden a las dos impresoras, pero cuál es cuál? Vamos a pedir el detalle de estos dispositivos:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; root@octopi:~/octoprint# lsusb -v -d 0483:5740
+Acá hay dos dispositivos de **STMicroelectronics Virtual COM Port**, que corresponden a las dos impresoras, pero cuál es cuál? Vamos a pedir el detalle de estos dispositivos:
+ 
+```
+ root@octopi:~/octoprint# lsusb -v -d 0483:5740
 
 Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
 Device Descriptor:
@@ -376,47 +384,53 @@ Device Descriptor:
   iProduct                2 ARTILLERY_RUBY CDC in FS Mode
   iSerial                 3 3594398F3538  
 ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Lo que diferenica una impresora de la otra es el número serial del dispositivo. Como inicialmente la Artillery Genius Pro estaba mapeada en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;, podemos consultar cuál es su número de serial:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
+Lo que diferenica una impresora de la otra es el número serial del dispositivo. Como inicialmente la Artillery Genius Pro estaba mapeada en `/dev/ttyACM0`, podemos consultar cuál es su número de serial:
+ 
+```
+root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
     ATTRS{serial}==&quot;3594398F3538&quot;
     ATTRS{serial}==&quot;0000:01:00.0&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Ahora para la ver el código serial de la Artillery Sidewinder X2 se debe consultar por el dispositivo &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;:&lt;/p&gt;
+Ahora para la ver el código serial de la Artillery Sidewinder X2 se debe consultar por el dispositivo `/dev/ttyACM1`:
+ 
+```
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM1 | grep serial
     ATTRS{serial}==&quot;386F39543538&quot;
     ATTRS{serial}==&quot;0000:01:00.0&quot; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Para que  &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt;  reconozca estas reglas debemos crear el siguiente archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/udev/rules.d/40-printers.rules&lt;/code&gt; , con este contenido:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; # Genius Pro
+Para que  `udev`  reconozca estas reglas debemos crear el siguiente archivo `/etc/udev/rules.d/40-printers.rules` , con este contenido:
+ 
+```
+ # Genius Pro
 KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;3594398F3538&quot;, SYMLINK=&quot;ttyGeniusPro&quot;
 
 # Sidewinder X2
 KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;386F39543538&quot;, SYMLINK=&quot;ttySidewinderX2&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
+ 
+ Luego se debe reiniciar `udev` para que tome estos cambios:
+  
+```
+root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
+```
 
-&lt;p&gt;Luego se debe reiniciar &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; para que tome estos cambios:&lt;/p&gt;
+De esta manera quedarán las impresoras mapeadas de la siguiente forma:  
+  
+```
+root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
+lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttyGeniusPro -&gt; ttyACM0
+lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttySidewinderX2 -&gt; ttyACM1
+```
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm control --reload-rules &amp;amp;&amp;amp; udevadm trigger
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;De esta manera quedarán las impresoras mapeadas de la siguiente forma:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
-lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttyGeniusPro -&amp;gt; ttyACM0
-lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttySidewinderX2 -&amp;gt; ttyACM1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Por lo que la configuración de Docker podemos modificarla para reflejar estos cambios:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+Por lo que la configuración de Docker podemos modificarla para reflejar estos cambios:  
+  
+```
+version: '2.4'
 
 services:
   geniuspro:
@@ -455,14 +469,15 @@ services:
       - CAMERA_DEV=/dev/video0
       - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30  
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;h2 id=&quot;cámaras-de-video&quot;&gt;Cámaras de video&lt;/h2&gt;
-&lt;p&gt;A diferencia de las impresoras las cuales tienen seriales distintos, tengo dos cámaras de video &lt;strong&gt;Logitech C270&lt;/strong&gt; que son exaxtamente iguales. ¿Cómo hacemos para diferenciarlas? ¿Cómo podemos hacer que siempre tome la cámara correcta?&lt;/p&gt;
+## Cámaras de video
+A diferencia de las impresoras las cuales tienen seriales distintos, tengo dos cámaras de video **Logitech C270** que son exaxtamente iguales. ¿Cómo hacemos para diferenciarlas? ¿Cómo podemos hacer que siempre tome la cámara correcta?
 
-&lt;p&gt;Nuevamente hacemos el análisis con  &lt;code class=&quot;highlighter-rouge&quot;&gt;lsusb&lt;/code&gt;:&lt;/p&gt;
+Nuevamente hacemos el análisis con  `lsusb`:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# lsusb
+```
+root@octopi:~/octoprint# lsusb
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
@@ -471,11 +486,12 @@ Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
 Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
 Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Ambas cámaras están en el mismos bus pero identificadas como dispositivos USB diferentes, lo cual podemos aprovechar. En este caso no usaremos el id del producto para diferenciarlas sino el id de dispositivo USB.  Tomaremos como referencia el subsystem &lt;code class=&quot;highlighter-rouge&quot;&gt;video4linux&lt;/code&gt; en vez de &lt;code class=&quot;highlighter-rouge&quot;&gt;tty&lt;/code&gt;, por lo que estaremos usando &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNELS&lt;/code&gt; en vez de &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNEL&lt;/code&gt; para diferenciar las cámaras. Por ejemplo, para saber en qué dispositivo USB está  la cámara en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt; podemos ejecutar lo siguiente:&lt;/p&gt;
+Ambas cámaras están en el mismos bus pero identificadas como dispositivos USB diferentes, lo cual podemos aprovechar. En este caso no usaremos el id del producto para diferenciarlas sino el id de dispositivo USB.  Tomaremos como referencia el subsystem `video4linux` en vez de `tty`, por lo que estaremos usando `KERNELS` en vez de `KERNEL` para diferenciar las cámaras. Por ejemplo, para saber en qué dispositivo USB está  la cámara en `/dev/video0` podemos ejecutar lo siguiente:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
+```
+root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
     KERNELS==&quot;1-1.4:1.0&quot;
     KERNELS==&quot;1-1.4&quot;
     KERNELS==&quot;1-1&quot;
@@ -486,11 +502,12 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
     KERNELS==&quot;fd500000.pcie&quot;
     KERNELS==&quot;scb&quot;
     KERNELS==&quot;platform&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Para la otra cámara hacemos lo mismo:&lt;/p&gt;
+Para la otra cámara hacemos lo mismo:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
+```
+root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
     KERNELS==&quot;1-1.3:1.0&quot;
     KERNELS==&quot;1-1.3&quot;
     KERNELS==&quot;1-1&quot;
@@ -501,27 +518,30 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
     KERNELS==&quot;fd500000.pcie&quot;
     KERNELS==&quot;scb&quot;
     KERNELS==&quot;platform&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Ya con esta información podemos modificar las reglas de &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; de la siguiente manera:&lt;/p&gt;
+Ya con esta información podemos modificar las reglas de `udev` de la siguiente manera:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Genius Pro
+```
+# Genius Pro
 KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;3594398F3538&quot;, SYMLINK=&quot;ttyGeniusPro&quot;
 SUBSYSTEM==&quot;video4linux&quot;, KERNELS==&quot;1-1.3&quot;, ATTRS{idVendor}==&quot;046d&quot;, ATTRS{idProduct}==&quot;0825&quot;, SYMLINK=&quot;videoGeniusPro&quot;
 
 # Sidewinder X2
 KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;386F39543538&quot;, SYMLINK=&quot;ttySidewinderX2&quot;
 SUBSYSTEM==&quot;video4linux&quot;, KERNELS==&quot;1-1.4&quot;, ATTRS{idVendor}==&quot;046d&quot;, ATTRS{idProduct}==&quot;0825&quot;, SYMLINK=&quot;videoSidewinderX2&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;p&gt;Recuerden reiniciar las reglas de udev con:&lt;/p&gt;
+Recuerden reiniciar las reglas de udev con:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm control --reload-rules &amp;amp;&amp;amp; udevadm trigger
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
+root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
+```
 
-&lt;p&gt;De esta forma ahora tenemos las cámaras mapeadas como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/videoGeniusPro&lt;/code&gt;y  &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/videoSidewinderX2&lt;/code&gt; respectivamente. Ahora podemos modificar el archivo &lt;strong&gt;docker-compose.yml&lt;/strong&gt; para que tome esta nueva configuración:&lt;/p&gt;
+De esta forma ahora tenemos las cámaras mapeadas como `/dev/videoGeniusPro`y  `/dev/videoSidewinderX2` respectivamente. Ahora podemos modificar el archivo **docker-compose.yml** para que tome esta nueva configuración:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+```
+version: '2.4'
 
 services:
   geniuspro:
@@ -559,262 +579,260 @@ services:
       - ENABLE_MJPG_STREAMER=true
       - CAMERA_DEV=/dev/video0
       - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;h2 id=&quot;desempeño-con-dos-instancias-de-octoprint&quot;&gt;Desempeño con dos instancias de OctoPrint&lt;/h2&gt;
-&lt;p&gt;Seguramente te estarás preguntando sobre el consumo de estos contenedores en el sistema operativo y si las Raspberry puede manejarlo. Aquí te dejo una imagen de &lt;code class=&quot;highlighter-rouge&quot;&gt;htop&lt;/code&gt; con los dos contenedores arriba imprimiendo en cada una de las impresoras a la vez.&lt;/p&gt;
+## Desempeño con dos instancias de OctoPrint
+Seguramente te estarás preguntando sobre el consumo de estos contenedores en el sistema operativo y si las Raspberry puede manejarlo. Aquí te dejo una imagen de `htop` con los dos contenedores arriba imprimiendo en cada una de las impresoras a la vez. 
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-htop.jpg&quot; alt=&quot;htop&quot; /&gt;&lt;/p&gt;
+![htop](/assets/images/octoprint-htop.jpg)
 
-&lt;p&gt;Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizar un poco.&lt;/p&gt;
+Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizar un poco.
 
-&lt;h2 id=&quot;cómo-luce-las-impresoras-y-la-raspberry-pi&quot;&gt;¿Cómo luce las impresoras y la Raspberry Pi?&lt;/h2&gt;
+## ¿Cómo luce las impresoras y la Raspberry Pi?
 
-&lt;p&gt;Para cerrar este artículo les dejo una foto de mis impresoras conectadas a la RaspBerry Pi:&lt;/p&gt;
+Para cerrar este artículo les dejo una foto de mis impresoras conectadas a la RaspBerry Pi:
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/3dprinters.jpg&quot; alt=&quot;3D printers&quot; /&gt;&lt;/p&gt;
+![3D printers](/assets/images/3dprinters.jpg)
 
-&lt;p&gt;En la impresora más chica puede verse una caja pequeña gris que es la Raspberry Pi, junto a las dos cámaras web.&lt;/p&gt;
+En la impresora más chica puede verse una caja pequeña gris que es la Raspberry Pi, junto a las dos cámaras web.
 
-&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/guysoft/OctoPi&quot; target=&quot;_blank&quot;&gt;OctoPi&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers&quot; target=&quot;_blank&quot;&gt;Setting up OctoPrint on a Raspberry Pi for multiple printers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://youtu.be/LcA9o6OGfEg&quot; target=&quot;_blank&quot;&gt;Installing OctoPrint using Docker in Linux (video tutorial)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit&quot; target=&quot;_blank&quot;&gt;Installing OctoPrint using Docker in Linux (instructions)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;USB webcams known to work with mjpg-streamer&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters&quot; target=&quot;_blank&quot;&gt;How to distinguish between identical USB-to-serial adapters?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux&quot; target=&quot;_blank&quot;&gt;Udev Rule to discern 2 identical webcams on Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2022-04-17-paperlike-pencil-grips/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2022-04-17-paperlike-pencil-grips</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2022-04-17-paperlike-pencil-grips/">&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grip.jpg&quot; alt=&quot;PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Pencil y decidí escribir este artículo para comentarles sobre un producto que me ha sorprendido gratamente y que pienso que es una excelente mejora a considerar: &lt;strong&gt;Paper Like Pencil Grips&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;Puede que te haya pasado que al usar por mucho tiempo el Apple Pencil se te cansa la mano? Esto es algo común incluso con lápices tradicionales, y para esto ya existía una solución, los clásicos agarradores que se adaptan al lápiz para mejorar la postura de los dedos al escribir. Esto fue lo que terminó diseñando el equipo de PaperLike, pero para el Apple Pencil.&lt;/p&gt;
+# Referencias
+* [OctoPrint](https://octoprint.org){:target=&quot;_blank&quot;}
+* [OctoPi](https://github.com/guysoft/OctoPi){:target=&quot;_blank&quot;}
+* [Setting up OctoPrint on a Raspberry Pi for multiple printers](http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers){:target=&quot;_blank&quot;}
+* [Installing OctoPrint using Docker in Linux (video tutorial)](https://youtu.be/LcA9o6OGfEg){:target=&quot;_blank&quot;}
+* [Installing OctoPrint using Docker in Linux (instructions)](https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit){:target=&quot;_blank&quot;}
+* [USB webcams known to work with mjpg-streamer](https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149){:target=&quot;_bla￼nk&quot;}.
+* [How to distinguish between identical USB-to-serial adapters?](https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters){:target=&quot;_blank&quot;}
+* [Udev Rule to discern 2 identical webcams on Linux](https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux){:target=&quot;_blank&quot;}</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2022-04-17-paperlike-pencil-grips.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2022-04-17-paperlike-pencil-grips.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2022-04-17-paperlike-pencil-grips.md/">![PaperLike Pencil Grips](/assets/images/PaperLike-Pencil-Grip.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}&lt;br/&gt;
+Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Pencil y decidí escribir este artículo para comentarles sobre un producto que me ha sorprendido gratamente y que pienso que es una excelente mejora a considerar: **Paper Like Pencil Grips**.
 
-&lt;p&gt;Seguramente dirás que son unos simple agarradores y que puedes usar unos agarradores tradicionales y adaptarlos al Apple Pencil…Si, por poco dinero puedes colocarle un agarrador genérico pero hay algunas cosas que debes considerar, que ya resolvió el equipo de PaperLike y que no tendrás con un producto genérico:&lt;/p&gt;
+Puede que te haya pasado que al usar por mucho tiempo el Apple Pencil se te cansa la mano? Esto es algo común incluso con lápices tradicionales, y para esto ya existía una solución, los clásicos agarradores que se adaptan al lápiz para mejorar la postura de los dedos al escribir. Esto fue lo que terminó diseñando el equipo de PaperLike, pero para el Apple Pencil.
 
-&lt;h2 id=&quot;la-carga-magnética-del-apple-pencil&quot;&gt;La carga magnética del Apple Pencil&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/Grip-on-iPad.jpg&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+Seguramente dirás que son unos simple agarradores y que puedes usar unos agarradores tradicionales y adaptarlos al Apple Pencil...Si, por poco dinero puedes colocarle un agarrador genérico pero hay algunas cosas que debes considerar, que ya resolvió el equipo de PaperLike y que no tendrás con un producto genérico:
 
-&lt;p&gt;Esto lo consiguen gracias a que sus agarradores están diseñadas especialmente para el Apple Pencil, ya que tienen la forma del lápiz, y el lado que se usa para la carga magnética es ligeramente más delgado.&lt;/p&gt;
+## La carga magnética del Apple Pencil
+![Blink config](/assets/images/Grip-on-iPad.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}
 
-&lt;h2 id=&quot;la-postura-de-los-dedos&quot;&gt;La postura de los dedos.&lt;/h2&gt;
-&lt;p&gt;La gente de PaperLike tomaron en cuenta dos casos de borde: precisión y periodos prolongados de uso. Si, vienen dos agarradores de lápiz distintos: El primero está orientado a tener una máxima precisión al agarrar el lápiz para, por ejemplo, cuando necesitas detalles finos a la hora de dibujar. El segundo está pensado para ayudar a quienes toman notas por mucho tiempo, ideal para estudiantes universitarios.&lt;/p&gt;
+Esto lo consiguen gracias a que sus agarradores están diseñadas especialmente para el Apple Pencil, ya que tienen la forma del lápiz, y el lado que se usa para la carga magnética es ligeramente más delgado.
 
-&lt;p&gt;En mi caso particular disfruto mucho el agarrador de uso extendido (aunque hace tiempo que dejé los estudios universitarios atrás), pero estoy seguro que a los estudiantes les será de mucha utilidad, así como a los artistas (profesionales o no) les será de mucha utilidad poder tener trazos más precedidos a la hora de hacer sus creaciones.&lt;/p&gt;
+## La postura de los dedos.
+La gente de PaperLike tomaron en cuenta dos casos de borde: precisión y periodos prolongados de uso. Si, vienen dos agarradores de lápiz distintos: El primero está orientado a tener una máxima precisión al agarrar el lápiz para, por ejemplo, cuando necesitas detalles finos a la hora de dibujar. El segundo está pensado para ayudar a quienes toman notas por mucho tiempo, ideal para estudiantes universitarios.
 
-&lt;h2 id=&quot;función-de-doble-tap&quot;&gt;Función de doble tap&lt;/h2&gt;
-&lt;p&gt;El Apple Pencil tiene una segunda función que se activa haciendo un doble toque sobre la parte plana del lápiz. Con un agarrador genérico no hay forma que el doble tap funcione.  En el caso de los agarradores de lápiz PaperLike, esto lo consiguen con la parte más delgada del agarrador. Pero debo comentar que para usarlo hay que girar el lápiz para poder hacer el double tap. Esto lo uso mucho en &lt;strong&gt;GoodNotes 5&lt;/strong&gt;, y no es tan natural. De hecho el fundador del PaperLike en el video de explicación comenta que una opción es usar el agarrador con esa parte hacia arriba, pero considero que pierde la gracia ya que la forma del agarrador está diseñada para los dedos índices y el pulgar. Me parede que mejor opción es acostunbrarse a girar el lapiz antes de hacer el double tap, y volverlo a girar para contunuar escribiendo.&lt;/p&gt;
+En mi caso particular disfruto mucho el agarrador de uso extendido (aunque hace tiempo que dejé los estudios universitarios atrás), pero estoy seguro que a los estudiantes les será de mucha utilidad, así como a los artistas (profesionales o no) les será de mucha utilidad poder tener trazos más precedidos a la hora de hacer sus creaciones.
 
-&lt;h1 id=&quot;el-empaque&quot;&gt;El empaque&lt;/h1&gt;
-&lt;p&gt;Por último, me gustaría resaltar algo grato que es el empaque en el que vino. Como los agarradores las compré en una etapa temprana, los mismos vinieron en un sobre de papel, que de hecho aclaran que no es el empaque final del producto.&lt;/p&gt;
+## Función de doble tap
+El Apple Pencil tiene una segunda función que se activa haciendo un doble toque sobre la parte plana del lápiz. Con un agarrador genérico no hay forma que el doble tap funcione.  En el caso de los agarradores de lápiz PaperLike, esto lo consiguen con la parte más delgada del agarrador. Pero debo comentar que para usarlo hay que girar el lápiz para poder hacer el double tap. Esto lo uso mucho en **GoodNotes 5**, y no es tan natural. De hecho el fundador del PaperLike en el video de explicación comenta que una opción es usar el agarrador con esa parte hacia arriba, pero considero que pierde la gracia ya que la forma del agarrador está diseñada para los dedos índices y el pulgar. Me parede que mejor opción es acostunbrarse a girar el lapiz antes de hacer el double tap, y volverlo a girar para contunuar escribiendo.
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Envelop.jpg&quot; alt=&quot;Envoltorio de los PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+# El empaque
+Por último, me gustaría resaltar algo grato que es el empaque en el que vino. Como los agarradores las compré en una etapa temprana, los mismos vinieron en un sobre de papel, que de hecho aclaran que no es el empaque final del producto. 
 
-&lt;p&gt;En particular no me molesta para nada y de hecho hasta diría que debería ser la version final, una presentación sencilla y bastante amigable con el medio ambiente. Lo único que mejoraría es el material del sobre sea un poco más duro para que resista los embates del viaje, o en su defecto que las envíen en correspondencia “frágil”, ya que el envío no fue nada económico  (€ 39.99). En mi caso los míos llegaron en ese sobre un poco arrugado, y el contenido también se arrugó.&lt;/p&gt;
+![Envoltorio de los PaperLike Pencil Grips](/assets/images/PaperLike-Pencil-Grips-Envelop.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}
 
-&lt;p&gt;Otros detalles que me gustaron fueron la nota de agradecimiento que colocan en el empaqué, escrita a mano por el fundador de PaperLike (y luego impresa de manera industrial), así como un sticker muy bonito que agregan de la comunidad de artistas que usan sus productos.&lt;/p&gt;
+En particular no me molesta para nada y de hecho hasta diría que debería ser la version final, una presentación sencilla y bastante amigable con el medio ambiente. Lo único que mejoraría es el material del sobre sea un poco más duro para que resista los embates del viaje, o en su defecto que las envíen en correspondencia &quot;frágil&quot;, ya que el envío no fue nada económico  (€ 39.99). En mi caso los míos llegaron en ese sobre un poco arrugado, y el contenido también se arrugó.
+ 
+Otros detalles que me gustaron fueron la nota de agradecimiento que colocan en el empaqué, escrita a mano por el fundador de PaperLike (y luego impresa de manera industrial), así como un sticker muy bonito que agregan de la comunidad de artistas que usan sus productos.
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-thanks.jpg&quot; alt=&quot;Agradecimientos de PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+![Agradecimientos de PaperLike Pencil Grips](/assets/images/PaperLike-Pencil-Grips-thanks.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Sticker.jpg&quot; alt=&quot;Stricker de regalo PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+![Stricker de regalo PaperLike Pencil Grips](/assets/images/PaperLike-Pencil-Grips-Sticker.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}
 
-&lt;h1 id=&quot;dónde-comprar-las-agarraderas-de-paperlike&quot;&gt;¿Dónde comprar las agarraderas de PaperLike?&lt;/h1&gt;
-&lt;p&gt;Como les comenté, están en una etapa temprana,por lo que de momento el único sitio donde los encontrarás es en la tienda de PaperLike, en &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;los accesorios para iPad&lt;/a&gt; , en particular acá están publicados los &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;PaperLike Pencil Grips &lt;/a&gt;&lt;/p&gt;
+# ¿Dónde comprar las agarraderas de PaperLike?
+Como les comenté, están en una etapa temprana,por lo que de momento el único sitio donde los encontrarás es en la tienda de PaperLike, en [los accesorios para iPad](https://paperlike.com/collections/ipad-accessories){:target=&quot;_blank&quot;} , en particular acá están publicados los [PaperLike Pencil Grips ](https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set){:target=&quot;_blank&quot;}
 
-&lt;h1 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h1&gt;
-&lt;p&gt;Si necesitas un agarrador para tu Apple Pencil, ten en cuenta esta opción que ofrece la gente de PaperLike, que sin duda mejorará notablemente tu experiencia de uso en tu iPad.&lt;/p&gt;
+# Conclusión
+Si necesitas un agarrador para tu Apple Pencil, ten en cuenta esta opción que ofrece la gente de PaperLike, que sin duda mejorará notablemente tu experiencia de uso en tu iPad.
 
-&lt;h2 id=&quot;nota&quot;&gt;Nota&lt;/h2&gt;
-&lt;p&gt;Este artículo lo hice para compartir mi experiencia con los agarradores de lápiz de PaperLike, y no recibí ningún patrocinio ni tengo ninguna ganancia o participación en las ventas de los mismas.&lt;/p&gt;
+## Nota
+Este artículo lo hice para compartir mi experiencia con los agarradores de lápiz de PaperLike, y no recibí ningún patrocinio ni tengo ninguna ganancia o participación en las ventas de los mismas.
 
-&lt;p&gt;ß# Referencias&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com&quot; target=&quot;_blank&quot;&gt;Página de PaperLike&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;Accesorios para iPad&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;Agarradores de lápiz de PaperLike&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2022-01-25-ipad-pro-as-a-portable-workstation/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2022-01-25-ipad-pro-as-a-portable-workstation</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2022-01-25-ipad-pro-as-a-portable-workstation/">&lt;p&gt;&lt;img src=&quot;/assets/images/ipad-pro-2021.jpg&quot; alt=&quot;iPad Pro&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Hace un tiempo que no escribía en el blog, primero porque no encontraba algo interesante para compartir y segundo porque no había mucho tiempo de sobra (no es que ahora haya mucho tiempo de sobra pero bueno, se busca siempre un espacio para escribir unas líneas).&lt;/p&gt;
+ß# Referencias
+* [Página de PaperLike](https://paperlike.com){:target=&quot;_blank&quot;}
+* [Accesorios para iPad](https://paperlike.com/collections/ipad-accessories){:target=&quot;_blank&quot;}
+* [Agarradores de lápiz de PaperLike](https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set){:target=&quot;_blank&quot;}</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2022-01-25-ipad-pro-as-a-portable-workstation.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2022-01-25-ipad-pro-as-a-portable-workstation.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2022-01-25-ipad-pro-as-a-portable-workstation.md/">![iPad Pro](/assets/images/ipad-pro-2021.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}&lt;br/&gt;
+Hace un tiempo que no escribía en el blog, primero porque no encontraba algo interesante para compartir y segundo porque no había mucho tiempo de sobra (no es que ahora haya mucho tiempo de sobra pero bueno, se busca siempre un espacio para escribir unas líneas).
 
-&lt;p&gt;Lo cierto es que hace poco me hice con un iPad Pro de 11” y dentro de las cosas que estuve probando fue la posibilidad de usarlo como equipo de trabajo ligero, es decir, un equipo que pueda tener a la mano en mi mesa de noche sin que sea una computadora completa.&lt;/p&gt;
+Lo cierto es que hace poco me hice con un iPad Pro de 11&quot; y dentro de las cosas que estuve probando fue la posibilidad de usarlo como equipo de trabajo ligero, es decir, un equipo que pueda tener a la mano en mi mesa de noche sin que sea una computadora completa.
 
-&lt;p&gt;Si bien el iPad tiene muchas ventajas y cosas que me gustaron, el termino “Pro” no da como para tener una terminal completa de un sistema operativo o tener una &lt;a href=&quot;https://youtu.be/LrLDKYFyLMM&quot; target=&quot;_blank&quot;&gt;máquina virtual funcional&lt;/a&gt;, por lo que decidí investigar a ver si existía alguna opción y de las cosas que más tuvieron sentido para mí fue la de usar el iPad Pro como un cliente que se conecta a alguna otra parte donde si pueda tener acceso a un sistema operativo completo.&lt;/p&gt;
+Si bien el iPad tiene muchas ventajas y cosas que me gustaron, el termino &quot;Pro&quot; no da como para tener una terminal completa de un sistema operativo o tener una [máquina virtual funcional](https://youtu.be/LrLDKYFyLMM){:target=&quot;_blank&quot;}, por lo que decidí investigar a ver si existía alguna opción y de las cosas que más tuvieron sentido para mí fue la de usar el iPad Pro como un cliente que se conecta a alguna otra parte donde si pueda tener acceso a un sistema operativo completo.
 
-&lt;p&gt;De hecho en un &lt;a href=&quot;https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/&quot; target=&quot;_blank&quot;&gt;artículo&lt;/a&gt; que conseguí sugerían la opción de usar un Digital Ocean Droplet para tener una máquina virtual en la nube y desde ahí poder trabajar. Esta opción no es mala, pero teniendo una estación de trabajo en casa no vi la necesidad de irme a la nube.&lt;/p&gt;
+De hecho en un [artículo](https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/){:target=&quot;_blank&quot;} que conseguí sugerían la opción de usar un Digital Ocean Droplet para tener una máquina virtual en la nube y desde ahí poder trabajar. Esta opción no es mala, pero teniendo una estación de trabajo en casa no vi la necesidad de irme a la nube.
 
-&lt;p&gt;Siguiendo algunas de estas sugerencias terminé instalando &lt;strong&gt;Blink Shell&lt;/strong&gt; que viene con soporte para &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;, y usando &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; en mi laptop con Linux como sitio remoto pude hacerlo. A continuación les comento el detalle de esta configuración.&lt;/p&gt;
+Siguiendo algunas de estas sugerencias terminé instalando **Blink Shell** que viene con soporte para `mosh`, y usando `tmux` en mi laptop con Linux como sitio remoto pude hacerlo. A continuación les comento el detalle de esta configuración.
 
-&lt;h1 id=&quot;blink-shell-ssh--mosh&quot;&gt;Blink Shell (ssh / mosh)&lt;/h1&gt;
+# Blink Shell (ssh / mosh)
 
-&lt;p&gt;Lo primero que tuve que buscar fue un cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; decente para iPad. Dentro de las recomendaciones recurrentes en Internet &lt;strong&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Blink Shell&lt;/a&gt;&lt;/strong&gt; aparecía como una opción. En principio el hecho de que haya que comprarlo sin  un trial no gustaba pero como insistían en que era la mejor opción decidí probarlo (USD 19,99 a la fecha de publicación de este post).&lt;/p&gt;
+Lo primero que tuve que buscar fue un cliente `ssh` decente para iPad. Dentro de las recomendaciones recurrentes en Internet **[Blink Shell](https://blink.sh){:target=&quot;_blank&quot;}** aparecía como una opción. En principio el hecho de que haya que comprarlo sin  un trial no gustaba pero como insistían en que era la mejor opción decidí probarlo (USD 19,99 a la fecha de publicación de este post).
 
-&lt;p&gt;Tengo que decir que &lt;strong&gt;Blink Shell&lt;/strong&gt; es muy pero muy bueno, está diseñado para dispositivos móviles y tiene soporte para &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;.&lt;/p&gt;
+Tengo que decir que **Blink Shell** es muy pero muy bueno, está diseñado para dispositivos móviles y tiene soporte para `mosh`.
 
-&lt;h2 id=&quot;mosh&quot;&gt;Mosh&lt;/h2&gt;
+## Mosh
 
-&lt;p&gt;Te estarás preguntando como en su momento lo hice yo ¿Qué es &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;? La &lt;a href=&quot;https://mosh.org&quot; target=&quot;_blank&quot;&gt;página de mosh&lt;/a&gt; dice lo siguiente:&lt;/p&gt;
+Te estarás preguntando como en su momento lo hice yo ¿Qué es `mosh`? La [página de mosh](https://mosh.org){:target=&quot;_blank&quot;} dice lo siguiente:
 
-&lt;blockquote&gt;
-  &lt;p&gt;Aplicación de terminal remoto que permite la itinerancia, admite conectividad intermitente y proporciona eco local inteligente y edición de línea de las pulsaciones de teclado del usuario.&lt;/p&gt;
-&lt;/blockquote&gt;
+&gt; Aplicación de terminal remoto que permite la itinerancia, admite conectividad intermitente y proporciona eco local inteligente y edición de línea de las pulsaciones de teclado del usuario.
 
-&lt;p&gt;¿Sigues sin entender para qué sirve &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; como me pasaba a mí? Es como &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt; pero sin tener que aprender comandos para crear y manejar sesiones, además  por debajo utliza &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;.  En otras palabras, vas a tener la posibilidad de continuar con tu sesión de trabajo donde la dejaste, o si por ejemplo se te cortó la conexión y logras conectarte de nuevo con otra red.&lt;/p&gt;
+¿Sigues sin entender para qué sirve `mosh` como me pasaba a mí? Es como `screen` pero sin tener que aprender comandos para crear y manejar sesiones, además  por debajo utliza `ssh`.  En otras palabras, vas a tener la posibilidad de continuar con tu sesión de trabajo donde la dejaste, o si por ejemplo se te cortó la conexión y logras conectarte de nuevo con otra red.
 
-&lt;p&gt;Como por debajo se seguimos teniendo &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;, para usar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; la sintaxis es prácticamente la misma.  Es decir, si antes te conectabas con &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; a un servidor de esta manera:&lt;/p&gt;
+Como por debajo se seguimos teniendo `ssh`, para usar `mosh` la sintaxis es prácticamente la misma.  Es decir, si antes te conectabas con `ssh` a un servidor de esta manera:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh lgallard@192.168.1.65
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
+ssh lgallard@192.168.1.65
+```
 
-&lt;p&gt;Ahora con &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; lo haces de esta forma:&lt;/p&gt;
+Ahora con `mosh` lo haces de esta forma:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh lgallard@192.168.1.65
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
+mosh lgallard@192.168.1.65
+```
 
-&lt;p&gt;Parece sencillo el cambio y con esto ganamos que al cerrar nuestro iPad o el equipo donde estanos usando el cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; vamos a poder recuperar mágicamente la sesión de trabajo al volvernos a conectar.&lt;/p&gt;
+Parece sencillo el cambio y con esto ganamos que al cerrar nuestro iPad o el equipo donde estanos usando el cliente `mosh` vamos a poder recuperar mágicamente la sesión de trabajo al volvernos a conectar.
 
-&lt;p&gt;Puedes configurar las opciones de &lt;strong&gt;Blink Shell&lt;/strong&gt; accediendo a un asistente de configuración para tener distintos hosts y facilitar la conexión con un nombre en vez de una dirección IP. Para acceder a este asistente basta con escribir &lt;code class=&quot;highlighter-rouge&quot;&gt;config&lt;/code&gt; desde el terminal:&lt;/p&gt;
+Puedes configurar las opciones de **Blink Shell** accediendo a un asistente de configuración para tener distintos hosts y facilitar la conexión con un nombre en vez de una dirección IP. Para acceder a este asistente basta con escribir `config` desde el terminal:
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/Blink_config.png&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+![Blink config](/assets/images/Blink_config.png){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}
 
-&lt;p&gt;En mi caso ahora me puedo conectar a mi estación de trabajo de la siguiente forma:&lt;/p&gt;
+En mi caso ahora me puedo conectar a mi estación de trabajo de la siguiente forma:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh dauntless
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
+mosh dauntless
+```
 
-&lt;h2 id=&quot;mosh-lo-malo&quot;&gt;Mosh, lo malo&lt;/h2&gt;
+## Mosh, lo malo
 
-&lt;p&gt;El gran punto en contra de &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; es que no puedes hacer scroll del terminal, es decir, si necesitas consultar la salida de comandos que hayas ejecutado previamente y que ya no estén en la pantalla, no los vas a poder ver. Esto para mí era un gran problema porque al usar &lt;code class=&quot;highlighter-rouge&quot;&gt;terraform&lt;/code&gt; perdía los planes con los cambios a ser aplicados.&lt;/p&gt;
+El gran punto en contra de `mosh` es que no puedes hacer scroll del terminal, es decir, si necesitas consultar la salida de comandos que hayas ejecutado previamente y que ya no estén en la pantalla, no los vas a poder ver. Esto para mí era un gran problema porque al usar `terraform` perdía los planes con los cambios a ser aplicados.
 
-&lt;p&gt;Esta es la forma en que trabaja &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;, para tener un óptimo rendimiento hacen un rendering del texto. Hay un &lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;issue abierto&lt;/a&gt; de varios años donde los desarrolladores comentan que está a modo de referencia pero que no tienen ninguna intención de implementarlo. ¿Entonces no hay solución? Si, &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;.&lt;/p&gt;
+Esta es la forma en que trabaja `mosh`, para tener un óptimo rendimiento hacen un rendering del texto. Hay un [issue abierto](https://github.com/mobile-shell/mosh/issues/122){:target=&quot;_blank&quot;} de varios años donde los desarrolladores comentan que está a modo de referencia pero que no tienen ninguna intención de implementarlo. ¿Entonces no hay solución? Si, `tmux`.
 
-&lt;h1 id=&quot;qué-es-tmux&quot;&gt;¿Qué es tmux?&lt;/h1&gt;
+# ¿Qué es tmux?
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; es una herramienta que permite tener varias terminales abiertas (o ventanas) para que sean accedidas y controladas desde un solo terminal como haríamos con &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;.&lt;/p&gt;
+`tmux` es una herramienta que permite tener varias terminales abiertas (o ventanas) para que sean accedidas y controladas desde un solo terminal como haríamos con `screen`.  
 
-&lt;p&gt;Debes instalar &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; en el equipo donde deseamos iniciar sesión y una vez instalado basta con ejecutar esto desde el cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; (el iPad Pro en mi caso):&lt;/p&gt;
+Debes instalar `tmux` en el equipo donde deseamos iniciar sesión y una vez instalado basta con ejecutar esto desde el cliente `mosh` (el iPad Pro en mi caso):
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh danuntless -- tmux new  -s terminal-1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
+mosh danuntless -- tmux new  -s terminal-1
+```
 
-&lt;p&gt;De esta forma creamos una sessión nueva cuyo nombre es &lt;strong&gt;terminal-1&lt;/strong&gt;. Luego para acceder a esta sesión posteriormente debemos ejecutar lo siguiente:&lt;/p&gt;
+De esta forma creamos una sessión nueva cuyo nombre es **terminal-1**. Luego para acceder a esta sesión posteriormente debemos ejecutar lo siguiente:
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mosh danuntless -- tmux a  -t terminal-1&lt;/code&gt;&lt;/p&gt;
+`mosh danuntless -- tmux a  -t terminal-1`
 
-&lt;h2 id=&quot;activar-scrolling--en-tmux&quot;&gt;Activar scrolling  en tmux&lt;/h2&gt;
+## Activar scrolling  en tmux
 
-&lt;p&gt;En la estación de trabajo remota se debe configurar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; para tener el scrroling con &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;, esto se consigue editando el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.tmux.conf&lt;/code&gt; con este contenido:&lt;/p&gt;
+En la estación de trabajo remota se debe configurar `mosh` para tener el scrroling con `tmux`, esto se consigue editando el archivo `~/.tmux.conf` con este contenido:
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new-session
+```
+new-session
 set -g history-limit 30000
 set -g mouse on
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;h2 id=&quot;blink--ssh---mosh--tmux--eh&quot;&gt;Blink + ssh  + mosh + tmux … eh?&lt;/h2&gt;
+## Blink + ssh  + mosh + tmux ... eh?
 
-&lt;p&gt;“Espera un momento… &lt;strong&gt;Blink + ssh + mosh +  tmux&lt;/strong&gt;, no es medio complicado todo? No es mejor usar &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; con &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;? “. Sí, es una alternativa pero con &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; no te reconectarás automáticamente y tendrás que loguearte nuevamente si por ejemplo cierras el iPad, si tu dirección IP cambia por algún motivo (por ejemplo cambias de WiFI a línea telefónica) o si la sesión &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; expira.&lt;/p&gt;
+&quot;Espera un momento... **Blink + ssh + mosh +  tmux**, no es medio complicado todo? No es mejor usar `ssh` con `screen`? &quot;. Sí, es una alternativa pero con `ssh` no te reconectarás automáticamente y tendrás que loguearte nuevamente si por ejemplo cierras el iPad, si tu dirección IP cambia por algún motivo (por ejemplo cambias de WiFI a línea telefónica) o si la sesión `ssh` expira.
 
-&lt;p&gt;Reconozco que hay una curva de aprendizaje con &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; pero una vez superada te va a encantar y te preguntarás por qué no usaste antes &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;&lt;/p&gt;
+Reconozco que hay una curva de aprendizaje con `tmux` pero una vez superada te va a encantar y te preguntarás por qué no usaste antes `mosh` y `tmux`
 
-&lt;h2 id=&quot;más-sobre-tmux&quot;&gt;Más sobre tmux&lt;/h2&gt;
+## Más sobre tmux
 
-&lt;p&gt;Si quieres aprender a usar &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; te dejo una &lt;a href=&quot;https://tmuxcheatsheet.com&quot; target=&quot;_blank&quot;&gt;cheat sheet&lt;/a&gt; con los comandos que puedes usar. En particular encontré muy útil la división en paneles y el uso del zoom entre ellos, pero debo admitir que copiar texto entre paneles es algo complicado en el iPad y a veces prefiero usar &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; para esto, pero seguro ya le encontraré la vuelta.&lt;/p&gt;
+Si quieres aprender a usar `tmux` te dejo una [cheat sheet](https://tmuxcheatsheet.com){:target=&quot;_blank&quot;} con los comandos que puedes usar. En particular encontré muy útil la división en paneles y el uso del zoom entre ellos, pero debo admitir que copiar texto entre paneles es algo complicado en el iPad y a veces prefiero usar `vim` para esto, pero seguro ya le encontraré la vuelta.
 
-&lt;h1 id=&quot;palabras-finales&quot;&gt;Palabras finales&lt;/h1&gt;
+# Palabras finales
 
-&lt;p&gt;Si bien acá comento la experiencia con el iPad Pro, todo esto se puede replicar en un iPad Air e incluso usar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; desde otras estaciones de trabajo con Linux o Windows.&lt;/p&gt;
+Si bien acá comento la experiencia con el iPad Pro, todo esto se puede replicar en un iPad Air e incluso usar `mosh` y `tmux` desde otras estaciones de trabajo con Linux o Windows.
 
-&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
+# Referencias
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://youtu.be/LrLDKYFyLMM&quot; target=&quot;_blank&quot;&gt;Run ANY OS on iPad or iPhone! - YouTube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/&quot; target=&quot;_blank&quot;&gt;Using the iPad Pro as my development machine&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Blink Shell&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Mosh&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://tmuxcheatsheet.com&quot;&gt;Tmux cheat sheet&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;mosh prevents the use of scrollback&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2021-06-15-helm3-local-repo/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2021-06-15-helm3-local-repo</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2021-06-15-helm3-local-repo/">&lt;p&gt;&lt;img src=&quot;/assets/images/helm.jpg&quot; alt=&quot;Repositorio local para Helm 3&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;
-En Helm 3, el soporte del comando &lt;strong&gt;helm serve&lt;/strong&gt; se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes instalar el complemento &lt;strong&gt;helm servecm&lt;/strong&gt;, que usa &lt;strong&gt;ChartMuseum&lt;/strong&gt; para publicar los charts en tu medio de almacenamiento local (también se admiten otros medios de almacenamientos, como los buckets de S3).&lt;/p&gt;
+* [Run ANY OS on iPad or iPhone! - YouTube](https://youtu.be/LrLDKYFyLMM){:target=&quot;_blank&quot;}
+* [Using the iPad Pro as my development machine](https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/){:target=&quot;_blank&quot;}
+* [Blink Shell](https://blink.sh){:target=&quot;_blank&quot;}
+* [Mosh](https://blink.sh){:target=&quot;_blank&quot;}
+* [Tmux cheat sheet](https://tmuxcheatsheet.com)
+* [mosh prevents the use of scrollback](https://github.com/mobile-shell/mosh/issues/122){:target=&quot;_blank&quot;}</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2021-06-15-helm3-local-repo.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2021-06-15-helm3-local-repo.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2021-06-15-helm3-local-repo.md/">![Repositorio local para Helm 3](/assets/images/helm.jpg){:style=&quot;display:block; margin-left:auto; margin-right:auto&quot;}
+En Helm 3, el soporte del comando **helm serve** se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes instalar el complemento **helm servecm**, que usa **ChartMuseum** para publicar los charts en tu medio de almacenamiento local (también se admiten otros medios de almacenamientos, como los buckets de S3).
 
-&lt;p&gt;En esta artículo aprenderá cómo instalar y publicar un repositorio local en Helm 3.&lt;/p&gt;
+En esta artículo aprenderá cómo instalar y publicar un repositorio local en Helm 3.
 
-&lt;ol&gt;
-  &lt;li&gt;Instala &lt;strong&gt;ChartMuseum&lt;/strong&gt;&lt;br /&gt;
-En primer lugar, debes instalar &lt;strong&gt;ChartMuseum&lt;/strong&gt;. En la página del proyecto encontrará diferentes formas de instalarlo, pero yo lo instalo como una aplicación Go de la siguiente manera:
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;GO111MODULE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;on&quot;&lt;/span&gt; go get github.com/helm/chartmuseum@v0.13.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Instala  &lt;strong&gt;helm servecm plugin&lt;/strong&gt;&lt;br /&gt;&lt;/p&gt;
 
-    &lt;p&gt;&lt;br /&gt;Entonces necesitas instalar &lt;strong&gt;servecm&lt;/strong&gt; como un complemento de helm:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm plugin install https://github.com/jdolitsky/helm-servecm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Instala &lt;strong&gt;helm push plugin&lt;/strong&gt;&lt;br /&gt;
-Para alojar tus charts, usarás &lt;strong&gt;ChartMuseum&lt;/strong&gt; y &lt;strong&gt;helm servecm&lt;/strong&gt; pluing, pero aún tendrás que publicarlos en &lt;strong&gt;ChartMuseum&lt;/strong&gt;. Puedes hacerlo manualmente o usar otro complemento llamado &lt;strong&gt;helm push&lt;/strong&gt; que lo hace por ti:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+1. Instala **ChartMuseum**&lt;br/&gt;
+   En primer lugar, debes instalar **ChartMuseum**. En la página del proyecto encontrará diferentes formas de instalarlo, pero yo lo instalo como una aplicación Go de la siguiente manera:
+   ```bash
+   GO111MODULE=&quot;on&quot; go get github.com/helm/chartmuseum@v0.13.1
+   ```
+   
+2. Instala  **helm servecm plugin**&lt;br/&gt;
 
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm plugin install https://github.com/chartmuseum/helm-push.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Agrega el repo local repo en helm:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+   &lt;br/&gt;Entonces necesitas instalar **servecm** como un complemento de helm:&lt;br/&gt;&lt;br/&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm repo add local http://127.0.0.1:8879/charts
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Corre &lt;strong&gt;helm servecm plugin&lt;/strong&gt;:&lt;/p&gt;
+   ```bash
+   helm plugin install https://github.com/jdolitsky/helm-servecm
+   ```
 
-    &lt;p&gt;&lt;br /&gt;El siguiente paso es correr el plugin &lt;strong&gt;helm servecm&lt;/strong&gt;:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+3. Instala **helm push plugin**&lt;br/&gt;
+   Para alojar tus charts, usarás **ChartMuseum** y **helm servecm** pluing, pero aún tendrás que publicarlos en **ChartMuseum**. Puedes hacerlo manualmente o usar otro complemento llamado **helm push** que lo hace por ti:&lt;br/&gt;&lt;br/&gt;
 
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm servecm &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8879 &lt;span class=&quot;nt&quot;&gt;--storage&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--storage-local-rootdir&lt;/span&gt; ./local &lt;span class=&quot;nt&quot;&gt;--context-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/charts 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+   ```bash
+   helm plugin install https://github.com/chartmuseum/helm-push.git
+   ```
 
-    &lt;p&gt;Ahora puedes publicar tus charts en  http://127.0.0.1:8879/charts&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Publica tu chart en tu repositorio local:&lt;/p&gt;
+4. Agrega el repo local repo en helm:&lt;br/&gt;&lt;br/&gt;
 
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm push your-chart &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+   ```
+   helm repo add local http://127.0.0.1:8879/charts
+   ```
 
-&lt;p&gt;En este punto ya podrás utilizar tus charts locales en tu clúster ejecutando:&lt;/p&gt;
+5. Corre **helm servecm plugin**:
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm install  your-chart
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+   &lt;br/&gt;El siguiente paso es correr el plugin **helm servecm**:&lt;br/&gt;&lt;br/&gt;
 
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://helm.sh/docs/faq/#removal-of-helm-serve&quot; target=&quot;_blank&quot;&gt;Removal of helm serve&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/jdolitsky/helm-servecm&quot; target=&quot;_blank&quot;&gt;helm servecm plugin&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/helm/chartmuseum&quot; target=&quot;_blank&quot;&gt;ChartMuseum&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/chartmuseum/helm-push&quot; target=&quot;_blank&quot;&gt;helm push plugin&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2021-04-15-terraform-module-for-aws-ecr/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2021-04-15-terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2021-04-15-terraform-module-for-aws-ecr/">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Les comparto acá otro módulo de Terraform que publiqué como código Open Source, el cual permite crear registries en AWS ECR.&lt;/p&gt;
+   ```bash
+   helm servecm --port=8879 --storage local --storage-local-rootdir ./local --context-path=/charts 
+   ```
 
-&lt;p&gt;Puedes ver el módulo &lt;strong&gt;terraform-aws-ecr&lt;/strong&gt; en el &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/ecr/aws&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; o clonarlo desde &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr.git&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+   Ahora puedes publicar tus charts en  http://127.0.0.1:8879/charts
 
-&lt;p&gt;Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:&lt;/p&gt;
+6. Publica tu chart en tu repositorio local:
 
-&lt;p&gt;&lt;img src=&quot;https://lgallardo.com/images/terraform.jpg&quot; alt=&quot;Terraform&quot; target=&quot;_blank&quot; /&gt;&lt;/p&gt;
+   ```bash
+   helm push your-chart local
+   ```
 
-&lt;h1 id=&quot;terraform-aws-ecr&quot;&gt;terraform-aws-ecr&lt;/h1&gt;
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/ecr/&quot; target=&quot;_blank&quot;&gt;AWS ECR&lt;/a&gt; (Elastic Container Registry) which is a fully-managed Docker container registry.&lt;/p&gt;
+En este punto ya podrás utilizar tus charts locales en tu clúster ejecutando:
 
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-&lt;p&gt;You can use this module to create an ECR registry using few parameters (simple example) or define in detail every aspect of the registry (complete example).&lt;/p&gt;
+```bash
+helm install  your-chart
+```
 
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/tree/master/examples&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; for the  &lt;strong&gt;simple&lt;/strong&gt; and the &lt;strong&gt;complete&lt;/strong&gt; snippets.&lt;/p&gt;
+## Referencias
+* [Removal of helm serve](https://helm.sh/docs/faq/#removal-of-helm-serve){:target=&quot;_blank&quot;}
+* [helm servecm plugin](https://github.com/jdolitsky/helm-servecm){:target=&quot;_blank&quot;}
+* [ChartMuseum](https://github.com/helm/chartmuseum){:target=&quot;_blank&quot;}
+* [helm push plugin](https://github.com/chartmuseum/helm-push){:target=&quot;_blank&quot;}</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2021-04-15-terraform-module-for-aws-ecr.md/" rel="alternate" type="text/html" title="" /><published>2025-06-09T07:19:12-05:00</published><updated>2025-06-09T07:19:12-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2021-04-15-terraform-module-for-aws-ecr.md</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2021-04-15-terraform-module-for-aws-ecr.md/">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;&lt;br/&gt;
+Les comparto acá otro módulo de Terraform que publiqué como código Open Source, el cual permite crear registries en AWS ECR.
 
-&lt;h3 id=&quot;simple-example&quot;&gt;Simple example&lt;/h3&gt;
-&lt;p&gt;This example creates an ECR registry using few parameters&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;ecr&quot; {
+Puedes ver el módulo **terraform-aws-ecr** en el [Terraform Registry](https://registry.terraform.io/modules/lgallard/ecr/aws){:target=&quot;_blank&quot;} o clonarlo desde [Github](https://github.com/lgallard/terraform-aws-ecr.git){:target=&quot;_blank&quot;}.
+
+Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:
+
+![Terraform](https://lgallardo.com/images/terraform.jpg){:target=&quot;_blank&quot;}
+
+# terraform-aws-ecr
+Terraform module to create [AWS ECR](https://aws.amazon.com/ecr/){:target=&quot;_blank&quot;} (Elastic Container Registry) which is a fully-managed Docker container registry.
+
+## Usage
+You can use this module to create an ECR registry using few parameters (simple example) or define in detail every aspect of the registry (complete example).
+
+Check the [examples](https://github.com/lgallard/terraform-aws-ecr/tree/master/examples){:target=&quot;_blank&quot;} for the  **simple** and the **complete** snippets.
+
+### Simple example
+This example creates an ECR registry using few parameters
+
+```
+module &quot;ecr&quot; {
 
   source = &quot;lgallard/ecr/aws&quot;
 
@@ -828,12 +846,13 @@ Les comparto acá otro módulo de Terraform que publiqué como código Open Sour
   }
 
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+```
 
-&lt;h3 id=&quot;complete-example&quot;&gt;Complete example&lt;/h3&gt;
-&lt;p&gt;In this example the register is defined in detailed.&lt;/p&gt;
+### Complete example
+In this example the register is defined in detailed.
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;ecr&quot; {
+```
+module &quot;ecr&quot; {
 
   source = &quot;lgallard/ecr/aws&quot;
 
@@ -844,7 +863,7 @@ Les comparto acá otro módulo de Terraform que publiqué como código Open Sour
 
 
   # Note that currently only one policy may be applied to a repository.
-  policy = &amp;lt;&amp;lt;EOF
+  policy = &lt;&lt;EOF
 {
     &quot;Version&quot;: &quot;2008-10-17&quot;,
     &quot;Statement&quot;: [
@@ -875,7 +894,7 @@ EOF
 
   # Only one lifecycle policy can be used per repository.
   # To apply multiple rules, combined them in one policy JSON.
-  lifecycle_policy = &amp;lt;&amp;lt;EOF
+  lifecycle_policy = &lt;&lt;EOF
 {
     &quot;rules&quot;: [
         {
@@ -917,225 +936,39 @@ EOF
 
 }
 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;providers&quot;&gt;Providers&lt;/h2&gt;
+```
+## Providers
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Version&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;aws&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+| Name | Version |
+|------|---------|
+| aws | n/a |
 
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
+## Inputs
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;encryption_type&lt;/td&gt;
-      &lt;td&gt;The encryption type to use for the repository. Valid values are &lt;code class=&quot;highlighter-rouge&quot;&gt;AES256&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;AES256&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;image_scanning_configuration&lt;/td&gt;
-      &lt;td&gt;Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;image_tag_mutability&lt;/td&gt;
-      &lt;td&gt;The tag mutability setting for the repository. Must be one of: &lt;code class=&quot;highlighter-rouge&quot;&gt;MUTABLE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;IMMUTABLE&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;MUTABLE&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;kms_key&lt;/td&gt;
-      &lt;td&gt;The ARN of the KMS key to use when encryption_type is &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;. If not specified when encryption_type is &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;, uses a new KMS key. Otherwise, uses the default AWS managed key for ECR.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lifecycle_policy&lt;/td&gt;
-      &lt;td&gt;Manages the ECR repository lifecycle policy&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;name&lt;/td&gt;
-      &lt;td&gt;Name of the repository.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;policy&lt;/td&gt;
-      &lt;td&gt;Manages the ECR repository policy&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;scan_on_push&lt;/td&gt;
-      &lt;td&gt;Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;A mapping of tags to assign to the resource.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;timeouts&lt;/td&gt;
-      &lt;td&gt;Timeouts map.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;timeouts_delete&lt;/td&gt;
-      &lt;td&gt;How long to wait for a repository to be deleted.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| encryption\_type | The encryption type to use for the repository. Valid values are `AES256` or `KMS` | `string` | `&quot;AES256&quot;` | no |
+| image\_scanning\_configuration | Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning. | `map` | `{}` | no |
+| image\_tag\_mutability | The tag mutability setting for the repository. Must be one of: `MUTABLE` or `IMMUTABLE`. | `string` | `&quot;MUTABLE&quot;` | no |
+| kms\_key | The ARN of the KMS key to use when encryption\_type is `KMS`. If not specified when encryption\_type is `KMS`, uses a new KMS key. Otherwise, uses the default AWS managed key for ECR. | `string` | n/a | no |
+| lifecycle\_policy | Manages the ECR repository lifecycle policy | `string` | n/a | yes |
+| name | Name of the repository. | `string` | n/a | yes |
+| policy | Manages the ECR repository policy | `string` | n/a | yes |
+| scan\_on\_push | Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false). | `bool` | `true` | no |
+| tags | A mapping of tags to assign to the resource. | `map(string)` | `{}` | no |
+| timeouts | Timeouts map. | `map` | `{}` | no |
+| timeouts\_delete | How long to wait for a repository to be deleted. | `string` | n/a | no |
 
-&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
+## Outputs
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;arn&lt;/td&gt;
-      &lt;td&gt;Full ARN of the repository&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;name&lt;/td&gt;
-      &lt;td&gt;The name of the repository.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;registry_id&lt;/td&gt;
-      &lt;td&gt;The registry ID where the repository was created.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;repository_url&lt;/td&gt;
-      &lt;td&gt;The URL of the repository (in the form &lt;code class=&quot;highlighter-rouge&quot;&gt;aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName&lt;/code&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+| Name | Description |
+|------|-------------|
+| arn | Full ARN of the repository |
+| name | The name of the repository. |
+| registry\_id | The registry ID where the repository was created. |
+| repository\_url | The URL of the repository (in the form `aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName`) |
 
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+## References
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/ecr/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/es/_i18n/es/2020-11-23-certified-kubernetes-administrator-cka/" rel="alternate" type="text/html" title="" /><published>2025-06-09T01:47:54-05:00</published><updated>2025-06-09T01:47:54-05:00</updated><id>https://lgallardo.com/es/_i18n/es/2020-11-23-certified-kubernetes-administrator-cka</id><content type="html" xml:base="https://lgallardo.com/es/_i18n/es/2020-11-23-certified-kubernetes-administrator-cka/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Este artículo describe my experiencia y recomendacion para afrontar el examen &lt;strong&gt;Certified Kubernetes Administrator (CKA)&lt;/strong&gt; elaborado por The Linux Foundation.&lt;/p&gt;
-
-&lt;h1 id=&quot;el-examen&quot;&gt;El examen&lt;/h1&gt;
-
-&lt;p&gt;El examen es 100% práctico con 20 preguntas que se deben resolver en 2 horas, con un supervisor (proctor) que verifica que estés solo durante el examen, así como que cumplas todas &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;las reglas&lt;/a&gt;.
-Por ejemplo en mi caso el supervidor me pidió que le mostrara la habitación con una vista 360º, y que le mostrata debajo de mi escritorio. También me pedía de tanto en tanto que le mostrara mis manos cuando realizaba el examen.&lt;/p&gt;
-
-&lt;p&gt;Primero que nada, el examen abarca más que el CKAD en términos de complejidad. Teencontrarás con retos más difíciles, tales como arreglar un cluster roto o detectar por qué un servicio no está corriendo apropiadamente y hacer que funcione nuevamente.&lt;/p&gt;
-
-&lt;p&gt;En mi caso hubo pocas preguntas fáciles y diría que la mayoría eran de mediana o mayor dificultad, por ende ve preparado! Debes manejar muy bien tu tiempo. La preguntas se te mostrarán en un panel del lado izquierdo y tendrás acceso a un terminal donde deberás ejecutar las órdenes para resolverlas.&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/exam_ui.jpg&quot; alt=&quot;Exam UI&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Habrán preguntas para crear recursos y otras para identificar y resolver problemas (troubleshooting &amp;amp; fixing). Podrás copiar y pegar desde las instrucciones, además de tener acceso a un lugar para notas, por ejemplo para llevar el conteo de las preguntas pendientes.&lt;/p&gt;
-
-&lt;p&gt;Podrás consultar la documentación de Kubernetes desde estos sitios h&lt;a href=&quot;https://kubernetes.io/docs/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/docs/&lt;/a&gt;, &lt;a href=&quot;https://github.com/kubernetes/&quot; target=&quot;_blank&quot;&gt;https://github.com/kubernetes/&lt;/a&gt;, &lt;a href=&quot;https://kubernetes.io/blog/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/blog/&lt;/a&gt;,, abriendo una y solo uno pestaña adicional al examen.&lt;/p&gt;
-
-&lt;p&gt;El examen lo puedes presentar con Chrome, por lo que de los sitios mencionados arriba puedes acceder desde tus marcadores (sí, está permitido).&lt;/p&gt;
-
-&lt;h1 id=&quot;mi-experiencia&quot;&gt;Mi experiencia&lt;/h1&gt;
-
-&lt;p&gt;Con este examen no tuve ningún inconveniente (mira mi experiencia con el examen CKAD). Lo que si es que no tenía un reloj para llevar el tiempo en la interfaz del examen sino una barra de progreso que en ocasiones no estaba, pero esta vez estaba consiente del tiempo. El proctor solo me interrumpió 15 minutos antes de finalizar el examen para indicarme que casi había finalizado el tiempo.&lt;/p&gt;
-
-&lt;p&gt;Fui con muchas expectativas, pero esta vez referente a la dificultad del examen.&lt;/p&gt;
-
-&lt;h1 id=&quot;cómo-prepararse&quot;&gt;¿Cómo prepararse?&lt;/h1&gt;
-
-&lt;p&gt;Existen varios recursos gratuitos y otros pagos, todos válidos para prepararse, pero es fundamental tener experiencia práctica. Listo algunos de ellos:&lt;/p&gt;
-
-&lt;h2 id=&quot;libros&quot;&gt;Libros&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton: This book is good for an overview of Kubernetes, and is an extension of Nigel’s course (see below).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;: Este libro está bueno para tener una vista general de Kubernetes, y es una extensión del curso de Nigel (ver más abajo).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;cursos-en-línea&quot;&gt;Cursos en línea&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;: Este curso está muy bien diseñado y explica en detalle y con muchas animaciones los conceptos necesarios para aprender a desplegar aplicaciones en un cluster de Kubernetes. Adicionalmente da acceso a una plataforma llamada &lt;em&gt;&lt;strong&gt;Kloud Kode&lt;/strong&gt;&lt;/em&gt; creada con &lt;em&gt;&lt;strong&gt;Teachable&lt;/strong&gt;&lt;/em&gt; y con entornos de &lt;em&gt;&lt;strong&gt;Katacoda&lt;/strong&gt;&lt;/em&gt; diseñados para cada tema tratado, dos laboratorios tipo examen (con un  grado de dificultad alto) y dos examenes para practicar y preparase para trabajar bajo la presión del examen real.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;: Si tienes una suscripción de LinuxAcademy puedes seguir este curso. Ten en cuenta dos cosas: 1) Se  enfocan en editar los yamls y poco en cómo generarlos. 2) Los exámenes que tienen para practicar no son tan difíciles y pueden resultar insuficientes para aprobar sin haber practicado más allá de estos. Es recomendable hacer los laboratorios, los exámenes y otras preguntas para ejercitarse (ver abajo)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;: Este curso es para tener una visión general de Kubernetes, por ejemplo de su arquitectura (API Server, Kubelet, etc) así como para dar los primeros pasos en despliegues de aplicaciones. No incluye laboratorios prácticos.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;entornos-para-prácticar&quot;&gt;Entornos para prácticar&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;: Esta plataforma permite interactuar con un cluster de un nodo, desde una consola web, similar a lo que conseguiríamos en el examen. Lo interesante es que hay escenarios creados por otros usuarios que se pueden utilizar para aprender conceptos básicos, como por ejemplo secrets, configmaps, volumes, etc. Ten en cuenta que cada escenario dura máximo una hora.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;: Con esta opción podrás instalar una máquina virtual para tener tu propio cluster de un nodo.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;ejercicios-para-practicar&quot;&gt;Ejercicios para practicar&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;: Un conjunto de ejercicios que te ayudaran a prepararte para el examen y también pueden servirte para aprender y practicar con Kubernetes.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;: Este es otro conjunto de ejercicios que sirven para prepararte y tener todos los conceptos frescos antes de ir al examen.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;: En esta página se presentan algunos retos para completar y algunos tips para el examen. También ofrecen un simulador del examen con un costo de  €30 (no me suscribí, por lo que no sé exactamente cómo es el simulador o si de verdad tiene preguntas similares al del examen).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;notas-finales&quot;&gt;Notas finales&lt;/h1&gt;
-
-&lt;p&gt;Nuevamente te recomiendo que practiques mucho antes de presentar el examen, incluso si tienes experiencia con Kubernetes. La gestión del tiempo es importante, por lo que debes estar preparado para usar rápidamente la documentación de Kubernetes (desde la página o desde la consola con kubectl), estar preparado a generar yamls (no editarlos), y manejar los nervios y la presión.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;Exam Rules and Policies&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry></feed>
+* [terraform-aws-ecr module at Github](https://github.com/lgallard/terraform-aws-ecr.git){:target=&quot;_blank&quot;}
+* [terraform-aws-ecr module at Terraform Registry](https://registry.terraform.io/modules/lgallard/ecr/aws){:target=&quot;_blank&quot;}</content><author><name>Luis M. Gallardo D.</name></author></entry></feed>

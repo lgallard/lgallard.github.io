@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
-<meta property="article:section" content="Terraform">
-
 
 
 
@@ -369,14 +365,22 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p><img src="https://lgallardo.com/images/terraform.jpg" alt="Terraform" target="_blank" /></p>
+        <center><img src="/images/terraform-aws-ecr.jpg" alt="Terraform" /></center>
+<p><br />
+Les comparto acá otro módulo de Terraform que publiqué como código Open Source, el cual permite crear registries en AWS ECR.</p>
+
+<p>Puedes ver el módulo <strong>terraform-aws-ecr</strong> en el <a href="https://registry.terraform.io/modules/lgallard/ecr/aws" target="_blank">Terraform Registry</a> o clonarlo desde <a href="https://github.com/lgallard/terraform-aws-ecr.git" target="_blank">Github</a>.</p>
+
+<p>Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:</p>
+
+<p><img src="https://lgallardo.com/images/terraform.jpg" alt="Terraform" target="_blank" /></p>
 
 <h1 id="terraform-aws-ecr">terraform-aws-ecr</h1>
 <p>Terraform module to create <a href="https://aws.amazon.com/ecr/" target="_blank">AWS ECR</a> (Elastic Container Registry) which is a fully-managed Docker container registry.</p>
@@ -387,6 +391,257 @@
 <p>Check the <a href="https://github.com/lgallard/terraform-aws-ecr/tree/master/examples" target="_blank">examples</a> for the  <strong>simple</strong> and the <strong>complete</strong> snippets.</p>
 
 <h3 id="simple-example">Simple example</h3>
+<p>This example creates an ECR registry using few parameters</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "ecr" {
+
+  source = "lgallard/ecr/aws"
+
+  name         = "ecr-repo-dev"
+
+  # Tags
+  tags = {
+    Owner       = "DevOps team"
+    Environment = "dev"
+    Terraform   = true
+  }
+
+}
+</code></pre></div></div>
+
+<h3 id="complete-example">Complete example</h3>
+<p>In this example the register is defined in detailed.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "ecr" {
+
+  source = "lgallard/ecr/aws"
+
+  name                 = "ecr-repo-dev"
+  scan_on_push         = true
+  timeouts_delete      = "60m"
+  image_tag_mutability = "MUTABLE"
+
+
+  # Note that currently only one policy may be applied to a repository.
+  policy = &lt;&lt;EOF
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "repo policy",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:DescribeRepositories",
+                "ecr:GetRepositoryPolicy",
+                "ecr:ListImages",
+                "ecr:DeleteRepository",
+                "ecr:BatchDeleteImage",
+                "ecr:SetRepositoryPolicy",
+                "ecr:DeleteRepositoryPolicy"
+            ]
+        }
+    ]
+}
+EOF
+
+  # Only one lifecycle policy can be used per repository.
+  # To apply multiple rules, combined them in one policy JSON.
+  lifecycle_policy = &lt;&lt;EOF
+{
+    "rules": [
+        {
+            "rulePriority": 1,
+            "description": "Expire untagged images older than 14 days",
+            "selection": {
+                "tagStatus": "untagged",
+                "countType": "sinceImagePushed",
+                "countUnit": "days",
+                "countNumber": 14
+            },
+            "action": {
+                "type": "expire"
+            }
+        },
+        {
+            "rulePriority": 2,
+            "description": "Keep last 30 dev images",
+            "selection": {
+                "tagStatus": "tagged",
+                "tagPrefixList": ["dev"],
+                "countType": "imageCountMoreThan",
+                "countNumber": 30
+            },
+            "action": {
+                "type": "expire"
+            }
+        }
+    ]
+}
+EOF
+
+  # Tags
+  tags = {
+    Owner       = "DevOps team"
+    Environment = "dev"
+    Terraform   = true
+  }
+
+}
+
+</code></pre></div></div>
+<h2 id="providers">Providers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>aws</td>
+      <td>n/a</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="inputs">Inputs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th style="text-align: center">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>encryption_type</td>
+      <td>The encryption type to use for the repository. Valid values are <code class="highlighter-rouge">AES256</code> or <code class="highlighter-rouge">KMS</code></td>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td><code class="highlighter-rouge">"AES256"</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>image_scanning_configuration</td>
+      <td>Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.</td>
+      <td><code class="highlighter-rouge">map</code></td>
+      <td><code class="highlighter-rouge">{}</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>image_tag_mutability</td>
+      <td>The tag mutability setting for the repository. Must be one of: <code class="highlighter-rouge">MUTABLE</code> or <code class="highlighter-rouge">IMMUTABLE</code>.</td>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td><code class="highlighter-rouge">"MUTABLE"</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>kms_key</td>
+      <td>The ARN of the KMS key to use when encryption_type is <code class="highlighter-rouge">KMS</code>. If not specified when encryption_type is <code class="highlighter-rouge">KMS</code>, uses a new KMS key. Otherwise, uses the default AWS managed key for ECR.</td>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td>n/a</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>lifecycle_policy</td>
+      <td>Manages the ECR repository lifecycle policy</td>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td>n/a</td>
+      <td style="text-align: center">yes</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>Name of the repository.</td>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td>n/a</td>
+      <td style="text-align: center">yes</td>
+    </tr>
+    <tr>
+      <td>policy</td>
+      <td>Manages the ECR repository policy</td>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td>n/a</td>
+      <td style="text-align: center">yes</td>
+    </tr>
+    <tr>
+      <td>scan_on_push</td>
+      <td>Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).</td>
+      <td><code class="highlighter-rouge">bool</code></td>
+      <td><code class="highlighter-rouge">true</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>tags</td>
+      <td>A mapping of tags to assign to the resource.</td>
+      <td><code class="highlighter-rouge">map(string)</code></td>
+      <td><code class="highlighter-rouge">{}</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>timeouts</td>
+      <td>Timeouts map.</td>
+      <td><code class="highlighter-rouge">map</code></td>
+      <td><code class="highlighter-rouge">{}</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>timeouts_delete</td>
+      <td>How long to wait for a repository to be deleted.</td>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td>n/a</td>
+      <td style="text-align: center">no</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="outputs">Outputs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>arn</td>
+      <td>Full ARN of the repository</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>The name of the repository.</td>
+    </tr>
+    <tr>
+      <td>registry_id</td>
+      <td>The registry ID where the repository was created.</td>
+    </tr>
+    <tr>
+      <td>repository_url</td>
+      <td>The URL of the repository (in the form <code class="highlighter-rouge">aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://github.com/lgallard/terraform-aws-ecr.git" target="_blank">terraform-aws-ecr module at Github</a></li>
+  <li><a href="https://registry.terraform.io/modules/lgallard/ecr/aws" target="_blank">terraform-aws-ecr module at Terraform Registry</a></li>
+</ul>
 
         
       </section>
@@ -432,15 +687,7 @@
     
       
       
-      <a href="https://lgallardo.com/es/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
     
     </span>
   </p>
@@ -504,9 +751,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -519,8 +774,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -531,36 +785,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/es/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -573,8 +808,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Uso de GitHub Copilot Background Agents en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terr...</p>
   </article>
 </div>
         
@@ -585,9 +819,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -600,8 +842,42 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         

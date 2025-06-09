@@ -92,12 +92,6 @@
 
 <meta property="article:section" content="Infra">
 
-<meta property="article:section" content="AWS">
-
-<meta property="article:section" content="Packer">
-
-<meta property="article:section" content="Ubuntu">
-
 
 
 
@@ -372,14 +366,71 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/packer.jpg" alt="Logo Terraform" /></center>
+<p><br />
+Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:</p>
+
+<h1 id="using-the-aws-cli">Using the AWS CLI</h1>
+
+<p>My first approach was to use the the AWS CLI as shown below:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws ec2 describe-images \
+--owners 099720109477 \
+--filters Name=root-device-type,Values=ebs \
+Name=architecture,Values=x86_64 \
+Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' \
+Name=ena-support,Values=true \
+--query 'sort_by(Images, &amp;Name)[-1].[ImageId,CreationDate]' \
+--output text --region us-east-1
+
+ami-f0f8d695	2017-11-21T15:21:29.000Z
+
+</code></pre></div></div>
+
+<p>In this example, 099720109477 stands for Ubuntu’s owner ID.</p>
+
+<h1 id="ubuntu-amazon-ec2-ami-locator">Ubuntu Amazon EC2 AMI Locator</h1>
+
+<p>I also ran into the <a href="https://cloud-images.ubuntu.com/" target="_blank">Amazon EC2 AMI Locator</a> which can be a useful resource, specially if you dont have access to the AWS CLI.</p>
+
+<h1 id="packer-source-ami-filter">Packer source ami filter:</h1>
+
+<p>With Packer you can use the <a href="https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter" target="_blank"><em>source_ami_filter</em> </a> passing similar parameters like in the AWS CLI:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "us-east-1",
+      "instance_type": "c3.xlarge",
+      "ena_support": true,
+      "source_ami_filter": {
+        "filters": {
+        "virtualization-type": "hvm",
+        "name": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
+        "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },
+    }
+  ]
+}
+</code></pre></div></div>
+
+<p><em>References:</em></p>
+<ul>
+  <li><a href="https://gist.github.com/vancluever/7676b4dafa97826ef0e9" target="_blank">Find the most recent Ubuntu AMI using aws-cli</a></li>
+  <li><a href="https://cloud-images.ubuntu.com/" target="_blank">Amazon EC2 AMI Locator</a></li>
+  <li><a href="https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter">source_ami_filter</a> {:target=”_blank”}</li>
+</ul>
 
         
       </section>
@@ -429,19 +480,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/infra" class="page__taxonomy-item" rel="tag">Infra</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/packer" class="page__taxonomy-item" rel="tag">Packer</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
+      <a href="https://lgallardo.com/categories/infra" class="page__taxonomy-item" rel="tag">Infra</a>
     
     </span>
   </p>
@@ -505,9 +544,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -520,8 +567,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -532,36 +578,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -574,8 +601,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -586,9 +612,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -601,8 +635,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         
