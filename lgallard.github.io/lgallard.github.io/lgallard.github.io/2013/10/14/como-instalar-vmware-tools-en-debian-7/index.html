@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="VMWare">
-
 
 
 
@@ -364,14 +362,140 @@
 
 
 
-  less than 1 minute read
+  3 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/como-instalar-vmware-tools-en-debian-7.jpg" alt="VMWare Tools - Debian 7.1" /></center>
+<p><br />
+Installing VMWare Tool on Debian 7 is not that different than, for example, installing VirtualBox’s Guest Additions. In essence you have to have the system’s compiling tools, its kernel’s headers, then mount a virtual CD to run the script which will compile the kernel’s modules and reboot the machine. If you want to have more information about it, here I leave the procedure:</p>
+
+<ol>
+  <li>Install the compiling tolls for building the moodules (GCC and stuff):</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install build-essential
+</code></pre></div></div>
+
+<ol>
+  <li>Install the current kernel’s headers:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install linux-headers-<span class="k">$(</span>uname <span class="nt">-r</span><span class="k">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Mount the CD that content the VMWare utility  (From vSphere Client  you have to choose the <em>Install VMWare Tools</em> option  to have the CD available from the VM)</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount /dev/sr0  /mnt/
+</code></pre></div></div>
+
+<ol>
+  <li>Copy a the utility in a local folder of the system, and extract it:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /mnt/VMwareTools-8.6.10-913593.tar.gz /opt/
+<span class="nb">cd</span> /opt/
+<span class="nb">tar </span>xfzv VMwareTools-8.6.10-913593.tar.gz
+</code></pre></div></div>
+
+<ol>
+  <li>Finally run the utility script to build the needed kernel’s modules:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>vmware-tools-distrib/
+./vmware-install.pl
+</code></pre></div></div>
+
+<p>The script will ask some questions to build the needed modules, which a show next. I put here just some questions and part of the output. For your particular case, answer accordingly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating a new VMware Tools installer database using the tar4 format.
+Installing VMware Tools.
+In which directory <span class="k">do </span>you want to install the binary files?
+ <span class="o">[</span>/usr/bin]
+What is the directory that contains the init directories <span class="o">(</span>rc0.d/ to rc6.d/<span class="o">)</span>?
+ <span class="o">[</span>/etc]
+What is the directory that contains the init scripts?
+ <span class="o">[</span>/etc/init.d]
+In which directory <span class="k">do </span>you want to install the daemon files?
+ <span class="o">[</span>/usr/sbin]
+In which directory <span class="k">do </span>you want to install the library files?
+ <span class="o">[</span>/usr/lib/vmware-tools]
+The path <span class="s2">"/usr/lib/vmware-tools"</span> does not exist currently. This program is
+ going to create it, including needed parent directories. Is this what you want?
+ <span class="o">[</span>yes]
+In which directory <span class="k">do </span>you want to install the documentation files?
+ <span class="o">[</span>/usr/share/doc/vmware-tools]
+The path <span class="s2">"/usr/share/doc/vmware-tools"</span> does not exist currently. This program
+ is going to create it, including needed parent directories. Is this what you
+ want? <span class="o">[</span>yes]
+The installation of VMware Tools 8.6.10 build-913593 <span class="k">for </span>Linux completed
+ successfully. You can decide to remove this software from your system at any
+ <span class="nb">time </span>by invoking the following <span class="nb">command</span>: <span class="s2">"/usr/bin/vmware-uninstall-tools.pl"</span><span class="nb">.</span>
+Before running VMware Tools <span class="k">for </span>the first <span class="nb">time</span>, you need to configure it by
+ invoking the following <span class="nb">command</span>: <span class="s2">"/usr/bin/vmware-config-tools.pl"</span><span class="nb">.</span> Do you want
+ this program to invoke the <span class="nb">command </span><span class="k">for </span>you now? <span class="o">[</span>yes]
+Initializing...
+ Making sure services <span class="k">for </span>VMware Tools are stopped.
+Stopping VMware Tools services <span class="k">in </span>the virtual machine:
+ Guest operating system daemon: <span class="k">done
+ </span>Unmounting HGFS shares: <span class="k">done
+ </span>Guest filesystem driver: <span class="k">done</span>
+ <span class="o">[</span>EXPERIMENTAL] The VMware FileSystem Sync Driver <span class="o">(</span>vmsync<span class="o">)</span> is a new feature that
+ creates backups of virtual machines. Please refer to the VMware Knowledge Base
+ <span class="k">for </span>more details on this capability. Do you wish to <span class="nb">enable </span>this feature?
+ <span class="o">[</span>no]
+ Before you can compile modules, you need to have the following installed...
+make
+ gcc
+ kernel headers of the running kernel
+ Searching <span class="k">for </span>GCC...
+ Detected GCC binary at <span class="s2">"/usr/bin/gcc-4.6"</span><span class="nb">.</span>
+ The path <span class="s2">"/usr/bin/gcc-4.6"</span> appears to be a valid path to the gcc binary.
+ Would you like to change it? <span class="o">[</span>no]
+Searching <span class="k">for </span>a valid kernel header path...
+Detected the kernel headers at <span class="s2">"/lib/modules/3.2.0-4-amd64/build/include"</span><span class="nb">.</span>
+The path <span class="s2">"/lib/modules/3.2.0-4-amd64/build/include"</span> appears to be a valid path
+to the 3.2.0-4-amd64 kernel headers.
+Would you like to change it? <span class="o">[</span>no]
+The vmblock enables dragging or copying files between host and guest <span class="k">in </span>a
+Fusion or Workstation virtual environment. Do you wish to <span class="nb">enable </span>this feature?
+<span class="o">[</span>no] yes
+make: Leaving directory <span class="sb">`</span>/tmp/vmware-root/modules/vmblock-only<span class="s1">'
+
+No X install found.
+Creating a new initrd boot image for the kernel.
+update-initramfs: Generating /boot/initrd.img-3.2.0-4-amd64
+Checking acpi hot plug done
+Starting VMware Tools services in the virtual machine:
+Switching to guest configuration: done
+VM communication interface: done
+VM communication interface socket family: done
+File system sync driver: done
+Guest operating system daemon: done
+The configuration of VMware Tools 8.6.10 build-913593 for Linux for this
+running kernel completed successfully.
+You must restart your X session before any mouse or graphics changes take
+effect.
+You can now run VMware Tools by invoking "/usr/bin/vmware-toolbox-cmd" from the
+command line or by invoking "/usr/bin/vmware-toolbox" from the command line
+during an X server session.
+To enable advanced X features (e.g., guest resolution fit, drag and drop, and
+file and text copy/paste), you will need to do one (or more) of the following:
+1. Manually start /usr/bin/vmware-user
+2. Log out and log back into your desktop session; and,
+3. Restart your X session.
+Enjoy,
+--the VMware team
+Found VMware Tools CDROM mounted at /mnt. Ejecting device /dev/sr0 ...
+</span></code></pre></div></div>
+
+<p>Then reboot the virtual machine and check the VMWare Tools running, checking the VSphere Client status as shown on the upper image or by checking the status in the virtual machine:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service vmware-tools status
+vmtoolsd is running
+</code></pre></div></div>
 
         
       </section>
@@ -413,11 +537,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/vmware" class="page__taxonomy-item" rel="tag">VMWare</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -450,7 +570,7 @@
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/2014/02/16/samsung-galaxy-tab-p1000-con-android-4-3-cyanogenmod-10-2/" class="pagination--pager" title="Samsung Galaxy Tab P1000 with Android 4.3 – CyanogenMod 10.2
+      <a href="https://lgallardo.com/2013/11/12/problema-de-debmirror-gpgv-cant-check-signature-public-key-not-found/" class="pagination--pager" title="Debmirror problem: gpgv: Can’t check signature: public key not found
 ">Next</a>
     
   </nav>
@@ -481,9 +601,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -496,8 +624,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -508,36 +635,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -550,8 +658,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -562,9 +669,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -577,8 +692,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

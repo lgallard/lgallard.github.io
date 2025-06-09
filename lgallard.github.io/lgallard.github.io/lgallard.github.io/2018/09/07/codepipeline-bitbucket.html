@@ -94,14 +94,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
-<meta property="article:section" content="Codebuild">
-
-<meta property="article:section" content="CodePipeline">
-
-<meta property="article:section" content="Bitbucket">
-
 
 
 
@@ -376,14 +368,40 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/CodePipeline_bitbucket.jpg" alt="AWS CodePipeline and Bitbucket" /></center>
+<p><br />
+At work I needed to deploy an application using AWS CodePipeline but the repository where the code is located is in Bitbucket. This was an inconvenient task because AWS Pipeline does not support Bitbucket, as does AWS Codebuild.</p>
+
+<p>If you do some research on the internet, you can find alternative solutions to this problem, such as having a webhook in the repository that calls a lambda function and generates a file in a bucket and this is the trigger for AWS CodePipeline [1]. Another possible solution is to use Bitbucket Pipelines to create the object to be placed in the bucket, or even mirror the contents of the Bitbucket repository in AWS CodeCommit.</p>
+
+<p>Because these workarounds didn’t convince me, I was thinking about a solution where everything was left on AWS and that I didn’t have to configure repositories, and the key was the support that if AWS CodeBuild has Bitbucket. So instead of using the Bitbucket’s pipelines to generate the source of AWS CodePipeline, with AWS CodeBuild I generate a zip file with the source code of the application which is then used as input.</p>
+
+<p>In particular this application is a Docker image that is generated with AWS CodeBuild and then saved in AWS ECR. This CodeBuild generates as output artifact the definition of the ECS task, which is taken as input in the ECS deployment face, updating the service and therefore the application:</p>
+
+<center><img src="/images/aws_codepipeline_succeded.jpg" alt="AWS Codebuild trigger" /></center>
+<p><br /></p>
+
+<h1 id="not-everything-is-perfect">Not everything is perfect.</h1>
+
+<p>I list a few things to consider with this solution:</p>
+
+<ol>
+  <li>For CodeBuild to access private Bitbucket repositories, you must authenticate with a user from the AWS web console. If you are considering how to create this release, consider using a service account that has read-only access to the repository.</li>
+  <li>The AWS CodeBuild project trigger will not run automatically when you update the repository, so you need to start the project. If you want this to be automatic or as close as possible, you can set up a scheduled task in your project:</li>
+</ol>
+
+<center><img src="/images/aws_codebuild_trigger.jpg" alt="AWS Codebuild trigger" /></center>
+<p><br /></p>
+
+<p>[1] <a href="https://aws.amazon.com/blogs/devops/integrating-git-with-aws-codepipeline/" target="_blank">Integrating Git with AWS CodePipeline</a></p>
+
 
         
       </section>
@@ -437,23 +455,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/bitbucket" class="page__taxonomy-item" rel="tag">Bitbucket</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/codebuild" class="page__taxonomy-item" rel="tag">Codebuild</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/codepipeline" class="page__taxonomy-item" rel="tag">CodePipeline</a>
+      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
     
     </span>
   </p>
@@ -517,9 +519,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -532,8 +542,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -544,36 +553,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -586,8 +576,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -598,9 +587,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -613,8 +610,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

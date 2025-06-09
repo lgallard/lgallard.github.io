@@ -96,16 +96,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="CentOS">
-
-<meta property="article:section" content="Debian">
-
-<meta property="article:section" content="RedHat">
-
-<meta property="article:section" content="SuSE">
-
-<meta property="article:section" content="Ubuntu">
-
 
 
 
@@ -388,7 +378,31 @@
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img align="center" src="https://c2.staticflickr.com/2/1606/26688168326_0f3fab18f2_o.jpg" alt="time zone map" /></center>
+<p>El 1° de mayo, el huso horario cambiará en Venezuela a UTC-4, por lo que debes actualizar el paquete tzdata en Linux para estar preparado para este cambio. Para hacer esto solo debes hacer lo siguiente:</p>
+
+<p><strong>Debian/Ubuntu</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude update
+aptitude safe-upgrade tzdata
+</code></pre></div></div>
+
+<p><strong>Red Hat</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum check-update
+yum update tzdata
+</code></pre></div></div>
+
+<p>Para verificar que se la actualización tiene el cambio del huso horario se puede ejecutar la siguiente orden:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zdump -v /usr/share/zoneinfo/right/America/Caracas  | grep 2016
+
+/usr/share/zoneinfo/right/America/Caracas  Sun May  1 06:59:59 2016 UT = Sun May  1 02:29:59 2016 VET isdst=0 gmtoff=-16200
+/usr/share/zoneinfo/right/America/Caracas  Sun May  1 07:00:00 2016 UT = Sun May  1 03:00:00 2016 VET isdst=0 gmtoff=-14400
+</code></pre></div></div>
+
+<p><strong>Referencia:</strong> <a href="https://access.redhat.com/solutions/28425">How to check if the Time Zone database</a></p>
+
 
         
       </section>
@@ -446,27 +460,7 @@
     
       
       
-      <a href="https://lgallardo.com/es/categories/centos" class="page__taxonomy-item" rel="tag">CentOS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/debian" class="page__taxonomy-item" rel="tag">Debian</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/redhat" class="page__taxonomy-item" rel="tag">RedHat</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/suse" class="page__taxonomy-item" rel="tag">SuSE</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
+      <a href="https://lgallardo.com/es/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -530,9 +524,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -545,8 +547,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -557,36 +558,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/es/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -599,8 +581,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Uso de GitHub Copilot Background Agents en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terr...</p>
   </article>
 </div>
         
@@ -611,9 +592,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -626,8 +615,42 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         

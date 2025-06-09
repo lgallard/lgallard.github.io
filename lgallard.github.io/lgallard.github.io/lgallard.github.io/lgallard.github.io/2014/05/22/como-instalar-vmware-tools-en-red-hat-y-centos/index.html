@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="If you need to install VMWare Tools on virtual machines running Red Hat or CentOS as operating system, you can follow the procedure described next:ProcedureFirst of in VMWare vSphere locate the virtual machine you want to install the VMWare Tools and click on “Install VMWare Tools” as shown in the next image:You will see a dialog window indicating that the VMWare Tools will be mounted by clicking on the “mount” button. Then in the virtual machine where you want to install the VMWare Tools you must do the following in the terminal:# mount /dev/cdrom /mnt/mount: block device /dev/sr0 is write-protected, mounting read-only# cp /mnt/VMwareTools-9.0.0-782409.tar.gz /opt/# cd /opt/# tar xvzf VMwareTools-9.0.0-782409.tar.gz# cd vmware-tools-distrib/#./vmware-install.plThe latter is a script which will ask you questions related to the VMWare Tools intallation. In genersl terms the default option are okay, but if you want to modify any parameter you can change any value according to your needs:Creating a new VMware Tools installer database using the tar4 format.Installing VMware Tools.In which directory do you want to install the binary files?[/usr/bin]What is the directory that contains the init directories (rc0.d/ to rc6.d/)?[/etc/rc.d]What is the directory that contains the init scripts?[/etc/rc.d/init.d]In which directory do you want to install the daemon files?[/usr/sbin]In which directory do you want to install the library files?[/usr/lib/vmware-tools]The path &quot;/usr/lib/vmware-tools&quot; does not exist currently. This program isgoing to create it, including needed parent directories. Is this what you want?[yes]In which directory do you want to install the documentation files?[/usr/share/doc/vmware-tools]The path &quot;/usr/share/doc/vmware-tools&quot; does not exist currently. This programis going to create it, including needed parent directories. Is this what youwant? [yes]The installation of VMware Tools 9.0.0 build-782409 for Linux completedsuccessfully. You can decide to remove this software from your system at anytime by invoking the following command: &quot;/usr/bin/vmware-uninstall-tools.pl&quot;.Before running VMware Tools for the first time, you need to configure it byinvoking the following command: &quot;/usr/bin/vmware-config-tools.pl&quot;. Do you wantthis program to invoke the command for you now? [yes]Initializing...Making sure services for VMware Tools are stopped.The VMware FileSystem Sync Driver (vmsync) allows external third-party backupsoftware that is integrated with vSphere to create backups of the virtualmachine. Do you wish to enable this feature? [no]Found a compatible pre-built module for vmci. Installing it...Found a compatible pre-built module for vsock. Installing it...The module vmxnet3 has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmxnet3 to override.The module pvscsi has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=pvscsi to override.The module vmmemctl has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmmemctl to override.The VMware Host-Guest Filesystem allows for shared folders between the host OSand the guest OS in a Fusion or Workstation virtual environment. Do you wishto enable this feature? [no]Found a compatible pre-built module for vmxnet. Installing it...The vmblock enables dragging or copying files between host and guest in aFusion or Workstation virtual environment. Do you wish to enable this feature?[no]!!! [EXPERIMENTAL] !!!VMware automatic kernel modules enables automatic building and installation ofVMware kernel modules at boot that are not already present. By selecting yes,you will be enabling this experimental feature. You can always disable thisfeature by re-running vmware-config-tools.pl.Would you like to enable VMware automatic kernel modules?[no]No X install found.Creating a new initrd boot image for the kernel.vmware-tools start/runningThe configuration of VMware Tools 9.0.0 build-782409 for Linux for this runningkernel completed successfully.You must restart your X session before any mouse or graphics changes takeeffect.You can now run VMware Tools by invoking &quot;/usr/bin/vmware-toolbox-cmd&quot; from thecommand line.To enable advanced X features (e.g., guest resolution fit, drag and drop, andfile and text copy/paste), you will need to do one (or more) of the following:1. Manually start /usr/bin/vmware-user2. Log out and log back into your desktop session; and,3. Restart your X session.Enjoy,--the VMware teamFound VMware Tools CDROM mounted at /mnt. Ejecting device /dev/sr0 ...No eject (or equivilant) command could be located.Eject Failed: If possible manually eject the Tools installer from the guestcdrom mounted at /mnt before canceling tools install on the host.When the script had finished the VMWare Tools will be installed on the virtual machine. Now you can umount the ISO by doing:# umount /mntThen in VSphere you can check that VMWare Tools are running as shown in the first picture of this article.">
+<meta name="description" content="Read about How to install VMWare Tools on Red Hat and CentOS on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
@@ -33,44 +33,33 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="lgallardo.com">
-<meta property="og:title" content="How to install VMWare Tools on Red Hat and CentOS">
+<meta property="og:title"
+  content="How to install VMWare Tools on Red Hat and CentOS">
+<meta property="og:type" content="article">
 
 
-  <link rel="canonical" href="https://lgallardo.com/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
-  <meta property="og:url" content="https://lgallardo.com/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
-
-
-
-  <meta property="og:description" content="If you need to install VMWare Tools on virtual machines running Red Hat or CentOS as operating system, you can follow the procedure described next:ProcedureFirst of in VMWare vSphere locate the virtual machine you want to install the VMWare Tools and click on “Install VMWare Tools” as shown in the next image:You will see a dialog window indicating that the VMWare Tools will be mounted by clicking on the “mount” button. Then in the virtual machine where you want to install the VMWare Tools you must do the following in the terminal:# mount /dev/cdrom /mnt/mount: block device /dev/sr0 is write-protected, mounting read-only# cp /mnt/VMwareTools-9.0.0-782409.tar.gz /opt/# cd /opt/# tar xvzf VMwareTools-9.0.0-782409.tar.gz# cd vmware-tools-distrib/#./vmware-install.plThe latter is a script which will ask you questions related to the VMWare Tools intallation. In genersl terms the default option are okay, but if you want to modify any parameter you can change any value according to your needs:Creating a new VMware Tools installer database using the tar4 format.Installing VMware Tools.In which directory do you want to install the binary files?[/usr/bin]What is the directory that contains the init directories (rc0.d/ to rc6.d/)?[/etc/rc.d]What is the directory that contains the init scripts?[/etc/rc.d/init.d]In which directory do you want to install the daemon files?[/usr/sbin]In which directory do you want to install the library files?[/usr/lib/vmware-tools]The path &quot;/usr/lib/vmware-tools&quot; does not exist currently. This program isgoing to create it, including needed parent directories. Is this what you want?[yes]In which directory do you want to install the documentation files?[/usr/share/doc/vmware-tools]The path &quot;/usr/share/doc/vmware-tools&quot; does not exist currently. This programis going to create it, including needed parent directories. Is this what youwant? [yes]The installation of VMware Tools 9.0.0 build-782409 for Linux completedsuccessfully. You can decide to remove this software from your system at anytime by invoking the following command: &quot;/usr/bin/vmware-uninstall-tools.pl&quot;.Before running VMware Tools for the first time, you need to configure it byinvoking the following command: &quot;/usr/bin/vmware-config-tools.pl&quot;. Do you wantthis program to invoke the command for you now? [yes]Initializing...Making sure services for VMware Tools are stopped.The VMware FileSystem Sync Driver (vmsync) allows external third-party backupsoftware that is integrated with vSphere to create backups of the virtualmachine. Do you wish to enable this feature? [no]Found a compatible pre-built module for vmci. Installing it...Found a compatible pre-built module for vsock. Installing it...The module vmxnet3 has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmxnet3 to override.The module pvscsi has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=pvscsi to override.The module vmmemctl has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmmemctl to override.The VMware Host-Guest Filesystem allows for shared folders between the host OSand the guest OS in a Fusion or Workstation virtual environment. Do you wishto enable this feature? [no]Found a compatible pre-built module for vmxnet. Installing it...The vmblock enables dragging or copying files between host and guest in aFusion or Workstation virtual environment. Do you wish to enable this feature?[no]!!! [EXPERIMENTAL] !!!VMware automatic kernel modules enables automatic building and installation ofVMware kernel modules at boot that are not already present. By selecting yes,you will be enabling this experimental feature. You can always disable thisfeature by re-running vmware-config-tools.pl.Would you like to enable VMware automatic kernel modules?[no]No X install found.Creating a new initrd boot image for the kernel.vmware-tools start/runningThe configuration of VMware Tools 9.0.0 build-782409 for Linux for this runningkernel completed successfully.You must restart your X session before any mouse or graphics changes takeeffect.You can now run VMware Tools by invoking &quot;/usr/bin/vmware-toolbox-cmd&quot; from thecommand line.To enable advanced X features (e.g., guest resolution fit, drag and drop, andfile and text copy/paste), you will need to do one (or more) of the following:1. Manually start /usr/bin/vmware-user2. Log out and log back into your desktop session; and,3. Restart your X session.Enjoy,--the VMware teamFound VMware Tools CDROM mounted at /mnt. Ejecting device /dev/sr0 ...No eject (or equivilant) command could be located.Eject Failed: If possible manually eject the Tools installer from the guestcdrom mounted at /mnt before canceling tools install on the host.When the script had finished the VMWare Tools will be installed on the virtual machine. Now you can umount the ISO by doing:# umount /mntThen in VSphere you can check that VMWare Tools are running as shown in the first picture of this article.">
-
-
-
-  <meta name="twitter:site" content="@lgallard">
-  <meta name="twitter:title" content="How to install VMWare Tools on Red Hat and CentOS">
-  <meta name="twitter:description" content="If you need to install VMWare Tools on virtual machines running Red Hat or CentOS as operating system, you can follow the procedure described next:ProcedureFirst of in VMWare vSphere locate the virtual machine you want to install the VMWare Tools and click on “Install VMWare Tools” as shown in the next image:You will see a dialog window indicating that the VMWare Tools will be mounted by clicking on the “mount” button. Then in the virtual machine where you want to install the VMWare Tools you must do the following in the terminal:# mount /dev/cdrom /mnt/mount: block device /dev/sr0 is write-protected, mounting read-only# cp /mnt/VMwareTools-9.0.0-782409.tar.gz /opt/# cd /opt/# tar xvzf VMwareTools-9.0.0-782409.tar.gz# cd vmware-tools-distrib/#./vmware-install.plThe latter is a script which will ask you questions related to the VMWare Tools intallation. In genersl terms the default option are okay, but if you want to modify any parameter you can change any value according to your needs:Creating a new VMware Tools installer database using the tar4 format.Installing VMware Tools.In which directory do you want to install the binary files?[/usr/bin]What is the directory that contains the init directories (rc0.d/ to rc6.d/)?[/etc/rc.d]What is the directory that contains the init scripts?[/etc/rc.d/init.d]In which directory do you want to install the daemon files?[/usr/sbin]In which directory do you want to install the library files?[/usr/lib/vmware-tools]The path &quot;/usr/lib/vmware-tools&quot; does not exist currently. This program isgoing to create it, including needed parent directories. Is this what you want?[yes]In which directory do you want to install the documentation files?[/usr/share/doc/vmware-tools]The path &quot;/usr/share/doc/vmware-tools&quot; does not exist currently. This programis going to create it, including needed parent directories. Is this what youwant? [yes]The installation of VMware Tools 9.0.0 build-782409 for Linux completedsuccessfully. You can decide to remove this software from your system at anytime by invoking the following command: &quot;/usr/bin/vmware-uninstall-tools.pl&quot;.Before running VMware Tools for the first time, you need to configure it byinvoking the following command: &quot;/usr/bin/vmware-config-tools.pl&quot;. Do you wantthis program to invoke the command for you now? [yes]Initializing...Making sure services for VMware Tools are stopped.The VMware FileSystem Sync Driver (vmsync) allows external third-party backupsoftware that is integrated with vSphere to create backups of the virtualmachine. Do you wish to enable this feature? [no]Found a compatible pre-built module for vmci. Installing it...Found a compatible pre-built module for vsock. Installing it...The module vmxnet3 has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmxnet3 to override.The module pvscsi has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=pvscsi to override.The module vmmemctl has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmmemctl to override.The VMware Host-Guest Filesystem allows for shared folders between the host OSand the guest OS in a Fusion or Workstation virtual environment. Do you wishto enable this feature? [no]Found a compatible pre-built module for vmxnet. Installing it...The vmblock enables dragging or copying files between host and guest in aFusion or Workstation virtual environment. Do you wish to enable this feature?[no]!!! [EXPERIMENTAL] !!!VMware automatic kernel modules enables automatic building and installation ofVMware kernel modules at boot that are not already present. By selecting yes,you will be enabling this experimental feature. You can always disable thisfeature by re-running vmware-config-tools.pl.Would you like to enable VMware automatic kernel modules?[no]No X install found.Creating a new initrd boot image for the kernel.vmware-tools start/runningThe configuration of VMware Tools 9.0.0 build-782409 for Linux for this runningkernel completed successfully.You must restart your X session before any mouse or graphics changes takeeffect.You can now run VMware Tools by invoking &quot;/usr/bin/vmware-toolbox-cmd&quot; from thecommand line.To enable advanced X features (e.g., guest resolution fit, drag and drop, andfile and text copy/paste), you will need to do one (or more) of the following:1. Manually start /usr/bin/vmware-user2. Log out and log back into your desktop session; and,3. Restart your X session.Enjoy,--the VMware teamFound VMware Tools CDROM mounted at /mnt. Ejecting device /dev/sr0 ...No eject (or equivilant) command could be located.Eject Failed: If possible manually eject the Tools installer from the guestcdrom mounted at /mnt before canceling tools install on the host.When the script had finished the VMWare Tools will be installed on the virtual machine. Now you can umount the ISO by doing:# umount /mntThen in VSphere you can check that VMWare Tools are running as shown in the first picture of this article.">
-  <meta name="twitter:url" content="https://lgallardo.com/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-  
-
-  
-    <meta name="twitter:creator" content="@Luis Gallardo">
-  
+<link rel="canonical" href="https://lgallardo.com/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
+<meta property="og:url" content="https://lgallardo.com/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
 
 
 
-  
-
-  
+<meta property="og:description" content="Read about How to install VMWare Tools on Red Hat and CentOS on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="How to install VMWare Tools on Red Hat and CentOS">
+<meta name="twitter:description" content="Read about How to install VMWare Tools on Red Hat and CentOS on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
+<meta name="twitter:url" content="https://lgallardo.com/2014/05/22/como-instalar-vmware-tools-en-red-hat-y-centos/">
 
 
-  <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2014-05-22T07:44:35-05:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/luis.jpg">
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
 
 
 
@@ -79,7 +68,54 @@
 
 
 
-  <script type="application/ld+json">
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/luis.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2014-05-22T07:44:35-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="CentOS">
+
+<meta property="article:tag" content="RedHat">
+
+<meta property="article:tag" content="VMWare">
+
+
+<meta property="article:section" content="Linux">
+
+<meta property="article:section" content="CentOS">
+
+<meta property="article:section" content="RedHat">
+
+<meta property="article:section" content="VMWare">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
     {
       "@context" : "http://schema.org",
       "@type" : "Person",
@@ -95,7 +131,6 @@
 
 
 <!-- end SEO -->
-
 <link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -173,6 +208,28 @@
 
 
     
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" "
+>
+  
+    <img src="https://lgallardo.com/assets/images/luis.jpg" alt="How to install VMWare Tools on Red Hat and CentOS" class="page__hero-image">
+  
+  
+</div>
+
+
 
 
 
@@ -300,7 +357,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="How to install VMWare Tools on Red Hat and CentOS">
-    <meta itemprop="description" content="If you need to install VMWare Tools on virtual machines running Red Hat or CentOS as operating system, you can follow the procedure described next:ProcedureFirst of in VMWare vSphere locate the virtual machine you want to install the VMWare Tools and click on “Install VMWare Tools” as shown in the next image:You will see a dialog window indicating that the VMWare Tools will be mounted by clicking on the “mount” button. Then in the virtual machine where you want to install the VMWare Tools you must do the following in the terminal:# mount /dev/cdrom /mnt/mount: block device /dev/sr0 is write-protected, mounting read-only# cp /mnt/VMwareTools-9.0.0-782409.tar.gz /opt/# cd /opt/# tar xvzf VMwareTools-9.0.0-782409.tar.gz# cd vmware-tools-distrib/#./vmware-install.plThe latter is a script which will ask you questions related to the VMWare Tools intallation. In genersl terms the default option are okay, but if you want to modify any parameter you can change any value according to your needs:Creating a new VMware Tools installer database using the tar4 format.Installing VMware Tools.In which directory do you want to install the binary files?[/usr/bin]What is the directory that contains the init directories (rc0.d/ to rc6.d/)?[/etc/rc.d]What is the directory that contains the init scripts?[/etc/rc.d/init.d]In which directory do you want to install the daemon files?[/usr/sbin]In which directory do you want to install the library files?[/usr/lib/vmware-tools]The path &quot;/usr/lib/vmware-tools&quot; does not exist currently. This program isgoing to create it, including needed parent directories. Is this what you want?[yes]In which directory do you want to install the documentation files?[/usr/share/doc/vmware-tools]The path &quot;/usr/share/doc/vmware-tools&quot; does not exist currently. This programis going to create it, including needed parent directories. Is this what youwant? [yes]The installation of VMware Tools 9.0.0 build-782409 for Linux completedsuccessfully. You can decide to remove this software from your system at anytime by invoking the following command: &quot;/usr/bin/vmware-uninstall-tools.pl&quot;.Before running VMware Tools for the first time, you need to configure it byinvoking the following command: &quot;/usr/bin/vmware-config-tools.pl&quot;. Do you wantthis program to invoke the command for you now? [yes]Initializing...Making sure services for VMware Tools are stopped.The VMware FileSystem Sync Driver (vmsync) allows external third-party backupsoftware that is integrated with vSphere to create backups of the virtualmachine. Do you wish to enable this feature? [no]Found a compatible pre-built module for vmci. Installing it...Found a compatible pre-built module for vsock. Installing it...The module vmxnet3 has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmxnet3 to override.The module pvscsi has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=pvscsi to override.The module vmmemctl has already been installed on this system by anotherinstaller or package and will not be modified by this installer. Use the flag--clobber-kernel-modules=vmmemctl to override.The VMware Host-Guest Filesystem allows for shared folders between the host OSand the guest OS in a Fusion or Workstation virtual environment. Do you wishto enable this feature? [no]Found a compatible pre-built module for vmxnet. Installing it...The vmblock enables dragging or copying files between host and guest in aFusion or Workstation virtual environment. Do you wish to enable this feature?[no]!!! [EXPERIMENTAL] !!!VMware automatic kernel modules enables automatic building and installation ofVMware kernel modules at boot that are not already present. By selecting yes,you will be enabling this experimental feature. You can always disable thisfeature by re-running vmware-config-tools.pl.Would you like to enable VMware automatic kernel modules?[no]No X install found.Creating a new initrd boot image for the kernel.vmware-tools start/runningThe configuration of VMware Tools 9.0.0 build-782409 for Linux for this runningkernel completed successfully.You must restart your X session before any mouse or graphics changes takeeffect.You can now run VMware Tools by invoking &quot;/usr/bin/vmware-toolbox-cmd&quot; from thecommand line.To enable advanced X features (e.g., guest resolution fit, drag and drop, andfile and text copy/paste), you will need to do one (or more) of the following:1. Manually start /usr/bin/vmware-user2. Log out and log back into your desktop session; and,3. Restart your X session.Enjoy,--the VMware teamFound VMware Tools CDROM mounted at /mnt. Ejecting device /dev/sr0 ...No eject (or equivilant) command could be located.Eject Failed: If possible manually eject the Tools installer from the guestcdrom mounted at /mnt before canceling tools install on the host.When the script had finished the VMWare Tools will be installed on the virtual machine. Now you can umount the ISO by doing:# umount /mntThen in VSphere you can check that VMWare Tools are running as shown in the first picture of this article.">
+    <meta itemprop="description" content="Read about How to install VMWare Tools on Red Hat and CentOS on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
     <meta itemprop="datePublished" content="May 22, 2014">
     
 
@@ -315,156 +372,14 @@
 
 
 
-  4 minute read
+  less than 1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <center><img src="http://farm6.staticflickr.com/5275/13930613197_53fc38077b.jpg" alt="VMWare how to install VMWare tools on CentOS and Red Hat - running" width="500" height="209" /></center>
-<p><br />
-If you need to install VMWare Tools on virtual machines running Red Hat or CentOS as operating system, you can follow the procedure described next:</p>
-
-<h2 id="procedure">Procedure</h2>
-
-<p>First of in VMWare vSphere locate the virtual machine you want to install the VMWare Tools and click on “<em>Install VMWare Tools”</em> as shown in the next image:</p>
-
-<center><img src="http://farm6.staticflickr.com/5117/14117285255_6a26a10c61.jpg" alt="VMWare how to install VMWare tools on CentOS and Red Hat" width="500" height="270" /></center>
-<p><br /></p>
-
-<p>You will see a dialog window indicating that the VMWare Tools will be mounted by clicking on the “mount” button. Then in the virtual machine where you want to install the VMWare Tools you must do the following in the terminal:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mount /dev/cdrom /mnt/
-mount: block device /dev/sr0 is write-protected, mounting read-only
-
-# cp /mnt/VMwareTools-9.0.0-782409.tar.gz /opt/
-
-# cd /opt/
-# tar xvzf VMwareTools-9.0.0-782409.tar.gz
-
-# cd vmware-tools-distrib/
-
-#./vmware-install.pl
-</code></pre></div></div>
-
-<p>The latter is a script which will ask you questions related to the VMWare Tools intallation. In genersl terms the default option are okay, but if you want to modify any parameter you can change any value according to your needs:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating a new VMware Tools installer database using the tar4 format.
-
-Installing VMware Tools.
-
-In which directory do you want to install the binary files?
-[/usr/bin]
-
-What is the directory that contains the init directories (rc0.d/ to rc6.d/)?
-[/etc/rc.d]
-
-What is the directory that contains the init scripts?
-[/etc/rc.d/init.d]
-
-In which directory do you want to install the daemon files?
-[/usr/sbin]
-
-In which directory do you want to install the library files?
-[/usr/lib/vmware-tools]
-
-The path "/usr/lib/vmware-tools" does not exist currently. This program is
-going to create it, including needed parent directories. Is this what you want?
-[yes]
-
-In which directory do you want to install the documentation files?
-[/usr/share/doc/vmware-tools]
-
-The path "/usr/share/doc/vmware-tools" does not exist currently. This program
-is going to create it, including needed parent directories. Is this what you
-want? [yes]
-
-The installation of VMware Tools 9.0.0 build-782409 for Linux completed
-successfully. You can decide to remove this software from your system at any
-time by invoking the following command: "/usr/bin/vmware-uninstall-tools.pl".
-
-Before running VMware Tools for the first time, you need to configure it by
-invoking the following command: "/usr/bin/vmware-config-tools.pl". Do you want
-this program to invoke the command for you now? [yes]
-Initializing...
-
-Making sure services for VMware Tools are stopped.
-
-The VMware FileSystem Sync Driver (vmsync) allows external third-party backup
-software that is integrated with vSphere to create backups of the virtual
-machine. Do you wish to enable this feature? [no]
-
-Found a compatible pre-built module for vmci. Installing it...
-
-Found a compatible pre-built module for vsock. Installing it...
-
-The module vmxnet3 has already been installed on this system by another
-installer or package and will not be modified by this installer. Use the flag
---clobber-kernel-modules=vmxnet3 to override.
-
-The module pvscsi has already been installed on this system by another
-installer or package and will not be modified by this installer. Use the flag
---clobber-kernel-modules=pvscsi to override.
-
-The module vmmemctl has already been installed on this system by another
-installer or package and will not be modified by this installer. Use the flag
---clobber-kernel-modules=vmmemctl to override.
-
-The VMware Host-Guest Filesystem allows for shared folders between the host OS
-and the guest OS in a Fusion or Workstation virtual environment. Do you wish
-to enable this feature? [no]
-
-Found a compatible pre-built module for vmxnet. Installing it...
-
-The vmblock enables dragging or copying files between host and guest in a
-Fusion or Workstation virtual environment. Do you wish to enable this feature?
-[no]
-
-!!! [EXPERIMENTAL] !!!
-VMware automatic kernel modules enables automatic building and installation of
-VMware kernel modules at boot that are not already present. By selecting yes,
-you will be enabling this experimental feature. You can always disable this
-feature by re-running vmware-config-tools.pl.
-
-Would you like to enable VMware automatic kernel modules?
-[no]
-
-No X install found.
-
-Creating a new initrd boot image for the kernel.
-vmware-tools start/running
-The configuration of VMware Tools 9.0.0 build-782409 for Linux for this running
-kernel completed successfully.
-
-You must restart your X session before any mouse or graphics changes take
-effect.
-
-You can now run VMware Tools by invoking "/usr/bin/vmware-toolbox-cmd" from the
-command line.
-
-To enable advanced X features (e.g., guest resolution fit, drag and drop, and
-file and text copy/paste), you will need to do one (or more) of the following:
-1. Manually start /usr/bin/vmware-user
-2. Log out and log back into your desktop session; and,
-3. Restart your X session.
-
-Enjoy,
-
---the VMware team
-
-Found VMware Tools CDROM mounted at /mnt. Ejecting device /dev/sr0 ...
-No eject (or equivilant) command could be located.
-Eject Failed: If possible manually eject the Tools installer from the guest
-cdrom mounted at /mnt before canceling tools install on the host.
-</code></pre></div></div>
-
-<p>When the script had finished the VMWare Tools will be installed on the virtual machine. Now you can umount the ISO by doing:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># umount /mnt
-</code></pre></div></div>
-
-<p>Then in VSphere you can check that VMWare Tools are running as shown in the first picture of this article.</p>
+        
 
         
       </section>
@@ -514,7 +429,19 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
+      <a href="https://lgallardo.com/categories/centos" class="page__taxonomy-item" rel="tag">CentOS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/redhat" class="page__taxonomy-item" rel="tag">RedHat</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/vmware" class="page__taxonomy-item" rel="tag">VMWare</a>
     
     </span>
   </p>
@@ -580,7 +507,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
 </a>
       
     </h2>
@@ -594,7 +521,6 @@ cdrom mounted at /mnt before canceling tools install on the host.
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
 </p>
   </article>
 </div>
@@ -608,7 +534,34 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
 </a>
       
     </h2>
@@ -622,8 +575,6 @@ cdrom mounted at /mnt before canceling tools install on the host.
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
-
 </p>
   </article>
 </div>
@@ -637,7 +588,7 @@ cdrom mounted at /mnt before canceling tools install on the host.
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
+        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
 </a>
       
     </h2>
@@ -651,41 +602,13 @@ cdrom mounted at /mnt before canceling tools install on the host.
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powkiddy, a...</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:
-
 </p>
   </article>
 </div>
         
       </div>
     </div>
+  
   
 </div>
 
