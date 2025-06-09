@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
-<meta property="article:section" content="Terraform">
-
 
 
 
@@ -369,14 +365,86 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/terraform.jpg" alt="Terraform" /></center>
+<p><br />
+Una de las cosas que tenía pendiente por resolver era el hecho de que en Terraform hay bloques de configuración que dependiendo de las opciones puede que tengan parámetros distintos o que incluso no acepte los mismos parámetros.</p>
+
+<p>Para eso, y guiándome de un código de un <a href="https://github.com/cloudposse/terraform-aws-codebuild" target="_blank">módulo de la  comunidad</a>, logré sortear este problema usando <a href="https://www.terraform.io/docs/configuration/locals.html" target="_blank">locals values de Terraform</a></p>
+
+<p>Tomando un ejemplo de esto tenemos el bloque <code class="highlighter-rouge">artifacts</code> del recurso <a href="https://www.terraform.io/docs/providers/aws/r/codebuild_project.html" target="_blank">aws_codebuild_project de Terraform</a>, el cual puede tener parámetros algunos parámetros si el tipo es <code class="highlighter-rouge">S3</code>, <code class="highlighter-rouge">CODEPIPELINE</code> o <code class="highlighter-rouge">NO_ARTIFACTS</code>. Por ejemplo, si definimos un bloque de la siguiente manera no será fácil la parametrización del mismo:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
+
+[...]
+
+  artifacts{
+      type           = "${var.codebuild_artifacts_type}"
+      location       = "${var.codebuild_artifacts_location}"
+      name           = "${var.codebuild_artifacts_name}"
+      namespace_type = "${var.codebuild_artifacts_namespace_type}"
+      packaging      = "${var.codebuild_artifacts_packaging}"
+      path           = "${var.codebuild_artifacts_path}"
+
+  }
+}
+
+</code></pre></div></div>
+
+<p>Si por ejemplo intentamos colocar el <code class="highlighter-rouge">NO_ARTIFACTS</code> fallará porque aunque se coloquen valores “vacíos” para el resto de los parámetros, estos argumentos no están soportados. Para resolver esto hay que crear una definición del bloque con <code class="highlighter-rouge">locals</code> según el tipo proporcionado por <code class="highlighter-rouge">type</code> y usar esto como un índice:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
+
+[...]
+
+  artifacts = ["${local.codebuild_artifacts}"]
+
+}
+
+locals {
+  codebuild_artifacts_def = {
+    "S3" = [{
+      type           = "${var.codebuild_artifacts_type}"
+      location       = "${var.codebuild_artifacts_location}"
+      name           = "${var.codebuild_artifacts_name}"
+      namespace_type = "${var.codebuild_artifacts_namespace_type}"
+      packaging      = "${var.codebuild_artifacts_packaging}"
+      path           = "${var.codebuild_artifacts_path}"
+    }]
+
+    "CODEPIPELINE" = [{
+      type           = "${var.codebuild_artifacts_type}"
+      location       = "${var.codebuild_artifacts_location}"
+      name           = "${var.codebuild_artifacts_name}"
+      namespace_type = "${var.codebuild_artifacts_namespace_type}"
+      packaging      = "${var.codebuild_artifacts_packaging}"
+      path           = "${var.codebuild_artifacts_path}"
+    }]
+
+    "NO_ARTIFACTS" = [{
+      type = "${var.codebuild_artifacts_type}"
+    }]
+  }
+
+  # Retuned map
+  codebuild_artifacts = "${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}"
+}
+</code></pre></div></div>
+
+<p>Esto crea un bloque diferente dependiendo del tipo definido en la variable <code class="highlighter-rouge">codebuild_artifacts_type</code>.</p>
+
+<h2 id="referencias">Referencias:</h2>
+<ul>
+  <li><a href="https://www.terraform.io/docs/configuration/locals.html" target="_blank">locals values de Terraform</a></li>
+  <li><a href="https://github.com/cloudposse/terraform-aws-codebuild" target="_blank">módulo de la  comunidad de terraform-aws-codebuild</a></li>
+</ul>
+
 
         
       </section>
@@ -422,15 +490,7 @@
     
       
       
-      <a href="https://lgallardo.com/es/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
     
     </span>
   </p>
@@ -494,9 +554,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -509,8 +577,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -521,36 +588,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/es/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -563,8 +611,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Uso de GitHub Copilot Background Agents en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terr...</p>
   </article>
 </div>
         
@@ -575,9 +622,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -590,8 +645,42 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         

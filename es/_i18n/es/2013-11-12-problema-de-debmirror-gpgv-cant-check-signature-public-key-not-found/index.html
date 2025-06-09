@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2025-06-09T07:19:12-05:00">
+<meta property="article:published_time" content="2025-06-09T09:28:37-05:00">
 
 
 <meta property="article:author" content="Luis M. Gallardo D.">
@@ -342,14 +342,63 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/Debmirror_problem.jpg" alt="Debmirror problem" /></center>
+<p><br />
+Tengo un repositorio donde son servidos paquetes de Debian y Ubuntu de forma que las personas en la red interna puedan actualizar usando este repositorio. Pero el otro día me di cuenta que este no podía sincronizarse contra el repositorio de Debian como se describe en el artículo <a href="http://lgallardo.com/es/2012/12/06/como-crear-un-mirror-de-debian-y-ubuntu-con-debmirror/" target="_blank">Cómo crear un mirror de Debian y Ubuntu con debmirror</a>. Cuando trataba de ejecutar el script de sincronización este arrojaba errores y abortaba.</p>
+
+<h1 id="síntomas">Síntomas</h1>
+
+<p>Cuando se ejecuta el script de debmirror, este falla con un error similar a este:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpgv: Signature made Wed 17 Jul 2013 04:40:31 PM CST using RSA key ID 473041FA
+<span class="o">[</span>GNUPG:] ERRSIG AED4B06F473041FA 1 2 00 1374050431 9
+<span class="o">[</span>GNUPG:] NO_PUBKEY AED4B06F473041FA
+gpgv: Can’t check signature: public key not found
+gpgv: Signature made Wed 17 Jul 2013 04:40:31 PM CST using RSA key ID 46925553
+<span class="o">[</span>GNUPG:] ERRSIG 8B48AD6246925553 1 2 00 1374050431 9
+<span class="o">[</span>GNUPG:] NO_PUBKEY 8B48AD6246925553
+gpgv: Can’t check signature: public key not found
+Release signature does not verify
+</code></pre></div></div>
+<h1 id="causa">Causa</h1>
+
+<p>Los paquetes son validados usando una llave, de forma que podamos confiar en lo que descargamos desde los repositorios de origen y qué es instado finalmente en nuestros computadores. Algunos repositorios tienen un juego de llaves con llaves conocidas, y es probable que una nueva llave firmada fue agregada al juego de llaves de Debian/Ubuntu. Esto puede ocurrir si hay una nueva versión de la distro, y nuevas llaves son añadidas, haciendo que nuestro juego de llaves quede obsoletas (les falta las nuevas llaves).</p>
+
+<h1 id="solución">Solución</h1>
+
+<p>Para arreglar este inconveniente, sigue los siguientes pasos dependiendo de la distro a la que le estés haciendo mirror:</p>
+
+<h2 id="debian">Debian</h2>
+
+<p>Actualiza el repositorio e importa las nuevas llaves:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude update
+aptitude safe-upgrade
+gpg <span class="nt">--keyring</span> /usr/share/keyrings/debian-archive-keyring.gpg  <span class="nt">--export</span> | gpg <span class="nt">--no-default-keyring</span> <span class="nt">--keyring</span> /var/data/keyrings/debian/trustedkeys.gpg <span class="nt">--import</span>
+</code></pre></div></div>
+
+<p><strong>Nota:</strong> Si las llaves no fueron agregadas, descarga el último paquete  debian-archive-keyring desde los repoitorioes, extráelo y usa este juego de llaves. Ejemplo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://ftp.us.debian.org/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2012.4_all.deb
+dpkg <span class="nt">-x</span> debian-archive-keyring_2012.4_all.deb  ~
+gpg <span class="nt">--keyring</span> ~/usr/share/keyrings/debian-archive-keyring.gpg  <span class="nt">--export</span> | gpg <span class="nt">--no-default-keyring</span> <span class="nt">--keyring</span> /var/data/keyrings/debian/trustedkeys.gpg <span class="nt">--import</span>
+</code></pre></div></div>
+<h2 id="ubuntu">Ubuntu</h2>
+
+<p>Descarga el último paquete <em>ubuntu-archive-kering</em> y extráelo, luego usa este juego de llaves. Ejemplo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://mirror.pnl.gov/ubuntu//pool/main/u/ubuntu-keyring/ubuntu-keyring_2012.05.19_all.deb
+dpkg <span class="nt">-x</span> ubuntu-keyring_2012.05.19_all.deb ~
+gpg <span class="nt">--keyring</span> ~/usr/share/keyrings/ubuntu-archive-keyring.gpg <span class="nt">--export</span>|gpg <span class="nt">--no-default-keyring</span> <span class="nt">--keyring</span> /var/data/keyrings/ubuntu/trustedkeys.gpg <span class="nt">--import</span>
+</code></pre></div></div>
+<p>Luego el script de sincronización del mirror debe correr sin errores, descargando las últimas actualizaciones.</p>
 
         
       </section>
@@ -383,7 +432,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-09T07:19:12-05:00">June 09, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-09T09:28:37-05:00">June 09, 2025</time></p>
         
       </footer>
 
@@ -405,11 +454,11 @@
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/_i18n/es/2013-10-14-como-instalar-vmware-tools-en-debian-7.md/" class="pagination--pager" title="
+      <a href="https://lgallardo.com/es/_i18n/es/2013-10-14-como-instalar-vmware-tools-en-debian-7/" class="pagination--pager" title="
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/_i18n/es/2013-11-12-problema-de-debmirror-gpgv-cant-check-signature-public-key-not-found.md/" class="pagination--pager" title="
+      <a href="https://lgallardo.com/es/_i18n/es/2013-12-29-mi-primera-aplicacion-en-android-batteryreporter/" class="pagination--pager" title="
 ">Next</a>
     
   </nav>
@@ -442,7 +491,61 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/_i18n/es/2021-04-15-terraform-module-for-aws-ecr/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/_i18n/es/2020-11-23-certified-kubernetes-administrator-cka/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/_i18n/es/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" rel="permalink">
 </a>
       
     </h2>
@@ -469,7 +572,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
+        <a href="https://lgallardo.com/es/_i18n/es/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="permalink">
 </a>
       
     </h2>
@@ -479,61 +582,7 @@
 
 
 
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
+  5 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">

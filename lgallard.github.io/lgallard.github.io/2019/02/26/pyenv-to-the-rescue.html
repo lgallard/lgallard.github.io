@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Programming">
 
-<meta property="article:section" content="Python">
-
 
 
 
@@ -364,14 +362,79 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/Python-logo-150.jpg" alt="Python" /></center>
+<p><br />
+I recently switched to <em>Debian testing</em> again so as to be able to use Python 3.6 among other things. I started working with this version, creating my Lambda Layers and everything was fine until <em>Debian testing</em> switched to Python 3.7. Well, I told myself, there is no drama, using <code class="highlighter-rouge">alternative</code> I can switch versions of Python smoothly or set  <code class="highlighter-rouge">virtualenv</code> to use one interpreter or another.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# update-alternatives --config python
+There are 3 choices for the alternative python (providing /usr/bin/python).
+
+  Selection    Path                Priority   Status
+------------------------------------------------------------
+  0            /usr/bin/python3.6   3         auto mode
+  1            /usr/bin/python2     1         manual mode
+  2            /usr/bin/python3     2         manual mode
+* 3            /usr/bin/python3.6   3         manual mode
+
+Press &lt;enter&gt; to keep the current choice[*], or type selection number: 3
+
+</code></pre></div></div>
+
+<p>But even using <code class="highlighter-rouge">alternative</code> or forcing the interpreter to use Python 3.6 it seems there is always something pointing to Python 3.7:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ virtualenv -p /usr/bin/python3.6 test
+Running virtualenv with interpreter /usr/bin/python3.6
+Traceback (most recent call last):
+  File "/home/lgallard/.local/lib/python3.7/site-packages/virtualenv.py", line 22, in &lt;module&gt;
+    import distutils.spawn
+ModuleNotFoundError: No module named 'distutils.spawn'
+</code></pre></div></div>
+<p><br /></p>
+<h1 id="pyenv-to-the-rescue">pyenv to the rescue</h1>
+
+<p>There is a version manager of Python called <a href="https://github.com/pyenv/pyenv#choosing-the-python-version" target="_blank">pyenv</a> which allows you to configure the environment to use both locally and globally.</p>
+
+<p>For example, to install Python version 3.6.8 just do</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv install 3.6.8
+</code></pre></div></div>
+
+<p>We can verify the versions as follows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ pyenv versions
+  system
+* 3.6.8 (set by /home/lgallard/.pyenv/version)
+
+</code></pre></div></div>
+
+<p>Then to use the version installed with pyenv, just pass the path:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ virtualenv -p ~/.pyenv/versions/3.6.8/bin/python test
+Running virtualenv with interpreter /home/lgallard/.pyenv/versions/3.6.8/bin/python
+Using base prefix '/home/lgallard/.pyenv/versions/3.6.8'
+New python executable in /home/lgallard/test/bin/python
+Installing setuptools, pip, wheel...
+done.
+
+./test/bin/python --version
+Python 3.6.8
+</code></pre></div></div>
+
+<p>This way I was able to keep using the specific Python version I needed.</p>
+
+<p><strong>References:</strong></p>
+
+<ul>
+  <li><a href="https://github.com/pyenv/pyenv#choosing-the-python-version" target="_blank">pyenv</a></li>
+  <li><a href="https://stackoverflow.com/questions/23842713/using-python-3-in-virtualenv" target="_blank">Using Python 3 in virtualenv</a></li>
+</ul>
 
         
       </section>
@@ -413,11 +476,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/programming" class="page__taxonomy-item" rel="tag">Programming</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/python" class="page__taxonomy-item" rel="tag">Python</a>
+      <a href="https://lgallardo.com/categories/programming" class="page__taxonomy-item" rel="tag">Programming</a>
     
     </span>
   </p>
@@ -481,9 +540,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -496,8 +563,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -508,36 +574,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -550,8 +597,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -562,9 +608,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -577,8 +631,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         
