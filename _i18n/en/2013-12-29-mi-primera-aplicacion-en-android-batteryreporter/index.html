@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2025-06-09T01:46:21-05:00">
+<meta property="article:published_time" content="2025-06-09T07:17:29-05:00">
 
 
 <meta property="article:author" content="Luis M. Gallardo D.">
@@ -341,122 +341,14 @@
 
 
 
-  2 minute read
+  less than 1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <p style="text-align: center;"><a title="batteryreporter" href="http://farm4.static.flickr.com/3812/11639022884_3eb95e6a15.jpg" target="_blank"><img class="aligncenter" alt="batteryreporter" src="http://farm4.staticflickr.com/3812/11639022884_3eb95e6a15_n.jpg" width="192" height="320" /></a></p>
-<p>From a while I wanted to learn how to develop Android applications and when I saw that open a course at <a href="https://class.coursera.org/androidapps101-001/wiki/HomePage" target="_blank">Coursera for developing Android appslications</a> so I took the chance to learn. I must confess that it not  a piece of cake, I mean, it just not “copy and paste” code (although you can find example codes out there) and you must learn new concepts, because although you have programmed before (even Java) now you must learn how to do it the “Android’s way”.</p>
-
-<p>After following the video lectures, read and read a lot, I build my first application, which in deed is part of the first assignment for the course. It’s a simple application which reads the device’s battery, and reports if it is charging or discharging, as well as the percentage of charge of the device.</p>
-
-<p><strong>The code (MainActivity.java)</strong></p>
-
-<p>Here you can take a look to the code for the application:</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">lgallardo</span><span class="o">.</span><span class="na">batteryreporter</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">android.os.BatteryManager</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.os.Bundle</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.app.Activity</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.content.Intent</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.content.IntentFilter</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.content.res.Resources</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.view.Menu</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.view.View</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.widget.ImageView</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">android.widget.TextView</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MainActivity</span> <span class="kd">extends</span> <span class="n">Activity</span> <span class="o">{</span>
-
-<span class="nd">@Override</span>
- <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="o">)</span> <span class="o">{</span>
- <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">(</span><span class="n">savedInstanceState</span><span class="o">);</span>
- <span class="n">setContentView</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">activity_main</span><span class="o">);</span>
- <span class="o">}</span>
-
-<span class="nd">@Override</span>
- <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onCreateOptionsMenu</span><span class="o">(</span><span class="n">Menu</span> <span class="n">menu</span><span class="o">)</span> <span class="o">{</span>
- <span class="c1">// Inflate the menu; this adds items to the action bar if it is present.</span>
- <span class="n">getMenuInflater</span><span class="o">().</span><span class="na">inflate</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">menu</span><span class="o">.</span><span class="na">main</span><span class="o">,</span> <span class="n">menu</span><span class="o">);</span>
- <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
- <span class="o">}</span>
-
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">getStatus</span><span class="o">(</span><span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
-
-<span class="n">TextView</span> <span class="n">statusValueTextView</span><span class="o">,</span> <span class="n">chargingValueTextView</span><span class="o">,</span> <span class="n">levelValueTextView</span><span class="o">;</span>
- <span class="n">ImageView</span> <span class="n">iconImageView</span><span class="o">;</span>
-
- <span class="n">String</span> <span class="n">charging</span> <span class="o">=</span> <span class="s">""</span><span class="o">;</span>
-
-<span class="kt">int</span> <span class="n">level</span><span class="o">,</span> <span class="n">scale</span><span class="o">;</span>
- <span class="kt">float</span> <span class="n">batteryPct</span><span class="o">;</span>
-
-<span class="c1">// Get resources reference</span>
- <span class="n">Resources</span> <span class="n">res</span> <span class="o">=</span> <span class="n">getResources</span><span class="o">();</span>
-
-<span class="c1">// Get values TextViews</span>
- <span class="n">statusValueTextView</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">statusValue</span><span class="o">);</span>
- <span class="n">chargingValueTextView</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">chargingValue</span><span class="o">);</span>
- <span class="n">levelValueTextView</span> <span class="o">=</span> <span class="o">(</span><span class="n">TextView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">levelValue</span><span class="o">);</span>
-
- <span class="c1">// Get ImageView (icon)</span>
-
- <span class="n">iconImageView</span> <span class="o">=</span> <span class="o">(</span><span class="n">ImageView</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">imageView1</span><span class="o">);</span>
-
- <span class="c1">// Get battery's status</span>
- <span class="n">IntentFilter</span> <span class="n">ifilter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IntentFilter</span><span class="o">(</span><span class="n">Intent</span><span class="o">.</span><span class="na">ACTION_BATTERY_CHANGED</span><span class="o">);</span>
- <span class="n">Intent</span> <span class="n">batteryStatus</span> <span class="o">=</span> <span class="n">registerReceiver</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">ifilter</span><span class="o">);</span>
-
-<span class="c1">// Check if the battery is charging or is charged?</span>
- <span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="n">batteryStatus</span><span class="o">.</span><span class="na">getIntExtra</span><span class="o">(</span><span class="n">BatteryManager</span><span class="o">.</span><span class="na">EXTRA_STATUS</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
- <span class="kt">boolean</span> <span class="n">isCharging</span> <span class="o">=</span> <span class="n">status</span> <span class="o">==</span> <span class="n">BatteryManager</span><span class="o">.</span><span class="na">BATTERY_STATUS_CHARGING</span>
- <span class="o">||</span> <span class="n">status</span> <span class="o">==</span> <span class="n">BatteryManager</span><span class="o">.</span><span class="na">BATTERY_STATUS_FULL</span><span class="o">;</span>
-
-<span class="c1">// Update UI status</span>
- <span class="n">statusValueTextView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">Integer</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">status</span><span class="o">));</span>
-
-<span class="c1">// Update UI charging</span>
- <span class="k">if</span> <span class="o">(</span><span class="n">isCharging</span><span class="o">)</span> <span class="o">{</span>
- <span class="n">charging</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">yes</span><span class="o">);</span>
-
-<span class="c1">// Get charging method</span>
- <span class="kt">int</span> <span class="n">chargePlug</span> <span class="o">=</span> <span class="n">batteryStatus</span><span class="o">.</span><span class="na">getIntExtra</span><span class="o">(</span>
- <span class="n">BatteryManager</span><span class="o">.</span><span class="na">EXTRA_PLUGGED</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
- <span class="kt">boolean</span> <span class="n">usbCharge</span> <span class="o">=</span> <span class="n">chargePlug</span> <span class="o">==</span> <span class="n">BatteryManager</span><span class="o">.</span><span class="na">BATTERY_PLUGGED_USB</span><span class="o">;</span>
- <span class="c1">// boolean acCharge = chargePlug ==</span>
- <span class="c1">// BatteryManager.BATTERY_PLUGGED_AC;</span>
-
-<span class="k">if</span> <span class="o">(</span><span class="n">usbCharge</span><span class="o">)</span> <span class="o">{</span>
- <span class="n">charging</span> <span class="o">=</span> <span class="n">charging</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">res</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">usb</span><span class="o">);</span>
- <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
- <span class="n">charging</span> <span class="o">=</span> <span class="n">charging</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">res</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">ac</span><span class="o">);</span>
- <span class="o">}</span>
-
- <span class="n">iconImageView</span><span class="o">.</span><span class="na">setImageResource</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">charging</span><span class="o">);</span>
-
-<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
- <span class="n">charging</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">string</span><span class="o">.</span><span class="na">no</span><span class="o">);</span>
- <span class="n">iconImageView</span><span class="o">.</span><span class="na">setImageResource</span><span class="o">(</span><span class="n">R</span><span class="o">.</span><span class="na">drawable</span><span class="o">.</span><span class="na">discharging</span><span class="o">);</span>
- <span class="o">}</span>
-
-<span class="n">chargingValueTextView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">charging</span><span class="o">);</span>
-
-<span class="c1">// Update UI level</span>
- <span class="n">level</span> <span class="o">=</span> <span class="n">batteryStatus</span><span class="o">.</span><span class="na">getIntExtra</span><span class="o">(</span><span class="n">BatteryManager</span><span class="o">.</span><span class="na">EXTRA_LEVEL</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
- <span class="n">scale</span> <span class="o">=</span> <span class="n">batteryStatus</span><span class="o">.</span><span class="na">getIntExtra</span><span class="o">(</span><span class="n">BatteryManager</span><span class="o">.</span><span class="na">EXTRA_SCALE</span><span class="o">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">);</span>
- <span class="n">batteryPct</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">level</span> <span class="o">/</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span> <span class="n">scale</span><span class="o">;</span>
-
-<span class="n">levelValueTextView</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="n">Float</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">batteryPct</span><span class="o">)+</span><span class="s">"%"</span><span class="o">);</span>
-
-<span class="o">}</span>
-
-<span class="o">}</span>
-
-</code></pre></div></div>
+        
 
         
       </section>
@@ -490,7 +382,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-09T01:46:21-05:00">June 09, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-09T07:17:29-05:00">June 09, 2025</time></p>
         
       </footer>
 
@@ -512,11 +404,11 @@
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/_i18n/en/2013-11-12-problema-de-debmirror-gpgv-cant-check-signature-public-key-not-found/" class="pagination--pager" title="
+      <a href="https://lgallardo.com/_i18n/en/2013-11-12-problema-de-debmirror-gpgv-cant-check-signature-public-key-not-found.md/" class="pagination--pager" title="
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/_i18n/en/2014-02-16-samsung-galaxy-tab-p1000-con-android-4-3-cyanogenmod-10-2/" class="pagination--pager" title="
+      <a href="https://lgallardo.com/_i18n/en/2013-12-29-mi-primera-aplicacion-en-android-batteryreporter.md/" class="pagination--pager" title="
 ">Next</a>
     
   </nav>
@@ -549,6 +441,33 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
 </a>
       
@@ -559,7 +478,7 @@
 
 
 
-  1 minute read
+  less than 1 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
@@ -576,7 +495,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup/" rel="permalink">
+        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
 </a>
       
     </h2>
@@ -603,7 +522,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera/" rel="permalink">
+        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
 </a>
       
     </h2>
@@ -614,33 +533,6 @@
 
 
   1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2023-12-18-aws-certified-solutions-architect-professional-2023/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">

@@ -1,0 +1,1070 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>lgallardo.com</title>
+
+
+
+
+<meta name="description" content="DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.">
+
+
+
+
+<meta name="author" content="Luis M. Gallardo D.">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="lgallardo.com">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/_i18n/en/2022-09-25-octoprint-multiple-printers.md/">
+<meta property="og:url" content="https://lgallardo.com/_i18n/en/2022-09-25-octoprint-multiple-printers.md/">
+
+
+
+<meta property="og:description" content="DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="lgallardo.com">
+<meta name="twitter:description" content="DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.">
+<meta name="twitter:url" content="https://lgallardo.com/_i18n/en/2022-09-25-octoprint-multiple-printers.md/">
+
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/luis.jpg">
+
+
+
+
+<meta name="twitter:creator" content="@Luis M. Gallardo D.">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/luis.jpg">
+<meta property="og:image:width" content="400">
+<meta property="og:image:height" content="400">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-06-09T07:17:29-05:00">
+
+
+<meta property="article:author" content="Luis M. Gallardo D.">
+
+
+
+<meta property="article:section" content="_i18n">
+
+<meta property="article:section" content="en">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/_i18n/en/2022-09-25-octoprint-multiple-printers.md/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/_i18n/en/2022-09-25-octoprint-multiple-printers.md/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <meta itemprop="description" content="">
+    <meta itemprop="datePublished" content="June 09, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  13 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        ![OctoPrints](/assets/images/OctoPrint.jpg){:style="display:block; margin-left:auto; margin-right:auto"}<br/>
+One of the most useful tools when managing a 3D printer is [OctoPrint](https://octoprint.org){:target="_blank"}, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).
+
+## Multiple printers
+ But what if we have more than one printer? Can **OctoPrint** manage more than one printer?
+ 
+The short answer is: NO! The software itself is not designed for multiple printers, but you can find alternative ways to have more than one instance of **OctoPrint** running on your device or computer.
+ 
+There are several ways to do this, for example you can [modify the OctoPi scripts to add more instances](http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up- octoprint-for-multiple-printers){:target="_blank"}, create scripts that launch multiple instances of the same program, but the option I ended up using was Docker containers.
+ 
+## Raspberry Pi + Ubuntu
+In my case I have a **Raspberry Pi 4**, with 8 GB of RAM, more than enough to run multiple instances of **OctoPrint**.
+ 
+I originally had a specific operating system installed on my Raspberry called [OctoPi](https://github.com/guysoft/OctoPi){:target="_blank"}, a Debian derivative with **OctoPrint** as the main program that is launched when the Raspberry Pi is turned on, but as I wanted to use containers I decided to use Ubuntu, which general purposed distribution where you can surely find everything you need to work with containers.
+ 
+## Requirements and components:
+For this setup I used the following:
+
+* Impresora 3D - Artillery Genius Pro
+* Impresora 3D - Artillery SideWinder X2
+* 2x WebCam - Logitech C270 (one per printer)
+* Raspberry Pi 4 - 8G RAM
+* SD Card 64 GB
+* Ubuntu 22.04 LTS  ARM 64 bits
+* Docker 20.10.17
+* OctoPrint lastest (1.8.3)
+
+## Ubuntu Installation
+Nowadays is easier than ever to install **Ubuntu** on the Raspberry Pi, you just have to download **Raspberry Pi Imager,** which will generate the image on your SD card, select the operating system, which in this case is **Ubuntu 22.04 LTS** and you're done.  **Raspberry Pi Imager** is avialable for Linux, Mac and Windows, so you can generate the image on the operating system that suits you best.
+
+![Raspberry Pi Imager](/assets/images/Raspberry-Pi-Imager.jpg)
+
+From this very software you will have the possibility to configure the password of the WiFi network in case you are using the Raspberry wirelessly, so you don't need  to use a television set and a keyboard (headless), or manipulate the SD card to configure the networking. Since I'm using it headless, that's what I did and then I connected via **ssh**.
+
+![WiFi Settings](/assets/images/OctoPi-WiFi-Setting.jpg)
+
+For the headless setup the trick is to let the **Ubuntu** initialization scripts run and then connect via ssh. Now if you see that you can't connect via ssh you can look for an HDMI cable and a keyboard to check what might be going on.
+
+## Software installation on Ubuntu
+Apart from **Docker** we are going to need **docker-compose**, and the utilities that will help us install them.
+
+## Docker and docker-compose
+To install docker you need to download it using the script. You will need to loging in as the administrator user with the root account:
+
+```bash
+pi@octopi:~$ sudo su
+root@octopi:~# 
+
+root@octopi:~# apt install curl
+root@octopi:~# curl -sSL https://get.docker.com | sh
+
+root@octopi:~# apt update
+root@octopi:~# apt install docker-compose
+```
+
+## OctoPrint with one printer
+The first thing you need is to create a folder for OctoPrint, and then go into it:
+
+```bash
+root@octopi:~# mkdir octoprint
+root@octopi:~# 
+root@octopi:~# cd octoprint/
+root@octopi:~/octoprint#
+```
+
+Let's start with a printer, in this case I'll start with the `Artillery Genius Pro`. For this you can create a folder that identifies this printer:
+
+```bash
+root@octopi:~# mkdir geniuspro
+root@octopi:~# chmod -R 777 geniuspro/
+```
+
+It's important to know the actual path because you'll use it later in the container definition along with the name of this folder. To do this, execute the following command:
+
+```bash
+root@octopi:~# pwd
+/root/octoprint
+```
+
+With this you can indicate the files of this first instance of OctoPrint will reside in `/root/octoprint/geniuspro`
+
+Now to configure the printer you need to use  `docker-compose` so you need to create the `docker-compose.yml` file with the following information:
+
+```
+version: '2.4'
+
+services:
+  geniuspro:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/video0:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30
+```
+
+This file defines various things related to OctoPrint, such as the webcam and the printer itself. For example,  `image`  indicates which Docker image to use for the `geniuspro` service.
+
+Notice the ports definitions, where `5000` will be used for the web interface and `8080` for webcam streaming video.
+
+On the other hand, the printer is defined as a device in `/dev/ttyACM0`, and the webcam in `/dev/video0` 
+
+Something to keep in mind and that differs from the [example on which I based](https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit){:target="_bla￼nk"}, is that the streamer is now part of the Docker image and is served on port `8080`, so there is no need to have a separate definition of another Docker image pointing to the streamer.
+
+ `volumes`  has the reference to the printer directory that you had created as `/root/octoprint/geniuspro`, which will be mapped into the container as the `/octoprint` folder. That is, when we launch the container all the OctoPrint files for this printer will be in the `/root/octoprint/geniuspro` path of the operating system.
+
+Finally, `environment` has the streamer parameters, like webcam device from the container. In this case both the OS and the container match the path `/dev/video0`. Here you also need to provide you webcam parameters, in my case I indicated that the resolution is 1280x960 at 30 frames per second, which is what corresponds to my Logitech C270. For other models you can consult the [supported cameras list page](https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149){:target= "_bla￼nk"}.
+
+Once the `docker-compose.yml` file has been created with the information shown above, all you have to do is start the service with Docker:
+
+```
+root@octopi:~/octoprint# docker-compose up -d
+  
+Creating octoprint_geniuspro_1 ... done
+```
+
+With this we can access the OctoPrint web interface from the Raspberry Pi on the port that we had indicated,  in my case the url is http://192.168.68.102:5000:
+
+![OctoPrint Web 1](/assets/images/octoprint-multi-web.jpg)
+
+## Adding a second printer
+
+To add a second printer, you just have to replicate the configuration you had before, but specifying the new printer and the corresponding video camera. So for my Artillery Sidewinder X2 this would be:
+
+```
+version: '2.4'
+
+services:
+  geniuspro:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/video0:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30
+ 
+  sidewinder_x2:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyACM1:/dev/ttyACM0
+      - /dev/video2:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30
+
+```
+
+Take into account the phycal printer is identified as `/dev/ttyACM1` in the Raspberry , but the container internally it will be see it as `/dev/ttyACM0`. The same goes for the video camera, where it is physically identified as `/dev/video2` but internally the container will see it as `/dev/video0`.
+
+Once the configuration has been created, the container must be run as follows: 
+
+```
+root@octopi:~/octoprint# docker-compose up -d
+  
+octoprint_geniuspro_1 is up-to-date
+Creating octoprint_sidewinderx2_1 ... done
+```
+
+This will now allow access to the second instance of OctoPrint on port 5001:
+
+![OctoPrint Web 2](/assets/images/octoprint-multi-web2.jpg)
+
+## How to differentiate printers?
+In the example above I used the devices `/dev/ttyACM0` and `/dev/ttyACM1` to reference my first printer, the Artillery Genius Pro, and my second printer, the Artillery SideWinder X2, but the operating system not always takes that order, since it will depend on which one you had turned on first. In order to identify the printers regardless of the connection order we can create a symbolic link using `udev` with the manufacturer and product information.
+
+For this, you have first list the USB devices:
+
+```
+root@octopi:~/octoprint# lsusb
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
+Bus 001 Device 003: ID 046d:0825 Logitech, Inc. Webcam C270
+Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
+Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+
+There are two **STMicroelectronics Virtual COM Port** devices here, corresponding to the two printers, but which is which? We are going to ask for the detail of these devices:
+ 
+```
+ root@octopi:~/octoprint# lsusb -v -d 0483:5740
+
+Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
+Device Descriptor:
+  bLength                18
+  bDescriptorType         1
+  bcdUSB               2.00
+  bDeviceClass            2 Communications
+  bDeviceSubClass         2 Abstract (modem)
+  bDeviceProtocol         0
+  bMaxPacketSize0        64
+  idVendor           0x0483 STMicroelectronics
+  idProduct          0x5740 Virtual COM Port
+  bcdDevice            0.00
+  iManufacturer           1 STMicroelectronics
+  iProduct                2 ARTILLERY_RUBY CDC in FS Mode
+  iSerial                 3 386F39543538  
+...
+  
+Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
+Device Descriptor:
+  bLength                18
+  bDescriptorType         1
+  bcdUSB               2.00
+  bDeviceClass            2 Communications
+  bDeviceSubClass         2 Abstract (modem)
+  bDeviceProtocol         0
+  bMaxPacketSize0        64
+  idVendor           0x0483 STMicroelectronics
+  idProduct          0x5740 Virtual COM Port
+  bcdDevice            0.00
+  iManufacturer           1 STMicroelectronics
+  iProduct                2 ARTILLERY_RUBY CDC in FS Mode
+  iSerial                 3 3594398F3538  
+...
+```
+
+What differentiates one printer from another is the serial number of the device. Since the Artillery Genius Pro was initially mapped to `/dev/ttyACM0`, we can check what its serial number is:
+ 
+```
+root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
+    ATTRS{serial}=="3594398F3538"
+    ATTRS{serial}=="0000:01:00.0"
+```
+
+Now to see the serial code of the Artillery Sidewinder X2 you have to consult the device `/dev/ttyACM1`:
+
+```
+
+root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM1 | grep serial
+    ATTRS{serial}=="386F39543538"
+    ATTRS{serial}=="0000:01:00.0" 
+```
+
+For `udev` to recognize these rules we must create the following file `/etc/udev/rules.d/40-printers.rules` , with this content:
+ 
+```
+ # Genius Pro
+KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="3594398F3538", SYMLINK="ttyGeniusPro"
+
+# Sidewinder X2
+KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="386F39543538", SYMLINK="ttySidewinderX2"
+```
+ 
+ Then `udev` must be restarted to take these changes:
+  
+```
+root@octopi:~/octoprint# udevadm control --reload-rules && udevadm trigger
+```
+
+This way the printers will be mapped as follows:
+  
+```
+root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
+lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttyGeniusPro -> ttyACM0
+lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttySidewinderX2 -> ttyACM1
+```
+
+So the Docker configuration can be modified to reflect these changes:
+  
+```
+version: '2.4'
+
+services:
+  geniuspro:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyGeniusPro:/dev/ttyACM0
+      - /dev/video0:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30
+
+  sidewinderx2:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5001:5000
+      - 8081:8080
+    devices:
+      - /dev/ttySidewinderX2:/dev/ttyACM0
+      - /dev/video2:/dev/video0
+    volumes:
+      - /root/octoprint/sidewinderx2:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30  
+
+```
+
+## Webcams
+Unlike printers which have different serial numbers, I have two **Logitech C270** webcams that are exactly the same model. How can we  differente them? How can we make the OS to take the right camera?
+
+Again we do the analysis with `lsusb`:
+
+```
+root@octopi:~/octoprint# lsusb
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
+Bus 001 Device 003: ID 046d:0825 Logitech, Inc. Webcam C270
+Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
+Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+Both cameras are on the same bus but identified as different USB devices, which we can take advantage of. In this case we will not use the product id to differentiate them but the USB device id. We'll be referencing the `video4linux` subsystem instead of `tty`, so we'll be using `KERNELS` instead of `KERNEL` to differentiate cameras. For example, to find out which USB device the camera in `/dev/video0` is on, we can run the following:
+
+```
+root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
+    KERNELS=="1-1.4:1.0"
+    KERNELS=="1-1.4"
+    KERNELS=="1-1"
+    KERNELS=="usb1"
+    KERNELS=="0000:01:00.0"
+    KERNELS=="0000:00:00.0"
+    KERNELS=="pci0000:00"
+    KERNELS=="fd500000.pcie"
+    KERNELS=="scb"
+    KERNELS=="platform"
+```
+
+For the other camera we do the same:
+
+```
+root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
+    KERNELS=="1-1.3:1.0"
+    KERNELS=="1-1.3"
+    KERNELS=="1-1"
+    KERNELS=="usb1"
+    KERNELS=="0000:01:00.0"
+    KERNELS=="0000:00:00.0"
+    KERNELS=="pci0000:00"
+    KERNELS=="fd500000.pcie"
+    KERNELS=="scb"
+    KERNELS=="platform"
+```
+
+Now with this information we can modify the `udev` rules as follows:
+
+```
+# Genius Pro
+KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="3594398F3538", SYMLINK="ttyGeniusPro"
+SUBSYSTEM=="video4linux", KERNELS=="1-1.3", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", SYMLINK="videoGeniusPro"
+
+# Sidewinder X2
+KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="386F39543538", SYMLINK="ttySidewinderX2"
+SUBSYSTEM=="video4linux", KERNELS=="1-1.4", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", SYMLINK="videoSidewinderX2"
+```
+
+Remember to reset the `udev` rules with:
+
+```
+root@octopi:~/octoprint# udevadm control --reload-rules && udevadm trigger
+```
+
+So now we have the cameras mapped to `/dev/videoGeniusPro` and `/dev/videoSidewinderX2` respectively. Now we can modify the **docker-compose.yml** file to take this new configuration:
+
+```
+version: '2.4'
+
+services:
+  geniuspro:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyGeniusPro:/dev/ttyACM0
+      - /dev/videoGeniusPro:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30
+
+  sidewinderx2:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5001:5000
+      - 8081:8080
+    devices:
+      - /dev/ttySidewinderX2:/dev/ttyACM0
+      - /dev/videoSidewinderX2:/dev/video0
+    volumes:
+      - /root/octoprint/sidewinderx2:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30
+```
+
+## Performance with two instances of OctoPrint
+Probably you are wondering about the consumption of these containers in the operating system and if the Raspberry can handle it. Here is an image of `htop` with the two containers above printing to each of the printers at the same time.
+
+![htop](/assets/images/octoprint-htop.jpg)
+
+As you can see the Raspberry has a lot of resources available, since of the 8GB of RAM it is only consuming 0.5 GB including the operating system. From this we can draw two conclusions: the first one is that more printers can be added without problems, the only limit is the number of USB ports offered by the Raspberry (4 in my model), but you could add a USB hub to add more ports; and the second conclusion is that for two printers you could use a Raspberry with less RAM, for example 2 GB or 4 GB, and thus you would save a little.
+
+## What does the Raspberry Pi and printers look like?
+To finish this article I leave you a photo of my printers connected to the RaspBerry Pi:
+
+![3D printers](/assets/images/3dprinters.jpg)
+
+On the smaller printer you can see a small gray box that is the Raspberry Pi, next to the two web cameras.
+
+# References
+* [OctoPrint](https://octoprint.org){:target="_blank"}
+* [OctoPi](https://github.com/guysoft/OctoPi){:target="_blank"}
+* [Setting up OctoPrint on a Raspberry Pi for multiple printers](http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers){:target="_blank"}
+* [Installing OctoPrint using Docker in Linux (video tutorial)](https://youtu.be/LcA9o6OGfEg){:target="_blank"}
+* [Installing OctoPrint using Docker in Linux (instructions)](https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit){:target="_blank"}
+* [USB webcams known to work with mjpg-streamer](https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149){:target="_bla￼nk"}.
+* [How to distinguish between identical USB-to-serial adapters?](https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters){:target="_blank"}
+* [Udev Rule to discern 2 identical webcams on Linux](https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux){:target="_blank"}
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/i18n" class="page__taxonomy-item" rel="tag">_i18n</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/en" class="page__taxonomy-item" rel="tag">en</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-09T07:17:29-05:00">June 09, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=%20https%3A%2F%2Flgallardo.com%2F_i18n%2Fen%2F2022-09-25-octoprint-multiple-printers.md%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F_i18n%2Fen%2F2022-09-25-octoprint-multiple-printers.md%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F_i18n%2Fen%2F2022-09-25-octoprint-multiple-printers.md%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F_i18n%2Fen%2F2022-09-25-octoprint-multiple-printers.md%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/_i18n/en/2022-04-17-paperlike-pencil-grips.md/" class="pagination--pager" title="
+">Previous</a>
+    
+    
+      <a href="https://lgallardo.com/_i18n/en/2023-12-18-aws-certified-solutions-architect-professional-2023.md/" class="pagination--pager" title="
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lgallardo.com/_i18n/en/2022-09-25-octoprint-multiple-printers.md/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/_i18n/en/2022-09-25-octoprint-multiple-printers.md"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>
