@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="RaspberryPi">
-
-<meta property="article:section" content="Raspbian">
-
 
 
 
@@ -368,14 +364,118 @@
 
 
 
-  less than 1 minute read
+  3 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img alt="Raspberry Pi - USB Hard drive" src="/images/8556210768_fdeb59f794.jpg" /></center>
+<p><br />
+I’ve been using my Raspberry Pi with a 4 GB - class 4  SD card Kingston until it decided to die (since I burn the image the first time that SD card was a little problematic). Because I didn’t have another 2GB or higher SD card, I decided to do a research to check if I could use the first partition as boot and another partition from an external USB hard drive of 320 GB. Effectively it can be done and I describe the needed steps on this article.</p>
+
+<h1 id="raspbian-image">Raspbian Image</h1>
+
+<p>I decided to use the Raspbian image <a href="http://downloads.raspberrypi.org/images/raspbian/2013-02-09-wheezy-raspbian/2013-02-09-wheezy-raspbian.zip" target="_blank">Raspbian 2013-02-09-wheezy-raspbian.img</a>, but first I had to do a trick: dump the image to a 8 GB pen drive to be able separate the /boot partition and the remaining file system.</p>
+
+<h2 id="dumping-raspbian-to-the-pen-drive">Dumping Raspbian to the pen drive</h2>
+
+<p>Just dump the Raspbian image as it were a SD card, but instead of using <em>/dev/mmcblk0</em> do it on your  pen drive:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.img <span class="nv">of</span><span class="o">=</span>/dev/sdb
+</code></pre></div></div>
+
+<h2 id="extracting-the-boot-image">Extracting the boot image</h2>
+
+<p>In order to extract the Raspbian’s boot image just dump the first partition of the pen drive:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/dev/scb1 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img
+</code></pre></div></div>
+
+<h2 id="extracting-the-operating-system">Extracting the operating system</h2>
+
+<p>Do the same to extract the file system where the operating systems resides:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/dev/sdc2 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img
+</code></pre></div></div>
+
+<h1 id="partition-boot-on-sd-card">Partition /boot on SD card</h1>
+
+<p>You will still need a SD card to boot your Rasberry, but it not longer need to be 2GB, in fact it could be much less, even 64 MB (I use a 1 GB SD card I found). To do so, you need to make a partition with <em>GParted</em> of about 60 MB as show in the next picture:</p>
+
+<center><img alt="GParted - SD Card" src="/images/8554117258_2d08f1b9f1.jpg" /></center>
+<p><br /></p>
+
+<p>Now copy the content of the first image you dumped previously:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img <span class="nv">of</span><span class="o">=</span>/dev/sdb1
+</code></pre></div></div>
+
+<p>Once you have copied the data you must mount that partition and then edit file <em>/media/usb0/cmdline.txt  </em>(change <em>/media/usb0</em> according to the mounting point), and put the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dwc_otg.lpm_enable<span class="o">=</span>0 <span class="nv">console</span><span class="o">=</span>ttyAMA0,115200 <span class="nv">kgdboc</span><span class="o">=</span>ttyAMA0,115200 <span class="nv">console</span><span class="o">=</span>tty1 &lt;strong&gt;root<span class="o">=</span>/dev/sda1&lt;/strong&gt; <span class="nv">rootfstype</span><span class="o">=</span>ext4 <span class="nv">elevator</span><span class="o">=</span>deadline rootwait
+</code></pre></div></div>
+
+<p>Here is important to put <strong><em>root=/dev/sda1</em></strong>  so the Raspberry uses the first partition of the external USB hard drive as the root partition, I mean, the “/”; directory at boot.</p>
+
+<h1 id="partitioning-the-external-usb-hard-drive">Partitioning the external USB hard drive</h1>
+
+<p>Connect the hard drive to a PC and make the partitions as shown in the next picture. The first partition will content the file system  and the second one will be used for saving data (you can define later that in the <em>/etc/fstab</em> of your the RaspBerry Pi).</p>
+
+<center><img alt="GParted - hard drive" src="http://farm9.staticflickr.com/8530/8553015259_26cc222350.jpg" />
+</center>
+<p><br /></p>
+
+<h1 id="file-system-partition-">File system partition “/”</h1>
+
+<p>Now you can dump the Raspian image you got to the first partition of the USB hard drive. To do so type this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img <span class="nv">of</span><span class="o">=</span>/dev/sdc1
+</code></pre></div></div>
+
+<h2 id="fixing-the-size-partition">Fixing the size partition</h2>
+
+<p>As you can see in the last picture, the partition was created of 9 GB size, but if you mount the partition it will report it as only 2 GB because the Raspian image has that size by default.  To fix this you must umount the partition and and resize the file system:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# umount /dev/sdc1
+
+:~# e2fsck <span class="nt">-f</span> /dev/sdc1
+
+e2fsck 1.42.5 <span class="o">(</span>29-Jul-2012<span class="o">)</span>
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+Raspbian: 66488/114688 files <span class="o">(</span>0.1% non-contiguous<span class="o">)</span>, 346538/458240 blocks
+
+:~# resize2fs /dev/sdc1
+
+resize2fs 1.42.5 <span class="o">(</span>29-Jul-2012<span class="o">)</span>
+Resizing the filesystem on /dev/sdc1 to 2304000 <span class="o">(</span>4k<span class="o">)</span> blocks.
+The filesystem on /dev/sdc1 is now 2304000 blocks long.
+</code></pre></div></div>
+
+<p>After that check the available space. It should report something like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df <span class="nt">-h</span>
+
+/dev/sdc2 285G 191M 271G 1% /media/Data
+/dev/sdc1 8.7G 1.3G 7.0G 16% /media/Raspbian
+</code></pre></div></div>
+
+<p>If you follow these steps, your Raspberry Pi will boot from a USB hard drive.</p>
+
+<h2 id="final-notes">Final notes</h2>
+
+<ul>
+  <li>It’s a fact that a hard drive have a higher price than a SD card but you have to consider the later will suffer more, specially a file system with journal can kill the SD card, so it’s not crazy to think in an external USB hard drive.</li>
+  <li>This hard drive and keyword are powered by the Raspberry Pi without problems. But if I connect something more, for instance a mouse, it can’t handle all and the device reboots.</li>
+  <li>Using a hard drive can solve the SD card compatibility issue (recommended class 6 type). In my case I used a SanDisk of 1 GB, class 4 and it worked perfectly.</li>
+  <li>Probably you can use dd and extract the /boot and file system partitions, but due I didn’t know the exact size and because I was a little lazy a decide to dump the Raspbian image on a pen drive and extract the images that way.</li>
+</ul>
+
 
         
       </section>
@@ -421,15 +521,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/raspberrypi" class="page__taxonomy-item" rel="tag">RaspberryPi</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/raspbian" class="page__taxonomy-item" rel="tag">Raspbian</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -493,9 +585,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -508,8 +608,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -520,36 +619,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -562,8 +642,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -574,9 +653,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -589,8 +676,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

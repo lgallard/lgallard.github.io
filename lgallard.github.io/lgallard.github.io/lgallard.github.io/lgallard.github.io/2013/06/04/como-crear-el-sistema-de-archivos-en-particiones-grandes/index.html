@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="SysAdmin">
-
 
 
 
@@ -364,14 +362,81 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img alt="Hard drives" src="/images/8903890585_d232fbb0ae.jpg" /></center>
+<p><br />
+Sometimes you’ll see on hard drives some inconsistencies with size, used value and the available space. The problem occurs when the operating system reports something different of what we locally we expect. For example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df <span class="nt">-h</span> | <span class="nb">grep </span>data
+
+Filesystem Size Used Avail Use% Mounted on
+
+/dev/sdb1 788G 726G 23G 98% /var/data
+</code></pre></div></div>
+
+<p>If you do the math it should be 788 GB – 726 GB = 62 GB…but <em>df</em> (I mean Linux) reports there are 23 GB available. Where are the remaining 39 GB?</p>
+
+<p>The issue is the available space. Available for whom? For the operating system, users, etc. But it turns out that on ext2, ext3 and ext4 file systems there is a  5%  of space reserved  by default to avoid the system to collapse, for example due to logs or data bases making it in-operating, so root can use that 5% to rescue it. Thus, checking the size of that partition we can see that  5% of 788 GB is 39.5 GB. Here is the difference.</p>
+
+<p>Now, how can we use or take advantage of those extra GBs, because if a partition is used just for data those 5% for the operating system makes no sense except for the root /  or  /var partitions,. There are two ways:</p>
+
+<ol>
+  <li>
+    <p>When the partition’s file system is created you can use the  <em>-m</em> option in the  <em>mkfs.ext[2,3,4]</em> command. example:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> :~# mkfs.ext3 <span class="nt">-m</span> 0 /dev/sdb1
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>If the filesystem was already created, you can use the  <em>-m</em> option with the <em>tune2fs</em> command. But here it’s important to umount the partition first to avoid data loss. Example:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> :~# umount /var/data
+  
+ :~#  tune2fs <span class="nt">-m</span> 0 /dev/sdb1
+  
+ tune2fs 1.41.12 <span class="o">(</span>17-May-2010<span class="o">)</span>
+ Setting reserved blocks percentage to 0% <span class="o">(</span>0 blocks<span class="o">)</span>
+    
+ :~#  mount /var/data
+</code></pre></div>    </div>
+    <p>Then check the available space one more time:</p>
+  </li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df <span class="nt">-h</span> | <span class="nb">grep </span>data
+  
+Filesystem Size Used Avail Use% Mounted on
+
+/dev/sdb1 788G 726G 63G 93% /var/data
+</code></pre></div></div>
+
+<p>Now  the space available correspond to what we logically expected…by the way, how we can check the reserved space without using <em>df</em>? There are to ways:</p>
+
+<ol>
+  <li>
+    <p>Using dumpe2fs:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> :~# dumpe2fs <span class="nt">-h</span> /dev/sdb1 | <span class="nb">grep </span>Reserved
+  
+ dumpe2fs 1.41.12 <span class="o">(</span>17-May-2010<span class="o">)</span>
+ Reserved block count: 0
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Using  tune2fs:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> :~# tune2fs <span class="nt">-l</span> /dev/sdb1 | <span class="nb">grep </span>Reserved Reserved block
+    
+ count: 0
+</code></pre></div>    </div>
+  </li>
+</ol>
 
         
       </section>
@@ -413,11 +478,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/sysadmin" class="page__taxonomy-item" rel="tag">SysAdmin</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -481,9 +542,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -496,8 +565,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -508,36 +576,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -550,8 +599,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -562,9 +610,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -577,8 +633,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         
