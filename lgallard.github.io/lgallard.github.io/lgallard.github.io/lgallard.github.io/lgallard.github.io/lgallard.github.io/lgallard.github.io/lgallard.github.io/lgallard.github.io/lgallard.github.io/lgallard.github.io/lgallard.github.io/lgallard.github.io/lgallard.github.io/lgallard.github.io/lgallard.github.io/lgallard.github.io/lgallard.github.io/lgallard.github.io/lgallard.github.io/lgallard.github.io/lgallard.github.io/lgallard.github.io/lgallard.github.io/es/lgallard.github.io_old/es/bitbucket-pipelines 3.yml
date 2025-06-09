@@ -1,0 +1,31 @@
+# This is a sample build configuration for Ruby.
+# Check our guides at https://confluence.atlassian.com/x/8r-5Mw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: ruby:2.3.3
+
+pipelines:
+  default:
+    - step:
+        script: # Modify the commands below to build your repository.
+          - bundler --version
+          - bundle install
+          - bundle exec jekyll build -t
+  branches:
+    master:
+      - step:
+          script:
+            - bundler --version
+            - bundle install
+            - bundle exec jekyll build -t
+            - git clone https://github.com/lgallard/lgallard.github.io.git
+            - cp -r /opt/atlassian/pipelines/agent/build/_site/* lgallard.github.io/
+            - cd lgallard.github.io
+            - ls -la 2016/
+            - git config --global user.email "lgallard@gmail.com"
+            - git config --global user.name "Luis Gallardo"
+            - git config --global push.default simple
+            - git add --all
+            - git commit -m "`date`"
+            - git push https://$githubtoken@github.com/lgallard/lgallard.github.io.git

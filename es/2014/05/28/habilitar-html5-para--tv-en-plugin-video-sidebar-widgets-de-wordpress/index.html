@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Programación">
 
-<meta property="article:section" content="PHP">
-
-<meta property="article:section" content="WordPress">
-
 
 
 
@@ -369,14 +365,94 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <h2 id="el-problema">El problema</h2>
+
+<p>Viendo mi blog desde una tableta me percaté que los videos de Blipblip.tv que configuré en el <em>Video Sidebar Widgets</em> no se mostraban. Investigando me di cuenta que el plugin carga la versión anterior del reproductor de Blipblip.tv basado en Flash y no HTML5, por lo que lo videos no se podían apreciar desde dispositivos móviles que no soportasen Flash, los cuales ya son la mayoría.</p>
+
+<h2 id="la-solución">La solución</h2>
+
+<p>Simplemente en los archivos <em>helper-functions.php</em> y <em>class-videosidebarwidget.php</em> agregué condicionales para el caso Blipblip.tv y en concordancia agregué el player con HTML5. En particular, agregué las siguientes líneas en el archivo <em>helper-functions.php:</em></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elseif($admin=="true"){
+ if($source == "Blip"){
+ echo "\n&amp;lt;iframe src=\"$value.html?p=1\" width=\"250\" height=\"250\" 
+ frameborder=\"0\" allowfullscreen&amp;gt;
+ &amp;lt;/iframe&amp;gt; 
+ 
+ &amp;lt;embed type=\"application/x-shockwave-flash\" src=\"http://a.blip.tv/api.swf#$v_id2\" 
+ style=\"display:none\"&amp;gt;
+ &amp;lt;/embed&amp;gt;\n\n"; 
+ }else{ 
+ // echo video in admin
+ echo "\n&amp;lt;object width=\"212\" height=\"172\"&amp;gt;\n";
+ echo $flashvar;
+ echo "&amp;lt;param name=\"allowfullscreen\" value=\"true\" /&amp;gt;\n";
+ echo "&amp;lt;param name=\"allowscriptaccess\" value=\"always\" /&amp;gt;\n";
+ echo "&amp;lt;param name=\"movie\" value=\"$value\" /&amp;gt;\n";
+ echo "&amp;lt;param name=\"wmode\" value=\"transparent\"&amp;gt;\n";
+ echo "&amp;lt;embed src=\"$value\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" ";
+ echo "allowfullscreen=\"true\" allowscriptaccess=\"always\" ";
+ echo $flashvar2;
+ echo "width=\"212\" height=\"172\"&amp;gt;\n";
+ echo "&amp;lt;/embed&amp;gt;\n";
+ echo "&amp;lt;/object&amp;gt;\n\n";
+ }
+}else{
+</code></pre></div></div>
+
+<p>Y en el archivo <em>class-videosidebarwidget.php</em> modifiqué lo siguiente:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+case 'Blip':
+ $rv_value = "http://blip.tv/play/$Embed_id";
+ &lt;strong&gt;$rv_flashvar&lt;/strong&gt; = "";
+ $rv_flashvar2 = "";
+ $rv_cap = $Embed_cap;
+</code></pre></div></div>
+
+<p>Y agregué estas líneas:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if($select_source == "Blip"){ 
+ echo "\n&amp;lt;iframe align=\"left\" src=\"$rv_value.html?p=1\" width=\"$RV_width\" height=\"$RV_height\" 
+ frameborder=\"0\" allowfullscreen&amp;gt;
+ &amp;lt;/iframe&amp;gt;
+ 
+ &amp;lt;embed type=\"application/x-shockwave-flash\" src=\"http://a.blip.tv/api.swf#$Embed_id\" 
+ style=\"display:none\"&amp;gt;
+ &amp;lt;/embed&amp;gt;\n\n";
+}else{
+ echo "\n&amp;lt;object width=\"$RV_width\" height=\"$RV_height\"&amp;gt;\n";
+ echo $rv_flashvar;
+ echo "&amp;lt;param name=\"allowfullscreen\" value=\"true\" /&amp;gt;\n";
+ echo "&amp;lt;param name=\"allowscriptaccess\" value=\"always\" /&amp;gt;\n";
+ echo "&amp;lt;param name=\"movie\" value=\"$rv_value\" /&amp;gt;\n";
+ echo "&amp;lt;param name=\"wmode\" value=\"transparent\"&amp;gt;\n";
+ echo "&amp;lt;embed src=\"$rv_value\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" ";
+ echo "allowfullscreen=\"true\" allowscriptaccess=\"always\" ";
+ echo $rv_flashvar2;
+ echo "width=\"$RV_width\" height=\"$RV_height\"&amp;gt;\n";
+ echo "&amp;lt;/embed&amp;gt;\n";
+ echo "&amp;lt;/object&amp;gt;\n\n";
+ }
+ if(!empty($rv_cap)){echo "&amp;lt;p class=\"VideoCaption\"&amp;gt;$rv_cap&amp;lt;/p&amp;gt;\n\n";};
+ 
+ 
+ echo $after_widget;
+ }
+</code></pre></div></div>
+
+<p>Luego de esto, los videos aleatorios con HTML5 se cargan sin problemas.</p>
+
+<h2 id="soporte-del-plugin">Soporte del plugin</h2>
+
+<p>Por cierto que contacté al desarrollador del plugin para que agregue estos cambios y me informó que estaba muy ocupado para hacerlo. Lástima que no lo sede al dominio público para que otro lo siga manteniendo.</p>
 
         
       </section>
@@ -422,15 +498,7 @@
     
       
       
-      <a href="https://lgallardo.com/es/categories/php" class="page__taxonomy-item" rel="tag">PHP</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/programaci%C3%B3n" class="page__taxonomy-item" rel="tag">Programación</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/wordpress" class="page__taxonomy-item" rel="tag">WordPress</a>
+      <a href="https://lgallardo.com/es/categories/programaci%C3%B3n" class="page__taxonomy-item" rel="tag">Programación</a>
     
     </span>
   </p>
@@ -494,9 +562,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -509,8 +585,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -521,36 +596,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/es/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -563,8 +619,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Uso de GitHub Copilot Background Agents en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terr...</p>
   </article>
 </div>
         
@@ -575,9 +630,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -590,8 +653,42 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         

@@ -1,75 +1,275 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2021-02-09T17:00:44-06:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Certified Kubernetes Administrator (CKA)</title><link href="https://lgallardo.com/2021/02/09/2021-02-09-certified-kubernetes-administrator-cka/" rel="alternate" type="text/html" title="Certified Kubernetes Administrator (CKA)" /><published>2021-02-08T18:00:00-06:00</published><updated>2021-02-08T18:00:00-06:00</updated><id>https://lgallardo.com/2021/02/09/certified-kubernetes-administrator-cka</id><content type="html" xml:base="https://lgallardo.com/2021/02/09/2021-02-09-certified-kubernetes-administrator-cka/">&lt;center&gt;&lt;img src=&quot;/images/cka.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2021-04-16T19:43:26-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Terraform module for AWS ECR</title><link href="https://lgallardo.com/2021/04/15/terraform-module-for-aws-ecr" rel="alternate" type="text/html" title="Terraform module for AWS ECR" /><published>2021-04-14T19:00:00-05:00</published><updated>2021-04-14T19:00:00-05:00</updated><id>https://lgallardo.com/2021/04/15/terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/2021/04/15/terraform-module-for-aws-ecr">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;
+I share here another Terraform module I published as open source code, which allows you to create registries in &lt;a href=&quot;https://aws.amazon.com/ecr/&quot; target=&quot;_blank&quot;&gt;AWS ECR&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;This post describes my experience and recommendations for tackling the &lt;strong&gt;Certified Kubernetes Administrator (CKA)&lt;/strong&gt; exam by The Linux Foundation.&lt;/p&gt;
+&lt;p&gt;You can check my module &lt;strong&gt;terraform-aws-ecr&lt;/strong&gt; at the &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/ecr/aws&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; or clone it from &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr.git&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h1 id=&quot;the-exam&quot;&gt;The exam&lt;/h1&gt;
+&lt;p&gt;If you want to take a sneak of the module, I also left the README in this post:&lt;/p&gt;
 
-&lt;p&gt;The exam is 100% practical with about 20 questions that must be solved in 2 hours top, supervised by a proctor who verifies that you are alone during the exam, and that you follow &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;all rules&lt;/a&gt;. In my case, for this exam the proctor asked me to show a 360° view of the room and  below my desk. He also asked me from time to time to show him my hands.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://lgallardo.com/images/terraform.jpg&quot; alt=&quot;Terraform&quot; target=&quot;_blank&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;First off, this exam goes beyond the CKAD exam in terms of complexity, because you will face more difficult challenges, like fixing a broken cluster, or detecting why a service is not running properly and make it work again.&lt;/p&gt;
+&lt;h1 id=&quot;terraform-aws-ecr&quot;&gt;terraform-aws-ecr&lt;/h1&gt;
+&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/ecr/&quot; target=&quot;_blank&quot;&gt;AWS ECR&lt;/a&gt; (Elastic Container Registry) which is a fully-managed Docker container registry.&lt;/p&gt;
 
-&lt;p&gt;In my case there were few easy questions and I’d say that most of them were medium to difficult, therefore be prepared! You must manage your time very well. Questions will be shown in a panel on the left side and you will have access to a web-based terminal where you have to execute the commands to solve them.&lt;/p&gt;
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
+&lt;p&gt;You can use this module to create an ECR registry using few parameters (simple example) or define in detail every aspect of the registry (complete example).&lt;/p&gt;
 
-&lt;center&gt;&lt;img src=&quot;/images/exam_ui.jpg&quot; alt=&quot;Exam UI&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/tree/master/examples&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; for the  &lt;strong&gt;simple&lt;/strong&gt; and the &lt;strong&gt;complete&lt;/strong&gt; snippets.&lt;/p&gt;
 
-&lt;p&gt;There will be questions to create resources, others to identify and solve problems (troubleshooting &amp;amp; fixing). You can copy and paste from the instructions, in addition to having access to a place for notes, for example to keep track of pending questions.&lt;/p&gt;
+&lt;h3 id=&quot;simple-example&quot;&gt;Simple example&lt;/h3&gt;
+&lt;p&gt;This example creates an ECR registry using few parameters&lt;/p&gt;
 
-&lt;p&gt;You will be able to consult the Kubernetes documentation from these sites &lt;a href=&quot;https://kubernetes.io/docs/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/docs/&lt;/a&gt;, &lt;a href=&quot;https://github.com/kubernetes/&quot; target=&quot;_blank&quot;&gt;https://github.com/kubernetes/&lt;/a&gt;, &lt;a href=&quot;https://kubernetes.io/blog/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/blog/&lt;/a&gt;, opening one and only one additional tab to the exam.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;ecr&quot; {
 
-&lt;p&gt;You can take the exam with Chrome, so yo can access the sites mentioned above from your bookmarks (yes, it’s allowed)&lt;/p&gt;
+  source = &quot;lgallard/ecr/aws&quot;
 
-&lt;h1 id=&quot;my-experience&quot;&gt;My experience&lt;/h1&gt;
+  name         = &quot;ecr-repo-dev&quot;
 
-&lt;p&gt;With this exam I didn’t face any trouble at all (check &lt;a href=&quot;https://lgallardo.com/es/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;my experience with CKAD exam&lt;/a&gt;). I didn’t have a clock or progress bar to keep track of the time in the examination interface, but this time I was conscious about timing. The proctor only interrupted me 15 minutes before the end of the exam to let me know it was almost over.&lt;/p&gt;
+  # Tags
+  tags = {
+    Owner       = &quot;DevOps team&quot;
+    Environment = &quot;dev&quot;
+    Terraform   = true
+  }
 
-&lt;p&gt;I went with a lot of expectations, but this time regarding the exam’s difficulty.&lt;/p&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;how-to-prepare&quot;&gt;How to prepare?&lt;/h1&gt;
-&lt;p&gt;There are several free and other paid resources, all are valid to prepare you, but practical experience is essential. I list some of them:&lt;/p&gt;
+&lt;h3 id=&quot;complete-example&quot;&gt;Complete example&lt;/h3&gt;
+&lt;p&gt;In this example the register is defined in detailed.&lt;/p&gt;
 
-&lt;h2 id=&quot;books&quot;&gt;Books&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;ecr&quot; {
+
+  source = &quot;lgallard/ecr/aws&quot;
+
+  name                 = &quot;ecr-repo-dev&quot;
+  scan_on_push         = true
+  timeouts_delete      = &quot;60m&quot;
+  image_tag_mutability = &quot;MUTABLE&quot;
+
+
+  # Note that currently only one policy may be applied to a repository.
+  policy = &amp;lt;&amp;lt;EOF
+{
+    &quot;Version&quot;: &quot;2008-10-17&quot;,
+    &quot;Statement&quot;: [
+        {
+            &quot;Sid&quot;: &quot;repo policy&quot;,
+            &quot;Effect&quot;: &quot;Allow&quot;,
+            &quot;Principal&quot;: &quot;*&quot;,
+            &quot;Action&quot;: [
+                &quot;ecr:GetDownloadUrlForLayer&quot;,
+                &quot;ecr:BatchGetImage&quot;,
+                &quot;ecr:BatchCheckLayerAvailability&quot;,
+                &quot;ecr:PutImage&quot;,
+                &quot;ecr:InitiateLayerUpload&quot;,
+                &quot;ecr:UploadLayerPart&quot;,
+                &quot;ecr:CompleteLayerUpload&quot;,
+                &quot;ecr:DescribeRepositories&quot;,
+                &quot;ecr:GetRepositoryPolicy&quot;,
+                &quot;ecr:ListImages&quot;,
+                &quot;ecr:DeleteRepository&quot;,
+                &quot;ecr:BatchDeleteImage&quot;,
+                &quot;ecr:SetRepositoryPolicy&quot;,
+                &quot;ecr:DeleteRepositoryPolicy&quot;
+            ]
+        }
+    ]
+}
+EOF
+
+  # Only one lifecycle policy can be used per repository.
+  # To apply multiple rules, combined them in one policy JSON.
+  lifecycle_policy = &amp;lt;&amp;lt;EOF
+{
+    &quot;rules&quot;: [
+        {
+            &quot;rulePriority&quot;: 1,
+            &quot;description&quot;: &quot;Expire untagged images older than 14 days&quot;,
+            &quot;selection&quot;: {
+                &quot;tagStatus&quot;: &quot;untagged&quot;,
+                &quot;countType&quot;: &quot;sinceImagePushed&quot;,
+                &quot;countUnit&quot;: &quot;days&quot;,
+                &quot;countNumber&quot;: 14
+            },
+            &quot;action&quot;: {
+                &quot;type&quot;: &quot;expire&quot;
+            }
+        },
+        {
+            &quot;rulePriority&quot;: 2,
+            &quot;description&quot;: &quot;Keep last 30 dev images&quot;,
+            &quot;selection&quot;: {
+                &quot;tagStatus&quot;: &quot;tagged&quot;,
+                &quot;tagPrefixList&quot;: [&quot;dev&quot;],
+                &quot;countType&quot;: &quot;imageCountMoreThan&quot;,
+                &quot;countNumber&quot;: 30
+            },
+            &quot;action&quot;: {
+                &quot;type&quot;: &quot;expire&quot;
+            }
+        }
+    ]
+}
+EOF
+
+  # Tags
+  tags = {
+    Owner       = &quot;DevOps team&quot;
+    Environment = &quot;dev&quot;
+    Terraform   = true
+  }
+
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;providers&quot;&gt;Providers&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Version&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;aws&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Type&lt;/th&gt;
+      &lt;th&gt;Default&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;encryption_type&lt;/td&gt;
+      &lt;td&gt;The encryption type to use for the repository. Valid values are &lt;code class=&quot;highlighter-rouge&quot;&gt;AES256&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;AES256&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;image_scanning_configuration&lt;/td&gt;
+      &lt;td&gt;Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;image_tag_mutability&lt;/td&gt;
+      &lt;td&gt;The tag mutability setting for the repository. Must be one of: &lt;code class=&quot;highlighter-rouge&quot;&gt;MUTABLE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;IMMUTABLE&lt;/code&gt;.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;MUTABLE&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;kms_key&lt;/td&gt;
+      &lt;td&gt;The ARN of the KMS key to use when encryption_type is &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;. If not specified when encryption_type is &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;, uses a new KMS key. Otherwise, uses the default AWS managed key for ECR.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lifecycle_policy&lt;/td&gt;
+      &lt;td&gt;Manages the ECR repository lifecycle policy&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;name&lt;/td&gt;
+      &lt;td&gt;Name of the repository.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;policy&lt;/td&gt;
+      &lt;td&gt;Manages the ECR repository policy&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;scan_on_push&lt;/td&gt;
+      &lt;td&gt;Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tags&lt;/td&gt;
+      &lt;td&gt;A mapping of tags to assign to the resource.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;timeouts&lt;/td&gt;
+      &lt;td&gt;Timeouts map.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;timeouts_delete&lt;/td&gt;
+      &lt;td&gt;How long to wait for a repository to be deleted.&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;n/a&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;arn&lt;/td&gt;
+      &lt;td&gt;Full ARN of the repository&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;name&lt;/td&gt;
+      &lt;td&gt;The name of the repository.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;registry_id&lt;/td&gt;
+      &lt;td&gt;The registry ID where the repository was created.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;repository_url&lt;/td&gt;
+      &lt;td&gt;The URL of the repository (in the form &lt;code class=&quot;highlighter-rouge&quot;&gt;aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName&lt;/code&gt;)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton: This book is good for an overview of Kubernetes, and is an extension of Nigel’s course.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;: This is an excellent book to learn Kubernetes, it covers various topics of CKAD and also of CKA.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;online-courses&quot;&gt;Online courses&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Administrator (CKA) with Tests (Mumshad Mannambeth)&lt;/a&gt;: This course is very well designed and explains in detail and with many animations the concepts necessary to learn how manage a Kubernetes cluster. Additionally, it gives access to a platform named &lt;em&gt;&lt;strong&gt;Kloud Kode&lt;/strong&gt;&lt;/em&gt; created with &lt;em&gt;&lt;strong&gt;Teachable&lt;/strong&gt;&lt;/em&gt; and with &lt;em&gt;&lt;strong&gt;Katacoda&lt;/strong&gt;&lt;/em&gt; environments designed for each topic covered, a exam-type lab (with a high degree of difficulty) and three exam mocks to practice and prepare you to work under the pressure as in the real exam.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;practice-environments&quot;&gt;Practice environments&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.killer.sh/&quot; target=&quot;_blank&quot;&gt;killer.sh simulator&lt;/a&gt;: This is a paid CKA exam simulator, close to the real exam experience and dificulty. It has 25 complex scenarios to solve in 120 minutes plus additional 5 extra ones. After the test session you will get access to detailed solutions. Keep in mind that you will only have access to two sessions (two simulations), but I guarantee that one will be more than enough.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;: This free platform allows you to interact with a cluster with just one node, from a web console, similar to what we would get in the exam. The interesting thing is there are scenarios created by other users that you can use to learn basic concepts, such as secrets, configmaps, volumes, etc. Please note that each scenario lasts a maximum of one hour.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;: With this option you can install a virtual machine to have your own cluster with a node.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;exercises-to-practice&quot;&gt;Exercises to practice&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/walidshaari/Kubernetes-Certified-Administrator&quot; target=&quot;_blank&quot;&gt;CKA Exercises&lt;/a&gt;:
-A set of exercises that will help you prepare for the exam and can also help you learn and practice with Kubernetes.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;endnotes&quot;&gt;Endnotes&lt;/h1&gt;
-&lt;p&gt;Again I recommend you to practice enough before taking the exam, even if you have experience with Kubernetes. Time management is important, so you must be prepared to use the Kubernetes documentation quickly (from the documentation page or from the console with kubectl), be prepared to generate yamls (not edit them), and handle nerves and pressure.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;Exam Rules and Policies&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Administrator (CKA) with Tests (Mumshad Mannambeth)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.killer.sh/&quot; target=&quot;_blank&quot;&gt;killer.sh simulator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/walidshaari/Kubernetes-Certified-Administrator&quot; target=&quot;_blank&quot;&gt;CKA Exercises&lt;/a&gt;:&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html"></summary></entry><entry><title type="html">Mouse Logitech MX Anywhere 2s Flounder on Linux</title><link href="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" rel="alternate" type="text/html" title="Mouse Logitech MX Anywhere 2s Flounder on Linux" /><published>2020-08-05T19:00:00-05:00</published><updated>2020-08-05T19:00:00-05:00</updated><id>https://lgallardo.com/2020/08/06/logitech-mx-anywhere-2s-flounder-on-linux</id><content type="html" xml:base="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/">&lt;center&gt;&lt;img src=&quot;/images/logitech-mouse.jpg&quot; alt=&quot;Logitech Mx Anywhere 2s Flounder on Linux&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.&lt;/p&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/ecr/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">I share here another Terraform module I published as open source code, which allows you to create registries in AWS ECR.</summary></entry><entry><title type="html">Mouse Logitech MX Anywhere 2s Flounder on Linux</title><link href="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" rel="alternate" type="text/html" title="Mouse Logitech MX Anywhere 2s Flounder on Linux" /><published>2020-08-05T19:00:00-05:00</published><updated>2020-08-05T19:00:00-05:00</updated><id>https://lgallardo.com/2020/08/06/logitech-mx-anywhere-2s-flounder-on-linux</id><content type="html" xml:base="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/">&lt;center&gt;&lt;img src=&quot;/images/logitech-mouse.jpg&quot; alt=&quot;Logitech Mx Anywhere 2s Flounder on Linux&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;
+I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.&lt;/p&gt;
 
 &lt;p&gt;When you connect it on Linux, the mouse works the first time without doing any magic. The two buttons on the right side of the mouse are configured for Forward and Back in the browser and any application in general.&lt;/p&gt;
 
@@ -122,10 +322,85 @@ A set of exercises that will help you prepare for the exam and can also help you
   &lt;li&gt;&lt;a href=&quot;https://www.logitech.com/en-roeu/product/mx-anywhere-2s-flow.910-005153.html#specs&quot; target=&quot;_blank&quot;&gt;Logitech MX Anywhere 2S  &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/101105/how-to-assign-back-and-forward-actions-to-logitech-anywhere-mouse-mx-horizo&quot; target=&quot;_blank&quot;&gt;How to assign “back” and “forward” actions to Logitech Anywhere Mouse MX’ horizontal scroll wheel?&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Xbindkeys#Identifying_keycodes&quot; target=&quot;_blank&quot;&gt;Xbindkeys (ArchLinux)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Linux" /><category term="Debian" /><summary type="html"></summary></entry><entry><title type="html">Certified Kubernetes Application Developer (CKAD)</title><link href="https://lgallardo.com/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="alternate" type="text/html" title="Certified Kubernetes Application Developer (CKAD)" /><published>2020-07-25T19:00:00-05:00</published><updated>2020-07-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/07/26/certified-kubernetes-application-developer-ckad</id><content type="html" xml:base="https://lgallardo.com/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Linux" /><category term="Debian" /><summary type="html">I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.</summary></entry><entry><title type="html">Certified Kubernetes Administrator(CKA)</title><link href="https://lgallardo.com/2020/11/23/2020-11-23-certified-kubernetes-administrator-cka/" rel="alternate" type="text/html" title="Certified Kubernetes Administrator(CKA)" /><published>2020-07-25T19:00:00-05:00</published><updated>2020-07-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/11/23/certified-kubernetes-administrator-cka</id><content type="html" xml:base="https://lgallardo.com/2020/11/23/2020-11-23-certified-kubernetes-administrator-cka/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;I recently approved the &lt;strong&gt;Certified Kubernetes Application Developer (CKAD)&lt;/strong&gt; exam by The Linux Foundation, so I decided to share my experience and some recommendations to prepare for the exam.&lt;/p&gt;
+&lt;p&gt;This post describes my experience and recommendations for tackling the &lt;strong&gt;Certified Kubernetes Administrator (CKA)&lt;/strong&gt; exam by The Linux Foundation.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-exam&quot;&gt;The exam&lt;/h1&gt;
+
+&lt;p&gt;The exam is 100% practical with about 20 questions that must be solved in 2 hours, supervised by a proctor who verifies that you are alone during the exam, and that you comply with &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;all rules&lt;/a&gt;. In my case, for this exam the proctored asked me to show a 360° view of the room, and to show him below my desk. He also asked me from time to time to show him my hands.&lt;/p&gt;
+
+&lt;p&gt;First off, this exam goes beyond the CKAD exam in terms of complexity, because you will face more difficult challenges, like fixing a broken cluster, or detecting  why a services is not running properly and make it work again.&lt;/p&gt;
+
+&lt;p&gt;In my case there were few easy questions and I’d say that most of them were medium to difficult, therefore be prepared! You  you must manage your time very well. Questions will be shown in a panel on the left side and you will have access to a terminal where you have to execute the commands to solve them.&lt;/p&gt;
+
+&lt;center&gt;&lt;img src=&quot;/images/exam_ui.jpg&quot; alt=&quot;Exam UI&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;There will be questions to create resources, others to identify and solve problems (troubleshooting &amp;amp; fixing) . You can copy and paste from the instructions, in addition to having access to a place for notes, for example to keep track of pending questions.&lt;/p&gt;
+
+&lt;p&gt;You will be able to consult the Kubernetes documentation from these sites &lt;a href=&quot;https://kubernetes.io/docs/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/docs/&lt;/a&gt;, &lt;a href=&quot;https://github.com/kubernetes/&quot; target=&quot;_blank&quot;&gt;https://github.com/kubernetes/&lt;/a&gt;, &lt;a href=&quot;https://kubernetes.io/blog/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/blog/&lt;/a&gt;, opening one and only one additional tab to the exam.&lt;/p&gt;
+
+&lt;p&gt;You can take the exam with Chrome, so yo can access the sites mentioned above from your bookmarks (yes, it’s allowed)&lt;/p&gt;
+
+&lt;h1 id=&quot;my-experience&quot;&gt;My experience&lt;/h1&gt;
+
+&lt;p&gt;With this exam I didn’t face any trouble at all (check my experience with CKAD exam). I didn’t have a clock or progress bar to keep track of the time in the examination interface, but this time I was conscious about timing. The proctor only interrupted me 15 minutes before the end of the exam to let me know it was almost over.&lt;/p&gt;
+
+&lt;p&gt;I went with a lot of expectations, but this regarding the exam’s difficulty.&lt;/p&gt;
+
+&lt;h1 id=&quot;how-to-prepare&quot;&gt;How to prepare?&lt;/h1&gt;
+&lt;p&gt;There are several free and other paid resources, all valid to prepare, but practical experience is essential. I list some of them:&lt;/p&gt;
+
+&lt;h2 id=&quot;books&quot;&gt;Books&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton: This book is good for an overview of Kubernetes, and is an extension of Nigel’s course (see below).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;: This is an excellent book to learn Kubernetes, it covers various topics of CKAD and also of CKA.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;online-courses&quot;&gt;Online courses&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;: This course is very well designed and explains in detail and with many animations the concepts necessary to learn how to deploy applications in a Kubernetes cluster. Additionally, it gives access to a platform named &lt;em&gt;&lt;strong&gt;Kloud Kode&lt;/strong&gt;&lt;/em&gt; created with &lt;em&gt;&lt;strong&gt;Teachable&lt;/strong&gt;&lt;/em&gt; and with &lt;em&gt;&lt;strong&gt;Katacoda&lt;/strong&gt;&lt;/em&gt; environments designed for each topic covered, two exam-type labs (with a high degree of difficulty) and two exams to practice and prepare to work under the pressure of the real exam. .&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;: If you have a LinuxAcademy subscription you can follow this course. Keep two things in mind: 1) It focuses on editing yamls and little on how to generate them. 2) The exam mocks they have to practice are not so difficult and they may be insufficient to pass without having practiced beyond them. It’s recommended to do the labs, exams and other questions to exercise (see below)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;: This course is to have an overview of Kubernetes, for example of its architecture (API Server, Kubelet, etc.) as well as to take the first steps in application deployments. No practical labs included.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;: This course is to start with Kubernetes, to have the fundamental concepts. Ideal for those who have not had contact with Kubernetes. No practical labs included.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;practice-environments&quot;&gt;Practice environments&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;: This platform allows you to interact with a cluster with just one node, from a web console, similar to what we would get in the exam. The interesting thing is that there are scenarios created by other users that can be used to learn basic concepts, such as secrets, configmaps, volumes, etc. Please note that each scneario lasts a maximum of one hour.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;: With this option you can install a virtual machine to have your own cluster with a node.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;exercises-to-practice&quot;&gt;Exercises to practice&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;:
+A set of exercises that will help you prepare for the exam and can also help you learn and practice with Kubernetes.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;:This is another set of exercises that serve to prepare you and have all the concepts fresh before going to the exam..&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;: This page presents some challenges to complete and some tips for the exam. They also offer an exam simulator at a cost of €30 (I didn’t subscribe, so I don’t know exactly what the simulator is like or if it really has similar exam questions).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;endnotes&quot;&gt;Endnotes&lt;/h1&gt;
+&lt;p&gt;Again I recommend you to practice enough before taking the exam, even if you have experience with Kubernetes. Time management is important, so you must be prepared to use the Kubernetes documentation quickly (from the documentation page or from the console with kubectl), be prepared to generate yamls (not edit them), and handle nerves and pressure.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;Exam Rules and Policies&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html"></summary></entry><entry><title type="html">Certified Kubernetes Application Developer (CKAD)</title><link href="https://lgallardo.com/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="alternate" type="text/html" title="Certified Kubernetes Application Developer (CKAD)" /><published>2020-07-25T19:00:00-05:00</published><updated>2020-07-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/07/26/certified-kubernetes-application-developer-ckad</id><content type="html" xml:base="https://lgallardo.com/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;p&gt;&lt;br /&gt;
+I recently approved the &lt;strong&gt;Certified Kubernetes Application Developer (CKAD)&lt;/strong&gt; exam by The Linux Foundation, so I decided to share my experience and some recommendations to prepare for the exam.&lt;/p&gt;
 
 &lt;h1 id=&quot;the-exam&quot;&gt;The exam&lt;/h1&gt;
 
@@ -206,7 +481,7 @@ A set of exercises that will help you prepare for the exam and can also help you
   &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html"></summary></entry><entry><title type="html">Terraform module for Secrets Manager</title><link href="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager" rel="alternate" type="text/html" title="Terraform module for Secrets Manager" /><published>2020-06-25T19:00:00-05:00</published><updated>2020-06-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager</id><content type="html" xml:base="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-secrets-manager.jpg&quot; alt=&quot;AWS Secrets Manager&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html">I recently approved the Certified Kubernetes Application Developer (CKAD) exam by The Linux Foundation, so I decided to share my experience and some recommendations to prepare for the exam.</summary></entry><entry><title type="html">Terraform module for Secrets Manager</title><link href="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager" rel="alternate" type="text/html" title="Terraform module for Secrets Manager" /><published>2020-06-25T19:00:00-05:00</published><updated>2020-06-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager</id><content type="html" xml:base="https://lgallardo.com/2020/06/26/terraform-module-for-amazon-secrets-manager">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-secrets-manager.jpg&quot; alt=&quot;AWS Secrets Manager&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;
 I just published a Terraform module called &lt;strong&gt;terraform-aws-secrets-manager&lt;/strong&gt; at Github, so I decided to share it as well in the public Terraform Registry.&lt;/p&gt;
 
@@ -1988,329 +2263,4 @@ I share here another Terraform module that I just published as open source, whic
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-elasticsearch&quot; target=&quot;_blank&quot;&gt;terraform-aws-elastichsearch module at Github&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/elasticsearch/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-elasticsearch module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">I share here another Terraform module that I just published as open source, which allows you to create Amazon Elasticsearch Service clusters. The module is designed following the best practices and principles of the AWS Well-Architected Framework.</summary></entry><entry><title type="html">Terraform module for AWS Backup</title><link href="https://lgallardo.com/2019/10/18/terraform-module-for-aws-backup" rel="alternate" type="text/html" title="Terraform module for AWS Backup" /><published>2019-10-17T19:00:00-05:00</published><updated>2019-10-17T19:00:00-05:00</updated><id>https://lgallardo.com/2019/10/18/terraform-module-for-aws-backup</id><content type="html" xml:base="https://lgallardo.com/2019/10/18/terraform-module-for-aws-backup">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-backup-terraform-registry.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-I just published my first open-sourced Terraform module called &lt;strong&gt;terraform-aws-backup&lt;/strong&gt; at Github, so I decided to share it as well in the public Terraform Registry.&lt;/p&gt;
-
-&lt;p&gt;You can check my module &lt;strong&gt;terraform-aws-backup&lt;/strong&gt; at the &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; or clone it from &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup.git&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;If you want to take a sneak of the module, I also left the README in this post:&lt;/p&gt;
-
-&lt;h1 id=&quot;terraform-aws-backup&quot;&gt;terraform-aws-backup&lt;/h1&gt;
-
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/backup/&quot; target=&quot;_blank&quot;&gt;AWS Backup&lt;/a&gt; plans.  AWS Backup is a fully managed backup service that makes it easy to centralize and automate the back up of data across AWS services (EBS volumes, RDS databases, DynamoDB tables, EFS file systems, and Storage Gateway volumes).&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;You can use this module to create a simple plan using the module’s &lt;code class=&quot;highlighter-rouge&quot;&gt;rule_*&lt;/code&gt; variables. You can also  use the &lt;code class=&quot;highlighter-rouge&quot;&gt;rules&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;selections&lt;/code&gt; list of maps variables to build a more complete plan by defining several rules and selections at once.&lt;/p&gt;
-
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/tree/master/examples&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; for the  &lt;strong&gt;simple plan&lt;/strong&gt;, the &lt;strong&gt;simple plan with list&lt;/strong&gt; and the &lt;strong&gt;complete plan&lt;/strong&gt; snippets.&lt;/p&gt;
-
-&lt;h3 id=&quot;example-complete-plan&quot;&gt;Example (complete plan)&lt;/h3&gt;
-
-&lt;p&gt;This example creates a plan with two rules and two selections at once. It also defines a vault key which is used by the first rule because no &lt;code class=&quot;highlighter-rouge&quot;&gt;target_vault_name&lt;/code&gt; was given (null). Whereas the second rule is using the “Default” vault key.&lt;/p&gt;
-
-&lt;p&gt;The first selection has two assignments, the first defined by a resource ARN and the second one defined by a tag condition. The second selection has just one assignment defined by a resource ARN.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_backup_example&quot; {
-
-  source = &quot;../modules/terraform-aws-backup&quot;
-
-  # Vault
-  vault_name = &quot;vault-3&quot;
-
-  # Plan
-  plan_name = &quot;complete-plan&quot;
-
-  # Multiple rules using a list of maps
-  rules = [
-    {
-      name              = &quot;rule-1&quot;
-      schedule          = &quot;cron(0 12 * * ? *)&quot;
-      target_vault_name = null
-      start_window      = 120
-      completion_window = 360
-      lifecycle = {
-        cold_storage_after = 0
-        delete_after       = 90
-      },
-      recovery_point_tags = {
-        Environment = &quot;production&quot;
-      }
-    },
-    {
-      name                = &quot;rule-2&quot;
-      target_vault_name   = &quot;Default&quot;
-      schedule            = null
-      start_window        = 120
-      completion_window   = 360
-      lifecycle           = {}
-      recovery_point_tags = {}
-    },
-  ]
-
-  # Multiple selections
-  #  - Selection-1: By resources and tag
-  #  - Selection-2: Only by resources
-  selections = [
-    {
-      name      = &quot;selection-1&quot;
-      resources = [&quot;arn:aws:dynamodb:us-east-1:123456789101:table/mydynamodb-table1&quot;]
-      selection_tag = {
-        type  = &quot;STRINGEQUALS&quot;
-        key   = &quot;Environment&quot;
-        value = &quot;production&quot;
-      }
-    },
-    {
-      name          = &quot;selection-2&quot;
-      resources     = [&quot;arn:aws:dynamodb:us-east-1:123456789101:table/mydynamodb-table2&quot;]
-      selection_tag = {}
-    },
-  ]
-
-  tags = {
-    Owner       = &quot;backup team&quot;
-    Environment = &quot;production&quot;
-    Terraform   = true
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;plan_name&lt;/td&gt;
-      &lt;td&gt;The display name of a backup plan&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_completion_window&lt;/td&gt;
-      &lt;td&gt;The amount of time AWS Backup attempts a backup before canceling the job and returning an error&lt;/td&gt;
-      &lt;td&gt;`number`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_lifecycle_cold_storage_after&lt;/td&gt;
-      &lt;td&gt;Specifies the number of days after creation that a recovery point is moved to cold storage&lt;/td&gt;
-      &lt;td&gt;`number`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_lifecycle_delete_after&lt;/td&gt;
-      &lt;td&gt;Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than `cold_storage_after`&lt;/td&gt;
-      &lt;td&gt;`number`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_name&lt;/td&gt;
-      &lt;td&gt;An display name for a backup rule&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_recovery_point_tags&lt;/td&gt;
-      &lt;td&gt;Metadata that you can assign to help organize the resources that you create&lt;/td&gt;
-      &lt;td&gt;`map(string)`&lt;/td&gt;
-      &lt;td&gt;`{}`&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_schedule&lt;/td&gt;
-      &lt;td&gt;A CRON expression specifying when AWS Backup initiates a backup job&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_start_window&lt;/td&gt;
-      &lt;td&gt;The amount of time in minutes before beginning a backup&lt;/td&gt;
-      &lt;td&gt;`number`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rules&lt;/td&gt;
-      &lt;td&gt;A list of rule maps&lt;/td&gt;
-      &lt;td&gt;`list`&lt;/td&gt;
-      &lt;td&gt;`[]`&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;selection_name&lt;/td&gt;
-      &lt;td&gt;The display name of a resource selection document&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;selection_resources&lt;/td&gt;
-      &lt;td&gt;An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan&lt;/td&gt;
-      &lt;td&gt;`list`&lt;/td&gt;
-      &lt;td&gt;`[]`&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;selection_tag_key&lt;/td&gt;
-      &lt;td&gt;The key in a key-value pair&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;selection_tag_type&lt;/td&gt;
-      &lt;td&gt;An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;selection_tag_value&lt;/td&gt;
-      &lt;td&gt;The value in a key-value pair&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;selections&lt;/td&gt;
-      &lt;td&gt;A list of selction maps&lt;/td&gt;
-      &lt;td&gt;`list`&lt;/td&gt;
-      &lt;td&gt;`[]`&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;A mapping of tags to assign to the resource&lt;/td&gt;
-      &lt;td&gt;`map(string)`&lt;/td&gt;
-      &lt;td&gt;`{}`&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vault_kms_key_arn&lt;/td&gt;
-      &lt;td&gt;The server-side encryption key that is used to protect your backups&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vault_name&lt;/td&gt;
-      &lt;td&gt;Name of the backup vault to create. If not given, AWS use default&lt;/td&gt;
-      &lt;td&gt;`string`&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;plan_arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the backup plan&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;plan_id&lt;/td&gt;
-      &lt;td&gt;The id of the backup plan&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;plan_version&lt;/td&gt;
-      &lt;td&gt;Unique, randomly generated, Unicode, UTF-8 encoded string that serves as the version ID of the backup plan&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vault_arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the vault&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vault_id&lt;/td&gt;
-      &lt;td&gt;The name of the vault&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;known-issues&quot;&gt;Known issues&lt;/h2&gt;
-
-&lt;p&gt;During the developing of the module I found some issues reported to the The AWS provider:&lt;/p&gt;
-
-&lt;h3 id=&quot;related-backup-plan-selections-must-be-deleted-prior-to-backup-plan-deletion&quot;&gt;Related backup plan selections must be deleted prior to backup plan deletion&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ terraform destroy
-...
-module.aws_backup_example.aws_iam_policy.ab_tag_policy: Destruction complete after 2s
-module.aws_backup_example.aws_iam_role.ab_role: Destruction complete after 1s
-
-Error: error deleting Backup Plan: InvalidRequestException: Related backup plan selections must be deleted prior to backup plan deletion
-	status code: 400, request id: 4a6637c8-2d46-4714-9929-4df3f694979b
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;When trying to destroy a plan, terraform complains about deleting the selections first, even though terraform tries to delete them in the right order:&lt;/p&gt;
-
-&lt;p&gt;This issue was reported as &lt;a href=&quot;https://github.com/terraform-providers/terraform-provider-aws/issues/10414&quot; target=&quot;_blank&quot;&gt;&lt;em&gt;Backup Plan deletion fails randomly&lt;/em&gt;&lt;/a&gt; for the AWS Provider.&lt;/p&gt;
-
-&lt;p&gt;This happens because thee AWS provider tries to delete the plan without waiting for the selections destroyal confirmation.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Workaround:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I included and script in the examples that destroys the selections first and then destroys the plan:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; cat terraform_destroy_aws_backup.sh
-
- #!/bin/sh
-targets=&quot;&quot;
-for i in `terraform state list | grep &quot;selection&quot;`; do targets=&quot;${targets} --target=${i}&quot;; done
-
-# Destroy selections
-terraform destroy ${targets}
-
-# Destroy all
-terraform destroy
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;error-creating-backup-selection-iam-role-is-not-authorized-to-call-taggetresources&quot;&gt;Error creating Backup Selection: IAM Role is not authorized to call tag:GetResources&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: error creating Backup Selection: InvalidParameterValueException: IAM Role arn:aws:iam::111111111111:role/aws-backup-plan-complete-plan-role is not authorized to call tag:GetResources
-	status code: 400, request id: 07ab775d-8885-4240-bb99-41305df969e0
-
-  on .terraform/modules/aws_backup_example/selection.tf line 1, in resource &quot;aws_backup_selection&quot; &quot;ab_selection&quot;:
-   1: resource &quot;aws_backup_selection&quot; &quot;ab_selection&quot; {
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This issue was reported as &lt;a href=&quot;https://github.com/terraform-providers/terraform-provider-aws/issues/10511&quot; target=&quot;_blank&quot;&gt;aws_backup_selection.selection: error creating Backup Selection: InvalidParameterValueException&lt;/a&gt; for the AWS Provider.&lt;/p&gt;
-
-&lt;p&gt;I faced this when applying and destroying the same plan several times, for instance when I ws developing the module.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Workaround:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;I couldn’t find any workaround for this. Just destroy all wait some time and apply again.&lt;/p&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-backup module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">I just published my first open-sourced Terraform module called terraform-aws-backup at Github, so I decided to share it as well in the public Terraform Registry.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">I share here another Terraform module that I just published as open source, which allows you to create Amazon Elasticsearch Service clusters. The module is designed following the best practices and principles of the AWS Well-Architected Framework.</summary></entry></feed>
