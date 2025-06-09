@@ -90,8 +90,6 @@
 
 <meta property="article:section" content="Python">
 
-<meta property="article:section" content="AWS">
-
 
 
 
@@ -366,14 +364,73 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/lambda-logs.jpg" alt="Lambda logs" /></center>
+<p><br />
+One of the company’s developers asked me if there was any way to view the Lambda function logs from the command line, so I wouldn’t have to go into the AWS console and see them in CloudWatch Logs. After some research I got a project in Github called <a href="https://github.com/jorgebastida/awslogs" target="_blank">awslogs</a> that does just this. Here’s how to install and use it from a Python virtual environment:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>virualenv awslogs
+source awslogs/bin/activate
+
+pip install awslogs
+pip install awscli
+</code></pre></div></div>
+
+<p>The first thing we need to know are the groups where the logs of our Lambda functions are defined, for this we use the AWS CLI:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+aws logs describe-log-grups --region us-east-1
+{
+    "logGroups": [
+        {
+            "arn": "arn:aws:logs:us-east-1:123456789123:log-group:/aws/lambda/get_transcription:*", 
+            "creationTime": 1531834572841, 
+            "metricFilterCount": 0, 
+            "logGroupName": "/aws/lambda/get_transcription", 
+            "storedBytes": 0
+        },
+        {
+            "arn": "arn:aws:logs:us-east-1:264349563434:log-group:/aws/lambda/validate_time:*", 
+            "creationTime": 1532118107128, 
+            "metricFilterCount": 0, 
+            "logGroupName": "/aws/lambda/validate_time", 
+            "storedBytes": 0
+        }
+    ]
+}
+</code></pre></div></div>
+
+<p>Now to view the logs of, for example, the function <code class="highlighter-rouge">get_transcription</code> from the command line we can execute:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>awslogs get  /aws/lambda/get_transcription --aws-region us-east-1  --watch  | cut -d " " -f 3-20
+
+</code></pre></div></div>
+
+<p>And the result would be something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>START RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1 Version: $LATEST
+[DEBUG]	2018-07-23T15:39:50.422Z	a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Searching id: e321-eaefe4311ca1
+tuple indices must be integers or slices, not str: TypeError
+recent call last):
+File "/var/task/app/services/get_transcription.py", line 100, in lambda_handler
+  date_text = field['transcription']
+indices must be integers or slices, not str
+END RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1
+REPORT RequestId: a2124cb1-818e-11e8-acc8-5bd968ce3fe1	Duration: 265.66 ms	Billed Duration: 300 ms 	Memory Size: 128 MB	Max Memory Used: 33 MB
+</code></pre></div></div>
+
+<h2 id="references">References:</h2>
+<ul>
+  <li><a href="https://github.com/jorgebastida/awslogs" target="_blank">jorgebastida/awslogs</a>.</li>
+  <li><a href="https://gist.github.com/apeckham/9bcb464096997c1b0d41" target="_blank">View aws lambda logs on the command line</a>.</li>
+</ul>
+
 
         
       </section>
@@ -412,10 +469,6 @@
   <p class="page__taxonomy">
     <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
-    
-      
-      
-      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
     
       
       
@@ -487,9 +540,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -502,8 +563,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -514,36 +574,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -556,8 +597,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -568,9 +608,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -583,8 +631,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
-<meta property="article:section" content="Terraform">
-
 
 
 
@@ -368,14 +364,201 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/terraform-aws-route53-resolver-rules.jpg" alt="AWS Route53 Resolver Rules" /></center>
+<p><br /></p>
+<center><img src="/images/Resolver-outbound-endpoint.jpg" alt="Resolver outbound endpoint" /></center>
+<p><br />
+I wrote this module to be able to create AWS Route53 Resolver rules for outbound endpoints in a more convenient way.</p>
+
+<p>You can check the module <strong>terraform-aws-route53-resolver-rules</strong> at the <a href="https://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/" target="_blank">Terraform Registry</a> or clone it from <a href="https://github.com/lgallard/terraform-aws-route53-resolver-rules" target="_blank">Github</a>.</p>
+
+<p>If you want to take a sneak of the module, I also left the README in this post:</p>
+
+<h1 id="terraform-aws-route53-resolver-rules">terraform-aws-route53-resolver-rules</h1>
+
+<p>Terraform module to create <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html">AWS Route53 Resolver Rules</a>.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>Before you start to forward queries, you must create  Resolver outbound endpoints in the connected VPCs. These endpoints provide a path for inbound or outbound queries. To accomplish this you can create the endpoints using the <a href="https://www.terraform.io/docs/providers/aws/r/route53_resolver_endpoint.html">aws_route53_resolver_endpoint</a> resource or use a module like the <a href="https://github.com/rhythmictech/terraform-aws-route53-endpoint">terraform-aws-route53-endpoint</a></p>
+
+<p>Check the <a href="https://github.com/lgallard/terraform-aws-route53-resolver-rules/blob/master/examples/">examples</a> folder for the <strong>simple</strong> and the <strong>complete</strong> snippets.</p>
+
+<h3 id="example-complete">Example (complete)</h3>
+
+<p>This example creates two rules in a outbound endpoint, using all the parameter expected for building the rules:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Outbound endpoint using the rhythmictech/terraform-aws-route53-endpoint module
+module "r53-outboud" {
+  source            = "git::https://github.com/rhythmictech/terraform-aws-route53-endpoint"
+  direction         = "outbound"
+  allowed_resolvers = ["192.168.0.0/24"]
+  vpc_id            = "vpc-0fffff0123456789"
+  ip_addresses      = [
+    {
+      ip        = "172.30.1.10"
+      subnet_id = "subnet-abcd123456789aaaa"
+    },
+    {
+      ip        = "172.30.2.10"
+      subnet_id = "subnet-abcd123456789bbbb"
+    }
+  ]
+}
+
+# AWS Route 53 Resolver rules
+module "r53-resolver-rules" {
+  source               = "git::https://github.com/lgallard/terraform-aws-route53-resolver-rules.git"
+  resolver_endpoint_id = module.r53-outboud.endpoint_ids
+
+  rules = [
+    { rule_name   = "r53r-rule-1"
+      domain_name = "bar.foo."
+      ram_name    = "ram-r53r-1"
+      vpc_ids     = ["vpc-0fffff0123456789"]
+      ips         = ["192.168.10.10", "192.168.10.11:54"]
+      principals  = ["123456789101", "101987654321"]
+    },
+    {
+      rule_name   = "r53r-rule-2"
+      domain_name = "example.com."
+      ram_name    = "ram-r53r-2"
+      vpc_ids     = ["vpc-0fffff0123456789"]
+      ips         = ["192.168.10.10", "192.168.10.11:54"]
+      principals  = ["123456789101", "101987654321"]
+    }
+  ]
+}
+
+</code></pre></div></div>
+
+<p><strong>Note</strong>: You can define IP and ports using the <em>IP:PORT</em> syntax, as shown above.</p>
+
+<h2 id="inputs">Inputs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th style="text-align: center">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>resolver_endpoint_id</td>
+      <td>The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.</td>
+      <td><code class="highlighter-rouge">string</code></td>
+      <td><code class="highlighter-rouge">null</code></td>
+      <td style="text-align: center">yes</td>
+    </tr>
+    <tr>
+      <td>rules</td>
+      <td>List of rules</td>
+      <td><code class="highlighter-rouge">list</code></td>
+      <td><code class="highlighter-rouge">[]</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>tags</td>
+      <td>Map of tags to apply to supported resources</td>
+      <td><code class="highlighter-rouge">map(string)</code></td>
+      <td><code class="highlighter-rouge">{}</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+Each rule accept the following parameters:</p>
+
+<h3 id="rules">Rules</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th style="text-align: center">Type</th>
+      <th style="text-align: center">Default</th>
+      <th style="text-align: center">Required</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>domain_name</td>
+      <td>Domain name to forward requests for</td>
+      <td style="text-align: center">string</td>
+      <td style="text-align: center"><code class="highlighter-rouge">null</code></td>
+      <td style="text-align: center">yes</td>
+    </tr>
+    <tr>
+      <td>ips</td>
+      <td>List of IPs and ports to forward DNS requests to. Use <em>IP:PORT</em> syntax, or just the IP</td>
+      <td style="text-align: center">list(string)</td>
+      <td style="text-align: center"><code class="highlighter-rouge">[]</code></td>
+      <td style="text-align: center">yes</td>
+    </tr>
+    <tr>
+      <td>principals</td>
+      <td>List of account IDs to share the resolver rule with</td>
+      <td style="text-align: center">list(string)</td>
+      <td style="text-align: center"><code class="highlighter-rouge">[]</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>ram_name</td>
+      <td>RAM share name</td>
+      <td style="text-align: center">string</td>
+      <td style="text-align: center">r53-<code class="highlighter-rouge">domain_name</code>-rule</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>resolver_endpoint_id</td>
+      <td>Resolver endpoint id</td>
+      <td style="text-align: center">string</td>
+      <td style="text-align: center"><code class="highlighter-rouge">null</code></td>
+      <td style="text-align: center">yes</td>
+    </tr>
+    <tr>
+      <td>rule_name</td>
+      <td>Route53 resolver rule name</td>
+      <td style="text-align: center">string</td>
+      <td style="text-align: center"><code class="highlighter-rouge">domain_name</code>-rule</td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>tags</td>
+      <td>Map of tags to apply to supported resources</td>
+      <td style="text-align: center">map(string)</td>
+      <td style="text-align: center"><code class="highlighter-rouge">{}</code></td>
+      <td style="text-align: center">no</td>
+    </tr>
+    <tr>
+      <td>vpc_ids</td>
+      <td>List of VPC ids to associate to the rule</td>
+      <td style="text-align: center">list(string)</td>
+      <td style="text-align: center"><code class="highlighter-rouge">[]</code></td>
+      <td style="text-align: center">yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://github.com/lgallard/terraform-aws-route53-resolver-rules.git" target="_blank">terraform-aws-route53-resolver-rules module at Github</a></li>
+  <li><a href="https://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/" target="_blank">terraform-aws-route53-resolver-rules at Terraform Registry</a></li>
+</ul>
 
         
       </section>
@@ -421,15 +604,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
     
     </span>
   </p>
@@ -493,9 +668,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -508,8 +691,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -520,36 +702,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -562,8 +725,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -574,9 +736,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -589,8 +759,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

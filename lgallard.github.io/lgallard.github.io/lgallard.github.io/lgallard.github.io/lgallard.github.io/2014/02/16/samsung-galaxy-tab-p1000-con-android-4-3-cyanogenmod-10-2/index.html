@@ -92,10 +92,6 @@
 
 <meta property="article:section" content="Android">
 
-<meta property="article:section" content="HumberOS">
-
-<meta property="article:section" content="Samsung">
-
 
 
 
@@ -370,14 +366,62 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <p align="center">
+  <a title="CyanogenMod 10.1 - Android 4.2.1 - Samsung Galaxy Tab 7" href="http://farm8.static.flickr.com/7284/8724130987_520ce9bf73_z.jpg" target="_blank"><img class="alignnone" alt="CyanogenMod 10.1 - Android 4.2.1 - Samsung Galaxy Tab 7" src="http://farm8.staticflickr.com/7284/8724130987_520ce9bf73_m.jpg" width="141" height="240" /></a> <a title="CyanogenMod 10.1 - Android 4.2.1 - Samsung Galaxy Tab 7" href="http://farm8.static.flickr.com/7394/8725251156_039e47ef8f_z.jpg" target="_blank"><img alt="CyanogenMod 10.1 - Android 4.2.1 - Samsung Galaxy Tab 7" src="http://farm8.staticflickr.com/7394/8725251156_039e47ef8f_m.jpg" width="141" height="240" /></a> <a title="CyanogenMod 10.1 - Android 4.2.1 - Samsung Galaxy Tab 7" href="http://farm8.static.flickr.com/7453/8724131661_ac7818ee7d_z.jpg" target="_blank"><img alt="CyanogenMod 10.1 - Android 4.2.1 - Samsung Galaxy Tab 7" src="http://farm8.staticflickr.com/7453/8724131661_ac7818ee7d_m.jpg" width="141" height="240" /></a>
+</p>
+<p>One more time I wanted to give another breath to my <em>Samsung Galaxy Tab 7</em>, because prices here in Venezuela are not encouraging, so I decided to install Cyanogenmod 10.2 con Android 4.3, thanks to HumberOS. This upgrade is valid only for the Latin American model, I mean Samsung Galaxy Tab 7 P1000N (o P1000L). Here I leave all you need to do so, and some tips.</p>
+
+<h2 id="considerations">Considerations</h2>
+
+<ul>
+  <li>Remember that <span style="color: #ff0000;"><strong>only you are responsible of what you do to your tablet</strong></span>. Although I followed this method, I won’t take any responsibility if you brick your tablet.</li>
+  <li>Backup your current rom and any data. This will help you to go back if something goes wrong.</li>
+  <li>Do this procedure with at least 75% of battery charge.</li>
+  <li>This rom <span style="color: #ff0000;"><strong>ONLY works on <strong>P1000N / <strong>P1000</strong></strong>L</strong></span>.</li>
+</ul>
+
+<h2 id="requisites">Requisites</h2>
+
+<ul>
+  <li>To have installed a Recovery  capable of loading updates ( like <em>CWM Recovery)</em></li>
+</ul>
+
+<h2 id="installing">Installing</h2>
+
+<ol>
+  <li>Download and copy into internal o external sdcard’s root directory files <em><a href="http://lgallardo.com/wp-content/uploads/files/android/sgt7/roms/cm-10.2-20130921-HumberOS-p1.zip">cm-10.2-20130921-HumberOS-p1.zip</a></em>, and <em><a href="http://lgallardo.com/wp-content/uploads/files/android/sgt7/roms/gapps-jb-20130813-signed.zip">gapps-jb-20130813-signed.zip</a></em>. The first one is the ROM and the second one are the Googles’ apps for this Android version.</li>
+  <li>Turn off the tablet and then turn it on in the <em>CWM Recovery</em> by pressing Power On + Volume Up buttons at the same time. When it boots you should see a screen like this one:</li>
+</ol>
+<p style="text-align: center;">
+      <a href="http://farm8.static.flickr.com/7345/8727412856_ae11280272_z.jpg" target="_blank"><img class="alignnone" alt="" src="http://farm8.staticflickr.com/7345/8727412856_ae11280272_m.jpg" width="240" height="170" /></a> <a href="http://farm8.staticflickr.com/7292/8726284701_3aa40aa217_z.jpg" target="_blank"><img alt="CyanogenMod 10.1 - Android 4.2.1 - Samsung Galaxy Tab 7" src="http://farm8.staticflickr.com/7292/8726284701_3aa40aa217_m.jpg" width="240" height="180" /></a>
+  </p>
+
+<ol>
+  <li>Make <em>wipe data / factory reset</em> and <em>wipe dalvik cache _on the _wipe menu</em>.</li>
+  <li>On the  <em>Install menu</em> go to <em>choose zip from internal sdcard</em> (or <em>choose zip from external sdcard</em> if it’s your case). Choose  the <em>cm-10.2-20130921-HumberOS-p1.zip</em> file to flash it to the tablet.</li>
+  <li>Later you must install the Google’s apps. To do so you have to go one more time to <em>choose zip from internal sdcard</em> option and choose the file <em>gapps-jb-20130813-signed.zip</em>.</li>
+  <li>Once installed, go to <em>reboot menu</em> and reboot the tablet by choosing <em>reboot system</em>. The tablet will boot with the CyanogenMod’s logo. It will last quite a few, don’t turn off the tablet. Be patient.</li>
+  <li>When it had finished, follow the tablet’s settings wizard, and enjoy it!</li>
+</ol>
+
+<h2 id="imei-no-valid">IMEI no valid</h2>
+
+<p>If you reboot your tablet and got the Invalid IMEI error as show below, I recommend you to got to the <a href="http://lgallardo.com/2011/11/04/stock-rom-gingerbread-2-3-3-para-samsung-galaxy-tab-7-p1000n/" target="_blank">Stock ROM 2.3.3</a>, and the update with the <a href="http://lgallardo.com/2011/11/08/gingerbread-2-3-3-rooteada-para-samsung-galaxy-tab-7-p1000n/" target="_blank">HumberOS’s kernel</a> qith grants you root permission,  and finally do the above steps for upgrading to 4.3:</p>
+
+<p style="text-align: center;">
+  <a title="IMEI issue" href="http://farm4.static.flickr.com/3785/12229145416_8669fd5af6_z.jpg" target="_blank"><img alt="IMEI issue" src="http://farm4.staticflickr.com/3785/12229145416_8669fd5af6_m.jpg" width="240" height="180" /></a>
+</p>
+
+<p style="text-align: left;">
+  The process can be a little tedious but it must be done to use a fresh operating system so it can recognize the device&#8217;s IMEI.
+</p>
 
         
       </section>
@@ -427,15 +471,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/humberos" class="page__taxonomy-item" rel="tag">HumberOS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/samsung" class="page__taxonomy-item" rel="tag">Samsung</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -464,7 +500,7 @@
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/2013/10/14/como-instalar-vmware-tools-en-debian-7/" class="pagination--pager" title="How to install VMWare Tools on Debian 7
+      <a href="https://lgallardo.com/2013/12/29/mi-primera-aplicacion-en-android-batteryreporter/" class="pagination--pager" title="My first application on Android: BatteryReporter
 ">Previous</a>
     
     
@@ -499,9 +535,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -514,8 +558,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -526,36 +569,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -568,8 +592,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -580,9 +603,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -595,8 +626,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

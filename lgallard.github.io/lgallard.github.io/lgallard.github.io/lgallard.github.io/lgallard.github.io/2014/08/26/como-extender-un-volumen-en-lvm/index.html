@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="SystemAdmin">
-
-<meta property="article:section" content="LVM">
-
 
 
 
@@ -368,14 +364,101 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/como-extender-un-volumen-en-lvm.jpg" alt="" width="233" height="204" /></center>
+<p><br /></p>
+
+<p>Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# fdisk -l /dev/sdb
+
+Disk /dev/sdb: 483.2 GB, 483183820800 bytes
+ 255 heads, 63 sectors/track, 58743 cylinders, total 943718400 sectors
+ Units = sectors of 1 * 512 = 512 bytes
+ Sector size (logical/physical): 512 bytes / 512 bytes
+ I/O size (minimum/optimal): 512 bytes / 512 bytes
+ Disk identifier: 0x0001178e
+</code></pre></div></div>
+
+<p>After expanding the volume you must make the system to rescan the volume:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# echo 1 &amp;gt; /sys/block/sdb/device/rescan
+</code></pre></div></div>
+
+<p>Then check the disk geometry one more time:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# fdisk -l /dev/sdb
+
+Disk /dev/sdb: 536.9 GB, 536870912000 bytes
+ 255 heads, 63 sectors/track, 65270 cylinders, total 1048576000 sectors
+ Units = sectors of 1 * 512 = 512 bytes
+ Sector size (logical/physical): 512 bytes / 512 bytes
+ I/O size (minimum/optimal): 512 bytes / 512 bytes
+ Disk identifier: 0x0001178e
+</code></pre></div></div>
+
+<p>As you can see, the disk size grew up but this is only known by the operating system, because the LVM still has the same information since the physical volume hasn’t been expanded yet:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvs
+ PV VG Fmt Attr PSize PFree
+ /dev/sda5 debian lvm2 a-- 3.76g 0
+ /dev/sda6 debian lvm2 a-- 13.00g 0
+ /dev/sdb svn_vg lvm2 a-- 450.00g 0
+</code></pre></div></div>
+
+<p>If you extend the physical volume with the following command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvresize /dev/sdb
+ Physical volume "/dev/sdb" changed
+ 1 physical volume(s) resized / 0 physical volume(s) not resized
+</code></pre></div></div>
+
+<p>And check the physical volume sizes you will see the added space:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvs
+ PV VG Fmt Attr PSize PFree
+ /dev/sda5 debian lvm2 a-- 3.76g 0
+ /dev/sda6 debian lvm2 a-- 13.00g 0
+ /dev/sdb svn_vg lvm2 a-- 500.00g 50.00g
+</code></pre></div></div>
+
+<p>Now you have to extend the logical volume and the system file size on the fly. You can do both actions using just one command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# lvresize -r -L +50G /dev/mapper/svn_vg-svn
+
+Extending logical volume svn to 500.00 GiB
+ Logical volume svn successfully resized
+ resize2fs 1.42.5 (29-Jul-2012)
+ Filesystem at /dev/mapper/svn_vg-svn is mounted on /var/data/svn; on-line resizing required
+ old_desc_blocks = 29, new_desc_blocks = 32
+ Performing an on-line resize of /dev/mapper/svn_vg-svn to 131070976 (4k) blocks.
+ The filesystem on /dev/mapper/svn_vg-svn is now 131070976 blocks long.
+</code></pre></div></div>
+
+<p>Finally, check the free space available to see the added 50 GB in the system file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df -h
+ Filesystem Size Used Avail Use% Mounted on
+ rootfs 993M 287M 655M 31% /
+ udev 10M 0 10M 0% /dev
+ tmpfs 397M 228K 397M 1% /run
+ /dev/mapper/debian-root 993M 287M 655M 31% /
+ tmpfs 5.0M 0 5.0M 0% /run/lock
+ tmpfs 794M 0 794M 0% /run/shm
+ /dev/sda1 228M 34M 183M 16% /boot
+ /dev/mapper/debian-home 2.0G 39M 1.9G 3% /home
+ /dev/mapper/debian-tmp 3.9G 7.1M 3.7G 1% /tmp
+ /dev/mapper/debian-usr 2.0G 869M 1.1G 46% /usr
+ /dev/mapper/debian-var 6.7G 2.1G 4.3G 33% /var
+ /dev/mapper/svn_vg-svn 493G 432G 62G 88% /var/data/svn
+</code></pre></div></div>
+
 
         
       </section>
@@ -421,15 +504,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/lvm" class="page__taxonomy-item" rel="tag">LVM</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/systemadmin" class="page__taxonomy-item" rel="tag">SystemAdmin</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -493,9 +568,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -508,8 +591,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -520,36 +602,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -562,8 +625,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -574,9 +636,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -589,8 +659,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

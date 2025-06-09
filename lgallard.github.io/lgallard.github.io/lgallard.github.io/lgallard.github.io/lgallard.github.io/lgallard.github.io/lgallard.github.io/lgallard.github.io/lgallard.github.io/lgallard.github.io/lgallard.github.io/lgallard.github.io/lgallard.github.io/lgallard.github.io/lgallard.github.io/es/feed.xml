@@ -1,4 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2024-05-13T07:05:27-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Anbernic 35xxH and Batocera</title><link href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="alternate" type="text/html" title="Anbernic 35xxH and Batocera" /><published>2024-05-11T19:00:00-05:00</published><updated>2024-05-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera</id><content type="html" xml:base="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/">&lt;p&gt;&lt;img src=&quot;/assets/images/anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2024-05-27T14:58:46-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Batocera &amp;amp; iPhone hotspot</title><link href="https://lgallardo.com/es/2024/05/27/batocera-iphone-hotspot/" rel="alternate" type="text/html" title="Batocera &amp; iPhone hotspot" /><published>2024-05-26T19:00:00-05:00</published><updated>2024-05-26T19:00:00-05:00</updated><id>https://lgallardo.com/es/2024/05/27/batocera-iphone-connection</id><content type="html" xml:base="https://lgallardo.com/es/2024/05/27/batocera-iphone-hotspot/">&lt;p&gt;&lt;img src=&quot;/assets/images/batocera.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+En mi post anterior, mencioné que estoy usando la consola portátil Ambernic 35xxh para retrogaming. Este dispositivo ofrece un formato agradable, horizontal, compacto y práctico, lo que lo hace perfecto para jugar en cualquier lugar. Además, destaqué cómo &lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt; mejora la experiencia de juego en general. Proporciona una interfaz de usuario mucho mejor y una integración fantástica con Retroarch, elevando el disfrute de los juegos clásicos.&lt;/p&gt;
+
+&lt;p&gt;Según se describe en la página principal del proyecto, RetroArch es una interfaz para emuladores, motores de juegos y reproductores multimedia, que te permite jugar a juegos clásicos en una amplia gama de dispositivos. Estos incluyen el Ambernic 35xxh, PS Vita, Nintendo 3DS o incluso una computadora.&lt;/p&gt;
+
+&lt;p&gt;RetroArch también ofrece varias características que no están disponibles en las consolas originales. Por ejemplo, te permite guardar estados de juego para NES, SNES, GBA y más. Además, puedes configurar una cuenta de RetroAchievements y mejorar tu experiencia de juego con logros creados por la comunidad, similares a los que se encuentran en consolas modernas como Xbox o PlayStation.&lt;/p&gt;
+
+&lt;p&gt;Jugar en el Ambernic 35xxh en casa conectado a Wi-Fi es genial y funciona a la perfección; sin embargo, cuando estás en movimiento, puede presentar algunos desafíos. Por un lado, tienes que cambiar entre el Wi-Fi de tu casa y una conexión de hotspot en tu teléfono, pero Batocera no ofrece una lista de conexiones para elegir, al menos desde la interfaz de usuario. Por otro lado, aunque puedes establecer una conexión con tu teléfono, podría perderse durante el juego debido a la inactividad del tráfico, como tiende a hacer el iPhone.&lt;/p&gt;
+
+&lt;p&gt;Para abordar el primer problema, investigué un poco y encontré un &lt;a href=&quot;https://www.reddit.com/r/batocera/comments/10db9cs/does_batocera_support_saving_multiple_wifi_points/&quot; target=&quot;_blank&quot;&gt;artículo en Reddit&lt;/a&gt; que sugiere una solución. Mencionaba que hay una configuración que puedes usar para especificar una segunda (e incluso una tercera) conexión. Para hacer esto, necesitas conectar tu tarjeta SD a una computadora, editar el archivo de configuración de Batocera llamado &lt;code class=&quot;highlighter-rouge&quot;&gt;batocera.conf&lt;/code&gt; ubicado en la carpeta raíz de la partición &lt;code class=&quot;highlighter-rouge&quot;&gt;SHARED&lt;/code&gt;, o en caso de que te conectes a través de SSH, se encuentra en &lt;code class=&quot;highlighter-rouge&quot;&gt;/userdata/system/batocera.conf&lt;/code&gt;. Rellénalo con los valores de tu Wi-Fi de casa y hotspot en la sección de red como se muestra a continuación:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ------------ B - Network ------------ #
+
+## Set system hostname, accessible via network share.
+system.hostname=BATOCERA
+## Wi-Fi country code (00 for World), see https://wiki.batocera.org/wifi_ssid#i_can_t_see_my_ssid_in_the_list_but_i_can_see_my_neighbor_s
+#wifi.country=FR
+## Activate Wi-Fi (0,1)
+wifi.enabled=1
+## Wi-Fi SSID (string)
+wifi.ssid=HomeWifi
+## Wi-Fi KEY (string)
+## Escape your special chars (# ; $) with a backslash. eg. $ becomes \$
+
+## Secondary Wi-Fi (not configurable via the user interface)
+wifi2.ssid=iPhone
+wifi2.key=iPhonePassword*
+
+## Third Wi-Fi (not configurable via the user interface)
+wifi3.ssid=HomeWifi
+wifi3.key=HomeWifiPassword*
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para resolver el segundo problema, creé un script para generar una pequeña cantidad de tráfico cada minuto haciendo ping a un servidor conocido. Esto evita que el iPhone pierda la conexión. El script necesita ser agregado a los scripts de arranque de Batocera conectándote a tu dispositivo a través de SSH y copiando el siguiente script como &lt;code class=&quot;highlighter-rouge&quot;&gt;/boot/postshare.sh&lt;/code&gt;, según lo sugiere la &lt;a href=&quot;https://wiki.batocera.org/launch_a_script&quot; target=&quot;_blank&quot;&gt;documentación de Batocera:&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;En resumen, con algunas configuraciones adicionales y soluciones creativas, puedes mejorar significativamente tu experiencia de retrogaming en el Ambernic 35xxh. Desde optimizar la conectividad Wi-Fi hasta asegurar que tu conexión se mantenga estable, estas modificaciones te permitirán disfrutar de tus juegos clásicos sin interrupciones. ¡Feliz retrogaming!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Referencias&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/batocera/comments/10db9cs/does_batocera_support_saving_multiple_wifi_points/&quot; target=&quot;_blank&quot;&gt;Post en Reddit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wiki.batocera.org/launch_a_script)&quot; target=&quot;_blank&quot;&gt;Batocera Wiki - Launch a script&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Linux" /><category term="Retroemulationetro" /><summary type="html">En mi post anterior, mencioné que estoy usando la consola portátil Ambernic 35xxh para retrogaming. Este dispositivo ofrece un formato agradable, horizontal, compacto y práctico, lo que lo hace perfecto para jugar en cualquier lugar. Además, destaqué cómo Batocera mejora la experiencia de juego en general. Proporciona una interfaz de usuario mucho mejor y una integración fantástica con Retroarch, elevando el disfrute de los juegos clásicos.</summary></entry><entry><title type="html">Anbernic 35xxH and Batocera</title><link href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="alternate" type="text/html" title="Anbernic 35xxH and Batocera" /><published>2024-05-11T19:00:00-05:00</published><updated>2024-05-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera</id><content type="html" xml:base="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/">&lt;p&gt;&lt;img src=&quot;/assets/images/anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
 Hoy en día, el mercado está inundado de una variedad de dispositivos portátiles para la emulación retro, provenientes de varias compañías chinas como &lt;a href=&quot;https://www.goretroid.com/&quot;&gt;Retroid&lt;/a&gt;, &lt;a href=&quot;https://powkiddy.com/&quot;&gt;Powkiddy&lt;/a&gt;, y &lt;a href=&quot;https://anbernic.com/&quot;&gt;Anbernic&lt;/a&gt;. Estos dispositivos varían en factores de forma, desde pantallas compactas hasta capacidades de cómputo más potentes y sistemas operativos, algunos de los cuales son de código abierto, mientras que otros son propietarios y mantenidos por los fabricantes mismos.&lt;/p&gt;
 
 &lt;p&gt;Después de ver innumerables videos en YouTube, comparar especificaciones y explorar consolas retro en AliExpress con precios inferiores a $100, me encontré con la &lt;strong&gt;Anbernic 35xxH&lt;/strong&gt;. Este modelo, con una pantalla de 3.5 pulgadas, es desarrollado por Anbernic. Es similar a la &lt;strong&gt;Anbernic 35xx Plus&lt;/strong&gt; pero tiene una orientación horizontal. El nombre del modelo ‘35xxh’ indica una pantalla de 3.5 pulgadas (‘35xx’) y una disposición horizontal (‘h’).&lt;/p&gt;
@@ -1108,85 +1150,4 @@ Por ejemplo en mi caso el supervidor me pidió que le mostrara la habitación co
   &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html">Este artículo describe my experiencia y recomendacion para afrontar el examen Certified Kubernetes Administrator (CKA) elaborado por The Linux Foundation.</summary></entry><entry><title type="html">Certified Kubernetes Application Developer (CKAD)</title><link href="https://lgallardo.com/es/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="alternate" type="text/html" title="Certified Kubernetes Application Developer (CKAD)" /><published>2020-07-25T19:00:00-05:00</published><updated>2020-07-25T19:00:00-05:00</updated><id>https://lgallardo.com/es/2020/07/26/certified-kubernetes-application-developer-ckad</id><content type="html" xml:base="https://lgallardo.com/es/2020/07/26/2020-07-26-certified-kubernetes-application-developer-ckad/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Recientemente aprobé el examen &lt;strong&gt;Certified Kubernetes Application Developer (CKAD&lt;/strong&gt;) elaborado por The Linux Foundation. Comparto mi experiencia y algunas recomendaciones para prepararse para el examen.&lt;/p&gt;
-
-&lt;h1 id=&quot;el-examen&quot;&gt;El examen&lt;/h1&gt;
-
-&lt;p&gt;El examen es 100% práctico con 19 preguntas que se deben resolver en 2 horas, con un supervisor (proctor) que verifica que estés solo durante el examen, así como que cumplas &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;todas las reglas&lt;/a&gt; para presentar (por ejemplo en mi caso me pidieron cerrar todas las puertas que daban acceso a mi comedor, que fue donde presenté el examen)&lt;/p&gt;
-
-&lt;p&gt;Algunas preguntas serán fáciles, otras tendrán varios pasos a seguir, por lo que debes administrar muy bien el tiempo. La preguntas se te mostrarán en un panel del lado izquierdo y tendrás acceso a un terminal donde deberás ejecutar las órdenes para resolverlas.&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/exam_ui.jpg&quot; alt=&quot;Exam UI&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Habrán preguntas para crear recursos y otras para identificar y resolver problemas (troubleshooting). Podrás copiar y pegar desde las instrucciones, además de tener acceso a un lugar para notas, por ejemplo para llevar el conteo de las preguntas pendientes.&lt;/p&gt;
-
-&lt;p&gt;Podrás consultar la documentación de Kubernetes desde estos sitios &lt;a href=&quot;https://kubernetes.io/docs/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/docs/&lt;/a&gt;, &lt;a href=&quot;https://github.com/kubernetes/&quot; target=&quot;_blank&quot;&gt;https://github.com/kubernetes/&lt;/a&gt;,  &lt;a href=&quot;https://kubernetes.io/blog/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/blog/&lt;/a&gt;, abriendo una y solo uno pestaña adicional al examen.&lt;/p&gt;
-
-&lt;p&gt;El examen lo puedes presentar con Chrome, por lo que de los sitios mencionados arriba puedes acceder desde tus marcadores (sí, está permitido)&lt;/p&gt;
-
-&lt;h1 id=&quot;mi-experiencia&quot;&gt;Mi experiencia&lt;/h1&gt;
-&lt;p&gt;Tenía algo de expectativa porque es un examen práctico, y como era el primero de este estilo que presentaba no sabía con qué me iba a encontrar ni cómo iba a poder manejar el tiempo.&lt;/p&gt;
-
-&lt;p&gt;Durante el examen me pasaron me varias cosas que me retrasaron, por ejemplo al utilizar una combinación de teclas de Vim para moverme entre ventanas cerré accidentalmente el examen, con lo cual tuve que reconectarme y contactar al proctor.&lt;/p&gt;
-
-&lt;p&gt;Por otro lado, ese día mi proveedor de Internet tenía problemas y hacía que mi conexión estuviese muy lenta, por lo que los cambios en los yamls los veía con retardos de aproximadamente 5 segundos.&lt;/p&gt;
-
-&lt;p&gt;En algún momento la conexión se perdió completamente, y el examen se cerró, teniendo que ingresar nuevamente y coordinar con el proctor.&lt;/p&gt;
-
-&lt;p&gt;Otra de las cosas que me pasó fue que la alarma del celular que estaba cerca empezó a sonar (el examen lo hice a las 5:00 AM), asi que le pedí permiso al proctor para apagarla, con lo cual tuvo que pausar el examen.&lt;/p&gt;
-
-&lt;p&gt;Todas estás desconexiones y pausas no detienen el tiempo, cuando se comienza el examen se tienen 2 horas exactas.&lt;/p&gt;
-
-&lt;p&gt;Otro inconveniente que tuve fue que no tenía un reloj para llevar el tiempo en la interfaz del examen sino una barra de progreso que en ocasiones no estaba, por lo que el proctor me recordaba el tiempo restante cada tanto, interrumpiendo mi concentración.&lt;/p&gt;
-
-&lt;h1 id=&quot;cómo-prepararse&quot;&gt;¿Cómo prepararse?&lt;/h1&gt;
-&lt;p&gt;Existen varios recursos gratuitos y otros pagos, todos válidos para prepararse, pero es fundamental tener experiencia práctica. Listo algunos de ellos:&lt;/p&gt;
-
-&lt;h2 id=&quot;libros&quot;&gt;Libros&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton: Este libro está bueno para tener una vista general de Kubernetes, y es una extensión del curso de Nigel (ver más abajo).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;: Referencia obligada para aprender Kubernetes, cubre varios tópicos de CKAD y también de CKA.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;cursos-en-línea&quot;&gt;Cursos en línea&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;: Este curso está muy bien diseñado y explica en detalle y con muchas animaciones los conceptos necesarios para aprender a desplegar aplicaciones en un cluster de Kubernetes. Adicionalmente da acceso a una plataforma llamada &lt;em&gt;&lt;strong&gt;Kloud Kode&lt;/strong&gt;&lt;/em&gt; creada con &lt;em&gt;&lt;strong&gt;Teachable&lt;/strong&gt;&lt;/em&gt; y con entornos de &lt;em&gt;&lt;strong&gt;Katacoda&lt;/strong&gt;&lt;/em&gt; diseñados para cada tema tratado, dos laboratorios tipo examen (con un  grado de dificultad alto) y dos examenes para practicar y preparase para trabajar bajo la presión del examen real.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;: Si tienes una suscripción de LinuxAcademy puedes seguir este curso. Ten en cuenta dos cosas: 1) Se  enfocan en editar los yamls y poco en cómo generarlos. 2) Los exámenes que tienen para practicar no son tan difíciles y pueden resultar insuficientes para aprobar sin haber practicado más allá de estos. Es recomendable hacer los laboratorios, los exámenes y otras preguntas para ejercitarse (ver abajo)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;: Este curso es para tener una visión general de Kubernetes, por ejemplo de su arquitectura (API Server, Kubelet, etc) así como para dar los primeros pasos en despliegues de aplicaciones. No incluye laboratorios prácticos.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;: Este curso es para iniciarse con Kubernetes, para tener los conceptos fundamentales. Ideal para quienes no han tenido contacto con Kubernetes. No incluye laboratorios prácticos.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;entornos-para-prácticar&quot;&gt;Entornos para prácticar&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;: Esta plataforma permite interactuar con un cluster de un nodo, desde una consola web, similar a lo que conseguiríamos en el examen. Lo interesante es que hay escenarios creados por otros usuarios que se pueden utilizar para aprender conceptos básicos, como por ejemplo secrets, configmaps, volumes, etc. Ten en cuenta que cada escenario dura máximo una hora.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;: Con esta opción podrás instalar una máquina virtual para tener tu propio cluster de un nodo.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;ejercicios-para-practicar&quot;&gt;Ejercicios para practicar&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;: Un conjunto de ejercicios que te ayudaran a prepararte para el examen y también pueden servirte para aprender y practicar con Kubernetes.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;: Este es otro conjunto de ejercicios que sirven para prepararte y tener todos los conceptos frescos antes de ir al examen.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;: En esta página se presentan algunos retos para completar y algunos tips para el examen. También ofrecen un simulador del examen con un costo de  €30 (no me suscribí, por lo que no sé exactamente cómo es el simulador o si de verdad tiene preguntas similares al del examen).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;notas-finales&quot;&gt;Notas finales&lt;/h1&gt;
-
-&lt;p&gt;Nuevamente te recomiendo que practiques mucho antes de presentar el examen, incluso si tienes experiencia con Kubernetes. La gestión del tiempo es importante, por lo que debes estar preparado para usar rápidamente la documentación de Kubernetes (desde la página o desde la consola con kubectl), estar preparado a generar yamls (no editarlos), y manejar los nervios y la presión.&lt;/p&gt;
-
-&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;Exam Rules and Policies&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html">Recientemente aprobé el examen Certified Kubernetes Application Developer (CKAD) elaborado por The Linux Foundation. Comparto mi experiencia y algunas recomendaciones para prepararse para el examen.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html">Este artículo describe my experiencia y recomendacion para afrontar el examen Certified Kubernetes Administrator (CKA) elaborado por The Linux Foundation.</summary></entry></feed>
