@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
 
 
 
@@ -364,14 +362,134 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img alt="AWS ASG Lifecycle hooks" src="/images/lifecycle_hooks.jpg" /></center>
+<p><br />
+Recently I needed to execute some actions after a EC2 instance was created by an Auto Scaling Group. At first a thought in using the userdata or cloud-init but I needed to create alarms in CloudWatch based on the instance itself, and those alarms must be created dynamically as I used to do with Terraform.</p>
+
+<h1 id="lifecycle-hooks">Lifecycle hooks</h1>
+
+<p>The Auto Scaling Groups have <em>Lifecycle hooks</em> where you can perform actions when the instance was launched or terminated. For instance you can a create CloudWatch rule to use the event’s message and get the instance-id or the lifecycle hook’s metadata field. An example how this message looks is shown bellow:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "EC2InstanceId": "i-0030f3ac294a5764a",
+    "AutoScalingGroupName": "sync-service",
+    "LifecycleActionToken": "802cc943-c45a-c8c8-b25d-111222333440",
+    "LifecycleHookName": "sync-service-StatusCheckFailed-0-launching-hook",
+    "NotificationMetadata": {
+        "EvaluationPeriods": 5,
+        "Missing_data": "breaching",
+        "AlarmActions": "arn:aws:sns:us-east-1:111111111111:sns-topic",
+        "AlarmDescription": "The instance has not passed both instance and system status checks",
+        "Namespace": "AWS/EC2",
+        "Period": 60,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "AlarmName": "sync-status-check",
+        "Statistic": "Average",
+        "Threshold": 0,
+        "MetricName": "StatusCheckFailed"
+ },
+   
+</code></pre></div></div>
+
+<p>Here the <em>NotificationMetadata</em> contains a JSON with the alarm definition which will be consume for the lambda function to create it.</p>
+
+<h1 id="triggering-the-lambda-function-using-a-cloudwatch-event">Triggering the lambda function using a CloudWatch event</h1>
+
+<p>You can instruct CloudWatch to respond to Auto Scaling events and trigger a lambda function to pass that message.</p>
+
+<center><img alt="AWS Lambda console" src="/images/asg_create_alarms_lambda_console.jpg" /></center>
+<p><br /></p>
+
+<h1 id="lambda-function">Lambda function</h1>
+<p>Here you have the lambda function that retrieves the instance-id and the lifecycle hook’s metadata:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c"># Create AWS clients</span>
+<span class="n">cw</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s">'cloudwatch'</span><span class="p">)</span>
+
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">LOGGER</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+<span class="c"># Retrieves instance id from CloudWatch event</span>
+<span class="k">def</span> <span class="nf">get_instance_id</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">event</span><span class="p">[</span><span class="s">'detail'</span><span class="p">][</span><span class="s">'EC2InstanceId'</span><span class="p">]</span>
+    <span class="k">except</span> <span class="nb">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">def</span> <span class="nf">get_metadata</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">event</span><span class="p">[</span><span class="s">'detail'</span><span class="p">][</span><span class="s">'NotificationMetadata'</span><span class="p">]</span>
+    <span class="k">except</span> <span class="nb">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+
+    <span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+    <span class="n">instanceid</span> <span class="o">=</span> <span class="n">get_instance_id</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">get_metadata</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    
+    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"instance-id: </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">instanceid</span><span class="p">)</span>
+    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"metadata: </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">metadata</span><span class="p">)</span>
+
+    <span class="c"># Create Metric</span>
+    <span class="n">cw</span><span class="o">.</span><span class="n">put_metric_alarm</span><span class="p">(</span>
+    <span class="n">AlarmName</span><span class="o">=</span><span class="s">"</span><span class="si">%</span><span class="s">s-</span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s">'AlarmName'</span><span class="p">],</span> <span class="n">instanceid</span><span class="p">),</span>
+    <span class="n">AlarmDescription</span><span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s">'AlarmDescription'</span><span class="p">],</span>
+    <span class="n">ActionsEnabled</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">AlarmActions</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="s">'AlarmActions'</span><span class="p">]</span>
+    <span class="p">],</span>
+    <span class="n">MetricName</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'MetricName'</span><span class="p">],</span>
+    <span class="n">Namespace</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Namespace'</span><span class="p">],</span>
+    <span class="n">Statistic</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Statistic'</span><span class="p">],</span>
+    <span class="n">Dimensions</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s">'Name'</span><span class="p">:</span> <span class="s">'InstanceId'</span><span class="p">,</span>
+            <span class="s">'Value'</span><span class="p">:</span> <span class="n">instanceid</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+    <span class="n">Period</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Period'</span><span class="p">],</span>
+    <span class="n">EvaluationPeriods</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'EvaluationPeriods'</span><span class="p">],</span>
+    <span class="n">Threshold</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Threshold'</span><span class="p">],</span>
+    <span class="n">TreatMissingData</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Missing_data'</span><span class="p">],</span>
+    <span class="n">ComparisonOperator</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'ComparisonOperator'</span><span class="p">]</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h1 id="iam-roles-and-policies">IAM Roles and Policies</h1>
+<p>Remember to create a ROLE and attach the needed policies to your lambda function.</p>
+
+<h1 id="references">References:</h1>
+
+<ul>
+  <li>
+    <p><a href="https://aws.amazon.com/blogs/compute/using-aws-lambda-with-auto-scaling-lifecycle-hooks/" target="_blank">Using AWS Lambda with Auto Scaling Lifecycle Hooks</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/aws-samples/aws-lambda-lifecycle-hooks-function" target="_blank">aws-lambda-lifecycle-hooks-function</a></p>
+  </li>
+  <li>
+    <p><a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/cloud-watch-events.html" target="_blank">Getting CloudWatch Events When Your Auto Scaling Group Scales</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/thigley986/Lambda-AWS-Automated-Alarm-Creation" target="_blank">Lambda-AWS-Automated-Alarm-Creation</a></p>
+  </li>
+</ul>
+
 
         
       </section>
@@ -410,10 +528,6 @@
   <p class="page__taxonomy">
     <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
-    
-      
-      
-      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
     
       
       
@@ -481,9 +595,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -496,8 +618,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -508,36 +629,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -550,8 +652,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -562,9 +663,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -577,8 +686,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

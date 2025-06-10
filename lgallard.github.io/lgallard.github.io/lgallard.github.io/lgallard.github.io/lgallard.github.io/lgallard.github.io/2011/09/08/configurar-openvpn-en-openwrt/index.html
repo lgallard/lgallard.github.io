@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="OpenWrt">
-
 
 
 
@@ -364,14 +362,201 @@
 
 
 
-  less than 1 minute read
+  3 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img title="OpenVPN on OpenWrt" alt="" src="/images/6124989098_eec49b6b3d.jpg" width="450" height="342" /></center>
+<p><br />
+Due to my home router is connected 24×7 it makes it the ideal place to install a VPN server. In my case I had installed OpenWrt on my router TP-LINK TL-WR1043ND (to install OpenWrt on this router you can read the article about <a href="http://lgallardo.com/2011/05/22/instalacion-de-openwrt-en-tp-link-tl-wr1043nd/" target="_blank">Installing OpenWrt on router TP-LINK TL-WR1043ND</a>). This post it’s general enough and explains how to install OpenVP on OpenWrt, no matter what model router with OpenWrt you have.</p>
+
+<h1 id="installing-openvpn-on-openwrt">Installing OpenVPN on OpenWrt</h1>
+
+<p>On the router just install OpenVPN package:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>opkg install openvpn
+</code></pre></div></div>
+
+<h1 id="certificates-pc">Certificates (PC)</h1>
+
+<p>Client and server certificates will be done on a PC with Linux, on Debian to be exact. The idea is to avoid installing software in the limited router’s rom.To get what will need install the following package:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install openvpn
+</code></pre></div></div>
+
+<ul>
+  <li>Make the woring directory and the base files to use:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /etc/openvpn/easy-rsa/
+cp <span class="nt">-r</span> /usr/share/doc/openvpn/examples/easy-rsa/2.0/<span class="k">*</span> /etc/openvpn/easy-rsa/
+</code></pre></div></div>
+
+<ul>
+  <li>Edit file  <em>/etc/openvpn/easy-rsa/vars</em>, which lets you make a unique certificate using the values provided:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">KEY_COUNTRY</span><span class="o">=</span><span class="s2">"VE"</span> 
+<span class="nb">export </span><span class="nv">KEY_PROVINCE</span><span class="o">=</span><span class="s2">"DC"</span> 
+<span class="nb">export </span><span class="nv">KEY_CITY</span><span class="o">=</span><span class="s2">"Caracas"</span> 
+<span class="nb">export </span><span class="nv">KEY_ORG</span><span class="o">=</span><span class="s2">"Mi organización"</span> 
+<span class="nb">export </span><span class="nv">KEY_EMAIL</span><span class="o">=</span><span class="s2">"micorre@dominio.org"</span>
+</code></pre></div></div>
+<ul>
+  <li>Go to the working directory and load the file you just edited:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/openvpn/easy-rsa/
+<span class="nb">source </span>vars
+</code></pre></div></div>
+
+<p>Now lets create the certificates for the server and clients.</p>
+
+<h2 id="certificates-for-the-server">Certificates for the server</h2>
+
+<p>In order to make the certificates for the server you must do the following steps:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./clean-all
+./build-dh
+./pkitool <span class="nt">--initca</span>
+./pkitool <span class="nt">--server</span> server
+<span class="nb">cd </span>keys
+openvpn <span class="nt">--genkey</span> <span class="nt">--secret</span> ta.key
+</code></pre></div></div>
+
+<h2 id="certificates-for-the-clients">Certificates for the clients</h2>
+
+<p>In order to generate the certificate for the client just do this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/openvpn/easy-rsa/
+<span class="nb">source </span>vars
+./pkitool hostname
+</code></pre></div></div>
+
+<p>Here <em>hostname</em> is the name of the host where the certificate will be installed (random part).</p>
+
+<h1 id="settings-the-vpn">Settings the VPN</h1>
+
+<p>Now let’s see how to set the VPN, both in the server and client side.</p>
+
+<h2 id="setting-the-server-router">Setting the server (router)</h2>
+
+<ul>
+  <li>Copy the generated certificates for the server to router:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scp server.crt server.key ca.crt dh1024.pem ta.key root@192.168.1.1:/etc/openvpn/
+</code></pre></div></div>
+
+<p style="padding-left: 30px;">
+  Here 192.168.1.1 is the router&#8217;s IP address for this example.
+</p>
+
+<ul>
+  <li>Although you can be tempted to use a config file borrow form other OpenVPN server, it’s better to use the one provided by OpenWrt and just adapt it to your needs. So, edit file <em>/etc/config/openvpn</em> with the followin values (I just put the not commented lines to save space).</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>config openvpn sample_server
+    option <span class="nb">enable </span>1
+    option port 1194
+    option proto udp
+    option dev tun
+    option ca /etc/openvpn/ca.crt
+    option cert /etc/openvpn/server.crt
+    option key /etc/openvpn/server.key
+    option dh /etc/openvpn/dh1024.pem
+    option server <span class="s2">"10.8.0.0 255.255.255.0"</span>
+    option ifconfig_pool_persist /tmp/ipp.txt
+    option client_to_client 1
+    option keepalive <span class="s2">"10 120"</span>
+    option tls_auth <span class="s2">"/etc/openvpn/ta.key 0"</span>
+    option comp_lzo 1
+    option persist_key 1
+    option persist_tun 1
+    option status /tmp/openvpn-status.log
+    option verb 3
+</code></pre></div></div>
+
+<h2 id="setting-the-clients-pcs">Setting the clients (PCs)</h2>
+
+<ul>
+  <li>Copy the certificates and keys generated for each client, for example for the PC <em>hostname</em>, as explained next:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/openvpn/easy-rsa/keys/ca.crt
+/etc/openvpn/easy-rsa/keys/hostname.crt
+/etc/openvpn/easy-rsa/keys/hostname.key
+/etc/openvpn/easy-rsa/keys/ta.key
+</code></pre></div></div>
+
+<ul>
+  <li>If you haven’t install OpenVPN on the clients, you can do it::</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install openvpn
+</code></pre></div></div>
+
+<ul>
+  <li>Copy the example file for the client’ s configuration:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/
+</code></pre></div></div>
+
+<ul>
+  <li>Edit the file with the following values:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client 
+dev tun 
+proto udp 
+remote 192.168.1.30 1194
+resolv-retry infinite 
+nobind 
+persist-key 
+persist-tun 
+ca /mnt/datos/OpenVpn/easy-rsa/keys/ca.crt 
+cert /mnt/datos/OpenVpn/easy-rsa/keys/hostname.crt 
+key /mnt/datos/OpenVpn/easy-rsa/keys/hostname.key 
+ns-cert-type server 
+tls-auth /mnt/datos/OpenVpn/easy-rsa/keys/ta.key 1 
+comp-lzo 
+verb 3
+</code></pre></div></div>
+
+<p>Here the <em>remote</em> directive has a fixed IP, but you can set a dynamic domain name on <em>dyndns</em> or <em>no-ip</em> instead of a private address.</p>
+
+<h1 id="enabling-the-service">Enabling the service</h1>
+
+<p>Now you must enable the service in both sides, in the server (OpenWrt) and in the clients (PCs). For each of them:</p>
+
+<h2 id="enable-the-service-in-the-server-router">Enable the service in the server (router)</h2>
+
+<p>Run the following in OpenWrt:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/init.d/openvpn <span class="nb">enable</span>
+/etc/init.d/openvpn start
+</code></pre></div></div>
+
+<h2 id="enabling-the-service-in-the-clients-pcs">Enabling the service in the clients (PCs)</h2>
+
+<p>Now you must enable the OpenVPN service in every client. In general terms it will depen on the distro you will be using. In Debian you can enable the service as follow:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update-rc.d openvpn defaults
+/etc/init.d/openvpn start
+</code></pre></div></div>
+
+<p>After all this your server will have a <em>tun</em> interface with the address 10.8.0,1 and clients will have an interface with a IP address like 10.8.0.x.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://help.ubuntu.com/12.04/serverguide/openvpn.html" target="_blank">Ubuntu’s OpenVPN documentation</a></li>
+  <li><a href="http://wiki.openwrt.org/doc/howto/vpn.openvpn" target="_blank">OpenWrt’s Easy OpenVPN server setup guide</a></li>
+</ul>
 
         
       </section>
@@ -413,11 +598,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/openwrt" class="page__taxonomy-item" rel="tag">OpenWrt</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -481,9 +662,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -496,8 +685,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -508,36 +696,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -550,8 +719,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -562,9 +730,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -577,8 +753,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         
