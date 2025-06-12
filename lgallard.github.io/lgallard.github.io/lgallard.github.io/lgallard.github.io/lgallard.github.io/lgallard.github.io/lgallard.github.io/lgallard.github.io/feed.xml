@@ -1,4 +1,146 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2022-09-25-octoprint-multiple-printers/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2022-09-25-octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2022-09-25-octoprint-multiple-printers/">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-09T09:47:56-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow</title><link href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="alternate" type="text/html" title="Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow" /><published>2025-06-07T19:00:00-05:00</published><updated>2025-06-07T19:00:00-05:00</updated><id>https://lgallardo.com/2025/06/08/coding-agents-bugbot</id><content type="html" xml:base="https://lgallardo.com/2025/06/08/coding-agents-bugbot/">&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png&quot; alt=&quot;BugBot and Copilot: AI Reviewers&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recently, while working on my Terraform modules, I had an idea: &lt;strong&gt;What about using BugBot to check Copilot’s Coding Agents?&lt;/strong&gt; With Copilot Coding Agents already helping automate PRs and refactors, I decided to give BugBot a try as an additional reviewer.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-experiment&quot;&gt;The Experiment&lt;/h2&gt;
+
+&lt;p&gt;I assigned Copilot Coding Agents to implement new features and fixes in my repositories. Once the PRs were ready, I ran BugBot to review the changes. The results were fascinating:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_00-46.png&quot; alt=&quot;Copilot PR with BugBot review&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;BugBot quickly detected issues that Copilot’s own review had missed, especially around edge cases and variable usage. Its bug detection capabilities are on another level compared to Copilot’s built-in review features.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_00-47.png&quot; alt=&quot;BugBot detailed bug report&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, BugBot flagged overly restrictive regex validation and unused variables in a Copilot-generated PR. It provided actionable feedback, which I then relayed to Copilot for fixes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot2025-06-09_00-48.png&quot; alt=&quot;BugBot and Copilot: AI Reviewers&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;highlights&quot;&gt;Highlights&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;BugBot excels at bug detection:&lt;/strong&gt; It found subtle issues in Copilot Coding Agents’ PRs, providing detailed explanations and suggestions.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Copilot Coding Agents excel at implementation:&lt;/strong&gt; They quickly propose and implement solutions, and can interpret and act on BugBot’s feedback.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AI is not infallible:&lt;/strong&gt; Even with both tools, bugs or outdated code can slip through. For example, Copilot generated a workflow using a deprecated GitHub Action, and BugBot didn’t catch it either.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_01-01.png&quot; alt=&quot;Workflow error: Deprecated GitHub Action&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Combining Copilot Coding Agents and BugBot creates a powerful AI-driven review and implementation workflow. Each tool has its strengths: BugBot for deep bug detection, Copilot for rapid solution delivery. However, human oversight is still essential to catch edge cases and evolving platform changes.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; BugBot is a paid service for automated code reviews. My tests and experiments described here were conducted during the free trial period, which allowed me to evaluate its capabilities without incurring any cost.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/features/copilot&quot;&gt;GitHub Copilot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cursor.so/bugbot&quot;&gt;Cursor BugBot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/pull/55&quot;&gt;feat: Add support for repository replication &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Recently, while working on my Terraform modules, I had an idea: What about using BugBot to check Copilot's Coding Agents? With Copilot Coding Agents a...</summary></entry><entry><title type="html">Using GitHub Copilot Background Agents</title><link href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="alternate" type="text/html" title="Using GitHub Copilot Background Agents" /><published>2025-06-04T19:00:00-05:00</published><updated>2025-06-04T19:00:00-05:00</updated><id>https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup</id><content type="html" xml:base="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/">&lt;!-- Add a relevant image here --&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-coding-agent.png&quot; alt=&quot;GitHub Copilot Background Agents&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recently, I had the opportunity to try out GitHub Copilot Coding Agents (Background Agents) on one of my personal projects: the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup&lt;/a&gt; module. This module is designed to help users manage AWS Backup plans using Terraform.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-problem&quot;&gt;The Problem&lt;/h2&gt;
+
+&lt;p&gt;A user opened &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/issues/114&quot;&gt;an issue&lt;/a&gt; requesting support for multiple backup plans per vault. This required a significant refactor of the module, as it previously only supported a single plan per vault. I decided to assign the issue to Copilot to see how well it could handle a real-world infrastructure-as-code (IaC) refactor.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-assigned-by-lgallard.png&quot; alt=&quot;GitHub Issue Assignment&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-copilot-solution&quot;&gt;The Copilot Solution&lt;/h2&gt;
+
+&lt;p&gt;Copilot Background Agents picked up the issue and proposed a pull request (&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/pull/115&quot;&gt;PR #115&lt;/a&gt;) that introduced a new &lt;code class=&quot;highlighter-rouge&quot;&gt;plans&lt;/code&gt; variable (a map of maps) to support multiple backup plans. The PR included all necessary code changes, documentation updates, and maintained backward compatibility with the previous single-plan approach.&lt;/p&gt;
+
+&lt;p&gt;I interacted with Copilot directly through GitHub, asking questions and requesting changes. For example, I verified backward compatibility and reported an edge case related to Terraform state migration. Copilot responded to my comments, addressed the issues, and updated the PR accordingly.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-pr.png&quot; alt=&quot;Copilot PR Conversation&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;highlights&quot;&gt;Highlights&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;End-to-end automation:&lt;/strong&gt; Most of the process happened within GitHub, with minimal human intervention.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Speed:&lt;/strong&gt; The entire refactor and review process took about 35 minutes, with Copilot handling the bulk of the work in just 13 minutes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Device flexibility:&lt;/strong&gt; I managed the process from my iPad mini using Arc, without needing a local IDE.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Iterative feedback:&lt;/strong&gt; Copilot handled multiple rounds of feedback, including error reports and code adjustments.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;drawbacks&quot;&gt;Drawbacks&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Model selection:&lt;/strong&gt; There was no option to choose which AI model Copilot used for the task.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Testing required:&lt;/strong&gt; As with any automated code generation, manual testing and validation were necessary before merging.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Image handling:&lt;/strong&gt; Copilot could not read images pasted in comments, so error messages had to be provided as text.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;GitHub Copilot Background Agents proved to be a valuable tool for unattended, automation-friendly tasks like module refactoring. While it’s important to test and validate the generated code, Copilot can significantly accelerate development workflows, especially for infrastructure code.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup module on GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot;&gt;terraform-aws-backup module on Terraform Registry&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/copilot&quot;&gt;GitHub Copilot Background Agents&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Recently, I had the opportunity to try out GitHub Copilot Coding Agents (Background Agents) on one of my personal projects: the terraform-aws-backup m...</summary></entry><entry><title type="html">Anbernic 35xxH and Batocera</title><link href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="alternate" type="text/html" title="Anbernic 35xxH and Batocera" /><published>2024-05-11T19:00:00-05:00</published><updated>2024-05-11T19:00:00-05:00</updated><id>https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera</id><content type="html" xml:base="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/">&lt;p&gt;&lt;img src=&quot;/assets/images/anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as &lt;a href=&quot;https://www.goretroid.com/&quot; target=&quot;_blank&quot;&gt;Retroid&lt;/a&gt;, &lt;a href=&quot;https://powkiddy.com/&quot; target=&quot;_blank&quot;&gt;Powkiddy&lt;/a&gt;, and &lt;a href=&quot;https://anbernic.com/&quot; target=&quot;_blank&quot;&gt;Anbernic&lt;/a&gt;. These devices vary in form factors—ranging from compact screens to more powerful computing capabilities and operating systems, some of which are open-source, while others are proprietary and maintained by the manufacturers themselves.&lt;/p&gt;
+
+&lt;p&gt;After watching countless YouTube videos, comparing specifications, and exploring retro consoles on AliExpress priced under $100, I stumbled upon the &lt;strong&gt;Anbernic 35xxH&lt;/strong&gt;. This model, featuring a 3.5-inch screen, is developed by Anbernic. It is similar to the &lt;strong&gt;Anbernic 35xx Plus&lt;/strong&gt; but sports a horizontal orientation. The model name ‘35xxH’ indicates a 3.5-inch screen (‘35xx’) and a horizontal layout (‘H’).&lt;/p&gt;
+
+&lt;p&gt;As mentioned earlier, some operating systems are developed by the device manufacturers, like Anbernic, which offers a proprietary OS. While this OS serves its purpose, it is not without limitations. For example, the way games are displayed and organized can be confusing and cumbersome, and some emulators perform better on RetroArch than on the standalone emulators included with the OS.&lt;/p&gt;
+
+&lt;p&gt;Seeking a more user-friendly interface, I turned to &lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;, an open-source project maintained by the community. Batocera provides a more intuitive and visually appealing user interface.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/batocera-anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxh&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;For those interested in using Batocera on your &lt;strong&gt;Anbernic 35xxH&lt;/strong&gt;, there is a repository where you can download the Batocera image, called &lt;a href=&quot;https://github.com/rg35xx-cfw/rg35xx-cfw.github.io/discussions/104&quot; target=&quot;_blank&quot;&gt;Batocera Lite Beta for RG35XX Plus and RG35XX H&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.goretroid.com/&quot; target=&quot;_blank&quot;&gt;Retroid&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://powkiddy.com/&quot; target=&quot;_blank&quot;&gt;Powkiddy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://anbernic.com/&quot; target=&quot;_blank&quot;&gt;Anbernic&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powki...</summary></entry><entry><title type="html">AWS (re)Certified Solutions Architect - Professional</title><link href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="alternate" type="text/html" title="AWS (re)Certified Solutions Architect - Professional" /><published>2023-12-18T09:00:55-06:00</published><updated>2023-12-18T09:00:55-06:00</updated><id>https://lgallardo.com/2023/12/18/aws-certified-solutions-architect-professional-2023</id><content type="html" xml:base="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/">&lt;p&gt;&lt;img src=&quot;/assets/images/aws-csap-2023.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:&lt;/p&gt;
+
+&lt;p&gt;If you’re taking the exam for the first time or, as in my case, seeking recertification, I recommend that you review the new content and check what has changed compared to the previous exam. Examples of these changes could be AWS SSO to AWS Identity Center. I also recommend that you familiarize yourself with new services such as AWS Elastic Disaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, among others.&lt;/p&gt;
+
+&lt;p&gt;There were 75 questions in 180 minutes. As is typical with AWS professional certifications, the exam is long and features extensive statements and lengthy answers. For those whose native language is not English, this can be confusing, so you will likely have to read several questions more than once (and their options).
+If you’re taking the exam for the first time or, as in my case, seeking recertification, I recommend that you review the new content and check what has changed compared to the previous exam. Examples of these changes could be AWS SSO to AWS Identity Center. I also recommend that you familiarize yourself with new services such as AWS Elastic Disaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, among others.
+My recommendations for saving time in this exam are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Answer the easy questions quickly; don’t spend too much time pondering whether it’s the correct answer because it most likely is.&lt;/li&gt;
+  &lt;li&gt;Mark the questions where you genuinely have doubts, so when reviewing, you can focus only on those. If time remains, then start reviewing the rest.&lt;/li&gt;
+  &lt;li&gt;Mark multiple-choice questions for review, even if you think they are correct. It’s better to be 100% sure of the options because if you make a mistake in one, the answer can be considered incorrect.&lt;/li&gt;
+  &lt;li&gt;Read the questions carefully because the statement contains the information that will help you eliminate options or choose the correct ones.&lt;/li&gt;
+  &lt;li&gt;Remember that this is an Amazon certification, so always ask yourself which Amazon service is relevant.&lt;/li&gt;
+  &lt;li&gt;Dismiss solutions that can be done at the OS level if an Amazon service provides it, only considering it when there is no other option.&lt;/li&gt;
+  &lt;li&gt;Not everything is solved with Lambda + SQS, even if it seems correct. Review which options or services meet the requirements of the question and don’t be misled by options that initially seem correct.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are interested in this certification, I recommend some links:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For this exam, I stayed loyal to AWS A Cloud Guru, but to be honest, it seems to me that the content is covered superficially, and the course as it stands today looks like a Frankenstein creation. There are at least two instructors with different content formats, as if they had merged the best of Linux Academy’s courses with those of A Cloud Guru. Nonetheless, if you are interested, here it is available:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.pluralsight.com/courses/aws-certified-solutions-architect-professional-sap-c02&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - AWS Certified Solutions Architect Professional&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;AWS Documentation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:</summary></entry><entry><title type="html">OctoPrint with multiple 3D printers</title><link href="https://lgallardo.com/2022/09/25/octoprint-multiple-printers" rel="alternate" type="text/html" title="OctoPrint with multiple 3D printers" /><published>2022-09-24T19:00:00-05:00</published><updated>2022-09-24T19:00:00-05:00</updated><id>https://lgallardo.com/2022/09/25/octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/2022/09/25/octoprint-multiple-printers">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
 One of the most useful tools when managing a 3D printer is &lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;, since among several things it allows you to manage your printer from a web interface, as well as adding a lot of functionality (for example, monitoring and management of the printer through Telegram, plugins to generate timelapse videos of the prints, or even detect when there are spaghetti-like problems in our prints using another plugin with AI).&lt;/p&gt;
 
 &lt;h2 id=&quot;multiple-printers&quot;&gt;Multiple printers&lt;/h2&gt;
@@ -444,7 +586,215 @@ services:
   &lt;li&gt;&lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;USB webcams known to work with mjpg-streamer&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters&quot; target=&quot;_blank&quot;&gt;How to distinguish between identical USB-to-serial adapters?&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux&quot; target=&quot;_blank&quot;&gt;Udev Rule to discern 2 identical webcams on Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2021-04-15-terraform-module-for-aws-ecr/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2021-04-15-terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2021-04-15-terraform-module-for-aws-ecr/">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">One of the most useful tools when managing a 3D printer is OctoPrint, since among several things it allows you to manage your printer from a web inter...</summary></entry><entry><title type="html">PaperLike Pencil Grips</title><link href="https://lgallardo.com/2022/04/17/paperlike-pencil-grips" rel="alternate" type="text/html" title="PaperLike Pencil Grips" /><published>2022-04-17T00:00:00-05:00</published><updated>2022-04-17T00:00:00-05:00</updated><id>https://lgallardo.com/2022/04/17/paperlike-pencil-grips</id><content type="html" xml:base="https://lgallardo.com/2022/04/17/paperlike-pencil-grips">&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grip.jpg&quot; alt=&quot;PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+I’ve been using my iPad for a while to take notes with the Apple Pencil and I decided to write this article to tell you about a product that has pleasantly surprised me and which I think is an excellent improvement to consider: the &lt;strong&gt;Paper Like Pencil Grips&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;It may have happened to you that when using the Apple Pencil for a long time, your hand gets tired? This is common even with traditional pencils, and for this there was already a solution, the classic grips adapted to the pencil to improve the posture of the fingers when writing. This is what the PaperLike team ended up designing, but for the Apple Pencil.&lt;/p&gt;
+
+&lt;p&gt;You’ll say that they are simple grips and probably you think you can use traditional grips to adapt them to the Apple Pencil…Yes, for little money you can put a generic grip on it but there’re a couple of things that you should consider, that the PaperLike team has already solved and that you won’t have with a generic product:&lt;/p&gt;
+
+&lt;h2 id=&quot;apple-pencils-magnetic-charge&quot;&gt;Apple Pencil’s magnetic charge&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/Grip-on-iPad.jpg&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;They achieve this thanks to the fact their grips are specially designed for the Apple Pencil, since they have the shape of the pencil, and the side used for magnetic charging is slightly thinner.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-posture-of-the-fingers&quot;&gt;The posture of the fingers&lt;/h2&gt;
+&lt;p&gt;The PaperLike guys took into account two edge cases: precision and prolonged periods of use. Yes, two different pencil grips come in the envelop: The first is aimed at having maximum precision when grabbing the pencil, for example when you need fine details when drawing. The second one is designed to help those who take notes for a long time, ideal for university students.&lt;/p&gt;
+
+&lt;p&gt;In my case, I really enjoy the grip for long session using (although I left behind my university yeas a long time ago), but I am sure this will be very useful for students, and for artists (professional or not) it will be help them  to have more precise lines when making their creations.&lt;/p&gt;
+
+&lt;p&gt;It is definitely an improvement that undoubtedly changes the experience of using the iPad and the Apple Pencil.&lt;/p&gt;
+
+&lt;h2 id=&quot;double-tap-funtion&quot;&gt;Double tap funtion&lt;/h2&gt;
+&lt;p&gt;The Apple Pencil has a second function that is activated by double-tapping the flat part of the pencil. With a generic grip there’s no way to double tap. The PaperLike Pencil Grips achieves this with the thinnest part of the grip. But I must comment that to use it you have to turn the pencil to be able to double tap. I use this a lot in &lt;strong&gt;GoodNotes 5&lt;/strong&gt;, and it’s not that natural. In fact, the founder of PaperLike in the How-To video comments that one option is to use the grip with that part facing up, but I think it loses its grace becuase the grip’s shape was designed for the index fingers and the thumb. It seemed to me that the best option is to get used to turning the pencil before doing the double tap, and turning it  back to continue writing.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-packaging&quot;&gt;The packaging&lt;/h1&gt;
+&lt;p&gt;Finally, I would like to highlight something pleasant, which is the packaging in which it came. As I bought the grips at an early stage, they came in a paper envelope, which in fact they make clear is not the final packaging for the product.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Envelop.jpg&quot; alt=&quot;PaperLike Pencil Grips Packing&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In particular, it doesn’t bother me at all and in fact I would even say that it should be the final version, a simple and environmentally friendly presentation. The only thing that would suggest to improve is that the material of the envelope, it should be a little harder so that it can withstand the onslaught of the trip, or in any case they should send them in “fragile” correspondence, since the shipment was not at all economical (€ 39.99). In my case, mine arrived in that envelope a little wrinkled, and the contents also wrinkled.&lt;/p&gt;
+
+&lt;p&gt;Other details that I liked were the thank you note they place on the packaging, handwritten by the founder of PaperLike (and then printed industrially), as well as a very nice sticker that they add from the community of artists who use their products.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-thanks.jpg&quot; alt=&quot;PaperLike Pencil Grips thanking note&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Sticker.jpg&quot; alt=&quot;PaperLike Pencil Grips sticker gift&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;where-to-buy-the-paperlike-grips&quot;&gt;Where to buy the PaperLike Grips?&lt;/h1&gt;
+&lt;p&gt;As I mentioned, they are at an early stage, so at the moment the only place you will be able to buy them in PaperLike’s store, got to &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;iPad accessories&lt;/a&gt; , here the &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;PaperLike Pencil Grips are available.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;If you need a grip for your Apple Pencil, keep in mind this option offered by the PaperLike guys, which will undoubtedly improve your user experience on your iPad  significantly.&lt;/p&gt;
+
+&lt;h2 id=&quot;disclaimer&quot;&gt;Disclaimer&lt;/h2&gt;
+&lt;p&gt;I wrote this post to share my experience with the PaperLike pencil grips, and I did not receive any sponsorship or have any profit or participation in their sales.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://paperlike.com&quot; target=&quot;_blank&quot;&gt;PaperLike page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;iPad Accessories&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;PaperLike Pencil Grips&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">I've been using my iPad for a while to take notes with the Apple Pencil and I decided to write this article to tell you about a product that has pleas...</summary></entry><entry><title type="html">iPad Pro as portable workstation</title><link href="https://lgallardo.com/2022/01/25/ipad-pro-as-a-portable-workstation/" rel="alternate" type="text/html" title="iPad Pro as portable workstation" /><published>2022-01-24T18:00:00-06:00</published><updated>2022-01-24T18:00:00-06:00</updated><id>https://lgallardo.com/2022/01/25/ipad-pro-as-a-portable-workstation</id><content type="html" xml:base="https://lgallardo.com/2022/01/25/ipad-pro-as-a-portable-workstation/">&lt;p&gt;&lt;img src=&quot;/assets/images/ipad-pro-2021.jpg&quot; alt=&quot;iPad Pro&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+It’s been a while since I posted on the blog, first because I couldn’t find something interesting to share and second because there wasn’t much spare time (It’s not that now there’s a lot of time to spare but well, one make some time to write a few lines).&lt;/p&gt;
+
+&lt;p&gt;The truth is I recently got an iPad Pro 11” and among the things I tried was the possibility to use it as a light work equipment, that is, a computer that I can have on hand on my bedside table without it being a complete computer.&lt;/p&gt;
+
+&lt;p&gt;While the iPad has many advantages and things that I really liked, it seems the term “Pro” is not enough to have a complete terminal as you can find in an operating system or to have a functional &lt;a href=&quot;https://youtu.be/LrLDKYFyLMM&quot; target=&quot;_blank&quot;&gt;virtual machine&lt;/a&gt;, so I decided to investigate if there is an option to use it as a client that connects somewhere else where I can have access to a complete operating system.&lt;/p&gt;
+
+&lt;p&gt;In fact, I read an &lt;a href=&quot;https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/&quot; target=&quot;_blank&quot;&gt;article&lt;/a&gt; that suggested using a Digital Ocean Droplet to have a virtual machine in the cloud and from there be able to work. This option is not bad, but having a workstation at home I didn’t see the need to go to the cloud.&lt;/p&gt;
+
+&lt;p&gt;Following some of these suggestions I ended up installing &lt;strong&gt;Blink Shell&lt;/strong&gt; that comes with &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; support, and using &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; on my remote Linux laptop I was able to achieve this. Below I explain the details of this configuration.&lt;/p&gt;
+
+&lt;h1 id=&quot;blink-shell-ssh--mosh&quot;&gt;Blink Shell (ssh / mosh)&lt;/h1&gt;
+
+&lt;p&gt;The first thing I had to look for was a decent &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; client for iPad. &lt;strong&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Blink Shell&lt;/a&gt;&lt;/strong&gt; appeared as recurring recommendation on Internet articles. At first, I didn’t like the fact you have to buy it without a trial but since there were several recommendations I gave it a try (USD 19.99 at the date of publication of this post).&lt;/p&gt;
+
+&lt;p&gt;I have to admit  &lt;strong&gt;Blink Shell&lt;/strong&gt; is very, very good, it’s  designed for mobile devices and has support for &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;mosh&quot;&gt;Mosh&lt;/h2&gt;
+&lt;p&gt;Maybe you are wondering as I did, What is &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;?  The definition from the &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; page says:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Remote terminal application that allows roaming, supports intermittent connectivity, and provides intelligent local echo and line editing of user keystrokes.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Do you still not understand what &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; is for as it happened to me? It’s like &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt; but without having to learn commands to create and manage sessions, it also uses &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; under the hood. In other words, you will have the possibility to continue working on your session where you left it off, or if for example your connection was cut and you manage to connect again to another network.&lt;/p&gt;
+
+&lt;p&gt;As under the hood  it uses &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;, in order to use &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; the syntax is practically the same. Therefore if you used to connect to a server using &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh lgallard@192.168.1.65
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now with &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; you can connect to the server as follows:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh lgallard@192.168.1.65
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The change seems simple and with this we now are able to close our iPad or the computer where we are using the &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; client and be able to magically recover the work session when we reconnect.&lt;/p&gt;
+
+&lt;p&gt;You can configure  &lt;strong&gt;Blink Shell&lt;/strong&gt; options by accessing a configuration wizard to have different hosts and ease the connection with a name instead of an IP address. To access this wizard simply type &lt;code class=&quot;highlighter-rouge&quot;&gt;config&lt;/code&gt; from the terminal:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/Blink_config.png&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In my case now I can connect to my workstation as follows:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh dauntless
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;mosh-the-bad&quot;&gt;Mosh, the bad&lt;/h2&gt;
+
+&lt;p&gt;As a con &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; can’t scroll the terminal, that is, if you need to check the output of commands that you have previously executed and are no longer on the screen, you won’t be able to see them. For me, this was a big problem because when using &lt;code class=&quot;highlighter-rouge&quot;&gt;terraform&lt;/code&gt; I lost the plans with the changes to be applied.&lt;/p&gt;
+
+&lt;p&gt;This is the way &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; works, to have optimal performance they render the text. There’s an &lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;open issue&lt;/a&gt; since several years where the developers commented they left it opened as a reference but  they have no intention of implementing it. So, is there  no solution? Yes, &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-is-tmux&quot;&gt;What is tmux?&lt;/h1&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; is a tool that allows you to have several terminals open (or windows) to be accessed and controlled from a single terminal as we would do with &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You have to install &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; on the computer where we want to log in and once installed it’s enough to run this from the &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; client (the iPad Pro in my case):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh danuntless -- tmux new  -s terminal-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This way we can create a new session whose name is &lt;strong&gt;terminal-1&lt;/strong&gt;. Then to access this session later you have to run the following:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mosh danuntless -- tmux a  -t terminal-1&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;enabling--scrolling-on-tmux&quot;&gt;Enabling  scrolling on tmux&lt;/h2&gt;
+
+&lt;p&gt;On the remote workstation you must configure &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; to have scrolling enabled using &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;, to achieve this edit the  &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.tmux.conf&lt;/code&gt; file with this content:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new-session
+set -g history-limit 30000
+set -g mouse on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;blink--ssh---mosh--tmux--eh&quot;&gt;Blink + ssh  + mosh + tmux … eh?&lt;/h2&gt;
+
+&lt;p&gt;“Wait a moment … &lt;strong&gt;Blink + ssh + mosh + tmux&lt;/strong&gt;, Are all these too complicated? Isn’t it better to use &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;? “. Yes, it’s an alternative, but with &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; you would not be able to reconnect automatically and you will have to log in again if you close the iPad or if your IP address changes for some reason (for example,  if you change  your connection from WiFI to cell phone) or if the &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; session expires.&lt;/p&gt;
+
+&lt;p&gt;I have to admit there’s a learning curve to cover with &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; but once passed you will love it and wonder why you didn’t use &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; before.&lt;/p&gt;
+
+&lt;h2 id=&quot;more-about-tmux&quot;&gt;More about tmux&lt;/h2&gt;
+
+&lt;p&gt;If you want to learn how to use &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; I leave you a &lt;a href=&quot;https://tmuxcheatsheet.com&quot; target=&quot;_blank&quot;&gt;cheat sheet&lt;/a&gt; with the commands you can use. In my case, I found the panels division and the use of zooming between them very useful, but I must admit that copying text between panels is somewhat complicated on the iPad and sometimes I prefer to use &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; for this, but I will surely find a workaround.&lt;/p&gt;
+
+&lt;h1 id=&quot;final-words&quot;&gt;Final words&lt;/h1&gt;
+
+&lt;p&gt;Here I comment my experiences with the iPad Pro, but all these can be replicated on an iPad Air and even use &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; from other workstations with Linux or Windows.&lt;/p&gt;
+
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/LrLDKYFyLMM&quot; target=&quot;_blank&quot;&gt;Run ANY OS on iPad or iPhone! - YouTube&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/&quot; target=&quot;_blank&quot;&gt;Using the iPad Pro as my development machine&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Blink Shell&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Mosh&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tmuxcheatsheet.com&quot;&gt;Tmux cheat sheet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;mosh prevents the use of scrollback&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">It's been a while since I posted on the blog, first because I couldn't find something interesting to share and second because there wasn't much spare ...</summary></entry><entry><title type="html">Helm 3 local repo</title><link href="https://lgallardo.com/2021/06/15/helm-local-repo/" rel="alternate" type="text/html" title="Helm 3 local repo" /><published>2021-06-14T19:00:00-05:00</published><updated>2021-06-14T19:00:00-05:00</updated><id>https://lgallardo.com/2021/06/15/helm3-local-repo</id><content type="html" xml:base="https://lgallardo.com/2021/06/15/helm-local-repo/">&lt;p&gt;&lt;img src=&quot;/assets/images/helm.jpg&quot; alt=&quot;Helm 3 local repo&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;
+In Helm 3 the support of &lt;strong&gt;helm serve&lt;/strong&gt; command was removed due to some design issues, therefore if you need a similar tool you have to install  &lt;strong&gt;helm servecm&lt;/strong&gt;  plugin, which uses &lt;strong&gt;ChartMuseum&lt;/strong&gt; for publishing the charts to your local storage (other storages are also supported, like S3 buckets).&lt;/p&gt;
+
+&lt;p&gt;In this post you will learn how to install and publish a local repo in Helm 3.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Install &lt;strong&gt;ChartMuseum&lt;/strong&gt;&lt;br /&gt;
+First off, you need to install &lt;strong&gt;ChartMuseum&lt;/strong&gt;. At the project page you will find different ways  of installing it, but I install as a Go app as follows:&lt;br /&gt;&lt;br /&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;GO111MODULE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;on&quot;&lt;/span&gt; go get github.com/helm/chartmuseum@v0.13.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Install &lt;strong&gt;helm servecm plugin&lt;/strong&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;Then you need to install &lt;strong&gt;servecm&lt;/strong&gt; as a helm plugin:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm plugin install https://github.com/jdolitsky/helm-servecm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Install &lt;strong&gt;helm push plugin&lt;/strong&gt;&lt;br /&gt;
+In order to host your charts, you will be using &lt;strong&gt;ChartMuseum&lt;/strong&gt; and &lt;strong&gt;helm servecm&lt;/strong&gt; pluing, but you will still need to publish them into &lt;strong&gt;ChartMuseum&lt;/strong&gt;. You can do it manually or use another plugin called &lt;strong&gt;helm push&lt;/strong&gt; which does it for you:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm plugin install https://github.com/chartmuseum/helm-push.git
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Add the local repo in helm:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm repo add local http://127.0.0.1:8879/charts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run &lt;strong&gt;helm servecm plugin&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;Next step is to run &lt;strong&gt;helm servecm&lt;/strong&gt; plugin:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm servecm &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8879 &lt;span class=&quot;nt&quot;&gt;--storage&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--storage-local-rootdir&lt;/span&gt; ./local &lt;span class=&quot;nt&quot;&gt;--context-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/charts 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Now you can publish your charts at http://127.0.0.1:8879/charts&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Publish your chart to your local repo:&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm push your-chart &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;At this point you will be able to use you local charts in your cluster by executing:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm install  your-chart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://helm.sh/docs/faq/#removal-of-helm-serve&quot; target=&quot;_blank&quot;&gt;Removal of helm serve&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/jdolitsky/helm-servecm&quot; target=&quot;_blank&quot;&gt;helm servecm plugin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/helm/chartmuseum&quot; target=&quot;_blank&quot;&gt;ChartMuseum&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/chartmuseum/helm-push&quot; target=&quot;_blank&quot;&gt;helm push plugin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">In Helm 3 the support of helm serve command was removed due to some design issues, therefore if you need a similar tool you have to install helm serv...</summary></entry><entry><title type="html">Terraform module for AWS ECR</title><link href="https://lgallardo.com/2021/04/15/terraform-module-for-aws-ecr" rel="alternate" type="text/html" title="Terraform module for AWS ECR" /><published>2021-04-15T00:00:00-05:00</published><updated>2021-04-15T00:00:00-05:00</updated><id>https://lgallardo.com/2021/04/15/terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/2021/04/15/terraform-module-for-aws-ecr">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;
 I share here another Terraform module I published as open source code, which allows you to create registries in AWS ECR.&lt;/p&gt;
 
@@ -713,82 +1063,7 @@ EOF
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Github&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/ecr/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2020-11-23-certified-kubernetes-administrator-cka/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2020-11-23-certified-kubernetes-administrator-cka</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2020-11-23-certified-kubernetes-administrator-cka/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-This post describes my experience and recommendations for tackling the &lt;strong&gt;Certified Kubernetes Administrator (CKA)&lt;/strong&gt; exam by The Linux Foundation.&lt;/p&gt;
-
-&lt;h1 id=&quot;the-exam&quot;&gt;The exam&lt;/h1&gt;
-
-&lt;p&gt;The exam is 100% practical with about 20 questions that must be solved in 2 hours, supervised by a proctor who verifies that you are alone during the exam, and that you comply with &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;all rules&lt;/a&gt;. In my case, for this exam the proctored asked me to show a 360° view of the room, and to show him below my desk. He also asked me from time to time to show him my hands.&lt;/p&gt;
-
-&lt;p&gt;First off, this exam goes beyond the CKAD exam in terms of complexity. You will face more difficult challenges, like fixing a broken cluster or detecting why a service is not running properly and make it work again.&lt;/p&gt;
-
-&lt;p&gt;In my case there were few easy questions and I’d say that most of them were medium to difficult, therefore be prepared! You  you must manage your time very well. Questions will be shown in a panel on the left side and you will have access to a terminal where you have to execute the commands to solve them.&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/exam_ui.jpg&quot; alt=&quot;Exam UI&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;There will be questions to create resources, others to identify and solve problems (troubleshooting &amp;amp; fixing) . You can copy and paste from the instructions, in addition to having access to a place for notes, for example to keep track of pending questions.&lt;/p&gt;
-
-&lt;p&gt;You will be able to consult the Kubernetes documentation from these sites &lt;a href=&quot;https://kubernetes.io/docs/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/docs/&lt;/a&gt;, &lt;a href=&quot;https://github.com/kubernetes/&quot; target=&quot;_blank&quot;&gt;https://github.com/kubernetes/&lt;/a&gt;, &lt;a href=&quot;https://kubernetes.io/blog/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/blog/&lt;/a&gt;, opening one and only one additional tab to the exam.&lt;/p&gt;
-
-&lt;p&gt;You can take the exam with Chrome, so yo can access the sites mentioned above from your bookmarks (yes, it’s allowed)&lt;/p&gt;
-
-&lt;h1 id=&quot;my-experience&quot;&gt;My experience&lt;/h1&gt;
-
-&lt;p&gt;With this exam I didn’t face any trouble at all (check my experience with CKAD exam). I didn’t have a clock or progress bar to keep track of the time in the examination interface, but this time I was conscious about timing. The proctor only interrupted me 15 minutes before the end of the exam to let me know it was almost over.&lt;/p&gt;
-
-&lt;p&gt;I went with a lot of expectations, but this time regarding the exam’s difficulty.&lt;/p&gt;
-
-&lt;h1 id=&quot;how-to-prepare&quot;&gt;How to prepare?&lt;/h1&gt;
-&lt;p&gt;There are several free and other paid resources, all valid to prepare, but practical experience is essential. I list some of them:&lt;/p&gt;
-
-&lt;h2 id=&quot;books&quot;&gt;Books&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton: This book is good for an overview of Kubernetes, and is an extension of Nigel’s course (see below).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;: This is an excellent book to learn Kubernetes, it covers various topics of CKAD and also of CKA.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;online-courses&quot;&gt;Online courses&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;: This course is very well designed and explains in detail and with many animations the concepts necessary to learn how to deploy applications in a Kubernetes cluster. Additionally, it gives access to a platform named &lt;em&gt;&lt;strong&gt;Kloud Kode&lt;/strong&gt;&lt;/em&gt; created with &lt;em&gt;&lt;strong&gt;Teachable&lt;/strong&gt;&lt;/em&gt; and with &lt;em&gt;&lt;strong&gt;Katacoda&lt;/strong&gt;&lt;/em&gt; environments designed for each topic covered, two exam-type labs (with a high degree of difficulty) and two exams to practice and prepare to work under the pressure of the real exam. .&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;: If you have a LinuxAcademy subscription you can follow this course. Keep two things in mind: 1) It focuses on editing yamls and little on how to generate them. 2) The exam mocks they have to practice are not so difficult and they may be insufficient to pass without having practiced beyond them. It’s recommended to do the labs, exams and other questions to exercise (see below)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;: This course is to have an overview of Kubernetes, for example of its architecture (API Server, Kubelet, etc.) as well as to take the first steps in application deployments. No practical labs included.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;: This course is to start with Kubernetes, to have the fundamental concepts. Ideal for those who have not had contact with Kubernetes. No practical labs included.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;practice-environments&quot;&gt;Practice environments&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;: This platform allows you to interact with a cluster with just one node, from a web console, similar to what we would get in the exam. The interesting thing is that there are scenarios created by other users that can be used to learn basic concepts, such as secrets, configmaps, volumes, etc. Please note that each scneario lasts a maximum of one hour.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;: With this option you can install a virtual machine to have your own cluster with a node.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;exercises-to-practice&quot;&gt;Exercises to practice&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;:
-A set of exercises that will help you prepare for the exam and can also help you learn and practice with Kubernetes.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;:This is another set of exercises that serve to prepare you and have all the concepts fresh before going to the exam..&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;: This page presents some challenges to complete and some tips for the exam. They also offer an exam simulator at a cost of €30 (I didn’t subscribe, so I don’t know exactly what the simulator is like or if it really has similar exam questions).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;endnotes&quot;&gt;Endnotes&lt;/h1&gt;
-&lt;p&gt;Again I recommend you to practice enough before taking the exam, even if you have experience with Kubernetes. Time management is important, so you must be prepared to use the Kubernetes documentation quickly (from the documentation page or from the console with kubectl), be prepared to generate yamls (not edit them), and handle nerves and pressure.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;Exam Rules and Policies&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/">&lt;center&gt;&lt;img src=&quot;/images/logitech-mouse.jpg&quot; alt=&quot;Logitech Mx Anywhere 2s Flounder on Linux&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">I share here another Terraform module I published as open source code, which allows you to create registries in AWS ECR.</summary></entry><entry><title type="html">Mouse Logitech MX Anywhere 2s Flounder on Linux</title><link href="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" rel="alternate" type="text/html" title="Mouse Logitech MX Anywhere 2s Flounder on Linux" /><published>2020-08-05T19:00:00-05:00</published><updated>2020-08-05T19:00:00-05:00</updated><id>https://lgallardo.com/2020/08/06/logitech-mx-anywhere-2s-flounder-on-linux</id><content type="html" xml:base="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/">&lt;center&gt;&lt;img src=&quot;/images/logitech-mouse.jpg&quot; alt=&quot;Logitech Mx Anywhere 2s Flounder on Linux&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;
 I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.&lt;/p&gt;
 
@@ -843,1448 +1118,4 @@ I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be
   &lt;li&gt;&lt;a href=&quot;https://www.logitech.com/en-roeu/product/mx-anywhere-2s-flow.910-005153.html#specs&quot; target=&quot;_blank&quot;&gt;Logitech MX Anywhere 2S  &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/101105/how-to-assign-back-and-forward-actions-to-logitech-anywhere-mouse-mx-horizo&quot; target=&quot;_blank&quot;&gt;How to assign “back” and “forward” actions to Logitech Anywhere Mouse MX’ horizontal scroll wheel?&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Xbindkeys#Identifying_keycodes&quot; target=&quot;_blank&quot;&gt;Xbindkeys (ArchLinux)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2020-07-26-certified-kubernetes-application-developer-ckad/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2020-07-26-certified-kubernetes-application-developer-ckad</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2020-07-26-certified-kubernetes-application-developer-ckad/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-I recently approved the &lt;strong&gt;Certified Kubernetes Application Developer (CKAD)&lt;/strong&gt; exam by The Linux Foundation, so I decided to share my experience and some recommendations to prepare for the exam.&lt;/p&gt;
-
-&lt;h1 id=&quot;the-exam&quot;&gt;The exam&lt;/h1&gt;
-
-&lt;p&gt;The exam is 100% practical with 19 questions that must be solved in 2 hours, supervised by a proctor who verifies that you are alone during the exam, and that you comply with &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;all rules&lt;/a&gt; (for example in my case he asked me to close all doors that gave access to my dining room, where I took the exam).&lt;/p&gt;
-
-&lt;p&gt;Some questions will be easy, others will have several steps to follow, so you must manage your time very well. Questions will be shown in a panel on the left side and you will have access to a terminal where you must execute the commands to solve them.&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/exam_ui.jpg&quot; alt=&quot;Exam UI&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;There will be questions to create resources and others to identify and solve problems (troubleshooting). You can copy and paste from the instructions, in addition to having access to a place for notes, for example to keep track of pending questions.&lt;/p&gt;
-
-&lt;p&gt;You will be able to consult the Kubernetes documentation from these sites &lt;a href=&quot;https://kubernetes.io/docs/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/docs/&lt;/a&gt;, &lt;a href=&quot;https://github.com/kubernetes/&quot; target=&quot;_blank&quot;&gt;https://github.com/kubernetes/&lt;/a&gt;, &lt;a href=&quot;https://kubernetes.io/blog/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/blog/&lt;/a&gt;, opening one and only one additional tab to the exam.&lt;/p&gt;
-
-&lt;p&gt;You can take the exam with Chrome, so yo can access the sites mentioned above from your bookmarks (yes, it’s allowed)&lt;/p&gt;
-
-&lt;h1 id=&quot;my-experience&quot;&gt;My experience&lt;/h1&gt;
-&lt;p&gt;I had some expectation because it’s a practical exam, and since it was the first of this style that I took, I didn’t know what to expect or how I was going to be able to handle time.&lt;/p&gt;
-
-&lt;p&gt;During the exam, several things happened to me that delayed me, for example, when I used a Vim’s key combination to move between windows, I accidentally closed the exam, so I had to reconnect and contact the proctor.&lt;/p&gt;
-
-&lt;p&gt;On the other hand, that day my Internet provider had problems and made my connection very slow, so changes in the yaml files were seen with delays of approximately 5 seconds.&lt;/p&gt;
-
-&lt;p&gt;At some point the connection was completely lost, and the exam was closed, so I had to log in again and coordinate with the proctor.&lt;/p&gt;
-
-&lt;p&gt;Another thing that happened was that the alarm on my nearby cell phone went off (I took the exam at 5:00 AM) so I asked the proctor for permission to turn it off, therefore he had to pause the exam.&lt;/p&gt;
-
-&lt;p&gt;All these disconnections and pauses don’t stop the time, when the exam begins you have exactly 2 hours.
- exactas.&lt;/p&gt;
-
-&lt;p&gt;Another drawback I had was that I did not have a clock to keep track of the time in the examination interface, but rather a progress bar that was sometimes missing, so the proctor reminded me of the remaining time every so often, interrupting my concentration.&lt;/p&gt;
-
-&lt;h1 id=&quot;how-to-prepare&quot;&gt;How to prepare?&lt;/h1&gt;
-&lt;p&gt;There are several free and other paid resources, all valid to prepare, but practical experience is essential. I list some of them:&lt;/p&gt;
-
-&lt;h2 id=&quot;books&quot;&gt;Books&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton: This book is good for an overview of Kubernetes, and is an extension of Nigel’s course (see below).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;: This is an excellent book to learn Kubernetes, it covers various topics of CKAD and also of CKA.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;online-courses&quot;&gt;Online courses&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;: This course is very well designed and explains in detail and with many animations the concepts necessary to learn how to deploy applications in a Kubernetes cluster. Additionally, it gives access to a platform named &lt;em&gt;&lt;strong&gt;Kloud Kode&lt;/strong&gt;&lt;/em&gt; created with &lt;em&gt;&lt;strong&gt;Teachable&lt;/strong&gt;&lt;/em&gt; and with &lt;em&gt;&lt;strong&gt;Katacoda&lt;/strong&gt;&lt;/em&gt; environments designed for each topic covered, two exam-type labs (with a high degree of difficulty) and two exams to practice and prepare to work under the pressure of the real exam. .&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;: If you have a LinuxAcademy subscription you can follow this course. Keep two things in mind: 1) It focuses on editing yamls and little on how to generate them. 2) The exam mocks they have to practice are not so difficult and they may be insufficient to pass without having practiced beyond them. It’s recommended to do the labs, exams and other questions to exercise (see below)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;: This course is to have an overview of Kubernetes, for example of its architecture (API Server, Kubelet, etc.) as well as to take the first steps in application deployments. No practical labs included.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;: This course is to start with Kubernetes, to have the fundamental concepts. Ideal for those who have not had contact with Kubernetes. No practical labs included.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;practice-environments&quot;&gt;Practice environments&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;: This platform allows you to interact with a cluster with just one node, from a web console, similar to what we would get in the exam. The interesting thing is that there are scenarios created by other users that can be used to learn basic concepts, such as secrets, configmaps, volumes, etc. Please note that each scneario lasts a maximum of one hour.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;: With this option you can install a virtual machine to have your own cluster with a node.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;exercises-to-practice&quot;&gt;Exercises to practice&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;:
-A set of exercises that will help you prepare for the exam and can also help you learn and practice with Kubernetes.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;:This is another set of exercises that serve to prepare you and have all the concepts fresh before going to the exam..&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;: This page presents some challenges to complete and some tips for the exam. They also offer an exam simulator at a cost of €30 (I didn’t subscribe, so I don’t know exactly what the simulator is like or if it really has similar exam questions).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;endnotes&quot;&gt;Endnotes&lt;/h1&gt;
-&lt;p&gt;Again I recommend you to practice enough before taking the exam, even if you have experience with Kubernetes. Time management is important, so you must be prepared to use the Kubernetes documentation quickly (from the documentation page or from the console with kubectl), be prepared to generate yamls (not edit them), and handle nerves and pressure.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;Exam Rules and Policies&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2020-06-26-terraform-module-for-amazon-secrets-manager/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2020-06-26-terraform-module-for-amazon-secrets-manager</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2020-06-26-terraform-module-for-amazon-secrets-manager/">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-secrets-manager.jpg&quot; alt=&quot;AWS Secrets Manager&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-I just published a Terraform module called &lt;strong&gt;terraform-aws-secrets-manager&lt;/strong&gt; at Github, so I decided to share it as well in the public Terraform Registry.&lt;/p&gt;
-
-&lt;p&gt;You can check the module &lt;strong&gt;terraform-aws-secrets-manager&lt;/strong&gt; at the &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/secrets-manager/aws/&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; or clone it from &lt;a href=&quot;https://github.com/lgallard/terraform-aws-secrets-manager&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you want to take a sneak of the module, I also left the README in this post:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lgallardo.com/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/p&gt;
-&lt;h1 id=&quot;terraform-aws-secrets-manager&quot;&gt;terraform-aws-secrets-manager&lt;/h1&gt;
-
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/secrets-manager/&quot; target=&quot;_blank&quot;&gt;Amazon Secrets Manager&lt;/a&gt; resources.&lt;/p&gt;
-
-&lt;p&gt;AWS Secrets Manager helps you protect secrets needed to access your applications, services, and IT resources. The service enables you to easily rotate, manage, and retrieve database credentials, API keys, and other secrets throughout their lifecycle.&lt;/p&gt;
-
-&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;/h2&gt;
-
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-secrets-manager/tree/master/examples/&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; folder where you can see the complete compilation of snippets.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;You can create secrets for plain texts, keys/values and binary data:&lt;/p&gt;
-
-&lt;h3 id=&quot;plain-text-secrets&quot;&gt;Plain text secrets&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;secrets-manager-1&quot; {
-
-  source = &quot;lgallard/secrets-manager/aws&quot;
-
-  secrets = [
-    {
-      name                    = &quot;secret-1&quot;
-      description             = &quot;My secret 1&quot;
-      recovery_window_in_days = 7
-      secret_string           = &quot;This is an example&quot;
-    },
-    {
-      name                    = &quot;secret-2&quot;
-      description             = &quot;My secret 2&quot;
-      recovery_window_in_days = 7
-      secret_string           = &quot;This is another example&quot;
-    }
-  ]
-
-  tags = {
-    Owner       = &quot;DevOps team&quot;
-    Environment = &quot;dev&quot;
-    Terraform   = true
-
-  }
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;keyvalue-secrets&quot;&gt;Key/Value secrets&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;secrets-manager-2&quot; {
-
-  source = &quot;lgallard/secrets-manager/aws&quot;
-
-  secrets = [
-   {
-      name        = &quot;secret-kv-1&quot;
-      description = &quot;This is a key/value secret&quot;
-      secret_key_value = {
-        key1 = &quot;value1&quot;
-        key2 = &quot;value2&quot;
-      }
-      recovery_window_in_days = 7
-    },
-   {
-      name        = &quot;secret-kv-2&quot;
-      description = &quot;Another key/value secret&quot;
-      secret_key_value = {
-        username = &quot;user&quot;
-        password = &quot;topsecret&quot;
-      }
-      tags = {
-        app = &quot;web&quot;
-      }
-      recovery_window_in_days = 7
-    },
- ]
-
-  tags = {
-    Owner       = &quot;DevOps team&quot;
-    Environment = &quot;dev&quot;
-    Terraform   = true
-  }
-
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;binary-secrets&quot;&gt;Binary secrets&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;secrets-manager-3&quot; {
-
-  source = &quot;lgallard/secrets-manager/aws&quot;
-
-  secrets = [
-    {
-      name                    = &quot;secret-binary-1&quot;
-      description             = &quot;This is a binary secret&quot;
-      secret_binary           = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDt4TcI58h4G0wR+GcDY+0VJR10JNvG92jEKGaKxeMaOkfsXflVGsYXbfVBBCG/n3uHtTse7baYLB6LWQAuYWL1SHJVhhTQ7pPiocFWibAvJlVo1l7qJEDu2OxKpWEleCE+p3ufNXAy7v5UFO7EOnj0Zg6R3F/MiAWbQnaEHcYzNtogyC24YBecBLrBXZNi1g0AN1hM9k+3XvWUYTf9vPv8LIWnqo7y4Q2iEGWWurf37YFl1LzX4mG/Co+Vfe5TlZSe2YPMYWlw0ZKaKvwzInRR6dPMAflo3ABzlduiIbSdp110uGqB8i2M8eGXNDxR7Ni4nnLWnT9r1cpWhXWP6pAG4Xg8+x7+PIg/pgjgJNmsURw+jPD6+hkCw2Vz16EIgkC2b7lj0V6J4LncUoRzU/1sAzCQ4tspy3SKBUinYoxbDvXleF66FHEjfparnvNwfslBx0IJjG2uRwuX6zrsNIsGF1stEjz+eyAOtFV4/wRjRcCNDZvl1ODzIvwf8pAWddE= lgallard@server1&quot;
-    },
-    {
-      name                    = &quot;secret-binary-2&quot;
-      description             = &quot;Another binary secret&quot;
-      secret_binary           = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzc818NSC6oJYnNjVWoF43+IuQpqc3WyS8BWZ50uawK5lY/aObweX2YiXPv2CoVvHUM0vG7U7BDBvNi2xwsT9n9uT27lcVQsTa8iDtpyoeBhcj3vJ60Jd04UfoMP7Og6UbD+KGiaqQ0LEtMXq6d3i619t7V0UkaJ4MXh2xl5y3bV4zNzTXdSScJnvMFfjLW0pJOOqltLma3NQ9ILVdMSK2Vzxc87T+h/jp0VuUAX4Rx9DqmxEU/4JadXmow/BKy69KVwAk/AQ8jL7OwD2YAxlMKqKnOsBJQF27YjmMD240UjkmnPlxkV8+g9b2hA0iM5GL+5MWg6pPUE0BYdarCmwyuaWYhv/426LnfHTz9UVC3y9Hg5c4X4I6AdJJUmarZXqxnMe9jJiqiQ+CAuxW3m0gIGsEbUul6raG73xFuozlaXq3J+kMCVW24eG2i5fezgmtiysIf/dpcUo+YLkX+U8jdMQg9IwCY0bf8XL39kwJ7u8uWU8+7nMcS9VQ5llVVMk= lgallard@server2&quot;
-      recovery_window_in_days = 7
-      tags = {
-        app = &quot;web&quot;
-      }
-    }
-
- ]
-
-  tags = {
-    Owner       = &quot;DevOps team&quot;
-    Environment = &quot;dev&quot;
-    Terraform   = true
-  }
-
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;secrets-rotation&quot;&gt;Secrets Rotation&lt;/h2&gt;
-
-&lt;p&gt;If yo need to rotate your secrets, use &lt;code class=&quot;highlighter-rouge&quot;&gt;rotate_secrets&lt;/code&gt; list to define them. Take into account that the lambda function must exist and it must have the right permissions to rotate the secrets in AWS Secret manager:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;secrets-manager-4&quot; {
-
-  source = &quot;lgallard/secrets-manager/aws&quot;
-
-    rotate_secrets = [
-    {
-      name                    = &quot;secret-rotate-1&quot;
-      description             = &quot;This is a secret to be rotated by a lambda&quot;
-      secret_string           = &quot;This is an example&quot;
-      rotation_lambda_arn     = &quot;arn:aws:lambda:us-east-1:123455678910:function:lambda-rotate-secret&quot;
-      recovery_window_in_days = 15
-    },
-    {
-      name                    = &quot;secret-rotate-2&quot;
-      description             = &quot;This is another secret to be rotated by a lambda&quot;
-      secret_string           = &quot;This is another example&quot;
-      rotation_lambda_arn     = &quot;arn:aws:lambda:us-east-1:123455678910:function:lambda-rotate-secret&quot;
-      recovery_window_in_days = 7
-    },
-  ]
-
-  tags = {
-    Owner       = &quot;DevOps team&quot;
-    Environment = &quot;dev&quot;
-    Terraform   = true
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;several-secret-definitions&quot;&gt;Several secret definitions&lt;/h2&gt;
-
-&lt;p&gt;You can define different type of secrets (string, key/balue or binary) in the same &lt;code class=&quot;highlighter-rouge&quot;&gt;secrets&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;rotate_secrets&lt;/code&gt; list:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;secrets-manager-5&quot; {
-
-  source = &quot;lgallard/secrets-manager/aws&quot;
-
-  secrets = [
-    {
-      name                    = &quot;secret-plain&quot;
-      description             = &quot;My plain text secret&quot;
-      recovery_window_in_days = 7
-      secret_string           = &quot;This is an example&quot;
-    },
-   {
-      name        = &quot;secret-key-value&quot;
-      description = &quot;This is a key/value secret&quot;
-      secret_key_value = {
-        username = &quot;user&quot;
-        password = &quot;topsecret&quot;
-      }
-      tags = {
-        app = &quot;web&quot;
-      }
-      recovery_window_in_days = 7
-    },
- ]
-
-  tags = {
-    Owner       = &quot;DevOps team&quot;
-    Environment = &quot;dev&quot;
-    Terraform   = true
-  }
-
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;providers&quot;&gt;Providers&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Version&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;aws&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;automatically_after_days&lt;/td&gt;
-      &lt;td&gt;Specifies the number of days between automatic scheduled rotations of the secret.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;recovery_window_in_days&lt;/td&gt;
-      &lt;td&gt;Specifies the number of days that AWS Secrets Manager waits before it can delete the secret. This value can be 0 to force deletion without recovery or range from 7 to 30 days.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rotate_secrets&lt;/td&gt;
-      &lt;td&gt;List of secrets to keep and rotate in AWS Secrets Manager&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;secrets&lt;/td&gt;
-      &lt;td&gt;List of secrets to keep in AWS Secrets Manager&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;Specifies a key-value map of user-defined tags that are attached to the secret.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rotate_secret_arns&lt;/td&gt;
-      &lt;td&gt;Rotate secret arn list&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rotate_secret_ids&lt;/td&gt;
-      &lt;td&gt;Rotate secret id list&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;secret_arns&lt;/td&gt;
-      &lt;td&gt;Secret arn list&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;secret_ids&lt;/td&gt;
-      &lt;td&gt;Secret id list&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-secrets-manager.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-secrets-manager module at github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/secrets-manager/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-secrets-manager module at Terraform registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2020-04-28-hashicorp-certified-terraform-associate/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2020-04-28-hashicorp-certified-terraform-associate</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2020-04-28-hashicorp-certified-terraform-associate/">&lt;center&gt;&lt;img src=&quot;/images/terraform-associate-badge.jpg&quot; alt=&quot;HasiCorp Certified: Terraform Associate&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt; 
-HashiCorp recently announced the general availability of some of their &lt;a href=&quot;https://www.hashicorp.com/blog/announcing-hashicorp-cloud-engineering-certifications/&quot; target=&quot;_blank&quot;&gt;Cloud Certifications&lt;/a&gt; like Terraform and Vault (and others to come like Consul). As I’ve been working with Terraform for a while and due to the fact I’ve published modules at the &lt;a href=&quot;https://registry.terraform.io/search?q=lgallard&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; I decided to take the exam.&lt;/p&gt;
-
-&lt;p&gt;You can verify the validity of the certifications using &lt;strong&gt;&lt;em&gt;Acclaim&lt;/em&gt;&lt;/strong&gt; platform. For example for my certification visit my badge &lt;a href=&quot;https://www.youracclaim.com/badges/d82312de-3f83-430b-8136-78c18e757463/public_url&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;the-exam&quot;&gt;The exam&lt;/h1&gt;
-
-&lt;p&gt;There were 57 questions to answer in 60 minutes, with a proctor which verifies your are alone during the exam.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-did-i-prepare&quot;&gt;How did I prepare?&lt;/h2&gt;
-
-&lt;p&gt;Unlike other exams that I had already taken the preparation for this was different. Since the general availability was announced just few days ago and there weren’t many resources online like courses at &lt;strong&gt;A Cloud Guru&lt;/strong&gt; or &lt;strong&gt;Linux Academy&lt;/strong&gt; I had to follow HashiCorp’s recommendations:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform/certification/terraform-associate-study-guide&quot; target=&quot;_blank&quot;&gt;Study Guide&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform/certification/terraform-associate-review&quot; target=&quot;_blank&quot;&gt;Exam Review&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform/certification/terraform-associate-sample-questions&quot; target=&quot;_blank&quot;&gt;Sample Questions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I found more useful the &lt;strong&gt;&lt;em&gt;Exam Review&lt;/em&gt;&lt;/strong&gt;, which leds you to other resources you can check to complete any gap you may have. In the case you are starting to use Terraform the &lt;strong&gt;&lt;em&gt;Study Guide&lt;/em&gt;&lt;/strong&gt; would suit you better, and then follow the &lt;strong&gt;&lt;em&gt;Exam Review&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;The &lt;strong&gt;&lt;em&gt;Sample questions&lt;/em&gt;&lt;/strong&gt; are just a guide on how the exam format is with some questions alike. Don’t assume these question will be asked in the real exam.&lt;/p&gt;
-
-&lt;h2 id=&quot;but-what-to-study&quot;&gt;But what to study?&lt;/h2&gt;
-
-&lt;p&gt;First take into account the contents of the blueprint HashiCorp provides for the exam:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Understand infrastructure as code (IaC) concepts&lt;/li&gt;
-  &lt;li&gt;Understand Terraform’s purpose (vs other IaC)&lt;/li&gt;
-  &lt;li&gt;Understand Terraform basics&lt;/li&gt;
-  &lt;li&gt;Use the Terraform CLI (outside of core workflow)&lt;/li&gt;
-  &lt;li&gt;Interact with Terraform modules&lt;/li&gt;
-  &lt;li&gt;Navigate Terraform workflow&lt;/li&gt;
-  &lt;li&gt;Implement and maintain state&lt;/li&gt;
-  &lt;li&gt;Read, generate, and modify configuration&lt;/li&gt;
-  &lt;li&gt;Understand Terraform Cloud and Enterprise capabilities&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This blue print is detailed in the &lt;a href=&quot;https://www.hashicorp.com/certification/terraform-associate/&quot; target=&quot;_blank&quot;&gt;Terrraform Certification Exam&lt;/a&gt; page and the &lt;strong&gt;&lt;em&gt;Exam review&lt;/em&gt;&lt;/strong&gt; is a match with this.&lt;/p&gt;
-
-&lt;p&gt;On the other hand I also recommend:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Learn the basic commands (init, plan, apply, destroy) and their possible extra options. Use each command help to get used to their extra options.&lt;/li&gt;
-  &lt;li&gt;Learn the Terraform workflow.&lt;/li&gt;
-  &lt;li&gt;Know the tfstate file and the possible backends to handle it.&lt;/li&gt;
-  &lt;li&gt;Understand what a Workspace is (both for the Open Source and the Cloud / Enterprise versions).&lt;/li&gt;
-  &lt;li&gt;Know the difference between the Open Source, Cloud and Enterprise versions of Terraform.&lt;/li&gt;
-  &lt;li&gt;Practice before the exam (really, don’t overlook this!).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;other-resources-for-learning-terraform&quot;&gt;Other resources for learning Terraform&lt;/h2&gt;
-
-&lt;p&gt;There are other resources you can use to learn Terraform:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraformupandrunning.com&quot; target=&quot;_blank&quot;&gt;Terraform Up &amp;amp; Running&lt;/a&gt;. This book was written from a series of posts available at &lt;a href=&quot;https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca&quot; target=&quot;_blank&quot;&gt;A Comprehensive Guide to Terraform&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform#getting-started&quot; target=&quot;_blank&quot;&gt;Learn to provision infrastructure with HashiCorp Terraform&lt;/a&gt;. This a series of videos and resources provided by HashiCorp you can follow to getting starting with Terraform (AWS, Azure, Google Cloud, Terraform Cloud)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/hashicorp&quot; target=&quot;_blank&quot;&gt;Katacoda scenarios&lt;/a&gt; by HashiCorp. In particular the &lt;a href=&quot;https://www.katacoda.com/hashicorp/scenarios/terraform-cloud&quot; target=&quot;_blank&quot;&gt;Terraform Cloud scenario&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;my-recommendations-for-saving-time-on-this-exam-are&quot;&gt;My recommendations for saving time on this exam are:&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Answer the easy question quick, don’t stay long thinking whether is right answer because probably it is.&lt;/li&gt;
-  &lt;li&gt;Only mark for review those question where you really have a doubt, so you can check them later and if there’s time left be able to review them all.&lt;/li&gt;
-  &lt;li&gt;If you have a doubt, for example in how terraform works just remember what have you done in practice or real life. Simple!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.hashicorp.com/certification/terraform-associate/&quot; target=&quot;_blank&quot;&gt;Terrraform Certification Exam page&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform/certification/terraform-associate-study-guide&quot; target=&quot;_blank&quot;&gt;Study Guide&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform/certification/terraform-associate-review&quot; target=&quot;_blank&quot;&gt;Exam Review&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform/certification/terraform-associate-sample-questions&quot; target=&quot;_blank&quot;&gt;Sample Questions&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.gruntwork.io/a-comprehensive-guide-to-terraform-b3d32832baca&quot; target=&quot;_blank&quot;&gt;A Comprehensive Guide to Terraform&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.terraformupandrunning.com&quot; target=&quot;_blank&quot;&gt;Terraform Up &amp;amp; Running&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform#getting-started&quot; target=&quot;_blank&quot;&gt;Learn to provision infrastructure with HashiCorp Terraform&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/hashicorp&quot; target=&quot;_blank&quot;&gt;Katacoda scenarios&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/hashicorp/scenarios/terraform-cloud&quot; target=&quot;_blank&quot;&gt;Terraform Cloud scenario&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2020-04-18-terraform-module-for-amazon-codebuild/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2020-04-18-terraform-module-for-amazon-codebuild</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2020-04-18-terraform-module-for-amazon-codebuild/">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-codebuild.jpg&quot; alt=&quot;AWS CodeBuild&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-I just published a Terraform module called &lt;strong&gt;terraform-aws-codebuild&lt;/strong&gt; at Github, so I decided to share it as well in the public Terraform Registry.&lt;/p&gt;
-
-&lt;p&gt;You can check the module &lt;strong&gt;terraform-aws-codebuild&lt;/strong&gt; at the &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/codebuild/aws/&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; or clone it from &lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you want to take a sneak of the module, I also left the README in this post:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lgallardo.com/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/p&gt;
-&lt;h1 id=&quot;terraform-aws-codebuild&quot;&gt;terraform-aws-codebuild&lt;/h1&gt;
-&lt;p&gt;Terraform module for creating &lt;a href=&quot;https://aws.amazon.com/codebuild/&quot; target=&quot;_blank&quot;&gt;AWS CodeBuild&lt;/a&gt; Projects. AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-&lt;p&gt;You can  define CodeBuild projects using object variables (made of maps, lists, booleans, etc.), or you can define projects using the classic module’s variables approach (eg. &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts_*&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;cache_*&lt;/code&gt;, etc.).&lt;/p&gt;
-
-&lt;p&gt;In the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild/tree/master/examples/&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; folder you can check both approaches in detail and another example with VPC support.&lt;/p&gt;
-
-&lt;h2 id=&quot;example-using-objects&quot;&gt;Example using objects&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;myapp-project&quot; {
-
-  source = &quot;git::https://github.com/lgallard/terraform-aws-codebuild.git&quot;
-
-  name        = &quot;my-app&quot;
-  description = &quot;Codebuild for deploying myapp&quot;
-
-  # CodeBuild Source
-  codebuild_source_version = &quot;master&quot;
-  codebuild_source = {
-    type            = &quot;GITHUB&quot;
-    location        = &quot;https://github.com/lgallard/codebuild-example.git&quot;
-    git_clone_depth = 1
-
-    git_submodules_config = {
-      fetch_submodules = true
-    }
-  }
-
-  # Environment
-  environment = {
-    compute_type    = &quot;BUILD_GENERAL1_SMALL&quot;
-    image           = &quot;aws/codebuild/standard:2.0&quot;
-    type            = &quot;LINUX_CONTAINER&quot;
-    privileged_mode = true
-
-    # Environment variables
-    variables = [
-      {
-        name  = &quot;REGISTRY_URL&quot;
-        value = &quot;012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr&quot;
-      },
-      {
-        name  = &quot;AWS_DEFAULT_REGION&quot;
-        value = &quot;us-east-1&quot;
-      },
-    ]
-  }
-
-  # Artifacts
-  artifacts = {
-    location  = aws_s3_bucket.myapp-project.bucket
-    type      = &quot;S3&quot;
-    path      = &quot;/&quot;
-    packaging = &quot;ZIP&quot;
-  }
-
-  # Cache
-  cache = {
-    type     = &quot;S3&quot;
-    location = aws_s3_bucket.myapp-project.bucket
-  }
-
-  # Logs
-  s3_logs = {
-    status   = &quot;ENABLED&quot;
-    location = &quot;${aws_s3_bucket.myapp-project.id}/build-log&quot;
-  }
-
-  # Tags
-  tags = {
-    Environment = &quot;dev&quot;
-    owner       = &quot;development-team&quot;
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;example-using-variables&quot;&gt;Example using variables&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;myapp-project&quot; {
-
-  source = &quot;git::https://github.com/lgallard/terraform-aws-codebuild.git&quot;
-
-  name        = &quot;my-app-var&quot;
-  description = &quot;Codebuild for deploying myapp (variables)&quot;
-
-  # CodeBuild Source
-  codebuild_source_version = &quot;master&quot;
-
-  codebuild_source_type                                   = &quot;GITHUB&quot;
-  codebuild_source_location                               = &quot;https://github.com/lgallard/codebuild-example.git&quot;
-  codebuild_source_git_clone_depth                        = 1
-  codebuild_source_git_submodules_config_fetch_submodules = true
-
-  # Environment
-  environment_compute_type    = &quot;BUILD_GENERAL1_SMALL&quot;
-  environment_image           = &quot;aws/codebuild/standard:2.0&quot;
-  environment_type            = &quot;LINUX_CONTAINER&quot;
-  environment_privileged_mode = true
-
-  # Environment variables
-  environment_variables = [
-    {
-      name  = &quot;REGISTRY_URL&quot;
-      value = &quot;012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr&quot;
-    },
-    {
-      name  = &quot;AWS_DEFAULT_REGION&quot;
-      value = &quot;us-east-1&quot;
-    },
-  ]
-
-  # Artifacts
-  artifacts_location  = aws_s3_bucket.myapp-project.bucket
-  artifacts_type      = &quot;S3&quot;
-  artifacts_path      = &quot;/&quot;
-  artifacts_packaging = &quot;ZIP&quot;
-
-  # Cache
-  cache_type     = &quot;S3&quot;
-  cache_location = aws_s3_bucket.myapp-project.bucket
-
-  # Logs
-  s3_logs_status   = &quot;ENABLED&quot;
-  s3_logs_location = &quot;${aws_s3_bucket.myapp-project.id}/build-var-log&quot;
-
-
-  # Tags
-  tags = {
-    Environment = &quot;dev&quot;
-    owner       = &quot;development-team&quot;
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts&lt;/td&gt;
-      &lt;td&gt;Information about the project’s build output artifacts.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_artifact_identifier&lt;/td&gt;
-      &lt;td&gt;The artifact identifier. Must be the same specified inside AWS CodeBuild buildspec.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_encryption_disabled&lt;/td&gt;
-      &lt;td&gt;If set to true, output artifacts will not be encrypted. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; then this value will be ignored.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_location&lt;/td&gt;
-      &lt;td&gt;Information about the build output artifact location. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; then this value will be ignored. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the name of the output bucket.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_name&lt;/td&gt;
-      &lt;td&gt;The name of the project. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the name of the output artifact object.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_namespace_type&lt;/td&gt;
-      &lt;td&gt;The namespace to use in storing build artifacts. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, then valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_ID&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NONE&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_override_artifact_name&lt;/td&gt;
-      &lt;td&gt;If set to true, a name specified in the build spec file overrides the artifact name.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_packaging&lt;/td&gt;
-      &lt;td&gt;The type of build output artifact to create. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;NONE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ZIP&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_path&lt;/td&gt;
-      &lt;td&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the path to the output artifact&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_type&lt;/td&gt;
-      &lt;td&gt;The build output artifact’s type. Valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;NO_ARTIFACTS&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;badge_enabled&lt;/td&gt;
-      &lt;td&gt;Generates a publicly-accessible URL for the projects build badge. Available as badge_url attribute when enabled.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;build_timeout&lt;/td&gt;
-      &lt;td&gt;How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed.The default is 60 minutes.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;60&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cache&lt;/td&gt;
-      &lt;td&gt;Information about the cache storage for the project.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cache_location&lt;/td&gt;
-      &lt;td&gt;The location where the AWS CodeBuild project stores cached resources. For type S3 the value must be a valid S3 bucket name/prefix. (Required when cache &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cache_modes&lt;/td&gt;
-      &lt;td&gt;Specifies settings that AWS CodeBuild uses to store and reuse build dependencies. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_SOURCE_CACHE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_DOCKER_LAYER_CACHE&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_CUSTOM_CACHE&lt;/code&gt;. (Required when cache type is &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL&lt;/code&gt;)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cache_type&lt;/td&gt;
-      &lt;td&gt;The type of storage that will be used for the AWS CodeBuild project cache. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_CACHE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;NO_CACHE&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cloudwatch_logs&lt;/td&gt;
-      &lt;td&gt;Configuration for the builds to store log data to CloudWatch.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cloudwatch_logs_group_name&lt;/td&gt;
-      &lt;td&gt;The group name of the logs in CloudWatch Logs.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cloudwatch_logs_status&lt;/td&gt;
-      &lt;td&gt;Current status of logs in CloudWatch Logs for a build project. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;ENABLED&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DISABLED.&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;ENABLED&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cloudwatch_logs_stream_name&lt;/td&gt;
-      &lt;td&gt;The stream name of the logs in CloudWatch Logs.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source&lt;/td&gt;
-      &lt;td&gt;Information about the project’s input source code.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_auth&lt;/td&gt;
-      &lt;td&gt;Information about the authorization settings for AWS CodeBuild to access the source code to be built.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_auth_resource&lt;/td&gt;
-      &lt;td&gt;The resource value that applies to the specified authorization type.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_auth_type&lt;/td&gt;
-      &lt;td&gt;The authorization type to use. The only valid value is OAUTH&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;OAUTH&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_buildspec&lt;/td&gt;
-      &lt;td&gt;The build spec declaration to use for this build project’s related builds. This must be set when type is iNO_SOURCE&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_git_clone_depth&lt;/td&gt;
-      &lt;td&gt;Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_git_submodules_config&lt;/td&gt;
-      &lt;td&gt;Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_git_submodules_config_fetch_submodules&lt;/td&gt;
-      &lt;td&gt;If set to true, fetches Git submodules for the AWS CodeBuild build project.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_insecure_ssl&lt;/td&gt;
-      &lt;td&gt;Ignore SSL warnings when connecting to source control.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_location&lt;/td&gt;
-      &lt;td&gt;The location of the source code from git or s3.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_report_build_status&lt;/td&gt;
-      &lt;td&gt;Set to true to report the status of a build’s start and finish to your source provider. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;BITBUCKET&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_type&lt;/td&gt;
-      &lt;td&gt;The type of repository that contains the source code to be built. Valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB_ENTERPRISE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BITBUCKET&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_SOURCE&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;CODEPIPELINE&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_version&lt;/td&gt;
-      &lt;td&gt;A version of the build input to be built for this project. If not specified, the latest version is used.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;description&lt;/td&gt;
-      &lt;td&gt;A short description of the project.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;encryption_key&lt;/td&gt;
-      &lt;td&gt;The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project’s build output artifacts.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment&lt;/td&gt;
-      &lt;td&gt;Information about the project’s build environment.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_certificate&lt;/td&gt;
-      &lt;td&gt;The ARN of the S3 bucket, path prefix and object key that contains the PEM-encoded certificate.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_compute_type&lt;/td&gt;
-      &lt;td&gt;Information about the compute resources the build project will use. Available values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_SMALL&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_MEDIUM&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_LARGE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_2XLARGE&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_SMALL&lt;/code&gt; is only valid if type is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_CONTAINER&lt;/code&gt;. When type is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_GPU_CONTAINER&lt;/code&gt;, compute_type need to be &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_LARGE&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;BUILD_GENERAL1_MEDIUM&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_image&lt;/td&gt;
-      &lt;td&gt;The Docker image to use for this build project. Valid values include Docker images provided by CodeBuild (e.g &lt;code class=&quot;highlighter-rouge&quot;&gt;aws/codebuild/standard:2.0&lt;/code&gt;), Docker Hub images (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;hashicorp/terraform:latest&lt;/code&gt;), and full Docker repository URIs such as those for ECR (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;137112412989.dkr.ecr.us-west-2.amazonaws.com/amazonlinux:latest&lt;/code&gt;)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;aws/codebuild/standard:2.0&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_image_pull_credentials_type&lt;/td&gt;
-      &lt;td&gt;The type of credentials AWS CodeBuild uses to pull images in your build. Available values for this parameter are &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEBUID&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;SERVICE_ROLE&lt;/code&gt;. When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;CODEBUILD&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_privileged_mode&lt;/td&gt;
-      &lt;td&gt;If set to true, enables running the Docker daemon inside a Docker container.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_registry_credential&lt;/td&gt;
-      &lt;td&gt;Information about credentials for access to a private Docker registry. Registry Credential config blocks are documented below.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_type&lt;/td&gt;
-      &lt;td&gt;The type of build environment to use for related builds. Available values are: &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_CONTAINER&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_GPU_CONTAINER&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;WINDOWS_CONTAINER&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ARM_CONTAINER&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;LINUX_CONTAINER&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_variables&lt;/td&gt;
-      &lt;td&gt;A list of sets of environment variables to make available to builds for this build project.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;name&lt;/td&gt;
-      &lt;td&gt;The projects name.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;queued_timeout&lt;/td&gt;
-      &lt;td&gt;How long in minutes, from 5 to 480 (8 hours), a build is allowed to be queued before it times out.The default is 8 hours.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;480&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;s3_logs&lt;/td&gt;
-      &lt;td&gt;Configuration for the builds to store log data to S3.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;s3_logs_encryption_disabled&lt;/td&gt;
-      &lt;td&gt;Set to true if you do not want S3 logs encrypted.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;s3_logs_location&lt;/td&gt;
-      &lt;td&gt;The name of the S3 bucket and the path prefix for S3 logs. Must be set if status is ENABLED, otherwise it must be empty.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;s3_logs_status&lt;/td&gt;
-      &lt;td&gt;Current status of logs in S3 for a build project. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;ENABLED&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DISABLED.&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;DISABLED&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;A mapping of tags to assign to the resource.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_config&lt;/td&gt;
-      &lt;td&gt;Configuration for the builds to run inside a VPC.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_config_security_group_ids&lt;/td&gt;
-      &lt;td&gt;The security group IDs to assign to running builds.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_config_subnets&lt;/td&gt;
-      &lt;td&gt;The subnet IDs within which to run builds.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_config_vpc_id&lt;/td&gt;
-      &lt;td&gt;The ID of the VPC within which to run builds.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the CodeBuild project&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;id&lt;/td&gt;
-      &lt;td&gt;The name (if imported via name) or ARN (if created via Terraform or imported via ARN) of the CodeBuild project.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;name&lt;/td&gt;
-      &lt;td&gt;The name of the CodeBuild project&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;service_role_arn&lt;/td&gt;
-      &lt;td&gt;Amazon Resource Name (ARN) of the Service Role for CodeBuild.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;service_role_id&lt;/td&gt;
-      &lt;td&gt;ID of the Service Role created for CodeBuild.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;service_role_name&lt;/td&gt;
-      &lt;td&gt;Name of the Service Role created for CodeBuild.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuild module at github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/codebuild/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuild module at Terraform registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2020-02-29-terraform-module-for-route53-resolver-rules/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2020-02-29-terraform-module-for-route53-resolver-rules</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2020-02-29-terraform-module-for-route53-resolver-rules/">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-route53-resolver-rules.jpg&quot; alt=&quot;AWS Route53 Resolver Rules&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;img src=&quot;/images/Resolver-outbound-endpoint.jpg&quot; alt=&quot;Resolver outbound endpoint&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-I wrote this module to be able to create AWS Route53 Resolver rules for outbound endpoints in a more convenient way.&lt;/p&gt;
-
-&lt;p&gt;You can check the module &lt;strong&gt;terraform-aws-route53-resolver-rules&lt;/strong&gt; at the &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; or clone it from &lt;a href=&quot;https://github.com/lgallard/terraform-aws-route53-resolver-rules&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you want to take a sneak of the module, I also left the README in this post:&lt;/p&gt;
-
-&lt;h1 id=&quot;terraform-aws-route53-resolver-rules&quot;&gt;terraform-aws-route53-resolver-rules&lt;/h1&gt;
-
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html&quot;&gt;AWS Route53 Resolver Rules&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;Before you start to forward queries, you must create  Resolver outbound endpoints in the connected VPCs. These endpoints provide a path for inbound or outbound queries. To accomplish this you can create the endpoints using the &lt;a href=&quot;https://www.terraform.io/docs/providers/aws/r/route53_resolver_endpoint.html&quot;&gt;aws_route53_resolver_endpoint&lt;/a&gt; resource or use a module like the &lt;a href=&quot;https://github.com/rhythmictech/terraform-aws-route53-endpoint&quot;&gt;terraform-aws-route53-endpoint&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-route53-resolver-rules/blob/master/examples/&quot;&gt;examples&lt;/a&gt; folder for the &lt;strong&gt;simple&lt;/strong&gt; and the &lt;strong&gt;complete&lt;/strong&gt; snippets.&lt;/p&gt;
-
-&lt;h3 id=&quot;example-complete&quot;&gt;Example (complete)&lt;/h3&gt;
-
-&lt;p&gt;This example creates two rules in a outbound endpoint, using all the parameter expected for building the rules:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Outbound endpoint using the rhythmictech/terraform-aws-route53-endpoint module
-module &quot;r53-outboud&quot; {
-  source            = &quot;git::https://github.com/rhythmictech/terraform-aws-route53-endpoint&quot;
-  direction         = &quot;outbound&quot;
-  allowed_resolvers = [&quot;192.168.0.0/24&quot;]
-  vpc_id            = &quot;vpc-0fffff0123456789&quot;
-  ip_addresses      = [
-    {
-      ip        = &quot;172.30.1.10&quot;
-      subnet_id = &quot;subnet-abcd123456789aaaa&quot;
-    },
-    {
-      ip        = &quot;172.30.2.10&quot;
-      subnet_id = &quot;subnet-abcd123456789bbbb&quot;
-    }
-  ]
-}
-
-# AWS Route 53 Resolver rules
-module &quot;r53-resolver-rules&quot; {
-  source               = &quot;git::https://github.com/lgallard/terraform-aws-route53-resolver-rules.git&quot;
-  resolver_endpoint_id = module.r53-outboud.endpoint_ids
-
-  rules = [
-    { rule_name   = &quot;r53r-rule-1&quot;
-      domain_name = &quot;bar.foo.&quot;
-      ram_name    = &quot;ram-r53r-1&quot;
-      vpc_ids     = [&quot;vpc-0fffff0123456789&quot;]
-      ips         = [&quot;192.168.10.10&quot;, &quot;192.168.10.11:54&quot;]
-      principals  = [&quot;123456789101&quot;, &quot;101987654321&quot;]
-    },
-    {
-      rule_name   = &quot;r53r-rule-2&quot;
-      domain_name = &quot;example.com.&quot;
-      ram_name    = &quot;ram-r53r-2&quot;
-      vpc_ids     = [&quot;vpc-0fffff0123456789&quot;]
-      ips         = [&quot;192.168.10.10&quot;, &quot;192.168.10.11:54&quot;]
-      principals  = [&quot;123456789101&quot;, &quot;101987654321&quot;]
-    }
-  ]
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You can define IP and ports using the &lt;em&gt;IP:PORT&lt;/em&gt; syntax, as shown above.&lt;/p&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resolver_endpoint_id&lt;/td&gt;
-      &lt;td&gt;The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rules&lt;/td&gt;
-      &lt;td&gt;List of rules&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;Map of tags to apply to supported resources&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;br /&gt;
-Each rule accept the following parameters:&lt;/p&gt;
-
-&lt;h3 id=&quot;rules&quot;&gt;Rules&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Type&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_name&lt;/td&gt;
-      &lt;td&gt;Domain name to forward requests for&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ips&lt;/td&gt;
-      &lt;td&gt;List of IPs and ports to forward DNS requests to. Use &lt;em&gt;IP:PORT&lt;/em&gt; syntax, or just the IP&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;principals&lt;/td&gt;
-      &lt;td&gt;List of account IDs to share the resolver rule with&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ram_name&lt;/td&gt;
-      &lt;td&gt;RAM share name&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;r53-&lt;code class=&quot;highlighter-rouge&quot;&gt;domain_name&lt;/code&gt;-rule&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resolver_endpoint_id&lt;/td&gt;
-      &lt;td&gt;Resolver endpoint id&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_name&lt;/td&gt;
-      &lt;td&gt;Route53 resolver rule name&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;domain_name&lt;/code&gt;-rule&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;Map of tags to apply to supported resources&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;map(string)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_ids&lt;/td&gt;
-      &lt;td&gt;List of VPC ids to associate to the rule&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-route53-resolver-rules.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-route53-resolver-rules module at Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-route53-resolver-rules at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry><entry><title type="html"></title><link href="https://lgallardo.com/_i18n/en/2019-11-23-terraform-module-for-amazon-cognito-user-pool/" rel="alternate" type="text/html" title="" /><published>2025-06-09T09:26:40-05:00</published><updated>2025-06-09T09:26:40-05:00</updated><id>https://lgallardo.com/_i18n/en/2019-11-23-terraform-module-for-amazon-cognito-user-pool</id><content type="html" xml:base="https://lgallardo.com/_i18n/en/2019-11-23-terraform-module-for-amazon-cognito-user-pool/">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-cognito-user-pool.jpg&quot; alt=&quot;terraform-aws-cognito-user-pool&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-I share here another Terraform module that I just published as open source, which allows you to create Amazon Cognito User Pools with its attributes and resouces such as &lt;strong&gt;app clients&lt;/strong&gt;, &lt;strong&gt;domain&lt;/strong&gt; y &lt;strong&gt;resource server&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;You can check the module &lt;strong&gt;terraform-aws-cognito-user-pool&lt;/strong&gt; at the &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; or clone it from &lt;a href=&quot;https://github.com/lgallard/terraform-aws-cognito-user-pool&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you want to take a sneak of the module, I also left the README in this post:&lt;/p&gt;
-
-&lt;h1 id=&quot;terraform-aws-cognito-user-pool&quot;&gt;terraform-aws-cognito-user-pool&lt;/h1&gt;
-
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/cognito/&quot;&gt;Amazon Cognito User Pools&lt;/a&gt;, configure its attributes and resources such as  &lt;strong&gt;app clients&lt;/strong&gt;, &lt;strong&gt;domain&lt;/strong&gt;, &lt;strong&gt;resource servers&lt;/strong&gt;. Amazon Cognito User Pools provide a secure user directory that scales to hundreds of millions of users. As a fully managed service, User Pools are easy to set up without any worries about standing up server infrastructure.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;You can use this module to create a Cognito User Pool using the default values or use the detailed definition to set every aspect of the Cognito User Pool&lt;/p&gt;
-
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-cognito-user-pool/tree/master/examples/&quot;&gt;examples&lt;/a&gt; where you can see the &lt;strong&gt;simple&lt;/strong&gt; example using the default values, the &lt;strong&gt;simple_extended&lt;/strong&gt; version which adds  &lt;strong&gt;app clients&lt;/strong&gt;, &lt;strong&gt;domain&lt;/strong&gt;, &lt;strong&gt;resource servers&lt;/strong&gt; resources, or the &lt;strong&gt;complete&lt;/strong&gt; version with a detailed example.&lt;/p&gt;
-
-&lt;h3 id=&quot;example-simple&quot;&gt;Example (simple)&lt;/h3&gt;
-
-&lt;p&gt;This simple example creates a AWS Cognito User Pool with the default values:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_cognito_user_pool_simple&quot; {
-
-  source = &quot;../modules/terraform-aws-cognito-user-pool&quot;
-
-  user_pool_name = &quot;mypool&quot;
-
-  tags = {
-    Owner       = &quot;infra&quot;
-    Environment = &quot;production&quot;
-    Terraform   = true
-  }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;example-complete&quot;&gt;Example (complete)&lt;/h3&gt;
-
-&lt;p&gt;This more complete example creates a AWS Cognito User Pool using a detailed configuration. Please check the example folder to get the example with all options:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_cognito_user_pool_complete&quot; {
-
-  source = &quot;../modules/terraform-aws-cognito-user-pool&quot;
-
-  user_pool_name           = &quot;mypool&quot;
-  alias_attributes         = [&quot;email&quot;, &quot;phone_number&quot;]
-  auto_verified_attributes = [&quot;email&quot;]
-
-  admin_create_user_config = {
-    unused_account_validity_days = 9
-    email_subject                = &quot;Here, your verification code baby&quot;
-  }
-
-  email_configuration = {
-    email_sending_account  = &quot;DEVELOPER&quot;
-    reply_to_email_address = &quot;email@example.com&quot;
-    source_arn             = &quot;arn:aws:ses:us-east-1:888888888888:identity/example.com&quot;
-  }
-
-  password_policy = {
-    minimum_length    = 10
-    require_lowercase = false
-    require_numbers   = true
-    require_symbols   = true
-    require_uppercase = true
-  }
-
-  schemas = [
-    {
-      attribute_data_type      = &quot;Boolean&quot;
-      developer_only_attribute = false
-      mutable                  = true
-      name                     = &quot;available&quot;
-      required                 = false
-    },
-    {
-      attribute_data_type      = &quot;Boolean&quot;
-      developer_only_attribute = true
-      mutable                  = true
-      name                     = &quot;registered&quot;
-      required                 = false
-    }
-  ]
-
-  string_schemas = [
-    {
-      attribute_data_type      = &quot;String&quot;
-      developer_only_attribute = false
-      mutable                  = false
-      name                     = &quot;email&quot;
-      required                 = true
-
-      string_attribute_constraints = {
-        min_length = 7
-        max_length = 15
-      }
-    }
-  ]
-
-  tags = {
-    Owner       = &quot;infra&quot;
-    Environment = &quot;productionq q                                                                                                       | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| client_allowed_oauth_flows_user_pool_client                 | Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools                                                         | `bool`                                                                                                                                                                                 | `true`                                                                   | no       |
-| client_allowed_oauth_scopes                                    | List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin)                                                             | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| client_callback_urls                                            | List of allowed callback URLs for the identity providers                                                                                                    | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| client_default_redirect_uri                                    | The default redirect URI. Must be in the list of callback URLs                                                                                              | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| client_explicit_auth_flows                                     | List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH)                                                         | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| client_generate_secret                                          | Should an application secret be generated                                                                                                                   | `bool`                                                                                                                                                                                 | `true`                                                                   | no       |
-| client_logout_urls                                              | List of allowed logout URLs for the identity providers                                                                                                      | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| client_name                                                      | The name of the application client                                                                                                                          | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| client_read_attributes                                          | List of user pool attributes the application client can read from                                                                                           | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| client_refresh_token_validity                                  | The time limit in days refresh tokens are valid for                                                                                                         | `number`                                                                                                                                                                               | `30`                                                                     | no       |
-| client_supported_identity_providers                            | List of provider names for the identity providers that are supported on this client                                                                         | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| client_write_attributes                                         | List of user pool attributes the application client can write to                                                                                            | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| clients                                                           | A container with the clients definitions                                                                                                                    | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| device_configuration                                             | The configuration for the user pool's device tracking                                                                                                       | `map`                                                                                                                                                                                  | `{}`                                                                     | no       |
-| device_configuration_challenge_required_on_new_device       | Indicates whether a challenge is required on a new device. Only applicable to a new device                                                                  | `bool`                                                                                                                                                                                 | `false`                                                                  | no       |
-| device_configuration_device_only_remembered_on_user_prompt | If true, a device is only remembered on user prompt                                                                                                         | `bool`                                                                                                                                                                                 | `false`                                                                  | no       |
-| domain                                                            | Cognito User Pool domain                                                                                                                                    | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| domain_certificate_arn                                          | The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain                                                                                       | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| email_configuration                                              | The Email Configuration                                                                                                                                     | `map`                                                                                                                                                                                  | `{}`                                                                     | no       |
-| email_configuration_email_sending_account                     | Instruct Cognito to either use its built-in functional or Amazon SES to send out emails. Allowed values: `COGNITO_DEFAULT` or `DEVELOPER`              | `string`                                                                                                                                                                               | `&quot;COGNITO_DEFAULT&quot;`                                                     | no       |
-| email_configuration_reply_to_email_address                   | The REPLY-TO email address                                                                                                                                  | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| email_configuration_source_arn                                 | The ARN of the email source                                                                                                                                 | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| email_verification_message                                      | A string representing the email verification message                                                                                                        | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| email_verification_subject                                      | A string representing the email verification subject                                                                                                        | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| lambda_config                                                    | A container for the AWS Lambda triggers associated with the user pool                                                                                       | `map`                                                                                                                                                                                  | n/a                                                                        | yes      |
-| lambda_config_create_auth_challenge                           | The ARN of the lambda creating an authentication challenge.                                                                                                 | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_custom_message                                   | A custom Message AWS Lambda trigger.                                                                                                                        | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_define_auth_challenge                           | Defines the authentication challenge.                                                                                                                       | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_post_authentication                              | A post-authentication AWS Lambda trigger                                                                                                                    | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_post_confirmation                                | A post-confirmation AWS Lambda trigger                                                                                                                      | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_pre_authentication                               | A pre-authentication AWS Lambda trigger                                                                                                                     | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_pre_sign_up                                     | A pre-registration AWS Lambda trigger                                                                                                                       | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_pre_token_generation                            | Allow to customize identity token claims before token generation                                                                                            | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_user_migration                                   | The user migration Lambda config type                                                                                                                       | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| lambda_config_verify_auth_challenge_response                 | Verifies the authentication challenge response                                                                                                              | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| mfa_configuration                                                | Set to enable multi-factor authentication. Must be one of the following values (ON, OFF, OPTIONAL)                                                          | `string`                                                                                                                                                                               | `&quot;OFF&quot;`                                                                  | no       |
-| number_schemas                                                   | A container with the number schema attributes of a user pool. Maximum of 50 attributes                                                                      | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| password_policy                                                  | A container for information about the user pool password policy                                                                                             | ```hcl object({ minimum_length = number, require_lowercase = bool, require_lowercase = bool, require_numbers = bool, require_symbols = bool, require_uppercase = bool }) ``` | n/a                                                                        | yes      |
-| password_policy_minimum_length                                 | The minimum length of the password policy that you have set                                                                                                 | `number`                                                                                                                                                                               | `8`                                                                      | no       |
-| password_policy_require_lowercase                              | Whether you have required users to use at least one lowercase letter in their password                                                                      | `bool`                                                                                                                                                                                 | `true`                                                                   | no       |
-| password_policy_require_numbers                                | Whether you have required users to use at least one number in their password                                                                                | `bool`                                                                                                                                                                                 | `true`                                                                   | no       |
-| password_policy_require_symbols                                | Whether you have required users to use at least one symbol in their password                                                                                | `bool`                                                                                                                                                                                 | `true`                                                                   | no       |
-| password_policy_require_uppercase                              | Whether you have required users to use at least one uppercase letter in their password                                                                      | `bool`                                                                                                                                                                                 | `true`                                                                   | no       |
-| resource_server_identifier                                      | An identifier for the resource server                                                                                                                       | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| resource_server_name                                            | A name for the resource server                                                                                                                              | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| resource_server_scope_description                              | The scope description                                                                                                                                       | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| resource_server_scope_name                                     | The scope name                                                                                                                                              | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| resource_servers                                                 | A container with the user_groups definitions                                                                                                               | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| schemas                                                           | A container with the schema attributes of a user pool. Maximum of 50 attributes                                                                             | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| sms_authentication_message                                      | A string representing the SMS authentication message                                                                                                        | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| sms_configuration                                                | The SMS Configuration                                                                                                                                       | `map`                                                                                                                                                                                  | `{}`                                                                     | no       |
-| sms_configuration_external_id                                  | The external ID used in IAM role trust relationships                                                                                                        | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| sms_configuration_sns_caller_arn                              | The ARN of the Amazon SNS caller. This is usually the IAM role that you've given Cognito permission to assume                                               | `string`                                                                                                                                                                               | `&quot;&quot;`                                                                     | no       |
-| sms_verification_message                                        | A string representing the SMS verification message                                                                                                          | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| string_schemas                                                   | A container with the string schema attributes of a user pool. Maximum of 50 attributes                                                                      | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| tags                                                              | A mapping of tags to assign to the User Pool                                                                                                                | `map(string)`                                                                                                                                                                          | `{}`                                                                     | no       |
-| user_group_description                                          | The description of the user group                                                                                                                           | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| user_group_name                                                 | The name of the user group                                                                                                                                  | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| user_group_precedence                                           | The precedence of the user group                                                                                                                            | `number`                                                                                                                                                                               | n/a                                                                        | yes      |
-| user_group_role_arn                                            | The ARN of the IAM role to be associated with the user group                                                                                                | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| user_groups                                                      | A container with the user_groups definitions                                                                                                               | `list`                                                                                                                                                                                 | `[]`                                                                   | no       |
-| user_pool_add_ons                                              | Configuration block for user pool add-ons to enable user pool advanced security mode features                                                               | `map`                                                                                                                                                                                  | `{}`                                                                     | no       |
-| user_pool_add_ons_advanced_security_mode                    | The mode for advanced security, must be one of `OFF`, `AUDIT` or `ENFORCED`                                                                           | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| user_pool_name                                                  | The name of the user pool                                                                                                                                   | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| username_attributes                                              | Specifies whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with `alias_attributes`                 | `list`                                                                                                                                                                                 | n/a                                                                        | yes      |
-| verification_message_template                                   | The verification message templates configuration                                                                                                            | `map`                                                                                                                                                                                  | `{}`                                                                     | no       |
-| verification_message_template_default_email_option           | The default email option. Must be either `CONFIRM_WITH_CODE` or `CONFIRM_WITH_LINK`. Defaults to `CONFIRM_WITH_CODE`                            | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| verification_message_template_email_message_by_link         | The email message template for sending a confirmation link to the user, it must contain the `{##Click Here##}` placeholder                            | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-| verification_message_template_email_subject_by_link         | The subject line for the email message template for sending a confirmation link to the user                                                                 | `string`                                                                                                                                                                               | n/a                                                                        | yes      |
-
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| arn | The ARN of the user pool |
-| client_ids | The ids of the user pool clients |
-| client_secrets | The client secrets of the user pool clients |
-| creation_date | The date the user pool was created |
-| domain_app_version | The app version |
-| domain_aws_account_id | The AWS account ID for the user pool owner |
-| domain_cloudfront_distribution_arn | The ARN of the CloudFront distribution |
-| domain_s3_bucket | The S3 bucket where the static files for this domain are stored |
-| endpoint | The endpoint name of the user pool. Example format: cognito-idp.REGION.amazonaws.com/xxxx_yyyyy |
-| id | The id of the user pool |
-| last_modified_date | The date the user pool was last modified |
-| resource_servers_scope_identifiers | A list of all scopes configured in the format identifier/scope_name |
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;know-issue&quot;&gt;Know issue&lt;/h2&gt;
-&lt;h3 id=&quot;removing-all-lambda-triggers&quot;&gt;Removing all lambda triggers&lt;/h3&gt;
-
-&lt;p&gt;If you define lambda triggers using the &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config&lt;/code&gt; block or any &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config_*&lt;/code&gt; variable and you want to remove all triggers, define the lambda_config block with an empty map &lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt; and apply the plan. Then comment the &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config&lt;/code&gt; block or define it as &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and apply the plan again.&lt;/p&gt;
-
-&lt;p&gt;This is needed because all paramters for the &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config&lt;/code&gt; block are optional and keeping all block attributes empty or null forces to create a &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config {}&lt;/code&gt; block very time a plan/apply is run.&lt;/p&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-cognito-user-pool&quot; target=&quot;_blank&quot;&gt;terraform-aws-cognito-user-pool module at Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-cognito-user-pool module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis M. Gallardo D.</name></author></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.</summary></entry></feed>

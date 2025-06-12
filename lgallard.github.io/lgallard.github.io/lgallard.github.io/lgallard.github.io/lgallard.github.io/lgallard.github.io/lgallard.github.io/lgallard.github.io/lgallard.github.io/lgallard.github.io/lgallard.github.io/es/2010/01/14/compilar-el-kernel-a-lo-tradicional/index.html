@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="Debian">
-
-<meta property="article:section" content="Administración">
-
 
 
 
@@ -369,14 +365,102 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/compilar-el-kernel-a-lo-tradicional.jpg" alt="kernel" /></center>
+<p><br />
+Existen varias razones para compilar un kernel. Por ejemplo puedes estar interesado en agregar un nuevo hardware o funcionalidad a tu computadora, o entonar tu sistema para tener un servicio o aplicación más confiable. Cualquiera que sea tu razón, aquí tienes las instrucciones para compilar el kernel de la forma tradicional.</p>
+
+<h2 id="requisitos">Requisitos</h2>
+
+<p>Como vas a compilar un kernel, necesitarás algunos archivos y compiladores. También necesitarás <em>ncurses</em> para desplegar diálogos en una consola. En Debian puedes instalar todo esto escribiendo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install build-essential libncurses5-dev
+</code></pre></div></div>
+
+<h2 id="directorio-de-trabajo">Directorio de trabajo</h2>
+
+<p>Es común usar el directorio <em>/usr/src/</em> al momento de compilar el kernel, controladores y módulos. Entonces, entra a ese directorio:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /usr/src/
+</code></pre></div></div>
+
+<h2 id="procedimiento">Procedimiento</h2>
+
+<p>Necesitarás las fuentes del kernel para compilarlo. Estas pueden obtenerse desde los repositorios de la distribución o desde <a href="http://kernel.org" target="_blank">kernel.org</a> directamente. En Debian tendrás un archivo <em>tar</em> en el directorio <em>/usr/src/</em> al instalar el siguiente paquete:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install linux-source-2.6.30
+</code></pre></div></div>
+
+<p>Si quieres descargarlas desde kernel.org sería algo como esto:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-c</span> http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.30.tar.bz2
+</code></pre></div></div>
+
+<p>Ahora descomprime el archivo <em>tar</em>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar </span>xfjv linux-source-2.6.30.tar.bz2
+</code></pre></div></div>
+
+<p>De existir por compilaciones previas, borra el enlace linux:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm linux
+</code></pre></div></div>
+
+<p>Ahora crea un enlace al directorio descomprimido. Si descargaste las fuentes desde Debian esto sería:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ln <span class="nt">-s</span> linux-source-2.6.30 linux
+</code></pre></div></div>
+
+<p>Si las descargaste desde kernel.org, debes escribir:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ln <span class="nt">-s</span> linux-source-2.6.30 linux
+</code></pre></div></div>
+
+<p>Entra al directorio <em>linux</em>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>linux
+</code></pre></div></div>
+
+<p>Si has compilado otros kernels es buena idea limpiar todo antes de comenzar a compilar el kernel nuevo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make mrproper
+</code></pre></div></div>
+
+<p>Procede ahora a configurar las opciones de tu kernel. Para hacer esto, puedes usar <em>make config</em> (una interfaz interactiva pero algo molesta), make menuconfig (basada en <em>mcurses</em>). Yo sugiero usar la segunda opción:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make menuconfig
+</code></pre></div></div>
+
+<p>Verás una ventana similar a la mostrada arriba (la imagen principal del artículo). Desde ahí podrás seleccionar nuevas características para tu kernel, y decirle que las compile como módulo o como parte del kernel. Luego de que hayas seleccionado las opciones, escoge <em>Exit</em> para escribir el archivo <em>.config</em>.</p>
+
+<p>En este punto ya has configurado tu kernel, para compilarlo escribe lo siguiente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make
+</code></pre></div></div>
+
+<p>Este paso puede tardar mucho según las opciones que hayas escogido. Una vez que haya finalizado (y si no hubo errores) procede a instalar la imagen compilada y sus módulos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make install
+make module_install
+</code></pre></div></div>
+
+<p>Debes crear una pre-imagen, conocida como initramfs, para ayudar a tu kernel a cargar al momento de iniciar la máquina. Para crear esta pre-imagen para tu kernel escribe lo siguiente:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkinitramfs -o /boot/initrd.img-2.6.30 2.6.30&lt;/pre&gt;
+
+</code></pre></div></div>
+<p>Ahora edita <em>grub</em> (o cualquier bootloader que estés usando) para arrancar por el kernel compilado. Esto lo puedes hacer de forma manual, o si estás en Debian la orden <em>update-grub</em> lo hace por ti de forma automática:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update-grub
+</code></pre></div></div>
+
+<p>Finalmente, reinicia la computadora y selecciona tu kernel recién compilado.</p>
 
         
       </section>
@@ -419,14 +503,6 @@
   <p class="page__taxonomy">
     <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/administraci%C3%B3n" class="page__taxonomy-item" rel="tag">Administración</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/debian" class="page__taxonomy-item" rel="tag">Debian</a><span class="sep">, </span>
     
       
       
@@ -494,9 +570,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -509,8 +593,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -521,36 +604,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/es/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -563,8 +627,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Uso de GitHub Copilot Background Agents en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terr...</p>
   </article>
 </div>
         
@@ -575,9 +638,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -590,8 +661,42 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         

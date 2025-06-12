@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="Ubuntu">
-
 
 
 
@@ -364,14 +362,101 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/escaner-multifuncional-epson-stylus-cx5600-en-linux.jpg" /></center>
+<p><br />
+I convinced my sister to use Linux after the fourth Windows XP installation (due to viruses). But she complained about not having installed her Epson Stylus CX5600 scanner on Linux, so after doing a research here you are what you need to set it up…</p>
+
+<h2 id="installing-sane">Installing SANE</h2>
+
+<p>In order to handle your Epson Stylus CX5600 scanner you have to install SANE (Scanner Access Now Easy) which is an API for handling raster scanner on Linux (and others OS like Windows, OS/2, etc). So, type the following command in a terminal:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install sane sane-utils
+</code></pre></div></div>
+
+<h2 id="installing-the-drivers">Installing the drivers</h2>
+
+<p>Oddly Ubuntu 9.10 doesn’t  detected the scanner by default. In fact you have to download some .rpm files available from <a href="http://www.avasys.jp/lx-bin2/linux_e/spc/DL1.do" target="_blank">Avasys</a> site and convert them to .deb files using <em>alien</em>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alien <span class="nt">-c</span> iscan-2.10.0-1.i386.rpm
+alien <span class="nt">-c</span> iscan-plugin-cx4400-2.0.0-0.c2.i386.rpm
+</code></pre></div></div>
+
+<p>Install the debianized packages using <em>dpkg</em>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dpkg <span class="nt">-i</span> iscan_2.10.0-2_i386.deb
+dpkg <span class="nt">-i</span> iscan-plugin-cx4400_2.0.0-1_i386.deb
+</code></pre></div></div>
+
+<p>Check if the scanner is detected using <em>lsusb</em> command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# lsusb
+Bus 002 Device 002: ID 04b8:083f Seiko Epson Corp. Stylus DX4450
+Bus 002 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 001 Device 002: ID 058f:6366 Alcor Micro Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+</code></pre></div></div>
+
+<p>With that information edit the <em>/etc/sane.d/epkowa.conf</em> file adding the following line (vendor id and product id):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usb 0x04b8 0x083f
+</code></pre></div></div>
+
+<p>Now edit the <em>/etc/sane.d/dll.conf</em> file commenting <em>epson</em> and <em>epson2</em> lines and adding or uncomenting <em>epkowa</em>. So you’ll have something like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#epson</span>
+<span class="c">#epson2</span>
+epkowa
+</code></pre></div></div>
+
+<p>At this point you will be able to use your scanner. You can use <em>xsane</em>, <em>flegita</em> or <em>skanlite</em> to scan your images.</p>
+
+<h2 id="only-root-can-use-the-scanner">Only root can use the scanner</h2>
+
+<p>If the scanner only works with <em>root</em> even though your account belongs to the <em>saned</em> group, this might be a permission problem related to <em>udev</em>. For instance,  I got the scanner’s usb address:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# lsusb
+ Bus 002 Device 002: ID 04b8:083f Seiko Epson Corp. Stylus DX4450
+</code></pre></div></div>
+
+<p>With that information, I checked how <em>udev</em> mapped  the device:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# <span class="nb">ls</span> <span class="nt">-l</span> /dev/bus/usb/002/002
+crw-rw-r--+ 1 root root 189, 129 2009-12-01 21:37 /dev/bus/usb/002/002
+</code></pre></div></div>
+
+<p>This is the problem. It should have mapped it with the <em>saned</em> group instead of <em>root</em>. To fix it, edit the <em>/lib/udev/rules.d/40-libsane.rules</em> file and add the following lines:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Epson CX5600</span>
+ATTRS<span class="o">{</span>idVendor<span class="o">}==</span><span class="s2">"04b8"</span>, ATTRS<span class="o">{</span>idProduct<span class="o">}==</span><span class="s2">"083f"</span>, <span class="nv">MODE</span><span class="o">=</span><span class="s2">"0664"</span>, <span class="nv">GROUP</span><span class="o">=</span><span class="s2">"saned"</span>, ENV<span class="o">{</span>libsane_matched<span class="o">}=</span><span class="s2">"yes"</span>
+</code></pre></div></div>
+
+<p>To apply changes, unplug and plug your scanner. Check the new ownership by listing the <em>/dev/bus</em> directory again, but you have to look whether the device id has been changed:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# lsusb
+Bus 002 Device 003: ID 04b8:083f Seiko Epson Corp. Stylus DX4450
+</code></pre></div></div>
+
+<p>If it changed, use the new device id to check the ownership:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@humbrige:~# <span class="nb">ls</span> <span class="nt">-l</span> /dev/bus/usb/002/003
+crw-rw-r--+ 1 root saned 189, 129 2009-12-01 21:37 /dev/bus/usb/002/003
+</code></pre></div></div>
+
+<p>As you can see, now it belongs to the <em>saned</em> group, meaning that all member of <em>saned</em> group will be able to use the scanner :)</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="http://www.ubuntu-es.org/?q=node/69308" target="_blank">cx5600 en Ubuntu (instalación de Scanner)</a></li>
+  <li><a href="http://ubuntuforums.org/showthread.php?t=1285100" target="_blank">Scanner Issue – Ubuntu forgets /dev/bus/usb permissions change</a></li>
+</ul>
 
         
       </section>
@@ -413,11 +498,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -446,7 +527,7 @@
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/2009/11/22/%C2%BFpor-que-no-usar-windows/" class="pagination--pager" title="Why not to use Windows?
+      <a href="https://lgallardo.com/2009/12/03/redencion-adios-windows-xp-hola-ubuntu-9-10/" class="pagination--pager" title="Redemption: Bye bye Windows XP…Howdy Ubuntu 9.10
 ">Previous</a>
     
     
@@ -481,9 +562,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -496,8 +585,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -508,36 +596,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -550,8 +619,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -562,9 +630,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -577,8 +653,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

@@ -94,14 +94,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
-<meta property="article:section" content="Alexa">
-
-<meta property="article:section" content="Lambda">
-
-<meta property="article:section" content="Layers">
-
 
 
 
@@ -376,14 +368,74 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/alexa_lambda_layers.jpg" alt="Alexa + lambda + Layers" /></center>
+<p><br /></p>
+<h1 id="lambda-layers">Lambda Layers</h1>
+<p><a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html" target="_blank">Lambda Layers</a> was recently incorporated into AWS, which basically allows you to share libraries and codes between Lambda functions. This makes it possible to speed up development since now it is not necessary to pack all libraries with the Lambda function, as we used to do with Alexa’s ASK, but now these libraries can be uploaded independently in Lambda Layers and used directly in our functions.</p>
+
+<h1 id="alexas-ask-sdk">Alexa’s ASK SDK</h1>
+<p>To prepare Alexa’s ASK for Lambda Layers we can follow the following steps:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>virtualenv python
+source python/bin/activate
+pip install ask-sdk
+zip -r ask-sdk.zip python/lib/python3.6/site-packages/
+</code></pre></div></div>
+
+<p>Now you can use the Alexa’s ASK SDK from your lambda functions without having to upload it in each deployment.</p>
+
+<h1 id="uploading-the-ask-sdk-to-lambda-layers">Uploading the ASK SDK to Lambda Layers</h1>
+
+<p>The first thing we must do is to create the Lambda Layers from the console:</p>
+
+<center><img src="/images/create_layer.jpg" alt="Create Layer" /></center>
+<p><br /></p>
+
+<p>Then you must fill out the form and select the .zip that you created to upload it, and finally you must indicate the runtime with which it is compatible.</p>
+
+<center><img src="/images/ask_sdk_lambda_layer.jpg" alt="Add SDK" /></center>
+<p><br /></p>
+
+<p>Once created, we can see the description and the version:</p>
+
+<center><img src="/images/ask_sdk_lambda_layer2.jpg" alt="Add SDK" /></center>
+<p><br /></p>
+
+<h1 id="how-to-include-the-ask-sdk-from-lambda-layers">How to include the ASK SDK from Lambda Layers?</h1>
+
+<ol>
+  <li>
+    <p>Got to your Lambda function and right under yout function name you can click on <strong><em>Layers</em></strong></p>
+  </li>
+  <li>
+    <p>From the below section <strong><em>Referenced layers</em></strong> click on the <strong><em>Add a layer</em></strong> button</p>
+  </li>
+</ol>
+
+<center><img src="/images/add_layer1.jpg" alt="Add SDK" /></center>
+<p><br /></p>
+
+<ol>
+  <li>Select the <strong><em>ask-sdk</em></strong> layer from the drop-down menu, and click on <strong><em>Add</em></strong></li>
+</ol>
+
+<center><img src="/images/add_layer2.jpg" alt="Add SDK" /></center>
+<p><br /></p>
+
+<p>As you can see below, the Lambda Layer with the Alexa’s ASK SDK can now be used in this Lambda function:</p>
+
+<center><img src="/images/add_layer3.jpg" alt="Add SDK" /></center>
+<p><br /></p>
+
+<p>You can select this same Layer for other Lambda functions that use the same ASK SDK and runtime without having to be uploading it in each deployment.</p>
+
 
         
       </section>
@@ -437,23 +489,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/alexa" class="page__taxonomy-item" rel="tag">Alexa</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/lambda" class="page__taxonomy-item" rel="tag">Lambda</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/layers" class="page__taxonomy-item" rel="tag">Layers</a>
+      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
     
     </span>
   </p>
@@ -517,9 +553,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -532,8 +576,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -544,36 +587,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -586,8 +610,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -598,9 +621,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -613,8 +644,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         
