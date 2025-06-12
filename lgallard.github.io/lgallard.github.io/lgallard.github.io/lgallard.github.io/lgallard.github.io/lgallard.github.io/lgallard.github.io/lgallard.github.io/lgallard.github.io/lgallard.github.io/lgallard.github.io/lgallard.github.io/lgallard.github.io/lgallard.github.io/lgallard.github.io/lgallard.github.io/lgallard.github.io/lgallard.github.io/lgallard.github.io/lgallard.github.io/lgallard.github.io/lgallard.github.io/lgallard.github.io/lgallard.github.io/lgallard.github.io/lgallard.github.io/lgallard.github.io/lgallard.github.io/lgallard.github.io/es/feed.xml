@@ -1,7 +1,611 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2022-04-17T23:02:40-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Repositorio local de Helm 3</title><link href="https://lgallardo.com/es/2021/06/15/helm-local-repo/" rel="alternate" type="text/html" title="Repositorio local de Helm 3" /><published>2021-06-14T19:00:00-05:00</published><updated>2021-06-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2021/06/15/helm3-local-repo</id><content type="html" xml:base="https://lgallardo.com/es/2021/06/15/helm-local-repo/">&lt;center&gt;&lt;img src=&quot;/images/helm.jpg&quot; alt=&quot;Repositorio local para Helm 3&quot; width=&quot;304&quot; height=&quot;351&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h1 id=&quot;repositorio-local-para-helm-3&quot;&gt;Repositorio local para Helm 3&lt;/h1&gt;
-&lt;p&gt;En Helm 3, el soporte del comando &lt;strong&gt;helm serve&lt;/strong&gt; se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes instalar el complemento &lt;strong&gt;helm servecm&lt;/strong&gt;, que usa &lt;strong&gt;ChartMuseum&lt;/strong&gt; para publicar los charts en tu medio de almacenamiento local (también se admiten otros medios de almacenamientos, como los buckets de S3).&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2022-09-25T17:42:29-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Octoprint con múltiple impresoras 3D</title><link href="https://lgallardo.com/es/2022/09/25/octoprint-multiple-printers" rel="alternate" type="text/html" title="Octoprint con múltiple impresoras 3D" /><published>2022-09-24T19:00:00-05:00</published><updated>2022-09-24T19:00:00-05:00</updated><id>https://lgallardo.com/es/2022/09/25/octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/es/2022/09/25/octoprint-multiple-printers">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Una de las herramientas más útiles a la hora de gestionar una impresora 3D es &lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).&lt;/p&gt;
+
+&lt;h2 id=&quot;múltiples-impresoras&quot;&gt;Múltiples impresoras&lt;/h2&gt;
+
+&lt;p&gt;¿Pero qué pasa si tenemos más de una impresora? ¿Puede &lt;strong&gt;OctoPrint&lt;/strong&gt; gestionar mas de una impresora?&lt;/p&gt;
+
+&lt;p&gt;La respuesta corta es: NO! El software en sí no está diseñado para múltiples impresoras, pero se puede buscar formas alternativas para tener más de una instancia de &lt;strong&gt;OctoPrint&lt;/strong&gt; corriendo en nuestro dispositivo o computadora.&lt;/p&gt;
+
+&lt;p&gt;Existen varias formas para esto, por ejemplo se puede &lt;a href=&quot;http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers&quot; target=&quot;_blank&quot;&gt;modificar los scripts de OctoPi para agregar más instancias&lt;/a&gt;,  crear scripts que lancen varias instancias del mismo programa , pero la opción que terminé usando  fue la de contenedores Docker.&lt;/p&gt;
+
+&lt;h2 id=&quot;raspberry-pi--ubuntu&quot;&gt;Raspberry Pi + Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;En mi caso tengo una &lt;strong&gt;Raspberry Pi 4&lt;/strong&gt;, de 8 GB de RAM, más que suficiente para correr múltiples instancias de &lt;strong&gt;OctoPrint&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;En principio tenía instalado en mi Raspberry un sistema operativo específico llamado &lt;a href=&quot;https://github.com/guysoft/OctoPi&quot;&gt;OctoPi&lt;/a&gt;, un derivado de Debian con &lt;strong&gt;OctoPrint&lt;/strong&gt; como el programa principal que se lanza cuando se enciende el dispositivo, pero al querer tener containers pensé en usar Ubuntu que es una distribución menos especializada y donde seguramente se puede encontrar todo lo necesario para trabajar con contenedores.&lt;/p&gt;
+
+&lt;h2 id=&quot;requisitos-y-componentes&quot;&gt;Requisitos y componentes:&lt;/h2&gt;
+
+&lt;p&gt;Para esta configuración usé lo siguiente:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Impresora 3D - Artillery Genius Pro&lt;/li&gt;
+  &lt;li&gt;Impresora 3D - Artillery SideWinder X2&lt;/li&gt;
+  &lt;li&gt;2x WebCam - Logitech C270 (una por impresora)&lt;/li&gt;
+  &lt;li&gt;Raspberry Pi 4 - 8G RAM&lt;/li&gt;
+  &lt;li&gt;SD Card 64 GB&lt;/li&gt;
+  &lt;li&gt;Ubuntu 22.04 LTS  ARM 64 bits&lt;/li&gt;
+  &lt;li&gt;Docker 20.10.17&lt;/li&gt;
+  &lt;li&gt;OctoPrint lastest (1.8.3)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;instalación-de-ubuntu&quot;&gt;Instalación de Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;Para instalar &lt;strong&gt;Ubuntu&lt;/strong&gt; en la Raspberry Pi ahora es más sencillo que nunca, solo tienes que descargar &lt;strong&gt;Raspberry Pi Imager,&lt;/strong&gt; el cual generará la imagen en tu tarjeta SD, seleccionar el sistema operativo, que en este caso es &lt;strong&gt;Ubuntu 22.04 LTS&lt;/strong&gt; y listo. Hay versiones de Raspberry Pi Imager para Linux, Mac y Windows, así que podrás generar la imagen en el sistema operativo que más te convenga.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/Raspberry-Pi-Imager.jpg&quot; alt=&quot;Raspberry Pi Imager&quot; /&gt;
+{:style=”display:block; margin-left:auto; margin-right:auto”}&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Desde este mismo software vas a tener la posibilidad de configurar la contraseña de la red WiFi en caso de que la estés usando la Raspberry de forma inalámbrica y que no quieras usar un televisor y un teclado (headless), o tocar la SD para configurar la red. Como yo lo estoy usando headless, fue lo que hice y luego me conecté por &lt;strong&gt;ssh&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/OctoPi-WiFi-Setting.jpg&quot; alt=&quot;WiFi Settings&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Para la configuración headless el truco es dejar que corran los scripts de inicialización de &lt;strong&gt;Ubuntu&lt;/strong&gt; y luego conectarte por ssh. Ahora si ves que no puedes conectarte por ssh puedes buscar un cable HDMI y un teclado para revisar qué pueda estar pasando.&lt;/p&gt;
+
+&lt;h2 id=&quot;instalación-del-software-en-ubuntu&quot;&gt;Instalación del software en Ubuntu&lt;/h2&gt;
+
+&lt;p&gt;Aparte de &lt;strong&gt;Docker&lt;/strong&gt; vamos a necesitar, &lt;strong&gt;docker-compose&lt;/strong&gt;, y los utilitarios que nos ayudarán a instalarlos.&lt;/p&gt;
+
+&lt;h2 id=&quot;docker-y-docker-compose&quot;&gt;Docker y docker-compose&lt;/h2&gt;
+
+&lt;p&gt;Para instalar docker debemos descargarlo usando el script. Neceistaremos entrar como usuario administrador con la cuenta root;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pi@octopi:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;su
+root@octopi:~# 
+
+root@octopi:~# apt install curl
+root@octopi:~# curl &lt;span class=&quot;nt&quot;&gt;-sSL&lt;/span&gt; https://get.docker.com | sh
+
+root@octopi:~# apt update
+root@octopi:~# apt install docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;octoprint-con-una-impresora&quot;&gt;Octoprint con una impresora&lt;/h2&gt;
+
+&lt;p&gt;Lo primero que haremos es crear un carpeta para OctoPrint, y luego entrar en ella:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# mkdir octoprint
+root@octopi:~# 
+root@octopi:~# &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;octoprint/
+root@octopi:~/octoprint#
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Vamos a empezar con una impresora, en este caso empezaré con la &lt;code class=&quot;highlighter-rouge&quot;&gt;Artillery Genius Pro&lt;/code&gt;.  Para esto creamos una carpeta que identifique a esta impresora:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# mkdir geniuspro
+root@octopi:~# chmod &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; 777 geniuspro/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Es importante saber la ruta actual porque luego la usaremos en la definición del contenedor junto con el nombre de esta carpeta . Para ellos ejecutamos la siguiente orden:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# &lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
+/root/octoprint
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ya con esto podemos indicar luego que los archivos de esta primera instancia de OctoPrint residirán en &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Ahora para configurar la impresora vamos a usar &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt; por lo que creamos el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; con la siguiente información:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+
+services:
+  geniuspro:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/video0:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Este archivo define varias cosas relacionadas a OctoPrint, como la cámara web y la impresora como tal. Por ejemplo, con &lt;code class=&quot;highlighter-rouge&quot;&gt;image&lt;/code&gt; indicamos cuál es la imagen Docker a usar para el servicio &lt;code class=&quot;highlighter-rouge&quot;&gt;geniuspro&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;En esta definición hay que destacar los puertos, los cuales serán usados para acceder a los servicios, siendo el &lt;code class=&quot;highlighter-rouge&quot;&gt;5000&lt;/code&gt; para la interfaz web y el &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt; para el streaming de video de la cámara web.&lt;/p&gt;
+
+&lt;p&gt;Por otro lado se define como dispositivo la impresora en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;, y la cámara web en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Algo a tener en cuenta y que se diferencia del &lt;a href=&quot;https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit&quot; target=&quot;_bla￼nk&quot;&gt;ejemplo en cuál me basé&lt;/a&gt;, es que el streamer ahora es parte de la imagen Docker y es atendido en el puerto &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt;, por los que no hace falta tener una definición aparte a otra imagen Docker apuntando al streamer.&lt;/p&gt;
+
+&lt;p&gt;Luego en &lt;code class=&quot;highlighter-rouge&quot;&gt;volumes&lt;/code&gt; es donde se hace la referencia al directorio de la impresora que habíamos creado en la ruta  &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt;, que será mapeada  dentro del contenedor en  la carpeta &lt;code class=&quot;highlighter-rouge&quot;&gt;/octoprint&lt;/code&gt;. Es decir, cuando levantemos el contenedor todos los archivos de Octoprint para esta impresora quedarán en la ruta &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt; del sistema operativo.&lt;/p&gt;
+
+&lt;p&gt;Por último, en &lt;code class=&quot;highlighter-rouge&quot;&gt;environment&lt;/code&gt; definimos los parámetros para el streamer, pasando la información del dispositivo de la cámara web referido desde el contenedor, que en este caso coincide con el del sistema operativo afitrión, es decir, &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;. También le proporcionamos los parámetros de la cámara, en mi caso le indico que la resolución es de 1280x960 a 30 frames por segundos, que es lo que corresponde com mi Logitech C270. Para otros modelos puedes consultar el &lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;listado desde la  página de cámaras soportadas&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Una vez creado el archivo  &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yaml&lt;/code&gt; con la información mostrada arriba, solo basta con levantar el servicio con Docker:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# docker-compose up -d
+  
+Creating octoprint_geniuspro_1 ... done
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ya con esto podemos acceder a la interfaz web de OctoPrint desde la ip de la Raspberry en el puerto que le habíamos indicado, que en mi caso la url es http://192.168.68.102:5000:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/octoprint-multi-web.jpg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;agregar-una-segunda-impresora&quot;&gt;Agregar una segunda impresora&lt;/h2&gt;
+
+&lt;p&gt;Para agregar una segunda impresora solo hay que replicar la configuración que teníamos antes, pero especificando la nueva impresora y la cámara de video correspondiente. Entonces para mi Artillery Sidewinder X2 esto sería:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+
+services:
+  geniuspro:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/video0:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
+ 
+  sidewinder_x2:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyACM1:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/video2:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Aquí hay que aclarar que en el apartado devices físicamente la impresora está identificada en la Raspberry como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;, pero al crear el contenedor internamente se identificará como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;. Lo mismo pasa con la cámara de video, donde físicamente se identifca como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video2&lt;/code&gt; pero internamente el contenedor la verá como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Una vez creada la configuración se debe levantar el contendor de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# docker-compose up -d
+  
+octoprint_geniuspro_1 is up-to-date
+Creating octoprint_sidewinderx2_1 ... done
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Con esto ya se podrá acceder a la segunda instancia de OctoPrint en el puerto 5001:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/octoprint-multi-web2.png&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cómo-diferenciar-las-impresoras&quot;&gt;¿Cómo diferenciar las impresoras?&lt;/h2&gt;
+
+&lt;p&gt;En el anterior ejemplo usé los dipositivos &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;  para hacer refeencia a mi primera impresora, la Artillery Genius Pro, y a la segunda impresora la Artillery SideWinder X2, pero el sistema operativo no siempre las tomará en ese orden, ya que dependerá de cuál encienda primero . Para poder identificar las impresoras sin importar el orden de conexión podemos crear un enlace simbólico usando &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; con la información del fabricante y del producto.&lt;/p&gt;
+
+&lt;p&gt;Para esto primero hay que listar los dispositivos USB:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# lsusb
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
+Bus 001 Device 003: ID 046d:0825 Logitech, Inc. Webcam C270
+Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
+Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Acá hay dos dispositivos de &lt;strong&gt;STMicroelectronics Virtual COM Port&lt;/strong&gt;, que corresponden a las dos impresoras, pero cuál es cuál? Vamos a pedir el detalle de estos dispositivos:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; root@octopi:~/octoprint# lsusb -v -d 0483:5740
+
+Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
+Device Descriptor:
+  bLength                18
+  bDescriptorType         1
+  bcdUSB               2.00
+  bDeviceClass            2 Communications
+  bDeviceSubClass         2 Abstract (modem)
+  bDeviceProtocol         0
+  bMaxPacketSize0        64
+  idVendor           0x0483 STMicroelectronics
+  idProduct          0x5740 Virtual COM Port
+  bcdDevice            0.00
+  iManufacturer           1 STMicroelectronics
+  iProduct                2 ARTILLERY_RUBY CDC in FS Mode
+  iSerial                 3 386F39543538  
+...
+  
+Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
+Device Descriptor:
+  bLength                18
+  bDescriptorType         1
+  bcdUSB               2.00
+  bDeviceClass            2 Communications
+  bDeviceSubClass         2 Abstract (modem)
+  bDeviceProtocol         0
+  bMaxPacketSize0        64
+  idVendor           0x0483 STMicroelectronics
+  idProduct          0x5740 Virtual COM Port
+  bcdDevice            0.00
+  iManufacturer           1 STMicroelectronics
+  iProduct                2 ARTILLERY_RUBY CDC in FS Mode
+  iSerial                 3 3594398F3538  
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Lo que diferenica una impresora de la otra es el número serial del dispositivo. Como inicialmente la Artillery Genius Pro estaba mapeada en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;, podemos consultar cuál es su número de serial:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
+    ATTRS{serial}==&quot;3594398F3538&quot;
+    ATTRS{serial}==&quot;0000:01:00.0&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora para la ver el código serial de la Artillery Sidewinder X2 se debe consultar por el dispositivo &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM1 | grep serial
+    ATTRS{serial}==&quot;386F39543538&quot;
+    ATTRS{serial}==&quot;0000:01:00.0&quot; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para que  &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt;  reconozca estas reglas debemos crear el siguiente archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/udev/rules.d/40-printers.rules&lt;/code&gt; , con este contenido:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; # Genius Pro
+KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;3594398F3538&quot;, SYMLINK=&quot;ttyGeniusPro&quot;
+
+# Sidewinder X2
+KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;386F39543538&quot;, SYMLINK=&quot;ttySidewinderX2&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Luego se debe reiniciar &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; para que tome estos cambios:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm control --reload-rules &amp;amp;&amp;amp; udevadm trigger
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;De esta manera quedarán las impresoras mapeadas de la siguiente forma:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
+lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttyGeniusPro -&amp;gt; ttyACM0
+lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttySidewinderX2 -&amp;gt; ttyACM1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Por lo que la configuración de Docker podemos modificarla para reflejar estos cambios:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+
+services:
+  geniuspro:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyGeniusPro:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/video0:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
+
+  sidewinderx2:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5001:5000
+      - 8081:8080
+    devices:
+      - /dev/ttySidewinderX2:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/video2:/dev/video0
+    volumes:
+      - /root/octoprint/sidewinderx2:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30  
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;cámaras-de-video&quot;&gt;Cámaras de video&lt;/h2&gt;
+
+&lt;p&gt;A diferencia de las impresoras las cuales tienen un serial distintos, tengo dos cámaras de video &lt;strong&gt;Logitech C270&lt;/strong&gt; que son exaxtamente iguales. ¿Cómo hacemos para diferenciarlas? ¿Cómo podemos hacer que siempre tome la cámara correcta?&lt;/p&gt;
+
+&lt;p&gt;Nuevamente hacemos el análisis con  &lt;code class=&quot;highlighter-rouge&quot;&gt;lsusb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# lsusb
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
+Bus 001 Device 003: ID 046d:0825 Logitech, Inc. Webcam C270
+Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
+Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
+Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ambas cámaras están en el mismos bus pero identificadas como dispositivos USB diferentes, lo cual podemos aprovechar. En este caso no usaremos el id del producto para diferencialrlas sino el id de dispositivo USB.  Tomaremos como referecia el subsystem &lt;code class=&quot;highlighter-rouge&quot;&gt;video4linux&lt;/code&gt; en vez de &lt;code class=&quot;highlighter-rouge&quot;&gt;tty&lt;/code&gt;, por lo que estaremos usando &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNELS&lt;/code&gt; en vez de &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNEL&lt;/code&gt; para diferenciar las cámaras. Por ejemplo, para saber en qué dispositivo USB está  la cámara en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt; podemos ejecutar lo siguiente:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
+    KERNELS==&quot;1-1.4:1.0&quot;
+    KERNELS==&quot;1-1.4&quot;
+    KERNELS==&quot;1-1&quot;
+    KERNELS==&quot;usb1&quot;
+    KERNELS==&quot;0000:01:00.0&quot;
+    KERNELS==&quot;0000:00:00.0&quot;
+    KERNELS==&quot;pci0000:00&quot;
+    KERNELS==&quot;fd500000.pcie&quot;
+    KERNELS==&quot;scb&quot;
+    KERNELS==&quot;platform&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Para la otra cámara hacemos lo mismo:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
+    KERNELS==&quot;1-1.3:1.0&quot;
+    KERNELS==&quot;1-1.3&quot;
+    KERNELS==&quot;1-1&quot;
+    KERNELS==&quot;usb1&quot;
+    KERNELS==&quot;0000:01:00.0&quot;
+    KERNELS==&quot;0000:00:00.0&quot;
+    KERNELS==&quot;pci0000:00&quot;
+    KERNELS==&quot;fd500000.pcie&quot;
+    KERNELS==&quot;scb&quot;
+    KERNELS==&quot;platform&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ya con esta información podemos modificar las reglas de &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; de la siguiente manera:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Genius Pro
+KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;3594398F3538&quot;, SYMLINK=&quot;ttyGeniusPro&quot;
+SUBSYSTEM==&quot;video4linux&quot;, KERNELS==&quot;1-1.3&quot;, ATTRS{idVendor}==&quot;046d&quot;, ATTRS{idProduct}==&quot;0825&quot;, SYMLINK=&quot;videoGeniusPro&quot;
+
+# Sidewinder X2
+KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;386F39543538&quot;, SYMLINK=&quot;ttySidewinderX2&quot;
+SUBSYSTEM==&quot;video4linux&quot;, KERNELS==&quot;1-1.4&quot;, ATTRS{idVendor}==&quot;046d&quot;, ATTRS{idProduct}==&quot;0825&quot;, SYMLINK=&quot;videoSidewinderX2&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Recuerden reiniciar las reglas de udev con:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm control --reload-rules &amp;amp;&amp;amp; udevadm trigger
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;De esta forma ahora tenemos las cámaras mapeadas a &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/videoGeniusPro &lt;/code&gt;y  &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/videoSidewinderX2&lt;/code&gt; respectivamente. Ahora podemos modificar el archivo de &lt;strong&gt;docker-compose&lt;/strong&gt; para que tome esta nueva configuración:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
+
+services:
+  geniuspro:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 8080:8080
+    devices:
+      - /dev/ttyGeniusPro:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/videoGeniusPro:/dev/video0
+    volumes:
+      - /root/octoprint/geniuspro:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
+
+  sidewinderx2:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 5001:5000
+      - 8081:8080
+    devices:
+      - /dev/ttySidewinderX2:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
+      - /dev/videoSidewinderX2:/dev/video0
+    volumes:
+      - /root/octoprint/sidewinderx2:/octoprint
+    # uncomment the lines below to ensure camera streaming is enabled when
+    # you add a video device
+    environment:
+      - ENABLE_MJPG_STREAMER=true
+      - CAMERA_DEV=/dev/video0
+      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;desempeño-con-dos-instancias-de-octoprint&quot;&gt;Desempeño con dos instancias de OctoPrint&lt;/h2&gt;
+
+&lt;p&gt;Seguramente te estarás preguntando sobre el consumo de estos contenedores en el sistema operativo y si las Raspberry puede manejarlo. Aquí te dejo una imagen de &lt;code class=&quot;highlighter-rouge&quot;&gt;htop&lt;/code&gt; con los dos contenedores arriba imprimiendo en cada una de las impresoras a la vez.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/octoprint-htop.jpg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizarías un poco.&lt;/p&gt;
+
+&lt;h2 id=&quot;cómo-luce-las-impresoras-y-la-raspberry-pi&quot;&gt;¿Cómo luce las impresoras y la Raspberry Pi?&lt;/h2&gt;
+
+&lt;p&gt;Para cerrar este artículo les dejo una foto de mis impresoras conectadas a la RaspBerry Pi:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/3dprinters.jpg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En la impresora más chica puede verse una caja pequeña gris que es la Raspberry Pi, junto a las dos cámaras web.&lt;/p&gt;
+
+&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/guysoft/OctoPi&quot; target=&quot;_blank&quot;&gt;OctoPi&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers&quot; target=&quot;_blank&quot;&gt;Setting up OctoPrint on a Raspberry Pi for multiple printers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/LcA9o6OGfEg&quot; target=&quot;_blank&quot;&gt;Installing OctoPrint using Docker in Linux (video tutorial)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit&quot; target=&quot;_blank&quot;&gt;Installing OctoPrint using Docker in Linux (instructions)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;USB webcams known to work with mjpg-streamer&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters&quot; target=&quot;_blank&quot;&gt;How to distinguish between identical USB-to-serial adapters?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux&quot;&gt;Udev Rule to discern 2 identical webcams on Linux&lt;/a&gt;){:target=”_blank”}&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="3dPrint" /><category term="Linux" /><category term="OctoPi" /><category term="Raspberry" /><summary type="html"></summary></entry><entry><title type="html">PaperLike Pencil Grips</title><link href="https://lgallardo.com/es/2022/04/17/paperlike-pencil-grips" rel="alternate" type="text/html" title="PaperLike Pencil Grips" /><published>2022-04-16T19:00:00-05:00</published><updated>2022-04-16T19:00:00-05:00</updated><id>https://lgallardo.com/es/2022/04/17/paperlike-pencil-grips</id><content type="html" xml:base="https://lgallardo.com/es/2022/04/17/paperlike-pencil-grips">&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grip.jpg&quot; alt=&quot;PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Pencil y decidí escribir este artículo para comentarles sobre un producto que me ha sorprendido gratamente y que pienso que es una excelente mejora a considerar: &lt;strong&gt;Paper Like Pencil Grips&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Puede que te haya pasado que al usar por mucho tiempo el Apple Pencil se te cansa la mano? Esto es algo común incluso con lápices tradicionales, y para esto ya existía una solución, los clásicos agarradores que se adaptan al lápiz para mejorar la postura de los dedos al escribir. Esto fue lo que terminó diseñando el equipo de PaperLike, pero para el Apple Pencil.&lt;/p&gt;
+
+&lt;p&gt;Seguramente dirás que son unos simple agarradores y que puedes usar unos agarradores tradicionales y adaptarlos al Apple Pencil…Si, por poco dinero puedes colocarle un agarrador genérico pero hay algunas cosas que debes considerar, que ya resolvió el equipo de PaperLike y que no tendrás con un producto genérico:&lt;/p&gt;
+
+&lt;h2 id=&quot;la-carga-magnética-del-apple-pencil&quot;&gt;La carga magnética del Apple Pencil&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/Grip-on-iPad.jpg&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Esto lo consiguen gracias a que sus agarradores están diseñadas especialmente para el Apple Pencil, ya que tienen la forma del lápiz, y el lado que se usa para la carga magnética es ligeramente más delgado.&lt;/p&gt;
+
+&lt;h2 id=&quot;la-postura-de-los-dedos&quot;&gt;La postura de los dedos.&lt;/h2&gt;
+&lt;p&gt;La gente de PaperLike tomaron en cuenta dos casos de borde: precisión y periodos prolongados de uso. Si, vienen dos agarradores de lápiz distintos: El primero está orientado a tener una máxima precisión al agarrar el lápiz para, por ejemplo, cuando necesitas detalles finos a la hora de dibujar. El segundo está pensado para ayudar a quienes toman notas por mucho tiempo, ideal para estudiantes universitarios.&lt;/p&gt;
+
+&lt;p&gt;En mi caso particular disfruto mucho el agarrador de uso extendido (aunque hace tiempo que dejé los estudios universitarios atrás), pero estoy seguro que a los estudiantes les será de mucha utilidad, así como a los artistas (profesionales o no) les será de mucha utilidad poder tener trazos más precedidos a la hora de hacer sus creaciones.&lt;/p&gt;
+
+&lt;h2 id=&quot;función-de-doble-tap&quot;&gt;Función de doble tap&lt;/h2&gt;
+&lt;p&gt;El Apple Pencil tiene una segunda función que se activa haciendo un doble toque sobre la parte plana del lápiz. Con un agarrador genérico no hay forma que el doble tap funcione.  En el caso de los agarradores de lápiz PaperLike, esto lo consiguen con la parte más delgada del agarrador. Pero debo comentar que para usarlo hay que girar el lápiz para poder hacer el double tap. Esto lo uso mucho en &lt;strong&gt;GoodNotes 5&lt;/strong&gt;, y no es tan natural. De hecho el fundador del PaperLike en el video de explicación comenta que una opción es usar el agarrador con esa parte hacia arriba, pero considero que pierde la gracia ya que la forma del agarrador está diseñada para los dedos índices y el pulgar. Me parede que mejor opción es acostunbrarse a girar el lapiz antes de hacer el double tap, y volverlo a girar para contunuar escribiendo.&lt;/p&gt;
+
+&lt;h1 id=&quot;el-empaque&quot;&gt;El empaque&lt;/h1&gt;
+&lt;p&gt;Por último, me gustaría resaltar algo grato que es el empaque en el que vino. Como los agarradores las compré en una etapa temprana, los mismos vinieron en un sobre de papel, que de hecho aclaran que no es el empaque final del producto.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Envelop.jpg&quot; alt=&quot;Envoltorio de los PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En particular no me molesta para nada y de hecho hasta diría que debería ser la version final, una presentación sencilla y bastante amigable con el medio ambiente. Lo único que mejoraría es el material del sobre sea un poco más duro para que resista los embates del viaje, o en su defecto que las envíen en correspondencia “frágil”, ya que el envío no fue nada económico  (€ 39.99). En mi caso los míos llegaron en ese sobre un poco arrugado, y el contenido también se arrugó.&lt;/p&gt;
+
+&lt;p&gt;Otros detalles que me gustaron fueron la nota de agradecimiento que colocan en el empaqué, escrita a mano por el fundador de PaperLike (y luego impresa de manera industrial), así como un sticker muy bonito que agregan de la comunidad de artistas que usan sus productos.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-thanks.jpg&quot; alt=&quot;Agradecimientos de PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Sticker.jpg&quot; alt=&quot;Stricker de regalo PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;dónde-comprar-las-agarraderas-de-paperlike&quot;&gt;¿Dónde comprar las agarraderas de PaperLike?&lt;/h1&gt;
+&lt;p&gt;Como les comenté, están en una etapa temprana,por lo que de momento el único sitio donde los encontrarás es en la tienda de PaperLike, en &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;los accesorios para iPad&lt;/a&gt; , en particular acá están publicados los &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;PaperLike Pencil Grips &lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h1&gt;
+&lt;p&gt;Si necesitas un agarrador para tu Apple Pencil, ten en cuenta esta opción que ofrece la gente de PaperLike, que sin duda mejorará notablemente tu experiencia de uso en tu iPad.&lt;/p&gt;
+
+&lt;h2 id=&quot;nota&quot;&gt;Nota&lt;/h2&gt;
+&lt;p&gt;Este artículo lo hice para compartir mi experiencia con los agarradores de lápiz de PaperLike, y no recibí ningún patrocinio ni tengo ninguna ganancia o participación en las ventas de los mismas.&lt;/p&gt;
+
+&lt;p&gt;ß# Referencias&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://paperlike.com&quot; target=&quot;_blank&quot;&gt;Página de PaperLike&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;Accesorios para iPad&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;Agarradores de lápiz de PaperLike&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Mac" /><category term="iPad" /><summary type="html">Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Pencil y decidí escribir este artículo para comentarles sobre un producto que me ha sorprendido gratamente y que pienso que es una excelente mejora a considerar: Paper Like Pencil Grips.</summary></entry><entry><title type="html">iPad Pro como estación de trabajo portátil</title><link href="https://lgallardo.com/es/2022/01/25/ipad-pro-as-a-portable-workstation/" rel="alternate" type="text/html" title="iPad Pro como estación de trabajo portátil" /><published>2022-01-24T23:00:07-06:00</published><updated>2022-01-24T23:00:07-06:00</updated><id>https://lgallardo.com/es/2022/01/25/ipad-pro-as-a-portable-workstation</id><content type="html" xml:base="https://lgallardo.com/es/2022/01/25/ipad-pro-as-a-portable-workstation/">&lt;p&gt;&lt;img src=&quot;/assets/images/ipad-pro-2021.jpg&quot; alt=&quot;iPad Pro&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+Hace un tiempo que no escribía en el blog, primero porque no encontraba algo interesante para compartir y segundo porque no había mucho tiempo de sobra (no es que ahora haya mucho tiempo de sobra pero bueno, se busca siempre un espacio para escribir unas líneas).&lt;/p&gt;
+
+&lt;p&gt;Lo cierto es que hace poco me hice con un iPad Pro de 11” y dentro de las cosas que estuve probando fue la posibilidad de usarlo como equipo de trabajo ligero, es decir, un equipo que pueda tener a la mano en mi mesa de noche sin que sea una computadora completa.&lt;/p&gt;
+
+&lt;p&gt;Si bien el iPad tiene muchas ventajas y cosas que me gustaron, el termino “Pro” no da como para tener una terminal completa de un sistema operativo o tener una &lt;a href=&quot;https://youtu.be/LrLDKYFyLMM&quot; target=&quot;_blank&quot;&gt;máquina virtual funcional&lt;/a&gt;, por lo que decidí investigar a ver si existía alguna opción y de las cosas que más tuvieron sentido para mí fue la de usar el iPad Pro como un cliente que se conecta a alguna otra parte donde si pueda tener acceso a un sistema operativo completo.&lt;/p&gt;
+
+&lt;p&gt;De hecho en un &lt;a href=&quot;https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/&quot; target=&quot;_blank&quot;&gt;artículo&lt;/a&gt; que conseguí sugerían la opción de usar un Digital Ocean Droplet para tener una máquina virtual en la nube y desde ahí poder trabajar. Esta opción no es mala, pero teniendo una estación de trabajo en casa no vi la necesidad de irme a la nube.&lt;/p&gt;
+
+&lt;p&gt;Siguiendo algunas de estas sugerencias terminé instalando &lt;strong&gt;Blink Shell&lt;/strong&gt; que viene con soporte para &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;, y usando &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; en mi laptop con Linux como sitio remoto pude hacerlo. A continuación les comento el detalle de esta configuración.&lt;/p&gt;
+
+&lt;h1 id=&quot;blink-shell-ssh--mosh&quot;&gt;Blink Shell (ssh / mosh)&lt;/h1&gt;
+
+&lt;p&gt;Lo primero que tuve que buscar fue un cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; decente para iPad. Dentro de las recomendaciones recurrentes en Internet &lt;strong&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Blink Shell&lt;/a&gt;&lt;/strong&gt; aparecía como una opción. En principio el hecho de que haya que comprarlo sin  un trial no gustaba pero como insistían en que era la mejor opción decidí probarlo (USD 19,99 a la fecha de publicación de este post).&lt;/p&gt;
+
+&lt;p&gt;Tengo que decir que &lt;strong&gt;Blink Shell&lt;/strong&gt; es muy pero muy bueno, está diseñado para dispositivos móviles y tiene soporte para &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;mosh&quot;&gt;Mosh&lt;/h2&gt;
+
+&lt;p&gt;Te estarás preguntando como en su momento lo hice yo ¿Qué es &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;? La &lt;a href=&quot;https://mosh.org&quot; target=&quot;_blank&quot;&gt;página de mosh&lt;/a&gt; dice lo siguiente:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Aplicación de terminal remoto que permite la itinerancia, admite conectividad intermitente y proporciona eco local inteligente y edición de línea de las pulsaciones de teclado del usuario.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;¿Sigues sin entender para qué sirve &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; como me pasaba a mí? Es como &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt; pero sin tener que aprender comandos para crear y manejar sesiones, además  por debajo utliza &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;.  En otras palabras, vas a tener la posibilidad de continuar con tu sesión de trabajo donde la dejaste, o si por ejemplo se te cortó la conexión y logras conectarte de nuevo con otra red.&lt;/p&gt;
+
+&lt;p&gt;Como por debajo se seguimos teniendo &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;, para usar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; la sintaxis es prácticamente la misma.  Es decir, si antes te conectabas con &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; a un servidor de esta manera:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh lgallard@192.168.1.65
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Ahora con &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; lo haces de esta forma:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh lgallard@192.168.1.65
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Parece sencillo el cambio y con esto ganamos que al cerrar nuestro iPad o el equipo donde estanos usando el cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; vamos a poder recuperar mágicamente la sesión de trabajo al volvernos a conectar.&lt;/p&gt;
+
+&lt;p&gt;Puedes configurar las opciones de &lt;strong&gt;Blink Shell&lt;/strong&gt; accediendo a un asistente de configuración para tener distintos hosts y facilitar la conexión con un nombre en vez de una dirección IP. Para acceder a este asistente basta con escribir &lt;code class=&quot;highlighter-rouge&quot;&gt;config&lt;/code&gt; desde el terminal:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/Blink_config.png&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En mi caso ahora me puedo conectar a mi estación de trabajo de la siguiente forma:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh dauntless
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;mosh-lo-malo&quot;&gt;Mosh, lo malo&lt;/h2&gt;
+
+&lt;p&gt;El gran punto en contra de &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; es que no puedes hacer scroll del terminal, es decir, si necesitas consultar la salida de comandos que hayas ejecutado previamente y que ya no estén en la pantalla, no los vas a poder ver. Esto para mí era un gran problema porque al usar &lt;code class=&quot;highlighter-rouge&quot;&gt;terraform&lt;/code&gt; perdía los planes con los cambios a ser aplicados.&lt;/p&gt;
+
+&lt;p&gt;Esta es la forma en que trabaja &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;, para tener un óptimo rendimiento hacen un rendering del texto. Hay un &lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;issue abierto&lt;/a&gt; de varios años donde los desarrolladores comentan que está a modo de referencia pero que no tienen ninguna intención de implementarlo. ¿Entonces no hay solución? Si, &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;qué-es-tmux&quot;&gt;¿Qué es tmux?&lt;/h1&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; es una herramienta que permite tener varias terminales abiertas (o ventanas) para que sean accedidas y controladas desde un solo terminal como haríamos con &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Debes instalar &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; en el equipo donde deseamos iniciar sesión y una vez instalado basta con ejecutar esto desde el cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; (el iPad Pro en mi caso):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh danuntless -- tmux new  -s terminal-1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;De esta forma creamos una sessión nueva cuyo nombre es &lt;strong&gt;terminal-1&lt;/strong&gt;. Luego para acceder a esta sesión posteriormente debemos ejecutar lo siguiente:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mosh danuntless -- tmux a  -t terminal-1&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;activar-scrolling--en-tmux&quot;&gt;Activar scrolling  en tmux&lt;/h2&gt;
+
+&lt;p&gt;En la estación de trabajo remota se debe configurar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; para tener el scrroling con &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;, esto se consigue editando el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.tmux.conf&lt;/code&gt; con este contenido:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new-session
+set -g history-limit 30000
+set -g mouse on
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;blink--ssh---mosh--tmux--eh&quot;&gt;Blink + ssh  + mosh + tmux … eh?&lt;/h2&gt;
+
+&lt;p&gt;“Espera un momento… &lt;strong&gt;Blink + ssh + mosh +  tmux&lt;/strong&gt;, no es medio complicado todo? No es mejor usar &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; con &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;? “. Sí, es una alternativa pero con &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; no te reconectarás automáticamente y tendrás que loguearte nuevamente si por ejemplo cierras el iPad, si tu dirección IP cambia por algún motivo (por ejemplo cambias de WiFI a línea telefónica) o si la sesión &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; expira.&lt;/p&gt;
+
+&lt;p&gt;Reconozco que hay una curva de aprendizaje con &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; pero una vez superada te va a encantar y te preguntarás por qué no usaste antes &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;más-sobre-tmux&quot;&gt;Más sobre tmux&lt;/h2&gt;
+
+&lt;p&gt;Si quieres aprender a usar &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; te dejo una &lt;a href=&quot;https://tmuxcheatsheet.com&quot; target=&quot;_blank&quot;&gt;cheat sheet&lt;/a&gt; con los comandos que puedes usar. En particular encontré muy útil la división en paneles y el uso del zoom entre ellos, pero debo admitir que copiar texto entre paneles es algo complicado en el iPad y a veces prefiero usar &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; para esto, pero seguro ya le encontraré la vuelta.&lt;/p&gt;
+
+&lt;h1 id=&quot;palabras-finales&quot;&gt;Palabras finales&lt;/h1&gt;
+
+&lt;p&gt;Si bien acá comento la experiencia con el iPad Pro, todo esto se puede replicar en un iPad Air e incluso usar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; desde otras estaciones de trabajo con Linux o Windows.&lt;/p&gt;
+
+&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://youtu.be/LrLDKYFyLMM&quot; target=&quot;_blank&quot;&gt;Run ANY OS on iPad or iPhone! - YouTube&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/&quot; target=&quot;_blank&quot;&gt;Using the iPad Pro as my development machine&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Blink Shell&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Mosh&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tmuxcheatsheet.com&quot;&gt;Tmux cheat sheet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;mosh prevents the use of scrollback&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Administración" /><category term="Mac" /><category term="iPad" /><summary type="html">Hace un tiempo que no escribía en el blog, primero porque no encontraba algo interesante para compartir y segundo porque no había mucho tiempo de sobra (no es que ahora haya mucho tiempo de sobra pero bueno, se busca siempre un espacio para escribir unas líneas).</summary></entry><entry><title type="html">Repositorio local de Helm 3</title><link href="https://lgallardo.com/es/2021/06/15/helm-local-repo/" rel="alternate" type="text/html" title="Repositorio local de Helm 3" /><published>2021-06-14T19:00:00-05:00</published><updated>2021-06-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2021/06/15/helm3-local-repo</id><content type="html" xml:base="https://lgallardo.com/es/2021/06/15/helm-local-repo/">&lt;p&gt;&lt;img src=&quot;/assets/images/helm.jpg&quot; alt=&quot;Repositorio local para Helm 3&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;
+En Helm 3, el soporte del comando &lt;strong&gt;helm serve&lt;/strong&gt; se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes instalar el complemento &lt;strong&gt;helm servecm&lt;/strong&gt;, que usa &lt;strong&gt;ChartMuseum&lt;/strong&gt; para publicar los charts en tu medio de almacenamiento local (también se admiten otros medios de almacenamientos, como los buckets de S3).&lt;/p&gt;
 
 &lt;p&gt;En esta artículo aprenderá cómo instalar y publicar un repositorio local en Helm 3.&lt;/p&gt;
 
@@ -61,7 +665,7 @@ Para alojar tus charts, usarás &lt;strong&gt;ChartMuseum&lt;/strong&gt; y &lt;s
   &lt;li&gt;&lt;a href=&quot;https://github.com/jdolitsky/helm-servecm&quot; target=&quot;_blank&quot;&gt;helm servecm plugin&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/helm/chartmuseum&quot; target=&quot;_blank&quot;&gt;ChartMuseum&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/chartmuseum/helm-push&quot; target=&quot;_blank&quot;&gt;helm push plugin&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html">Repositorio local para Helm 3 En Helm 3, el soporte del comando helm serve se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes instalar el complemento helm servecm, que usa ChartMuseum para publicar los charts en tu medio de almacenamiento local (también se admiten otros medios de almacenamientos, como los buckets de S3).</summary></entry><entry><title type="html">Módulo de Terraform para AWS ECR</title><link href="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr" rel="alternate" type="text/html" title="Módulo de Terraform para AWS ECR" /><published>2021-04-14T19:00:00-05:00</published><updated>2021-04-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html">En Helm 3, el soporte del comando helm serve se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes instalar el complemento helm servecm, que usa ChartMuseum para publicar los charts en tu medio de almacenamiento local (también se admiten otros medios de almacenamientos, como los buckets de S3).</summary></entry><entry><title type="html">Módulo de Terraform para AWS ECR</title><link href="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr" rel="alternate" type="text/html" title="Módulo de Terraform para AWS ECR" /><published>2021-04-14T19:00:00-05:00</published><updated>2021-04-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;br /&gt;
 Les comparto acá otro módulo de Terraform que publiqué como código Open Source, el cual permite crear registries en AWS ECR.&lt;/p&gt;
 
@@ -928,1519 +1532,4 @@ HashiCorp anunció recientemente la disponibilidad general de algunas de sus &lt
   &lt;li&gt;&lt;a href=&quot;https://learn.hashicorp.com/terraform#getting-started&quot; target=&quot;_blank&quot;&gt;Learn to provision infrastructure with HashiCorp Terraform&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/hashicorp&quot; target=&quot;_blank&quot;&gt;Katacoda scenarios&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/hashicorp/scenarios/terraform-cloud&quot; target=&quot;_blank&quot;&gt;Terraform Cloud scenario&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><category term="HashiCorp" /><summary type="html">HashiCorp anunció recientemente la disponibilidad general de algunas de sus Certificaciones Cloud como Terraform y Vault (y otras que vendrán como la de Consul). Como he estado trabajando con Terraform por un tiempo y debido al hecho de que he publicado módulos en el registro de módulos o Terraform Registry, decidí tomar el examen.</summary></entry><entry><title type="html">Módulo de Terraform para Amazon CodeBuild</title><link href="https://lgallardo.com/es/2020/04/18/2020-04-18-terraform-module-for-amazon-codebuild/" rel="alternate" type="text/html" title="Módulo de Terraform para Amazon CodeBuild" /><published>2020-04-17T19:00:00-05:00</published><updated>2020-04-17T19:00:00-05:00</updated><id>https://lgallardo.com/es/2020/04/18/terraform-module-for-amazon-codebuild</id><content type="html" xml:base="https://lgallardo.com/es/2020/04/18/2020-04-18-terraform-module-for-amazon-codebuild/">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-codebuild.jpg&quot; alt=&quot;AWS CodeBuild&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Acabo de publicar un módulo Terraform llamado &lt;strong&gt;terraform-aws-codebuild&lt;/strong&gt; en Github, así que decidí compartirlo también en el Registro público de Terraform.&lt;/p&gt;
-
-&lt;p&gt;Puedes ver el módulo &lt;strong&gt;terraform-aws-codebuild&lt;/strong&gt; en el &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/codebuild/aws/&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; o clonarlo desde &lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lgallardo.com/images/terraform.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/p&gt;
-&lt;h1 id=&quot;terraform-aws-codebuild&quot;&gt;terraform-aws-codebuild&lt;/h1&gt;
-&lt;p&gt;Terraform module for creating &lt;a href=&quot;https://aws.amazon.com/codebuild/&quot; target=&quot;_blank&quot;&gt;AWS CodeBuild&lt;/a&gt; Projects. AWS CodeBuild is a fully managed continuous integration service that compiles source code, runs tests, and produces software packages that are ready to deploy.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-&lt;p&gt;You can  define CodeBuild projects using object variables (made of maps, lists, booleans, etc.), or you can define projects using the classic module’s variables approach (eg. &lt;code class=&quot;highlighter-rouge&quot;&gt;artifacts_*&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;cache_*&lt;/code&gt;, etc.).&lt;/p&gt;
-
-&lt;p&gt;In the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild/tree/master/examples/&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; folder you can check both approaches in detail and another example with VPC support.&lt;/p&gt;
-
-&lt;h2 id=&quot;example-using-objects&quot;&gt;Example using objects&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;myapp-project&quot; {
-
-  source = &quot;git::https://github.com/lgallard/terraform-aws-codebuild.git&quot;
-
-  name        = &quot;my-app&quot;
-  description = &quot;Codebuild for deploying myapp&quot;
-
-  # CodeBuild Source
-  codebuild_source_version = &quot;master&quot;
-  codebuild_source = {
-    type            = &quot;GITHUB&quot;
-    location        = &quot;https://github.com/lgallard/codebuild-example.git&quot;
-    git_clone_depth = 1
-
-    git_submodules_config = {
-      fetch_submodules = true
-    }
-  }
-
-  # Environment
-  environment = {
-    compute_type    = &quot;BUILD_GENERAL1_SMALL&quot;
-    image           = &quot;aws/codebuild/standard:2.0&quot;
-    type            = &quot;LINUX_CONTAINER&quot;
-    privileged_mode = true
-
-    # Environment variables
-    variables = [
-      {
-        name  = &quot;REGISTRY_URL&quot;
-        value = &quot;012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr&quot;
-      },
-      {
-        name  = &quot;AWS_DEFAULT_REGION&quot;
-        value = &quot;us-east-1&quot;
-      },
-    ]
-  }
-
-  # Artifacts
-  artifacts = {
-    location  = aws_s3_bucket.myapp-project.bucket
-    type      = &quot;S3&quot;
-    path      = &quot;/&quot;
-    packaging = &quot;ZIP&quot;
-  }
-
-  # Cache
-  cache = {
-    type     = &quot;S3&quot;
-    location = aws_s3_bucket.myapp-project.bucket
-  }
-
-  # Logs
-  s3_logs = {
-    status   = &quot;ENABLED&quot;
-    location = &quot;${aws_s3_bucket.myapp-project.id}/build-log&quot;
-  }
-
-  # Tags
-  tags = {
-    Environment = &quot;dev&quot;
-    owner       = &quot;development-team&quot;
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;example-using-variables&quot;&gt;Example using variables&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;myapp-project&quot; {
-
-  source = &quot;git::https://github.com/lgallard/terraform-aws-codebuild.git&quot;
-
-  name        = &quot;my-app-var&quot;
-  description = &quot;Codebuild for deploying myapp (variables)&quot;
-
-  # CodeBuild Source
-  codebuild_source_version = &quot;master&quot;
-
-  codebuild_source_type                                   = &quot;GITHUB&quot;
-  codebuild_source_location                               = &quot;https://github.com/lgallard/codebuild-example.git&quot;
-  codebuild_source_git_clone_depth                        = 1
-  codebuild_source_git_submodules_config_fetch_submodules = true
-
-  # Environment
-  environment_compute_type    = &quot;BUILD_GENERAL1_SMALL&quot;
-  environment_image           = &quot;aws/codebuild/standard:2.0&quot;
-  environment_type            = &quot;LINUX_CONTAINER&quot;
-  environment_privileged_mode = true
-
-  # Environment variables
-  environment_variables = [
-    {
-      name  = &quot;REGISTRY_URL&quot;
-      value = &quot;012345678910.dkr.ecr.us-east-1.amazonaws.com/my-ecr&quot;
-    },
-    {
-      name  = &quot;AWS_DEFAULT_REGION&quot;
-      value = &quot;us-east-1&quot;
-    },
-  ]
-
-  # Artifacts
-  artifacts_location  = aws_s3_bucket.myapp-project.bucket
-  artifacts_type      = &quot;S3&quot;
-  artifacts_path      = &quot;/&quot;
-  artifacts_packaging = &quot;ZIP&quot;
-
-  # Cache
-  cache_type     = &quot;S3&quot;
-  cache_location = aws_s3_bucket.myapp-project.bucket
-
-  # Logs
-  s3_logs_status   = &quot;ENABLED&quot;
-  s3_logs_location = &quot;${aws_s3_bucket.myapp-project.id}/build-var-log&quot;
-
-
-  # Tags
-  tags = {
-    Environment = &quot;dev&quot;
-    owner       = &quot;development-team&quot;
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts&lt;/td&gt;
-      &lt;td&gt;Information about the project’s build output artifacts.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_artifact_identifier&lt;/td&gt;
-      &lt;td&gt;The artifact identifier. Must be the same specified inside AWS CodeBuild buildspec.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_encryption_disabled&lt;/td&gt;
-      &lt;td&gt;If set to true, output artifacts will not be encrypted. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; then this value will be ignored.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_location&lt;/td&gt;
-      &lt;td&gt;Information about the build output artifact location. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; then this value will be ignored. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the name of the output bucket.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_name&lt;/td&gt;
-      &lt;td&gt;The name of the project. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the name of the output artifact object.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_namespace_type&lt;/td&gt;
-      &lt;td&gt;The namespace to use in storing build artifacts. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, then valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_ID&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NONE&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_override_artifact_name&lt;/td&gt;
-      &lt;td&gt;If set to true, a name specified in the build spec file overrides the artifact name.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_packaging&lt;/td&gt;
-      &lt;td&gt;The type of build output artifact to create. If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;NONE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ZIP&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_path&lt;/td&gt;
-      &lt;td&gt;If &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;, this is the path to the output artifact&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;artifacts_type&lt;/td&gt;
-      &lt;td&gt;The build output artifact’s type. Valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_ARTIFACTS&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;NO_ARTIFACTS&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;badge_enabled&lt;/td&gt;
-      &lt;td&gt;Generates a publicly-accessible URL for the projects build badge. Available as badge_url attribute when enabled.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;build_timeout&lt;/td&gt;
-      &lt;td&gt;How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed.The default is 60 minutes.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;60&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cache&lt;/td&gt;
-      &lt;td&gt;Information about the cache storage for the project.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cache_location&lt;/td&gt;
-      &lt;td&gt;The location where the AWS CodeBuild project stores cached resources. For type S3 the value must be a valid S3 bucket name/prefix. (Required when cache &lt;code class=&quot;highlighter-rouge&quot;&gt;type&lt;/code&gt; is &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cache_modes&lt;/td&gt;
-      &lt;td&gt;Specifies settings that AWS CodeBuild uses to store and reuse build dependencies. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_SOURCE_CACHE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_DOCKER_LAYER_CACHE&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL_CUSTOM_CACHE&lt;/code&gt;. (Required when cache type is &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL&lt;/code&gt;)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cache_type&lt;/td&gt;
-      &lt;td&gt;The type of storage that will be used for the AWS CodeBuild project cache. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_CACHE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LOCAL&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;NO_CACHE&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cloudwatch_logs&lt;/td&gt;
-      &lt;td&gt;Configuration for the builds to store log data to CloudWatch.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cloudwatch_logs_group_name&lt;/td&gt;
-      &lt;td&gt;The group name of the logs in CloudWatch Logs.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cloudwatch_logs_status&lt;/td&gt;
-      &lt;td&gt;Current status of logs in CloudWatch Logs for a build project. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;ENABLED&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DISABLED.&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;ENABLED&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;cloudwatch_logs_stream_name&lt;/td&gt;
-      &lt;td&gt;The stream name of the logs in CloudWatch Logs.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source&lt;/td&gt;
-      &lt;td&gt;Information about the project’s input source code.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_auth&lt;/td&gt;
-      &lt;td&gt;Information about the authorization settings for AWS CodeBuild to access the source code to be built.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_auth_resource&lt;/td&gt;
-      &lt;td&gt;The resource value that applies to the specified authorization type.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_auth_type&lt;/td&gt;
-      &lt;td&gt;The authorization type to use. The only valid value is OAUTH&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;OAUTH&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_buildspec&lt;/td&gt;
-      &lt;td&gt;The build spec declaration to use for this build project’s related builds. This must be set when type is iNO_SOURCE&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_git_clone_depth&lt;/td&gt;
-      &lt;td&gt;Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_git_submodules_config&lt;/td&gt;
-      &lt;td&gt;Information about the Git submodules configuration for an AWS CodeBuild build project. Git submodules config blocks are documented below. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_git_submodules_config_fetch_submodules&lt;/td&gt;
-      &lt;td&gt;If set to true, fetches Git submodules for the AWS CodeBuild build project.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_insecure_ssl&lt;/td&gt;
-      &lt;td&gt;Ignore SSL warnings when connecting to source control.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_location&lt;/td&gt;
-      &lt;td&gt;The location of the source code from git or s3.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_report_build_status&lt;/td&gt;
-      &lt;td&gt;Set to true to report the status of a build’s start and finish to your source provider. This option is only valid when the type is &lt;code class=&quot;highlighter-rouge&quot;&gt;BITBUCKET&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_type&lt;/td&gt;
-      &lt;td&gt;The type of repository that contains the source code to be built. Valid values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;CODECOMMIT&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEPIPELINE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB_ENTERPRISE&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BITBUCKET&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;S3&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;NO_SOURCE&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;CODEPIPELINE&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;codebuild_source_version&lt;/td&gt;
-      &lt;td&gt;A version of the build input to be built for this project. If not specified, the latest version is used.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;description&lt;/td&gt;
-      &lt;td&gt;A short description of the project.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;encryption_key&lt;/td&gt;
-      &lt;td&gt;The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build project’s build output artifacts.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment&lt;/td&gt;
-      &lt;td&gt;Information about the project’s build environment.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_certificate&lt;/td&gt;
-      &lt;td&gt;The ARN of the S3 bucket, path prefix and object key that contains the PEM-encoded certificate.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_compute_type&lt;/td&gt;
-      &lt;td&gt;Information about the compute resources the build project will use. Available values for this parameter are: &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_SMALL&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_MEDIUM&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_LARGE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_2XLARGE&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_SMALL&lt;/code&gt; is only valid if type is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_CONTAINER&lt;/code&gt;. When type is set to &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_GPU_CONTAINER&lt;/code&gt;, compute_type need to be &lt;code class=&quot;highlighter-rouge&quot;&gt;BUILD_GENERAL1_LARGE&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;BUILD_GENERAL1_MEDIUM&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_image&lt;/td&gt;
-      &lt;td&gt;The Docker image to use for this build project. Valid values include Docker images provided by CodeBuild (e.g &lt;code class=&quot;highlighter-rouge&quot;&gt;aws/codebuild/standard:2.0&lt;/code&gt;), Docker Hub images (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;hashicorp/terraform:latest&lt;/code&gt;), and full Docker repository URIs such as those for ECR (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;137112412989.dkr.ecr.us-west-2.amazonaws.com/amazonlinux:latest&lt;/code&gt;)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;aws/codebuild/standard:2.0&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_image_pull_credentials_type&lt;/td&gt;
-      &lt;td&gt;The type of credentials AWS CodeBuild uses to pull images in your build. Available values for this parameter are &lt;code class=&quot;highlighter-rouge&quot;&gt;CODEBUID&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;SERVICE_ROLE&lt;/code&gt;. When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;CODEBUILD&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_privileged_mode&lt;/td&gt;
-      &lt;td&gt;If set to true, enables running the Docker daemon inside a Docker container.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_registry_credential&lt;/td&gt;
-      &lt;td&gt;Information about credentials for access to a private Docker registry. Registry Credential config blocks are documented below.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_type&lt;/td&gt;
-      &lt;td&gt;The type of build environment to use for related builds. Available values are: &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_CONTAINER&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;LINUX_GPU_CONTAINER&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;WINDOWS_CONTAINER&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ARM_CONTAINER&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;LINUX_CONTAINER&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;environment_variables&lt;/td&gt;
-      &lt;td&gt;A list of sets of environment variables to make available to builds for this build project.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;name&lt;/td&gt;
-      &lt;td&gt;The projects name.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;queued_timeout&lt;/td&gt;
-      &lt;td&gt;How long in minutes, from 5 to 480 (8 hours), a build is allowed to be queued before it times out.The default is 8 hours.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;480&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;s3_logs&lt;/td&gt;
-      &lt;td&gt;Configuration for the builds to store log data to S3.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;s3_logs_encryption_disabled&lt;/td&gt;
-      &lt;td&gt;Set to true if you do not want S3 logs encrypted.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;s3_logs_location&lt;/td&gt;
-      &lt;td&gt;The name of the S3 bucket and the path prefix for S3 logs. Must be set if status is ENABLED, otherwise it must be empty.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;s3_logs_status&lt;/td&gt;
-      &lt;td&gt;Current status of logs in S3 for a build project. Valid values: &lt;code class=&quot;highlighter-rouge&quot;&gt;ENABLED&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;DISABLED.&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;DISABLED&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;A mapping of tags to assign to the resource.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_config&lt;/td&gt;
-      &lt;td&gt;Configuration for the builds to run inside a VPC.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;any&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_config_security_group_ids&lt;/td&gt;
-      &lt;td&gt;The security group IDs to assign to running builds.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_config_subnets&lt;/td&gt;
-      &lt;td&gt;The subnet IDs within which to run builds.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_config_vpc_id&lt;/td&gt;
-      &lt;td&gt;The ID of the VPC within which to run builds.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the CodeBuild project&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;id&lt;/td&gt;
-      &lt;td&gt;The name (if imported via name) or ARN (if created via Terraform or imported via ARN) of the CodeBuild project.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;name&lt;/td&gt;
-      &lt;td&gt;The name of the CodeBuild project&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;service_role_arn&lt;/td&gt;
-      &lt;td&gt;Amazon Resource Name (ARN) of the Service Role for CodeBuild.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;service_role_id&lt;/td&gt;
-      &lt;td&gt;ID of the Service Role created for CodeBuild.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;service_role_name&lt;/td&gt;
-      &lt;td&gt;Name of the Service Role created for CodeBuild.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-codebuild.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuild module at Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/codebuild/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-codebuild module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">Acabo de publicar un módulo Terraform llamado terraform-aws-codebuild en Github, así que decidí compartirlo también en el Registro público de Terraform.</summary></entry><entry><title type="html">Módulo de Terraform para Amazon Route53 Resolver Rules</title><link href="https://lgallardo.com/es/2020/02/29/terraform-module-for-route53-resolver-rules" rel="alternate" type="text/html" title="Módulo de Terraform para Amazon Route53 Resolver Rules" /><published>2020-02-28T18:00:00-06:00</published><updated>2020-02-28T18:00:00-06:00</updated><id>https://lgallardo.com/es/2020/02/29/terraform-module-for-route53-resolver-rules</id><content type="html" xml:base="https://lgallardo.com/es/2020/02/29/terraform-module-for-route53-resolver-rules">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-route53-resolver-rules.jpg&quot; alt=&quot;AWS Route53 Resolver Rules&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;center&gt;&lt;img src=&quot;/images/Resolver-outbound-endpoint.jpg&quot; alt=&quot;Resolver outbound endpoint diagram&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Escribí este módulo para poder crear reglas de AWS Route53 Resolver para endpoints de salida de una manera más conveniente.&lt;/p&gt;
-
-&lt;p&gt;Puedes verificar el módulo  &lt;strong&gt;terraform-aws-route53-resolver-rules&lt;/strong&gt; en el &lt;a href=&quot;hhttps://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; o clonarlo de &lt;a href=&quot;https://github.com/lgallard/terraform-aws-route53-resolver-rules&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:&lt;/p&gt;
-
-&lt;h1 id=&quot;terraform-aws-route53-resolver-rules&quot;&gt;terraform-aws-route53-resolver-rules&lt;/h1&gt;
-
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html&quot;&gt;AWS Route53 Resolver Rules&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;Before you start to forward queries, you must create  Resolver outbound endpoints in the connected VPCs. These endpoints provide a path for inbound or outbound queries. To accomplish this you can create the endpoints using the &lt;a href=&quot;https://www.terraform.io/docs/providers/aws/r/route53_resolver_endpoint.html&quot;&gt;aws_route53_resolver_endpoint&lt;/a&gt; resource or use a module like the &lt;a href=&quot;https://github.com/rhythmictech/terraform-aws-route53-endpoint&quot;&gt;terraform-aws-route53-endpoint&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-route53-resolver-rules/blob/master/examples/&quot;&gt;examples&lt;/a&gt; folder for the &lt;strong&gt;simple&lt;/strong&gt; and the &lt;strong&gt;complete&lt;/strong&gt; snippets.&lt;/p&gt;
-
-&lt;h3 id=&quot;example-complete&quot;&gt;Example (complete)&lt;/h3&gt;
-
-&lt;p&gt;This example creates two rules in a outbound endpoint, using all the parameter expected for building the rules:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Outbound endpoint using the rhythmictech/terraform-aws-route53-endpoint module
-module &quot;r53-outboud&quot; {
-  source            = &quot;git::https://github.com/rhythmictech/terraform-aws-route53-endpoint&quot;
-  direction         = &quot;outbound&quot;
-  allowed_resolvers = [&quot;192.168.0.0/24&quot;]
-  vpc_id            = &quot;vpc-0fffff0123456789&quot;
-  ip_addresses      = [
-    {
-      ip        = &quot;172.30.1.10&quot;
-      subnet_id = &quot;subnet-abcd123456789aaaa&quot;
-    },
-    {
-      ip        = &quot;172.30.2.10&quot;
-      subnet_id = &quot;subnet-abcd123456789bbbb&quot;
-    }
-  ]
-}
-
-# AWS Route 53 Resolver rules
-module &quot;r53-resolver-rules&quot; {
-  source               = &quot;git::https://github.com/lgallard/terraform-aws-route53-resolver-rules.git&quot;
-  resolver_endpoint_id = module.r53-outboud.endpoint_ids
-
-  rules = [
-    { rule_name   = &quot;r53r-rule-1&quot;
-      domain_name = &quot;bar.foo.&quot;
-      ram_name    = &quot;ram-r53r-1&quot;
-      vpc_ids     = [&quot;vpc-0fffff0123456789&quot;]
-      ips         = [&quot;192.168.10.10&quot;, &quot;192.168.10.11:54&quot;]
-      principals  = [&quot;123456789101&quot;, &quot;101987654321&quot;]
-    },
-    {
-      rule_name   = &quot;r53r-rule-2&quot;
-      domain_name = &quot;example.com.&quot;
-      ram_name    = &quot;ram-r53r-2&quot;
-      vpc_ids     = [&quot;vpc-0fffff0123456789&quot;]
-      ips         = [&quot;192.168.10.10&quot;, &quot;192.168.10.11:54&quot;]
-      principals  = [&quot;123456789101&quot;, &quot;101987654321&quot;]
-    }
-  ]
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: You can define IP and ports using the &lt;em&gt;IP:PORT&lt;/em&gt; syntax, as shown above.&lt;/p&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resolver_endpoint_id&lt;/td&gt;
-      &lt;td&gt;The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rules&lt;/td&gt;
-      &lt;td&gt;List of rules&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;Map of tags to apply to supported resources&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;br /&gt;
-Each rule accept the following parameters:&lt;/p&gt;
-
-&lt;h3 id=&quot;rules&quot;&gt;Rules&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Type&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_name&lt;/td&gt;
-      &lt;td&gt;Domain name to forward requests for&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ips&lt;/td&gt;
-      &lt;td&gt;List of IPs and ports to forward DNS requests to. Use &lt;em&gt;IP:PORT&lt;/em&gt; syntax, or just the IP&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;principals&lt;/td&gt;
-      &lt;td&gt;List of account IDs to share the resolver rule with&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ram_name&lt;/td&gt;
-      &lt;td&gt;RAM share name&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;r53-&lt;code class=&quot;highlighter-rouge&quot;&gt;domain_name&lt;/code&gt;-rule&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resolver_endpoint_id&lt;/td&gt;
-      &lt;td&gt;Resolver endpoint id&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rule_name&lt;/td&gt;
-      &lt;td&gt;Route53 resolver rule name&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;string&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;domain_name&lt;/code&gt;-rule&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;Map of tags to apply to supported resources&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;map(string)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;vpc_ids&lt;/td&gt;
-      &lt;td&gt;List of VPC ids to associate to the rule&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;list(string)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-route53-resolver-rules.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-route53-resolver-rules module at Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/route53-resolver-rules/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-route53-resolver-rules at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">Escribí este módulo para poder crear reglas de AWS Route53 Resolver para endpoints de salida de una manera más conveniente.</summary></entry><entry><title type="html">Módulo de Terraform para Amazon Cognito User Pools</title><link href="https://lgallardo.com/es/2019/11/23/terraform-module-for-amazon-cognito-user-pool" rel="alternate" type="text/html" title="Módulo de Terraform para Amazon Cognito User Pools" /><published>2019-11-22T18:00:00-06:00</published><updated>2019-11-22T18:00:00-06:00</updated><id>https://lgallardo.com/es/2019/11/23/terraform-module-for-amazon-cognito-user-pool</id><content type="html" xml:base="https://lgallardo.com/es/2019/11/23/terraform-module-for-amazon-cognito-user-pool">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-cognito-user-pool.jpg&quot; alt=&quot;terraform-aws-cognito-user-pool&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Les comparto otro módulo Terraform que acabo de publicar como código abierto, el cual permite crear Cognito User Pools con sus atributos, así como recursos tales como &lt;strong&gt;app clients&lt;/strong&gt;, &lt;strong&gt;domain&lt;/strong&gt; y &lt;strong&gt;resource server&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Puedes verificar el módulo &lt;strong&gt;terraform-aws-cognito-user-pool&lt;/strong&gt; en el &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; o clonarlo de &lt;a href=&quot;https://github.com/lgallard/terraform-aws-cognito-user-pool&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:&lt;/p&gt;
-
-&lt;h1 id=&quot;terraform-aws-cognito-user-pool&quot;&gt;terraform-aws-cognito-user-pool&lt;/h1&gt;
-
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/cognito/&quot;&gt;Amazon Cognito User Pools&lt;/a&gt;, configure its attributes and resources such as  &lt;strong&gt;app clients&lt;/strong&gt;, &lt;strong&gt;domain&lt;/strong&gt;, &lt;strong&gt;resource servers&lt;/strong&gt;. Amazon Cognito User Pools provide a secure user directory that scales to hundreds of millions of users. As a fully managed service, User Pools are easy to set up without any worries about standing up server infrastructure.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;You can use this module to create a Cognito User Pool using the default values or use the detailed definition to set every aspect of the Cognito User Pool&lt;/p&gt;
-
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-cognito-user-pool/tree/master/examples/&quot;&gt;examples&lt;/a&gt; where you can see the &lt;strong&gt;simple&lt;/strong&gt; example using the default values, the &lt;strong&gt;simple_extended&lt;/strong&gt; version which adds  &lt;strong&gt;app clients&lt;/strong&gt;, &lt;strong&gt;domain&lt;/strong&gt;, &lt;strong&gt;resource servers&lt;/strong&gt; resources, or the &lt;strong&gt;complete&lt;/strong&gt; version with a detailed example.&lt;/p&gt;
-
-&lt;h3 id=&quot;example-simple&quot;&gt;Example (simple)&lt;/h3&gt;
-
-&lt;p&gt;This simple example creates a AWS Cognito User Pool with the default values:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_cognito_user_pool_simple&quot; {
-
-  source = &quot;../modules/terraform-aws-cognito-user-pool&quot;
-
-  user_pool_name = &quot;mypool&quot;
-
-  tags = {
-    Owner       = &quot;infra&quot;
-    Environment = &quot;production&quot;
-    Terraform   = true
-  }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;example-complete&quot;&gt;Example (complete)&lt;/h3&gt;
-
-&lt;p&gt;This more complete example creates a AWS Cognito User Pool using a detailed configuration. Please check the example folder to get the example with all options:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;aws_cognito_user_pool_complete&quot; {
-
-  source = &quot;../modules/terraform-aws-cognito-user-pool&quot;
-
-  user_pool_name           = &quot;mypool&quot;
-  alias_attributes         = [&quot;email&quot;, &quot;phone_number&quot;]
-  auto_verified_attributes = [&quot;email&quot;]
-
-  admin_create_user_config = {
-    unused_account_validity_days = 9
-    email_subject                = &quot;Here, your verification code baby&quot;
-  }
-
-  email_configuration = {
-    email_sending_account  = &quot;DEVELOPER&quot;
-    reply_to_email_address = &quot;email@example.com&quot;
-    source_arn             = &quot;arn:aws:ses:us-east-1:888888888888:identity/example.com&quot;
-  }
-
-  password_policy = {
-    minimum_length    = 10
-    require_lowercase = false
-    require_numbers   = true
-    require_symbols   = true
-    require_uppercase = true
-  }
-
-  schemas = [
-    {
-      attribute_data_type      = &quot;Boolean&quot;
-      developer_only_attribute = false
-      mutable                  = true
-      name                     = &quot;available&quot;
-      required                 = false
-    },
-    {
-      attribute_data_type      = &quot;Boolean&quot;
-      developer_only_attribute = true
-      mutable                  = true
-      name                     = &quot;registered&quot;
-      required                 = false
-    }
-  ]
-
-  string_schemas = [
-    {
-      attribute_data_type      = &quot;String&quot;
-      developer_only_attribute = false
-      mutable                  = false
-      name                     = &quot;email&quot;
-      required                 = true
-
-      string_attribute_constraints = {
-        min_length = 7
-        max_length = 15
-      }
-    }
-  ]
-
-  tags = {
-    Owner       = &quot;infra&quot;
-    Environment = &quot;production&quot;
-    Terraform   = true
-  }
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;admin_create_user_config&lt;/td&gt;
-      &lt;td&gt;The configuration for AdminCreateUser requests&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;admin_create_user_config_allow_admin_create_user_only&lt;/td&gt;
-      &lt;td&gt;Set to True if only the administrator is allowed to create user profiles. Set to False if users can sign themselves up via an app&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;admin_create_user_config_email_message&lt;/td&gt;
-      &lt;td&gt;The message template for email messages. Must contain &lt;code class=&quot;highlighter-rouge&quot;&gt;{username}&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;{####}&lt;/code&gt; placeholders, for username and temporary password, respectively&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;{username}, your verification code is &lt;/code&gt;{####}&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;admin_create_user_config_email_subject&lt;/td&gt;
-      &lt;td&gt;The subject line for email messages&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Your verification code&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;admin_create_user_config_sms_message&lt;/td&gt;
-      &lt;td&gt;- The message template for SMS messages. Must contain &lt;code class=&quot;highlighter-rouge&quot;&gt;{username}&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;{####}&lt;/code&gt; placeholders, for username and temporary password, respectively&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Your username is {username} and temporary password is &lt;/code&gt;{####}&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;admin_create_user_config_unused_account_validity_days&lt;/td&gt;
-      &lt;td&gt;The user account expiration limit, in days, after which the account is no longer usable&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;7&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;alias_attributes&lt;/td&gt;
-      &lt;td&gt;Attributes supported as an alias for this user pool. Possible values: phone_number, email, or preferred_username. Conflicts with &lt;code class=&quot;highlighter-rouge&quot;&gt;username_attributes&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;auto_verified_attributes&lt;/td&gt;
-      &lt;td&gt;The attributes to be auto-verified. Possible values: email, phone_number&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_allowed_oauth_flows&lt;/td&gt;
-      &lt;td&gt;The name of the application client&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_allowed_oauth_flows_user_pool_client&lt;/td&gt;
-      &lt;td&gt;Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_allowed_oauth_scopes&lt;/td&gt;
-      &lt;td&gt;List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_callback_urls&lt;/td&gt;
-      &lt;td&gt;List of allowed callback URLs for the identity providers&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_default_redirect_uri&lt;/td&gt;
-      &lt;td&gt;The default redirect URI. Must be in the list of callback URLs&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_explicit_auth_flows&lt;/td&gt;
-      &lt;td&gt;List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_generate_secret&lt;/td&gt;
-      &lt;td&gt;Should an application secret be generated&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_logout_urls&lt;/td&gt;
-      &lt;td&gt;List of allowed logout URLs for the identity providers&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_name&lt;/td&gt;
-      &lt;td&gt;The name of the application client&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_read_attributes&lt;/td&gt;
-      &lt;td&gt;List of user pool attributes the application client can read from&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_refresh_token_validity&lt;/td&gt;
-      &lt;td&gt;The time limit in days refresh tokens are valid for&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;30&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_supported_identity_providers&lt;/td&gt;
-      &lt;td&gt;List of provider names for the identity providers that are supported on this client&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_write_attributes&lt;/td&gt;
-      &lt;td&gt;List of user pool attributes the application client can write to&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;clients&lt;/td&gt;
-      &lt;td&gt;A container with the clients definitions&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;device_configuration&lt;/td&gt;
-      &lt;td&gt;The configuration for the user pool’s device tracking&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;device_configuration_challenge_required_on_new_device&lt;/td&gt;
-      &lt;td&gt;Indicates whether a challenge is required on a new device. Only applicable to a new device&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;device_configuration_device_only_remembered_on_user_prompt&lt;/td&gt;
-      &lt;td&gt;If true, a device is only remembered on user prompt&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain&lt;/td&gt;
-      &lt;td&gt;Cognito User Pool domain&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_certificate_arn&lt;/td&gt;
-      &lt;td&gt;The ARN of an ISSUED ACM certificate in us-east-1 for a custom domain&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;email_configuration&lt;/td&gt;
-      &lt;td&gt;The Email Configuration&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;email_configuration_email_sending_account&lt;/td&gt;
-      &lt;td&gt;Instruct Cognito to either use its built-in functional or Amazon SES to send out emails. Allowed values: &lt;code class=&quot;highlighter-rouge&quot;&gt;COGNITO_DEFAULT&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;DEVELOPER&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;COGNITO_DEFAULT&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;email_configuration_reply_to_email_address&lt;/td&gt;
-      &lt;td&gt;The REPLY-TO email address&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;email_configuration_source_arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the email source&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;email_verification_message&lt;/td&gt;
-      &lt;td&gt;A string representing the email verification message&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;email_verification_subject&lt;/td&gt;
-      &lt;td&gt;A string representing the email verification subject&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config&lt;/td&gt;
-      &lt;td&gt;A container for the AWS Lambda triggers associated with the user pool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_create_auth_challenge&lt;/td&gt;
-      &lt;td&gt;The ARN of the lambda creating an authentication challenge.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_custom_message&lt;/td&gt;
-      &lt;td&gt;A custom Message AWS Lambda trigger.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_define_auth_challenge&lt;/td&gt;
-      &lt;td&gt;Defines the authentication challenge.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_post_authentication&lt;/td&gt;
-      &lt;td&gt;A post-authentication AWS Lambda trigger&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_post_confirmation&lt;/td&gt;
-      &lt;td&gt;A post-confirmation AWS Lambda trigger&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_pre_authentication&lt;/td&gt;
-      &lt;td&gt;A pre-authentication AWS Lambda trigger&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_pre_sign_up&lt;/td&gt;
-      &lt;td&gt;A pre-registration AWS Lambda trigger&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_pre_token_generation&lt;/td&gt;
-      &lt;td&gt;Allow to customize identity token claims before token generation&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_user_migration&lt;/td&gt;
-      &lt;td&gt;The user migration Lambda config type&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lambda_config_verify_auth_challenge_response&lt;/td&gt;
-      &lt;td&gt;Verifies the authentication challenge response&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;mfa_configuration&lt;/td&gt;
-      &lt;td&gt;Set to enable multi-factor authentication. Must be one of the following values (ON, OFF, OPTIONAL)&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;OFF&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;number_schemas&lt;/td&gt;
-      &lt;td&gt;A container with the number schema attributes of a user pool. Maximum of 50 attributes&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;password_policy&lt;/td&gt;
-      &lt;td&gt;A container for information about the user pool password policy&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hcl object({ minimum_length = number, require_lowercase = bool, require_lowercase = bool, require_numbers = bool, require_symbols = bool, require_uppercase = bool })&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;password_policy_minimum_length&lt;/td&gt;
-      &lt;td&gt;The minimum length of the password policy that you have set&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;8&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;password_policy_require_lowercase&lt;/td&gt;
-      &lt;td&gt;Whether you have required users to use at least one lowercase letter in their password&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;password_policy_require_numbers&lt;/td&gt;
-      &lt;td&gt;Whether you have required users to use at least one number in their password&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;password_policy_require_symbols&lt;/td&gt;
-      &lt;td&gt;Whether you have required users to use at least one symbol in their password&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;password_policy_require_uppercase&lt;/td&gt;
-      &lt;td&gt;Whether you have required users to use at least one uppercase letter in their password&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resource_server_identifier&lt;/td&gt;
-      &lt;td&gt;An identifier for the resource server&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resource_server_name&lt;/td&gt;
-      &lt;td&gt;A name for the resource server&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resource_server_scope_description&lt;/td&gt;
-      &lt;td&gt;The scope description&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resource_server_scope_name&lt;/td&gt;
-      &lt;td&gt;The scope name&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resource_servers&lt;/td&gt;
-      &lt;td&gt;A container with the user_groups definitions&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;schemas&lt;/td&gt;
-      &lt;td&gt;A container with the schema attributes of a user pool. Maximum of 50 attributes&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sms_authentication_message&lt;/td&gt;
-      &lt;td&gt;A string representing the SMS authentication message&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sms_configuration&lt;/td&gt;
-      &lt;td&gt;The SMS Configuration&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sms_configuration_external_id&lt;/td&gt;
-      &lt;td&gt;The external ID used in IAM role trust relationships&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sms_configuration_sns_caller_arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the Amazon SNS caller. This is usually the IAM role that you’ve given Cognito permission to assume&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sms_verification_message&lt;/td&gt;
-      &lt;td&gt;A string representing the SMS verification message&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;string_schemas&lt;/td&gt;
-      &lt;td&gt;A container with the string schema attributes of a user pool. Maximum of 50 attributes&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;A mapping of tags to assign to the User Pool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;user_group_description&lt;/td&gt;
-      &lt;td&gt;The description of the user group&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;user_group_name&lt;/td&gt;
-      &lt;td&gt;The name of the user group&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;user_group_precedence&lt;/td&gt;
-      &lt;td&gt;The precedence of the user group&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;user_group_role_arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the IAM role to be associated with the user group&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;user_groups&lt;/td&gt;
-      &lt;td&gt;A container with the user_groups definitions&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[]&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;user_pool_add_ons&lt;/td&gt;
-      &lt;td&gt;Configuration block for user pool add-ons to enable user pool advanced security mode features&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;user_pool_add_ons_advanced_security_mode&lt;/td&gt;
-      &lt;td&gt;The mode for advanced security, must be one of &lt;code class=&quot;highlighter-rouge&quot;&gt;OFF&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;AUDIT&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;ENFORCED&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;user_pool_name&lt;/td&gt;
-      &lt;td&gt;The name of the user pool&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;username_attributes&lt;/td&gt;
-      &lt;td&gt;Specifies whether email addresses or phone numbers can be specified as usernames when a user signs up. Conflicts with &lt;code class=&quot;highlighter-rouge&quot;&gt;alias_attributes&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;list&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;verification_message_template&lt;/td&gt;
-      &lt;td&gt;The verification message templates configuration&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;verification_message_template_default_email_option&lt;/td&gt;
-      &lt;td&gt;The default email option. Must be either &lt;code class=&quot;highlighter-rouge&quot;&gt;CONFIRM_WITH_CODE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;CONFIRM_WITH_LINK&lt;/code&gt;. Defaults to &lt;code class=&quot;highlighter-rouge&quot;&gt;CONFIRM_WITH_CODE&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;verification_message_template_email_message_by_link&lt;/td&gt;
-      &lt;td&gt;The email message template for sending a confirmation link to the user, it must contain the &lt;code class=&quot;highlighter-rouge&quot;&gt;{##Click Here##}&lt;/code&gt; placeholder&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;verification_message_template_email_subject_by_link&lt;/td&gt;
-      &lt;td&gt;The subject line for the email message template for sending a confirmation link to the user&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the user pool&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_ids&lt;/td&gt;
-      &lt;td&gt;The ids of the user pool clients&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;client_secrets&lt;/td&gt;
-      &lt;td&gt;The client secrets of the user pool clients&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;creation_date&lt;/td&gt;
-      &lt;td&gt;The date the user pool was created&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_app_version&lt;/td&gt;
-      &lt;td&gt;The app version&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_aws_account_id&lt;/td&gt;
-      &lt;td&gt;The AWS account ID for the user pool owner&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_cloudfront_distribution_arn&lt;/td&gt;
-      &lt;td&gt;The ARN of the CloudFront distribution&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;domain_s3_bucket&lt;/td&gt;
-      &lt;td&gt;The S3 bucket where the static files for this domain are stored&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;endpoint&lt;/td&gt;
-      &lt;td&gt;The endpoint name of the user pool. Example format: cognito-idp.REGION.amazonaws.com/xxxx_yyyyy&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;id&lt;/td&gt;
-      &lt;td&gt;The id of the user pool&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;last_modified_date&lt;/td&gt;
-      &lt;td&gt;The date the user pool was last modified&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;resource_servers_scope_identifiers&lt;/td&gt;
-      &lt;td&gt;A list of all scopes configured in the format identifier/scope_name&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;know-issue&quot;&gt;Know issue&lt;/h2&gt;
-&lt;h3 id=&quot;removing-all-lambda-triggers&quot;&gt;Removing all lambda triggers&lt;/h3&gt;
-
-&lt;p&gt;If you define lambda triggers using the &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config&lt;/code&gt; block or any &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config_*&lt;/code&gt; variable and you want to remove all triggers, define the lambda_config block with an empty map &lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt; and apply the plan. Then comment the &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config&lt;/code&gt; block or define it as &lt;code class=&quot;highlighter-rouge&quot;&gt;null&lt;/code&gt; and apply the plan again.&lt;/p&gt;
-
-&lt;p&gt;This is needed because all paramters for the &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config&lt;/code&gt; block are optional and keeping all block attributes empty or null forces to create a &lt;code class=&quot;highlighter-rouge&quot;&gt;lambda_config {}&lt;/code&gt; block very time a plan/apply is run.&lt;/p&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-cognito-user-pool&quot; target=&quot;_blank&quot;&gt;terraform-aws-cognito-user-pool module at Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/cognito-user-pool/aws/&quot; target=&quot;_blank&quot;&gt;terraform-aws-cognito-user-pool module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AWS" /><category term="Terraform" /><summary type="html">Les comparto otro módulo Terraform que acabo de publicar como código abierto, el cual permite crear Cognito User Pools con sus atributos, así como recursos tales como app clients, domain y resource server.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><category term="HashiCorp" /><summary type="html">HashiCorp anunció recientemente la disponibilidad general de algunas de sus Certificaciones Cloud como Terraform y Vault (y otras que vendrán como la de Consul). Como he estado trabajando con Terraform por un tiempo y debido al hecho de que he publicado módulos en el registro de módulos o Terraform Registry, decidí tomar el examen.</summary></entry></feed>

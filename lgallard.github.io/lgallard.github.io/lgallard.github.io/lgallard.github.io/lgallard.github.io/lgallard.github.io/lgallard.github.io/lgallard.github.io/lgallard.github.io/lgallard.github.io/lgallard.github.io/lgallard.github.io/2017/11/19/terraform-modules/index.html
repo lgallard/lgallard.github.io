@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Infra">
 
-<meta property="article:section" content="Terraform">
-
 
 
 
@@ -364,14 +362,225 @@
 
 
 
-  less than 1 minute read
+  3 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/terraform.jpg" alt="Terraform logo" /></center>
+<p>In this post you’ll see how reuse your Terraform code using modules to avoid writing the same code over and over. Also you will lear how to version your modules and how to use a specific version.</p>
+
+<h1 id="how-to-define-a-module">How to define a module?</h1>
+
+<p>Just put all your .tf files into a folder, for example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mymodule/
+├── main.tf
+├── outputs.tf
+├── README.md
+└── variables.tf
+
+</code></pre></div></div>
+<p>Then copy it into a <em>modules</em> folder.</p>
+
+<h1 id="how-to-use-the-module">How to use the module?</h1>
+<p>Use the <em>source</em> parameter to specify the path of your module as shown below:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+
+  source = "./modules/mymodule"
+
+  var1 = "Hello World"
+  var2 = 1999
+}
+</code></pre></div></div>
+
+<h1 id="modules-variables">Module’s variables</h1>
+<p>As you can see this module receives two arguments, which can be defined in the <em>mymodule</em>’s <em>variables.tf</em> file.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>variable "var1" {
+  description = "A string var"
+}
+
+variable "var2" {
+  description = "A numerical var"
+default = 1989
+}
+
+</code></pre></div></div>
+
+<h1 id="modules-outputs">Module’s outputs</h1>
+<p>Modules also have outputs that can be used by other modules and resources. You can define them in the outputs.tf file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+output "id" {
+  description = "This is the mymodule's id"
+}
+
+output "name" {
+  description = "This is the mymodule's name"
+}
+
+</code></pre></div></div>
+<h1 id="modules-sources">Modules Sources</h1>
+
+<p>The above examples use the <em>source</em> parameter to retrieve the module from a local folder, but you can also use other sources like a git repository, mercurial repository, HTTP urls, S3 bucket or the Terraform Registry.</p>
+
+<p>For example, instead of using a folder you can use a git repository to version your module and call it this way:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+
+  source = "git@bitbucket.org:mygitrepo/mymodule.git"
+
+  var1 = "Hello World"
+  var2 = 1999
+}
+</code></pre></div></div>
+
+<h1 id="module-repo-branch-and-version">Module repo branch and version</h1>
+<p>You can also point to a specific branch or version in a git repository using the <em>?ref</em> query. For example to specify the <em>dev</em> branch:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+
+  source = "git@bitbucket.org:mygitrepo/mymodule.git?ref=dev"
+
+  var1 = "Hello World"
+  var2 = 1999
+}
+</code></pre></div></div>
+
+<p>To point to version 0.0.2 use it like this:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+
+  source = "git@bitbucket.org:mygitrepo/mymodule.git?ref=0.0.2"
+
+  var1 = "Hello World"
+  var2 = 1999
+}
+</code></pre></div></div>
+
+<h2 id="whats-the-problem-with-this-approach">What’s the problem with this approach?</h2>
+
+<p>If you want to upgrade the module version and you have used it several times in your project you must edit it in every place you defined it by hand.</p>
+
+<h1 id="module-version">Module version</h1>
+<p>If your are using Terraform version v0.11.0+ you can use a specific version for a module. This help you to point to a specific version, for example to a an stable version of the module. This only works if you are using a module registry like the <a href="https://www.terraform.io/docs/registry/index.html" target="_blank">Terraform Registry</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+  source  = "hashicorp/mymodule"
+  version = "0.0.2"
+
+  var1 = "Hello World"
+  var2 = 1999
+}
+</code></pre></div></div>
+<h2 id="whats-the-problem-with-this-approach-1">What’s the problem with this approach?</h2>
+<ul>
+  <li>The Terraform Registry is a public registry. For private use you must use the <a href="https://www.terraform.io/docs/registry/private.html" target="_blank">Private Registry</a> available ine the Enterprise version.</li>
+  <li>Only available for Terraform version v0.11.0+</li>
+</ul>
+
+<h1 id="using-a-terrafile">Using a Terrafile</h1>
+<p>There’s another approach to overcome the version pitfalls which is to write a file to define the modules to use from a git repository, by branch or version. This file si called the <em>Terrafile</em>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+# VPC
+tf_aws_vpc:
+  source : "git@github.com:terraform-community-modules/tf_aws_vpc.git"
+  version: "master"
+
+tf_my_module:
+  source: "git@bitbucket.org:mygitrepo/mymodule.git"
+  version: "0.0.2"                   
+</code></pre></div></div>
+
+<p>These modules will be downloaded into a <em>modules</em> folder and then you can reference your module using this local folder:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+
+  source = "./modules/mymodule"
+
+  var1 = "Hello World"
+  var2 = 1999
+}
+</code></pre></div></div>
+
+<p>To get the modules you can use the this Rakefile:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'yaml'</span>
+<span class="nb">require</span> <span class="s1">'fileutils'</span>
+
+<span class="c1"># You may want to change this.</span>
+<span class="k">def</span> <span class="nf">modules_path</span>
+  <span class="s1">'vendor/modules'</span>
+<span class="k">end</span>
+
+<span class="c1"># You may want to change this.</span>
+<span class="k">def</span> <span class="nf">terrafile_path</span>
+  <span class="s1">'Terrafile'</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">read_terrafile</span>
+  <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span> <span class="n">terrafile_path</span>
+    <span class="no">YAML</span><span class="p">.</span><span class="nf">load_file</span> <span class="n">terrafile_path</span>
+  <span class="k">else</span>
+    <span class="nb">fail</span><span class="p">(</span><span class="s1">'[*] Terrafile does not exist'</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">create_modules_directory</span>
+  <span class="k">unless</span> <span class="no">Dir</span><span class="p">.</span><span class="nf">exist?</span> <span class="n">modules_path</span>
+    <span class="nb">puts</span> <span class="s2">"[*] Creating Terraform modules directory at '</span><span class="si">#{</span><span class="n">modules_path</span><span class="si">}</span><span class="s2">'"</span>
+    <span class="no">FileUtils</span><span class="p">.</span><span class="nf">makedirs</span> <span class="n">modules_path</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">delete_cached_terraform_modules</span>
+  <span class="nb">puts</span> <span class="s2">"[*] Deleting cached Terraform modules at '</span><span class="si">#{</span><span class="n">modules_path</span><span class="si">}</span><span class="s2">'"</span>
+  <span class="no">FileUtils</span><span class="p">.</span><span class="nf">rm_rf</span> <span class="n">modules_path</span>
+<span class="k">end</span>
+
+<span class="n">desc</span> <span class="s1">'Fetch the Terraform modules listed in the Terrafile'</span>
+<span class="n">task</span> <span class="ss">:get_modules</span> <span class="k">do</span>
+  <span class="n">terrafile</span> <span class="o">=</span> <span class="n">read_terrafile</span>
+
+  <span class="n">create_modules_directory</span>
+  <span class="n">delete_cached_terraform_modules</span>
+
+  <span class="n">terrafile</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">module_name</span><span class="p">,</span> <span class="n">repository_details</span><span class="o">|</span>
+    <span class="n">source</span>  <span class="o">=</span> <span class="n">repository_details</span><span class="p">[</span><span class="s1">'source'</span><span class="p">]</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">repository_details</span><span class="p">[</span><span class="s1">'version'</span><span class="p">]</span>
+    <span class="nb">puts</span> <span class="s2">"[*] Checking out </span><span class="si">#{</span><span class="n">version</span><span class="si">}</span><span class="s2"> of </span><span class="si">#{</span><span class="n">source</span><span class="si">}</span><span class="s2"> ..."</span><span class="p">.</span><span class="nf">colorize</span><span class="p">(</span><span class="ss">:green</span><span class="p">)</span>
+
+    <span class="no">Dir</span><span class="p">.</span><span class="nf">mkdir</span><span class="p">(</span><span class="n">modules_path</span><span class="p">)</span> <span class="k">unless</span> <span class="no">Dir</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="n">modules_path</span><span class="p">)</span>
+    <span class="no">Dir</span><span class="p">.</span><span class="nf">chdir</span><span class="p">(</span><span class="n">modules_path</span><span class="p">)</span> <span class="k">do</span>
+      <span class="sb">`git clone -b </span><span class="si">#{</span><span class="n">version</span><span class="si">}</span><span class="sb"> </span><span class="si">#{</span><span class="n">source</span><span class="si">}</span><span class="sb"> </span><span class="si">#{</span><span class="n">module_name</span><span class="si">}</span><span class="sb"> &amp;&gt; /dev/null`</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>And download them using the <em>get_modules</em> function:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rake get_modules
+</code></pre></div></div>
+
+<p>Finally get the modules in Terraform</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform get
+</code></pre></div></div>
+
+<h1 id="references">References</h1>
+<ul>
+  <li><a href="https://www.terraform.io/docs/modules/usage.html" target="_blank">Terraform - Module Usage</a></li>
+  <li><a href="https://www.terraform.io/docs/modules/sources.html" target="_blank">Terraform - Module Sources</a></li>
+  <li><a href="https://www.terraform.io/docs/registry/index.html" target="_blank">Terraform Public Registry</a></li>
+  <li><a href="https://www.terraform.io/docs/registry/private.html" target="_blank">Terraform Private Registry</a></li>
+  <li><a href="http://bensnape.com/2016/01/14/terraform-design-patterns-the-terrafile/" target="_blank">Terraform Design Patterns: the Terrafile</a></li>
+</ul>
+
 
         
       </section>
@@ -413,11 +622,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/infra" class="page__taxonomy-item" rel="tag">Infra</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+      <a href="https://lgallardo.com/categories/infra" class="page__taxonomy-item" rel="tag">Infra</a>
     
     </span>
   </p>
@@ -481,9 +686,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -496,8 +709,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -508,36 +720,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -550,8 +743,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -562,9 +754,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -577,8 +777,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         
