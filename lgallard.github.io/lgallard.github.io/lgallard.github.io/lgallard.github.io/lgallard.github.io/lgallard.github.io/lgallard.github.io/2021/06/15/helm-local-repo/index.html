@@ -92,12 +92,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="Kubernetes">
-
-<meta property="article:section" content="k8s">
-
-<meta property="article:section" content="EKS">
-
 
 
 
@@ -372,7 +366,7 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
@@ -380,11 +374,6 @@
 
       <section class="page__content" itemprop="text">
         <p><img src="/assets/images/helm.jpg" alt="Helm 3 local repo" style="display:block; margin-left:auto; margin-right:auto" />
-In Helm 3 the support of <strong>helm serve</strong> command was removed due to some design issues, therefore if you need a similar tool you have to install  <strong>helm servecm</strong>  plugin, which uses <strong>ChartMuseum</strong> for publishing the charts to your local storage (other storages are also supported, like S3 buckets).</p>
-
-<h2 id="in-this-post-you-will-learn-how-to-install-and-publish-a-local-repo-in-helm-3">In this post you will learn how to install and publish a local repo in Helm 3.</h2>
-
-<p><img src="/assets/images/helm.jpg" alt="Helm 3 local repo" style="display:block; margin-left:auto; margin-right:auto" />
 In Helm 3 the support of <strong>helm serve</strong> command was removed due to some design issues, therefore if you need a similar tool you have to install  <strong>helm servecm</strong>  plugin, which uses <strong>ChartMuseum</strong> for publishing the charts to your local storage (other storages are also supported, like S3 buckets).</p>
 
 <p>In this post you will learn how to install and publish a local repo in Helm 3.</p>
@@ -403,7 +392,49 @@ First off, you need to install <strong>ChartMuseum</strong>. At the project page
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm plugin install https://github.com/jdolitsky/helm-servecm
 </code></pre></div>    </div>
   </li>
+  <li>
+    <p>Install <strong>helm push plugin</strong><br />
+In order to host your charts, you will be using <strong>ChartMuseum</strong> and <strong>helm servecm</strong> pluing, but you will still need to publish them into <strong>ChartMuseum</strong>. You can do it manually or use another plugin called <strong>helm push</strong> which does it for you:<br /><br /></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm plugin install https://github.com/chartmuseum/helm-push.git
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Add the local repo in helm:<br /><br /></p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm repo add local http://127.0.0.1:8879/charts
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Run <strong>helm servecm plugin</strong>:</p>
+
+    <p><br />Next step is to run <strong>helm servecm</strong> plugin:<br /><br /></p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm servecm <span class="nt">--port</span><span class="o">=</span>8879 <span class="nt">--storage</span> <span class="nb">local</span> <span class="nt">--storage-local-rootdir</span> ./local <span class="nt">--context-path</span><span class="o">=</span>/charts 
+</code></pre></div>    </div>
+
+    <p>Now you can publish your charts at http://127.0.0.1:8879/charts</p>
+  </li>
+  <li>
+    <p>Publish your chart to your local repo:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm push your-chart <span class="nb">local</span>
+</code></pre></div>    </div>
+  </li>
 </ol>
+
+<p>At this point you will be able to use you local charts in your cluster by executing:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm install  your-chart
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+<ul>
+  <li><a href="https://helm.sh/docs/faq/#removal-of-helm-serve" target="_blank">Removal of helm serve</a></li>
+  <li><a href="https://github.com/jdolitsky/helm-servecm" target="_blank">helm servecm plugin</a></li>
+  <li><a href="https://github.com/helm/chartmuseum" target="_blank">ChartMuseum</a></li>
+  <li><a href="https://github.com/chartmuseum/helm-push" target="_blank">helm push plugin</a></li>
+</ul>
 
         
       </section>
@@ -453,19 +484,7 @@ First off, you need to install <strong>ChartMuseum</strong>. At the project page
     
       
       
-      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/eks" class="page__taxonomy-item" rel="tag">EKS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/k8s" class="page__taxonomy-item" rel="tag">k8s</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/kubernetes" class="page__taxonomy-item" rel="tag">Kubernetes</a>
+      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
     
     </span>
   </p>
@@ -529,9 +548,17 @@ First off, you need to install <strong>ChartMuseum</strong>. At the project page
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -544,8 +571,7 @@ First off, you need to install <strong>ChartMuseum</strong>. At the project page
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -556,36 +582,17 @@ First off, you need to install <strong>ChartMuseum</strong>. At the project page
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -598,8 +605,7 @@ First off, you need to install <strong>ChartMuseum</strong>. At the project page
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -610,9 +616,17 @@ First off, you need to install <strong>ChartMuseum</strong>. At the project page
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -625,8 +639,41 @@ First off, you need to install <strong>ChartMuseum</strong>. At the project page
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

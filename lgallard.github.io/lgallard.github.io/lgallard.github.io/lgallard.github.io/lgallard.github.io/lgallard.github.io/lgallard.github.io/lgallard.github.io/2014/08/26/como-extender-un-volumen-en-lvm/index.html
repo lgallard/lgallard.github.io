@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:">
+<meta name="description" content="Read about How to extend a volume on LVM on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
@@ -33,44 +33,33 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="lgallardo.com">
-<meta property="og:title" content="How to extend a volume on LVM">
+<meta property="og:title"
+  content="How to extend a volume on LVM">
+<meta property="og:type" content="article">
 
 
-  <link rel="canonical" href="https://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/">
-  <meta property="og:url" content="https://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/">
-
-
-
-  <meta property="og:description" content="Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:">
-
-
-
-  <meta name="twitter:site" content="@lgallard">
-  <meta name="twitter:title" content="How to extend a volume on LVM">
-  <meta name="twitter:description" content="Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:">
-  <meta name="twitter:url" content="https://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-  
-
-  
-    <meta name="twitter:creator" content="@Luis Gallardo">
-  
+<link rel="canonical" href="https://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/">
+<meta property="og:url" content="https://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/">
 
 
 
-  
-
-  
+<meta property="og:description" content="Read about How to extend a volume on LVM on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="How to extend a volume on LVM">
+<meta name="twitter:description" content="Read about How to extend a volume on LVM on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
+<meta name="twitter:url" content="https://lgallardo.com/2014/08/26/como-extender-un-volumen-en-lvm/">
 
 
-  <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2014-08-26T12:45:02-05:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/luis.jpg">
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
 
 
 
@@ -79,7 +68,50 @@
 
 
 
-  <script type="application/ld+json">
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/luis.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2014-08-26T12:45:02-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="SystemAdmin">
+
+<meta property="article:tag" content="LVM">
+
+
+<meta property="article:section" content="Linux">
+
+<meta property="article:section" content="SystemAdmin">
+
+<meta property="article:section" content="LVM">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
     {
       "@context" : "http://schema.org",
       "@type" : "Person",
@@ -95,7 +127,6 @@
 
 
 <!-- end SEO -->
-
 <link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -173,6 +204,28 @@
 
 
     
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" "
+>
+  
+    <img src="https://lgallardo.com/assets/images/luis.jpg" alt="How to extend a volume on LVM" class="page__hero-image">
+  
+  
+</div>
+
+
 
 
 
@@ -300,7 +353,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="How to extend a volume on LVM">
-    <meta itemprop="description" content="Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:">
+    <meta itemprop="description" content="Read about How to extend a volume on LVM on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
     <meta itemprop="datePublished" content="August 26, 2014">
     
 
@@ -315,101 +368,14 @@
 
 
 
-  2 minute read
+  less than 1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <center><img src="/images/como-extender-un-volumen-en-lvm.jpg" alt="" width="233" height="204" /></center>
-<p><br /></p>
-
-<p>Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# fdisk -l /dev/sdb
-
-Disk /dev/sdb: 483.2 GB, 483183820800 bytes
- 255 heads, 63 sectors/track, 58743 cylinders, total 943718400 sectors
- Units = sectors of 1 * 512 = 512 bytes
- Sector size (logical/physical): 512 bytes / 512 bytes
- I/O size (minimum/optimal): 512 bytes / 512 bytes
- Disk identifier: 0x0001178e
-</code></pre></div></div>
-
-<p>After expanding the volume you must make the system to rescan the volume:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# echo 1 &amp;gt; /sys/block/sdb/device/rescan
-</code></pre></div></div>
-
-<p>Then check the disk geometry one more time:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# fdisk -l /dev/sdb
-
-Disk /dev/sdb: 536.9 GB, 536870912000 bytes
- 255 heads, 63 sectors/track, 65270 cylinders, total 1048576000 sectors
- Units = sectors of 1 * 512 = 512 bytes
- Sector size (logical/physical): 512 bytes / 512 bytes
- I/O size (minimum/optimal): 512 bytes / 512 bytes
- Disk identifier: 0x0001178e
-</code></pre></div></div>
-
-<p>As you can see, the disk size grew up but this is only known by the operating system, because the LVM still has the same information since the physical volume hasn’t been expanded yet:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvs
- PV VG Fmt Attr PSize PFree
- /dev/sda5 debian lvm2 a-- 3.76g 0
- /dev/sda6 debian lvm2 a-- 13.00g 0
- /dev/sdb svn_vg lvm2 a-- 450.00g 0
-</code></pre></div></div>
-
-<p>If you extend the physical volume with the following command:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvresize /dev/sdb
- Physical volume "/dev/sdb" changed
- 1 physical volume(s) resized / 0 physical volume(s) not resized
-</code></pre></div></div>
-
-<p>And check the physical volume sizes you will see the added space:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvs
- PV VG Fmt Attr PSize PFree
- /dev/sda5 debian lvm2 a-- 3.76g 0
- /dev/sda6 debian lvm2 a-- 13.00g 0
- /dev/sdb svn_vg lvm2 a-- 500.00g 50.00g
-</code></pre></div></div>
-
-<p>Now you have to extend the logical volume and the system file size on the fly. You can do both actions using just one command:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# lvresize -r -L +50G /dev/mapper/svn_vg-svn
-
-Extending logical volume svn to 500.00 GiB
- Logical volume svn successfully resized
- resize2fs 1.42.5 (29-Jul-2012)
- Filesystem at /dev/mapper/svn_vg-svn is mounted on /var/data/svn; on-line resizing required
- old_desc_blocks = 29, new_desc_blocks = 32
- Performing an on-line resize of /dev/mapper/svn_vg-svn to 131070976 (4k) blocks.
- The filesystem on /dev/mapper/svn_vg-svn is now 131070976 blocks long.
-</code></pre></div></div>
-
-<p>Finally, check the free space available to see the added 50 GB in the system file:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df -h
- Filesystem Size Used Avail Use% Mounted on
- rootfs 993M 287M 655M 31% /
- udev 10M 0 10M 0% /dev
- tmpfs 397M 228K 397M 1% /run
- /dev/mapper/debian-root 993M 287M 655M 31% /
- tmpfs 5.0M 0 5.0M 0% /run/lock
- tmpfs 794M 0 794M 0% /run/shm
- /dev/sda1 228M 34M 183M 16% /boot
- /dev/mapper/debian-home 2.0G 39M 1.9G 3% /home
- /dev/mapper/debian-tmp 3.9G 7.1M 3.7G 1% /tmp
- /dev/mapper/debian-usr 2.0G 869M 1.1G 46% /usr
- /dev/mapper/debian-var 6.7G 2.1G 4.3G 33% /var
- /dev/mapper/svn_vg-svn 493G 432G 62G 88% /var/data/svn
-</code></pre></div></div>
-
+        
 
         
       </section>
@@ -455,7 +421,15 @@ Extending logical volume svn to 500.00 GiB
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/lvm" class="page__taxonomy-item" rel="tag">LVM</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/systemadmin" class="page__taxonomy-item" rel="tag">SystemAdmin</a>
     
     </span>
   </p>
@@ -521,7 +495,7 @@ Extending logical volume svn to 500.00 GiB
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
 </a>
       
     </h2>
@@ -535,7 +509,6 @@ Extending logical volume svn to 500.00 GiB
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
 </p>
   </article>
 </div>
@@ -549,7 +522,34 @@ Extending logical volume svn to 500.00 GiB
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
 </a>
       
     </h2>
@@ -563,8 +563,6 @@ Extending logical volume svn to 500.00 GiB
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
-
 </p>
   </article>
 </div>
@@ -578,7 +576,7 @@ Extending logical volume svn to 500.00 GiB
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
+        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
 </a>
       
     </h2>
@@ -592,41 +590,13 @@ Extending logical volume svn to 500.00 GiB
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powkiddy, a...</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:
-
 </p>
   </article>
 </div>
         
       </div>
     </div>
+  
   
 </div>
 

@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="SysAdmin">
-
-<meta property="article:section" content="LVM">
-
 
 
 
@@ -368,14 +364,137 @@
 
 
 
-  less than 1 minute read
+  3 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img title="LVM move" src="http://farm4.staticflickr.com/3818/13856896305_05c67f7f3e.jpg" alt="LVM move" width="300" height="269" /></center>
+<p><br />
+If you need to move data from one disk to another one you could think in copying the data with cp, rsync, or any other tool, and then umount the partition, edit the <em>/etc/fstab</em> file to point to the new path, and all that involve to remove a disk or partition for another one. But if you forcasted and partitioned using LVM, there is a cleaner way of changing partitions on the fly, I mean, without umounting partitions and even leaving the same references in the <em>/etc/file</em>, because the same LVM partition will be used. Let’s see an example: if you have a 50 GB disk as a physical volume in <em>/dev/sdb</em>, which is set in a volume grup called <em>data</em>, and you need to move all data to another disk /dev/sdc, just do the following. First the initial distribution si shown:</p>
+
+<center><img title="LVM concepts" src="http://farm8.staticflickr.com/7113/13857268454_08a73f00ea.jpg" alt="LVM concepts" width="385" height="281" /></center>
+<p><br /></p>
+
+<p>You can check the current state of the physical volumes using the <em>pvs</em> command:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvs
+PV VG Fmt Attr PSize PFree
+ /dev/sda2 system lvm2 a- 19.77g 0 
+ /dev/sdb data lvm2 a- 50.00g 0
+</code></pre></div></div>
+
+<p>Then create the physical volume where the data will be moved:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvcreate /dev/sdc
+ Physical volume "/dev/sdc" successfully created
+</code></pre></div></div>
+
+<p>Check the physical volumes again:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvs
+PV VG Fmt Attr PSize PFree 
+ /dev/sda2 system lvm2 a- 19.77g 0 
+ /dev/sdb data lvm2 a- 50.00g 0 
+ /dev/sdc lvm2 a- 50.00g 50.00g
+</code></pre></div></div>
+
+<p>Now check the volume groups:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># vgs
+VG #PV #LV #SN Attr VSize VFree
+ data 1 1 0 wz--n- 50.00g 0 
+ system 1 6 0 wz--n- 19.77g 0
+</code></pre></div></div>
+
+<p>As you can see the volume group called <em>data</em> sizes 50 GB. Because this is the volume group which have the physical volume you want to move (/dev/sdb), you must add the physical volume to this group:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># vgextend data /dev/sdc
+ Volume group "data" successfully extended
+</code></pre></div></div>
+
+<p>If you check it one more time you will see that the volume group has 100 GB  which correspond to  <em>/dev/sdb</em> (0 GB free) y <em>/dev/sdc</em> ( 50 GB free):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvs
+PV VG Fmt Attr PSize PFree 
+ /dev/sda2 system lvm2 a- 19.77g 0 
+ /dev/sdb data lvm2 a- 50.00g 0 
+ &lt;strong&gt;/dev/sdc data lvm2 a- 50.00g 50.00g&lt;/strong&gt;
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># vgs
+ VG #PV #LV #SN Attr VSize VFree 
+ &lt;strong&gt;data 2 1 0 wz--n- 99.99g 50.00g&lt;/strong&gt;
+ system 1 6 0 wz--n- 19.77g 0
+</code></pre></div></div>
+
+<p>Now let’s proceed to move the data from the physical volume  <em>/dev/sdb</em> to <em>/dev/sdc</em>:</p>
+
+<center><img title="LVM move" src="http://farm4.staticflickr.com/3818/13856896305_05c67f7f3e.jpg" alt="LVM move" width="300" height="269" /></center>
+<p><br /></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvmove /dev/sdb
+/dev/sdb: Moved: 0.0%
+/dev/sdb: Moved: 11.8%
+/dev/sdb: Moved: 30.5%
+/dev/sdb: Moved: 75.7%
+/dev/sdb: Moved: 95.0%
+/dev/sdb: Moved: 99.3%
+/dev/sdb: Moved: 100.0%
+</code></pre></div></div>
+
+<p>There is not need to specify the other volume because the data will be distributed among the remaining physical volumes of the volume group, and in this case it is just /dev/sdc. Now, let’s check the distribution of the physical volumes:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvs
+PV VG Fmt Attr PSize PFree 
+ /dev/sda2 system lvm2 a- 19.77g 0 
+ &lt;strong&gt;/dev/sdb data lvm2 a- 50.00g 50.00g&lt;/strong&gt;
+&lt;strong&gt; /dev/sdc data lvm2 a- 50.00g 0&lt;/strong&gt;
+</code></pre></div></div>
+
+<p>As you can see the /dev/sdb has no data (50 GB free) while /dev/sdc has the data (0 GB free). Just</p>
+
+<p>Como puede verse el disco <em>/dev/sdb</em> no tiene datos (50 GB libres) mientras que <em>/dev/sdc</em> tiene los datos (0 GB libres). Now remove the physical volume to disincorporate from the volume group:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># vgreduce data /dev/sdb
+ Removed "/dev/sdb" from volume group "data"
+</code></pre></div></div>
+
+<p>Now check the volume groups and the physical volumes:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvs
+PV VG Fmt Attr PSize PFree 
+ /dev/sda2 system lvm2 a- 19.77g 0 
+ &lt;strong&gt;/dev/sdb lvm2 a- 50.00g 50.00g&lt;/strong&gt;
+ /dev/sdc data lvm2 a- 50.00g 0
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># vgs
+VG #PV #LV #SN Attr VSize VFree
+ &lt;strong&gt;data 1 1 0 wz--n- 50.00g 0&lt;/strong&gt; 
+ system 1 6 0 wz--n- 19.77g 0
+</code></pre></div></div>
+
+<p>Finally proceed to wipe the physical volume::</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvremove /dev/sdb
+ Labels on physical volume "/dev/sdb" successfully wiped
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># pvs
+PV VG Fmt Attr PSize PFree
+ /dev/sda2 system lvm2 a- 19.77g 0
+ /dev/sdc data lvm2 a- 50.00g 0
+</code></pre></div></div>
+
+<p>This allows data to be moved from one disk to another without copying the data on operating system level, without interrupting services or restarting the computer. At the end we will have the disk <em>/dev/sdc</em> as the physical volume of the volume <em>data</em> as shown below:</p>
+
+<center><img title="LVM final" src="http://farm3.staticflickr.com/2824/13856925773_df139b9d34.jpg" alt="LVM final" width="300" height="269" /></center>
+<p><br /></p>
+
+<p><strong>Reference:</strong> http://www.tldp.org/HOWTO/LVM-HOWTO/removeadisk.html</p>
 
         
       </section>
@@ -421,15 +540,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/lvm" class="page__taxonomy-item" rel="tag">LVM</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/sysadmin" class="page__taxonomy-item" rel="tag">SysAdmin</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -493,9 +604,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -508,8 +627,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -520,36 +638,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -562,8 +661,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -574,9 +672,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -589,8 +695,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

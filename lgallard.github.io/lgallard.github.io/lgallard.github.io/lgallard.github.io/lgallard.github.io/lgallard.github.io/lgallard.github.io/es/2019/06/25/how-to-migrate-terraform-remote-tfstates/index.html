@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
-<meta property="article:section" content="Terraform">
-
 
 
 
@@ -369,14 +365,58 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/terraform-remote-states.jpg" alt="Terraform" /></center>
+<p><br />
+En Terraform uno tiene la posibilidad de renombrar y mover recursos y módulos en un mismo tfstate tanto si es local como remoto. Pero cuando se quiere migrar de recursos o módulos entre tftstates remotos hay que tomar otras consideraciones.</p>
+
+<p>Para resolver esto lo que se tiene que hacer es traerse la configuración remota, luego mover el recurso de forma local, y una vez que se haya movido, subir el cambio al tftstate remoto.</p>
+
+<p>Veamos el procedimiento:</p>
+
+<p>1) Traerse el tfstate remoto de destino:
+  </p>
+
+<p>Para mover los recursos de un tfstate a otro se necesita tener de forma local el tfstate destino:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform state pull &gt; dev.tfstate
+</code></pre></div></div>
+
+<p>2) Mover el recurso o módulo a este tfstate local</p>
+
+<p>En este ejemplo se desea mover el recurso <code class="highlighter-rouge">module.lambda.module.your_funtion</code> a <code class="highlighter-rouge">module.your_function</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform state mv -state-out=dev.tfstate module.lambda.module.your_function module.your_function
+</code></pre></div></div>
+<p>3) Subir el cambio al tftstate remoto</p>
+
+<p>El recurso se movió de un estado a otro, pero se hizo de forma local. Para que quede en el tftstate remoto de destino se debe subir:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform state push dev.tfstate
+</code></pre></div></div>
+
+<p>En algunos casos puede requerirse el uso de la opción <code class="highlighter-rouge">-force</code>, por ejemplo cuando se tuvo problemas con la inicialización del módulo , por lo que la orden anterior quedaría de la siguiente manera:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform state push -force dev.tfstate
+</code></pre></div></div>
+
+<p>Por último, y una vez que haya comprobado que todo está correctamente, puede borrar el tftstate local:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ rm dev.tfstate*
+</code></pre></div></div>
+
+<h2 id="referencias">Referencias:</h2>
+<ul>
+  <li><a href="https://medium.com/@lynnlin827/moving-terraform-resources-states-from-one-remote-state-to-another-c76f8b76a996" target="_blank">Moving Terraform Resources’ States from One Remote State to Another</a></li>
+  <li><a href="https://stackoverflow.com/questions/50400007/terraform-how-to-migrate-state-between-projects" target="_blank">Terraform: How to migrate state between projects?</a></li>
+</ul>
+
 
         
       </section>
@@ -422,15 +462,7 @@
     
       
       
-      <a href="https://lgallardo.com/es/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
     
     </span>
   </p>
@@ -463,7 +495,7 @@
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2019/10/18/terraform-module-for-aws-backup" class="pagination--pager" title="Módulo de Terraform para AWS Backup
+      <a href="https://lgallardo.com/es/2019/07/05/holidays-alexa-skill" class="pagination--pager" title="Skill de Alexa: Días Festivos
 ">Next</a>
     
   </nav>
@@ -494,9 +526,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -509,8 +549,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -521,36 +560,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/es/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -563,8 +583,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Uso de GitHub Copilot Background Agents en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terr...</p>
   </article>
 </div>
         
@@ -575,9 +594,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -590,8 +617,42 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         
