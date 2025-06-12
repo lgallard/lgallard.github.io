@@ -1,4 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-08T18:47:53-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Using GitHub Copilot Background Agents</title><link href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="alternate" type="text/html" title="Using GitHub Copilot Background Agents" /><published>2025-06-04T19:00:00-05:00</published><updated>2025-06-04T19:00:00-05:00</updated><id>https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup</id><content type="html" xml:base="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/">&lt;!-- Add a relevant image here --&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-08T19:22:07-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow</title><link href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="alternate" type="text/html" title="Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow" /><published>2025-06-07T19:00:00-05:00</published><updated>2025-06-07T19:00:00-05:00</updated><id>https://lgallardo.com/2025/06/08/coding-agents-bugbot</id><content type="html" xml:base="https://lgallardo.com/2025/06/08/coding-agents-bugbot/">&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png&quot; alt=&quot;BugBot and Copilot: AI Reviewers&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recently, while working on my Terraform modules, I had an idea: &lt;strong&gt;What about using BugBot to check Copilot’s Coding Agents?&lt;/strong&gt; With Copilot Coding Agents already helping automate PRs and refactors, I decided to give BugBot a try as an additional reviewer.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-experiment&quot;&gt;The Experiment&lt;/h2&gt;
+
+&lt;p&gt;I assigned Copilot Coding Agents to implement new features and fixes in my repositories. Once the PRs were ready, I ran BugBot to review the changes. The results were fascinating:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_00-46.png&quot; alt=&quot;Copilot PR with BugBot review&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;BugBot quickly detected issues that Copilot’s own review had missed, especially around edge cases and variable usage. Its bug detection capabilities are on another level compared to Copilot’s built-in review features.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_00-47.png&quot; alt=&quot;BugBot detailed bug report&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, BugBot flagged overly restrictive regex validation and unused variables in a Copilot-generated PR. It provided actionable feedback, which I then relayed to Copilot for fixes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot2025-06-09_00-48.png&quot; alt=&quot;BugBot and Copilot: AI Reviewers&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;highlights&quot;&gt;Highlights&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;BugBot excels at bug detection:&lt;/strong&gt; It found subtle issues in Copilot Coding Agents’ PRs, providing detailed explanations and suggestions.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Copilot Coding Agents excel at implementation:&lt;/strong&gt; They quickly propose and implement solutions, and can interpret and act on BugBot’s feedback.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AI is not infallible:&lt;/strong&gt; Even with both tools, bugs or outdated code can slip through. For example, Copilot generated a workflow using a deprecated GitHub Action, and BugBot didn’t catch it either.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_01-01.png&quot; alt=&quot;Workflow error: Deprecated GitHub Action&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Combining Copilot Coding Agents and BugBot creates a powerful AI-driven review and implementation workflow. Each tool has its strengths: BugBot for deep bug detection, Copilot for rapid solution delivery. However, human oversight is still essential to catch edge cases and evolving platform changes.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; BugBot is a paid service for automated code reviews. My tests and experiments described here were conducted during the free trial period, which allowed me to evaluate its capabilities without incurring any cost.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/features/copilot&quot;&gt;GitHub Copilot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cursor.so/bugbot&quot;&gt;Cursor BugBot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/pull/55&quot;&gt;feat: Add support for repository replication &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="GitHub" /><category term="Copilot" /><category term="BugBot" /><category term="Terraform" /><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Using GitHub Copilot Background Agents</title><link href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="alternate" type="text/html" title="Using GitHub Copilot Background Agents" /><published>2025-06-04T19:00:00-05:00</published><updated>2025-06-04T19:00:00-05:00</updated><id>https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup</id><content type="html" xml:base="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/">&lt;!-- Add a relevant image here --&gt;
 &lt;p&gt;&lt;img src=&quot;/assets/images/copilot-coding-agent.png&quot; alt=&quot;GitHub Copilot Background Agents&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently, I had the opportunity to try out GitHub Copilot Coding Agents (Background Agents) on one of my personal projects: the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup&lt;/a&gt; module. This module is designed to help users manage AWS Backup plans using Terraform.&lt;/p&gt;
@@ -1076,79 +1118,4 @@ I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be
   &lt;li&gt;&lt;a href=&quot;https://www.logitech.com/en-roeu/product/mx-anywhere-2s-flow.910-005153.html#specs&quot; target=&quot;_blank&quot;&gt;Logitech MX Anywhere 2S  &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/101105/how-to-assign-back-and-forward-actions-to-logitech-anywhere-mouse-mx-horizo&quot; target=&quot;_blank&quot;&gt;How to assign “back” and “forward” actions to Logitech Anywhere Mouse MX’ horizontal scroll wheel?&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Xbindkeys#Identifying_keycodes&quot; target=&quot;_blank&quot;&gt;Xbindkeys (ArchLinux)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Linux" /><category term="Debian" /><summary type="html">I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.</summary></entry><entry><title type="html">Certified Kubernetes Administrator (CKA)</title><link href="https://lgallardo.com/2020/11/23/2020-11-23-certified-kubernetes-administrator-cka/" rel="alternate" type="text/html" title="Certified Kubernetes Administrator (CKA)" /><published>2020-07-25T19:00:00-05:00</published><updated>2020-07-25T19:00:00-05:00</updated><id>https://lgallardo.com/2020/11/23/certified-kubernetes-administrator-cka</id><content type="html" xml:base="https://lgallardo.com/2020/11/23/2020-11-23-certified-kubernetes-administrator-cka/">&lt;center&gt;&lt;img src=&quot;/images/ckad.jpg&quot; alt=&quot;Certified Kubernetes Application Developer&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-This post describes my experience and recommendations for tackling the &lt;strong&gt;Certified Kubernetes Administrator (CKA)&lt;/strong&gt; exam by The Linux Foundation.&lt;/p&gt;
-
-&lt;h1 id=&quot;the-exam&quot;&gt;The exam&lt;/h1&gt;
-
-&lt;p&gt;The exam is 100% practical with about 20 questions that must be solved in 2 hours, supervised by a proctor who verifies that you are alone during the exam, and that you comply with &lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;all rules&lt;/a&gt;. In my case, for this exam the proctored asked me to show a 360° view of the room, and to show him below my desk. He also asked me from time to time to show him my hands.&lt;/p&gt;
-
-&lt;p&gt;First off, this exam goes beyond the CKAD exam in terms of complexity. You will face more difficult challenges, like fixing a broken cluster or detecting why a service is not running properly and make it work again.&lt;/p&gt;
-
-&lt;p&gt;In my case there were few easy questions and I’d say that most of them were medium to difficult, therefore be prepared! You  you must manage your time very well. Questions will be shown in a panel on the left side and you will have access to a terminal where you have to execute the commands to solve them.&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/exam_ui.jpg&quot; alt=&quot;Exam UI&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;There will be questions to create resources, others to identify and solve problems (troubleshooting &amp;amp; fixing) . You can copy and paste from the instructions, in addition to having access to a place for notes, for example to keep track of pending questions.&lt;/p&gt;
-
-&lt;p&gt;You will be able to consult the Kubernetes documentation from these sites &lt;a href=&quot;https://kubernetes.io/docs/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/docs/&lt;/a&gt;, &lt;a href=&quot;https://github.com/kubernetes/&quot; target=&quot;_blank&quot;&gt;https://github.com/kubernetes/&lt;/a&gt;, &lt;a href=&quot;https://kubernetes.io/blog/&quot; target=&quot;_blank&quot;&gt;https://kubernetes.io/blog/&lt;/a&gt;, opening one and only one additional tab to the exam.&lt;/p&gt;
-
-&lt;p&gt;You can take the exam with Chrome, so yo can access the sites mentioned above from your bookmarks (yes, it’s allowed)&lt;/p&gt;
-
-&lt;h1 id=&quot;my-experience&quot;&gt;My experience&lt;/h1&gt;
-
-&lt;p&gt;With this exam I didn’t face any trouble at all (check my experience with CKAD exam). I didn’t have a clock or progress bar to keep track of the time in the examination interface, but this time I was conscious about timing. The proctor only interrupted me 15 minutes before the end of the exam to let me know it was almost over.&lt;/p&gt;
-
-&lt;p&gt;I went with a lot of expectations, but this time regarding the exam’s difficulty.&lt;/p&gt;
-
-&lt;h1 id=&quot;how-to-prepare&quot;&gt;How to prepare?&lt;/h1&gt;
-&lt;p&gt;There are several free and other paid resources, all valid to prepare, but practical experience is essential. I list some of them:&lt;/p&gt;
-
-&lt;h2 id=&quot;books&quot;&gt;Books&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton: This book is good for an overview of Kubernetes, and is an extension of Nigel’s course (see below).&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;: This is an excellent book to learn Kubernetes, it covers various topics of CKAD and also of CKA.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;online-courses&quot;&gt;Online courses&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;: This course is very well designed and explains in detail and with many animations the concepts necessary to learn how to deploy applications in a Kubernetes cluster. Additionally, it gives access to a platform named &lt;em&gt;&lt;strong&gt;Kloud Kode&lt;/strong&gt;&lt;/em&gt; created with &lt;em&gt;&lt;strong&gt;Teachable&lt;/strong&gt;&lt;/em&gt; and with &lt;em&gt;&lt;strong&gt;Katacoda&lt;/strong&gt;&lt;/em&gt; environments designed for each topic covered, two exam-type labs (with a high degree of difficulty) and two exams to practice and prepare to work under the pressure of the real exam. .&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;: If you have a LinuxAcademy subscription you can follow this course. Keep two things in mind: 1) It focuses on editing yamls and little on how to generate them. 2) The exam mocks they have to practice are not so difficult and they may be insufficient to pass without having practiced beyond them. It’s recommended to do the labs, exams and other questions to exercise (see below)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;: This course is to have an overview of Kubernetes, for example of its architecture (API Server, Kubelet, etc.) as well as to take the first steps in application deployments. No practical labs included.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;: This course is to start with Kubernetes, to have the fundamental concepts. Ideal for those who have not had contact with Kubernetes. No practical labs included.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;practice-environments&quot;&gt;Practice environments&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;: This platform allows you to interact with a cluster with just one node, from a web console, similar to what we would get in the exam. The interesting thing is that there are scenarios created by other users that can be used to learn basic concepts, such as secrets, configmaps, volumes, etc. Please note that each scneario lasts a maximum of one hour.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;: With this option you can install a virtual machine to have your own cluster with a node.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;exercises-to-practice&quot;&gt;Exercises to practice&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;:
-A set of exercises that will help you prepare for the exam and can also help you learn and practice with Kubernetes.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;:This is another set of exercises that serve to prepare you and have all the concepts fresh before going to the exam..&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;: This page presents some challenges to complete and some tips for the exam. They also offer an exam simulator at a cost of €30 (I didn’t subscribe, so I don’t know exactly what the simulator is like or if it really has similar exam questions).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;endnotes&quot;&gt;Endnotes&lt;/h1&gt;
-&lt;p&gt;Again I recommend you to practice enough before taking the exam, even if you have experience with Kubernetes. Time management is important, so you must be prepared to use the Kubernetes documentation quickly (from the documentation page or from the console with kubectl), be prepared to generate yamls (not edit them), and handle nerves and pressure.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.linuxfoundation.org/tc-docs/certification/lf-candidate-handbook/exam-rules-and-policies&quot; target=&quot;_blank&quot;&gt;Exam Rules and Policies&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/gp/product/B072TS9ZQZ/ref=ppx_yo_dt_b_d_asin_title_o06?ie=UTF8&amp;amp;psc=1&quot; target=&quot;_blank&quot;&gt;The Kubernetes Book: Updated Feb 2020&lt;/a&gt;  by Nigel Poulton.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure-ebook/dp/B07YP1XSZ9/ref=sr_1_1?dchild=1&amp;amp;keywords=kubernetes+up+and+running&amp;amp;qid=1595782565&amp;amp;s=digital-text&amp;amp;sr=1-1&quot; target=&quot;_blank&quot;&gt;Kubernetes up and running&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/certified-kubernetes-application-developer/&quot; target=&quot;_blank&quot;&gt;Kubernetes Certified Application Developer (CKAD) with Tests (Mumshad Mannambeth)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://linuxacademy.com/course/certified-kubernetes-application-developer-ckad/&quot; target=&quot;_blank&quot;&gt;Certified Kubernetes Application Developer (CKAD) - Linux Academy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-deep-dive&quot; target=&quot;_blank&quot;&gt;Kubernetes Deep Dive - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://acloud.guru/learn/kubernetes-fundamental/&quot; target=&quot;_blank&quot;&gt;Kubernetes Fundamentals - A Cloud Guru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.katacoda.com/&quot; target=&quot;_blank&quot;&gt;Katacoda&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/install-minikube/&quot; target=&quot;_blank&quot;&gt;Minikube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dgkanatsios/CKAD-exercises&quot; target=&quot;_blank&quot;&gt;CKAD Exercises&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/bb-tutorials-and-thoughts/practice-enough-with-these-questions-for-the-ckad-exam-2f42d1228552&quot; target=&quot;_blank&quot;&gt;Practice Enough With These 150 Questions for the CKAD Exam&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://codeburst.io/kubernetes-ckad-weekly-challenges-overview-and-tips-7282b36a2681&quot; target=&quot;_blank&quot;&gt;Kubernetes CKAD Example Exam Questions Practical Challenge Series&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Kubernetes" /><category term="k8s" /><category term="EKS" /><summary type="html">This post describes my experience and recommendations for tackling the Certified Kubernetes Administrator (CKA) exam by The Linux Foundation.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Linux" /><category term="Debian" /><summary type="html">I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.</summary></entry></feed>

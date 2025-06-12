@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
-<meta property="article:section" content="Terraform">
-
 
 
 
@@ -369,14 +365,175 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/terraform.jpg" alt="Terraform" /></center>
+<p><br />
+Hace un tiempo escribí sobre <a href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform" target="_blank">cómo hacer bloques dinámicos en Terraform 0.11.x</a>, que si bien resolvía el problema generaba otros debido a que era no era una solución oficial.</p>
+
+<p>En esencia lo que hacía era definir los bloques de forma dinámica usando una asiganción a una lista de maps. Es decir, en vez de hacer esto:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
+
+[...]
+
+  artifacts{
+      type           = "${var.codebuild_artifacts_type}"
+      location       = "${var.codebuild_artifacts_location}"
+      name           = "${var.codebuild_artifacts_name}"
+      namespace_type = "${var.codebuild_artifacts_namespace_type}"
+      packaging      = "${var.codebuild_artifacts_packaging}"
+      path           = "${var.codebuild_artifacts_path}"
+
+  }
+}
+
+</code></pre></div></div>
+
+<p>Se sustituía por:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
+
+[...]
+
+  artifacts = ["${local.codebuild_artifacts}"]
+
+}
+
+</code></pre></div></div>
+
+<p>Donde <code class="highlighter-rouge">local.codebuild_artifacts</code> se construida a partir de una lista de maps, que dependiendo del tipo definido en la variable <code class="highlighter-rouge">codebuild_artifacts_type</code> creaba un bloque diferente:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+locals {
+  codebuild_artifacts_def = {
+    "S3" = [{
+      type                = "${var.codebuild_artifacts_type}"
+      location            = "${var.codebuild_artifacts_location}"
+      name                = "${var.codebuild_artifacts_name}"
+      namespace_type      = "${var.codebuild_artifacts_namespace_type}"
+      packaging           = "${var.codebuild_artifacts_packaging}"
+      path                = "${var.codebuild_artifacts_path}"
+      encryption_disabled = var.codebuild_artifacts_encryption_disabled
+    }]
+
+    "CODEPIPELINE" = [{
+      type                = "${var.codebuild_artifacts_type}"
+      location            = "${var.codebuild_artifacts_location}"
+      name                = "${var.codebuild_artifacts_name}"
+      namespace_type      = "${var.codebuild_artifacts_namespace_type}"
+      packaging           = "${var.codebuild_artifacts_packaging}"
+      path                = "${var.codebuild_artifacts_path}"
+      encryption_disabled = var.codebuild_artifacts_encryption_disabled
+    }]
+
+    "NO_ARTIFACTS" = [{
+      type = "${var.codebuild_artifacts_type}"
+    }]
+  }
+
+  # Retuned map
+  codebuild_artifacts = "${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}"
+}
+</code></pre></div></div>
+<p><br /></p>
+
+<h1 id="bloques-dinámicos-en-terraform-012x">Bloques dinámicos en Terraform 0.12.x</h1>
+
+<p>Terraform 0.12.x propone el uso de <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">bloques dinámicos</a> para solucionar este y otros casos relacionados a bloques. Para esto hay que usar <code class="highlighter-rouge">dynamic</code> y <code class="highlighter-rouge">for-each</code>. Por ejemplo, para la definición de arriba tendriamos lo siguiente:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
+    for_each = [local.codebuild_artifacts]
+    content {
+      type                = artifacts.value.type
+      encryption_disabled = lookup(artifacts.value, "encryption_disabled", null)
+      location            = lookup(artifacts.value, "location", null)
+      name                = lookup(artifacts.value, "name", null)
+      namespace_type      = lookup(artifacts.value, "namespace_type", null)
+      packaging           = lookup(artifacts.value, "packaging", null)
+      path                = lookup(artifacts.value, "path", null)
+    }
+  }
+</code></pre></div></div>
+
+<p>Y la definición de <code class="highlighter-rouge">local.codebuild_artifacts</code> se simplifica enormemente:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
+  codebuild_artifacts = {
+    type                = var.codebuild_artifacts_type
+    location            = var.codebuild_artifacts_location
+    name                = var.codebuild_artifacts_name
+    namespace_type      = var.codebuild_artifacts_namespace_type
+    packaging           = var.codebuild_artifacts_packaging
+    path                = var.codebuild_artifacts_path
+    encryption_disabled = var.codebuild_artifacts_encryption_disabled
+  }
+}
+
+</code></pre></div></div>
+
+<p><strong>¿Dónde está la magia?</strong></p>
+
+<p>Primero, en el tipo de datos <code class="highlighter-rouge">null</code>, el cual le dice a Terraform que ignore el atributo si la función <code class="highlighter-rouge">lookup</code> no encuentra el índice en el map.</p>
+
+<p>Veamos las primeras línea de la definición del bloque  <code class="highlighter-rouge">content</code>, que es lo que se subsituye en el bloque <code class="highlighter-rouge">artifacts</code> en cada iteración:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    content {
+      type                = artifacts.value.type
+      encryption_disabled = lookup(artifacts.value, "encryption_disabled", null)
+      location            = lookup(artifacts.value, "location", null)
+      ...
+</code></pre></div></div>
+
+<p>Acá se puede apreciar que:</p>
+
+<ol>
+  <li>El atributo <code class="highlighter-rouge">type</code> siempre se define acorde al valor de <code class="highlighter-rouge">artifacts.value.type</code>. Es decir, no se toma del map.</li>
+  <li>El atributo <code class="highlighter-rouge">encryption_disabled</code> se asigna si se consigue en el map algo como <code class="highlighter-rouge">artifacts.value['encryption_disabled']</code>. Si este ínidce no existe se le asiga <code class="highlighter-rouge">null</code> y por ende no será tomado en cuenta pot Terraform.</li>
+  <li>Y es igual para el resto de los atributos, como por ejemplo <code class="highlighter-rouge">location</code>.</li>
+</ol>
+
+<p>Esto permite tener definiciones de bloques dinámicas, pero teniendo en cuenta que se deben definir ciertos valores en conjunto. Por ejemplo, para <code class="highlighter-rouge">S3</code>se debe definir las variables:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var.codebuild_artifacts_type
+var.codebuild_artifacts_location
+var.codebuild_artifacts_name
+var.codebuild_artifacts_namespace_type
+var.codebuild_artifacts_packaging
+var.codebuild_artifacts_path
+var.codebuild_artifacts_encryption_disabled
+</code></pre></div></div>
+
+<p>Mientras que para <code class="highlighter-rouge">NO_ARTIFACTS</code> basta con:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var.codebuild_artifacts_type
+</code></pre></div></div>
+
+<p>Por otro lado, la magia se completa por el hecho de que no se está usando la asingación para el bloque <code class="highlighter-rouge">artifacts</code> sino por la definición del bloque. Es decir, en vez de usar esta asignación:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> artifacts = ["${local.codebuild_artifacts}"]
+</code></pre></div></div>
+
+<p>Se usa la definición de bloque dinámico.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
+    for_each = [local.codebuild_artifacts]
+    content {
+      ...
+  }
+</code></pre></div></div>
+
+<h2 id="referencias">Referencias:</h2>
+<ul>
+  <li><a href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform" target="_blank">Bloques dinámicos en Terraform 0.11.x</a></li>
+  <li><a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">HashiCorp Terraform 0.12 Preview: For and For-Each</a></li>
+</ul>
+
 
         
       </section>
@@ -422,15 +579,7 @@
     
       
       
-      <a href="https://lgallardo.com/es/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+      <a href="https://lgallardo.com/es/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
     
     </span>
   </p>
@@ -494,9 +643,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -509,8 +666,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -521,36 +677,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/es/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -563,8 +700,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Uso de GitHub Copilot Background Agents en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terr...</p>
   </article>
 </div>
         
@@ -575,9 +711,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -590,8 +734,42 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         

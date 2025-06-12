@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="The problemVisiting my blog from a tablet I noticed that theBlip.Tv videos I set in _Video Sidebar Widgets _were not shown. Doing a research I realized the plugin loaded the old flash-based player  instead of the HTML5 version, so videos coudn’t be played from mobile devices with not flash support, which are the majority of the handheld systems nowadays.The solutionI just had to add some conditionals in files helper-functions.php and class-videosidebarwidget.php to consider the Blipblip.tv case and thus I added the HTM5 player. In particular, I added the following lines to helper-functions.php:elseif($admin==&quot;true&quot;){ if($source == &quot;Blip&quot;){ echo &quot;\n&amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot;  frameborder=\&quot;0\&quot; allowfullscreen&amp;gt; &amp;lt;/iframe&amp;gt;   &amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot;  style=\&quot;display:none\&quot;&amp;gt; &amp;lt;/embed&amp;gt;\n\n&quot;;  }else{  // echo video in admin echo &quot;\n&amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;gt;\n&quot;; echo $flashvar; echo &quot;&amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $flashvar2; echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;/embed&amp;gt;\n&quot;; echo &quot;&amp;lt;/object&amp;gt;\n\n&quot;; }}else{And in file class-videosidebarwidget.php I edited the below code:&lt;br class=&quot;Apple-interchange-newline&quot; /&gt; case &#39;Blip&#39;: $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;; &lt;strong&gt;$rv_flashvar&lt;/strong&gt; = &quot;&quot;; $rv_flashvar2 = &quot;&quot;; $rv_cap = $Embed_cap;And I added the following lines:if($select_source == &quot;Blip&quot;){  echo &quot;\n&amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;  frameborder=\&quot;0\&quot; allowfullscreen&amp;gt; &amp;lt;/iframe&amp;gt;  &amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot;  style=\&quot;display:none\&quot;&amp;gt; &amp;lt;/embed&amp;gt;\n\n&quot;;}else{ echo &quot;\n&amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;gt;\n&quot;; echo $rv_flashvar; echo &quot;&amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $rv_flashvar2; echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;/embed&amp;gt;\n&quot;; echo &quot;&amp;lt;/object&amp;gt;\n\n&quot;; } if(!empty($rv_cap)){echo &quot;&amp;lt;p class=\&quot;VideoCaption\&quot;&amp;gt;$rv_cap&amp;lt;/p&amp;gt;\n\n&quot;;};   echo $after_widget; }After these changes random HTM5 videos are loaded without problems.Plugin supportBy the way, I tried to contact the plugin developer to include these changes and he said he had not time for doing it. It a shame it’s not open-sourced so somebody else can maintain the code.">
+<meta name="description" content="Read about Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
@@ -33,44 +33,33 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="lgallardo.com">
-<meta property="og:title" content="Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets">
+<meta property="og:title"
+  content="Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets">
+<meta property="og:type" content="article">
 
 
-  <link rel="canonical" href="https://lgallardo.com/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">
-  <meta property="og:url" content="https://lgallardo.com/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">
-
-
-
-  <meta property="og:description" content="The problemVisiting my blog from a tablet I noticed that theBlip.Tv videos I set in _Video Sidebar Widgets _were not shown. Doing a research I realized the plugin loaded the old flash-based player  instead of the HTML5 version, so videos coudn’t be played from mobile devices with not flash support, which are the majority of the handheld systems nowadays.The solutionI just had to add some conditionals in files helper-functions.php and class-videosidebarwidget.php to consider the Blipblip.tv case and thus I added the HTM5 player. In particular, I added the following lines to helper-functions.php:elseif($admin==&quot;true&quot;){ if($source == &quot;Blip&quot;){ echo &quot;\n&amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot;  frameborder=\&quot;0\&quot; allowfullscreen&amp;gt; &amp;lt;/iframe&amp;gt;   &amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot;  style=\&quot;display:none\&quot;&amp;gt; &amp;lt;/embed&amp;gt;\n\n&quot;;  }else{  // echo video in admin echo &quot;\n&amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;gt;\n&quot;; echo $flashvar; echo &quot;&amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $flashvar2; echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;/embed&amp;gt;\n&quot;; echo &quot;&amp;lt;/object&amp;gt;\n\n&quot;; }}else{And in file class-videosidebarwidget.php I edited the below code:&lt;br class=&quot;Apple-interchange-newline&quot; /&gt; case &#39;Blip&#39;: $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;; &lt;strong&gt;$rv_flashvar&lt;/strong&gt; = &quot;&quot;; $rv_flashvar2 = &quot;&quot;; $rv_cap = $Embed_cap;And I added the following lines:if($select_source == &quot;Blip&quot;){  echo &quot;\n&amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;  frameborder=\&quot;0\&quot; allowfullscreen&amp;gt; &amp;lt;/iframe&amp;gt;  &amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot;  style=\&quot;display:none\&quot;&amp;gt; &amp;lt;/embed&amp;gt;\n\n&quot;;}else{ echo &quot;\n&amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;gt;\n&quot;; echo $rv_flashvar; echo &quot;&amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $rv_flashvar2; echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;/embed&amp;gt;\n&quot;; echo &quot;&amp;lt;/object&amp;gt;\n\n&quot;; } if(!empty($rv_cap)){echo &quot;&amp;lt;p class=\&quot;VideoCaption\&quot;&amp;gt;$rv_cap&amp;lt;/p&amp;gt;\n\n&quot;;};   echo $after_widget; }After these changes random HTM5 videos are loaded without problems.Plugin supportBy the way, I tried to contact the plugin developer to include these changes and he said he had not time for doing it. It a shame it’s not open-sourced so somebody else can maintain the code.">
-
-
-
-  <meta name="twitter:site" content="@lgallard">
-  <meta name="twitter:title" content="Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets">
-  <meta name="twitter:description" content="The problemVisiting my blog from a tablet I noticed that theBlip.Tv videos I set in _Video Sidebar Widgets _were not shown. Doing a research I realized the plugin loaded the old flash-based player  instead of the HTML5 version, so videos coudn’t be played from mobile devices with not flash support, which are the majority of the handheld systems nowadays.The solutionI just had to add some conditionals in files helper-functions.php and class-videosidebarwidget.php to consider the Blipblip.tv case and thus I added the HTM5 player. In particular, I added the following lines to helper-functions.php:elseif($admin==&quot;true&quot;){ if($source == &quot;Blip&quot;){ echo &quot;\n&amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot;  frameborder=\&quot;0\&quot; allowfullscreen&amp;gt; &amp;lt;/iframe&amp;gt;   &amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot;  style=\&quot;display:none\&quot;&amp;gt; &amp;lt;/embed&amp;gt;\n\n&quot;;  }else{  // echo video in admin echo &quot;\n&amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;gt;\n&quot;; echo $flashvar; echo &quot;&amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $flashvar2; echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;/embed&amp;gt;\n&quot;; echo &quot;&amp;lt;/object&amp;gt;\n\n&quot;; }}else{And in file class-videosidebarwidget.php I edited the below code:&lt;br class=&quot;Apple-interchange-newline&quot; /&gt; case &#39;Blip&#39;: $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;; &lt;strong&gt;$rv_flashvar&lt;/strong&gt; = &quot;&quot;; $rv_flashvar2 = &quot;&quot;; $rv_cap = $Embed_cap;And I added the following lines:if($select_source == &quot;Blip&quot;){  echo &quot;\n&amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;  frameborder=\&quot;0\&quot; allowfullscreen&amp;gt; &amp;lt;/iframe&amp;gt;  &amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot;  style=\&quot;display:none\&quot;&amp;gt; &amp;lt;/embed&amp;gt;\n\n&quot;;}else{ echo &quot;\n&amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;gt;\n&quot;; echo $rv_flashvar; echo &quot;&amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $rv_flashvar2; echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;/embed&amp;gt;\n&quot;; echo &quot;&amp;lt;/object&amp;gt;\n\n&quot;; } if(!empty($rv_cap)){echo &quot;&amp;lt;p class=\&quot;VideoCaption\&quot;&amp;gt;$rv_cap&amp;lt;/p&amp;gt;\n\n&quot;;};   echo $after_widget; }After these changes random HTM5 videos are loaded without problems.Plugin supportBy the way, I tried to contact the plugin developer to include these changes and he said he had not time for doing it. It a shame it’s not open-sourced so somebody else can maintain the code.">
-  <meta name="twitter:url" content="https://lgallardo.com/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-  
-
-  
-    <meta name="twitter:creator" content="@Luis Gallardo">
-  
+<link rel="canonical" href="https://lgallardo.com/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">
+<meta property="og:url" content="https://lgallardo.com/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">
 
 
 
-  
-
-  
+<meta property="og:description" content="Read about Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets">
+<meta name="twitter:description" content="Read about Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
+<meta name="twitter:url" content="https://lgallardo.com/2014/05/28/habilitar-html5-para--tv-en-plugin-video-sidebar-widgets-de-wordpress/">
 
 
-  <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2014-05-28T15:00:33-05:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/luis.jpg">
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
 
 
 
@@ -79,7 +68,50 @@
 
 
 
-  <script type="application/ld+json">
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/luis.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2014-05-28T15:00:33-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="PHP">
+
+<meta property="article:tag" content="WordPress">
+
+
+<meta property="article:section" content="Programming">
+
+<meta property="article:section" content="PHP">
+
+<meta property="article:section" content="WordPress">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
     {
       "@context" : "http://schema.org",
       "@type" : "Person",
@@ -95,7 +127,6 @@
 
 
 <!-- end SEO -->
-
 <link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -173,6 +204,28 @@
 
 
     
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" "
+>
+  
+    <img src="https://lgallardo.com/assets/images/luis.jpg" alt="Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets" class="page__hero-image">
+  
+  
+</div>
+
+
 
 
 
@@ -300,7 +353,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets">
-    <meta itemprop="description" content="The problemVisiting my blog from a tablet I noticed that theBlip.Tv videos I set in _Video Sidebar Widgets _were not shown. Doing a research I realized the plugin loaded the old flash-based player  instead of the HTML5 version, so videos coudn’t be played from mobile devices with not flash support, which are the majority of the handheld systems nowadays.The solutionI just had to add some conditionals in files helper-functions.php and class-videosidebarwidget.php to consider the Blipblip.tv case and thus I added the HTM5 player. In particular, I added the following lines to helper-functions.php:elseif($admin==&quot;true&quot;){ if($source == &quot;Blip&quot;){ echo &quot;\n&amp;lt;iframe src=\&quot;$value.html?p=1\&quot; width=\&quot;250\&quot; height=\&quot;250\&quot;  frameborder=\&quot;0\&quot; allowfullscreen&amp;gt; &amp;lt;/iframe&amp;gt;   &amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$v_id2\&quot;  style=\&quot;display:none\&quot;&amp;gt; &amp;lt;/embed&amp;gt;\n\n&quot;;  }else{  // echo video in admin echo &quot;\n&amp;lt;object width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;gt;\n&quot;; echo $flashvar; echo &quot;&amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;movie\&quot; value=\&quot;$value\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;embed src=\&quot;$value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $flashvar2; echo &quot;width=\&quot;212\&quot; height=\&quot;172\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;/embed&amp;gt;\n&quot;; echo &quot;&amp;lt;/object&amp;gt;\n\n&quot;; }}else{And in file class-videosidebarwidget.php I edited the below code:&lt;br class=&quot;Apple-interchange-newline&quot; /&gt; case &#39;Blip&#39;: $rv_value = &quot;http://blip.tv/play/$Embed_id&quot;; &lt;strong&gt;$rv_flashvar&lt;/strong&gt; = &quot;&quot;; $rv_flashvar2 = &quot;&quot;; $rv_cap = $Embed_cap;And I added the following lines:if($select_source == &quot;Blip&quot;){  echo &quot;\n&amp;lt;iframe align=\&quot;left\&quot; src=\&quot;$rv_value.html?p=1\&quot; width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;  frameborder=\&quot;0\&quot; allowfullscreen&amp;gt; &amp;lt;/iframe&amp;gt;  &amp;lt;embed type=\&quot;application/x-shockwave-flash\&quot; src=\&quot;http://a.blip.tv/api.swf#$Embed_id\&quot;  style=\&quot;display:none\&quot;&amp;gt; &amp;lt;/embed&amp;gt;\n\n&quot;;}else{ echo &quot;\n&amp;lt;object width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;gt;\n&quot;; echo $rv_flashvar; echo &quot;&amp;lt;param name=\&quot;allowfullscreen\&quot; value=\&quot;true\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;allowscriptaccess\&quot; value=\&quot;always\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;movie\&quot; value=\&quot;$rv_value\&quot; /&amp;gt;\n&quot;; echo &quot;&amp;lt;param name=\&quot;wmode\&quot; value=\&quot;transparent\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;embed src=\&quot;$rv_value\&quot; type=\&quot;application/x-shockwave-flash\&quot; wmode=\&quot;transparent\&quot; &quot;; echo &quot;allowfullscreen=\&quot;true\&quot; allowscriptaccess=\&quot;always\&quot; &quot;; echo $rv_flashvar2; echo &quot;width=\&quot;$RV_width\&quot; height=\&quot;$RV_height\&quot;&amp;gt;\n&quot;; echo &quot;&amp;lt;/embed&amp;gt;\n&quot;; echo &quot;&amp;lt;/object&amp;gt;\n\n&quot;; } if(!empty($rv_cap)){echo &quot;&amp;lt;p class=\&quot;VideoCaption\&quot;&amp;gt;$rv_cap&amp;lt;/p&amp;gt;\n\n&quot;;};   echo $after_widget; }After these changes random HTM5 videos are loaded without problems.Plugin supportBy the way, I tried to contact the plugin developer to include these changes and he said he had not time for doing it. It a shame it’s not open-sourced so somebody else can maintain the code.">
+    <meta itemprop="description" content="Read about Enabling HTML5 for Blipblip.tv in WordPress plugin Video Sidebar Widgets on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
     <meta itemprop="datePublished" content="May 28, 2014">
     
 
@@ -315,93 +368,14 @@
 
 
 
-  1 minute read
+  less than 1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <h2 id="the-problem">The problem</h2>
-
-<p>Visiting my blog from a tablet I noticed that theBlip.Tv videos I set in _Video Sidebar Widgets _were not shown. Doing a research I realized the plugin loaded the old flash-based player  instead of the HTML5 version, so videos coudn’t be played from mobile devices with not flash support, which are the majority of the handheld systems nowadays.</p>
-
-<h2 id="the-solution">The solution</h2>
-
-<p>I just had to add some conditionals in files <em>helper-functions.php</em> and <em>class-videosidebarwidget.php</em> to consider the Blipblip.tv case and thus I added the HTM5 player. In particular, I added the following lines to <em>helper-functions.php:</em></p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>elseif($admin=="true"){
- if($source == "Blip"){
- echo "\n&amp;lt;iframe src=\"$value.html?p=1\" width=\"250\" height=\"250\" 
- frameborder=\"0\" allowfullscreen&amp;gt;
- &amp;lt;/iframe&amp;gt; 
- 
- &amp;lt;embed type=\"application/x-shockwave-flash\" src=\"http://a.blip.tv/api.swf#$v_id2\" 
- style=\"display:none\"&amp;gt;
- &amp;lt;/embed&amp;gt;\n\n"; 
- }else{ 
- // echo video in admin
- echo "\n&amp;lt;object width=\"212\" height=\"172\"&amp;gt;\n";
- echo $flashvar;
- echo "&amp;lt;param name=\"allowfullscreen\" value=\"true\" /&amp;gt;\n";
- echo "&amp;lt;param name=\"allowscriptaccess\" value=\"always\" /&amp;gt;\n";
- echo "&amp;lt;param name=\"movie\" value=\"$value\" /&amp;gt;\n";
- echo "&amp;lt;param name=\"wmode\" value=\"transparent\"&amp;gt;\n";
- echo "&amp;lt;embed src=\"$value\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" ";
- echo "allowfullscreen=\"true\" allowscriptaccess=\"always\" ";
- echo $flashvar2;
- echo "width=\"212\" height=\"172\"&amp;gt;\n";
- echo "&amp;lt;/embed&amp;gt;\n";
- echo "&amp;lt;/object&amp;gt;\n\n";
- }
-}else{
-</code></pre></div></div>
-
-<p>And in file <em>class-videosidebarwidget.php</em> I edited the below code:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;br class="Apple-interchange-newline" /&gt; case 'Blip':
- $rv_value = "http://blip.tv/play/$Embed_id";
- &lt;strong&gt;$rv_flashvar&lt;/strong&gt; = "";
- $rv_flashvar2 = "";
- $rv_cap = $Embed_cap;
-</code></pre></div></div>
-
-<p>And I added the following lines:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if($select_source == "Blip"){ 
- echo "\n&amp;lt;iframe align=\"left\" src=\"$rv_value.html?p=1\" width=\"$RV_width\" height=\"$RV_height\" 
- frameborder=\"0\" allowfullscreen&amp;gt;
- &amp;lt;/iframe&amp;gt;
- 
- &amp;lt;embed type=\"application/x-shockwave-flash\" src=\"http://a.blip.tv/api.swf#$Embed_id\" 
- style=\"display:none\"&amp;gt;
- &amp;lt;/embed&amp;gt;\n\n";
-}else{
- echo "\n&amp;lt;object width=\"$RV_width\" height=\"$RV_height\"&amp;gt;\n";
- echo $rv_flashvar;
- echo "&amp;lt;param name=\"allowfullscreen\" value=\"true\" /&amp;gt;\n";
- echo "&amp;lt;param name=\"allowscriptaccess\" value=\"always\" /&amp;gt;\n";
- echo "&amp;lt;param name=\"movie\" value=\"$rv_value\" /&amp;gt;\n";
- echo "&amp;lt;param name=\"wmode\" value=\"transparent\"&amp;gt;\n";
- echo "&amp;lt;embed src=\"$rv_value\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" ";
- echo "allowfullscreen=\"true\" allowscriptaccess=\"always\" ";
- echo $rv_flashvar2;
- echo "width=\"$RV_width\" height=\"$RV_height\"&amp;gt;\n";
- echo "&amp;lt;/embed&amp;gt;\n";
- echo "&amp;lt;/object&amp;gt;\n\n";
- }
- if(!empty($rv_cap)){echo "&amp;lt;p class=\"VideoCaption\"&amp;gt;$rv_cap&amp;lt;/p&amp;gt;\n\n";};
- 
- 
- echo $after_widget;
- }
-</code></pre></div></div>
-
-<p>After these changes random HTM5 videos are loaded without problems.</p>
-
-<h2 id="plugin-support">Plugin support</h2>
-
-<p>By the way, I tried to contact the plugin developer to include these changes and he said he had not time for doing it. It a shame it’s not open-sourced so somebody else can maintain the code.</p>
+        
 
         
       </section>
@@ -447,7 +421,15 @@
     
       
       
-      <a href="https://lgallardo.com/categories/programming" class="page__taxonomy-item" rel="tag">Programming</a>
+      <a href="https://lgallardo.com/categories/php" class="page__taxonomy-item" rel="tag">PHP</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/programming" class="page__taxonomy-item" rel="tag">Programming</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/wordpress" class="page__taxonomy-item" rel="tag">WordPress</a>
     
     </span>
   </p>
@@ -513,7 +495,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
 </a>
       
     </h2>
@@ -527,7 +509,6 @@
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
 </p>
   </article>
 </div>
@@ -541,7 +522,34 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
 </a>
       
     </h2>
@@ -555,8 +563,6 @@
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
-
 </p>
   </article>
 </div>
@@ -570,7 +576,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
+        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
 </a>
       
     </h2>
@@ -584,41 +590,13 @@
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powkiddy, a...</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:
-
 </p>
   </article>
 </div>
         
       </div>
     </div>
+  
   
 </div>
 
