@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="Debian">
-
-<meta property="article:section" content="Java">
-
 
 
 
@@ -368,14 +364,69 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="https://farm3.staticflickr.com/2520/3945758216_56dd43253e_o.png" /></center>
+<p><br />
+If you need to install Oracle Java on Debian, you can follow the next steps once the binary file had been downloaded from <a href="http://www.oracle.com/technetwork/java/javase/downloads/" target="_blank">Oracles’s download page</a>:</p>
+
+<p>Once it has been downloaded, proceed to extract it into the <em>/opt</em> directory:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># tar xvzf jdk-8u45-linux-x64.tar.gz
+</code></pre></div></div>
+
+<p>First let’s check the current java version:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># java -version
+</code></pre></div></div>
+
+<p>java version “1.7.0_79”
+OpenJDK Runtime Environment (IcedTea 2.5.5) (7u79-2.5.5-0ubuntu0.14.04.2)
+OpenJDK 64-Bit Server VM (build 24.79-b02, mixed mode<span style="line-height: 1.5;">)</span></p>
+
+<p>Here you can see it points to OpenJDK’s 1.7.0_79 version. Now let’s add a path to the version to use:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_45/bin/java 1
+</code></pre></div></div>
+
+<p>Last line adds the <em>/opt/jdk1.8.0_45/bin/java</em> path to <em>/usr/bin/java java</em>  binary, in other words, it creates a symbolic link to use in case that options is chosen. Let’s set an alternative that points to the new path:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update-alternatives --config java
+ 
+  Selection Path Priority Status
+------------------------------------------------------------
+* 0 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java 1071 auto mode
+ 1 /opt/jdk1.8.0_45/bin/java 1 manual mode
+ 2 /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java 1061 manual mode
+ 3 /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java 1071 manual mode
+
+ 
+ Enter to keep the current selection[+], or type selection number:
+ 
+</code></pre></div></div>
+
+<p>After choosing the option 1, check the <em>java</em> version one more time:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># java -version
+
+java version "1.8.0_45"
+Java(TM) SE Runtime Environment (build 1.8.0_45-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)
+</code></pre></div></div>
+
+<p>Now the binary points to the Oracle’s version. You can check it with the symbolic links:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ls -l /usr/bin/java
+lrwxrwxrwx 1 root root 22 jun  9  2014 /usr/bin/java -&gt; /etc/alternatives/java
+
+# ls -l /etc/alternatives/java
+lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt; /opt/jdk1.8.0_45/bin/java
+</code></pre></div></div>
 
         
       </section>
@@ -418,14 +469,6 @@
   <p class="page__taxonomy">
     <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
-    
-      
-      
-      <a href="https://lgallardo.com/categories/debian" class="page__taxonomy-item" rel="tag">Debian</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/java" class="page__taxonomy-item" rel="tag">Java</a><span class="sep">, </span>
     
       
       
@@ -493,9 +536,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -508,8 +559,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -520,36 +570,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -562,8 +593,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -574,9 +604,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -589,8 +627,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

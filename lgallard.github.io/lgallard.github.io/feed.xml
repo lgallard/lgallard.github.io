@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-09T19:11:25-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow</title><link href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="alternate" type="text/html" title="Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow" /><published>2025-06-07T19:00:00-05:00</published><updated>2025-06-07T19:00:00-05:00</updated><id>https://lgallardo.com/2025/06/08/coding-agents-bugbot</id><content type="html" xml:base="https://lgallardo.com/2025/06/08/coding-agents-bugbot/">&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png&quot; alt=&quot;BugBot and Copilot: AI Reviewers&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-11T19:44:44-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Exploring Cursor Background Agents: A Hands-On Experience with Terraform Automation</title><link href="https://lgallardo.com/2025/06/11/cursor-background-agents-experience/" rel="alternate" type="text/html" title="Exploring Cursor Background Agents: A Hands-On Experience with Terraform Automation" /><published>2025-06-10T19:00:00-05:00</published><updated>2025-06-10T19:00:00-05:00</updated><id>https://lgallardo.com/2025/06/11/cursor-background-agents-experience</id><content type="html" xml:base="https://lgallardo.com/2025/06/11/cursor-background-agents-experience/">&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-experience.png&quot; alt=&quot;Cursor Background Agents Experience&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The other day, someone at work commented that Cursor also has background agents. I decided to give it a try with one of my own repos (&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-aws-ecr&lt;/code&gt;) and this is the whole experience.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;First off, I had to disable the privacy mode in Cursor. This is a requirement in the preview phase (it may change in the future?), but Cursor claims all environments are isolated from each other.&lt;/p&gt;
+
+&lt;p&gt;To start working with the agent, I asked Copilot to suggest improvements to the Terraform module (let’s say it was the “planning” phase), then I did the same in Cursor and asked it to compare the result (I copied &amp;amp; pasted it from Copilot) and to create the issues with the MCP server for GitHub.&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-the-environment&quot;&gt;Setting Up the Environment&lt;/h2&gt;
+
+&lt;p&gt;To start working with the Background Agents, in Cursor I clicked on the “Show Background History” icon. This led me to the install app &amp;amp; configuration process for the machine that will be running the agents for this repo. It opens a cursor-alike interface where we can interact while setting up the environment.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents.jpg&quot; alt=&quot;Show Background History&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-new.jpg&quot; alt=&quot;New Agents&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here I asked to validate linters and tools needed for the project. After some issues with Python (now modules have to be installed in envs instead of the OS) which I fixed with the very same Cursor interface, I had my machine ready to launch background agents.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-env.jpg&quot; alt=&quot;Background Agents Machibe Agents&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;first-agent-launch&quot;&gt;First Agent Launch&lt;/h2&gt;
+
+&lt;p&gt;When launching the first agent, I was warned about the fact agents need setting a base-price 😅. I set $20 for testing and any future use.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-price.jpg&quot; alt=&quot;Background Agents Machine Agents&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I instructed the agent to start working on &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/issues/33&quot;&gt;issue #33&lt;/a&gt;. Once finished I saw the green checked mark, meaning the agent had finished (after 3 min).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-ready.jpg&quot; alt=&quot;Cursor Background Agent done&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I opened the agent and saw the result. It also suggested to create a PR, which I accepted.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-PR.jpg&quot; alt=&quot;Cursor Background Agents PR&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The PR was created, however my only complaint was that the description was not completed and the title didn’t follow the release-please format (I realized it when I merged the PR and the GH action didn’t create a chore PR for the release). I completed the description using GitHub Copilot’s Summary option. Btw, the PR was co-authored with Cursor.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agants-coauthored.jpg&quot; alt=&quot;Cursor Background Agents - coauthor&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cost-analysis&quot;&gt;Cost Analysis&lt;/h2&gt;
+
+&lt;p&gt;Finally I checked the cost of the test: &lt;strong&gt;$4.63 for an easy PR&lt;/strong&gt; 🤔. We have to take into account that Background Agents only use MAX models at the moment.&lt;/p&gt;
+
+&lt;h2 id=&quot;key-takeaways&quot;&gt;Key Takeaways&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Setup Process&lt;/strong&gt;: The environment configuration is straightforward, though some Python environment issues needed resolving&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Speed&lt;/strong&gt;: The agent completed a simple task in just 3 minutes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Quality&lt;/strong&gt;: The code changes were solid, but PR formatting could be improved&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cost&lt;/strong&gt;: At $4.63 for a simple PR, costs can add up quickly with MAX models&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Integration&lt;/strong&gt;: Good GitHub integration, though release-please formatting wasn’t followed&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Co-authoring&lt;/strong&gt;: Nice touch that PRs are co-authored with Cursor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I just wanted to share this if anyone is considering to use Cursor Background Agents. The experience was generally positive - the agents work efficiently and produce quality results. However, consider the cost implications and be prepared for some setup requirements like disabling privacy mode.&lt;/p&gt;
+
+&lt;p&gt;The technology shows promise for automating routine development tasks, but human oversight is still needed for proper PR formatting and adherence to project-specific conventions.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This experience was conducted during Cursor’s preview phase. Features and requirements may change as the product evolves.&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Luis Gallardo</name></author><category term="AI Tools" /><category term="Terraform" /><category term="Automation" /><summary type="html">I decided to give Cursor Background Agents a try with one of my own repos (terraform-aws-ecr) after hearing about their capabilities. Here's the whole experience...</summary></entry><entry><title type="html">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow</title><link href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="alternate" type="text/html" title="Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow" /><published>2025-06-07T19:00:00-05:00</published><updated>2025-06-07T19:00:00-05:00</updated><id>https://lgallardo.com/2025/06/08/coding-agents-bugbot</id><content type="html" xml:base="https://lgallardo.com/2025/06/08/coding-agents-bugbot/">&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png&quot; alt=&quot;BugBot and Copilot: AI Reviewers&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently, while working on my Terraform modules, I had an idea: &lt;strong&gt;What about using BugBot to check Copilot’s Coding Agents?&lt;/strong&gt; With Copilot Coding Agents already helping automate PRs and refactors, I decided to give BugBot a try as an additional reviewer.&lt;/p&gt;
 
@@ -1063,59 +1126,4 @@ EOF
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Github&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/ecr/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">I share here another Terraform module I published as open source code, which allows you to create registries in AWS ECR.</summary></entry><entry><title type="html">Mouse Logitech MX Anywhere 2s Flounder on Linux</title><link href="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" rel="alternate" type="text/html" title="Mouse Logitech MX Anywhere 2s Flounder on Linux" /><published>2020-08-05T19:00:00-05:00</published><updated>2020-08-05T19:00:00-05:00</updated><id>https://lgallardo.com/2020/08/06/logitech-mx-anywhere-2s-flounder-on-linux</id><content type="html" xml:base="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/">&lt;center&gt;&lt;img src=&quot;/images/logitech-mouse.jpg&quot; alt=&quot;Logitech Mx Anywhere 2s Flounder on Linux&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.&lt;/p&gt;
-
-&lt;p&gt;When you connect it on Linux, the mouse works the first time without doing any magic. The two buttons on the right side of the mouse are configured for Forward and Back in the browser and any application in general.&lt;/p&gt;
-
-&lt;p&gt;For Windows and for Mac there’s a mouse software that allows you to customize these buttons (with gesture support as well), but for Linux that software is not available.&lt;/p&gt;
-
-&lt;p&gt;If you want to map these buttons in Linux you should use something like &lt;strong&gt;xbindkeys&lt;/strong&gt; or &lt;strong&gt;xmodmap&lt;/strong&gt;. Here I explain what I had to do to get it working the way I wanted.&lt;/p&gt;
-
-&lt;h2 id=&quot;1-install-the-necessary-software&quot;&gt;1. Install the necessary software&lt;/h2&gt;
-
-&lt;p&gt;You will need &lt;strong&gt;xbindkeys&lt;/strong&gt; for maping the  keys, and &lt;strong&gt;xdotool&lt;/strong&gt; to execute keyboard actions.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;apt install xbindkeys xdotool&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;2-detecting-the-button-keys&quot;&gt;2. Detecting the button keys&lt;/h2&gt;
-
-&lt;p&gt;You can find out what keys are associated to your mouse using &lt;strong&gt;xev&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xev | grep button&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;This will open a small white window which is where you should place the mouse pointer and press the buttons to obtain the values associated with each key:&lt;/p&gt;
-
-&lt;center&gt;&lt;img src=&quot;/images/xev.jpg&quot; alt=&quot;xev&quot; width=&quot;340&quot; height=&quot;340&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;I tried all the buttons and their corresponding values are shown above, in the first image of this post above. In total there are 9 possible buttons / keys.&lt;/p&gt;
-
-&lt;h2 id=&quot;3-buttons-mapping&quot;&gt;3. Buttons mapping&lt;/h2&gt;
-
-&lt;p&gt;You need to create a file for &lt;strong&gt;xbindkeys&lt;/strong&gt; with the default options, which in fact is a file with some commented examples:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;xbindkeys --defaults &amp;gt; ~/.xbindkeysrc&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;And then add the mapping you want. In my case I added the following in the &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.xbindkeysrc&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;guake&quot;
-  b:9
-
-&quot;xdotool key Super_L&quot;
-  b:8
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally you must run the command &lt;code class=&quot;highlighter-rouge&quot;&gt;xbindkeys&lt;/code&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$ xbindkeys&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Now pressing button 9 (Forward) will run &lt;strong&gt;Guake&lt;/strong&gt;, while if I press button 8 (Back) it strokes the &lt;code class=&quot;highlighter-rouge&quot;&gt;Super_L&lt;/code&gt; key (Start key or also badly known as the Windows key).&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.logitech.com/en-roeu/product/mx-anywhere-2s-flow.910-005153.html#specs&quot; target=&quot;_blank&quot;&gt;Logitech MX Anywhere 2S  &lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/101105/how-to-assign-back-and-forward-actions-to-logitech-anywhere-mouse-mx-horizo&quot; target=&quot;_blank&quot;&gt;How to assign “back” and “forward” actions to Logitech Anywhere Mouse MX’ horizontal scroll wheel?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Xbindkeys#Identifying_keycodes&quot; target=&quot;_blank&quot;&gt;Xbindkeys (ArchLinux)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">I bought a Logitech Mx Anywhere 2s Flounder mouse too free up a USB port, and be able to configure more buttons compared to the mouse I had.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">I share here another Terraform module I published as open source code, which allows you to create registries in AWS ECR.</summary></entry></feed>

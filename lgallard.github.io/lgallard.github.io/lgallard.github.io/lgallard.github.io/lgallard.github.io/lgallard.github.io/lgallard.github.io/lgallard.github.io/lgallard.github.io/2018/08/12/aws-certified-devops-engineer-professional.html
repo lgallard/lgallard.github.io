@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
 
 
 
@@ -364,14 +362,61 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/AWS_Certified_DevOps_Engineer_Professional.jpg" alt="AWS CSA" width="500" height="386" /></center>
+<p><br />
+I recently approved the <code class="highlighter-rouge">AWS Certified DevOps Engineer - Professional</code> certification and wanted to leave my comments on the exam:</p>
+
+<p>It was 80 questions to answer in 170 minutes. This exam is the most difficult because you need to know about the previous contents of Developer and SysOps certifications. You generally need to know AWS technology and when to use it from the DevOps perspective for deploying applications on AWS. In particular, the key topics here are CloudFormation, OpsWorks, Elastic Beanstalk and Auto Scaling Groups.</p>
+
+<h1 id="cloudformation">CloudFormation</h1>
+<p>At a minimum, you should know how a CloudFormation template is composed, how to update a stack, how to prevent it from being updated, difference between WaitCondition and Creation Policy, how to rolling update ASGs, resource types.</p>
+
+<h1 id="opsworks">OpsWorks</h1>
+<p>Here you should be clear about the concepts of Stack, Layer, and Application. Knowing what Lyfecyles events are and how or when they run. It is of the utmost importance to know the “deployment” command and to note that it is not only useful for deploying applications. It’s also important to remember that with OpsWorks you can add existing infrastructure to stacks (which you can’t do in CloudFormation or Elastic Beanstalk) and that you can only associate one RDS instance per stack.</p>
+
+<h1 id="elastic-beanstalk">Elastic Beanstalk</h1>
+<p>Understand the use cases of the service, remember that you can use Docker in EB, so you can practically run anything in containers. Learn how to create settings from the .ebextenstions, as well as how to save settings and precedence between different ways to do so. Important that you know the types of deployment that you can perform with EB, and in particular that it is one of those that allows you to make Blue/Green deployments integrated into the service, but that on the contrary you must use Route 53 if you want to make an A/B deployment.</p>
+
+<h1 id="auto-scaling-groups">Auto Scaling Groups</h1>
+<p>Regarding Auto Scaling Groups you should know the Termination policies, and which ones are useful for deploying applications. Studies Lifecycle Hooks and in particular all states through which an instance passes, and use cases when it is in <code class="highlighter-rouge">pending: wait</code> and <code class="highlighter-rouge">terminating: wait</code>.</p>
+
+<h1 id="the-remaining">The remaining</h1>
+<p>The rest of the exam focuses on evaluating your knowledge of deployment types on AWS, as well as topics for Developer and SysOps certifications, such as DynamoDB or CloudWatch.</p>
+
+<h1 id="my-tips-for-saving-time-on-this-exam-are">My tips for saving time on this exam are:</h1>
+<ul>
+  <li>Answer the easy question quick, don’t stay long thinking whether is right answer because probably it is.</li>
+  <li>Only mark for review those question where you really have a doubt, so you can check them later and if there’s time left be able to review them all.</li>
+  <li>Think it is a Amazon certification and in that matter always wonder what Amazon service to use.</li>
+  <li>Take into account that it’s a Amazon certification and in that matter always think what Amazon service to use.</li>
+  <li>Discard things that can be done at the OS level if an Amazon service provides it, and only consider it when there is no other option.</li>
+  <li>Whenever you read scalable think of SQS / DynamoDB, cost-saving = S3 / S3 RRS, and so on.</li>
+</ul>
+
+<p>If you are interested in this certification and I recommend you some links:</p>
+
+<p><strong>Online courses</strong></p>
+
+<ul>
+  <li><a href="http://linuxacademy.com" target="_blank">Linux Academy</a></li>
+  <li><a href="https://acloud.guru/learn/aws-certified-devops-engineer-professional" target="_blank">A Cloud Guru</a></li>
+  <li><a href="https://cloudacademy.com/aws-certifications-training/" target="_blank">Cloud Academy</a></li>
+</ul>
+
+<p><strong>Documentación de AWS</strong></p>
+
+<ul>
+  <li><a href="https://aws.amazon.com/whitepapers/" target="_blank">Whitepapers</a></li>
+  <li><a href="https://aws.amazon.com/documentation/" target="_blank">Documentation</a></li>
+  <li><a href="https://aws.amazon.com/faqs/" target="_blank">FAQs</a></li>
+</ul>
 
         
       </section>
@@ -410,10 +455,6 @@
   <p class="page__taxonomy">
     <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
-    
-      
-      
-      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
     
       
       
@@ -481,9 +522,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -496,8 +545,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -508,36 +556,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -550,8 +579,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -562,9 +590,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -577,8 +613,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

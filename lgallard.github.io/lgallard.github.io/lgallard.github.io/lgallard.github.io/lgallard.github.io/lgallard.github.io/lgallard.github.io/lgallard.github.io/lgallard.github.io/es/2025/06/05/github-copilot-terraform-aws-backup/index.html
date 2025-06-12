@@ -96,14 +96,6 @@
 
 <meta property="article:section" content="Automatización">
 
-<meta property="article:section" content="GitHub">
-
-<meta property="article:section" content="Copilot">
-
-<meta property="article:section" content="Terraform">
-
-<meta property="article:section" content="AWS">
-
 
 
 
@@ -379,7 +371,7 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
@@ -387,10 +379,6 @@
 
       <section class="page__content" itemprop="text">
         <p><img src="/assets/images/copilot-coding-agent.png" alt="GitHub Copilot Background Agents" style="display:block; margin-left:auto; margin-right:auto;" /></p>
-
-<p>–</p>
-
-<p><img src="/assets/images/copilot-coding-agent.png" alt="GitHub Copilot Background Agents" style="display:block; margin-left:auto; margin-right:auto;" /></p>
 
 <p>Recientemente tuve la oportunidad de probar los GitHub Copilot Coding Agents (Background Agents) en uno de mis proyectos personales: el módulo <a href="https://github.com/lgallard/terraform-aws-backup">terraform-aws-backup</a>. Este módulo está diseñado para ayudar a los usuarios a gestionar planes de AWS Backup usando Terraform.</p>
 
@@ -409,6 +397,33 @@
 <p><img src="/assets/images/copilot-pr.png" alt="Conversación en el PR de Copilot" /></p>
 
 <h2 id="puntos-destacados">Puntos destacados</h2>
+
+<ul>
+  <li><strong>Automatización de extremo a extremo:</strong> Casi todo el proceso ocurrió dentro de GitHub, con mínima intervención humana.</li>
+  <li><strong>Rapidez:</strong> Todo el proceso de refactor y revisión tomó unos 35 minutos, de los cuales Copilot realizó la mayor parte en solo 13 minutos.</li>
+  <li><strong>Flexibilidad de dispositivos:</strong> Gestioné el proceso desde mi iPad mini usando Arc, sin necesidad de un IDE local.</li>
+  <li><strong>Retroalimentación iterativa:</strong> Copilot manejó varias rondas de feedback, incluyendo reportes de errores y ajustes de código.</li>
+</ul>
+
+<h2 id="desventajas">Desventajas</h2>
+
+<ul>
+  <li><strong>Selección de modelo:</strong> No había opción para elegir qué modelo de IA usaba Copilot para la tarea.</li>
+  <li><strong>Pruebas necesarias:</strong> Como con cualquier generación automática de código, fue necesario probar y validar manualmente antes de hacer merge.</li>
+  <li><strong>Manejo de imágenes:</strong> Copilot no pudo leer imágenes pegadas en los comentarios, así que los errores debían proporcionarse en texto.</li>
+</ul>
+
+<h2 id="conclusión">Conclusión</h2>
+
+<p>GitHub Copilot Background Agents demostró ser una herramienta valiosa para tareas automatizadas y desatendidas como el refactor de módulos. Aunque es importante probar y validar el código generado, Copilot puede acelerar significativamente los flujos de trabajo de desarrollo, especialmente para infraestructura como código.</p>
+
+<h2 id="referencias">Referencias</h2>
+
+<ul>
+  <li><a href="https://github.com/lgallard/terraform-aws-backup">terraform-aws-backup module en GitHub</a></li>
+  <li><a href="https://registry.terraform.io/modules/lgallard/backup/aws">terraform-aws-backup module en Terraform Registry</a></li>
+  <li><a href="https://docs.github.com/en/copilot">GitHub Copilot Background Agents</a></li>
+</ul>
 
         
       </section>
@@ -466,23 +481,7 @@
     
       
       
-      <a href="https://lgallardo.com/es/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/copilot" class="page__taxonomy-item" rel="tag">Copilot</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/github" class="page__taxonomy-item" rel="tag">GitHub</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/nube" class="page__taxonomy-item" rel="tag">Nube</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+      <a href="https://lgallardo.com/es/categories/nube" class="page__taxonomy-item" rel="tag">Nube</a>
     
     </span>
   </p>
@@ -515,7 +514,7 @@
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/_i18n/es/2009-03-23-apt-vs-aptitude.md/" class="pagination--pager" title="
+      <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" class="pagination--pager" title="Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 ">Next</a>
     
   </nav>
@@ -546,9 +545,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -561,8 +568,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -573,9 +579,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -585,10 +599,10 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
   </article>
 </div>
@@ -600,9 +614,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
 </a>
       
     </h2>
@@ -615,8 +637,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         
@@ -627,9 +648,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/OctoPrint.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2022/09/25/octoprint-multiple-printers" rel="permalink">OctoPrint con múltiples impresoras 3D
 </a>
       
     </h2>
@@ -639,11 +668,10 @@
 
 
 
-  1 minute read
+  12 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre OctoPrint con múltiples impresoras 3D en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraf...</p>
   </article>
 </div>
         
