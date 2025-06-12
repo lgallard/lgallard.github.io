@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:">
+<meta name="description" content="Read about How to get the latest Ubuntu AMI on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
@@ -33,44 +33,33 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="lgallardo.com">
-<meta property="og:title" content="How to get the latest Ubuntu AMI">
+<meta property="og:title"
+  content="How to get the latest Ubuntu AMI">
+<meta property="og:type" content="article">
 
 
-  <link rel="canonical" href="https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">
-  <meta property="og:url" content="https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">
-
-
-
-  <meta property="og:description" content="Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:">
-
-
-
-  <meta name="twitter:site" content="@lgallard">
-  <meta name="twitter:title" content="How to get the latest Ubuntu AMI">
-  <meta name="twitter:description" content="Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:">
-  <meta name="twitter:url" content="https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-  
-
-  
-    <meta name="twitter:creator" content="@Luis Gallardo">
-  
+<link rel="canonical" href="https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">
+<meta property="og:url" content="https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">
 
 
 
-  
-
-  
+<meta property="og:description" content="Read about How to get the latest Ubuntu AMI on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="How to get the latest Ubuntu AMI">
+<meta name="twitter:description" content="Read about How to get the latest Ubuntu AMI on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
+<meta name="twitter:url" content="https://lgallardo.com/2018/01/25/how-to-get-the-latest-ubuntu-ami/">
 
 
-  <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-01-24T18:00:10-06:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/luis.jpg">
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
 
 
 
@@ -79,7 +68,54 @@
 
 
 
-  <script type="application/ld+json">
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/luis.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2018-01-24T18:00:10-06:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="AWS">
+
+<meta property="article:tag" content="Packer">
+
+<meta property="article:tag" content="Ubuntu">
+
+
+<meta property="article:section" content="Infra">
+
+<meta property="article:section" content="AWS">
+
+<meta property="article:section" content="Packer">
+
+<meta property="article:section" content="Ubuntu">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
     {
       "@context" : "http://schema.org",
       "@type" : "Person",
@@ -95,7 +131,6 @@
 
 
 <!-- end SEO -->
-
 <link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -173,6 +208,28 @@
 
 
     
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" "
+>
+  
+    <img src="https://lgallardo.com/assets/images/luis.jpg" alt="How to get the latest Ubuntu AMI" class="page__hero-image">
+  
+  
+</div>
+
+
 
 
 
@@ -300,7 +357,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="How to get the latest Ubuntu AMI">
-    <meta itemprop="description" content="Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:">
+    <meta itemprop="description" content="Read about How to get the latest Ubuntu AMI on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
     <meta itemprop="datePublished" content="January 25, 2018">
     
 
@@ -315,71 +372,14 @@
 
 
 
-  1 minute read
+  less than 1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <center><img src="/images/packer.jpg" alt="Logo Terraform" /></center>
-<p><br />
-Recently I needed to get the latest AMI for Ubuntu Trusty 14.04 Ubuntu with ENA support enabled to build an image using Packer so I did a research and found a way to do it using the AWS CLI.  All those AMIs can be found listed on a page called ‘Ubuntu EC2 AMI Locator’. These approaches worked but then I wanted to avoid humans errors therefore I kept on doing more research and found a way to do it directly with Packer’s templates. Below I show both ways:</p>
-
-<h1 id="using-the-aws-cli">Using the AWS CLI</h1>
-
-<p>My first approach was to use the the AWS CLI as shown below:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws ec2 describe-images \
---owners 099720109477 \
---filters Name=root-device-type,Values=ebs \
-Name=architecture,Values=x86_64 \
-Name=name,Values='*hvm-ssd/ubuntu-trusty-14.04*' \
-Name=ena-support,Values=true \
---query 'sort_by(Images, &amp;Name)[-1].[ImageId,CreationDate]' \
---output text --region us-east-1
-
-ami-f0f8d695	2017-11-21T15:21:29.000Z
-
-</code></pre></div></div>
-
-<p>In this example, 099720109477 stands for Ubuntu’s owner ID.</p>
-
-<h1 id="ubuntu-amazon-ec2-ami-locator">Ubuntu Amazon EC2 AMI Locator</h1>
-
-<p>I also ran into the <a href="https://cloud-images.ubuntu.com/" target="_blank">Amazon EC2 AMI Locator</a> which can be a useful resource, specially if you dont have access to the AWS CLI.</p>
-
-<h1 id="packer-source-ami-filter">Packer source ami filter:</h1>
-
-<p>With Packer you can use the <a href="https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter" target="_blank"><em>source_ami_filter</em> </a> passing similar parameters like in the AWS CLI:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
-  "builders": [
-    {
-      "type": "amazon-ebs",
-      "region": "us-east-1",
-      "instance_type": "c3.xlarge",
-      "ena_support": true,
-      "source_ami_filter": {
-        "filters": {
-        "virtualization-type": "hvm",
-        "name": "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
-        "root-device-type": "ebs"
-        },
-        "owners": ["099720109477"],
-        "most_recent": true
-      },
-    }
-  ]
-}
-</code></pre></div></div>
-
-<p><em>References:</em></p>
-<ul>
-  <li><a href="https://gist.github.com/vancluever/7676b4dafa97826ef0e9" target="_blank">Find the most recent Ubuntu AMI using aws-cli</a></li>
-  <li><a href="https://cloud-images.ubuntu.com/" target="_blank">Amazon EC2 AMI Locator</a></li>
-  <li><a href="https://www.packer.io/docs/builders/amazon-ebs.html#source_ami_filter">source_ami_filter</a> {:target=”_blank”}</li>
-</ul>
+        
 
         
       </section>
@@ -429,7 +429,19 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
     
       
       
-      <a href="https://lgallardo.com/categories/infra" class="page__taxonomy-item" rel="tag">Infra</a>
+      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/infra" class="page__taxonomy-item" rel="tag">Infra</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/packer" class="page__taxonomy-item" rel="tag">Packer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/ubuntu" class="page__taxonomy-item" rel="tag">Ubuntu</a>
     
     </span>
   </p>
@@ -495,7 +507,7 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
 </a>
       
     </h2>
@@ -509,7 +521,6 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
 </p>
   </article>
 </div>
@@ -523,7 +534,34 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
 </a>
       
     </h2>
@@ -537,8 +575,6 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
-
 </p>
   </article>
 </div>
@@ -552,7 +588,7 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
+        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
 </a>
       
     </h2>
@@ -566,41 +602,13 @@ ami-f0f8d695	2017-11-21T15:21:29.000Z
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powkiddy, a...</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:
-
 </p>
   </article>
 </div>
         
       </div>
     </div>
+  
   
 </div>
 

@@ -1,103 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2024-05-27T16:43:48-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Batocera &amp;amp; iPhone hotspot</title><link href="https://lgallardo.com/es/2024/05/27/batocera-iphone-hotspot/" rel="alternate" type="text/html" title="Batocera &amp; iPhone hotspot" /><published>2024-05-26T19:00:00-05:00</published><updated>2024-05-26T19:00:00-05:00</updated><id>https://lgallardo.com/es/2024/05/27/batocera-iphone-connection</id><content type="html" xml:base="https://lgallardo.com/es/2024/05/27/batocera-iphone-hotspot/">&lt;p&gt;&lt;img src=&quot;/assets/images/batocera.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-En mi post anterior, mencioné que estoy usando la consola portátil Anbernic 35xxh para retrogaming. Este dispositivo ofrece un formato agradable, horizontal, compacto y práctico, lo que lo hace perfecto para jugar en cualquier lugar. Además, destaqué cómo &lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt; mejora la experiencia de juego en general. Proporciona una interfaz de usuario mucho mejor y una integración fantástica con Retroarch, elevando el disfrute de los juegos clásicos.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-06-05T06:45:33-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle></subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Uso de GitHub Copilot Background Agents para refactorizar terraform-aws-backup</title><link href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="alternate" type="text/html" title="Uso de GitHub Copilot Background Agents para refactorizar terraform-aws-backup" /><published>2025-06-04T19:00:00-05:00</published><updated>2025-06-04T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup</id><content type="html" xml:base="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/">&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-coding-agent.png&quot; alt=&quot;GitHub Copilot Background Agents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Según se describe en la página principal del proyecto, RetroArch es una interfaz para emuladores, motores de juegos y reproductores multimedia, que te permite jugar a juegos clásicos en una amplia gama de dispositivos. Estos incluyen el Anbernic 35xxh, PS Vita, Nintendo 3DS o incluso una computadora.&lt;/p&gt;
+&lt;p&gt;Recientemente tuve la oportunidad de probar los GitHub Copilot Coding Agents (Background Agents) en uno de mis proyectos personales: el módulo &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup&lt;/a&gt;. Este módulo está diseñado para ayudar a los usuarios a gestionar planes de AWS Backup usando Terraform.&lt;/p&gt;
 
-&lt;p&gt;RetroArch también ofrece varias características que no están disponibles en las consolas originales. Por ejemplo, te permite guardar estados de juego para NES, SNES, GBA y más. Además, puedes configurar una cuenta de RetroAchievements y mejorar tu experiencia de juego con logros creados por la comunidad, similares a los que se encuentran en consolas modernas como Xbox o PlayStation.&lt;/p&gt;
+&lt;h2 id=&quot;el-problema&quot;&gt;El problema&lt;/h2&gt;
 
-&lt;p&gt;Para poder disfrutar de estas funcionalidades de Retroachievements debestar en línea en todo momento. Jugar en la Anbernic 35xxh en casa conectado a Wi-Fi es genial y funciona a la perfección; sin embargo, cuando estás en la calle hay algunos desafíos a tomar en cuenta. Por un lado, tienes que cambiar entre el Wi-Fi de tu casa y una conexión de hotspot en tu teléfono, pero Batocera no ofrece una lista de conexiones para elegir, al menos desde la interfaz de usuario. Por otro lado, aunque puedes establecer una conexión con tu teléfono, podría perderse durante el juego debido a la inactividad del tráfico, como tiende a pasar en el iPhone.&lt;/p&gt;
+&lt;p&gt;Un usuario abrió &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/issues/114&quot;&gt;un issue&lt;/a&gt; solicitando soporte para múltiples planes de backup por vault. Esto requería un refactor importante del módulo, ya que previamente solo soportaba un plan por vault. Decidí asignar el issue a Copilot para ver cómo manejaba un refactor real de infraestructura como código (IaC).&lt;/p&gt;
 
-&lt;p&gt;Para abordar el primer problema, investigué un poco y encontré un &lt;a href=&quot;https://www.reddit.com/r/batocera/comments/10db9cs/does_batocera_support_saving_multiple_wifi_points/&quot; target=&quot;_blank&quot;&gt;artículo en Reddit&lt;/a&gt; que sugiere una solución que básicamente es que existe una configuración que puedes usar para especificar una segunda (e incluso una tercera) conexión. Para hacer esto, necesitas conectar tu tarjeta SD a una computadora, editar el archivo de configuración de Batocera llamado &lt;code class=&quot;highlighter-rouge&quot;&gt;batocera.conf&lt;/code&gt; ubicado en la carpeta raíz de la partición &lt;code class=&quot;highlighter-rouge&quot;&gt;SHARED&lt;/code&gt;, o en caso de que te conectes a través de SSH, se encuentra en &lt;code class=&quot;highlighter-rouge&quot;&gt;/userdata/system/batocera.conf&lt;/code&gt;. Completalo con los valores de tu Wi-Fi de casa y hotspot en la sección de red como se muestra a continuación:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-assigned-by-lgallard.png&quot; alt=&quot;Asignación del issue a Copilot&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ------------ B - Network ------------ #
+&lt;h2 id=&quot;la-solución-de-copilot&quot;&gt;La solución de Copilot&lt;/h2&gt;
 
-## Set system hostname, accessible via network share.
-system.hostname=BATOCERA
-## Wi-Fi country code (00 for World), see https://wiki.batocera.org/wifi_ssid#i_can_t_see_my_ssid_in_the_list_but_i_can_see_my_neighbor_s
-#wifi.country=FR
-## Activate Wi-Fi (0,1)
-wifi.enabled=1
-## Wi-Fi SSID (string)
-wifi.ssid=HomeWifi
-## Wi-Fi KEY (string)
-## Escape your special chars (# ; $) with a backslash. eg. $ becomes \$
+&lt;p&gt;Copilot Background Agents tomó el issue y propuso un pull request (&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/pull/115&quot;&gt;PR #115&lt;/a&gt;) que introdujo una nueva variable &lt;code class=&quot;highlighter-rouge&quot;&gt;plans&lt;/code&gt; (un mapa de mapas) para soportar múltiples planes de backup. El PR incluyó todos los cambios de código necesarios, actualizaciones de documentación y mantuvo la compatibilidad hacia atrás con el enfoque de un solo plan.&lt;/p&gt;
 
-## Secondary Wi-Fi (not configurable via the user interface)
-wifi2.ssid=iPhone
-wifi2.key=iPhonePassword*
+&lt;p&gt;Interactué con Copilot directamente desde GitHub, haciendo preguntas y solicitando cambios. Por ejemplo, verifiqué la compatibilidad hacia atrás y reporté un caso especial relacionado con la migración del estado de Terraform. Copilot respondió a mis comentarios, resolvió los problemas y actualizó el PR en consecuencia.&lt;/p&gt;
 
-## Third Wi-Fi (not configurable via the user interface)
-wifi3.ssid=HomeWifi
-wifi3.key=HomeWifiPassword*
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-pr.png&quot; alt=&quot;Conversación en el PR de Copilot&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Para resolver el segundo problema, creé un script para generar una pequeña cantidad de tráfico cada minuto haciendo ping a un servidor conocido. Esto evita que el iPhone pierda la conexión. El script necesita ser agregado a los scripts de arranque de Batocera conectándote a tu dispositivo a través de SSH y copiando el siguiente script como &lt;code class=&quot;highlighter-rouge&quot;&gt;/boot/postshare.sh&lt;/code&gt;, según lo sugiere la &lt;a href=&quot;https://wiki.batocera.org/launch_a_script&quot; target=&quot;_blank&quot;&gt;documentación de Batocera:&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;puntos-destacados&quot;&gt;Puntos destacados&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# Script to keep the network connection active only if not connected to 'HomeWifi'&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# IP to ping&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;SERVER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8
-
-&lt;span class=&quot;c&quot;&gt;# Desired network SSID&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;DESIRED_SSID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;HomeWifi&quot;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# Function to check SSID and ping/reconnect if necessary&lt;/span&gt;
-keep_network_alive&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# Get current SSID&lt;/span&gt;
-    &lt;span class=&quot;nv&quot;&gt;CURRENT_SSID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;iw dev wlan1 link | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'SSID'&lt;/span&gt; | awk &lt;span class=&quot;s1&quot;&gt;'{print $2}'&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;# Check if the current SSID is not the desired one&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$CURRENT_SSID&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESIRED_SSID&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
-        &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Not connected to &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESIRED_SSID&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;, checking internet connection...&quot;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; ping &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 1 &lt;span class=&quot;nv&quot;&gt;$SERVER&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /dev/null 2&amp;gt;&amp;amp;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
-            &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Internet connection down. Attempting to reconnect...&quot;&lt;/span&gt;
-            /sbin/ifdown wlan1 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; /sbin/ifup wlan1
-        &lt;span class=&quot;k&quot;&gt;else
-            &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Internet connection is active, but not on &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESIRED_SSID&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.&quot;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;fi
-    else
-        &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Connected to &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DESIRED_SSID&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;. No action required.&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in
-  &lt;/span&gt;start&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Starting network maintenance...&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
-      &lt;/span&gt;keep_network_alive
-      sleep 60  &lt;span class=&quot;c&quot;&gt;# Check every 60 seconds&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &amp;amp;
-    &lt;span class=&quot;p&quot;&gt;;;&lt;/span&gt;
-  stop&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Stopping network maintenance...&quot;&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;# Find the process and kill the loop&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;ps aux | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'[k]eep_network_alive'&lt;/span&gt; | awk &lt;span class=&quot;s1&quot;&gt;'{print $2}'&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;;;&lt;/span&gt;
-  restart|reload&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; stop
-    &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; start
-    &lt;span class=&quot;p&quot;&gt;;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Usage: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; {start|stop|restart}&quot;&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
-&lt;span class=&quot;k&quot;&gt;esac
-
-&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;0  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Aquí tienes que tener en cuenta que el script asume que la Wi-Fi de casa se llama “HomeWifi”. Debes ajustarlo con el nombre de tu red de casa paraq ue funcione, o mejorarlo para que se tome de forma dinámica desde el el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;batocera.conf&lt;/code&gt;, pero esto último te lo dejo a ti.&lt;/p&gt;
-
-&lt;p&gt;En resumen, con algunas configuraciones adicionales y soluciones creativas, puedes mejorar significativamente tu experiencia de retrogaming en el Anbernic 35xxh. Desde optimizar la conectividad Wi-Fi hasta asegurar que tu conexión se mantenga estable, estas modificaciones te permitirán disfrutar de tus juegos clásicos sin interrupciones. ¡Feliz retrogaming!&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Referencias&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/batocera/comments/10db9cs/does_batocera_support_saving_multiple_wifi_points/&quot; target=&quot;_blank&quot;&gt;Post en Reddit&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wiki.batocera.org/launch_a_script)&quot; target=&quot;_blank&quot;&gt;Batocera Wiki - Launch a script&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Linux" /><category term="Retroemulationetro" /><summary type="html">En mi post anterior, mencioné que estoy usando la consola portátil Anbernic 35xxh para retrogaming. Este dispositivo ofrece un formato agradable, horizontal, compacto y práctico, lo que lo hace perfecto para jugar en cualquier lugar. Además, destaqué cómo Batocera mejora la experiencia de juego en general. Proporciona una interfaz de usuario mucho mejor y una integración fantástica con Retroarch, elevando el disfrute de los juegos clásicos.</summary></entry><entry><title type="html">Anbernic 35xxH and Batocera</title><link href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="alternate" type="text/html" title="Anbernic 35xxH and Batocera" /><published>2024-05-11T19:00:00-05:00</published><updated>2024-05-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera</id><content type="html" xml:base="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/">&lt;p&gt;&lt;img src=&quot;/assets/images/anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
+  &lt;li&gt;&lt;strong&gt;Automatización de extremo a extremo:&lt;/strong&gt; Casi todo el proceso ocurrió dentro de GitHub, con mínima intervención humana.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Rapidez:&lt;/strong&gt; Todo el proceso de refactor y revisión tomó unos 35 minutos, de los cuales Copilot realizó la mayor parte en solo 13 minutos.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Flexibilidad de dispositivos:&lt;/strong&gt; Gestioné el proceso desde mi iPad mini usando Arc, sin necesidad de un IDE local.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Retroalimentación iterativa:&lt;/strong&gt; Copilot manejó varias rondas de feedback, incluyendo reportes de errores y ajustes de código.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;desventajas&quot;&gt;Desventajas&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Selección de modelo:&lt;/strong&gt; No había opción para elegir qué modelo de IA usaba Copilot para la tarea.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Pruebas necesarias:&lt;/strong&gt; Como con cualquier generación automática de código, fue necesario probar y validar manualmente antes de hacer merge.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Manejo de imágenes:&lt;/strong&gt; Copilot no pudo leer imágenes pegadas en los comentarios, así que los errores debían proporcionarse en texto.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
+
+&lt;p&gt;GitHub Copilot Background Agents demostró ser una herramienta valiosa para tareas automatizadas y desatendidas como el refactor de módulos. Aunque es importante probar y validar el código generado, Copilot puede acelerar significativamente los flujos de trabajo de desarrollo, especialmente para infraestructura como código.&lt;/p&gt;
+
+&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup module en GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot;&gt;terraform-aws-backup module en Terraform Registry&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/copilot&quot;&gt;GitHub Copilot Background Agents&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="GitHub" /><category term="Copilot" /><category term="Terraform" /><category term="AWS" /><summary type="html"></summary></entry><entry><title type="html">Anbernic 35xxH and Batocera</title><link href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="alternate" type="text/html" title="Anbernic 35xxH and Batocera" /><published>2024-05-11T19:00:00-05:00</published><updated>2024-05-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera</id><content type="html" xml:base="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/">&lt;p&gt;&lt;img src=&quot;/assets/images/anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
 Hoy en día, el mercado está inundado de una variedad de dispositivos portátiles para la emulación retro, provenientes de varias compañías chinas como &lt;a href=&quot;https://www.goretroid.com/&quot;&gt;Retroid&lt;/a&gt;, &lt;a href=&quot;https://powkiddy.com/&quot;&gt;Powkiddy&lt;/a&gt;, y &lt;a href=&quot;https://anbernic.com/&quot;&gt;Anbernic&lt;/a&gt;. Estos dispositivos varían en factores de forma, desde pantallas compactas hasta capacidades de cómputo más potentes y sistemas operativos, algunos de los cuales son de código abierto, mientras que otros son propietarios y mantenidos por los fabricantes mismos.&lt;/p&gt;
 
 &lt;p&gt;Después de ver innumerables videos en YouTube, comparar especificaciones y explorar consolas retro en AliExpress con precios inferiores a $100, me encontré con la &lt;strong&gt;Anbernic 35xxH&lt;/strong&gt;. Este modelo, con una pantalla de 3.5 pulgadas, es desarrollado por Anbernic. Es similar a la &lt;strong&gt;Anbernic 35xx Plus&lt;/strong&gt; pero tiene una orientación horizontal. El nombre del modelo ‘35xxh’ indica una pantalla de 3.5 pulgadas (‘35xx’) y una disposición horizontal (‘h’).&lt;/p&gt;

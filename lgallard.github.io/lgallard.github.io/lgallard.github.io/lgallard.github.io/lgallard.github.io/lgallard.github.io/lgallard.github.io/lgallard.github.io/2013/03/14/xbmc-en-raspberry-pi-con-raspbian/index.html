@@ -90,10 +90,6 @@
 
 <meta property="article:section" content="Linux">
 
-<meta property="article:section" content="Debian">
-
-<meta property="article:section" content="Raspberry">
-
 
 
 
@@ -375,7 +371,34 @@
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img class="aligncenter" alt="XBMC - Raspbian" src="http://farm9.staticflickr.com/8103/8557630602_ab1e337361.jpg" /></center>
+<p>If you want to install XBMC on your Raspberry Pi using  Raspbian and got dependency problems, you can download it from this repo by adding the following line to <em>/etc/apt/sources.list</em></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># XBMC Repo</span>
+deb http://archive.mene.za.net/raspbian wheezy contrib
+</code></pre></div></div>
+
+<p>Then update and install XBMC:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@raspberry:~# aptitude update
+root@raspberry:~# aptitude install xbmc
+</code></pre></div></div>
+
+<p>After that, you can start it on boot and increase the priority level by editing file <em>/etc/default/xbmc</em> with these parameters:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set this to 1 to enable startup</span>
+<span class="nv">ENABLED</span><span class="o">=</span>1&lt;/pre&gt;
+ 
+<span class="c"># The user to run XBMC as</span>
+<span class="nv">USER</span><span class="o">=</span>pi&lt;/pre&gt;
+ 
+<span class="c"># Adjust niceness of XBMC (decrease for higher priority)</span>
+<span class="nv">NICE</span><span class="o">=</span><span class="nt">-10</span>
+</code></pre></div></div>
+
+<p>Remember to disable the LXDE or XFCE start on boot (you can ue rasp-config). Enjoy it!</p>
+
+<p><strong>Reference:</strong> <a href="http://michael.gorven.za.net/raspberrypi/xbmc" target="_blank">XBMC for Raspberry Pi</a></p>
 
         
       </section>
@@ -421,15 +444,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/debian" class="page__taxonomy-item" rel="tag">Debian</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/raspberry" class="page__taxonomy-item" rel="tag">Raspberry</a>
+      <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a>
     
     </span>
   </p>
@@ -493,9 +508,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -508,8 +531,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -520,36 +542,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -562,8 +565,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -574,9 +576,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -589,8 +599,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         
