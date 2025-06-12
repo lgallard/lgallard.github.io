@@ -9,6 +9,7 @@ echo "🚀 Starting blog publishing process..."
 export JEKYLL_VERSION=3.8.6
 DEPLOY_REPO="lgallard.github.io"
 DEPLOY_BRANCH="master"
+TEMP_DEPLOY_DIR="/tmp/$(basename $PWD)_deploy_$$"
 
 # Safety check: ensure we're not running from inside the deployment directory
 CURRENT_DIR=$(basename "$PWD")
@@ -28,53 +29,51 @@ if [ ! -d "_site" ]; then
     exit 1
 fi
 
-# Step 3: Prepare deployment directory
-echo "🧹 Preparing deployment directory..."
-if [ -d "$DEPLOY_REPO" ]; then
-    echo "📂 Deployment directory exists, checking for corruption..."
-    # Check for nested directories (sign of infinite loop)
-    NESTED_COUNT=$(find $DEPLOY_REPO -name "lgallard.github.io" -type d | grep -v "^$DEPLOY_REPO$" | wc -l)
-    if [ "$NESTED_COUNT" -gt 0 ]; then
-        echo "🚨 Found $NESTED_COUNT nested directories! Removing corrupted deployment directory..."
-        rm -rf $DEPLOY_REPO
-        echo "📂 Cloning fresh deployment repository..."
-        git clone https://github.com/lgallard/lgallard.github.io.git $DEPLOY_REPO
-    else
-        cd $DEPLOY_REPO
-        
-        # Handle any uncommitted changes
-        if [ -n "$(git status --porcelain)" ]; then
-            echo "🧹 Found uncommitted changes, stashing them..."
-            git add --all
-            git stash
-        fi
-        
-        # Pull latest changes
-        git pull origin $DEPLOY_BRANCH
-        cd ..
-    fi
-else
-    echo "📂 Cloning deployment repository..."
-    git clone https://github.com/lgallard/lgallard.github.io.git $DEPLOY_REPO
-fi
-
-# Step 4: Copy built site to deployment directory
-echo "📋 Copying built site files..."
-# Double-check: remove deployment directory from _site if it somehow exists
+# Step 3: Ensure _site doesn't contain deployment directory (safety check)
 if [ -d "_site/$DEPLOY_REPO" ]; then
-    echo "🧹 Removing deployment directory from _site to prevent infinite loop..."
+    echo "🚨 WARNING: Found deployment directory in _site, removing..."
     rm -rf "_site/$DEPLOY_REPO"
 fi
-rsync -av --delete _site/ $DEPLOY_REPO/ --exclude='.git' --exclude='lgallard.github.io'
 
-# Step 5: Deploy to GitHub Pages
+# Step 4: Prepare clean deployment directory
+echo "🧹 Preparing clean deployment environment..."
+
+# Remove any existing deployment directory that might be corrupted
+if [ -d "$DEPLOY_REPO" ]; then
+    echo "🗑️ Removing existing deployment directory..."
+    rm -rf "$DEPLOY_REPO"
+fi
+
+# Create temporary deployment directory in /tmp to avoid any conflicts
+echo "📂 Creating temporary deployment workspace..."
+rm -rf "$TEMP_DEPLOY_DIR"
+mkdir -p "$TEMP_DEPLOY_DIR"
+
+# Clone repository to temporary location
+echo "📂 Cloning deployment repository to temporary location..."
+git clone https://github.com/lgallard/lgallard.github.io.git "$TEMP_DEPLOY_DIR"
+
+# Step 5: Clear existing content and copy new content
+echo "📋 Updating deployment content..."
+cd "$TEMP_DEPLOY_DIR"
+
+# Remove all content except .git directory
+find . -mindepth 1 -name '.git' -prune -o -type f -exec rm {} + 2>/dev/null || true
+find . -mindepth 1 -name '.git' -prune -o -type d -exec rm -rf {} + 2>/dev/null || true
+
+# Copy built site content (go back to original directory first)
+cd "$OLDPWD"
+cp -r _site/* "$TEMP_DEPLOY_DIR"/
+
+# Step 6: Deploy from temporary directory
 echo "🌐 Deploying to GitHub Pages..."
-cd $DEPLOY_REPO
+cd "$TEMP_DEPLOY_DIR"
 
 # Check if there are any changes
 if [ -z "$(git status --porcelain)" ]; then
     echo "✅ No changes to deploy"
-    cd ..
+    cd "$OLDPWD"
+    rm -rf "$TEMP_DEPLOY_DIR"
     exit 0
 fi
 
@@ -88,6 +87,9 @@ else
     git push origin $DEPLOY_BRANCH
 fi
 
-cd ..
+# Step 7: Cleanup
+echo "🧹 Cleaning up temporary files..."
+cd "$OLDPWD"
+rm -rf "$TEMP_DEPLOY_DIR"
 
 echo "✅ Blog published successfully!"
