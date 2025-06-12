@@ -24,7 +24,7 @@
 
 
 
-<meta name="description" content="One of the things I had to resolve was the fact that in Terraform there are configuration blocks that, depending on the options may have different parameters or may not even accept the same parameters.">
+<meta name="description" content="Read about Dynamic configuration blocks in Terraform on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
@@ -33,44 +33,33 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="lgallardo.com">
-<meta property="og:title" content="Dynamic configuration blocks in Terraform">
+<meta property="og:title"
+  content="Dynamic configuration blocks in Terraform">
+<meta property="og:type" content="article">
 
 
-  <link rel="canonical" href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">
-  <meta property="og:url" content="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">
-
-
-
-  <meta property="og:description" content="One of the things I had to resolve was the fact that in Terraform there are configuration blocks that, depending on the options may have different parameters or may not even accept the same parameters.">
-
-
-
-  <meta name="twitter:site" content="@lgallard">
-  <meta name="twitter:title" content="Dynamic configuration blocks in Terraform">
-  <meta name="twitter:description" content="One of the things I had to resolve was the fact that in Terraform there are configuration blocks that, depending on the options may have different parameters or may not even accept the same parameters.">
-  <meta name="twitter:url" content="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">
-
-  
-    <meta name="twitter:card" content="summary">
-    
-  
-
-  
-    <meta name="twitter:creator" content="@Luis Gallardo">
-  
+<link rel="canonical" href="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">
+<meta property="og:url" content="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">
 
 
 
-  
-
-  
+<meta property="og:description" content="Read about Dynamic configuration blocks in Terraform on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
 
 
 
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Dynamic configuration blocks in Terraform">
+<meta name="twitter:description" content="Read about Dynamic configuration blocks in Terraform on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
+<meta name="twitter:url" content="https://lgallardo.com/2018/07/30/dynamic-configuration-blocks-in-terraform/">
 
 
-  <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2018-07-29T19:00:00-05:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/luis.jpg">
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
 
 
 
@@ -79,7 +68,50 @@
 
 
 
-  <script type="application/ld+json">
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/luis.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2018-07-29T19:00:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="AWS">
+
+<meta property="article:tag" content="Terraform">
+
+
+<meta property="article:section" content="Cloud">
+
+<meta property="article:section" content="AWS">
+
+<meta property="article:section" content="Terraform">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
     {
       "@context" : "http://schema.org",
       "@type" : "Person",
@@ -95,7 +127,6 @@
 
 
 <!-- end SEO -->
-
 <link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -173,6 +204,28 @@
 
 
     
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero"
+  style=" "
+>
+  
+    <img src="https://lgallardo.com/assets/images/luis.jpg" alt="Dynamic configuration blocks in Terraform" class="page__hero-image">
+  
+  
+</div>
+
+
 
 
 
@@ -300,7 +353,7 @@
 
   <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Dynamic configuration blocks in Terraform">
-    <meta itemprop="description" content="One of the things I had to resolve was the fact that in Terraform there are configuration blocks that, depending on the options may have different parameters or may not even accept the same parameters.">
+    <meta itemprop="description" content="Read about Dynamic configuration blocks in Terraform on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform.">
     <meta itemprop="datePublished" content="July 30, 2018">
     
 
@@ -315,86 +368,14 @@
 
 
 
-  1 minute read
+  less than 1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        <center><img src="/images/terraform.jpg" alt="Terraform" /></center>
-<p><br />
-One of the things I had to resolve was the fact that in Terraform there are configuration blocks that, depending on the options may have different parameters or may not even accept the same parameters.</p>
-
-<p>To do that, and by following a code from a <a href="https://github.com/cloudposse/terraform-aws-codebuild" target="_blank">community module</a>, I managed to overcome this problem using <a href="https://www.terraform.io/docs/configuration/locals.html" target="_blank">Terraform’s locals values</a></p>
-
-<p>Taking an example of this we have the <code class="highlighter-rouge">artifacts</code> block of the <a href="https://www.terraform.io/docs/providers/aws/r/codebuild_project.html">Terraform aws_codebuild_project resource</a>, which may have some parameters if the type is <code class="highlighter-rouge">S3</code>, <code class="highlighter-rouge">CODEPIPELINE</code> or <code class="highlighter-rouge">NO_ARTIFACTS</code>. For example, if you define a block as follows, it will not be easy to parameterize it:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
-
-[...]
-
-  artifacts{
-      type           = "${var.codebuild_artifacts_type}"
-      location       = "${var.codebuild_artifacts_location}"
-      name           = "${var.codebuild_artifacts_name}"
-      namespace_type = "${var.codebuild_artifacts_namespace_type}"
-      packaging      = "${var.codebuild_artifacts_packaging}"
-      path           = "${var.codebuild_artifacts_path}"
-
-  }
-}
-
-</code></pre></div></div>
-
-<p>If we try to place the <code class="highlighter-rouge">NO_ARTIFACTS</code>, for example, it will fail because even if “empty” values are placed for the other parameters, these arguments are not supported. To resolve this you have to create a block definition with <code class="highlighter-rouge">locals</code> according to the type provided by <code class="highlighter-rouge">type</code> and use this as an index:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
-
-[...]
-
-  artifacts = ["${local.codebuild_artifacts}"]
-
-}
-
-locals {
-  codebuild_artifacts_def = {
-    "S3" = [{
-      type           = "${var.codebuild_artifacts_type}"
-      location       = "${var.codebuild_artifacts_location}"
-      name           = "${var.codebuild_artifacts_name}"
-      namespace_type = "${var.codebuild_artifacts_namespace_type}"
-      packaging      = "${var.codebuild_artifacts_packaging}"
-      path           = "${var.codebuild_artifacts_path}"
-    }]
-
-    "CODEPIPELINE" = [{
-      type           = "${var.codebuild_artifacts_type}"
-      location       = "${var.codebuild_artifacts_location}"
-      name           = "${var.codebuild_artifacts_name}"
-      namespace_type = "${var.codebuild_artifacts_namespace_type}"
-      packaging      = "${var.codebuild_artifacts_packaging}"
-      path           = "${var.codebuild_artifacts_path}"
-    }]
-
-    "NO_ARTIFACTS" = [{
-      type = "${var.codebuild_artifacts_type}"
-    }]
-  }
-
-  # Retuned map
-  codebuild_artifacts = "${local.codebuild_artifacts_def[var.codebuild_artifacts_type]}"
-}
-</code></pre></div></div>
-
-<p>This creates a different block depending on the type defined in the variable <code class="highlighter-rouge">codebuild_artifacts_type</code>.</p>
-
-<h2 id="references">References:</h2>
-<ul>
-  <li><a href="https://www.terraform.io/docs/configuration/locals.html" target="_blank">locals values de Terraform</a></li>
-  <li><a href="https://github.com/cloudposse/terraform-aws-codebuild" target="_blank">terraform-aws-codebuild community module</a></li>
-</ul>
-
+        
 
         
       </section>
@@ -440,7 +421,15 @@ locals {
     
       
       
-      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a>
+      <a href="https://lgallardo.com/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/cloud" class="page__taxonomy-item" rel="tag">Cloud</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
     
     </span>
   </p>
@@ -506,7 +495,7 @@ locals {
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
 </a>
       
     </h2>
@@ -520,7 +509,6 @@ locals {
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
 </p>
   </article>
 </div>
@@ -534,7 +522,34 @@ locals {
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
+        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
 </a>
       
     </h2>
@@ -548,8 +563,6 @@ locals {
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-
-
 </p>
   </article>
 </div>
@@ -563,7 +576,7 @@ locals {
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
+        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
 </a>
       
     </h2>
@@ -577,41 +590,13 @@ locals {
 </p>
     
     <p class="archive__item-excerpt" itemprop="description">
-Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powkiddy, a...</p>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  2 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:
-
 </p>
   </article>
 </div>
         
       </div>
     </div>
+  
   
 </div>
 

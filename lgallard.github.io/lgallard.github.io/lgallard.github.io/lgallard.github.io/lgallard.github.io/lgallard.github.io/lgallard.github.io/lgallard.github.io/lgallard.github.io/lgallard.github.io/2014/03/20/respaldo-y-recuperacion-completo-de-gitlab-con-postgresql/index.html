@@ -92,10 +92,6 @@
 
 <meta property="article:section" content="Programming">
 
-<meta property="article:section" content="GitLab">
-
-<meta property="article:section" content="Postgresql">
-
 
 
 
@@ -370,14 +366,59 @@
 
 
 
-  less than 1 minute read
+  1 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/gitlab_postgresql.jpg" alt="GitLab and Posgresql" /></center>
+<p><br />
+GitLab can be used with Postgresql as its database engine  (beside MySQL),  and all come ready to make backups and restores of its databases and git repositories by using a ruby script (rake). This is the recommended way because it lets you recover everything wit not pending transactiond on database and Git sides.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p><a href="https://github.com/gitlabhq/gitlabhq/blob/master/doc/raketasks/backup_restore.md">The documentation explains</a> all you have to perform a manual backup and restore, but the latter fails because it tries to insert existing registers that generate conflicts like this one:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER SEQUENCE
+psql:/home/git/gitlab/tmp/backups/db/database.sql:812: ERROR: relation "users" already exists
+</code></pre></div></div>
+
+<h2 id="the-solution">The Solution</h2>
+
+<p>The postgresql backup must erase all tables before trying to recreate them and insert the registers. That can be done by including the  <em>–clean</em> r <em>-c</em>  to the <em>pg_dump</em> command. This option must be edited in the ruby script that makes the backup, which is  _/home/git/gitlab/lib/backup/database.rb _by default. In this file you have to find this part of code and substitute the following bold line:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>require 'yaml'
+
+ module Backup
+ class Database
+ attr_reader :config, :db_dir
+def initialize
+ @config = YAML.load_file(File.join(Rails.root,'config','database.yml'))[Rails.env]
+ @db_dir = File.join(Gitlab.config.backup.path, 'db')
+ FileUtils.mkdir_p(@db_dir) unless Dir.exists?(@db_dir)
+ end
+def dump
+ success = case config["adapter"]
+ when /^mysql/ then
+ print "Dumping MySQL database #{config['database']} ... "
+ system('mysqldump', *mysql_args, config['database'], out: db_file_name)
+ when "postgresql" then
+ print "Dumping PostgreSQL database #{config['database']} ... "
+ pg_env
+ &lt;strong&gt;system('pg_dump', config['database'], out: db_file_name)&lt;/strong&gt;
+ end
+ report_success(success)
+ end
+</code></pre></div></div>
+
+<p>This line must be replaced with this other line:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;strong&gt;system('pg_dump', config['database'], '-c', out: db_file_name)&lt;/strong&gt;
+</code></pre></div></div>
+
+<p>Here you can see that option <em>-c</em> is passed as argument to command <em>pg_dump</em>. This will force to include all DROPS needed in the generated .sql  for the GitLab backup.</p>
 
         
       </section>
@@ -423,15 +464,7 @@
     
       
       
-      <a href="https://lgallardo.com/categories/gitlab" class="page__taxonomy-item" rel="tag">GitLab</a><span class="sep">, </span>
-    
-      
-      
       <a href="https://lgallardo.com/categories/linux" class="page__taxonomy-item" rel="tag">Linux</a><span class="sep">, </span>
-    
-      
-      
-      <a href="https://lgallardo.com/categories/postgresql" class="page__taxonomy-item" rel="tag">Postgresql</a><span class="sep">, </span>
     
       
       
@@ -499,9 +532,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
 </a>
       
     </h2>
@@ -514,8 +555,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow on lgallardo.com - DevOps Engineer and Backend Solutions ...</p>
   </article>
 </div>
         
@@ -526,36 +566,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/_i18n/en/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -568,8 +589,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Read about Using GitHub Copilot Background Agents on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python,...</p>
   </article>
 </div>
         
@@ -580,9 +600,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/_i18n/en/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -595,8 +623,41 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Read about Anbernic 35xxH and Batocera on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraf...</p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
 </p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Read about AWS (re)Certified Solutions Architect - Professional on lgallardo.com - DevOps Engineer and Backend Solutions Developer specializing in Kubernetes...</p>
   </article>
 </div>
         

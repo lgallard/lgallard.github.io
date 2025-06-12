@@ -88,8 +88,6 @@
 
 <meta property="article:section" content="Cloud">
 
-<meta property="article:section" content="AWS">
-
 
 
 
@@ -365,14 +363,114 @@
 
 
 
-  less than 1 minute read
+  2 minute read
 </p>
           
         </header>
       
 
       <section class="page__content" itemprop="text">
-        
+        <center><img src="/images/AWS_Certified_Alexa_Skill_Builder_Specialty.jpg" alt="AWS CSA" width="500" height="386" /></center>
+<p><br />
+En enero presenté el examen beta <code class="highlighter-rouge">AWS Certified Alexa Skill Builder Specialty</code> y ayer me llegó el resultado. Yo venía programando Skills de Alexa y cuando vi el blueprint del examen me llamó la atención que mucho del contenido ya lo conocía de una u otra forma.</p>
+
+<p>Fueron 80 preguntas para responder en 170 minutos, similar a un examen Professional.</p>
+
+<h2 id="cómo-me-preparé">¿Cómo me preparé?</h2>
+
+<p>A diferencia de otros examenes que he presentado la preparación para este fue diferente, ya que siendo un examen beta no existía ningún curso ni material didáctico enfocado para la certifiación.</p>
+
+<p>Antes de conocer la existencia del examen beta yo ya estaba experimentando con Alexa, y de hecho había visto el curso de la gente de <code class="highlighter-rouge">A Cloud Guru</code> llamado <a href="https://acloud.guru/learn/intro-alexa-free" target="_blank">Introduction to Alexa</a>, que si bien está bueno para empezar es muy básico ya que solo toman los ejemplos que se consiguen en los repositorios de git de AWS, modificando solo un par de cosas en el código.</p>
+
+<p>También había seguido la serie de videos <a href="https://acloud.guru/series/alexa-devs" target="_blank">Alexa Devs</a>, la cual tiene mas contenidos que el curso introductorio, acá hay información mas especifica como el de el manejo de videos y pantallas.</p>
+
+<h2 id="pero-qué-estudiar">¿Pero qué estudiar?</h2>
+
+<p>Hay que estar bien familiarizado con los contenidos del blueprint que proporcionan al registrarse en el examen:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Domain</th>
+      <th>% of Examination</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Domain 1: Voice-First Design Practices and Capabilities</td>
+      <td>14%</td>
+    </tr>
+    <tr>
+      <td>Domain 2: Skill Design</td>
+      <td>24%</td>
+    </tr>
+    <tr>
+      <td>Domain 3: Skill Architecture</td>
+      <td>14%</td>
+    </tr>
+    <tr>
+      <td>Domain 4: Skill Development</td>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <td>Domain 5: Test, Validate, and Troubleshoot</td>
+      <td>%18</td>
+    </tr>
+    <tr>
+      <td>Domain 6: Publishing, Operations, and Lifecycle Management</td>
+      <td>10%</td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td>100%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p>Por otro lado también recomiendo:</p>
+
+<ul>
+  <li>Aprender muy bien el JSON de petición / respuesta</li>
+  <li>Entender cómo funciona el programa Beta tester</li>
+  <li>Aprender cómo persistir los datos en una sesión y entre sesiones</li>
+  <li>Aprender los distintos interaction models y que intents son proporcionados por omisión</li>
+  <li>Entender los Built-in intents estándar</li>
+  <li>Conocer los servicios backend de AWS que usa Alexa, como por ejemplo Lambda, DynamoDB, S3, etc</li>
+  <li>Conocer cómo dar permisos a funciones lambda</li>
+</ul>
+
+<h2 id="tip-extra">Tip extra</h2>
+
+<p>Al ser una especialización muchas de las preguntas resultan largas y confusas, por lo que te recomiendo que cuando leas en la pregunta <code class="highlighter-rouge">Alexa Skill Builder</code> lo reemplazases  en tu mente por <code class="highlighter-rouge">Developer</code>, ya que suena muy raro cuando lees algo como  “An Alexa Skill Builder builds a skill…”</p>
+
+<h2 id="recomendaciones-para-ganar-tiempo-en-el-examen">Recomendaciones para ganar tiempo en el examen:</h2>
+
+<ul>
+  <li>Las preguntas fáciles respóndelas rápidamente, no te quedes mucho tiempo pensando en si es la respuesta correcta porque seguro lo es.</li>
+  <li>Solo marcar las preguntas en las que realmente tienes dudas, así al momento de revisarlas puedes enfocarte en solo esas y si queda tiempo empezar a revisar el resto</li>
+  <li>Piensen que es una certificación de Amazon, en ese sentido siempre preguntarse cuál servicio de Amazon corresponde.</li>
+  <li>Descartar cosas que se pueden hacer a nivel de S.O. si un servicio de Amazon lo provee, y solo considerarlo cuando no hay mas opción.</li>
+  <li>Siempre que lean scalable piensen en SQS/DynamoDB, cost-saving = S3/S3 RRS, y así.</li>
+</ul>
+
+<p>Si estás interesado en esta certificación te recomiendo algunos enlaces:</p>
+
+<p><strong>Cursos en línea</strong></p>
+
+<ul>
+  <li><a href="https://acloud.guru/learn/intro-alexa-free" target="_blank">Introduction to Alexa</a></li>
+  <li><a href="https://acloud.guru/series/alexa-devs" target="_blank">Alexa Devs</a></li>
+</ul>
+
+<p><strong>Documentación de AWS</strong></p>
+
+<ul>
+  <li><a href="https://aws.amazon.com/whitepapers/" target="_blank">Whitepapers</a></li>
+  <li><a href="https://aws.amazon.com/documentation/" target="_blank">Documentation</a></li>
+  <li><a href="https://aws.amazon.com/faqs/" target="_blank">FAQs</a></li>
+</ul>
 
         
       </section>
@@ -411,10 +509,6 @@
   <p class="page__taxonomy">
     <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
-    
-      
-      
-      <a href="https://lgallardo.com/es/categories/aws" class="page__taxonomy-item" rel="tag">AWS</a><span class="sep">, </span>
     
       
       
@@ -482,9 +576,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
 </a>
       
     </h2>
@@ -497,8 +599,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA en lgallardo.com - Ingeniero DevOps y Desa...</p>
   </article>
 </div>
         
@@ -509,36 +610,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-08-coding-agents-bugbot/" rel="permalink">
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
-  </article>
-</div>
-        
+      <div class="archive__item-teaser">
+        <img src=
           
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+            "https://lgallardo.com/es/assets/images/copilot-coding-agent.png"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2025-06-05-github-copilot-terraform-aws-backup.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
 </a>
       
     </h2>
@@ -551,8 +633,7 @@
   2 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
-</p>
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Uso de GitHub Copilot Background Agents en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terr...</p>
   </article>
 </div>
         
@@ -563,9 +644,17 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/anbernic-35xxh.jpg"
+          
+          alt="">
+      </div>
+    
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="https://lgallardo.com/es/_i18n/es/2024-05-12-anbernic-35xxh-batocera.md/" rel="permalink">
+        <a href="https://lgallardo.com/es/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
 </a>
       
     </h2>
@@ -578,8 +667,42 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre Anbernic 35xxH and Batocera en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, Python y Terraform.
 </p>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "https://lgallardo.com/es/assets/images/aws-csap-2023.jpg"
+          
+          alt="">
+      </div>
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="permalink">AWS (re)Certified Solutions Architect - Professional
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Lee sobre AWS (re)Certified Solutions Architect - Professional en lgallardo.com - Ingeniero DevOps y Desarrollador Backend especializado en Kubernetes, AWS, ...</p>
   </article>
 </div>
         
