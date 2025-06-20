@@ -1,4 +1,178 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-06-12T13:13:13-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Explorando Cursor Background Agents: Una experiencia práctica</title><link href="https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience/" rel="alternate" type="text/html" title="Explorando Cursor Background Agents: Una experiencia práctica" /><published>2025-06-10T19:00:00-05:00</published><updated>2025-06-10T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience</id><content type="html" xml:base="https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience/">&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-experience.png&quot; alt=&quot;Experiencia con Cursor Background Agents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-06-20T12:45:51-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">VS Code vs Cursor AI - Terraform, MCP Servers y DevOps en el Mundo Real</title><link href="https://lgallardo.com/es/2025/06/20/vscode-vs-cursor-mcp-experience/" rel="alternate" type="text/html" title="VS Code vs Cursor AI - Terraform, MCP Servers y DevOps en el Mundo Real" /><published>2025-06-20T04:00:00-05:00</published><updated>2025-06-20T04:00:00-05:00</updated><id>https://lgallardo.com/es/2025/06/20/vscode-vs-cursor-mcp-experience</id><content type="html" xml:base="https://lgallardo.com/es/2025/06/20/vscode-vs-cursor-mcp-experience/">&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-cursor.png&quot; alt=&quot;VS Code &amp;amp; Cursor lado a lado&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En los últimos días, he alternado entre &lt;strong&gt;Cursor&lt;/strong&gt; y &lt;strong&gt;VS Code + Copilot Enterprise&lt;/strong&gt; mientras trabajaba en varios stacks de Terraform/Terragrunt. Cabe destacar que VS Code + Copilot ahora incluye varios de los modelos populares que normalmente están disponibles en Cursor, y como mi equipo en el trabajo utiliza Copilot Enterprise, nos beneficiamos de un acceso e integración mejorados sin costo adicional, lo que facilita aún más aprovechar estos modelos.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-models.png&quot; alt=&quot;Modelos de VS Code&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:40%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Aquí están mis notas prácticas: en qué destaca cada herramienta, dónde tienen limitaciones y en qué situaciones una supera a la otra.&lt;/p&gt;
+
+&lt;h2 id=&quot;indexación-y-conciencia-de-contexto-️&quot;&gt;Indexación y Conciencia de Contexto 🗂️&lt;/h2&gt;
+
+&lt;p&gt;Mientras que VS Code carece de indexación nativa, Cursor destaca al trabajar con múltiples módulos de Terraform y el enfoque Terragrunt. Cursor es más consciente de cómo se relacionan los módulos entre sí y puede aplicar cambios en varios archivos a la vez cuando es necesario. En cambio, con VS Code, debes agregar manualmente todos los archivos y carpetas relevantes antes de hacer cambios, y aun así puede que se pierdan algunas actualizaciones. Esto significa que a menudo tienes que especificar exactamente qué archivos y ediciones se requieren. Aprovechar un servidor MCP que ya haya ingerido tus módulos de Terraform podría ayudar a solucionar estas limitaciones.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-cursor-indexing.png&quot; alt=&quot;Indexación de Cursor&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Nota:&lt;/strong&gt; La captura de pantalla anterior muestra la indexación automática y la conciencia de módulos de Cursor, una función que no está disponible en VS Code por defecto.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt;Cursor&lt;/th&gt;
+      &lt;th&gt;VS Code + Copilot&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Indexación automática de proyectos&lt;/td&gt;
+      &lt;td&gt;✅ Escanea cada carpeta/módulo al abrir el repo.&lt;/td&gt;
+      &lt;td&gt;❌ Ausente. Debes &lt;em&gt;Agregar al Chat&lt;/em&gt; cada archivo o carpeta manualmente.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Actualizaciones entre módulos&lt;/td&gt;
+      &lt;td&gt;✅ Entiende dependencias y edita todos los archivos afectados de una vez.&lt;/td&gt;
+      &lt;td&gt;⚠️ Necesita instrucciones explícitas; a veces olvida módulos anidados.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Conciencia de Terragrunt&lt;/td&gt;
+      &lt;td&gt;✅ Analiza &lt;code class=&quot;highlighter-rouge&quot;&gt;*.hcl&lt;/code&gt;, mantiene cadenas de estado remoto/inclusión.&lt;/td&gt;
+      &lt;td&gt;💤 Trata &lt;code class=&quot;highlighter-rouge&quot;&gt;terragrunt.hcl&lt;/code&gt; como texto plano a menos que se le indique.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Solución para VS Code&lt;/strong&gt;&lt;br /&gt;
+Apunta Copilot a un &lt;strong&gt;servidor MCP&lt;/strong&gt; que ya haya ingerido tus módulos de Terraform. El contexto adicional reduce ediciones faltantes, aunque aún no es completamente automático.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;servidores-mcp-en-todas-partes-&quot;&gt;Servidores MCP en Todas Partes 🎉&lt;/h2&gt;
+
+&lt;p&gt;Hablando de servidores MCP, VS Code ahora también los soporta y puede aprovechar los mismos endpoints que has configurado en Cursor. 🙂&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-mcp-github.png&quot; alt=&quot;VS COde MCPs&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cursor introdujo los &lt;strong&gt;servidores MCP&lt;/strong&gt; antes, permitiendo canalizar endpoints LLM personalizados o bases de conocimiento.&lt;/li&gt;
+  &lt;li&gt;Las versiones recientes de VS Code pueden &lt;strong&gt;reutilizar esos mismos endpoints MCP&lt;/strong&gt;. Un clic en “Trust Cursor MCP Servers” y aparecen como &lt;em&gt;tools&lt;/em&gt; dentro de Copilot.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Por qué importa:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Configuración unificada&lt;/strong&gt; – define el endpoint una vez y consúmelo desde cualquier IDE.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Control de costos&lt;/strong&gt; – planifica con &lt;code class=&quot;highlighter-rouge&quot;&gt;o3&lt;/code&gt; (barato, analítico) y programa con &lt;code class=&quot;highlighter-rouge&quot;&gt;claude-4x&lt;/code&gt; (caro, preciso) sin pasar por una capa intermedia.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Memoria compartida&lt;/strong&gt; – ambos editores consultan el mismo almacén de conocimiento, así que las respuestas son consistentes.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;instrucciones-personalizadas-vs-reglas-globales-&quot;&gt;Instrucciones Personalizadas vs Reglas Globales 📝&lt;/h2&gt;
+
+&lt;p&gt;En Cursor, puedes configurar reglas globales o por proyecto para definir comportamientos, estilos de programación e incluso comandos personalizados, permitiendo que Cursor adapte mejor sus respuestas e implementaciones. VS Code ofrece una función similar llamada &lt;a href=&quot;https://code.visualstudio.com/docs/copilot/copilot-customization&quot;&gt;Instrucciones Personalizadas&lt;/a&gt;, que pueden colocarse en la carpeta &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/&lt;/code&gt; para uso a nivel de proyecto o guardarse localmente para un efecto global sin comprometerlas en cada repositorio.&lt;/p&gt;
+
+&lt;p&gt;Para empezar en VS Code, simplemente usa el comando “Chat: New Instructions File” para crear una plantilla. De hecho, puedes pedirle a Copilot Chat que cree una basada en lo que has definido en Cursor.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-instructions.png&quot; alt=&quot;Instrucciones de VS Code&quot; /&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Característica&lt;/th&gt;
+      &lt;th&gt;Cursor (&lt;code class=&quot;highlighter-rouge&quot;&gt;.cursor/config.yaml&lt;/code&gt;)&lt;/th&gt;
+      &lt;th&gt;VS Code (Instrucciones Personalizadas)&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alcance&lt;/td&gt;
+      &lt;td&gt;Global o por proyecto&lt;/td&gt;
+      &lt;td&gt;Proyecto (&lt;code class=&quot;highlighter-rouge&quot;&gt;.github/&lt;/code&gt;) o usuario&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Formato&lt;/td&gt;
+      &lt;td&gt;YAML con reglas + hooks de shell&lt;/td&gt;
+      &lt;td&gt;Markdown/JSON en “instructions.md”&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Uso típico&lt;/td&gt;
+      &lt;td&gt;Guías de estilo, macros de comandos, nombres de ramas&lt;/td&gt;
+      &lt;td&gt;Igual + convenciones organizacionales&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Desde VS Code ejecuta &lt;strong&gt;“Chat: New Instructions File”&lt;/strong&gt; para crear una plantilla. Yo guardo una versión a nivel de repositorio en &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/ai-instructions.md&lt;/code&gt; y una global en &lt;code class=&quot;highlighter-rouge&quot;&gt;~/ai/instructions.md&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;calidad-de-generación-de-código-&quot;&gt;Calidad de Generación de Código 🤖&lt;/h2&gt;
+
+&lt;p&gt;En cuanto a generación de código, Cursor generalmente supera a VS Code, aunque ambos suelen usar los mismos modelos subyacentes. Cursor tiende a ofrecer soluciones más completas y sofisticadas, especialmente para tareas complejas. Dicho esto, para cambios simples o ediciones rápidas, VS Code es más que suficiente, lo que lo convierte en una opción práctica si quieres minimizar el uso de Cursor y ahorrar costos. 💸&lt;/p&gt;
+
+&lt;h3 id=&quot;cursor&quot;&gt;Cursor&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Produce scaffolds de extremo a extremo (módulo Terraform + Terratest + CI) con menos indicaciones.&lt;/li&gt;
+  &lt;li&gt;Mejor para refactorizar bases de código grandes e interconectadas.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;vs-code--copilot&quot;&gt;VS Code + Copilot&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Más rápido para cambios en &lt;strong&gt;un solo archivo&lt;/strong&gt;, docstrings, renombrar variables.&lt;/li&gt;
+  &lt;li&gt;Adecuado para módulos sencillos; solo requiere un poco más de guía.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;💸 &lt;strong&gt;Tip de presupuesto&lt;/strong&gt;: Diseña la arquitectura en VS Code (tokens baratos), cambia a Cursor solo cuando necesites trabajo pesado.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;matriz-de-decisión-rápida-&quot;&gt;Matriz de Decisión Rápida 🧐&lt;/h2&gt;
+
+&lt;p&gt;Antes de entrar en detalles, aquí tienes una matriz de decisión rápida para ayudarte a elegir la herramienta adecuada para escenarios DevOps comunes. Esta tabla resume en qué editor destaca para tareas específicas, desde refactorizaciones masivas hasta actualizaciones rápidas de módulos o trabajo offline.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Necesidad&lt;/th&gt;
+      &lt;th&gt;Herramienta sugerida&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Refactorización masiva en 15 módulos de Terraform&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Cursor&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Agregar un bucket S3 + outputs en un módulo&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;VS Code&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Aplicar prefijo de rama y títulos de PR organizacionales&lt;/td&gt;
+      &lt;td&gt;Cualquiera (vía Instrucciones/Reglas)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Obtener el modelo de “planificación” más barato con el mismo contexto MCP&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;VS Code&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Estás offline o en entorno aislado&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;Cursor&lt;/strong&gt; MCP autohospedado&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;lista-de-deseos-y-próximos-pasos-&quot;&gt;Lista de Deseos y Próximos Pasos 🔮&lt;/h2&gt;
+
+&lt;p&gt;A medida que ambas herramientas evolucionan, aún hay áreas donde las mejoras harían el trabajo DevOps diario mucho más fluido. Aquí algunas funciones y mejoras que me gustaría ver en futuras versiones:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Indexación nativa en VS Code&lt;/strong&gt; para grafos de Terraform/Terragrunt.&lt;/li&gt;
+  &lt;li&gt;Una interfaz compartida para editar &lt;strong&gt;Instrucciones Personalizadas / Reglas de Cursor&lt;/strong&gt; y sincronizar ambos editores.&lt;/li&gt;
+  &lt;li&gt;Opción para &lt;strong&gt;incluir automáticamente archivos cambiados&lt;/strong&gt; durante una sesión de chat (actualmente manual en Code).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;reflexión-final&quot;&gt;Reflexión Final&lt;/h3&gt;
+
+&lt;p&gt;Cursor sigue siendo el rey para refactorizaciones complejas y multi-módulo. Sin embargo, VS Code ha cerrado gran parte de la brecha al adoptar servidores MCP e Instrucciones Personalizadas, convirtiéndose en una opción perfectamente capaz (y más económica) para el trabajo incremental diario.&lt;/p&gt;
+
+&lt;p&gt;¡Feliz automatización! 🚀&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas de IA" /><category term="Terraform" /><category term="DevOps" /><summary type="html">Notas prácticas comparando VS Code + Copilot con Cursor. Temas: indexación, servidores MCP, Instrucciones Personalizadas y calidad de generación de código.</summary></entry><entry><title type="html">Explorando Cursor Background Agents: Una experiencia práctica</title><link href="https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience/" rel="alternate" type="text/html" title="Explorando Cursor Background Agents: Una experiencia práctica" /><published>2025-06-10T19:00:00-05:00</published><updated>2025-06-10T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience</id><content type="html" xml:base="https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience/">&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-experience.png&quot; alt=&quot;Experiencia con Cursor Background Agents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;El otro día, alguien en el trabajo comentó que Cursor también tiene agentes en segundo plano. Decidí probarlo con uno de mis propios repos (&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-aws-ecr&lt;/code&gt;) y esta es toda la experiencia.&lt;/p&gt;
 
@@ -856,273 +1030,4 @@ Para alojar tus charts, usarás &lt;strong&gt;ChartMuseum&lt;/strong&gt; y &lt;s
   &lt;li&gt;&lt;a href=&quot;https://github.com/jdolitsky/helm-servecm&quot; target=&quot;_blank&quot;&gt;helm servecm plugin&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/helm/chartmuseum&quot; target=&quot;_blank&quot;&gt;ChartMuseum&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/chartmuseum/helm-push&quot; target=&quot;_blank&quot;&gt;helm push plugin&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">En Helm 3, el soporte del comando helm serve se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes ...</summary></entry><entry><title type="html">Módulo de Terraform para AWS ECR</title><link href="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr" rel="alternate" type="text/html" title="Módulo de Terraform para AWS ECR" /><published>2021-04-14T19:00:00-05:00</published><updated>2021-04-14T19:00:00-05:00</updated><id>https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr</id><content type="html" xml:base="https://lgallardo.com/es/2021/04/15/terraform-module-for-aws-ecr">&lt;center&gt;&lt;img src=&quot;/images/terraform-aws-ecr.jpg&quot; alt=&quot;Terraform&quot; /&gt;&lt;/center&gt;
-&lt;p&gt;&lt;br /&gt;
-Les comparto acá otro módulo de Terraform que publiqué como código Open Source, el cual permite crear registries en AWS ECR.&lt;/p&gt;
-
-&lt;p&gt;Puedes ver el módulo &lt;strong&gt;terraform-aws-ecr&lt;/strong&gt; en el &lt;a href=&quot;https://registry.terraform.io/modules/lgallard/ecr/aws&quot; target=&quot;_blank&quot;&gt;Terraform Registry&lt;/a&gt; o clonarlo desde &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr.git&quot; target=&quot;_blank&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Si quieres echar un vistazo al módulo, también dejé el archivo README en esta publicación:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://lgallardo.com/images/terraform.jpg&quot; alt=&quot;Terraform&quot; target=&quot;_blank&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;terraform-aws-ecr&quot;&gt;terraform-aws-ecr&lt;/h1&gt;
-&lt;p&gt;Terraform module to create &lt;a href=&quot;https://aws.amazon.com/ecr/&quot; target=&quot;_blank&quot;&gt;AWS ECR&lt;/a&gt; (Elastic Container Registry) which is a fully-managed Docker container registry.&lt;/p&gt;
-
-&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;/h2&gt;
-&lt;p&gt;You can use this module to create an ECR registry using few parameters (simple example) or define in detail every aspect of the registry (complete example).&lt;/p&gt;
-
-&lt;p&gt;Check the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/tree/master/examples&quot; target=&quot;_blank&quot;&gt;examples&lt;/a&gt; for the  &lt;strong&gt;simple&lt;/strong&gt; and the &lt;strong&gt;complete&lt;/strong&gt; snippets.&lt;/p&gt;
-
-&lt;h3 id=&quot;simple-example&quot;&gt;Simple example&lt;/h3&gt;
-&lt;p&gt;This example creates an ECR registry using few parameters&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;ecr&quot; {
-
-  source = &quot;lgallard/ecr/aws&quot;
-
-  name         = &quot;ecr-repo-dev&quot;
-
-  # Tags
-  tags = {
-    Owner       = &quot;DevOps team&quot;
-    Environment = &quot;dev&quot;
-    Terraform   = true
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;complete-example&quot;&gt;Complete example&lt;/h3&gt;
-&lt;p&gt;In this example the register is defined in detailed.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;module &quot;ecr&quot; {
-
-  source = &quot;lgallard/ecr/aws&quot;
-
-  name                 = &quot;ecr-repo-dev&quot;
-  scan_on_push         = true
-  timeouts_delete      = &quot;60m&quot;
-  image_tag_mutability = &quot;MUTABLE&quot;
-
-
-  # Note that currently only one policy may be applied to a repository.
-  policy = &amp;lt;&amp;lt;EOF
-{
-    &quot;Version&quot;: &quot;2008-10-17&quot;,
-    &quot;Statement&quot;: [
-        {
-            &quot;Sid&quot;: &quot;repo policy&quot;,
-            &quot;Effect&quot;: &quot;Allow&quot;,
-            &quot;Principal&quot;: &quot;*&quot;,
-            &quot;Action&quot;: [
-                &quot;ecr:GetDownloadUrlForLayer&quot;,
-                &quot;ecr:BatchGetImage&quot;,
-                &quot;ecr:BatchCheckLayerAvailability&quot;,
-                &quot;ecr:PutImage&quot;,
-                &quot;ecr:InitiateLayerUpload&quot;,
-                &quot;ecr:UploadLayerPart&quot;,
-                &quot;ecr:CompleteLayerUpload&quot;,
-                &quot;ecr:DescribeRepositories&quot;,
-                &quot;ecr:GetRepositoryPolicy&quot;,
-                &quot;ecr:ListImages&quot;,
-                &quot;ecr:DeleteRepository&quot;,
-                &quot;ecr:BatchDeleteImage&quot;,
-                &quot;ecr:SetRepositoryPolicy&quot;,
-                &quot;ecr:DeleteRepositoryPolicy&quot;
-            ]
-        }
-    ]
-}
-EOF
-
-  # Only one lifecycle policy can be used per repository.
-  # To apply multiple rules, combined them in one policy JSON.
-  lifecycle_policy = &amp;lt;&amp;lt;EOF
-{
-    &quot;rules&quot;: [
-        {
-            &quot;rulePriority&quot;: 1,
-            &quot;description&quot;: &quot;Expire untagged images older than 14 days&quot;,
-            &quot;selection&quot;: {
-                &quot;tagStatus&quot;: &quot;untagged&quot;,
-                &quot;countType&quot;: &quot;sinceImagePushed&quot;,
-                &quot;countUnit&quot;: &quot;days&quot;,
-                &quot;countNumber&quot;: 14
-            },
-            &quot;action&quot;: {
-                &quot;type&quot;: &quot;expire&quot;
-            }
-        },
-        {
-            &quot;rulePriority&quot;: 2,
-            &quot;description&quot;: &quot;Keep last 30 dev images&quot;,
-            &quot;selection&quot;: {
-                &quot;tagStatus&quot;: &quot;tagged&quot;,
-                &quot;tagPrefixList&quot;: [&quot;dev&quot;],
-                &quot;countType&quot;: &quot;imageCountMoreThan&quot;,
-                &quot;countNumber&quot;: 30
-            },
-            &quot;action&quot;: {
-                &quot;type&quot;: &quot;expire&quot;
-            }
-        }
-    ]
-}
-EOF
-
-  # Tags
-  tags = {
-    Owner       = &quot;DevOps team&quot;
-    Environment = &quot;dev&quot;
-    Terraform   = true
-  }
-
-}
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;providers&quot;&gt;Providers&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Version&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;aws&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;inputs&quot;&gt;Inputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Type&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Required&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;encryption_type&lt;/td&gt;
-      &lt;td&gt;The encryption type to use for the repository. Valid values are &lt;code class=&quot;highlighter-rouge&quot;&gt;AES256&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;AES256&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;image_scanning_configuration&lt;/td&gt;
-      &lt;td&gt;Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;image_tag_mutability&lt;/td&gt;
-      &lt;td&gt;The tag mutability setting for the repository. Must be one of: &lt;code class=&quot;highlighter-rouge&quot;&gt;MUTABLE&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;IMMUTABLE&lt;/code&gt;.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;MUTABLE&quot;&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;kms_key&lt;/td&gt;
-      &lt;td&gt;The ARN of the KMS key to use when encryption_type is &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;. If not specified when encryption_type is &lt;code class=&quot;highlighter-rouge&quot;&gt;KMS&lt;/code&gt;, uses a new KMS key. Otherwise, uses the default AWS managed key for ECR.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lifecycle_policy&lt;/td&gt;
-      &lt;td&gt;Manages the ECR repository lifecycle policy&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;name&lt;/td&gt;
-      &lt;td&gt;Name of the repository.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;policy&lt;/td&gt;
-      &lt;td&gt;Manages the ECR repository policy&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;scan_on_push&lt;/td&gt;
-      &lt;td&gt;Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bool&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;tags&lt;/td&gt;
-      &lt;td&gt;A mapping of tags to assign to the resource.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map(string)&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;timeouts&lt;/td&gt;
-      &lt;td&gt;Timeouts map.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;{}&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;timeouts_delete&lt;/td&gt;
-      &lt;td&gt;How long to wait for a repository to be deleted.&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;n/a&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;no&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;outputs&quot;&gt;Outputs&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Name&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;arn&lt;/td&gt;
-      &lt;td&gt;Full ARN of the repository&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;name&lt;/td&gt;
-      &lt;td&gt;The name of the repository.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;registry_id&lt;/td&gt;
-      &lt;td&gt;The registry ID where the repository was created.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;repository_url&lt;/td&gt;
-      &lt;td&gt;The URL of the repository (in the form &lt;code class=&quot;highlighter-rouge&quot;&gt;aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName&lt;/code&gt;)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr.git&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Github&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/ecr/aws&quot; target=&quot;_blank&quot;&gt;terraform-aws-ecr module at Terraform Registry&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Les comparto acá otro módulo de Terraform que publiqué como código Open Source, el cual permite crear registries en AWS ECR.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">En Helm 3, el soporte del comando helm serve se eliminó debido a algunos problemas de diseño, por lo tanto, si necesita una herramienta similar debes ...</summary></entry></feed>

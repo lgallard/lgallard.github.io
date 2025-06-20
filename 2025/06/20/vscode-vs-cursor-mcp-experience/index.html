@@ -1,0 +1,842 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Hands-on notes comparing VS Code + Copilot to Cursor. Topics: indexing, MCP servers, Custom Instructions, and code-generation quality.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/">
+<meta property="og:url" content="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/">
+
+
+
+<meta property="og:description" content="Hands-on notes comparing VS Code + Copilot to Cursor. Topics: indexing, MCP servers, Custom Instructions, and code-generation quality.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps">
+<meta name="twitter:description" content="Hands-on notes comparing VS Code + Copilot to Cursor. Topics: indexing, MCP servers, Custom Instructions, and code-generation quality.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/vscode-cursor.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/vscode-cursor.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-06-20T04:00:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="AI Tools">
+
+<meta property="article:tag" content="Terraform">
+
+<meta property="article:tag" content="DevOps">
+
+
+<meta property="article:section" content="Blog">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2025/06/20/vscode-vs-cursor-mcp-experience/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2025/06/20/vscode-vs-cursor-mcp-experience/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps">
+    <meta itemprop="description" content="Hands-on notes comparing VS Code + Copilot to Cursor. Topics: indexing, MCP servers, Custom Instructions, and code-generation quality.">
+    <meta itemprop="datePublished" content="June 20, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/vscode-cursor.png" alt="VS Code &amp; Cursor side-by-side" style="display:block; margin-left:auto; margin-right:auto; width:60%" /></p>
+
+<p>In the past few days, I’ve alternated between <strong>Cursor</strong> and <strong>VS Code + Copilot Enterprise</strong> while working on multiple Terraform/Terragrunt stacks. Notably, VS Code + Copilot now includes several of the popular models commonly available in Cursor, and since my team at work uses Copilot Enterprise, we benefit from enhanced access and integration at no extra cost, making it even easier to leverage these models.</p>
+
+<p><img src="/assets/images/vscode-models.png" alt="VS Code models" style="display:block; margin-left:auto; margin-right:auto; width:40%" /></p>
+
+<p>Here are my hands-on notes: what each tool excels at, where they fall short, and the situations where one stands out over the other.</p>
+
+<h2 id="indexing--context-awareness-️">Indexing &amp; Context Awareness 🗂️</h2>
+
+<p>While VS Code lacks native indexing, Cursor stands out when working with multiple Terraform modules and the Terragrunt approach. Cursor is more aware of how modules relate to each other and can apply changes across several files at once when needed. In contrast, with VS Code, you must manually add all relevant files and folders before making changes—and even then, it may miss some updates. This means you often have to specify exactly which files and edits are required. Leveraging an MCP Server that has already ingested your Terraform modules might help address these limitations.</p>
+
+<p><img src="/assets/images/vscode-cursor-indexing.png" alt="Cursor Indexing" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
+
+<blockquote>
+  <p><strong>Note:</strong> The screenshot above shows Cursor’s automatic indexing and module awareness, which is not available in VS Code by default.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Cursor</th>
+      <th>VS Code + Copilot</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Automatic project indexing</td>
+      <td>✅ Scans every folder/module once the repo opens.</td>
+      <td>❌ Absent. You must <em>Add to Chat</em> each file or folder manually.</td>
+    </tr>
+    <tr>
+      <td>Cross-module updates</td>
+      <td>✅ Understands module dependencies and edits all impacted files in one shot.</td>
+      <td>⚠️ Needs explicit instructions; sometimes forgets nested modules.</td>
+    </tr>
+    <tr>
+      <td>Terragrunt awareness</td>
+      <td>✅ Parses <code class="highlighter-rouge">*.hcl</code>, keeps remote-state / include chains intact.</td>
+      <td>💤 Treats <code class="highlighter-rouge">terragrunt.hcl</code> like plain text unless guided.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>Work-around for VS Code</strong><br />
+Point Copilot to an <strong>MCP server</strong> that already ingested your Terraform modules. The additional context reduces missing edits, though it’s still not fully turnkey.</p>
+</blockquote>
+
+<h2 id="mcp-servers-everywhere-">MCP Servers Everywhere 🎉</h2>
+
+<p>Speaking of MCP Servers, VS Code now supports them as well, and can even leverage the same endpoints you’ve set up in Cursor. 🙂</p>
+
+<p><img src="/assets/images/vscode-mcp-github.png" alt="VS COde MCPs" /></p>
+
+<ul>
+  <li>Cursor introduced <strong>MCP servers</strong> earlier, letting you pipe custom LLM endpoints or knowledge bases.</li>
+  <li>Recent VS Code builds can <strong>reuse those exact MCP endpoints</strong>. One click on “Trust Cursor MCP Servers” and they show up as regular <em>tools</em> inside Copilot.</li>
+</ul>
+
+<p>Why it matters:</p>
+<ol>
+  <li><strong>Unified config</strong> – define the endpoint once, consume it from any IDE.</li>
+  <li><strong>Cost control</strong> – plan with <code class="highlighter-rouge">o3</code> (cheap, analytical) and code with <code class="highlighter-rouge">claude-4x</code> (pricey, precise) without routing through a middle layer.</li>
+  <li><strong>Shared memory</strong> – both editors query the same knowledge store, so answers stay consistent.</li>
+</ol>
+
+<h2 id="custom-instructions-vs-global-rules-">Custom Instructions vs Global Rules 📝</h2>
+
+<p>In Cursor, you can set up global or project-specific rules to define behaviors, coding styles, and even custom commands, allowing Cursor to better tailor its responses and implementations. VS Code offers a similar feature called <a href="https://code.visualstudio.com/docs/copilot/copilot-customization">Custom Instructions</a>, which can be placed in the <code class="highlighter-rouge">.github/</code> folder for project-wide use or stored locally for a global effect without committing them to each repository.</p>
+
+<p>To get started in VS Code, simply use the “Chat: New Instructions File” command to scaffold a template. In fact, you can instruct Copilot Chat to create one based on what you’ve defined in Cursor</p>
+
+<p><img src="/assets/images/vscode-instructions.png" alt="VS Code Instructions" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Cursor (<code class="highlighter-rouge">.cursor/config.yaml</code>)</th>
+      <th>VS Code (Custom Instructions)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Scope</td>
+      <td>Global or per project</td>
+      <td>Project (<code class="highlighter-rouge">.github/</code>) or user home</td>
+    </tr>
+    <tr>
+      <td>Format</td>
+      <td>YAML with rules + shell hooks</td>
+      <td>Markdown/JSON in “instructions.md”</td>
+    </tr>
+    <tr>
+      <td>Typical usage</td>
+      <td>Style guides, command macros, branch naming</td>
+      <td>Same + org-wide conventions</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>From VS Code run <strong>“Chat: New Instructions File”</strong> to scaffold a template. I keep a repo-level version under <code class="highlighter-rouge">.github/ai-instructions.md</code> and a global fallback in <code class="highlighter-rouge">~/ai/instructions.md</code>.</p>
+
+<h2 id="code-generation-quality-">Code Generation Quality 🤖</h2>
+
+<p>When it comes to code generation, Cursor generally outperforms VS Code, despite both often relying on the same underlying models. Cursor tends to deliver more comprehensive and sophisticated solutions, especially for complex tasks. That said, for simpler changes or quick edits, VS Code is more than capable, making it a practical choice if you want to minimize Cursor usage and keep costs down. 💸</p>
+
+<h3 id="cursor">Cursor</h3>
+<ul>
+  <li>Produces end-to-end scaffolds (Terraform module + Terratest + CI job) with fewer nudges.</li>
+  <li>Better at refactoring large, interconnected codebases.</li>
+</ul>
+
+<h3 id="vs-code--copilot">VS Code + Copilot</h3>
+<ul>
+  <li>Faster for <strong>single-file</strong> tweaks, docstrings, variable renames.</li>
+  <li>Adequate for straightforward modules; you just pay with a bit more hand-holding.</li>
+</ul>
+
+<blockquote>
+  <p>💸 <strong>Budget hint</strong>: Draft the architecture in VS Code (cheap tokens), switch to Cursor only when you need the heavy lifting.</p>
+</blockquote>
+
+<h2 id="quick-glance-decision-matrix-">Quick-Glance Decision Matrix 🧐</h2>
+
+<p>Before diving into the details, here’s a quick decision matrix to help you choose the right tool for common DevOps scenarios. This table summarizes which editor excels for specific tasks, from large-scale refactoring to quick module updates or working offline.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Need</th>
+      <th>Suggested Tool</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mass refactor across 15 Terraform modules</td>
+      <td><strong>Cursor</strong></td>
+    </tr>
+    <tr>
+      <td>Add an S3 bucket + outputs in one module</td>
+      <td><strong>VS Code</strong></td>
+    </tr>
+    <tr>
+      <td>Enforce org-wide branch prefix &amp; PR titles</td>
+      <td>Either (via Custom Instructions / rules)</td>
+    </tr>
+    <tr>
+      <td>Get cheapest “planning” model with same MCP context</td>
+      <td><strong>VS Code</strong></td>
+    </tr>
+    <tr>
+      <td>You’re offline or air-gapped</td>
+      <td><strong>Cursor</strong> self-hosted MCP</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="wishlist--next-steps-">Wishlist &amp; Next Steps 🔮</h2>
+
+<p>As both tools continue to evolve, there are still a few areas where improvements would make daily DevOps work even smoother. Here are some features and enhancements I’d love to see in future releases:</p>
+
+<ol>
+  <li><strong>Native indexing in VS Code</strong> for Terraform/Terragrunt graphs.</li>
+  <li>A shared UI to edit <strong>Custom Instructions / Cursor Rules</strong> once and sync both editors.</li>
+  <li>Toggle to <strong>auto-include changed files</strong> during a chat session (currently manual in Code).</li>
+</ol>
+
+<h3 id="final-thoughts">Final Thoughts</h3>
+
+<p>Cursor still owns the throne for complex, multi-module refactors. VS Code, however, closed much of the gap by embracing MCP servers and Custom Instructions, making it a perfectly capable (and cheaper) daily driver for incremental work.</p>
+
+<p><em>Happy automating!</em> 🚀</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-tools" class="page__taxonomy-item" rel="tag">AI Tools</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/devops" class="page__taxonomy-item" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-20T04:00:00-05:00">June 20, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=VS+Code+vs+Cursor+AI+-+Terraform%2C+MCP+Servers+%26+Real-World+DevOps%20https%3A%2F%2Flgallardo.com%2F2025%2F06%2F20%2Fvscode-vs-cursor-mcp-experience%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F06%2F20%2Fvscode-vs-cursor-mcp-experience%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F06%2F20%2Fvscode-vs-cursor-mcp-experience%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F06%2F20%2Fvscode-vs-cursor-mcp-experience%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/06/11/cursor-background-agents-experience/" class="pagination--pager" title="Exploring Cursor Background Agents: A Hands-On Experience
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/cursor-background-agents-experience.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/06/11/cursor-background-agents-experience/" rel="permalink">Exploring Cursor Background Agents: A Hands-On Experience
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I decided to give Cursor Background Agents a try with one of my own repos (terraform-aws-ecr) after hearing about their capabilities. Here’s the whole experi...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot and Copilot Coding Agents: An AI-driven review and implementation workflow
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Recently, while working on my Terraform modules, I had an idea: What about using BugBot to check Copilot’s Coding Agents? With Copilot Coding Agents a…
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/copilot-coding-agent.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Using GitHub Copilot Background Agents
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Recently, I had the opportunity to try out GitHub Copilot Coding Agents (Background Agents) on one of my personal projects: the terraform-aws-backup m…
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/anbernic-35xxh.jpg" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="permalink">Anbernic 35xxH and Batocera
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powki…
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2025/06/20/vscode-vs-cursor-mcp-experience"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>
