@@ -1,4 +1,213 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-30T18:57:33-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">VS Code vs Cursor AI - Terraform, MCP Servers &amp;amp; Real-World DevOps</title><link href="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/" rel="alternate" type="text/html" title="VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps" /><published>2025-06-20T04:00:00-05:00</published><updated>2025-06-20T04:00:00-05:00</updated><id>https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience</id><content type="html" xml:base="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/">&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-cursor.png&quot; alt=&quot;VS Code &amp;amp; Cursor side-by-side&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-06-30T19:13:23-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Choosing the Right AI Model in Cursor: A Practical Guide</title><link href="https://lgallardo.com/2025/07/01/choosing-right-ai-model-cursor/" rel="alternate" type="text/html" title="Choosing the Right AI Model in Cursor: A Practical Guide" /><published>2025-06-30T19:00:00-05:00</published><updated>2025-06-30T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/01/choosing-right-ai-model-cursor</id><content type="html" xml:base="https://lgallardo.com/2025/07/01/choosing-right-ai-model-cursor/">&lt;p&gt;&lt;img src=&quot;/assets/images/choosing-models-cursor.png&quot; alt=&quot;Cursor Model Selection&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The other day I commented that I intuitively find &lt;strong&gt;O3&lt;/strong&gt; better for reasoning, problem solving and troubleshooting, over other models like &lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;. Cursor has a selection tree to decide which model to choose based not only on the type of task but also on other factors like how much control or interaction you want to have (prompting), context window, etc.&lt;/p&gt;
+
+&lt;h2 id=&quot;-understanding-model-behavior&quot;&gt;🧠 Understanding Model Behavior&lt;/h2&gt;
+
+&lt;p&gt;According to Cursor’s official documentation, models can be categorized into two main behavior patterns:&lt;/p&gt;
+
+&lt;h3 id=&quot;-thinking-models&quot;&gt;🤖 Thinking Models&lt;/h3&gt;
+&lt;p&gt;These models infer your intent, plan ahead, and often make decisions without needing step-by-step guidance:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;O3&lt;/strong&gt;: Designed for complex reasoning and ambiguous problems&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;: Confident and assertive in decision-making&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Gemini-2.5-Pro&lt;/strong&gt;: Takes initiative and moves quickly&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;️-non-thinking-models&quot;&gt;🛠️ Non-Thinking Models&lt;/h3&gt;
+&lt;p&gt;These models wait for explicit instructions and don’t infer or guess:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;: Can also operate in this mode&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt;: Predictable and easier to guide&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-my-experience-with-different-models&quot;&gt;💡 My Experience with Different Models&lt;/h2&gt;
+
+&lt;h3 id=&quot;-o3-for-complex-problem-solving&quot;&gt;🔍 O3 for Complex Problem Solving&lt;/h3&gt;
+&lt;p&gt;As I mentioned, I find &lt;strong&gt;O3&lt;/strong&gt; particularly effective for:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Planning and troubleshooting&lt;/strong&gt;: When I need to reason through complex infrastructure issues&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Deep analysis&lt;/strong&gt;: Understanding intricate code relationships and dependencies&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Problem decomposition&lt;/strong&gt;: Breaking down complex tasks into manageable steps&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;However, O3 is slower and more resource-intensive, making it better suited for occasional use on challenging problems rather than daily coding tasks.&lt;/p&gt;
+
+&lt;h3 id=&quot;-claude-4-sonnet-for-implementation&quot;&gt;⚡ Claude-4-Sonnet for Implementation&lt;/h3&gt;
+&lt;p&gt;For day-to-day coding work, I tend to use &lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt; because:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;It’s fast and efficient for routine tasks&lt;/li&gt;
+  &lt;li&gt;Provides good balance between initiative and control&lt;/li&gt;
+  &lt;li&gt;Excellent for code generation and refactoring&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But when I get stuck in an “implementation-fix” loop with Claude, I take a step back and reason with &lt;strong&gt;O3&lt;/strong&gt; to find another “point of view,” then continue with Claude.&lt;/p&gt;
+
+&lt;h2 id=&quot;-cursors-selection-framework&quot;&gt;📊 Cursor’s Selection Framework&lt;/h2&gt;
+
+&lt;p&gt;According to the &lt;a href=&quot;https://docs.cursor.com/guides/selecting-models&quot;&gt;official documentation&lt;/a&gt;, you should consider:&lt;/p&gt;
+
+&lt;h3 id=&quot;1-prompting-style&quot;&gt;1. Prompting Style&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;strong&gt;If you prefer to…&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Recommended Models&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Be in control, give clear instructions&lt;/td&gt;
+      &lt;td&gt;Claude-4-Sonnet, GPT-4.1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Let the model take initiative&lt;/td&gt;
+      &lt;td&gt;Claude-4-Opus, Gemini-2.5-Pro, O3&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;2-task-type&quot;&gt;2. Task Type&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;strong&gt;Task&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Recommended Models&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Directed changes&lt;/td&gt;
+      &lt;td&gt;Claude-4-Sonnet, Gemini-2.5-Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Codebase navigation/search&lt;/td&gt;
+      &lt;td&gt;Gemini-2.5-Pro, Claude-4-Opus, O3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Planning or problem-solving&lt;/td&gt;
+      &lt;td&gt;Claude-4-Opus, Gemini-2.5-Pro&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Complex bugs or deep reasoning&lt;/td&gt;
+      &lt;td&gt;O3&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;3-model-characteristics&quot;&gt;3. Model Characteristics&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;strong&gt;Model&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Best For&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;O3&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Complex reasoning, ambiguous problems, deep analysis&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Daily driver, balanced control/initiative, fast implementation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Gemini-2.5-Pro&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Taking initiative, large context windows, exploration&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Predictable behavior, precise control, well-defined tasks&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;-selection-tree&quot;&gt;🌳 Selection Tree&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://docs.cursor.com/guides/selecting-models#selection-tree&quot;&gt;official Cursor documentation&lt;/a&gt; provides a helpful decision tree to guide model selection.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/choosing-models-cursor-tree.png&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s how to approach it:&lt;/p&gt;
+
+&lt;h3 id=&quot;decision-framework&quot;&gt;Decision Framework&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;&lt;strong&gt;What’s Most Important to You?&lt;/strong&gt;&lt;/th&gt;
+      &lt;th&gt;&lt;strong&gt;Recommended Action&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;I want control over what the model does&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;→ Directed changes&lt;/td&gt;
+      &lt;td&gt;Use Claude-4-Sonnet&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;→ Larger task with clear instructions&lt;/td&gt;
+      &lt;td&gt;Use Claude-4-Sonnet or GPT-4.1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;I want the model to figure it out&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;→ Routine or general use&lt;/td&gt;
+      &lt;td&gt;Use Claude-4-Sonnet, Gemini-2.5-Pro, or GPT-4.1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;→ Very complex or ambiguous&lt;/td&gt;
+      &lt;td&gt;Use O3&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;This decision tree helps you quickly identify the right model based on your immediate needs and the complexity of your task. As the documentation notes, these are subjective recommendations - you should choose the model that works best for your specific workflow.&lt;/p&gt;
+
+&lt;h2 id=&quot;-practical-recommendations&quot;&gt;💡 Practical Recommendations&lt;/h2&gt;
+
+&lt;p&gt;Based on my experience and Cursor’s guidance:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Start with Auto-select&lt;/strong&gt; if you’re unsure - it picks a reliable model from the pool&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Use O3 strategically&lt;/strong&gt; for complex problems that require deep reasoning&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Claude-4-Sonnet as daily driver&lt;/strong&gt; for most coding tasks&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Switch models when stuck&lt;/strong&gt; - different perspectives can unlock solutions&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Save effective combinations&lt;/strong&gt; as Custom Modes for reuse&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;-highlights&quot;&gt;✨ Highlights&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Model selection impacts productivity&lt;/strong&gt;: Choosing the right model for the task can significantly improve both speed and quality&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;O3 excels at reasoning&lt;/strong&gt;: Perfect for complex problem-solving and when you need a fresh perspective&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Claude-4-Sonnet for implementation&lt;/strong&gt;: Reliable daily driver for most coding tasks&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Context switching is powerful&lt;/strong&gt;: Moving between models can break through implementation loops&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Personal preference matters&lt;/strong&gt;: Your interaction style should influence model choice&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-conclusion&quot;&gt;🎯 Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Choosing the right AI model in Cursor isn’t just about capability - it’s about matching the model’s strengths to your specific task and working style. While O3 shines in complex reasoning scenarios, Claude-4-Sonnet provides the speed and reliability needed for daily development work.&lt;/p&gt;
+
+&lt;p&gt;The key is developing intuition about how each model behaves and knowing when to switch between them. As I’ve found, sometimes stepping back from implementation details and reasoning with O3 can provide the breakthrough needed to move forward effectively.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/guides/selecting-models&quot;&gt;Cursor - Selecting Models&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/&quot;&gt;Cursor Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/guides/selecting-models#model-behavior&quot;&gt;Model Comparison and Best Practices&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">The other day I commented that I intuitively find O3 better for reasoning, problem solving and troubleshooting, over other models like Claude-4-Sonnet...</summary></entry><entry><title type="html">VS Code vs Cursor AI - Terraform, MCP Servers &amp;amp; Real-World DevOps</title><link href="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/" rel="alternate" type="text/html" title="VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps" /><published>2025-06-20T04:00:00-05:00</published><updated>2025-06-20T04:00:00-05:00</updated><id>https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience</id><content type="html" xml:base="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/">&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-cursor.png&quot; alt=&quot;VS Code &amp;amp; Cursor side-by-side&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;In the past few days, I’ve alternated between &lt;strong&gt;Cursor&lt;/strong&gt; and &lt;strong&gt;VS Code + Copilot Enterprise&lt;/strong&gt; while working on multiple Terraform/Terragrunt stacks. Notably, VS Code + Copilot now includes several of the popular models commonly available in Cursor, and since my team at work uses Copilot Enterprise, we benefit from enhanced access and integration at no extra cost, making it even easier to leverage these models.&lt;/p&gt;
 
@@ -970,65 +1179,4 @@ set -g mouse on
   &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Mosh&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://tmuxcheatsheet.com&quot;&gt;Tmux cheat sheet&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;mosh prevents the use of scrollback&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">It's been a while since I posted on the blog, first because I couldn't find something interesting to share and second because there wasn't much spare ...</summary></entry><entry><title type="html">Helm 3 local repo</title><link href="https://lgallardo.com/2021/06/15/helm-local-repo/" rel="alternate" type="text/html" title="Helm 3 local repo" /><published>2021-06-14T19:00:00-05:00</published><updated>2021-06-14T19:00:00-05:00</updated><id>https://lgallardo.com/2021/06/15/helm3-local-repo</id><content type="html" xml:base="https://lgallardo.com/2021/06/15/helm-local-repo/">&lt;p&gt;&lt;img src=&quot;/assets/images/helm.jpg&quot; alt=&quot;Helm 3 local repo&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;
-In Helm 3 the support of &lt;strong&gt;helm serve&lt;/strong&gt; command was removed due to some design issues, therefore if you need a similar tool you have to install  &lt;strong&gt;helm servecm&lt;/strong&gt;  plugin, which uses &lt;strong&gt;ChartMuseum&lt;/strong&gt; for publishing the charts to your local storage (other storages are also supported, like S3 buckets).&lt;/p&gt;
-
-&lt;p&gt;In this post you will learn how to install and publish a local repo in Helm 3.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Install &lt;strong&gt;ChartMuseum&lt;/strong&gt;&lt;br /&gt;
-First off, you need to install &lt;strong&gt;ChartMuseum&lt;/strong&gt;. At the project page you will find different ways  of installing it, but I install as a Go app as follows:&lt;br /&gt;&lt;br /&gt;
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;GO111MODULE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;on&quot;&lt;/span&gt; go get github.com/helm/chartmuseum@v0.13.1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Install &lt;strong&gt;helm servecm plugin&lt;/strong&gt;&lt;br /&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;br /&gt;Then you need to install &lt;strong&gt;servecm&lt;/strong&gt; as a helm plugin:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm plugin install https://github.com/jdolitsky/helm-servecm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Install &lt;strong&gt;helm push plugin&lt;/strong&gt;&lt;br /&gt;
-In order to host your charts, you will be using &lt;strong&gt;ChartMuseum&lt;/strong&gt; and &lt;strong&gt;helm servecm&lt;/strong&gt; pluing, but you will still need to publish them into &lt;strong&gt;ChartMuseum&lt;/strong&gt;. You can do it manually or use another plugin called &lt;strong&gt;helm push&lt;/strong&gt; which does it for you:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm plugin install https://github.com/chartmuseum/helm-push.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Add the local repo in helm:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm repo add local http://127.0.0.1:8879/charts
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Run &lt;strong&gt;helm servecm plugin&lt;/strong&gt;:&lt;/p&gt;
-
-    &lt;p&gt;&lt;br /&gt;Next step is to run &lt;strong&gt;helm servecm&lt;/strong&gt; plugin:&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm servecm &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8879 &lt;span class=&quot;nt&quot;&gt;--storage&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--storage-local-rootdir&lt;/span&gt; ./local &lt;span class=&quot;nt&quot;&gt;--context-path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/charts 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;Now you can publish your charts at http://127.0.0.1:8879/charts&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Publish your chart to your local repo:&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm push your-chart &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;At this point you will be able to use you local charts in your cluster by executing:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;helm install  your-chart
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://helm.sh/docs/faq/#removal-of-helm-serve&quot; target=&quot;_blank&quot;&gt;Removal of helm serve&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/jdolitsky/helm-servecm&quot; target=&quot;_blank&quot;&gt;helm servecm plugin&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/helm/chartmuseum&quot; target=&quot;_blank&quot;&gt;ChartMuseum&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/chartmuseum/helm-push&quot; target=&quot;_blank&quot;&gt;helm push plugin&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">In Helm 3 the support of helm serve command was removed due to some design issues, therefore if you need a similar tool you have to install helm serv...</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">It's been a while since I posted on the blog, first because I couldn't find something interesting to share and second because there wasn't much spare ...</summary></entry></feed>

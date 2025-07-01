@@ -1,0 +1,867 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="El otro día comenté que intuitivamente encuentro que O3 es mejor para razonamiento, resolución de problemas y troubleshooting, comparado con otros modelos como Claude-4-Sonnet…">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/">
+<meta property="og:url" content="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/">
+
+
+
+<meta property="og:description" content="El otro día comenté que intuitivamente encuentro que O3 es mejor para razonamiento, resolución de problemas y troubleshooting, comparado con otros modelos como Claude-4-Sonnet…">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica">
+<meta name="twitter:description" content="El otro día comenté que intuitivamente encuentro que O3 es mejor para razonamiento, resolución de problemas y troubleshooting, comparado con otros modelos como Claude-4-Sonnet…">
+<meta name="twitter:url" content="https://lgallardo.com/2025/07/01/choosing-right-ai-model-cursor/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/choosing-models-cursor.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/es/assets/images/choosing-models-cursor.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-06-30T19:00:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="General">
+
+
+<meta property="article:section" content="Blog">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com/es",
+      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com/es",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+
+  
+  <a href="/2025/07/01/choosing-right-ai-model-cursor/" >English</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/2025/07/01/choosing-right-ai-model-cursor/" >English</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica">
+    <meta itemprop="description" content="El otro día comenté que intuitivamente encuentro que O3 es mejor para razonamiento, resolución de problemas y troubleshooting, comparado con otros modelos como Claude-4-Sonnet…">
+    <meta itemprop="datePublished" content="July 01, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/choosing-models-cursor.png" alt="Selección de Modelos en Cursor" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
+
+<p>El otro día comenté que intuitivamente encuentro que <strong>O3</strong> es mejor para razonamiento, resolución de problemas y troubleshooting, comparado con otros modelos como <strong>Claude-4-Sonnet</strong>. Cursor tiene un árbol de selección para decidir qué modelo elegir basado no solo en el tipo de tarea, sino también en otros factores como cuánto control o interacción quieres tener (prompting), ventana de contexto, etc.</p>
+
+<h2 id="-entendiendo-el-comportamiento-de-los-modelos">🧠 Entendiendo el Comportamiento de los Modelos</h2>
+
+<p>Según la documentación oficial de Cursor, los modelos pueden categorizarse en dos patrones principales de comportamiento:</p>
+
+<h3 id="-modelos-pensantes-thinking-models">🤖 Modelos Pensantes (Thinking Models)</h3>
+<p>Estos modelos infieren tu intención, planifican con anticipación y a menudo toman decisiones sin necesidad de guía paso a paso:</p>
+<ul>
+  <li><strong>O3</strong>: Diseñado para razonamiento complejo y problemas ambiguos</li>
+  <li><strong>Claude-4-Sonnet</strong>: Confiado y asertivo en la toma de decisiones</li>
+  <li><strong>Gemini-2.5-Pro</strong>: Toma iniciativa y se mueve rápidamente</li>
+</ul>
+
+<h3 id="️-modelos-no-pensantes-non-thinking-models">🛠️ Modelos No Pensantes (Non-Thinking Models)</h3>
+<p>Estos modelos esperan instrucciones explícitas y no infieren ni adivinan:</p>
+<ul>
+  <li><strong>Claude-4-Sonnet</strong>: También puede operar en este modo</li>
+  <li><strong>GPT-4.1</strong>: Predecible y más fácil de guiar</li>
+</ul>
+
+<h2 id="-mi-experiencia-con-diferentes-modelos">💡 Mi Experiencia con Diferentes Modelos</h2>
+
+<h3 id="-o3-para-resolución-de-problemas-complejos">🔍 O3 para Resolución de Problemas Complejos</h3>
+<p>Como mencioné, encuentro que <strong>O3</strong> es particularmente efectivo para:</p>
+<ul>
+  <li><strong>Planificación y troubleshooting</strong>: Cuando necesito razonar a través de problemas complejos de infraestructura</li>
+  <li><strong>Análisis profundo</strong>: Entender relaciones intrincadas de código y dependencias</li>
+  <li><strong>Descomposición de problemas</strong>: Dividir tareas complejas en pasos manejables</li>
+</ul>
+
+<p>Sin embargo, O3 es más lento y consume más recursos, haciéndolo más adecuado para uso ocasional en problemas desafiantes en lugar de tareas diarias de codificación.</p>
+
+<h3 id="-claude-4-sonnet-para-implementación">⚡ Claude-4-Sonnet para Implementación</h3>
+<p>Para el trabajo diario de codificación, tiendo a usar <strong>Claude-4-Sonnet</strong> porque:</p>
+<ul>
+  <li>Es rápido y eficiente para tareas rutinarias</li>
+  <li>Proporciona un buen equilibrio entre iniciativa y control</li>
+  <li>Excelente para generación de código y refactoring</li>
+</ul>
+
+<p>Pero cuando me quedo atascado en un bucle de “implementación-corrección” con Claude, doy un paso atrás y razono con <strong>O3</strong> para encontrar otro “punto de vista”, luego continúo con Claude.</p>
+
+<h2 id="-marco-de-selección-de-cursor">📊 Marco de Selección de Cursor</h2>
+
+<p>Según la <a href="https://docs.cursor.com/guides/selecting-models">documentación oficial</a>, debes considerar:</p>
+
+<h3 id="1-estilo-de-prompting">1. Estilo de Prompting</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Si prefieres…</strong></th>
+      <th><strong>Modelos Recomendados</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tener control, dar instrucciones claras</td>
+      <td>Claude-4-Sonnet, GPT-4.1</td>
+    </tr>
+    <tr>
+      <td>Que el modelo tome iniciativa</td>
+      <td>Claude-4-Opus, Gemini-2.5-Pro, O3</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-tipo-de-tarea">2. Tipo de Tarea</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Tarea</strong></th>
+      <th><strong>Modelos Recomendados</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cambios dirigidos</td>
+      <td>Claude-4-Sonnet, Gemini-2.5-Pro</td>
+    </tr>
+    <tr>
+      <td>Navegación/búsqueda en codebase</td>
+      <td>Gemini-2.5-Pro, Claude-4-Opus, O3</td>
+    </tr>
+    <tr>
+      <td>Planificación o resolución de problemas</td>
+      <td>Claude-4-Opus, Gemini-2.5-Pro</td>
+    </tr>
+    <tr>
+      <td>Bugs complejos o razonamiento profundo</td>
+      <td>O3</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="3-características-de-los-modelos">3. Características de los Modelos</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Modelo</strong></th>
+      <th><strong>Mejor Para</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>O3</strong></td>
+      <td>Razonamiento complejo, problemas ambiguos, análisis profundo</td>
+    </tr>
+    <tr>
+      <td><strong>Claude-4-Sonnet</strong></td>
+      <td>Conductor diario, equilibrio control/iniciativa, implementación rápida</td>
+    </tr>
+    <tr>
+      <td><strong>Gemini-2.5-Pro</strong></td>
+      <td>Tomar iniciativa, ventanas de contexto grandes, exploración</td>
+    </tr>
+    <tr>
+      <td><strong>GPT-4.1</strong></td>
+      <td>Comportamiento predecible, control preciso, tareas bien definidas</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-árbol-de-selección">🌳 Árbol de Selección</h2>
+
+<p>La <a href="https://docs.cursor.com/guides/selecting-models#selection-tree">documentación oficial de Cursor</a> proporciona un árbol de decisión útil para guiar la selección de modelos.</p>
+
+<p><img src="/assets/images/choosing-models-cursor-tree.png" alt="alt text" /></p>
+
+<p>Aquí está cómo abordarlo:</p>
+
+<h3 id="marco-de-decisión">Marco de Decisión</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>¿Qué es Más Importante para Ti?</strong></th>
+      <th><strong>Acción Recomendada</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Quiero control sobre lo que hace el modelo</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>→ Cambios dirigidos</td>
+      <td>Usa Claude-4-Sonnet</td>
+    </tr>
+    <tr>
+      <td>→ Tarea más grande con instrucciones claras</td>
+      <td>Usa Claude-4-Sonnet o GPT-4.1</td>
+    </tr>
+    <tr>
+      <td><strong>Quiero que el modelo lo resuelva</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>→ Rutinaria o uso general</td>
+      <td>Usa Claude-4-Sonnet, Gemini-2.5-Pro, o GPT-4.1</td>
+    </tr>
+    <tr>
+      <td>→ Muy compleja o ambigua</td>
+      <td>Usa O3</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Este árbol de decisión te ayuda a identificar rápidamente el modelo correcto basado en tus necesidades inmediatas y la complejidad de tu tarea. Como nota la documentación, estas son recomendaciones subjetivas - debes elegir el modelo que funcione mejor para tu flujo de trabajo específico.</p>
+
+<h2 id="-recomendaciones-prácticas">💡 Recomendaciones Prácticas</h2>
+
+<p>Basado en mi experiencia y la guía de Cursor:</p>
+
+<ol>
+  <li><strong>Comienza con Auto-select</strong> si no estás seguro - selecciona un modelo confiable del grupo</li>
+  <li><strong>Usa O3 estratégicamente</strong> para problemas complejos que requieren razonamiento profundo</li>
+  <li><strong>Claude-4-Sonnet como conductor diario</strong> para la mayoría de tareas de codificación</li>
+  <li><strong>Cambia modelos cuando te atasques</strong> - diferentes perspectivas pueden desbloquear soluciones</li>
+  <li><strong>Guarda combinaciones efectivas</strong> como Modos Personalizados para reutilizar</li>
+</ol>
+
+<h2 id="-puntos-destacados">✨ Puntos Destacados</h2>
+
+<ul>
+  <li><strong>La selección de modelo impacta la productividad</strong>: Elegir el modelo correcto para la tarea puede mejorar significativamente tanto la velocidad como la calidad</li>
+  <li><strong>O3 sobresale en razonamiento</strong>: Perfecto para resolución de problemas complejos y cuando necesitas una perspectiva fresca</li>
+  <li><strong>Claude-4-Sonnet para implementación</strong>: Conductor diario confiable para la mayoría de tareas de codificación</li>
+  <li><strong>El cambio de contexto es poderoso</strong>: Moverse entre modelos puede romper bucles de implementación</li>
+  <li><strong>La preferencia personal importa</strong>: Tu estilo de interacción debe influir en la elección del modelo</li>
+</ul>
+
+<h2 id="-conclusión">🎯 Conclusión</h2>
+
+<p>Elegir el modelo de IA correcto en Cursor no se trata solo de capacidad - se trata de hacer coincidir las fortalezas del modelo con tu tarea específica y estilo de trabajo. Mientras O3 brilla en escenarios de razonamiento complejo, Claude-4-Sonnet proporciona la velocidad y confiabilidad necesarias para el trabajo diario de desarrollo.</p>
+
+<p>La clave es desarrollar intuición sobre cómo se comporta cada modelo y saber cuándo cambiar entre ellos. Como he encontrado, a veces dar un paso atrás de los detalles de implementación y razonar con O3 puede proporcionar el avance necesario para avanzar efectivamente.</p>
+
+<h2 id="referencias">Referencias</h2>
+
+<ul>
+  <li><a href="https://docs.cursor.com/guides/selecting-models">Cursor - Selecting Models</a></li>
+  <li><a href="https://docs.cursor.com/">Cursor Documentation</a></li>
+  <li><a href="https://docs.cursor.com/guides/selecting-models#model-behavior">Model Comparison and Best Practices</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/general" class="page__taxonomy-item" rel="tag">General</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-06-30T19:00:00-05:00">July 01, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Eligiendo+el+Modelo+de+IA+Correcto+en+Cursor%3A+Una+Gu%C3%ADa+Pr%C3%A1ctica%20https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F01%2Fchoosing-right-ai-model-cursor%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F01%2Fchoosing-right-ai-model-cursor%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F01%2Fchoosing-right-ai-model-cursor%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F01%2Fchoosing-right-ai-model-cursor%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/es/2025/06/20/vscode-vs-cursor-mcp-experience/" class="pagination--pager" title="VS Code vs Cursor AI - Terraform, MCP Servers y DevOps en el Mundo Real
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/vscode-cursor.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/06/20/vscode-vs-cursor-mcp-experience/" rel="permalink">VS Code vs Cursor AI - Terraform, MCP Servers y DevOps en el Mundo Real
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Notas prácticas comparando VS Code + Copilot con Cursor. Temas: indexación, servidores MCP, Instrucciones Personalizadas y calidad de generación de código.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/cursor-background-agents-experience.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience/" rel="permalink">Explorando Cursor Background Agents: Una experiencia práctica
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Decidí probar Cursor Background Agents con uno de mis propios repos (terraform-aws-ecr) tras escuchar sobre sus capacidades. Aquí está toda la experiencia…
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="permalink">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Recientemente, mientras trabajaba en mis módulos de Terraform, se me ocurrió una idea: ¿Y si uso BugBot para revisar el trabajo de los Coding Agents d…
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/copilot-coding-agent.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="permalink">Uso de GitHub Copilot Background Agents
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Recientemente tuve la oportunidad de probar los GitHub Copilot Coding Agents (Background Agents) en uno de mis proyectos personales: el módulo terrafo…
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2025/07/01/choosing-right-ai-model-cursor"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>
