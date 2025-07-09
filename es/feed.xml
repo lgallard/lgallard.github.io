@@ -1,4 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-06-30T19:13:28-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica</title><link href="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/" rel="alternate" type="text/html" title="Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica" /><published>2025-06-30T19:00:00-05:00</published><updated>2025-06-30T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/">&lt;p&gt;&lt;img src=&quot;/assets/images/choosing-models-cursor.png&quot; alt=&quot;Selección de Modelos en Cursor&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-07-09T17:49:07-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Más allá de Cursor: Mi experiencia con Claude Code y Sequential Thinking</title><link href="https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" rel="alternate" type="text/html" title="Más allá de Cursor: Mi experiencia con Claude Code y Sequential Thinking" /><published>2025-07-08T19:00:00-05:00</published><updated>2025-07-08T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking/">&lt;p&gt;&lt;img src=&quot;/assets/images/code-cursor-claude.png&quot; alt=&quot;Claude Code, Cursor, and Sequential Thinking&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;El panorama de los editores de códifo impulsados por IA está evolucionando rápidamente. Como usuario de Copilot y Cursor, siempre estoy buscando nuevas herramientas que puedan aumentar la productividad y ofrecer una perspectiva fresca. El fin de semana pasado, la curiosidad me llevó a probar &lt;strong&gt;Claude Code&lt;/strong&gt; en mis repositorios personales—una tercera alternativa que ha estado ganando tracción, especialmente con su integración de &lt;strong&gt;Sequential Thinking&lt;/strong&gt;. Aquí está mi experiencia, cómo se compara con Cursor, y por qué podría valer la pena echarlo un vistazo para tu flujo de trabajo.&lt;/p&gt;
+
+&lt;h2 id=&quot;-comenzando-con-claude-code&quot;&gt;🚀 Comenzando con Claude Code&lt;/h2&gt;
+
+&lt;p&gt;Instalar Claude Code es sencillo con npm:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @anthropic-ai/claude-code
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Importante&lt;/strong&gt;: NO uses &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo npm install -g&lt;/code&gt; ya que esto puede llevar a problemas de permisos y riesgos de seguridad.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Una vez instalado, navega a tu proyecto e inicia Claude Code:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;your-awesome-project
+claude
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-opciones-de-autenticación&quot;&gt;🔐 Opciones de Autenticación&lt;/h3&gt;
+
+&lt;p&gt;Una de las primeras cosas que me llamó la atención fue la accesibilidad de Claude Code. Tienes múltiples opciones de autenticación:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Claude App (plan Pro o Max)&lt;/strong&gt;: Suscríbete al plan Pro ($17/mes), Pro Max  5x ($100/mes) o Pro Max 20x ($200/mes) de Claude para una suscripción unificada que incluye tanto Claude Code como la interfaz web.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Consola de Anthropic&lt;/strong&gt;: Conéctate a usando las API Key de Anthropic.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;-cli-vs-ide&quot;&gt;💻 CLI vs IDE&lt;/h3&gt;
+
+&lt;p&gt;A pesar de ser una herramienta principalmente CLI, Claude Code ofrece extensiones para &lt;strong&gt;VS Code&lt;/strong&gt; y &lt;strong&gt;Cursor&lt;/strong&gt; (que está basado en VS Code). Esto significa que puedes ejecutar Claude Code desde una terminal en tu editor y usar el comando &lt;code class=&quot;highlighter-rouge&quot;&gt;/ide&lt;/code&gt; para ver los cambios aplicados en, digamos, Cursor—cerrando la brecha entre los flujos de trabajo basados en texto y GUI.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-ide.png&quot; alt=&quot;Claude Code /ide&quot; /&gt;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Claude Code /ide&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;-primeras-impresiones-y-experiencia-de-usuario&quot;&gt;💭 Primeras Impresiones y Experiencia de Usuario&lt;/h2&gt;
+
+&lt;p&gt;Cambiar de Cursor o VS Code a una herramienta dirigida por CLI se sintió extraño al principio. La falta de arrastrar y soltar para imágenes fue notable, pero puedes solucionarlo referenciando archivos directamente (ej., &lt;code class=&quot;highlighter-rouge&quot;&gt;@path_to_image&lt;/code&gt;). Lo mismo aplica para cualquier archivo que quieras compartir con Claude Code.&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img src=&quot;/assets/images/claude-code-add-files.png&quot; alt=&quot;Claude Code add files&quot; /&gt;
+&lt;em&gt;Adding files&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Lo que realmente me impresionó fue cómo &lt;strong&gt;Claude Code recuerda las instrucciones&lt;/strong&gt;. Por ejemplo, solo tuve que decirle una vez que ejecutara &lt;code class=&quot;highlighter-rouge&quot;&gt;pre-commit&lt;/code&gt; en archivos nuevos y modificados—a diferencia de Cursor, que a menudo necesita recordatorios a pesar de tener esta regla configurada globalmente. Otro punto destacado: cuando referencié un archivo llamado &lt;code class=&quot;highlighter-rouge&quot;&gt;report-23.csv&lt;/code&gt; y luego lo eliminé en favor de un nuevo reporte, Claude Code buscó proactivamente cualquier archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;report-*.csv&lt;/code&gt;, mostrando un nivel de conciencia contextual que se sintió genuinamente útil.&lt;/p&gt;
+
+&lt;h2 id=&quot;-sequential-thinking-planificación-con-ia&quot;&gt;🧠 Sequential Thinking: Planificación con IA&lt;/h2&gt;
+
+&lt;p&gt;Había escuchado sobre &lt;strong&gt;Sequential Thinking&lt;/strong&gt; antes, pero la documentación del proyecto parecía tan simple que inicialmente la pasé por alto. Sin embargo, después de verlo en acción con Claude Code, me sorprendí genuinamente. Cuando pides un plan, Claude Code crea una &lt;strong&gt;cadena de pensamientos&lt;/strong&gt;—un análisis detallado y curso de acción que puede seguir. Aún mejor, puedes ejecutar el plan paso a paso, intervenir para modificar acciones, y luego continuar la ejecución. Este proceso de planificación interactivo y transparente se siente más natural y controlable que los modos de planificación/agente en Cursor.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-plan-on.png&quot; alt=&quot;Claude Code Plan On&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Claude Code Plan On&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-sequential-thinking.png&quot; alt=&quot;Sequential Thinking&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Sequential Thinking&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-todo-list.png&quot; alt=&quot;Claude Code Todo List&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Claude Code Todo List&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;️-claude-code-vs-cursor-comparación-de-características-y-precios&quot;&gt;⚖️ Claude Code vs Cursor: Comparación de Características y Precios&lt;/h2&gt;
+
+&lt;p&gt;¿Por qué considerar una herramienta de IA CLI/basada en texto sobre Cursor? ¿No es Cursor más flexible, especialmente porque puedes elegir entre múltiples modelos (incluyendo los de Claude)? Aquí está mi perspectiva:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Flexibilidad de Modelos&lt;/strong&gt;: Cursor te permite elegir entre una gama de modelos, pero Claude Code está estrechamente integrado con los modelos de Anthropic y Sequential Thinking.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Precios&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Claude Code Pro&lt;/strong&gt;: $20/mes, adecuado para la mayoría de desarrolladores casuales y no intensivos. Los límites se reinician cada 5 horas.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Max&lt;/strong&gt;: Hasta 20x límite de uso por una tarifa fija ($200 por mes).&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;API&lt;/strong&gt;: Pago por uso, costos predecibles, pero más caro que Pro o Max a largo plazo.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Cursor&lt;/strong&gt;: El modo Max es poderoso pero puede volverse caro, especialmente después de los cambios recientes de precios. Una vez que alcanzas el límite, pagas bajo demanda y los costos pueden fácilmente exceder $100/mes para usuarios intensivos, sin período de reinicio.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Valor&lt;/strong&gt;: Para mis necesidades, el plan Pro de Claude Code es costo-efectivo y predecible. La flexibilidad de Cursor es genial, pero el modelo de precios puede ser decisivo para algunos.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-limit.png&quot; alt=&quot;Claude Code Limit Reset&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Claude Code Limit Reset&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;-experiencia-de-codificación-escenarios-del-mundo-real&quot;&gt;💻 Experiencia de Codificación: Escenarios del Mundo Real&lt;/h2&gt;
+
+&lt;p&gt;En la práctica, Claude Code ha cumplido y a veces superado mis expectativas. He trabajado en problemas donde Cursor se quedaría atascado en un bucle planificación → implementación → solución de problemas → disculpas (incluso usando varios modelos), mientras que Claude Code resolvió el mismo problema en una o dos ejecuciones. El &lt;strong&gt;modo de planificación&lt;/strong&gt; en Claude Code, especialmente cuando se combina con Sequential Thinking, te permite revisar y ajustar el plan antes de saltar a la implementación. Mientras que Cursor ofrece algo similar al cambiar entre los modos Ask y Agent, el flujo de trabajo de Claude Code se siente más intuitivo y menos fragmentado.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-PR.png&quot; alt=&quot;Claude Code&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Claude Code&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;-destacados&quot;&gt;✨ Destacados&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Instalación fácil&lt;/strong&gt;: Instalación simple con npm con requisitos del sistema claros y opciones de autenticación&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CLI se encuentra con GUI&lt;/strong&gt;: Claude Code cierra la brecha entre los flujos de trabajo de terminal y editor con integración VS Code/Cursor&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Memoria que se mantiene&lt;/strong&gt;: A diferencia de Cursor, Claude Code recuerda instrucciones sin recordatorios constantes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sequential Thinking&lt;/strong&gt;: Planificación interactiva paso a paso que es más natural que los modos de agente tradicionales&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Precios predecibles&lt;/strong&gt;: Plan Pro de $20/mes vs. costos impredecibles bajo demanda de Cursor&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Conciencia contextual&lt;/strong&gt;: Busca proactivamente archivos y mantiene el contexto del proyecto efectivamente&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-reflexiones-finales&quot;&gt;🎯 Reflexiones Finales&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Cursor es genial, pero no es la única forma de codificar.&lt;/strong&gt; Hay otras herramientas de IA con diferentes enfoques que podrían adaptarse mejor a tus necesidades o presupuesto.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Pagar más por menos no es ideal.&lt;/strong&gt; Los precios predecibles y justos importan—Claude Code cumple aquí.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sequential Thinking es un cambio de juego.&lt;/strong&gt; La planificación transparente paso a paso hace que las tareas complejas sean más manejables y colaborativas.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;El panorama de codificación con IA está evolucionando rápidamente. Mi consejo: mantente flexible, experimenta con nuevas herramientas, y elige lo que funcione mejor para tu flujo de trabajo y billetera.&lt;/p&gt;
+
+&lt;h2 id=&quot;-referencias&quot;&gt;📚 Referencias&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://claude.ai/code&quot;&gt;Claude Code&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.anthropic.com/en/docs/claude-code/setup&quot;&gt;Documentación de Configuración de Claude Code&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/sequentialthinking/sequentialthinking&quot;&gt;Sequential Thinking&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cursor.so/&quot;&gt;Cursor&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas IA" /><category term="Asistentes de Codificación" /><category term="Sequential Thinking" /><summary type="html">Una comparación práctica entre Claude Code y Cursor, con un análisis profundo de Sequential Thinking y perspectivas prácticas para desarrolladores que eligen su próximo asistente de codificación con IA.</summary></entry><entry><title type="html">Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica</title><link href="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/" rel="alternate" type="text/html" title="Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica" /><published>2025-06-30T19:00:00-05:00</published><updated>2025-06-30T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/">&lt;p&gt;&lt;img src=&quot;/assets/images/choosing-models-cursor.png&quot; alt=&quot;Selección de Modelos en Cursor&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;El otro día comenté que intuitivamente encuentro que &lt;strong&gt;O3&lt;/strong&gt; es mejor para razonamiento, resolución de problemas y troubleshooting, comparado con otros modelos como &lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;. Cursor tiene un árbol de selección para decidir qué modelo elegir basado no solo en el tipo de tarea, sino también en otros factores como cuánto control o interacción quieres tener (prompting), ventana de contexto, etc.&lt;/p&gt;
 
@@ -1079,103 +1199,4 @@ Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Penci
   &lt;li&gt;&lt;a href=&quot;https://paperlike.com&quot; target=&quot;_blank&quot;&gt;Página de PaperLike&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;Accesorios para iPad&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;Agarradores de lápiz de PaperLike&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Pencil y decidí escribir este artículo para comentarles sobre un producto q...</summary></entry><entry><title type="html">iPad Pro como estación de trabajo portátil</title><link href="https://lgallardo.com/es/2022/01/25/ipad-pro-as-a-portable-workstation/" rel="alternate" type="text/html" title="iPad Pro como estación de trabajo portátil" /><published>2022-01-24T23:00:07-06:00</published><updated>2022-01-24T23:00:07-06:00</updated><id>https://lgallardo.com/es/2022/01/25/ipad-pro-as-a-portable-workstation</id><content type="html" xml:base="https://lgallardo.com/es/2022/01/25/ipad-pro-as-a-portable-workstation/">&lt;p&gt;&lt;img src=&quot;/assets/images/ipad-pro-2021.jpg&quot; alt=&quot;iPad Pro&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Hace un tiempo que no escribía en el blog, primero porque no encontraba algo interesante para compartir y segundo porque no había mucho tiempo de sobra (no es que ahora haya mucho tiempo de sobra pero bueno, se busca siempre un espacio para escribir unas líneas).&lt;/p&gt;
-
-&lt;p&gt;Lo cierto es que hace poco me hice con un iPad Pro de 11” y dentro de las cosas que estuve probando fue la posibilidad de usarlo como equipo de trabajo ligero, es decir, un equipo que pueda tener a la mano en mi mesa de noche sin que sea una computadora completa.&lt;/p&gt;
-
-&lt;p&gt;Si bien el iPad tiene muchas ventajas y cosas que me gustaron, el termino “Pro” no da como para tener una terminal completa de un sistema operativo o tener una &lt;a href=&quot;https://youtu.be/LrLDKYFyLMM&quot; target=&quot;_blank&quot;&gt;máquina virtual funcional&lt;/a&gt;, por lo que decidí investigar a ver si existía alguna opción y de las cosas que más tuvieron sentido para mí fue la de usar el iPad Pro como un cliente que se conecta a alguna otra parte donde si pueda tener acceso a un sistema operativo completo.&lt;/p&gt;
-
-&lt;p&gt;De hecho en un &lt;a href=&quot;https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/&quot; target=&quot;_blank&quot;&gt;artículo&lt;/a&gt; que conseguí sugerían la opción de usar un Digital Ocean Droplet para tener una máquina virtual en la nube y desde ahí poder trabajar. Esta opción no es mala, pero teniendo una estación de trabajo en casa no vi la necesidad de irme a la nube.&lt;/p&gt;
-
-&lt;p&gt;Siguiendo algunas de estas sugerencias terminé instalando &lt;strong&gt;Blink Shell&lt;/strong&gt; que viene con soporte para &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;, y usando &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; en mi laptop con Linux como sitio remoto pude hacerlo. A continuación les comento el detalle de esta configuración.&lt;/p&gt;
-
-&lt;h1 id=&quot;blink-shell-ssh--mosh&quot;&gt;Blink Shell (ssh / mosh)&lt;/h1&gt;
-
-&lt;p&gt;Lo primero que tuve que buscar fue un cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; decente para iPad. Dentro de las recomendaciones recurrentes en Internet &lt;strong&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Blink Shell&lt;/a&gt;&lt;/strong&gt; aparecía como una opción. En principio el hecho de que haya que comprarlo sin  un trial no gustaba pero como insistían en que era la mejor opción decidí probarlo (USD 19,99 a la fecha de publicación de este post).&lt;/p&gt;
-
-&lt;p&gt;Tengo que decir que &lt;strong&gt;Blink Shell&lt;/strong&gt; es muy pero muy bueno, está diseñado para dispositivos móviles y tiene soporte para &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;mosh&quot;&gt;Mosh&lt;/h2&gt;
-
-&lt;p&gt;Te estarás preguntando como en su momento lo hice yo ¿Qué es &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;? La &lt;a href=&quot;https://mosh.org&quot; target=&quot;_blank&quot;&gt;página de mosh&lt;/a&gt; dice lo siguiente:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Aplicación de terminal remoto que permite la itinerancia, admite conectividad intermitente y proporciona eco local inteligente y edición de línea de las pulsaciones de teclado del usuario.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;¿Sigues sin entender para qué sirve &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; como me pasaba a mí? Es como &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt; pero sin tener que aprender comandos para crear y manejar sesiones, además  por debajo utliza &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;.  En otras palabras, vas a tener la posibilidad de continuar con tu sesión de trabajo donde la dejaste, o si por ejemplo se te cortó la conexión y logras conectarte de nuevo con otra red.&lt;/p&gt;
-
-&lt;p&gt;Como por debajo se seguimos teniendo &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt;, para usar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; la sintaxis es prácticamente la misma.  Es decir, si antes te conectabas con &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; a un servidor de esta manera:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh lgallard@192.168.1.65
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ahora con &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; lo haces de esta forma:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh lgallard@192.168.1.65
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Parece sencillo el cambio y con esto ganamos que al cerrar nuestro iPad o el equipo donde estanos usando el cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; vamos a poder recuperar mágicamente la sesión de trabajo al volvernos a conectar.&lt;/p&gt;
-
-&lt;p&gt;Puedes configurar las opciones de &lt;strong&gt;Blink Shell&lt;/strong&gt; accediendo a un asistente de configuración para tener distintos hosts y facilitar la conexión con un nombre en vez de una dirección IP. Para acceder a este asistente basta con escribir &lt;code class=&quot;highlighter-rouge&quot;&gt;config&lt;/code&gt; desde el terminal:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/Blink_config.png&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;En mi caso ahora me puedo conectar a mi estación de trabajo de la siguiente forma:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh dauntless
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;mosh-lo-malo&quot;&gt;Mosh, lo malo&lt;/h2&gt;
-
-&lt;p&gt;El gran punto en contra de &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; es que no puedes hacer scroll del terminal, es decir, si necesitas consultar la salida de comandos que hayas ejecutado previamente y que ya no estén en la pantalla, no los vas a poder ver. Esto para mí era un gran problema porque al usar &lt;code class=&quot;highlighter-rouge&quot;&gt;terraform&lt;/code&gt; perdía los planes con los cambios a ser aplicados.&lt;/p&gt;
-
-&lt;p&gt;Esta es la forma en que trabaja &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt;, para tener un óptimo rendimiento hacen un rendering del texto. Hay un &lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;issue abierto&lt;/a&gt; de varios años donde los desarrolladores comentan que está a modo de referencia pero que no tienen ninguna intención de implementarlo. ¿Entonces no hay solución? Si, &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;qué-es-tmux&quot;&gt;¿Qué es tmux?&lt;/h1&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; es una herramienta que permite tener varias terminales abiertas (o ventanas) para que sean accedidas y controladas desde un solo terminal como haríamos con &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Debes instalar &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; en el equipo donde deseamos iniciar sesión y una vez instalado basta con ejecutar esto desde el cliente &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; (el iPad Pro en mi caso):&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mosh danuntless -- tmux new  -s terminal-1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;De esta forma creamos una sessión nueva cuyo nombre es &lt;strong&gt;terminal-1&lt;/strong&gt;. Luego para acceder a esta sesión posteriormente debemos ejecutar lo siguiente:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mosh danuntless -- tmux a  -t terminal-1&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;activar-scrolling--en-tmux&quot;&gt;Activar scrolling  en tmux&lt;/h2&gt;
-
-&lt;p&gt;En la estación de trabajo remota se debe configurar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; para tener el scrroling con &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;, esto se consigue editando el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.tmux.conf&lt;/code&gt; con este contenido:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new-session
-set -g history-limit 30000
-set -g mouse on
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;blink--ssh---mosh--tmux--eh&quot;&gt;Blink + ssh  + mosh + tmux … eh?&lt;/h2&gt;
-
-&lt;p&gt;“Espera un momento… &lt;strong&gt;Blink + ssh + mosh +  tmux&lt;/strong&gt;, no es medio complicado todo? No es mejor usar &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; con &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;? “. Sí, es una alternativa pero con &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; no te reconectarás automáticamente y tendrás que loguearte nuevamente si por ejemplo cierras el iPad, si tu dirección IP cambia por algún motivo (por ejemplo cambias de WiFI a línea telefónica) o si la sesión &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; expira.&lt;/p&gt;
-
-&lt;p&gt;Reconozco que hay una curva de aprendizaje con &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; pero una vez superada te va a encantar y te preguntarás por qué no usaste antes &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;más-sobre-tmux&quot;&gt;Más sobre tmux&lt;/h2&gt;
-
-&lt;p&gt;Si quieres aprender a usar &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; te dejo una &lt;a href=&quot;https://tmuxcheatsheet.com&quot; target=&quot;_blank&quot;&gt;cheat sheet&lt;/a&gt; con los comandos que puedes usar. En particular encontré muy útil la división en paneles y el uso del zoom entre ellos, pero debo admitir que copiar texto entre paneles es algo complicado en el iPad y a veces prefiero usar &lt;code class=&quot;highlighter-rouge&quot;&gt;vim&lt;/code&gt; para esto, pero seguro ya le encontraré la vuelta.&lt;/p&gt;
-
-&lt;h1 id=&quot;palabras-finales&quot;&gt;Palabras finales&lt;/h1&gt;
-
-&lt;p&gt;Si bien acá comento la experiencia con el iPad Pro, todo esto se puede replicar en un iPad Air e incluso usar &lt;code class=&quot;highlighter-rouge&quot;&gt;mosh&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; desde otras estaciones de trabajo con Linux o Windows.&lt;/p&gt;
-
-&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://youtu.be/LrLDKYFyLMM&quot; target=&quot;_blank&quot;&gt;Run ANY OS on iPad or iPhone! - YouTube&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/&quot; target=&quot;_blank&quot;&gt;Using the iPad Pro as my development machine&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Blink Shell&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blink.sh&quot; target=&quot;_blank&quot;&gt;Mosh&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://tmuxcheatsheet.com&quot;&gt;Tmux cheat sheet&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/mobile-shell/mosh/issues/122&quot; target=&quot;_blank&quot;&gt;mosh prevents the use of scrollback&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Hace un tiempo que no escribía en el blog, primero porque no encontraba algo interesante para compartir y segundo porque no había mucho tiempo de sobr...</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Pencil y decidí escribir este artículo para comentarles sobre un producto q...</summary></entry></feed>
