@@ -1,4 +1,646 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-07-09T18:10:03-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Más allá de Cursor: Mi experiencia con Claude Code y Sequential Thinking</title><link href="https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" rel="alternate" type="text/html" title="Más allá de Cursor: Mi experiencia con Claude Code y Sequential Thinking" /><published>2025-07-08T19:00:00-05:00</published><updated>2025-07-08T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking/">&lt;p&gt;&lt;img src=&quot;/assets/images/code-cursor-claude.png&quot; alt=&quot;Claude Code, Cursor, and Sequential Thinking&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-07-18T12:51:18-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Automatizando Revisiones de Código con Claude Code GitHub Actions</title><link href="https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup/" rel="alternate" type="text/html" title="Automatizando Revisiones de Código con Claude Code GitHub Actions" /><published>2025-07-17T19:00:00-05:00</published><updated>2025-07-17T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-vs.png&quot; alt=&quot;Configuración de Claude Code GitHub Actions&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La evolución de las herramientas de desarrollo impulsadas por IA continúa acelerándose, y ahora podemos traer el poder de &lt;strong&gt;Claude Code&lt;/strong&gt; directamente a nuestros flujos de trabajo de GitHub. Con Claude Code GitHub Actions, puedes tener un asistente de IA inteligente que automáticamente revisa pull requests, implementa funcionalidades desde issues y ayuda a mantener la calidad del código—todo activado con una simple mención &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;En esta guía completa, te llevaré paso a paso por la configuración de Claude Code GitHub Actions desde cero, cubriendo tanto el método de inicio rápido como las configuraciones de nivel empresarial para AWS Bedrock y Google Vertex AI.&lt;/p&gt;
+
+&lt;h2 id=&quot;-qué-es-claude-code-github-actions&quot;&gt;🚀 ¿Qué es Claude Code GitHub Actions?&lt;/h2&gt;
+
+&lt;p&gt;Claude Code GitHub Actions trae automatización impulsada por IA a tu flujo de trabajo de GitHub. Piénsalo como tener un desarrollador senior en tu equipo que:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Analiza código&lt;/strong&gt; y proporciona retroalimentación inteligente&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Crea pull requests&lt;/strong&gt; a partir de descripciones de issues&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Implementa funcionalidades&lt;/strong&gt; siguiendo tus estándares de codificación&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Corrige bugs&lt;/strong&gt; automáticamente con pruebas apropiadas&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Sigue tus directrices&lt;/strong&gt; definidas en archivos &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Se integra perfectamente&lt;/strong&gt; con tu flujo de trabajo existente de GitHub&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La belleza de este enfoque es que Claude ejecuta en la infraestructura de GitHub, manteniendo tu código seguro mientras proporciona capacidades de automatización de nivel empresarial.&lt;/p&gt;
+
+&lt;h2 id=&quot;️-requisitos-previos&quot;&gt;🛠️ Requisitos Previos&lt;/h2&gt;
+
+&lt;p&gt;Antes de comenzar, asegúrate de tener:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Acceso de administrador al repositorio&lt;/strong&gt; (requerido para instalar aplicaciones de GitHub y manejar secretos)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Facturación activa de Claude Code&lt;/strong&gt; (vía Anthropic Console, Claude Pro/Max, o proveedores de nube empresariales)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Comprensión básica&lt;/strong&gt; de GitHub Actions y flujos de trabajo YAML&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-método-de-configuración-rápida&quot;&gt;📋 Método de Configuración Rápida&lt;/h2&gt;
+
+&lt;p&gt;La forma más rápida de comenzar es a través del instalador integrado de Claude Code. Veamos este proceso paso a paso:&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-1-acceder-a-la-instalación-de-github&quot;&gt;Paso 1: Acceder a la Instalación de GitHub&lt;/h3&gt;
+
+&lt;p&gt;Primero, navega a GitHub y accede a la interfaz de instalación:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github.png&quot; alt=&quot;Interfaz de GitHub&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Abre tu terminal en el directorio de tu repositorio y ejecuta:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;tu-repositorio
+claude
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Luego ejecuta el comando de instalación:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/install-github-app
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;paso-2-seleccionar-tu-repositorio&quot;&gt;Paso 2: Seleccionar tu Repositorio&lt;/h3&gt;
+
+&lt;p&gt;El instalador te pedirá que selecciones qué repositorio configurar:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-repo.png&quot; alt=&quot;Selección de Repositorio&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Puedes usar tu repositorio actual o especificar uno diferente. Este paso asegura que Claude Code obtenga los permisos apropiados para tu proyecto específico.&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-3-configurar-autenticación-de-api&quot;&gt;Paso 3: Configurar Autenticación de API&lt;/h3&gt;
+
+&lt;p&gt;A continuación, necesitarás configurar tu método de autenticación de API:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-api-subscription.png&quot; alt=&quot;Configuración de Suscripción API&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Elige entre:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Crear un token de larga duración&lt;/strong&gt; con tu suscripción de Claude (recomendado para proyectos personales)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ingresar una nueva clave API&lt;/strong&gt; (para configuraciones empresariales personalizadas)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;paso-4-completar-la-instalación-de-la-aplicación-github&quot;&gt;Paso 4: Completar la Instalación de la Aplicación GitHub&lt;/h3&gt;
+
+&lt;p&gt;El instalador abrirá tu navegador para completar la instalación de la Aplicación GitHub:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-enter.png&quot; alt=&quot;Ingresar Instalación&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Esto te redirige a la página de instalación de la aplicación de GitHub donde otorgarás los permisos necesarios.&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-5-selección-de-organización&quot;&gt;Paso 5: Selección de Organización&lt;/h3&gt;
+
+&lt;p&gt;Si eres parte de múltiples organizaciones, selecciona la apropiada:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-org.png&quot; alt=&quot;Selección de Organización&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-org-lgallard.png&quot; alt=&quot;Selección de Organización - lgallard&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Elige tu cuenta personal o la organización que posee el repositorio que deseas configurar.&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-6-instalar-la-aplicación-claude-github&quot;&gt;Paso 6: Instalar la Aplicación Claude GitHub&lt;/h3&gt;
+
+&lt;p&gt;Completa la instalación de la Aplicación Claude GitHub:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-app.png&quot; alt=&quot;Aplicación Claude GitHub&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Revisa y confirma los permisos. La Aplicación Claude GitHub necesita:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Acceso de lectura a metadatos&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Acceso de lectura y escritura a código, issues y pull requests&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;paso-7-autenticación-final&quot;&gt;Paso 7: Autenticación Final&lt;/h3&gt;
+
+&lt;p&gt;Completa el proceso de autenticación:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-auth.png&quot; alt=&quot;Autenticación Completa&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Una vez que la autenticación esté completa, Claude Code automáticamente:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Instalará la Aplicación GitHub en tu repositorio&lt;/li&gt;
+  &lt;li&gt;Agregará tu clave API como un secreto del repositorio (&lt;code class=&quot;highlighter-rouge&quot;&gt;ANTHROPIC_API_KEY&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;Creará el archivo de flujo de trabajo en &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/workflows/claude.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;paso-8-seleccionar-flujos-de-trabajo-de-github&quot;&gt;Paso 8: Seleccionar Flujos de Trabajo de GitHub&lt;/h3&gt;
+
+&lt;p&gt;Durante el proceso de instalación, se te pedirá que selecciones qué flujos de trabajo instalar:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github-workflows.png&quot; alt=&quot;Selección de Flujos de Trabajo de GitHub&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Puedes elegir entre:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;@Claude Code&lt;/strong&gt;: Flujo de trabajo interactivo activado por menciones &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; en issues y comentarios de PR&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Claude Code Review&lt;/strong&gt;: Flujo de trabajo de revisión automatizada que se ejecuta en nuevos pull requests&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ambas opciones proporcionan diferentes enfoques para integrar Claude en tu flujo de trabajo de desarrollo.&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-9-revisar-el-pull-request-automatizado&quot;&gt;Paso 9: Revisar el Pull Request Automatizado&lt;/h3&gt;
+
+&lt;p&gt;Claude Code automáticamente crea un pull request con los archivos de flujo de trabajo necesarios:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr.png&quot; alt=&quot;PR de Claude GitHub&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;El PR incluye documentación completa explicando qué puede hacer Claude Code y cómo usarlo efectivamente.&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-10-claude-revisa-su-propio-trabajo&quot;&gt;Paso 10: Claude Revisa su Propio Trabajo&lt;/h3&gt;
+
+&lt;p&gt;Una de las características más impresionantes es que Claude puede revisar su propio pull request, proporcionando análisis detallado:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr-comment.png&quot; alt=&quot;Comentario de PR de Claude&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Claude automáticamente analiza los archivos de flujo de trabajo y proporciona una evaluación completa:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr-assessment.png&quot; alt=&quot;Evaluación de PR de Claude&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La revisión incluye retroalimentación detallada sobre calidad de código, prácticas de seguridad y consideraciones de rendimiento:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github-review.png&quot; alt=&quot;Revisión de Claude GitHub&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Al completarse, Claude proporciona un resumen de revisión completo con análisis detallado:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-review.png&quot; alt=&quot;Revisión Completa de Claude&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Esto muestra la evaluación exhaustiva de Claude incluyendo evaluación de calidad de código, análisis de seguridad y consideraciones de experiencia del desarrollador.&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-11-completar-configuración-de-autenticación&quot;&gt;Paso 11: Completar Configuración de Autenticación&lt;/h3&gt;
+
+&lt;p&gt;Después de revisar el PR, completa el paso final de autenticación:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-claude-auth.png&quot; alt=&quot;Autenticación de Claude&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-12-instalación-completa&quot;&gt;Paso 12: Instalación Completa&lt;/h3&gt;
+
+&lt;p&gt;Una vez que todo esté configurado, verás una confirmación de éxito:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-done.png&quot; alt=&quot;Configuración Completa de Claude&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;El proceso de instalación proporciona pasos siguientes claros:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Fusionar el PR&lt;/strong&gt; para habilitar la funcionalidad de Claude Code&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Instalar la Aplicación Claude GitHub&lt;/strong&gt; si aún no se ha hecho&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Comenzar a usar menciones &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt;&lt;/strong&gt; en tus issues y PRs&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;-configuración-manual-método-alternativo&quot;&gt;🔧 Configuración Manual (Método Alternativo)&lt;/h2&gt;
+
+&lt;p&gt;Si la configuración rápida no funciona o prefieres configuración manual, sigue estos pasos:&lt;/p&gt;
+
+&lt;h3 id=&quot;1-instalar-la-aplicación-claude-github&quot;&gt;1. Instalar la Aplicación Claude GitHub&lt;/h3&gt;
+
+&lt;p&gt;Visita &lt;a href=&quot;https://github.com/apps/claude&quot;&gt;https://github.com/apps/claude&lt;/a&gt; e instala la aplicación en tu repositorio.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-agregar-secretos-del-repositorio&quot;&gt;2. Agregar Secretos del Repositorio&lt;/h3&gt;
+
+&lt;p&gt;Navega a &lt;strong&gt;Configuraciones → Secretos y variables → Acciones&lt;/strong&gt; de tu repositorio y agrega:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ANTHROPIC_API_KEY: tu_clave_api_anthropic_aqui
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-crear-el-archivo-de-flujo-de-trabajo&quot;&gt;3. Crear el Archivo de Flujo de Trabajo&lt;/h3&gt;
+
+&lt;p&gt;Crea &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/workflows/claude.yml&lt;/code&gt; con esta configuración:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude Code&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request_review&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;submitted&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;claude&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'issue_comment' &amp;amp;&amp;amp; contains(github.event.comment.body, '@claude')) ||&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'pull_request_review_comment' &amp;amp;&amp;amp; contains(github.event.comment.body, '@claude')) ||&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'pull_request_review' &amp;amp;&amp;amp; contains(github.event.review.body, '@claude')) ||&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'issues' &amp;amp;&amp;amp; (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;fetch-depth&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;1&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Run Claude Code&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;anthropic_api_key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;allowed_tools&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;mcp__github__create_pull_request'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-configuración-empresarial-aws-bedrock-y-google-vertex-ai&quot;&gt;🏢 Configuración Empresarial (AWS Bedrock y Google Vertex AI)&lt;/h2&gt;
+
+&lt;p&gt;Para entornos empresariales, puedes configurar Claude Code para usar tu infraestructura de nube existente:&lt;/p&gt;
+
+&lt;h3 id=&quot;configuración-de-aws-bedrock&quot;&gt;Configuración de AWS Bedrock&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude PR Action (AWS Bedrock)&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;claude-pr&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;AWS_REGION&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-west-2&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Configure AWS Credentials (OIDC)&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;aws-actions/configure-aws-credentials@v4&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;role-to-assume&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;aws-region&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-west-2&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;trigger_phrase&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@claude&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;timeout_minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;60&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;use_bedrock&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;us.anthropic.claude-3-7-sonnet-20250219-v1:0&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;configuración-de-google-vertex-ai&quot;&gt;Configuración de Google Vertex AI&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude PR Action (Vertex AI)&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;claude-pr&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Authenticate to Google Cloud&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;google-github-actions/auth@v2&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;workload_identity_provider&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;service_account&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+      
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;trigger_phrase&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@claude&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;timeout_minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;60&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;use_vertex&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;claude-3-7-sonnet@20250219&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ANTHROPIC_VERTEX_PROJECT_ID&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;CLOUD_ML_REGION&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-east5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-mejores-prácticas-de-configuración&quot;&gt;📝 Mejores Prácticas de Configuración&lt;/h2&gt;
+
+&lt;h3 id=&quot;crear-un-archivo-claudemd&quot;&gt;Crear un Archivo CLAUDE.md&lt;/h3&gt;
+
+&lt;p&gt;Crea un archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt; en la raíz de tu repositorio para guiar el comportamiento de Claude:&lt;/p&gt;
+
+&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gh&quot;&gt;# Directrices del Proyecto para Claude Code&lt;/span&gt;
+
+&lt;span class=&quot;gu&quot;&gt;## Estilo de Código&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Usar TypeScript para todo código nuevo
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Seguir configuración de ESLint
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Preferir componentes funcionales en React
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Usar async/await sobre Promises
+
+&lt;span class=&quot;gu&quot;&gt;## Criterios de Revisión&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Asegurar que todas las funciones tengan manejo de errores apropiado
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Verificar seguridad de tipos (no tipos &lt;span class=&quot;sb&quot;&gt;`any`&lt;/span&gt;)
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Verificar implicaciones de rendimiento
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Validar requisitos de accesibilidad
+
+&lt;span class=&quot;gu&quot;&gt;## Estructura del Proyecto&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/src`&lt;/span&gt; - Código principal de la aplicación
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/tests`&lt;/span&gt; - Archivos de prueba
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/docs`&lt;/span&gt; - Documentación
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/scripts`&lt;/span&gt; - Scripts de construcción y despliegue
+
+&lt;span class=&quot;gu&quot;&gt;## Requisitos de Pruebas&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Pruebas unitarias para toda lógica de negocio
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Pruebas de integración para endpoints de API
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Pruebas E2E para flujos críticos de usuario
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;consideraciones-de-seguridad&quot;&gt;Consideraciones de Seguridad&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Nunca confirmes claves API&lt;/strong&gt; en tu repositorio&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Usa Secretos de GitHub&lt;/strong&gt; para toda configuración sensible&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Limita permisos&lt;/strong&gt; solo a lo necesario&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Revisa las sugerencias de Claude&lt;/strong&gt; antes de fusionar&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Configura timeouts apropiados&lt;/strong&gt; para prevenir flujos de trabajo descontrolados&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-ejemplos-de-uso-completos&quot;&gt;🎯 Ejemplos de Uso Completos&lt;/h2&gt;
+
+&lt;p&gt;Ahora que Claude Code está instalado, aquí tienes ejemplos prácticos de cómo aprovechar sus capacidades en tu flujo de trabajo de desarrollo diario:&lt;/p&gt;
+
+&lt;h3 id=&quot;-implementación-de-funcionalidades&quot;&gt;🔧 Implementación de Funcionalidades&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Convertir Issues en Pull Requests&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Crea un issue con una descripción de funcionalidad, luego comenta:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude implementa esta funcionalidad basándote en la descripción del issue
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Analizará los requisitos del issue&lt;/li&gt;
+  &lt;li&gt;Revisará tus patrones de código existentes&lt;/li&gt;
+  &lt;li&gt;Escribirá la implementación siguiendo tus estándares de codificación&lt;/li&gt;
+  &lt;li&gt;Creará pruebas si se especifica en tu &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Abrirá un pull request con la funcionalidad completa&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Ejemplo&lt;/strong&gt;: “Agregar funcionalidad de carga de avatar de usuario con integración S3”&lt;/p&gt;
+
+&lt;h3 id=&quot;-corrección-de-bugs&quot;&gt;🐛 Corrección de Bugs&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Resolución Automática de Bugs&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Cuando encuentres un bug, crea un issue o comenta:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude corrige el TypeError en el componente de dashboard de usuario
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Localizará el código problemático&lt;/li&gt;
+  &lt;li&gt;Analizará la causa raíz&lt;/li&gt;
+  &lt;li&gt;Implementará una corrección apropiada&lt;/li&gt;
+  &lt;li&gt;Agregará manejo de errores cuando sea apropiado&lt;/li&gt;
+  &lt;li&gt;Creará un PR con la solución&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Corrección Avanzada de Bugs&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude corrige la fuga de memoria en el administrador de conexión WebSocket. 
+El problema ocurre cuando los usuarios cambian rápidamente entre canales.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-orientación-de-implementación&quot;&gt;💡 Orientación de Implementación&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Obtener Consejos de Arquitectura&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;En un comentario de PR:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude ¿cómo debería implementar autenticación de usuario para este endpoint?
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude proporciona:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Mejores prácticas de seguridad&lt;/li&gt;
+  &lt;li&gt;Ejemplos de código específicos para tu stack&lt;/li&gt;
+  &lt;li&gt;Patrones de integración con tu sistema de autenticación existente&lt;/li&gt;
+  &lt;li&gt;Consideraciones de rendimiento&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Ayuda de Implementación Compleja&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude ayúdame a implementar un sistema de limitación de tasa para esta API. 
+Necesito soportar diferentes límites por nivel de usuario y degradación gradual.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-revisión-de-código-y-aseguramiento-de-calidad&quot;&gt;📋 Revisión de Código y Aseguramiento de Calidad&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Revisiones Completas de Código&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude revisa este PR por vulnerabilidades de seguridad y problemas de rendimiento
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude realiza:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Escaneo de vulnerabilidades de seguridad&lt;/li&gt;
+  &lt;li&gt;Identificación de cuellos de botella de rendimiento&lt;/li&gt;
+  &lt;li&gt;Evaluación de calidad de código&lt;/li&gt;
+  &lt;li&gt;Validación de mejores prácticas&lt;/li&gt;
+  &lt;li&gt;Verificaciones de cumplimiento de accesibilidad&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Enfoque Específico de Revisión&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude revisa esta migración de base de datos por pérdida potencial de datos y seguridad de rollback
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-pruebas-y-documentación&quot;&gt;🧪 Pruebas y Documentación&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Generación de Pruebas&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude escribe pruebas completas para este nuevo módulo de procesamiento de pagos
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude crea:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Pruebas unitarias para todas las funciones&lt;/li&gt;
+  &lt;li&gt;Pruebas de integración para APIs externas&lt;/li&gt;
+  &lt;li&gt;Pruebas de casos límite&lt;/li&gt;
+  &lt;li&gt;Implementaciones mock para dependencias&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Actualizaciones de Documentación&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude actualiza la documentación de la API para reflejar estos nuevos endpoints
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Mejoras de README&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude mejora el README del proyecto con mejores instrucciones de configuración y ejemplos
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;️-refactorización-y-optimización&quot;&gt;🏗️ Refactorización y Optimización&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Modernización de Código&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude refactoriza este componente para usar hooks de React en lugar de componentes de clase
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Optimización de Rendimiento&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude optimiza esta consulta de base de datos - está causando timeouts en datasets grandes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Actualizaciones de Código Legacy&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude actualiza este código de Node.js 14 a Node.js 20, 
+incluyendo actualizaciones de dependencias y reemplazos de APIs obsoletas
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-mejoras-de-seguridad&quot;&gt;🔒 Mejoras de Seguridad&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Auditorías de Seguridad&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude audita este flujo de autenticación por vulnerabilidades de seguridad
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Seguridad de Dependencias&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude verifica problemas de seguridad en nuestras dependencias de package.json 
+y sugiere alternativas más seguras
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-devops-y-despliegue&quot;&gt;🚀 DevOps y Despliegue&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Mejoras de CI/CD&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude optimiza nuestro flujo de trabajo de GitHub Actions para reducir tiempos de construcción
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Optimización de Docker&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude mejora este Dockerfile para mejor caché y tamaño de imagen más pequeño
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Infraestructura como Código&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude revisa esta configuración de Terraform para mejores prácticas de seguridad de AWS
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-flujos-de-trabajo-avanzados&quot;&gt;📊 Flujos de Trabajo Avanzados&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Desarrollo de Funcionalidades Multi-Paso&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude implementa un sistema completo de notificaciones de usuario:
+1. Esquema de base de datos para notificaciones
+2. Endpoints de API para operaciones CRUD  
+3. Integración WebSocket para actualizaciones en tiempo real
+4. Worker de notificaciones por email
+5. Componente frontend de notificaciones
+6. Suite completa de pruebas
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Asistencia de Migración&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude ayuda a migrar nuestra API REST a GraphQL:
+- Crear definiciones de esquema
+- Implementar resolvers  
+- Actualizar consultas del frontend
+- Mantener compatibilidad hacia atrás
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-desarrollo-frontend&quot;&gt;🎨 Desarrollo Frontend&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Creación de Componentes&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude crea un componente de tabla de datos reutilizable con:
+- Ordenamiento y filtrado
+- Paginación
+- Selección de filas
+- Funcionalidad de exportación
+- Diseño responsivo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Estilizado y UX&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude mejora la accesibilidad de este componente de formulario 
+y agrega etiquetas ARIA apropiadas
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-analíticas-y-monitoreo&quot;&gt;📈 Analíticas y Monitoreo&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Implementación de Observabilidad&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude agrega logging y monitoreo completo a este servicio:
+- Logging estructurado con IDs de correlación
+- Recolección de métricas para eventos clave de negocio
+- Seguimiento de errores y alertas
+- Monitoreo de rendimiento
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Análisis de Datos&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude analiza nuestras métricas de engagement de usuario y sugiere escenarios de pruebas A/B
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-consejos-pro-para-uso-efectivo-de-claude&quot;&gt;💡 Consejos Pro para Uso Efectivo de Claude&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Sé Específico&lt;/strong&gt;: Mientras más contexto proporciones, mejores serán las sugerencias de Claude&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Referencia Archivos&lt;/strong&gt;: Usa &lt;code class=&quot;highlighter-rouge&quot;&gt;@nombrearchivo&lt;/code&gt; para ayudar a Claude a entender tu código base&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Establece Expectativas&lt;/strong&gt;: Menciona tus patrones preferidos en &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Retroalimentación Iterativa&lt;/strong&gt;: Participa en conversación para refinar la implementación&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Revisa Cuidadosamente&lt;/strong&gt;: Siempre revisa las sugerencias de Claude antes de fusionar&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Estos ejemplos demuestran la versatilidad de Claude Code en manejar todo desde correcciones simples de bugs hasta decisiones arquitectónicas complejas. La clave es tratar a Claude como un miembro del equipo conocedor que puede entender contexto y seguir los patrones establecidos de tu proyecto.&lt;/p&gt;
+
+&lt;h2 id=&quot;-consideraciones-de-costos&quot;&gt;💰 Consideraciones de Costos&lt;/h2&gt;
+
+&lt;p&gt;Al usar Claude Code GitHub Actions, ten en cuenta los costos asociados:&lt;/p&gt;
+
+&lt;h3 id=&quot;costos-de-github-actions&quot;&gt;Costos de GitHub Actions&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Se ejecuta en runners hospedados por GitHub&lt;/li&gt;
+  &lt;li&gt;Consume tus minutos de GitHub Actions&lt;/li&gt;
+  &lt;li&gt;Ve la &lt;a href=&quot;https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions&quot;&gt;documentación de facturación de GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;costos-de-api&quot;&gt;Costos de API&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cada interacción de Claude consume tokens basados en la longitud de prompt/respuesta&lt;/li&gt;
+  &lt;li&gt;El uso varía por complejidad de tarea y tamaño del código base&lt;/li&gt;
+  &lt;li&gt;Ve la &lt;a href=&quot;https://claude.ai/pricing&quot;&gt;página de precios de Claude&lt;/a&gt; para tarifas actuales&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;consejos-de-optimización-de-costos&quot;&gt;Consejos de Optimización de Costos&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Usa comandos específicos de &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; para reducir llamadas innecesarias a la API&lt;/li&gt;
+  &lt;li&gt;Configura límites apropiados de &lt;code class=&quot;highlighter-rouge&quot;&gt;max_turns&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Establece &lt;code class=&quot;highlighter-rouge&quot;&gt;timeout_minutes&lt;/code&gt; razonables para evitar flujos de trabajo descontrolados&lt;/li&gt;
+  &lt;li&gt;Considera usar controles de concurrencia de GitHub para limitar ejecuciones paralelas&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-solución-de-problemas&quot;&gt;🔍 Solución de Problemas&lt;/h2&gt;
+
+&lt;h3 id=&quot;claude-no-responde&quot;&gt;Claude No Responde&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Verifica que la Aplicación GitHub esté instalada correctamente&lt;/li&gt;
+  &lt;li&gt;✅ Verifica que los flujos de trabajo estén habilitados en tu repositorio&lt;/li&gt;
+  &lt;li&gt;✅ Asegúrate de que la clave API esté establecida en los secretos del repositorio&lt;/li&gt;
+  &lt;li&gt;✅ Confirma que el comentario contenga &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; (no &lt;code class=&quot;highlighter-rouge&quot;&gt;/claude&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;errores-de-autenticación&quot;&gt;Errores de Autenticación&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Confirma que la clave API sea válida y tenga permisos suficientes&lt;/li&gt;
+  &lt;li&gt;✅ Para Bedrock/Vertex, verifica la configuración de credenciales de nube&lt;/li&gt;
+  &lt;li&gt;✅ Asegúrate de que los secretos estén nombrados correctamente en los flujos de trabajo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;flujo-de-trabajo-no-se-activa&quot;&gt;Flujo de Trabajo No Se Activa&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Verifica que los triggers del flujo de trabajo incluyan los eventos necesarios&lt;/li&gt;
+  &lt;li&gt;✅ Verifica que los permisos de la aplicación incluyan triggers de CI&lt;/li&gt;
+  &lt;li&gt;✅ Asegúrate de estar usando la Aplicación GitHub (no el usuario Actions)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-conclusión&quot;&gt;🎉 Conclusión&lt;/h2&gt;
+
+&lt;p&gt;Claude Code GitHub Actions representa un paso significativo adelante en flujos de trabajo de desarrollo asistidos por IA. Al automatizar revisiones de código, implementación de funcionalidades y corrección de bugs, los equipos pueden enfocarse en arquitectura de alto nivel y lógica de negocio mientras mantienen altos estándares de calidad de código.&lt;/p&gt;
+
+&lt;p&gt;El proceso de configuración es directo—ya sea que elijas el método de instalación rápida o optes por integración de proveedor de nube de nivel empresarial. Con configuración apropiada y las directrices correctas de &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;, Claude se convierte en un miembro valioso del equipo que trabaja las 24 horas para mejorar tu código base.&lt;/p&gt;
+
+&lt;p&gt;Comienza con casos de uso simples como revisiones automatizadas de código, luego expándete gradualmente a flujos de trabajo más complejos mientras tu equipo se vuelve cómodo con el desarrollo asistido por IA. ¡El futuro de la codificación colaborativa está aquí, y es más accesible que nunca! 🚀&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Consejo Pro&lt;/strong&gt;: Considera usar Claude Code localmente primero para entender sus capacidades antes de desplegarlo en tu pipeline de CI/CD. Esto te ayuda a crear mejores prompts y configurar reglas de automatización más efectivas.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Revisión de Código" /><category term="Automatización" /><category term="CI/CD" /><summary type="html">Guía paso a paso para configurar Claude Code GitHub Actions para revisiones automáticas inteligentes de PRs y manejo de issues en tus repositorios.</summary></entry><entry><title type="html">Más allá de Cursor: Mi experiencia con Claude Code y Sequential Thinking</title><link href="https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" rel="alternate" type="text/html" title="Más allá de Cursor: Mi experiencia con Claude Code y Sequential Thinking" /><published>2025-07-08T19:00:00-05:00</published><updated>2025-07-08T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking/">&lt;p&gt;&lt;img src=&quot;/assets/images/code-cursor-claude.png&quot; alt=&quot;Claude Code, Cursor, and Sequential Thinking&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;El panorama de los editores de códifo impulsados por IA está evolucionando rápidamente. Como usuario de Copilot y Cursor, siempre estoy buscando nuevas herramientas que puedan aumentar la productividad y ofrecer una perspectiva fresca. El fin de semana pasado, la curiosidad me llevó a probar &lt;strong&gt;Claude Code&lt;/strong&gt; en mis repositorios personales—una tercera alternativa que ha estado ganando tracción, especialmente con su integración de &lt;strong&gt;Sequential Thinking&lt;/strong&gt;. Aquí está mi experiencia, cómo se compara con Cursor, y por qué podría valer la pena echarlo un vistazo para tu flujo de trabajo.&lt;/p&gt;
 
@@ -1158,51 +1800,4 @@ services:
   &lt;li&gt;&lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;USB webcams known to work with mjpg-streamer&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters&quot; target=&quot;_blank&quot;&gt;How to distinguish between identical USB-to-serial adapters?&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux&quot; target=&quot;_blank&quot;&gt;Udev Rule to discern 2 identical webcams on Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Una de las herramientas más útiles a la hora de gestionar una impresora 3D es OctoPrint, ya que entre varias cosas permite administrar tu impresora de...</summary></entry><entry><title type="html">PaperLike Pencil Grips</title><link href="https://lgallardo.com/es/2022/04/17/paperlike-pencil-grips" rel="alternate" type="text/html" title="PaperLike Pencil Grips" /><published>2022-04-16T19:00:00-05:00</published><updated>2022-04-16T19:00:00-05:00</updated><id>https://lgallardo.com/es/2022/04/17/paperlike-pencil-grips</id><content type="html" xml:base="https://lgallardo.com/es/2022/04/17/paperlike-pencil-grips">&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grip.jpg&quot; alt=&quot;PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Pencil y decidí escribir este artículo para comentarles sobre un producto que me ha sorprendido gratamente y que pienso que es una excelente mejora a considerar: &lt;strong&gt;Paper Like Pencil Grips&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Puede que te haya pasado que al usar por mucho tiempo el Apple Pencil se te cansa la mano? Esto es algo común incluso con lápices tradicionales, y para esto ya existía una solución, los clásicos agarradores que se adaptan al lápiz para mejorar la postura de los dedos al escribir. Esto fue lo que terminó diseñando el equipo de PaperLike, pero para el Apple Pencil.&lt;/p&gt;
-
-&lt;p&gt;Seguramente dirás que son unos simple agarradores y que puedes usar unos agarradores tradicionales y adaptarlos al Apple Pencil…Si, por poco dinero puedes colocarle un agarrador genérico pero hay algunas cosas que debes considerar, que ya resolvió el equipo de PaperLike y que no tendrás con un producto genérico:&lt;/p&gt;
-
-&lt;h2 id=&quot;la-carga-magnética-del-apple-pencil&quot;&gt;La carga magnética del Apple Pencil&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/Grip-on-iPad.jpg&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Esto lo consiguen gracias a que sus agarradores están diseñadas especialmente para el Apple Pencil, ya que tienen la forma del lápiz, y el lado que se usa para la carga magnética es ligeramente más delgado.&lt;/p&gt;
-
-&lt;h2 id=&quot;la-postura-de-los-dedos&quot;&gt;La postura de los dedos.&lt;/h2&gt;
-&lt;p&gt;La gente de PaperLike tomaron en cuenta dos casos de borde: precisión y periodos prolongados de uso. Si, vienen dos agarradores de lápiz distintos: El primero está orientado a tener una máxima precisión al agarrar el lápiz para, por ejemplo, cuando necesitas detalles finos a la hora de dibujar. El segundo está pensado para ayudar a quienes toman notas por mucho tiempo, ideal para estudiantes universitarios.&lt;/p&gt;
-
-&lt;p&gt;En mi caso particular disfruto mucho el agarrador de uso extendido (aunque hace tiempo que dejé los estudios universitarios atrás), pero estoy seguro que a los estudiantes les será de mucha utilidad, así como a los artistas (profesionales o no) les será de mucha utilidad poder tener trazos más precedidos a la hora de hacer sus creaciones.&lt;/p&gt;
-
-&lt;h2 id=&quot;función-de-doble-tap&quot;&gt;Función de doble tap&lt;/h2&gt;
-&lt;p&gt;El Apple Pencil tiene una segunda función que se activa haciendo un doble toque sobre la parte plana del lápiz. Con un agarrador genérico no hay forma que el doble tap funcione.  En el caso de los agarradores de lápiz PaperLike, esto lo consiguen con la parte más delgada del agarrador. Pero debo comentar que para usarlo hay que girar el lápiz para poder hacer el double tap. Esto lo uso mucho en &lt;strong&gt;GoodNotes 5&lt;/strong&gt;, y no es tan natural. De hecho el fundador del PaperLike en el video de explicación comenta que una opción es usar el agarrador con esa parte hacia arriba, pero considero que pierde la gracia ya que la forma del agarrador está diseñada para los dedos índices y el pulgar. Me parede que mejor opción es acostunbrarse a girar el lapiz antes de hacer el double tap, y volverlo a girar para contunuar escribiendo.&lt;/p&gt;
-
-&lt;h1 id=&quot;el-empaque&quot;&gt;El empaque&lt;/h1&gt;
-&lt;p&gt;Por último, me gustaría resaltar algo grato que es el empaque en el que vino. Como los agarradores las compré en una etapa temprana, los mismos vinieron en un sobre de papel, que de hecho aclaran que no es el empaque final del producto.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Envelop.jpg&quot; alt=&quot;Envoltorio de los PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;En particular no me molesta para nada y de hecho hasta diría que debería ser la version final, una presentación sencilla y bastante amigable con el medio ambiente. Lo único que mejoraría es el material del sobre sea un poco más duro para que resista los embates del viaje, o en su defecto que las envíen en correspondencia “frágil”, ya que el envío no fue nada económico  (€ 39.99). En mi caso los míos llegaron en ese sobre un poco arrugado, y el contenido también se arrugó.&lt;/p&gt;
-
-&lt;p&gt;Otros detalles que me gustaron fueron la nota de agradecimiento que colocan en el empaqué, escrita a mano por el fundador de PaperLike (y luego impresa de manera industrial), así como un sticker muy bonito que agregan de la comunidad de artistas que usan sus productos.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-thanks.jpg&quot; alt=&quot;Agradecimientos de PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Sticker.jpg&quot; alt=&quot;Stricker de regalo PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;dónde-comprar-las-agarraderas-de-paperlike&quot;&gt;¿Dónde comprar las agarraderas de PaperLike?&lt;/h1&gt;
-&lt;p&gt;Como les comenté, están en una etapa temprana,por lo que de momento el único sitio donde los encontrarás es en la tienda de PaperLike, en &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;los accesorios para iPad&lt;/a&gt; , en particular acá están publicados los &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;PaperLike Pencil Grips &lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h1&gt;
-&lt;p&gt;Si necesitas un agarrador para tu Apple Pencil, ten en cuenta esta opción que ofrece la gente de PaperLike, que sin duda mejorará notablemente tu experiencia de uso en tu iPad.&lt;/p&gt;
-
-&lt;h2 id=&quot;nota&quot;&gt;Nota&lt;/h2&gt;
-&lt;p&gt;Este artículo lo hice para compartir mi experiencia con los agarradores de lápiz de PaperLike, y no recibí ningún patrocinio ni tengo ninguna ganancia o participación en las ventas de los mismas.&lt;/p&gt;
-
-&lt;p&gt;ß# Referencias&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com&quot; target=&quot;_blank&quot;&gt;Página de PaperLike&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;Accesorios para iPad&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;Agarradores de lápiz de PaperLike&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Vengo usando ya desde hace un tiempo mi iPad para tomar notas con el Apple Pencil y decidí escribir este artículo para comentarles sobre un producto q...</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Una de las herramientas más útiles a la hora de gestionar una impresora 3D es OctoPrint, ya que entre varias cosas permite administrar tu impresora de...</summary></entry></feed>

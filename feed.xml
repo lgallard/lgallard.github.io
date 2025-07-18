@@ -1,4 +1,646 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-09T18:09:58-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Beyond Cursor: My Experience with Claude Code and Sequential Thinking</title><link href="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" rel="alternate" type="text/html" title="Beyond Cursor: My Experience with Claude Code and Sequential Thinking" /><published>2025-07-08T19:00:00-05:00</published><updated>2025-07-08T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking</id><content type="html" xml:base="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/">&lt;p&gt;&lt;img src=&quot;/assets/images/code-cursor-claude.png&quot; alt=&quot;Claude Code, Cursor, and Sequential Thinking&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-18T12:51:14-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Automating Code Reviews with Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/" rel="alternate" type="text/html" title="Automating Code Reviews with Claude Code GitHub Actions" /><published>2025-07-17T19:00:00-05:00</published><updated>2025-07-17T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/18/claude-code-github-actions-setup</id><content type="html" xml:base="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-vs.png&quot; alt=&quot;Claude Code GitHub Actions Setup&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The evolution of AI-powered development tools continues to accelerate, and now we can bring the power of &lt;strong&gt;Claude Code&lt;/strong&gt; directly into our GitHub workflows. With Claude Code GitHub Actions, you can have an intelligent AI assistant that automatically reviews pull requests, implements features from issues, and helps maintain code quality—all triggered with a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; mention.&lt;/p&gt;
+
+&lt;p&gt;In this comprehensive guide, I’ll walk you through setting up Claude Code GitHub Actions from scratch, covering both the quick start method and enterprise-level configurations for AWS Bedrock and Google Vertex AI.&lt;/p&gt;
+
+&lt;h2 id=&quot;-what-is-claude-code-github-actions&quot;&gt;🚀 What is Claude Code GitHub Actions?&lt;/h2&gt;
+
+&lt;p&gt;Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. Think of it as having a senior developer on your team who:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Analyzes code&lt;/strong&gt; and provides intelligent feedback&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Creates pull requests&lt;/strong&gt; from issue descriptions&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Implements features&lt;/strong&gt; following your coding standards&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Fixes bugs&lt;/strong&gt; automatically with appropriate tests&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Follows your guidelines&lt;/strong&gt; defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt; files&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Integrates seamlessly&lt;/strong&gt; with your existing GitHub workflow&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The beauty of this approach is that Claude runs on GitHub’s infrastructure, keeping your code secure while providing enterprise-grade automation capabilities.&lt;/p&gt;
+
+&lt;h2 id=&quot;️-prerequisites&quot;&gt;🛠️ Prerequisites&lt;/h2&gt;
+
+&lt;p&gt;Before we begin, make sure you have:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Repository admin access&lt;/strong&gt; (required for installing GitHub apps and managing secrets)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Active Claude Code billing&lt;/strong&gt; (via Anthropic Console, Claude Pro/Max, or enterprise cloud providers)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Basic understanding&lt;/strong&gt; of GitHub Actions and YAML workflows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-quick-setup-method&quot;&gt;📋 Quick Setup Method&lt;/h2&gt;
+
+&lt;p&gt;The fastest way to get started is through Claude Code’s built-in installer. Let’s walk through this process step by step:&lt;/p&gt;
+
+&lt;h3 id=&quot;step-1-access-github-installation&quot;&gt;Step 1: Access GitHub Installation&lt;/h3&gt;
+
+&lt;p&gt;First, navigate to GitHub and access the installation interface:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github.png&quot; alt=&quot;GitHub Interface&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Open your terminal in your repository directory and run:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;your-repository
+claude
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then execute the installation command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/install-github-app
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;step-2-select-your-repository&quot;&gt;Step 2: Select Your Repository&lt;/h3&gt;
+
+&lt;p&gt;The installer will ask you to select which repository to configure:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-repo.png&quot; alt=&quot;Repository Selection&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can use your current repository or specify a different one. This step ensures Claude Code gets the appropriate permissions for your specific project.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-3-configure-api-authentication&quot;&gt;Step 3: Configure API Authentication&lt;/h3&gt;
+
+&lt;p&gt;Next, you’ll need to set up your API authentication method:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-api-subscription.png&quot; alt=&quot;API Subscription Setup&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Choose between:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Create a long-term token&lt;/strong&gt; with your Claude subscription (recommended for personal projects)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enter a new API key&lt;/strong&gt; (for custom enterprise setups)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;step-4-complete-github-app-installation&quot;&gt;Step 4: Complete GitHub App Installation&lt;/h3&gt;
+
+&lt;p&gt;The installer will open your browser to complete the GitHub App installation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-enter.png&quot; alt=&quot;Enter Installation&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This redirects you to GitHub’s app installation page where you’ll grant the necessary permissions.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-5-organization-selection&quot;&gt;Step 5: Organization Selection&lt;/h3&gt;
+
+&lt;p&gt;If you’re part of multiple organizations, select the appropriate one:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-org.png&quot; alt=&quot;Organization Selection&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-org-lgallard.png&quot; alt=&quot;Organization Selection - lgallard&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Choose your personal account or the organization that owns the repository you want to configure.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-6-install-claude-github-app&quot;&gt;Step 6: Install Claude GitHub App&lt;/h3&gt;
+
+&lt;p&gt;Complete the Claude GitHub App installation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-app.png&quot; alt=&quot;Claude GitHub App&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Review and confirm the permissions. The Claude GitHub App needs:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Read access to metadata&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Read and write access to code, issues, and pull requests&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;step-7-final-authentication&quot;&gt;Step 7: Final Authentication&lt;/h3&gt;
+
+&lt;p&gt;Complete the authentication process:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-auth.png&quot; alt=&quot;Complete Authentication&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once authentication is complete, Claude Code will automatically:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Install the GitHub App to your repository&lt;/li&gt;
+  &lt;li&gt;Add your API key as a repository secret (&lt;code class=&quot;highlighter-rouge&quot;&gt;ANTHROPIC_API_KEY&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;Create the workflow file at &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/workflows/claude.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;step-8-select-github-workflows&quot;&gt;Step 8: Select GitHub Workflows&lt;/h3&gt;
+
+&lt;p&gt;During the installation process, you’ll be prompted to select which workflows to install:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github-workflows.png&quot; alt=&quot;GitHub Workflows Selection&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can choose between:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;@Claude Code&lt;/strong&gt;: Interactive workflow triggered by &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; mentions in issues and PR comments&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Claude Code Review&lt;/strong&gt;: Automated review workflow that runs on new pull requests&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Both options provide different approaches to integrating Claude into your development workflow.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-9-review-the-automated-pull-request&quot;&gt;Step 9: Review the Automated Pull Request&lt;/h3&gt;
+
+&lt;p&gt;Claude Code automatically creates a pull request with the necessary workflow files:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr.png&quot; alt=&quot;Claude GitHub PR&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The PR includes comprehensive documentation explaining what Claude Code can do and how to use it effectively.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-10-claude-reviews-its-own-work&quot;&gt;Step 10: Claude Reviews Its Own Work&lt;/h3&gt;
+
+&lt;p&gt;One of the most impressive features is that Claude can review its own pull request, providing detailed analysis:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr-comment.png&quot; alt=&quot;Claude PR Comment&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Claude automatically analyzes the workflow files and provides a comprehensive assessment:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr-assessment.png&quot; alt=&quot;Claude PR Assessment&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The review includes detailed feedback on code quality, security practices, and performance considerations:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github-review.png&quot; alt=&quot;Claude GitHub Review&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Upon completion, Claude provides a comprehensive review summary with detailed analysis:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-review.png&quot; alt=&quot;Claude Review Complete&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This shows Claude’s thorough evaluation including code quality assessment, security analysis, and developer experience considerations.&lt;/p&gt;
+
+&lt;h3 id=&quot;step-11-complete-authentication-setup&quot;&gt;Step 11: Complete Authentication Setup&lt;/h3&gt;
+
+&lt;p&gt;After reviewing the PR, complete the final authentication step:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-claude-auth.png&quot; alt=&quot;Claude Authentication&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;step-12-installation-complete&quot;&gt;Step 12: Installation Complete&lt;/h3&gt;
+
+&lt;p&gt;Once everything is set up, you’ll see a success confirmation:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-done.png&quot; alt=&quot;Claude Setup Complete&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The installation process provides clear next steps:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Merge the PR&lt;/strong&gt; to enable Claude Code functionality&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Install the Claude GitHub App&lt;/strong&gt; if not already done&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Start using &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; mentions&lt;/strong&gt; in your issues and PRs&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;-manual-setup-alternative-method&quot;&gt;🔧 Manual Setup (Alternative Method)&lt;/h2&gt;
+
+&lt;p&gt;If the quick setup doesn’t work or you prefer manual configuration, follow these steps:&lt;/p&gt;
+
+&lt;h3 id=&quot;1-install-claude-github-app&quot;&gt;1. Install Claude GitHub App&lt;/h3&gt;
+
+&lt;p&gt;Visit &lt;a href=&quot;https://github.com/apps/claude&quot;&gt;https://github.com/apps/claude&lt;/a&gt; and install the app to your repository.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-add-repository-secrets&quot;&gt;2. Add Repository Secrets&lt;/h3&gt;
+
+&lt;p&gt;Navigate to your repository’s &lt;strong&gt;Settings → Secrets and variables → Actions&lt;/strong&gt; and add:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ANTHROPIC_API_KEY: your_anthropic_api_key_here
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-create-workflow-file&quot;&gt;3. Create Workflow File&lt;/h3&gt;
+
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/workflows/claude.yml&lt;/code&gt; with this configuration:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude Code&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request_review&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;submitted&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;claude&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'issue_comment' &amp;amp;&amp;amp; contains(github.event.comment.body, '@claude')) ||&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'pull_request_review_comment' &amp;amp;&amp;amp; contains(github.event.comment.body, '@claude')) ||&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'pull_request_review' &amp;amp;&amp;amp; contains(github.event.review.body, '@claude')) ||&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'issues' &amp;amp;&amp;amp; (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;fetch-depth&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;1&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Run Claude Code&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;anthropic_api_key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;allowed_tools&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;mcp__github__create_pull_request'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-enterprise-setup-aws-bedrock--google-vertex-ai&quot;&gt;🏢 Enterprise Setup (AWS Bedrock &amp;amp; Google Vertex AI)&lt;/h2&gt;
+
+&lt;p&gt;For enterprise environments, you can configure Claude Code to use your existing cloud infrastructure:&lt;/p&gt;
+
+&lt;h3 id=&quot;aws-bedrock-configuration&quot;&gt;AWS Bedrock Configuration&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude PR Action (AWS Bedrock)&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;claude-pr&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;AWS_REGION&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-west-2&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Configure AWS Credentials (OIDC)&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;aws-actions/configure-aws-credentials@v4&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;role-to-assume&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;aws-region&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-west-2&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;trigger_phrase&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@claude&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;timeout_minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;60&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;use_bedrock&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;us.anthropic.claude-3-7-sonnet-20250219-v1:0&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;google-vertex-ai-configuration&quot;&gt;Google Vertex AI Configuration&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude PR Action (Vertex AI)&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;claude-pr&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Authenticate to Google Cloud&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;google-github-actions/auth@v2&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;workload_identity_provider&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;service_account&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+      
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;trigger_phrase&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@claude&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;timeout_minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;60&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;use_vertex&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&quot;&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;claude-3-7-sonnet@20250219&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ANTHROPIC_VERTEX_PROJECT_ID&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;CLOUD_ML_REGION&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-east5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-configuration-best-practices&quot;&gt;📝 Configuration Best Practices&lt;/h2&gt;
+
+&lt;h3 id=&quot;create-a-claudemd-file&quot;&gt;Create a CLAUDE.md File&lt;/h3&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt; file in your repository root to guide Claude’s behavior:&lt;/p&gt;
+
+&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gh&quot;&gt;# Project Guidelines for Claude Code&lt;/span&gt;
+
+&lt;span class=&quot;gu&quot;&gt;## Code Style&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Use TypeScript for all new code
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Follow ESLint configuration
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Prefer functional components in React
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Use async/await over Promises
+
+&lt;span class=&quot;gu&quot;&gt;## Review Criteria&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Ensure all functions have proper error handling
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Check for type safety (no &lt;span class=&quot;sb&quot;&gt;`any`&lt;/span&gt; types)
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Verify performance implications
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Validate accessibility requirements
+
+&lt;span class=&quot;gu&quot;&gt;## Project Structure&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/src`&lt;/span&gt; - Main application code
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/tests`&lt;/span&gt; - Test files
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/docs`&lt;/span&gt; - Documentation
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/scripts`&lt;/span&gt; - Build and deployment scripts
+
+&lt;span class=&quot;gu&quot;&gt;## Testing Requirements&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Unit tests for all business logic
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Integration tests for API endpoints
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; E2E tests for critical user flows
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;security-considerations&quot;&gt;Security Considerations&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Never commit API keys&lt;/strong&gt; to your repository&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Use GitHub Secrets&lt;/strong&gt; for all sensitive configuration&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Limit permissions&lt;/strong&gt; to only what’s necessary&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Review Claude’s suggestions&lt;/strong&gt; before merging&lt;/li&gt;
+  &lt;li&gt;✅ &lt;strong&gt;Set appropriate timeouts&lt;/strong&gt; to prevent runaway workflows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-comprehensive-usage-examples&quot;&gt;🎯 Comprehensive Usage Examples&lt;/h2&gt;
+
+&lt;p&gt;Now that Claude Code is installed, here are practical examples of how to leverage its capabilities in your daily development workflow:&lt;/p&gt;
+
+&lt;h3 id=&quot;-feature-implementation&quot;&gt;🔧 Feature Implementation&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Turn Issues into Pull Requests&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Create an issue with a feature description, then comment:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude implement this feature based on the issue description
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude will:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Analyze the issue requirements&lt;/li&gt;
+  &lt;li&gt;Review your existing code patterns&lt;/li&gt;
+  &lt;li&gt;Write the implementation following your coding standards&lt;/li&gt;
+  &lt;li&gt;Create tests if specified in your &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Open a pull request with the complete feature&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: “Add user avatar upload functionality with S3 integration”&lt;/p&gt;
+
+&lt;h3 id=&quot;-bug-fixing&quot;&gt;🐛 Bug Fixing&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Automatic Bug Resolution&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;When you encounter a bug, create an issue or comment:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude fix the TypeError in the user dashboard component
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude will:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Locate the problematic code&lt;/li&gt;
+  &lt;li&gt;Analyze the root cause&lt;/li&gt;
+  &lt;li&gt;Implement an appropriate fix&lt;/li&gt;
+  &lt;li&gt;Add error handling when appropriate&lt;/li&gt;
+  &lt;li&gt;Create a PR with the solution&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Advanced Bug Fixing&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude fix the memory leak in the WebSocket connection manager. 
+The issue occurs when users rapidly switch between channels.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-implementation-guidance&quot;&gt;💡 Implementation Guidance&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Get Architecture Advice&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In a PR comment:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude how should I implement user authentication for this endpoint?
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude provides:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Security best practices&lt;/li&gt;
+  &lt;li&gt;Code examples specific to your stack&lt;/li&gt;
+  &lt;li&gt;Integration patterns with your existing auth system&lt;/li&gt;
+  &lt;li&gt;Performance considerations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Complex Implementation Help&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude help me implement a rate limiting system for this API. 
+I need to support different limits per user tier and graceful degradation.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-code-review-and-quality-assurance&quot;&gt;📋 Code Review and Quality Assurance&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Comprehensive Code Reviews&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude review this PR for security vulnerabilities and performance issues
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude performs:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Security vulnerability scanning&lt;/li&gt;
+  &lt;li&gt;Performance bottleneck identification&lt;/li&gt;
+  &lt;li&gt;Code quality assessment&lt;/li&gt;
+  &lt;li&gt;Best practices validation&lt;/li&gt;
+  &lt;li&gt;Accessibility compliance checks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Specific Review Focus&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude review this database migration for potential data loss and rollback safety
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-testing-and-documentation&quot;&gt;🧪 Testing and Documentation&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Test Generation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude write comprehensive tests for this new payment processing module
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude creates:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Unit tests for all functions&lt;/li&gt;
+  &lt;li&gt;Integration tests for external APIs&lt;/li&gt;
+  &lt;li&gt;Edge case testing&lt;/li&gt;
+  &lt;li&gt;Mock implementations for dependencies&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Documentation Updates&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude update the API documentation to reflect these new endpoints
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;README Improvements&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude enhance the project README with better setup instructions and examples
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;️-refactoring-and-optimization&quot;&gt;🏗️ Refactoring and Optimization&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Code Modernization&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude refactor this component to use React hooks instead of class components
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Performance Optimization&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude optimize this database query - it's causing timeouts on large datasets
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Legacy Code Updates&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude update this Node.js 14 code to Node.js 20, 
+including dependency updates and deprecated API replacements
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-security-improvements&quot;&gt;🔒 Security Improvements&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Security Audits&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude audit this authentication flow for security vulnerabilities
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Dependency Security&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude check our package.json dependencies for security issues 
+and suggest safer alternatives
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-devops-and-deployment&quot;&gt;🚀 DevOps and Deployment&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;CI/CD Improvements&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude optimize our GitHub Actions workflow to reduce build times
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Docker Optimization&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude improve this Dockerfile for better caching and smaller image size
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Infrastructure as Code&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude review this Terraform configuration for AWS security best practices
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-advanced-workflows&quot;&gt;📊 Advanced Workflows&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Multi-Step Feature Development&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude implement a complete user notification system:
+1. Database schema for notifications
+2. API endpoints for CRUD operations  
+3. WebSocket integration for real-time updates
+4. Email notification worker
+5. Frontend notification component
+6. Comprehensive test suite
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Migration Assistance&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude help migrate our REST API to GraphQL:
+- Create schema definitions
+- Implement resolvers  
+- Update frontend queries
+- Maintain backward compatibility
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-frontend-development&quot;&gt;🎨 Frontend Development&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Component Creation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude create a reusable data table component with:
+- Sorting and filtering
+- Pagination
+- Row selection
+- Export functionality
+- Responsive design
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Styling and UX&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude improve the accessibility of this form component 
+and add proper ARIA labels
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-analytics-and-monitoring&quot;&gt;📈 Analytics and Monitoring&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Observability Implementation&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude add comprehensive logging and monitoring to this service:
+- Structured logging with correlation IDs
+- Metrics collection for key business events
+- Error tracking and alerting
+- Performance monitoring
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Data Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude analyze our user engagement metrics and suggest A/B testing scenarios
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;-pro-tips-for-effective-claude-usage&quot;&gt;💡 Pro Tips for Effective Claude Usage&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Be Specific&lt;/strong&gt;: The more context you provide, the better Claude’s suggestions will be&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reference Files&lt;/strong&gt;: Use &lt;code class=&quot;highlighter-rouge&quot;&gt;@filename&lt;/code&gt; to help Claude understand your codebase&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Set Expectations&lt;/strong&gt;: Mention your preferred patterns in &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Iterative Feedback&lt;/strong&gt;: Engage in conversation to refine the implementation&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Review Carefully&lt;/strong&gt;: Always review Claude’s suggestions before merging&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;These examples demonstrate Claude Code’s versatility in handling everything from simple bug fixes to complex architectural decisions. The key is treating Claude as a knowledgeable team member who can understand context and follow your project’s established patterns.&lt;/p&gt;
+
+&lt;h2 id=&quot;-cost-considerations&quot;&gt;💰 Cost Considerations&lt;/h2&gt;
+
+&lt;p&gt;When using Claude Code GitHub Actions, be aware of the associated costs:&lt;/p&gt;
+
+&lt;h3 id=&quot;github-actions-costs&quot;&gt;GitHub Actions Costs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Runs on GitHub-hosted runners&lt;/li&gt;
+  &lt;li&gt;Consumes your GitHub Actions minutes&lt;/li&gt;
+  &lt;li&gt;See &lt;a href=&quot;https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions&quot;&gt;GitHub’s billing documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;api-costs&quot;&gt;API Costs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Each Claude interaction consumes tokens based on prompt/response length&lt;/li&gt;
+  &lt;li&gt;Usage varies by task complexity and codebase size&lt;/li&gt;
+  &lt;li&gt;See &lt;a href=&quot;https://claude.ai/pricing&quot;&gt;Claude’s pricing page&lt;/a&gt; for current rates&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cost-optimization-tips&quot;&gt;Cost Optimization Tips&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Use specific &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; commands to reduce unnecessary API calls&lt;/li&gt;
+  &lt;li&gt;Set appropriate &lt;code class=&quot;highlighter-rouge&quot;&gt;max_turns&lt;/code&gt; limits&lt;/li&gt;
+  &lt;li&gt;Establish reasonable &lt;code class=&quot;highlighter-rouge&quot;&gt;timeout_minutes&lt;/code&gt; to prevent runaway workflows&lt;/li&gt;
+  &lt;li&gt;Consider using GitHub’s concurrency controls to limit parallel executions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-troubleshooting&quot;&gt;🔍 Troubleshooting&lt;/h2&gt;
+
+&lt;h3 id=&quot;claude-doesnt-respond&quot;&gt;Claude Doesn’t Respond&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Verify GitHub App is installed correctly&lt;/li&gt;
+  &lt;li&gt;✅ Check that workflows are enabled in your repository&lt;/li&gt;
+  &lt;li&gt;✅ Ensure API key is set in repository secrets&lt;/li&gt;
+  &lt;li&gt;✅ Confirm comment contains &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; (not &lt;code class=&quot;highlighter-rouge&quot;&gt;/claude&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;authentication-errors&quot;&gt;Authentication Errors&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Confirm API key is valid and has sufficient permissions&lt;/li&gt;
+  &lt;li&gt;✅ For Bedrock/Vertex, verify cloud credential configuration&lt;/li&gt;
+  &lt;li&gt;✅ Ensure secrets are named correctly in workflows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;workflow-doesnt-trigger&quot;&gt;Workflow Doesn’t Trigger&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Verify workflow triggers include necessary events&lt;/li&gt;
+  &lt;li&gt;✅ Check that app permissions include CI triggers&lt;/li&gt;
+  &lt;li&gt;✅ Ensure you’re using the GitHub App (not Actions user)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-conclusion&quot;&gt;🎉 Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Claude Code GitHub Actions represents a significant step forward in AI-assisted development workflows. By automating code reviews, feature implementation, and bug fixes, teams can focus on high-level architecture and business logic while maintaining high code quality standards.&lt;/p&gt;
+
+&lt;p&gt;The setup process is straightforward—whether you choose the quick installation method or opt for enterprise cloud provider integration. With proper configuration and the right &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt; guidelines, Claude becomes a valuable team member that works around the clock to improve your codebase.&lt;/p&gt;
+
+&lt;p&gt;Start with simple use cases like automated code reviews, then gradually expand to more complex workflows as your team becomes comfortable with AI-assisted development. The future of collaborative coding is here, and it’s more accessible than ever! 🚀&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Pro Tip&lt;/strong&gt;: Consider using Claude Code locally first to understand its capabilities before deploying it to your CI/CD pipeline. This helps you create better prompts and set up more effective automation rules.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Code Review" /><category term="Automation" /><category term="CI/CD" /><summary type="html">Step-by-step guide to setting up Claude Code GitHub Actions for intelligent, automated PR reviews and issue handling in your repositories.</summary></entry><entry><title type="html">Beyond Cursor: My Experience with Claude Code and Sequential Thinking</title><link href="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" rel="alternate" type="text/html" title="Beyond Cursor: My Experience with Claude Code and Sequential Thinking" /><published>2025-07-08T19:00:00-05:00</published><updated>2025-07-08T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking</id><content type="html" xml:base="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/">&lt;p&gt;&lt;img src=&quot;/assets/images/code-cursor-claude.png&quot; alt=&quot;Claude Code, Cursor, and Sequential Thinking&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The landscape of AI-powered coding assistants is evolving rapidly. As a long-time user of Copilot and Cursor, I’m always on the lookout for new tools that can boost productivity and offer a fresh perspective. Last weekend, curiosity led me to try &lt;strong&gt;Claude Code&lt;/strong&gt; on my personal repositories—a third alternative that’s been gaining traction, especially with its integration of &lt;strong&gt;Sequential Thinking&lt;/strong&gt;. Here’s my experience, how it compares to Cursor, and why it might be worth a look for your workflow.&lt;/p&gt;
 
@@ -1159,53 +1801,4 @@ services:
   &lt;li&gt;&lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;USB webcams known to work with mjpg-streamer&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters&quot; target=&quot;_blank&quot;&gt;How to distinguish between identical USB-to-serial adapters?&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux&quot; target=&quot;_blank&quot;&gt;Udev Rule to discern 2 identical webcams on Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">One of the most useful tools when managing a 3D printer is OctoPrint, since among several things it allows you to manage your printer from a web inter...</summary></entry><entry><title type="html">PaperLike Pencil Grips</title><link href="https://lgallardo.com/2022/04/17/paperlike-pencil-grips" rel="alternate" type="text/html" title="PaperLike Pencil Grips" /><published>2022-04-17T00:00:00-05:00</published><updated>2022-04-17T00:00:00-05:00</updated><id>https://lgallardo.com/2022/04/17/paperlike-pencil-grips</id><content type="html" xml:base="https://lgallardo.com/2022/04/17/paperlike-pencil-grips">&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grip.jpg&quot; alt=&quot;PaperLike Pencil Grips&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-I’ve been using my iPad for a while to take notes with the Apple Pencil and I decided to write this article to tell you about a product that has pleasantly surprised me and which I think is an excellent improvement to consider: the &lt;strong&gt;Paper Like Pencil Grips&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;It may have happened to you that when using the Apple Pencil for a long time, your hand gets tired? This is common even with traditional pencils, and for this there was already a solution, the classic grips adapted to the pencil to improve the posture of the fingers when writing. This is what the PaperLike team ended up designing, but for the Apple Pencil.&lt;/p&gt;
-
-&lt;p&gt;You’ll say that they are simple grips and probably you think you can use traditional grips to adapt them to the Apple Pencil…Yes, for little money you can put a generic grip on it but there’re a couple of things that you should consider, that the PaperLike team has already solved and that you won’t have with a generic product:&lt;/p&gt;
-
-&lt;h2 id=&quot;apple-pencils-magnetic-charge&quot;&gt;Apple Pencil’s magnetic charge&lt;/h2&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/Grip-on-iPad.jpg&quot; alt=&quot;Blink config&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;They achieve this thanks to the fact their grips are specially designed for the Apple Pencil, since they have the shape of the pencil, and the side used for magnetic charging is slightly thinner.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-posture-of-the-fingers&quot;&gt;The posture of the fingers&lt;/h2&gt;
-&lt;p&gt;The PaperLike guys took into account two edge cases: precision and prolonged periods of use. Yes, two different pencil grips come in the envelop: The first is aimed at having maximum precision when grabbing the pencil, for example when you need fine details when drawing. The second one is designed to help those who take notes for a long time, ideal for university students.&lt;/p&gt;
-
-&lt;p&gt;In my case, I really enjoy the grip for long session using (although I left behind my university yeas a long time ago), but I am sure this will be very useful for students, and for artists (professional or not) it will be help them  to have more precise lines when making their creations.&lt;/p&gt;
-
-&lt;p&gt;It is definitely an improvement that undoubtedly changes the experience of using the iPad and the Apple Pencil.&lt;/p&gt;
-
-&lt;h2 id=&quot;double-tap-funtion&quot;&gt;Double tap funtion&lt;/h2&gt;
-&lt;p&gt;The Apple Pencil has a second function that is activated by double-tapping the flat part of the pencil. With a generic grip there’s no way to double tap. The PaperLike Pencil Grips achieves this with the thinnest part of the grip. But I must comment that to use it you have to turn the pencil to be able to double tap. I use this a lot in &lt;strong&gt;GoodNotes 5&lt;/strong&gt;, and it’s not that natural. In fact, the founder of PaperLike in the How-To video comments that one option is to use the grip with that part facing up, but I think it loses its grace becuase the grip’s shape was designed for the index fingers and the thumb. It seemed to me that the best option is to get used to turning the pencil before doing the double tap, and turning it  back to continue writing.&lt;/p&gt;
-
-&lt;h1 id=&quot;the-packaging&quot;&gt;The packaging&lt;/h1&gt;
-&lt;p&gt;Finally, I would like to highlight something pleasant, which is the packaging in which it came. As I bought the grips at an early stage, they came in a paper envelope, which in fact they make clear is not the final packaging for the product.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Envelop.jpg&quot; alt=&quot;PaperLike Pencil Grips Packing&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In particular, it doesn’t bother me at all and in fact I would even say that it should be the final version, a simple and environmentally friendly presentation. The only thing that would suggest to improve is that the material of the envelope, it should be a little harder so that it can withstand the onslaught of the trip, or in any case they should send them in “fragile” correspondence, since the shipment was not at all economical (€ 39.99). In my case, mine arrived in that envelope a little wrinkled, and the contents also wrinkled.&lt;/p&gt;
-
-&lt;p&gt;Other details that I liked were the thank you note they place on the packaging, handwritten by the founder of PaperLike (and then printed industrially), as well as a very nice sticker that they add from the community of artists who use their products.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-thanks.jpg&quot; alt=&quot;PaperLike Pencil Grips thanking note&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/PaperLike-Pencil-Grips-Sticker.jpg&quot; alt=&quot;PaperLike Pencil Grips sticker gift&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;where-to-buy-the-paperlike-grips&quot;&gt;Where to buy the PaperLike Grips?&lt;/h1&gt;
-&lt;p&gt;As I mentioned, they are at an early stage, so at the moment the only place you will be able to buy them in PaperLike’s store, got to &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;iPad accessories&lt;/a&gt; , here the &lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;PaperLike Pencil Grips are available.&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-&lt;p&gt;If you need a grip for your Apple Pencil, keep in mind this option offered by the PaperLike guys, which will undoubtedly improve your user experience on your iPad  significantly.&lt;/p&gt;
-
-&lt;h2 id=&quot;disclaimer&quot;&gt;Disclaimer&lt;/h2&gt;
-&lt;p&gt;I wrote this post to share my experience with the PaperLike pencil grips, and I did not receive any sponsorship or have any profit or participation in their sales.&lt;/p&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com&quot; target=&quot;_blank&quot;&gt;PaperLike page&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories&quot; target=&quot;_blank&quot;&gt;iPad Accessories&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://paperlike.com/collections/ipad-accessories/products/pencil-grip-set&quot; target=&quot;_blank&quot;&gt;PaperLike Pencil Grips&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">I've been using my iPad for a while to take notes with the Apple Pencil and I decided to write this article to tell you about a product that has pleas...</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">One of the most useful tools when managing a 3D printer is OctoPrint, since among several things it allows you to manage your printer from a web inter...</summary></entry></feed>
