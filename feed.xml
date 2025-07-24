@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-24T09:46:19-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative</title><link href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="From BugBot's $40/month to CodeBot: Building Your Own AI Code Review Alternative" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: BugBot Alternative&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-24T11:00:28-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative</title><link href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="From BugBot's $40/month to CodeBot: Building Your Own AI Code Review Alternative" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: BugBot Alternative&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Yesterday morning, I woke up to an email from Cursor that made me pause over my coffee. &lt;strong&gt;“Bugbot trial is coming to an end”&lt;/strong&gt; — and with it, the news that this feature I’d grown to appreciate would cost &lt;strong&gt;$40 per user per month&lt;/strong&gt; for 200 PR reviews. As a developer who’s always looking for efficient solutions, my immediate reaction was: 🤷&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-bugbot.png&quot; alt=&quot;BugBot end of trial&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-bugbot.png&quot; alt=&quot;BugBot end of trial&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Don’t get me wrong — BugBot was genuinely useful during the trial. It reviewed 112 of my PRs, flagged 176 issues, and I resolved 74.42% of them. But $40/month for a feature I thought would be part of the Pro Plan? That got me thinking about alternatives.&lt;/p&gt;
 
@@ -33,9 +33,9 @@
 
 &lt;p&gt;Here’s what a typical PR looked like after a few commits:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-review-full.png&quot; alt=&quot;Claude Full review&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-review-full.png&quot; alt=&quot;Claude Full review&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-review-full-cont.png&quot; alt=&quot;Claude Full review (cont)&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-review-full-cont.png&quot; alt=&quot;Claude Full review (cont)&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;By the third or fourth commit, I was spending more time reading AI feedback than actually coding. While thorough, it wasn’t practical for daily development workflows.&lt;/p&gt;
 
@@ -163,7 +163,7 @@ codebot performance verbose
 
 &lt;p&gt;And get back a focused report like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt.png&quot; alt=&quot;Claude Full review&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt.png&quot; alt=&quot;CodeBot Hunt Results&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The difference is remarkable:&lt;/p&gt;
 &lt;ul&gt;
