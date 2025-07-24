@@ -507,9 +507,19 @@ codebot performance verbose
 
 <p><strong>For the complete implementation, see the <a href="https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml">full GitHub Action workflow</a></strong></p>
 
-<h2 id="codebot-in-action">CodeBot in Action</h2>
+<h2 id="codebot-in-action-terraform-module-reviews">CodeBot in Action: Terraform Module Reviews</h2>
 
-<p>Now when I want a quick bug scan on a PR, I simply comment:</p>
+<p>It’s important to provide context: I primarily work with <strong>Terraform modules</strong> using Claude Code with the <strong>Sonnet 4 model</strong>. This combination is particularly effective because Sonnet 4 has excellent understanding of HCL syntax and infrastructure-as-code best practices.</p>
+
+<p>Terraform modules present unique challenges:</p>
+<ul>
+  <li><strong>Complex configurations</strong> with multiple AWS providers</li>
+  <li><strong>Interdependent variables and outputs</strong> requiring careful analysis</li>
+  <li><strong>Infrastructure-specific security patterns</strong> for AWS resources</li>
+  <li><strong>Input validations</strong> that can have subtle edge cases</li>
+</ul>
+
+<p>Now when I want a quick bug scan on a Terraform PR, I simply comment:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebot hunt
 </code></pre></div></div>

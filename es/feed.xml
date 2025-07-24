@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-07-24T08:20:35-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA</title><link href="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: Alternativa a BugBot&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-07-24T09:46:24-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA</title><link href="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: Alternativa a BugBot&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Ayer por la mañana, me desperté con un correo de Cursor que me hizo hacer una pausa mientras tomaba café. &lt;strong&gt;“El trial de Bugbot está llegando a su fin”&lt;/strong&gt; — y con él, la noticia de que esta funcionalidad que había llegado a apreciar costaría &lt;strong&gt;$40 por usuario por mes&lt;/strong&gt; por 200 revisiones de PR. Como desarrollador que siempre busca soluciones eficientes, mi reacción inmediata fue: 🤷&lt;/p&gt;
 
@@ -144,9 +144,19 @@ codebot performance verbose
 
 &lt;p&gt;&lt;strong&gt;Para la implementación completa, ve el &lt;a href=&quot;https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml&quot;&gt;workflow completo de GitHub Action&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;codebot-en-acción&quot;&gt;CodeBot en Acción&lt;/h2&gt;
+&lt;h2 id=&quot;codebot-en-acción-revisiones-de-módulos-terraform&quot;&gt;CodeBot en Acción: Revisiones de Módulos Terraform&lt;/h2&gt;
 
-&lt;p&gt;Ahora cuando quiero un escaneo rápido de bugs en un PR, simplemente comento:&lt;/p&gt;
+&lt;p&gt;Es importante mencionar el contexto: principalmente trabajo con &lt;strong&gt;módulos de Terraform&lt;/strong&gt; usando Claude Code con el &lt;strong&gt;modelo Sonnet 4&lt;/strong&gt;. Esta combinación es especialmente efectiva porque Sonnet 4 tiene un excelente entendimiento de sintaxis HCL y mejores prácticas de infraestructura como código.&lt;/p&gt;
+
+&lt;p&gt;Los módulos de Terraform presentan desafíos únicos:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Configuraciones complejas&lt;/strong&gt; con múltiples proveedores AWS&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Variables y outputs interdependientes&lt;/strong&gt; que requieren análisis cuidadoso&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Patrones de seguridad específicos&lt;/strong&gt; para recursos de infraestructura&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Validaciones de entrada&lt;/strong&gt; que pueden tener edge cases sutiles&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ahora cuando quiero un escaneo rápido de bugs en un PR de Terraform, simplemente comento:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;codebot hunt
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;

@@ -508,9 +508,19 @@ codebot performance verbose
 
 <p><strong>Para la implementación completa, ve el <a href="https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml">workflow completo de GitHub Action</a></strong></p>
 
-<h2 id="codebot-en-acción">CodeBot en Acción</h2>
+<h2 id="codebot-en-acción-revisiones-de-módulos-terraform">CodeBot en Acción: Revisiones de Módulos Terraform</h2>
 
-<p>Ahora cuando quiero un escaneo rápido de bugs en un PR, simplemente comento:</p>
+<p>Es importante mencionar el contexto: principalmente trabajo con <strong>módulos de Terraform</strong> usando Claude Code con el <strong>modelo Sonnet 4</strong>. Esta combinación es especialmente efectiva porque Sonnet 4 tiene un excelente entendimiento de sintaxis HCL y mejores prácticas de infraestructura como código.</p>
+
+<p>Los módulos de Terraform presentan desafíos únicos:</p>
+<ul>
+  <li><strong>Configuraciones complejas</strong> con múltiples proveedores AWS</li>
+  <li><strong>Variables y outputs interdependientes</strong> que requieren análisis cuidadoso</li>
+  <li><strong>Patrones de seguridad específicos</strong> para recursos de infraestructura</li>
+  <li><strong>Validaciones de entrada</strong> que pueden tener edge cases sutiles</li>
+</ul>
+
+<p>Ahora cuando quiero un escaneo rápido de bugs en un PR de Terraform, simplemente comento:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebot hunt
 </code></pre></div></div>
