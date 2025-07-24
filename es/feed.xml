@@ -1,4 +1,293 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-07-18T12:51:18-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Automatizando Revisiones de Código con Claude Code GitHub Actions</title><link href="https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup/" rel="alternate" type="text/html" title="Automatizando Revisiones de Código con Claude Code GitHub Actions" /><published>2025-07-17T19:00:00-05:00</published><updated>2025-07-17T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-vs.png&quot; alt=&quot;Configuración de Claude Code GitHub Actions&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-07-24T08:20:35-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA</title><link href="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: Alternativa a BugBot&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ayer por la mañana, me desperté con un correo de Cursor que me hizo hacer una pausa mientras tomaba café. &lt;strong&gt;“El trial de Bugbot está llegando a su fin”&lt;/strong&gt; — y con él, la noticia de que esta funcionalidad que había llegado a apreciar costaría &lt;strong&gt;$40 por usuario por mes&lt;/strong&gt; por 200 revisiones de PR. Como desarrollador que siempre busca soluciones eficientes, mi reacción inmediata fue: 🤷&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-bugbot.png&quot; alt=&quot;Fin del trial de BugBot&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;No me malinterpreten — BugBot fue genuinamente útil durante el trial. Revisó 112 de mis PRs, marcó 176 issues, y resolví el 74.42% de ellos. ¿Pero $40/mes por una funcionalidad que pensé sería parte del Plan Pro? Eso me hizo pensar en alternativas.&lt;/p&gt;
+
+&lt;h2 id=&quot;el-atractivo-de-bugbot-lo-que-lo-hacía-digno-de-replicar&quot;&gt;El Atractivo de BugBot: Lo Que Lo Hacía Digno de Replicar&lt;/h2&gt;
+
+&lt;p&gt;Durante el período beta de Cursor, BugBot tenía algunas cualidades que lo hacían genuinamente valioso:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Revisiones bajo demanda&lt;/strong&gt; — Podía activarlo con un simple comentario cuando realmente quería feedback&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reportes concisos y accionables&lt;/strong&gt; — Se enfocaba en bugs críticos y problemas de seguridad sin detalles abrumadores&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Búsqueda rápida de bugs&lt;/strong&gt; — Perfecto para capturar problemas antes del merge&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Factor cool&lt;/strong&gt; — Seamos honestos, tener un asistente IA llamado “BugBot” se sentía bastante genial&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;La clave era que BugBot funcionaba porque era &lt;strong&gt;enfocado y activado bajo demanda&lt;/strong&gt;, no porque corriera automáticamente en cada commit.&lt;/p&gt;
+
+&lt;h2 id=&quot;el-problema-de-claude-code-demasiado-de-algo-bueno&quot;&gt;El Problema de Claude Code: Demasiado de Algo Bueno&lt;/h2&gt;
+
+&lt;p&gt;Había estado usando Claude Code GitHub Actions por un tiempo, y aunque poderoso, tenía algunos problemas que lo hacían menos que ideal para uso diario:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;El Comportamiento por Defecto:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Se activaba en &lt;strong&gt;cada commit&lt;/strong&gt; en un PR&lt;/li&gt;
+  &lt;li&gt;Generaba &lt;strong&gt;reportes comprensivos y verbosos&lt;/strong&gt; que podían abarcar páginas&lt;/li&gt;
+  &lt;li&gt;Creaba &lt;strong&gt;múltiples comentarios de revisión&lt;/strong&gt; mientras iterabas en el código&lt;/li&gt;
+  &lt;li&gt;Requería una inversión significativa de tiempo para leer todo el feedback&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Así se veía un PR típico después de algunos commits:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-review-full.png&quot; alt=&quot;Revisión completa de Claude&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-review-full-cont.png&quot; alt=&quot;Revisión completa de Claude (cont)&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Para el tercer o cuarto commit, estaba pasando más tiempo leyendo feedback de IA que codeando. Aunque exhaustivo, no era práctico para flujos de desarrollo diarios.&lt;/p&gt;
+
+&lt;h2 id=&quot;entra-codebot-la-alternativa-a-bugbot&quot;&gt;Entra CodeBot: La Alternativa a BugBot&lt;/h2&gt;
+
+&lt;p&gt;Inspirado en el comportamineot enfocado de BugBot, me pregunté: &lt;strong&gt;¿Podría modificar la GitHub Action de Claude Code para comportarse más como el BugBot de Cursor?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;La visión era simple:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Activadores bajo demanda&lt;/strong&gt; en lugar de revisiones automáticas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reportes concisos y enfocados&lt;/strong&gt; adaptados a preocupaciones específicas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Múltiples modos de revisión&lt;/strong&gt; para diferentes tipos de análisis&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interfaz de comandos cool&lt;/strong&gt; que se sintiera natural de usar&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Trabajando con Claude Code mismo, transformé el workflow por defecto en algo mucho más práctico y similar a BugBot.&lt;/p&gt;
+
+&lt;h2 id=&quot;la-estructura-de-comandos-de-codebot&quot;&gt;La Estructura de Comandos de CodeBot&lt;/h2&gt;
+
+&lt;p&gt;La solución resultó en una interfaz de comandos limpia que te da exactamente el tipo de revisión que necesitas:&lt;/p&gt;
+
+&lt;h3 id=&quot;comandos-rápidos&quot;&gt;Comandos Rápidos&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Búsqueda rápida de bugs (como el BugBot de Cursor)&lt;/span&gt;
+codebot hunt
+
+&lt;span class=&quot;c&quot;&gt;# Análisis profundo con salida verbose  &lt;/span&gt;
+codebot analyze verbose
+
+&lt;span class=&quot;c&quot;&gt;# Revisión enfocada en seguridad&lt;/span&gt;
+codebot security
+
+&lt;span class=&quot;c&quot;&gt;# Revisión de optimización de rendimiento&lt;/span&gt;
+codebot performance
+
+&lt;span class=&quot;c&quot;&gt;# Revisión comprensiva&lt;/span&gt;
+codebot review
+
+&lt;span class=&quot;c&quot;&gt;# Por defecto usa el modo hunt&lt;/span&gt;
+codebot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;comandos-avanzados&quot;&gt;Comandos Avanzados&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Búsqueda detallada de bugs con análisis extendido&lt;/span&gt;
+codebot hunt verbose
+
+&lt;span class=&quot;c&quot;&gt;# Análisis profundo enfocado en seguridad  &lt;/span&gt;
+codebot analyze security
+
+&lt;span class=&quot;c&quot;&gt;# Revisión detallada de rendimiento con sugerencias de optimización&lt;/span&gt;
+codebot performance verbose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;implementación-técnica-los-cambios-clave&quot;&gt;Implementación Técnica: Los Cambios Clave&lt;/h2&gt;
+
+&lt;p&gt;En lugar de mostrarte todo el workflow de GitHub Action de más de 200 líneas, aquí están las modificaciones esenciales que hacen funcionar a CodeBot:&lt;/p&gt;
+
+&lt;h3 id=&quot;condiciones-de-activación-inteligentes&quot;&gt;Condiciones de Activación Inteligentes&lt;/h3&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;  
+  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;workflow_dispatch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;review_mode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Modo&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;de&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;revisión'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;hunt'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;choice&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;hunt&lt;/span&gt;
+          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;analyze&lt;/span&gt;  
+          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;security&lt;/span&gt;
+          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;performance&lt;/span&gt;
+          &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;review&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;lógica-de-parseo-de-comandos&quot;&gt;Lógica de Parseo de Comandos&lt;/h3&gt;
+&lt;p&gt;El workflow inteligentemente detecta el modo de revisión del texto del comentario y soporta flags verbose:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Parse review mode&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;COMMENT_BODY=&quot;$&quot;&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;if [[ &quot;$COMMENT_BODY&quot; =~ codebot[[:space:]]+hunt ]]; then&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;echo &quot;REVIEW_MODE=hunt&quot; &amp;gt;&amp;gt; $GITHUB_ENV&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;elif [[ &quot;$COMMENT_BODY&quot; =~ codebot[[:space:]]+analyze ]]; then&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;echo &quot;REVIEW_MODE=analyze&quot; &amp;gt;&amp;gt; $GITHUB_ENV&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;elif [[ &quot;$COMMENT_BODY&quot; =~ codebot[[:space:]]+security ]]; then&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;echo &quot;REVIEW_MODE=security&quot; &amp;gt;&amp;gt; $GITHUB_ENV&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;# ... modos adicionales&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;prompts-enfocados-por-modo&quot;&gt;Prompts Enfocados por Modo&lt;/h3&gt;
+&lt;p&gt;Cada modo obtiene un prompt personalizado que enfoca el análisis de Claude:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;hunt_prompt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;Busca bugs críticos, vulnerabilidades de seguridad y problemas de rendimiento.&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;Proporciona feedback conciso y accionable enfocándote en:&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;- Errores de lógica y casos límite&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;- Vulnerabilidades de seguridad  &lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;- Cuellos de botella de rendimiento&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;- Bugs críticos que podrían causar fallas&lt;/span&gt;
+  
+  &lt;span class=&quot;no&quot;&gt;Sé directo y enfocado. Prioriza los problemas más importantes.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Para la implementación completa, ve el &lt;a href=&quot;https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml&quot;&gt;workflow completo de GitHub Action&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;codebot-en-acción&quot;&gt;CodeBot en Acción&lt;/h2&gt;
+
+&lt;p&gt;Ahora cuando quiero un escaneo rápido de bugs en un PR, simplemente comento:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;codebot hunt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Y obtengo de vuelta un reporte enfocado como este:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt.png&quot; alt=&quot;Revisión completa de Claude&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La diferencia es notable:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Análisis conciso&lt;/strong&gt; enfocado en problemas reales&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Feedback accionable&lt;/strong&gt; sin detalles abrumadores&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Hilo de comentario único&lt;/strong&gt; que no desordena el PR&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Comentarios adhesivos&lt;/strong&gt; para mejor organización&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Cuando necesito análisis más profundo para cambios complejos:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;codebot analyze verbose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;la-verificación-de-costos&quot;&gt;La Verificación de Costos&lt;/h2&gt;
+
+&lt;p&gt;Hablemos de números. El precio de Cursor para BugBot:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;$40/mes por usuario&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;200 revisiones de PR incluidas&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Facturación separada&lt;/strong&gt; del plan principal Cursor Pro&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Para un equipo pequeño de 3 desarrolladores usando activamente esta funcionalidad, eso son &lt;strong&gt;$120/mes&lt;/strong&gt; o &lt;strong&gt;$1,440/año&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Alternativa CodeBot con Claude Code:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Claude Code ofrece planes de suscripción comenzando en &lt;strong&gt;$20/mes por usuario&lt;/strong&gt; que incluyen uso de GitHub Actions con límites generosos que se reinician cada 5 horas. Para mis necesidades, estoy suscrito al &lt;strong&gt;plan de $100/mes&lt;/strong&gt;, que proporciona uso amplio para múltiples repositorios y colaboración en equipo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Por qué esto tiene sentido:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Precio todo incluido&lt;/strong&gt;: GitHub Actions, uso CLI local, y acceso API en un plan&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Límites flexibles&lt;/strong&gt;: El uso se reinicia cada 5 horas, así que rara vez estás bloqueado&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Herramienta multipropósito&lt;/strong&gt;: No solo para revisiones de código - también maneja implementación de funcionalidades, debugging, y tareas generales de desarrollo&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mejor economía&lt;/strong&gt;: Mi $100/mes cubre toda la asistencia de desarrollo IA, no solo revisiones de código&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Comparación de costos:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Cursor BugBot&lt;/strong&gt;: $40/mes solo para 200 revisiones&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Claude Code&lt;/strong&gt;: $100/mes para asistencia de desarrollo ilimitada incluyendo revisiones, implementación, debugging, y más&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enfoque API puro&lt;/strong&gt;: Costaría aproximadamente $0.10-0.50 por revisión pero requiere facturación y gestión separada&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;funcionalidades-avanzadas-que-emergieron&quot;&gt;Funcionalidades Avanzadas que Emergieron&lt;/h2&gt;
+
+&lt;p&gt;Mientras construía CodeBot, varias mejoras evolucionaron naturalmente:&lt;/p&gt;
+
+&lt;h3 id=&quot;detección-de-contexto-inteligente&quot;&gt;Detección de Contexto Inteligente&lt;/h3&gt;
+&lt;p&gt;CodeBot automáticamente ajusta su enfoque basado en:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Tipos de archivo&lt;/strong&gt; siendo revisados (frontend vs. backend vs. infraestructura)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Alcance de cambios&lt;/strong&gt; (ajustes menores vs. refactors mayores)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Áreas sensibles a seguridad&lt;/strong&gt; (autenticación, manejo de datos, endpoints API)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;beneficios-de-integración&quot;&gt;Beneficios de Integración&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Funciona con cualquier repositorio&lt;/strong&gt; que soporte GitHub Actions&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sigue tus estándares de código&lt;/strong&gt; a través de configuración &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Se integra con workflows existentes&lt;/strong&gt; sin disrumpir procesos establecidos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Soporta múltiples proveedores cloud&lt;/strong&gt; (AWS Bedrock, Google Vertex AI)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mejoras-de-experiencia-de-desarrollador&quot;&gt;Mejoras de Experiencia de Desarrollador&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Ciclos de feedback más rápidos&lt;/strong&gt; con revisiones enfocadas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Menos fatiga de revisión&lt;/strong&gt; por reportes abrumadores&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mejor relación señal-ruido&lt;/strong&gt; en discusiones de PR&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Verbosidad personalizable&lt;/strong&gt; basada en la situación&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;lecciones-aprendidas-qué-funciona-y-qué-no&quot;&gt;Lecciones Aprendidas: Qué Funciona y Qué No&lt;/h2&gt;
+
+&lt;p&gt;Después de usar CodeBot por varias semanas, aquí están mis conclusiones clave:&lt;/p&gt;
+
+&lt;h3 id=&quot;lo-que-funciona-muy-bien-&quot;&gt;Lo Que Funciona Muy Bien ✅&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Revisiones bajo demanda&lt;/strong&gt; son significativamente más prácticas que las automáticas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Prompts específicos por modo&lt;/strong&gt; proporcionan relaciones señal-ruido mucho mejores&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ahorros de costo&lt;/strong&gt; son sustanciales comparado con alternativas SaaS&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Flexibilidad de personalización&lt;/strong&gt; te permite adaptarte a las necesidades de tu equipo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;limitaciones-a-considerar-️&quot;&gt;Limitaciones a Considerar ⚠️&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Complejidad de setup&lt;/strong&gt; — Requiere algo de conocimiento de GitHub Actions&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Límites de API&lt;/strong&gt; — Puede alcanzar límites con codebases muy grandes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ventanas de contexto&lt;/strong&gt; — Puede tener dificultades con PRs masivos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Overhead de mantenimiento&lt;/strong&gt; — Eres responsable de mantenerlo actualizado&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;beneficios-inesperados-&quot;&gt;Beneficios Inesperados 🎯&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Oportunidad de aprendizaje&lt;/strong&gt; — Entender cómo funcionan las revisiones de código IA bajo el capó&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Adopción del equipo&lt;/strong&gt; — Los desarrolladores aprecian el feedback enfocado y práctico&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Flexibilidad de integración&lt;/strong&gt; — Fácil de combinar con otros workflows de automatización&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;el-panorama-general-construir-vs-comprar&quot;&gt;El Panorama General: Construir vs. Comprar&lt;/h2&gt;
+
+&lt;p&gt;Esta experiencia reforzó un principio importante en ingeniería: &lt;strong&gt;a veces la mejor solución es la que construyes tú mismo&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;BugBot fue genuinamente útil, pero a $40/mes por usuario, representa el dilema clásico de precios SaaS. Estás pagando por conveniencia y pulimiento, pero la funcionalidad central a menudo puede ser replicada con herramientas existentes y un poco de trabajo de configuración.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cuándo construir lo tuyo:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Tienes requerimientos específicos que las herramientas SaaS no cumplen&lt;/li&gt;
+  &lt;li&gt;El precio no se alinea con tus patrones de uso&lt;/li&gt;
+  &lt;li&gt;Quieres control total sobre la implementación&lt;/li&gt;
+  &lt;li&gt;El aprendizaje y personalización son valiosos para tu equipo&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Cuándo comprar:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;El tiempo de setup y mantenimiento es más caro que la suscripción&lt;/li&gt;
+  &lt;li&gt;Necesitas uptime garantizado y soporte&lt;/li&gt;
+  &lt;li&gt;La funcionalidad está fuera de tu competencia central&lt;/li&gt;
+  &lt;li&gt;El tiempo al mercado es crítico&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conclusión-mejor-valor-mejor-experiencia&quot;&gt;Conclusión: Mejor Valor, Mejor Experiencia&lt;/h2&gt;
+
+&lt;p&gt;Construir CodeBot transformó lo que habría sido un &lt;strong&gt;gasto de $480/año&lt;/strong&gt; (solo por BugBot) en parte de mi &lt;strong&gt;suscripción existente de $100/mes de Claude Code&lt;/strong&gt; que cubre todas mis necesidades de desarrollo IA. Más importante, me dio exactamente la experiencia que quería: revisiones de código enfocadas y bajo demanda que realmente ayudan a mejorar la calidad del código sin abrumar el proceso de desarrollo.&lt;/p&gt;
+
+&lt;p&gt;La belleza de este enfoque es que no se trata solo de ahorros de costo — se trata de &lt;strong&gt;construir exactamente lo que necesitas&lt;/strong&gt;. CodeBot revisa código de la manera que quiero que sea revisado, se enfoca en problemas que importan a mis proyectos, y se integra perfectamente con mi workflow existente.&lt;/p&gt;
+
+&lt;p&gt;Si enfrentas una decisión similar con cualquier herramienta SaaS, considera si la funcionalidad central puede ser replicada con APIs existentes y herramientas de automatización. A veces la mejor solución es la que creas tú mismo, adaptada exactamente a tus necesidades.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;¿Listo para construir tu propio CodeBot?&lt;/strong&gt; Comienza con el &lt;a href=&quot;https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml&quot;&gt;workflow completo de GitHub Action&lt;/a&gt; y personalízalo para las necesidades específicas de tu equipo.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Consejo Pro&lt;/strong&gt;: Comienza con el modo básico &lt;code class=&quot;highlighter-rouge&quot;&gt;hunt&lt;/code&gt; para familiarizarte con el workflow, luego gradualmente agrega modos de revisión más sofisticados mientras tu equipo se acostumbra a las revisiones de código asistidas por IA. El futuro de la productividad de desarrollo no se trata de encontrar la herramienta perfecta — se trata de construir el workflow perfecto para tu equipo.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Code Review" /><category term="Automatización" /><category term="BugBot" /><summary type="html">Cuando Cursor anunció que BugBot costaría $40/mes por 200 revisiones de PR, decidí construir mi propia alternativa usando Claude Code GitHub Actions. Así transformé revisiones verbosas en análisis de código enfocado y bajo demanda.</summary></entry><entry><title type="html">Automatizando Revisiones de Código con Claude Code GitHub Actions</title><link href="https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup/" rel="alternate" type="text/html" title="Automatizando Revisiones de Código con Claude Code GitHub Actions" /><published>2025-07-17T19:00:00-05:00</published><updated>2025-07-17T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-vs.png&quot; alt=&quot;Configuración de Claude Code GitHub Actions&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;La evolución de las herramientas de desarrollo impulsadas por IA continúa acelerándose, y ahora podemos traer el poder de &lt;strong&gt;Claude Code&lt;/strong&gt; directamente a nuestros flujos de trabajo de GitHub. Con Claude Code GitHub Actions, puedes tener un asistente de IA inteligente que automáticamente revisa pull requests, implementa funcionalidades desde issues y ayuda a mantener la calidad del código—todo activado con una simple mención &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt;.&lt;/p&gt;
 
@@ -1353,451 +1642,4 @@ Mis recomendaciones para ganar tiempo en este examen son:&lt;/p&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Este artículo es para comentar mi experiecia con el examen para AWS Certified Solutions Architect - Professional (recertificación):</summary></entry><entry><title type="html">OctoPrint con múltiples impresoras 3D</title><link href="https://lgallardo.com/es/2022/09/25/octoprint-multiple-printers" rel="alternate" type="text/html" title="OctoPrint con múltiples impresoras 3D" /><published>2022-09-24T19:00:00-05:00</published><updated>2022-09-24T19:00:00-05:00</updated><id>https://lgallardo.com/es/2022/09/25/octoprint-multiple-printers</id><content type="html" xml:base="https://lgallardo.com/es/2022/09/25/octoprint-multiple-printers">&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPrint.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Una de las herramientas más útiles a la hora de gestionar una impresora 3D es &lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;, ya que entre varias cosas permite administrar tu impresora desde una interfaz web, así como agregar un montón de funcionalidades (por ejemplo, monitoreo y gestión de la impresora a través de Telegram, plugins para generar los videos timelapse de las impresiones, o incluso detectar cuando hay problemas tipo espagueti en nuestra impresiones usando otro plugin con AI).&lt;/p&gt;
-
-&lt;h2 id=&quot;múltiples-impresoras&quot;&gt;Múltiples impresoras&lt;/h2&gt;
-&lt;p&gt;¿Pero qué pasa si tenemos más de una impresora? ¿Puede &lt;strong&gt;OctoPrint&lt;/strong&gt; gestionar mas de una impresora?&lt;/p&gt;
-
-&lt;p&gt;La respuesta corta es: NO! El software en sí no está diseñado para múltiples impresoras, pero se puede buscar formas alternativas para tener más de una instancia de &lt;strong&gt;OctoPrint&lt;/strong&gt; corriendo en nuestro dispositivo o computadora.&lt;/p&gt;
-
-&lt;p&gt;Existen varias formas para esto, por ejemplo se puede &lt;a href=&quot;http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers&quot; target=&quot;_blank&quot;&gt;modificar los scripts de OctoPi para agregar más instancias&lt;/a&gt;,  crear scripts que lancen varias instancias del mismo programa , pero la opción que terminé usando  fue la de contenedores Docker.&lt;/p&gt;
-
-&lt;h2 id=&quot;raspberry-pi--ubuntu&quot;&gt;Raspberry Pi + Ubuntu&lt;/h2&gt;
-&lt;p&gt;En mi caso tengo una &lt;strong&gt;Raspberry Pi 4&lt;/strong&gt;, de 8 GB de RAM, más que suficiente para correr múltiples instancias de &lt;strong&gt;OctoPrint&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;En principio tenía instalado en mi Raspberry un sistema operativo específico llamado &lt;a href=&quot;https://github.com/guysoft/OctoPi&quot; target=&quot;_blank&quot;&gt;OctoPi&lt;/a&gt;, un derivado de Debian con &lt;strong&gt;OctoPrint&lt;/strong&gt; como el programa principal que se lanza cuando se enciende el dispositivo, pero al querer tener contenedores pensé en usar Ubuntu que es una distribución menos especializada y donde seguramente se puede encontrar todo lo necesario para trabajar con contenedores.&lt;/p&gt;
-
-&lt;h2 id=&quot;requisitos-y-componentes&quot;&gt;Requisitos y componentes:&lt;/h2&gt;
-&lt;p&gt;Para esta configuración usé lo siguiente:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Impresora 3D - Artillery Genius Pro&lt;/li&gt;
-  &lt;li&gt;Impresora 3D - Artillery SideWinder X2&lt;/li&gt;
-  &lt;li&gt;2x WebCam - Logitech C270 (una por impresora)&lt;/li&gt;
-  &lt;li&gt;Raspberry Pi 4 - 8G RAM&lt;/li&gt;
-  &lt;li&gt;SD Card 64 GB&lt;/li&gt;
-  &lt;li&gt;Ubuntu 22.04 LTS  ARM 64 bits&lt;/li&gt;
-  &lt;li&gt;Docker 20.10.17&lt;/li&gt;
-  &lt;li&gt;OctoPrint lastest (1.8.3)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;instalación-de-ubuntu&quot;&gt;Instalación de Ubuntu&lt;/h2&gt;
-&lt;p&gt;Para instalar &lt;strong&gt;Ubuntu&lt;/strong&gt; en la Raspberry Pi ahora es más sencillo que nunca, solo tienes que descargar &lt;strong&gt;Raspberry Pi Imager,&lt;/strong&gt; el cual generará la imagen en tu tarjeta SD, seleccionar el sistema operativo, que en este caso es &lt;strong&gt;Ubuntu 22.04 LTS&lt;/strong&gt; y listo. Hay versiones de Raspberry Pi Imager para Linux, Mac y Windows, así que podrás generar la imagen en el sistema operativo que más te convenga.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/Raspberry-Pi-Imager.jpg&quot; alt=&quot;Raspberry Pi Imager&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Desde este mismo software vas a tener la posibilidad de configurar la contraseña de la red WiFi en caso de que la estés usando la Raspberry de forma inalámbrica y que no quieras usar un televisor y un teclado (headless), o tocar la SD para configurar la red. Como yo lo estoy usando headless, fue lo que hice y luego me conecté por &lt;strong&gt;ssh&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/OctoPi-WiFi-Setting.jpg&quot; alt=&quot;WiFi Settings&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Para la configuración headless el truco es dejar que corran los scripts de inicialización de &lt;strong&gt;Ubuntu&lt;/strong&gt; y luego conectarte por ssh. Ahora si ves que no puedes conectarse por ssh puedes buscar un cable HDMI y un teclado para revisar qué pueda estar pasando.&lt;/p&gt;
-
-&lt;h2 id=&quot;instalación-del-software-en-ubuntu&quot;&gt;Instalación del software en Ubuntu&lt;/h2&gt;
-&lt;p&gt;Aparte de &lt;strong&gt;Docker&lt;/strong&gt; vamos a necesitar, &lt;strong&gt;docker-compose&lt;/strong&gt;, y los utilitarios que nos ayudarán a instalarlos.&lt;/p&gt;
-
-&lt;h2 id=&quot;docker-y-docker-compose&quot;&gt;Docker y docker-compose&lt;/h2&gt;
-&lt;p&gt;Para instalar docker debemos descargarlo usando el script. Necesitaremos entrar como usuario administrador con la cuenta root:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pi@octopi:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;su
-root@octopi:~# 
-
-root@octopi:~# apt install curl
-root@octopi:~# curl &lt;span class=&quot;nt&quot;&gt;-sSL&lt;/span&gt; https://get.docker.com | sh
-
-root@octopi:~# apt update
-root@octopi:~# apt install docker-compose
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;octoprint-con-una-impresora&quot;&gt;OctoPrint con una impresora&lt;/h2&gt;
-&lt;p&gt;Lo primero que haremos es crear un carpeta para OctoPrint, y luego entrar en ella:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# mkdir octoprint
-root@octopi:~# 
-root@octopi:~# &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;octoprint/
-root@octopi:~/octoprint#
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Vamos a empezar con una impresora, en este caso empezaré con la &lt;code class=&quot;highlighter-rouge&quot;&gt;Artillery Genius Pro&lt;/code&gt;.  Para esto creamos una carpeta que identifique a esta impresora:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# mkdir geniuspro
-root@octopi:~# chmod &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; 777 geniuspro/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Es importante saber la ruta actual porque luego la usaremos en la definición del contenedor junto con el nombre de esta carpeta. Para ello ejecutamos la siguiente orden:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~# &lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
-/root/octoprint
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ya con esto podemos indicar luego que los archivos de esta primera instancia de OctoPrint residirán en &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Ahora para configurar la impresora vamos a usar &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt; por lo que creamos el archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; con la siguiente información:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
-
-services:
-  geniuspro:
-    image: octoprint/octoprint
-    restart: unless-stopped
-    ports:
-      - 5000:5000
-      - 8080:8080
-    devices:
-      - /dev/ttyACM0:/dev/ttyACM0
-      - /dev/video0:/dev/video0
-    volumes:
-      - /root/octoprint/geniuspro:/octoprint
-    # uncomment the lines below to ensure camera streaming is enabled when
-    # you add a video device
-    environment:
-      - ENABLE_MJPG_STREAMER=true
-      - CAMERA_DEV=/dev/video0
-      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Este archivo define varias cosas relacionadas a OctoPrint, como la cámara web y la impresora como tal. Por ejemplo, con &lt;code class=&quot;highlighter-rouge&quot;&gt;image&lt;/code&gt; indicamos cuál es la imagen Docker a usar para el servicio &lt;code class=&quot;highlighter-rouge&quot;&gt;geniuspro&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;En esta definición hay que destacar los puertos, los cuales serán usados para acceder a los servicios, siendo el &lt;code class=&quot;highlighter-rouge&quot;&gt;5000&lt;/code&gt; para la interfaz web y el &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt; para el streaming de video de la cámara web.&lt;/p&gt;
-
-&lt;p&gt;Por otro lado se define como dispositivo la impresora en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;, y la cámara web en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Algo a tener en cuenta y que se diferencia del &lt;a href=&quot;https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit&quot; target=&quot;_bla￼nk&quot;&gt;ejemplo en cuál me basé&lt;/a&gt;, es que el streamer ahora es parte de la imagen Docker y es atendido en el puerto &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt;, por los que no hace falta tener una definición aparte a otra imagen Docker apuntando al streamer.&lt;/p&gt;
-
-&lt;p&gt;Luego en &lt;code class=&quot;highlighter-rouge&quot;&gt;volumes&lt;/code&gt; es donde se hace la referencia al directorio de la impresora que habíamos creado en la ruta  &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt;, que será mapeada  dentro del contenedor en  la carpeta &lt;code class=&quot;highlighter-rouge&quot;&gt;/octoprint&lt;/code&gt;. Es decir, cuando levantemos el contenedor todos los archivos de OctoPrint para esta impresora quedarán en la ruta &lt;code class=&quot;highlighter-rouge&quot;&gt;/root/octoprint/geniuspro&lt;/code&gt; del sistema operativo.&lt;/p&gt;
-
-&lt;p&gt;Por último, en &lt;code class=&quot;highlighter-rouge&quot;&gt;environment&lt;/code&gt; definimos los parámetros para el streamer, pasando la información del dispositivo de la cámara web referido desde el contenedor, que en este caso coincide con el del sistema operativo afitrión, es decir, &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;. También le proporcionamos los parámetros de la cámara, en mi caso le indico que la resolución es de 1280x960 a 30 frames por segundos, que es lo que corresponde com mi Logitech C270. Para otros modelos puedes consultar el &lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;listado desde la  página de cámaras soportadas&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Una vez creado el archivo  &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; con la información mostrada arriba, solo basta con levantar el servicio con Docker:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# docker-compose up -d
-  
-Creating octoprint_geniuspro_1 ... done
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ya con esto podemos acceder a la interfaz web de OctoPrint desde la ip de la Raspberry en el puerto que le habíamos indicado, que en mi caso la url es http://192.168.68.102:5000:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-multi-web.jpg&quot; alt=&quot;OctoPrint Web 1&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;agregar-una-segunda-impresora&quot;&gt;Agregar una segunda impresora&lt;/h2&gt;
-&lt;p&gt;Para agregar una segunda impresora solo hay que replicar la configuración que teníamos antes, pero especificando la nueva impresora y la cámara de video correspondiente. Entonces para mi Artillery Sidewinder X2 esto sería:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
-
-services:
-  geniuspro:
-    image: octoprint/octoprint
-    restart: unless-stopped
-    ports:
-      - 5000:5000
-      - 8080:8080
-    devices:
-      - /dev/ttyACM0:/dev/ttyACM0
-      - /dev/video0:/dev/video0
-    volumes:
-      - /root/octoprint/geniuspro:/octoprint
-    # uncomment the lines below to ensure camera streaming is enabled when
-    # you add a video device
-    environment:
-      - ENABLE_MJPG_STREAMER=true
-      - CAMERA_DEV=/dev/video0
-      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
- 
-  sidewinder_x2:
-    image: octoprint/octoprint
-    restart: unless-stopped
-    ports:
-      - 5000:5000
-      - 8080:8080
-    devices:
-      - /dev/ttyACM1:/dev/ttyACM0
-      - /dev/video2:/dev/video0
-    volumes:
-      - /root/octoprint/geniuspro:/octoprint
-    # uncomment the lines below to ensure camera streaming is enabled when
-    # you add a video device
-    environment:
-      - ENABLE_MJPG_STREAMER=true
-      - CAMERA_DEV=/dev/video0
-      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Aquí hay que aclarar que en el apartado devices físicamente la impresora está identificada en la Raspberry como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;, pero al crear el contenedor internamente se identificará como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;. Lo mismo pasa con la cámara de video, donde físicamente se identifca como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video2&lt;/code&gt; pero internamente el contenedor la verá como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Una vez creada la configuración se debe levantar el contendor de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# docker-compose up -d
-  
-octoprint_geniuspro_1 is up-to-date
-Creating octoprint_sidewinderx2_1 ... done
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Con esto ya se podrá acceder a la segunda instancia de OctoPrint en el puerto 5001:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-multi-web2.jpg&quot; alt=&quot;OctoPrint Web 2&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;cómo-diferenciar-las-impresoras&quot;&gt;¿Cómo diferenciar las impresoras?&lt;/h2&gt;
-&lt;p&gt;En el anterior ejemplo usé los dipositivos &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;  para hacer referencia a mi primera impresora, la Artillery Genius Pro, y a la segunda impresora la Artillery SideWinder X2, pero el sistema operativo no siempre las tomará en ese orden, ya que dependerá de cuál encienda primero . Para poder identificar las impresoras sin importar el orden de conexión podemos crear un enlace simbólico usando &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; con la información del fabricante y del producto.&lt;/p&gt;
-
-&lt;p&gt;Para esto primero hay que listar los dispositivos USB:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# lsusb
-Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
-Bus 001 Device 003: ID 046d:0825 Logitech, Inc. Webcam C270
-Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
-Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
-Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Acá hay dos dispositivos de &lt;strong&gt;STMicroelectronics Virtual COM Port&lt;/strong&gt;, que corresponden a las dos impresoras, pero cuál es cuál? Vamos a pedir el detalle de estos dispositivos:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; root@octopi:~/octoprint# lsusb -v -d 0483:5740
-
-Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
-Device Descriptor:
-  bLength                18
-  bDescriptorType         1
-  bcdUSB               2.00
-  bDeviceClass            2 Communications
-  bDeviceSubClass         2 Abstract (modem)
-  bDeviceProtocol         0
-  bMaxPacketSize0        64
-  idVendor           0x0483 STMicroelectronics
-  idProduct          0x5740 Virtual COM Port
-  bcdDevice            0.00
-  iManufacturer           1 STMicroelectronics
-  iProduct                2 ARTILLERY_RUBY CDC in FS Mode
-  iSerial                 3 386F39543538  
-...
-  
-Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
-Device Descriptor:
-  bLength                18
-  bDescriptorType         1
-  bcdUSB               2.00
-  bDeviceClass            2 Communications
-  bDeviceSubClass         2 Abstract (modem)
-  bDeviceProtocol         0
-  bMaxPacketSize0        64
-  idVendor           0x0483 STMicroelectronics
-  idProduct          0x5740 Virtual COM Port
-  bcdDevice            0.00
-  iManufacturer           1 STMicroelectronics
-  iProduct                2 ARTILLERY_RUBY CDC in FS Mode
-  iSerial                 3 3594398F3538  
-...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Lo que diferenica una impresora de la otra es el número serial del dispositivo. Como inicialmente la Artillery Genius Pro estaba mapeada en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM0&lt;/code&gt;, podemos consultar cuál es su número de serial:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
-    ATTRS{serial}==&quot;3594398F3538&quot;
-    ATTRS{serial}==&quot;0000:01:00.0&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ahora para la ver el código serial de la Artillery Sidewinder X2 se debe consultar por el dispositivo &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/ttyACM1&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM1 | grep serial
-    ATTRS{serial}==&quot;386F39543538&quot;
-    ATTRS{serial}==&quot;0000:01:00.0&quot; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Para que  &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt;  reconozca estas reglas debemos crear el siguiente archivo &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/udev/rules.d/40-printers.rules&lt;/code&gt; , con este contenido:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; # Genius Pro
-KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;3594398F3538&quot;, SYMLINK=&quot;ttyGeniusPro&quot;
-
-# Sidewinder X2
-KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;386F39543538&quot;, SYMLINK=&quot;ttySidewinderX2&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Luego se debe reiniciar &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; para que tome estos cambios:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm control --reload-rules &amp;amp;&amp;amp; udevadm trigger
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;De esta manera quedarán las impresoras mapeadas de la siguiente forma:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
-lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttyGeniusPro -&amp;gt; ttyACM0
-lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttySidewinderX2 -&amp;gt; ttyACM1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Por lo que la configuración de Docker podemos modificarla para reflejar estos cambios:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
-
-services:
-  geniuspro:
-    image: octoprint/octoprint
-    restart: unless-stopped
-    ports:
-      - 5000:5000
-      - 8080:8080
-    devices:
-      - /dev/ttyGeniusPro:/dev/ttyACM0
-      - /dev/video0:/dev/video0
-    volumes:
-      - /root/octoprint/geniuspro:/octoprint
-    # uncomment the lines below to ensure camera streaming is enabled when
-    # you add a video device
-    environment:
-      - ENABLE_MJPG_STREAMER=true
-      - CAMERA_DEV=/dev/video0
-      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
-
-  sidewinderx2:
-    image: octoprint/octoprint
-    restart: unless-stopped
-    ports:
-      - 5001:5000
-      - 8081:8080
-    devices:
-      - /dev/ttySidewinderX2:/dev/ttyACM0
-      - /dev/video2:/dev/video0
-    volumes:
-      - /root/octoprint/sidewinderx2:/octoprint
-    # uncomment the lines below to ensure camera streaming is enabled when
-    # you add a video device
-    environment:
-      - ENABLE_MJPG_STREAMER=true
-      - CAMERA_DEV=/dev/video0
-      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30  
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;cámaras-de-video&quot;&gt;Cámaras de video&lt;/h2&gt;
-&lt;p&gt;A diferencia de las impresoras las cuales tienen seriales distintos, tengo dos cámaras de video &lt;strong&gt;Logitech C270&lt;/strong&gt; que son exaxtamente iguales. ¿Cómo hacemos para diferenciarlas? ¿Cómo podemos hacer que siempre tome la cámara correcta?&lt;/p&gt;
-
-&lt;p&gt;Nuevamente hacemos el análisis con  &lt;code class=&quot;highlighter-rouge&quot;&gt;lsusb&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# lsusb
-Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
-Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
-Bus 001 Device 003: ID 046d:0825 Logitech, Inc. Webcam C270
-Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
-Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
-Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ambas cámaras están en el mismos bus pero identificadas como dispositivos USB diferentes, lo cual podemos aprovechar. En este caso no usaremos el id del producto para diferenciarlas sino el id de dispositivo USB.  Tomaremos como referencia el subsystem &lt;code class=&quot;highlighter-rouge&quot;&gt;video4linux&lt;/code&gt; en vez de &lt;code class=&quot;highlighter-rouge&quot;&gt;tty&lt;/code&gt;, por lo que estaremos usando &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNELS&lt;/code&gt; en vez de &lt;code class=&quot;highlighter-rouge&quot;&gt;KERNEL&lt;/code&gt; para diferenciar las cámaras. Por ejemplo, para saber en qué dispositivo USB está  la cámara en &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/video0&lt;/code&gt; podemos ejecutar lo siguiente:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
-    KERNELS==&quot;1-1.4:1.0&quot;
-    KERNELS==&quot;1-1.4&quot;
-    KERNELS==&quot;1-1&quot;
-    KERNELS==&quot;usb1&quot;
-    KERNELS==&quot;0000:01:00.0&quot;
-    KERNELS==&quot;0000:00:00.0&quot;
-    KERNELS==&quot;pci0000:00&quot;
-    KERNELS==&quot;fd500000.pcie&quot;
-    KERNELS==&quot;scb&quot;
-    KERNELS==&quot;platform&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Para la otra cámara hacemos lo mismo:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
-    KERNELS==&quot;1-1.3:1.0&quot;
-    KERNELS==&quot;1-1.3&quot;
-    KERNELS==&quot;1-1&quot;
-    KERNELS==&quot;usb1&quot;
-    KERNELS==&quot;0000:01:00.0&quot;
-    KERNELS==&quot;0000:00:00.0&quot;
-    KERNELS==&quot;pci0000:00&quot;
-    KERNELS==&quot;fd500000.pcie&quot;
-    KERNELS==&quot;scb&quot;
-    KERNELS==&quot;platform&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Ya con esta información podemos modificar las reglas de &lt;code class=&quot;highlighter-rouge&quot;&gt;udev&lt;/code&gt; de la siguiente manera:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Genius Pro
-KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;3594398F3538&quot;, SYMLINK=&quot;ttyGeniusPro&quot;
-SUBSYSTEM==&quot;video4linux&quot;, KERNELS==&quot;1-1.3&quot;, ATTRS{idVendor}==&quot;046d&quot;, ATTRS{idProduct}==&quot;0825&quot;, SYMLINK=&quot;videoGeniusPro&quot;
-
-# Sidewinder X2
-KERNEL==&quot;ttyACM[0-9]*&quot;, SUBSYSTEM==&quot;tty&quot;, ATTRS{idVendor}==&quot;0483&quot;, ATTRS{idProduct}==&quot;5740&quot;, ATTRS{serial}==&quot;386F39543538&quot;, SYMLINK=&quot;ttySidewinderX2&quot;
-SUBSYSTEM==&quot;video4linux&quot;, KERNELS==&quot;1-1.4&quot;, ATTRS{idVendor}==&quot;046d&quot;, ATTRS{idProduct}==&quot;0825&quot;, SYMLINK=&quot;videoSidewinderX2&quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Recuerden reiniciar las reglas de udev con:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@octopi:~/octoprint# udevadm control --reload-rules &amp;amp;&amp;amp; udevadm trigger
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;De esta forma ahora tenemos las cámaras mapeadas como &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/videoGeniusPro&lt;/code&gt;y  &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/videoSidewinderX2&lt;/code&gt; respectivamente. Ahora podemos modificar el archivo &lt;strong&gt;docker-compose.yml&lt;/strong&gt; para que tome esta nueva configuración:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: '2.4'
-
-services:
-  geniuspro:
-    image: octoprint/octoprint
-    restart: unless-stopped
-    ports:
-      - 5000:5000
-      - 8080:8080
-    devices:
-      - /dev/ttyGeniusPro:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
-      - /dev/videoGeniusPro:/dev/video0
-    volumes:
-      - /root/octoprint/geniuspro:/octoprint
-    # uncomment the lines below to ensure camera streaming is enabled when
-    # you add a video device
-    environment:
-      - ENABLE_MJPG_STREAMER=true
-      - CAMERA_DEV=/dev/video0
-      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
-
-  sidewinderx2:
-    image: octoprint/octoprint
-    restart: unless-stopped
-    ports:
-      - 5001:5000
-      - 8081:8080
-    devices:
-      - /dev/ttySidewinderX2:/dev/ttyACM0 # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
-      - /dev/videoSidewinderX2:/dev/video0
-    volumes:
-      - /root/octoprint/sidewinderx2:/octoprint
-    # uncomment the lines below to ensure camera streaming is enabled when
-    # you add a video device
-    environment:
-      - ENABLE_MJPG_STREAMER=true
-      - CAMERA_DEV=/dev/video0
-      - MJPG_STREAMER_INPUT=&quot;-y -n -r 1280x960 -f 30
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;desempeño-con-dos-instancias-de-octoprint&quot;&gt;Desempeño con dos instancias de OctoPrint&lt;/h2&gt;
-&lt;p&gt;Seguramente te estarás preguntando sobre el consumo de estos contenedores en el sistema operativo y si las Raspberry puede manejarlo. Aquí te dejo una imagen de &lt;code class=&quot;highlighter-rouge&quot;&gt;htop&lt;/code&gt; con los dos contenedores arriba imprimiendo en cada una de las impresoras a la vez.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/octoprint-htop.jpg&quot; alt=&quot;htop&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Como pordás notar la Raspberry está holgada, ya que de los 8GB de RAM apenas está consumiendo 0.5 GB incluyendo el sistema operativo. De esto podemos sacar dos conclusiones: la primera es que se pueden agregar más impresoras sin problemas, el único límite es la cantidad de puertos USB que ofrece las Raspberry (4 en mi modelo), pero podrías agregar un hub USB para agregar puertos; y lo segundo es que para dos impresoras se podría usar una Raspberry con menos RAM, por ejemplo de 2 GB o 4 GB, y así economizar un poco.&lt;/p&gt;
-
-&lt;h2 id=&quot;cómo-luce-las-impresoras-y-la-raspberry-pi&quot;&gt;¿Cómo luce las impresoras y la Raspberry Pi?&lt;/h2&gt;
-
-&lt;p&gt;Para cerrar este artículo les dejo una foto de mis impresoras conectadas a la RaspBerry Pi:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/3dprinters.jpg&quot; alt=&quot;3D printers&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;En la impresora más chica puede verse una caja pequeña gris que es la Raspberry Pi, junto a las dos cámaras web.&lt;/p&gt;
-
-&lt;h1 id=&quot;referencias&quot;&gt;Referencias&lt;/h1&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://octoprint.org&quot; target=&quot;_blank&quot;&gt;OctoPrint&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/guysoft/OctoPi&quot; target=&quot;_blank&quot;&gt;OctoPi&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://thomas-messmer.com/index.php/14-free-knowledge/howtos/79-setting-up-octoprint-for-multiple-printers&quot; target=&quot;_blank&quot;&gt;Setting up OctoPrint on a Raspberry Pi for multiple printers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://youtu.be/LcA9o6OGfEg&quot; target=&quot;_blank&quot;&gt;Installing OctoPrint using Docker in Linux (video tutorial)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit&quot; target=&quot;_blank&quot;&gt;Installing OctoPrint using Docker in Linux (instructions)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149&quot; target=&quot;_bla￼nk&quot;&gt;USB webcams known to work with mjpg-streamer&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://askubuntu.com/questions/49910/how-to-distinguish-between-identical-usb-to-serial-adapters&quot; target=&quot;_blank&quot;&gt;How to distinguish between identical USB-to-serial adapters?&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/424887/udev-rule-to-discern-2-identical-webcams-on-linux&quot; target=&quot;_blank&quot;&gt;Udev Rule to discern 2 identical webcams on Linux&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Una de las herramientas más útiles a la hora de gestionar una impresora 3D es OctoPrint, ya que entre varias cosas permite administrar tu impresora de...</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Este artículo es para comentar mi experiecia con el examen para AWS Certified Solutions Architect - Professional (recertificación):</summary></entry></feed>

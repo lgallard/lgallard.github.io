@@ -1,0 +1,981 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="When Cursor announced BugBot would cost $40/month for 200 PR reviews, I decided to build my own alternative using Claude Code GitHub Actions. Here’s how I transformed verbose reviews into focused, on-demand code analysis.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/">
+<meta property="og:url" content="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/">
+
+
+
+<meta property="og:description" content="When Cursor announced BugBot would cost $40/month for 200 PR reviews, I decided to build my own alternative using Claude Code GitHub Actions. Here’s how I transformed verbose reviews into focused, on-demand code analysis.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative">
+<meta name="twitter:description" content="When Cursor announced BugBot would cost $40/month for 200 PR reviews, I decided to build my own alternative using Claude Code GitHub Actions. Here’s how I transformed verbose reviews into focused, on-demand code analysis.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/codebot-hunt-bugs.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/codebot-hunt-bugs.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-07-23T19:00:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="GitHub Actions">
+
+<meta property="article:tag" content="AI">
+
+<meta property="article:tag" content="Code Review">
+
+<meta property="article:tag" content="Automation">
+
+<meta property="article:tag" content="BugBot">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative">
+    <meta itemprop="description" content="When Cursor announced BugBot would cost $40/month for 200 PR reviews, I decided to build my own alternative using Claude Code GitHub Actions. Here’s how I transformed verbose reviews into focused, on-demand code analysis.">
+    <meta itemprop="datePublished" content="July 24, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/codebot-hunt-bugs.png" alt="CodeBot: BugBot Alternative" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
+
+<p>Yesterday morning, I woke up to an email from Cursor that made me pause over my coffee. <strong>“Bugbot trial is coming to an end”</strong> — and with it, the news that this feature I’d grown to appreciate would cost <strong>$40 per user per month</strong> for 200 PR reviews. As a developer who’s always looking for efficient solutions, my immediate reaction was: 🤷</p>
+
+<p><img src="/assets/images/cursor-bugbot.png" alt="BugBot end of trial" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
+
+<p>Don’t get me wrong — BugBot was genuinely useful during the trial. It reviewed 112 of my PRs, flagged 176 issues, and I resolved 74.42% of them. But $40/month for a feature I thought would be part of the Pro Plan? That got me thinking about alternatives.</p>
+
+<h2 id="the-bugbot-appeal-what-made-it-worth-replicating">The BugBot Appeal: What Made It Worth Replicating</h2>
+
+<p>During Cursor’s beta period, BugBot had a few qualities that made it genuinely valuable:</p>
+
+<ol>
+  <li><strong>On-demand reviews</strong> — I could trigger it with a simple comment when I actually wanted feedback</li>
+  <li><strong>Concise, actionable reports</strong> — It focused on critical bugs and security issues without overwhelming detail</li>
+  <li><strong>Quick bug hunting</strong> — Perfect for catching issues before merging</li>
+  <li><strong>Cool factor</strong> — Let’s be honest, having an AI assistant called “BugBot” felt pretty neat</li>
+</ol>
+
+<p>The key insight was that BugBot worked because it was <strong>focused and triggered on demand</strong>, not because it ran automatically on every single commit.</p>
+
+<h2 id="the-claude-code-problem-too-much-of-a-good-thing">The Claude Code Problem: Too Much of a Good Thing</h2>
+
+<p>I’d been using Claude Code GitHub Actions for a while, and while powerful, it had some issues that made it less than ideal for everyday use:</p>
+
+<p><strong>The Default Behavior:</strong></p>
+<ul>
+  <li>Triggered on <strong>every commit</strong> in a PR</li>
+  <li>Generated <strong>comprehensive, verbose reports</strong> that could span pages</li>
+  <li>Created <strong>multiple review comments</strong> as you iterated on code</li>
+  <li>Required significant time investment to read through all the feedback</li>
+</ul>
+
+<p>Here’s what a typical PR looked like after a few commits:</p>
+
+<p><img src="/assets/images/claude-review-full.png" alt="Claude Full review" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
+
+<p><img src="/assets/images/claude-review-full-cont.png" alt="Claude Full review (cont)" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
+
+<p>By the third or fourth commit, I was spending more time reading AI feedback than actually coding. While thorough, it wasn’t practical for daily development workflows.</p>
+
+<h2 id="enter-codebot-the-bugbot-alternative">Enter CodeBot: The BugBot Alternative</h2>
+
+<p>Inspired by BugBot’s focused approach, I wondered: <strong>Could I modify the Claude Code GitHub Action to behave more like Cursor’s BugBot?</strong></p>
+
+<p>The vision was simple:</p>
+<ol>
+  <li><strong>On-demand triggers</strong> instead of automatic reviews</li>
+  <li><strong>Focused, concise reports</strong> tailored to specific concerns</li>
+  <li><strong>Multiple review modes</strong> for different types of analysis</li>
+  <li><strong>Cool command interface</strong> that felt natural to use</li>
+</ol>
+
+<p>Working with Claude Code itself, I transformed the default workflow into something much more practical and BugBot-like.</p>
+
+<h2 id="the-codebot-command-structure">The CodeBot Command Structure</h2>
+
+<p>The solution resulted in a clean command interface that gives you exactly the type of review you need:</p>
+
+<h3 id="quick-commands">Quick Commands</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Quick bug hunt (like Cursor's BugBot)</span>
+codebot hunt
+
+<span class="c"># Deep analysis with verbose output  </span>
+codebot analyze verbose
+
+<span class="c"># Security-focused review</span>
+codebot security
+
+<span class="c"># Performance optimization review</span>
+codebot performance
+
+<span class="c"># Comprehensive review</span>
+codebot review
+
+<span class="c"># Defaults to hunt mode</span>
+codebot
+</code></pre></div></div>
+
+<h3 id="advanced-commands">Advanced Commands</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Detailed bug hunt with extended analysis</span>
+codebot hunt verbose
+
+<span class="c"># Security-focused deep analysis  </span>
+codebot analyze security
+
+<span class="c"># Detailed performance review with optimization suggestions</span>
+codebot performance verbose
+</code></pre></div></div>
+
+<h2 id="technical-implementation-the-key-changes">Technical Implementation: The Key Changes</h2>
+
+<p>Rather than showing you the entire 200+ line GitHub Action workflow, here are the essential modifications that make CodeBot work:</p>
+
+<h3 id="smart-trigger-conditions">Smart Trigger Conditions</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">issue_comment</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>  
+  <span class="na">pull_request_review_comment</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+    <span class="na">inputs</span><span class="pi">:</span>
+      <span class="na">review_mode</span><span class="pi">:</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Review</span><span class="nv"> </span><span class="s">mode'</span>
+        <span class="na">required</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">default</span><span class="pi">:</span> <span class="s1">'</span><span class="s">hunt'</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">choice</span>
+        <span class="na">options</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">hunt</span>
+          <span class="pi">-</span> <span class="s">analyze</span>  
+          <span class="pi">-</span> <span class="s">security</span>
+          <span class="pi">-</span> <span class="s">performance</span>
+          <span class="pi">-</span> <span class="s">review</span>
+</code></pre></div></div>
+
+<h3 id="command-parsing-logic">Command Parsing Logic</h3>
+<p>The workflow intelligently detects review mode from comment text and supports verbose flags:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Parse review mode</span>
+  <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="no">COMMENT_BODY="$"</span>
+    <span class="no">if [[ "$COMMENT_BODY" =~ codebot[[:space:]]+hunt ]]; then</span>
+      <span class="no">echo "REVIEW_MODE=hunt" &gt;&gt; $GITHUB_ENV</span>
+    <span class="no">elif [[ "$COMMENT_BODY" =~ codebot[[:space:]]+analyze ]]; then</span>
+      <span class="no">echo "REVIEW_MODE=analyze" &gt;&gt; $GITHUB_ENV</span>
+    <span class="no">elif [[ "$COMMENT_BODY" =~ codebot[[:space:]]+security ]]; then</span>
+      <span class="no">echo "REVIEW_MODE=security" &gt;&gt; $GITHUB_ENV</span>
+    <span class="no"># ... additional modes</span>
+</code></pre></div></div>
+
+<h3 id="focused-prompts-by-mode">Focused Prompts by Mode</h3>
+<p>Each mode gets a tailored prompt that focuses Claude’s analysis:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hunt_prompt</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="no">Hunt for critical bugs, security vulnerabilities, and performance issues.</span>
+  <span class="no">Provide concise, actionable feedback focusing on:</span>
+  <span class="no">- Logic errors and edge cases</span>
+  <span class="no">- Security vulnerabilities  </span>
+  <span class="no">- Performance bottlenecks</span>
+  <span class="no">- Critical bugs that could cause failures</span>
+  
+  <span class="no">Be direct and focused. Prioritize the most important issues.</span>
+</code></pre></div></div>
+
+<p><strong>For the complete implementation, see the <a href="https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml">full GitHub Action workflow</a></strong></p>
+
+<h2 id="codebot-in-action">CodeBot in Action</h2>
+
+<p>Now when I want a quick bug scan on a PR, I simply comment:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebot hunt
+</code></pre></div></div>
+
+<p>And get back a focused report like this:</p>
+
+<p><img src="/assets/images/codebot-hunt.png" alt="Claude Full review" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
+
+<p>The difference is remarkable:</p>
+<ul>
+  <li><strong>Concise analysis</strong> focused on actual issues</li>
+  <li><strong>Actionable feedback</strong> without overwhelming detail</li>
+  <li><strong>Single comment thread</strong> that doesn’t clutter the PR</li>
+  <li><strong>Sticky comments</strong> for better organization</li>
+</ul>
+
+<p>When I need deeper analysis for complex changes:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebot analyze verbose
+</code></pre></div></div>
+
+<h2 id="the-cost-reality-check">The Cost Reality Check</h2>
+
+<p>Let’s talk numbers. Cursor’s pricing for BugBot:</p>
+<ul>
+  <li><strong>$40/month per user</strong></li>
+  <li><strong>200 PR reviews included</strong></li>
+  <li><strong>Separate billing</strong> from the main Cursor Pro plan</li>
+</ul>
+
+<p>For a small team of 3 developers actively using this feature, that’s <strong>$120/month</strong> or <strong>$1,440/year</strong>.</p>
+
+<p><strong>CodeBot alternative with Claude Code:</strong></p>
+
+<p>Claude Code offers subscription plans starting at <strong>$20/month per user</strong> that include GitHub Actions usage with generous limits that reset every 5 hours. For my needs, I’m subscribed to the <strong>$100/month plan</strong>, which provides ample usage for multiple repositories and team collaboration.</p>
+
+<p><strong>Why this makes sense:</strong></p>
+<ul>
+  <li><strong>All-inclusive pricing</strong>: GitHub Actions, local CLI usage, and API access in one plan</li>
+  <li><strong>Flexible limits</strong>: Usage resets every 5 hours, so you’re rarely blocked</li>
+  <li><strong>Multi-purpose tool</strong>: Not just for code reviews - also handles feature implementation, debugging, and general development tasks</li>
+  <li><strong>Better economics</strong>: My $100/month covers all AI development assistance, not just code reviews</li>
+</ul>
+
+<p><strong>Cost comparison:</strong></p>
+<ul>
+  <li><strong>Cursor BugBot</strong>: $40/month for 200 reviews only</li>
+  <li><strong>Claude Code</strong>: $100/month for unlimited development assistance including reviews, implementation, debugging, and more</li>
+  <li><strong>Pure API approach</strong>: Would cost roughly $0.10-0.50 per review but requires separate billing and management</li>
+</ul>
+
+<h2 id="advanced-features-that-emerged">Advanced Features That Emerged</h2>
+
+<p>While building CodeBot, several enhancements naturally evolved:</p>
+
+<h3 id="smart-context-detection">Smart Context Detection</h3>
+<p>CodeBot automatically adjusts its focus based on:</p>
+<ul>
+  <li><strong>File types</strong> being reviewed (frontend vs. backend vs. infrastructure)</li>
+  <li><strong>Change scope</strong> (minor tweaks vs. major refactors)</li>
+  <li><strong>Security-sensitive areas</strong> (authentication, data handling, API endpoints)</li>
+</ul>
+
+<h3 id="integration-benefits">Integration Benefits</h3>
+<ul>
+  <li><strong>Works with any repository</strong> that supports GitHub Actions</li>
+  <li><strong>Follows your coding standards</strong> through <code class="highlighter-rouge">CLAUDE.md</code> configuration</li>
+  <li><strong>Integrates with existing workflows</strong> without disrupting established processes</li>
+  <li><strong>Supports multiple cloud providers</strong> (AWS Bedrock, Google Vertex AI)</li>
+</ul>
+
+<h3 id="developer-experience-improvements">Developer Experience Improvements</h3>
+<ul>
+  <li><strong>Faster feedback cycles</strong> with focused reviews</li>
+  <li><strong>Less review fatigue</strong> from overwhelming reports</li>
+  <li><strong>Better signal-to-noise ratio</strong> in PR discussions</li>
+  <li><strong>Customizable verbosity</strong> based on the situation</li>
+</ul>
+
+<h2 id="lessons-learned-what-works-and-what-doesnt">Lessons Learned: What Works and What Doesn’t</h2>
+
+<p>After using CodeBot for several weeks, here are my key takeaways:</p>
+
+<h3 id="what-works-really-well-">What Works Really Well ✅</h3>
+<ul>
+  <li><strong>On-demand reviews</strong> are significantly more practical than automatic ones</li>
+  <li><strong>Mode-specific prompts</strong> provide much better signal-to-noise ratios</li>
+  <li><strong>Cost savings</strong> are substantial compared to SaaS alternatives</li>
+  <li><strong>Customization flexibility</strong> lets you adapt to your team’s needs</li>
+</ul>
+
+<h3 id="limitations-to-consider-️">Limitations to Consider ⚠️</h3>
+<ul>
+  <li><strong>Setup complexity</strong> — Requires some GitHub Actions knowledge</li>
+  <li><strong>API rate limits</strong> — Can hit limits with very large codebases</li>
+  <li><strong>Context windows</strong> — May struggle with massive PRs</li>
+  <li><strong>Maintenance overhead</strong> — You’re responsible for keeping it updated</li>
+</ul>
+
+<h3 id="unexpected-benefits-">Unexpected Benefits 🎯</h3>
+<ul>
+  <li><strong>Learning opportunity</strong> — Understanding how AI code reviews work under the hood</li>
+  <li><strong>Team adoption</strong> — Developers appreciate the focused, practical feedback</li>
+  <li><strong>Integration flexibility</strong> — Easy to combine with other automation workflows</li>
+</ul>
+
+<h2 id="the-bigger-picture-build-vs-buy">The Bigger Picture: Build vs. Buy</h2>
+
+<p>This experience reinforced an important principle in engineering: <strong>sometimes the best solution is the one you build yourself</strong>.</p>
+
+<p>BugBot was genuinely useful, but at $40/month per user, it represents the classic SaaS pricing dilemma. You’re paying for convenience and polish, but the core functionality can often be replicated with existing tools and a bit of configuration work.</p>
+
+<p><strong>When to build your own:</strong></p>
+<ul>
+  <li>You have specific requirements that SaaS tools don’t meet</li>
+  <li>The pricing doesn’t align with your usage patterns</li>
+  <li>You want full control over the implementation</li>
+  <li>Learning and customization are valuable to your team</li>
+</ul>
+
+<p><strong>When to buy:</strong></p>
+<ul>
+  <li>Setup and maintenance time is more expensive than the subscription</li>
+  <li>You need guaranteed uptime and support</li>
+  <li>The feature is outside your core competency</li>
+  <li>Time-to-market is critical</li>
+</ul>
+
+<h2 id="conclusion-better-value-better-experience">Conclusion: Better Value, Better Experience</h2>
+
+<p>Building CodeBot transformed what would have been a <strong>$480/year expense</strong> (for BugBot alone) into part of my existing <strong>$100/month Claude Code subscription</strong> that covers all my AI development needs. More importantly, it gave me exactly the experience I wanted: focused, on-demand code reviews that actually help improve code quality without overwhelming the development process.</p>
+
+<p>The beauty of this approach is that it’s not just about cost savings — it’s about <strong>building exactly what you need</strong>. CodeBot reviews code the way I want it reviewed, focuses on issues that matter to my projects, and integrates seamlessly with my existing workflow.</p>
+
+<p>If you’re facing a similar decision with any SaaS tool, consider whether the core functionality can be replicated with existing APIs and automation tools. Sometimes the best solution is the one you craft yourself, tailored exactly to your needs.</p>
+
+<p><strong>Ready to build your own CodeBot?</strong> Start with the <a href="https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml">complete GitHub Action workflow</a> and customize it for your team’s specific needs.</p>
+
+<hr />
+
+<p><strong>Pro Tip</strong>: Start with the basic <code class="highlighter-rouge">hunt</code> mode to get familiar with the workflow, then gradually add more sophisticated review modes as your team gets comfortable with AI-assisted code reviews. The future of development productivity isn’t about finding the perfect tool — it’s about building the perfect workflow for your team.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/automation" class="page__taxonomy-item" rel="tag">Automation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/bugbot" class="page__taxonomy-item" rel="tag">BugBot</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/code-review" class="page__taxonomy-item" rel="tag">Code Review</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/github-actions" class="page__taxonomy-item" rel="tag">GitHub Actions</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-23T19:00:00-05:00">July 24, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=From+BugBot%27s+%2440%2Fmonth+to+CodeBot%3A+Building+Your+Own+AI+Code+Review+Alternative%20https%3A%2F%2Flgallardo.com%2F2025%2F07%2F24%2Fbugbot-to-codebot-ai-review-alternative%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F24%2Fbugbot-to-codebot-ai-review-alternative%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F24%2Fbugbot-to-codebot-ai-review-alternative%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F24%2Fbugbot-to-codebot-ai-review-alternative%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/" class="pagination--pager" title="Automating Code Reviews with Claude Code GitHub Actions
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-github-vs.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/" rel="permalink">Automating Code Reviews with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to setting up Claude Code GitHub Actions for intelligent, automated PR reviews and issue handling in your repositories.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/code-cursor-claude.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" rel="permalink">Beyond Cursor: My Experience with Claude Code and Sequential Thinking
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">A hands-on comparison of Claude Code and Cursor, with a deep dive into Sequential Thinking and practical insights for developers choosing their next AI codin...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/choosing-models-cursor.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/07/01/choosing-right-ai-model-cursor/" rel="permalink">Choosing the Right AI Model in Cursor: A Practical Guide
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">The other day I commented that I intuitively find O3 better for reasoning, problem solving and troubleshooting, over other models like Claude-4-Sonnet…
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/vscode-cursor.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/" rel="permalink">VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Hands-on notes comparing VS Code + Copilot to Cursor. Topics: indexing, MCP servers, Custom Instructions, and code-generation quality.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2025/07/24/bugbot-to-codebot-ai-review-alternative"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>
