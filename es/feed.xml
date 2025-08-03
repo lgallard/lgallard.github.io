@@ -1,4 +1,184 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-07-26T18:48:18-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA</title><link href="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: Alternativa a BugBot&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-08-02T20:04:40-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Flujos de Trabajo de IA Especializados con Subagentes de Claude Code</title><link href="https://lgallardo.com/es/2025/08/02/claude-code-subagents-specialized-workflows/" rel="alternate" type="text/html" title="Flujos de Trabajo de IA Especializados con Subagentes de Claude Code" /><published>2025-08-01T19:00:00-05:00</published><updated>2025-08-01T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/08/02/claude-code-subagents-specialized-workflows</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/02/claude-code-subagents-specialized-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-puppets.png&quot; alt=&quot;Claude Code Subagents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La semana pasada, mientras exploraba las últimas funcionalidades de Claude Code, me topé con algo que cambió fundamentalmente cómo pienso sobre los asistentes de IA: &lt;strong&gt;subagentes&lt;/strong&gt;. En lugar de tener una IA de propósito general tratando de manejar todo desde publicación de blog hasta optimización de Terraform, podía crear asistentes IA especializados—cada uno con experiencia enfocada y herramientas dedicadas.&lt;/p&gt;
+
+&lt;p&gt;Es como pasar de tener un generalista abrumado a un equipo de especialistas que realmente entienden sus dominios. 🎯&lt;/p&gt;
+
+&lt;h2 id=&quot;-qué-son-los-subagentes-de-claude-code&quot;&gt;🤖 Qué Son los Subagentes de Claude Code&lt;/h2&gt;
+
+&lt;p&gt;Los subagentes son asistentes IA especializados que operan dentro de Claude Code, cada uno diseñado para tipos específicos de tareas. Piensa en ellos como consultores expertos que:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Operan independientemente&lt;/strong&gt; con sus propias ventanas de contexto&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Tienen conocimiento especializado&lt;/strong&gt; a través de prompts del sistema personalizados&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Usan herramientas específicas&lt;/strong&gt; adaptadas a su experiencia&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mantienen el enfoque&lt;/strong&gt; en sus dominios de problema designados&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La clave es la &lt;strong&gt;preservación del contexto&lt;/strong&gt;. En lugar de contaminar tu conversación principal con solución detallada de problemas de Jekyll o discusiones de optimización de Terraform, cada subagente maneja su especialidad en aislamiento mientras retorna resultados enfocados.&lt;/p&gt;
+
+&lt;h2 id=&quot;️-configurando-tu-primer-subagente&quot;&gt;⚙️ Configurando Tu Primer Subagente&lt;/h2&gt;
+
+&lt;p&gt;Comenzar es sorprendentemente sencillo. Claude Code proporciona una interfaz intuitiva a través del comando &lt;code class=&quot;highlighter-rouge&quot;&gt;/agents&lt;/code&gt;: 💡&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents.png&quot; alt=&quot;Claude Code Agents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:50%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-1.png&quot; alt=&quot;Interfaz de Agentes&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;El proceso de configuración te guía a través de tres decisiones clave:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-2.png&quot; alt=&quot;Proceso de Creación&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Ubicación&lt;/strong&gt;: Nivel de proyecto (&lt;code class=&quot;highlighter-rouge&quot;&gt;.claude/agents/&lt;/code&gt;) o nivel de usuario (&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.claude/agents/&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Método de creación&lt;/strong&gt;: Generar con Claude (recomendado) o configuración manual&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Especialización&lt;/strong&gt;: Definir el propósito, herramientas y experiencia del subagente&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Recomiendo comenzar con la generación de Claude—crea bases sólidas que luego puedes personalizar.&lt;/p&gt;
+
+&lt;h2 id=&quot;-ejemplo-del-mundo-real-subagentes-de-publicación-de-blog&quot;&gt;📝 Ejemplo del Mundo Real: Subagentes de Publicación de Blog&lt;/h2&gt;
+
+&lt;p&gt;Para mi blog basado en Jekyll, creé seis subagentes especializados que manejan diferentes aspectos del flujo de trabajo de publicación:&lt;/p&gt;
+
+&lt;h3 id=&quot;contenido-y-calidad&quot;&gt;Contenido y Calidad&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;blog-content-reviewer&lt;/code&gt;&lt;/strong&gt;: Precisión técnica, optimización SEO, legibilidad&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;seo-optimizer&lt;/code&gt;&lt;/strong&gt;: Metadatos, compartición social, optimización para motores de búsqueda&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;operaciones-técnicas&quot;&gt;Operaciones Técnicas&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll-site-builder&lt;/code&gt;&lt;/strong&gt;: Procesos de construcción, despliegue, configuraciones Docker&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;medium-converter&lt;/code&gt;&lt;/strong&gt;: Conversión y formato de contenido Jekyll-a-Medium&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mantenimiento-y-organización&quot;&gt;Mantenimiento y Organización&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i18n-sync&lt;/code&gt;&lt;/strong&gt;: Sincronización de contenido bilingüe (Inglés/Español)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;asset-manager&lt;/code&gt;&lt;/strong&gt;: Optimización de imágenes, limpieza de archivos sin usar&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-3.png&quot; alt=&quot;Configuración de Subagentes&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cada subagente tiene:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Acceso a herramientas enfocado&lt;/strong&gt; (solo lo que necesitan)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Prompts específicos del dominio&lt;/strong&gt; con instrucciones detalladas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Activación proactiva&lt;/strong&gt; basada en reconocimiento de contexto&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Por ejemplo, cuando edito un post del blog, el &lt;code class=&quot;highlighter-rouge&quot;&gt;blog-content-reviewer&lt;/code&gt; se activa automáticamente para verificar precisión técnica y elementos SEO. Cuando tengo problemas de construcción, el &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll-site-builder&lt;/code&gt; interviene con experiencia en despliegue.&lt;/p&gt;
+
+&lt;h2 id=&quot;️-subagentes-de-proyecto-terraform&quot;&gt;🏗️ Subagentes de Proyecto Terraform&lt;/h2&gt;
+
+&lt;p&gt;Mi ejemplo más complejo viene de optimizar el &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr&quot;&gt;módulo terraform-aws-ecr&lt;/a&gt;. Este proyecto necesitaba atención especializada en múltiples dominios:&lt;/p&gt;
+
+&lt;h3 id=&quot;especialización-de-infraestructura&quot;&gt;Especialización de Infraestructura&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-module-optimizer&lt;/code&gt;&lt;/strong&gt;: Estructura de código, organización de recursos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-sre-architect&lt;/code&gt;&lt;/strong&gt;: Monitoreo, mejoras de observabilidad&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-security-auditor&lt;/code&gt;&lt;/strong&gt;: Revisiones de seguridad, verificación de cumplimiento&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-cost-optimizer&lt;/code&gt;&lt;/strong&gt;: Eficiencia de recursos, gestión de costos&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;-el-desafío-de-coordinación&quot;&gt;🎭 El Desafío de Coordinación&lt;/h3&gt;
+
+&lt;p&gt;Aquí es donde los subagentes revelan tanto su poder como sus limitaciones. Creé un &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/issues/125&quot;&gt;issue de roadmap comprensivo&lt;/a&gt; para coordinar el esfuerzo de optimización:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/github-tacker-0.png&quot; alt=&quot;Roadmap de Terraform&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cada fase tiene objetivos específicos y dependencias:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/github-tacker-2.png&quot; alt=&quot;Fases del Proyecto&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Los subagentes ayudaron a crear desglose detallado de tareas y especificaciones técnicas, pero &lt;strong&gt;la coordinación requirió orquestación humana&lt;/strong&gt; a través del rastreador de issues de GitHub.&lt;/p&gt;
+
+&lt;h2 id=&quot;-lo-que-los-subagentes-no-son&quot;&gt;❌ Lo Que los Subagentes NO Son&lt;/h2&gt;
+
+&lt;p&gt;Es importante entender las limitaciones de los subagentes:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;❌ No son despachadores de tareas paralelas&lt;/strong&gt;&lt;br /&gt;
+Cada subagente opera independientemente con su propio contexto. No puedes decir “que tres subagentes trabajen en esto simultáneamente.”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;❌ No se coordinan automáticamente&lt;/strong&gt;&lt;br /&gt;
+Los subagentes no se comunican entre sí ni comparten contexto entre sus dominios especializados.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;❌ No son un reemplazo para la gestión de proyectos&lt;/strong&gt;&lt;br /&gt;
+Proyectos complejos multifase aún necesitan coordinación humana y gestión de dependencias.&lt;/p&gt;
+
+&lt;h2 id=&quot;-coordinando-múltiples-subagentes&quot;&gt;🎯 Coordinando Múltiples Subagentes&lt;/h2&gt;
+
+&lt;p&gt;Para proyectos complejos que requieren múltiples subagentes, he encontrado que los issues de GitHub funcionan excelentemente como mecanismos de coordinación:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/github-tacker-1.png&quot; alt=&quot;Coordinación de Issues de GitHub&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;El patrón:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Crear un issue maestro&lt;/strong&gt; delineando el alcance completo del proyecto&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Desglosar fases&lt;/strong&gt; con dependencias claras&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Usar subagentes secuencialmente&lt;/strong&gt; para cada tarea especializada&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Rastrear progreso&lt;/strong&gt; a través de actualizaciones de issues y checkboxes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enlazar issues relacionados&lt;/strong&gt; para mantener contexto del proyecto&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Este enfoque aprovecha la experiencia de cada subagente mientras mantiene coherencia del proyecto a través de coordinación explícita.&lt;/p&gt;
+
+&lt;h2 id=&quot;-mejores-prácticas-que-he-aprendido&quot;&gt;💡 Mejores Prácticas Que He Aprendido&lt;/h2&gt;
+
+&lt;h3 id=&quot;cuándo-crear-subagentes&quot;&gt;Cuándo Crear Subagentes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Tareas especializadas repetitivas&lt;/strong&gt; (como revisión de contenido de blog)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Conocimiento de dominio complejo&lt;/strong&gt; (optimización de Terraform, auditorías de seguridad)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Flujos de trabajo multi-paso&lt;/strong&gt; con patrones consistentes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Tareas que requieren combinaciones específicas de herramientas&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;consejos-de-organización&quot;&gt;Consejos de Organización&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Usar nombres descriptivos&lt;/strong&gt; que indiquen claramente el propósito&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Limitar acceso a herramientas&lt;/strong&gt; a solo lo que cada subagente necesita&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Control de versiones de subagentes del proyecto&lt;/strong&gt; para colaboración en equipo&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Documentar triggers de activación&lt;/strong&gt; en el campo de descripción&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;estrategia-de-selección-de-herramientas&quot;&gt;Estrategia de Selección de Herramientas&lt;/h3&gt;
+&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gh&quot;&gt;# Ejemplo: Acceso limitado a herramientas para subagente enfocado en seguridad&lt;/span&gt;
+tools: Read, Grep, Bash
+&lt;span class=&quot;gh&quot;&gt;# Excluye Write, Edit para prevenir cambios accidentales&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-la-ventaja-de-los-subagentes&quot;&gt;🚀 La Ventaja de los Subagentes&lt;/h2&gt;
+
+&lt;p&gt;Después de usar subagentes por un tiempo, los beneficios son claros:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;🎯 Experiencia Enfocada&lt;/strong&gt;: Cada subagente desarrolla conocimiento profundo en su dominio&lt;br /&gt;
+&lt;strong&gt;🧹 Contextos Limpios&lt;/strong&gt;: Las conversaciones principales se mantienen enfocadas en objetivos de alto nivel&lt;br /&gt;
+&lt;strong&gt;⚡ Flujos de Trabajo Eficientes&lt;/strong&gt;: Herramientas y prompts especializados aceleran tareas comunes&lt;br /&gt;
+&lt;strong&gt;🔄 Conocimiento Reutilizable&lt;/strong&gt;: Los subagentes funcionan a través de proyectos y miembros del equipo&lt;/p&gt;
+
+&lt;p&gt;El cambio de modelo mental es significativo: en lugar de pedirle a Claude que “haga todo,” estás construyendo un equipo de especialistas IA, cada uno excelente en su trabajo particular.&lt;/p&gt;
+
+&lt;h2 id=&quot;-comenzando&quot;&gt;🎬 Comenzando&lt;/h2&gt;
+
+&lt;p&gt;Si estás usando Claude Code, intenta crear tu primer subagente esta semana: 🚀&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Comienza simple&lt;/strong&gt;: Elige una tarea repetitiva que hagas a menudo&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Usa generación de Claude&lt;/strong&gt;: Déjalo crear la configuración inicial&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Itera y refina&lt;/strong&gt;: Ajusta herramientas y prompts basado en uso real&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Expande gradualmente&lt;/strong&gt;: Agrega más subagentes a medida que identifiques patrones&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Los subagentes representan una evolución en cómo trabajamos con IA—de asistencia general a experiencia especializada. Para flujos de trabajo de desarrollo complejos, se están volviendo indispensables. ⚡&lt;/p&gt;
+
+&lt;h2 id=&quot;-referencias&quot;&gt;📚 Referencias&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.anthropic.com/en/docs/claude-code/subagents&quot;&gt;Documentación de Subagentes de Claude Code&lt;/a&gt; - Guía oficial para crear y gestionar subagentes&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.anthropic.com/en/docs/claude-code/cli-reference&quot;&gt;Referencia CLI de Claude Code&lt;/a&gt; - Referencia completa de comandos incluyendo &lt;code class=&quot;highlighter-rouge&quot;&gt;/agents&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/issues/125&quot;&gt;Optimización del Módulo Terraform AWS ECR&lt;/a&gt; - Ejemplo del mundo real de coordinar múltiples subagentes&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="Herramientas IA" /><category term="Subagentes" /><category term="Automatización" /><category term="Terraform" /><category term="Blog Automatización" /><summary type="html">Transforma tu flujo de trabajo de desarrollo con Subagentes de Claude Code—asistentes IA especializados que aportan experiencia enfocada a tareas específicas, desde automatización de publicación de blog hasta proyectos de optimización de Terraform.</summary></entry><entry><title type="html">De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA</title><link href="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: Alternativa a BugBot&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Ayer por la mañana, me desperté con un correo de Cursor que me hizo hacer una pausa mientras tomaba café. &lt;strong&gt;“El trial de Bugbot está llegando a su fin”&lt;/strong&gt; — y con él, la noticia de que esta funcionalidad que había llegado a apreciar costaría &lt;strong&gt;$40 por usuario por mes&lt;/strong&gt; por 200 revisiones de PR. Como desarrollador que siempre busca soluciones eficientes, mi reacción inmediata fue: 🤷&lt;/p&gt;
 
@@ -45,7 +225,7 @@
 
 &lt;p&gt;La visión era simple:&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Activadores bajo demanda&lt;/strong&gt; en lugar de revisiones automáticas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Disparadores bajo demanda&lt;/strong&gt; en lugar de revisiones automáticas&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Reportes concisos y enfocados&lt;/strong&gt; adaptados a preocupaciones específicas&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Múltiples modos de revisión&lt;/strong&gt; para diferentes tipos de análisis&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Interfaz de comandos cool&lt;/strong&gt; que se sintiera natural de usar&lt;/li&gt;
@@ -1617,39 +1797,4 @@ Hoy en día, el mercado está inundado de una variedad de dispositivos portátil
   &lt;li&gt;&lt;a href=&quot;https://powkiddy.com/&quot; target=&quot;_blank&quot;&gt;Powkiddy&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://anbernic.com/&quot; target=&quot;_blank&quot;&gt;Anbernic&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Hoy en día, el mercado está inundado de una variedad de dispositivos portátiles para la emulación retro, provenientes de varias compañías chinas como ...</summary></entry><entry><title type="html">AWS (re)Certified Solutions Architect - Professional</title><link href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" rel="alternate" type="text/html" title="AWS (re)Certified Solutions Architect - Professional" /><published>2023-12-18T09:00:55-06:00</published><updated>2023-12-18T09:00:55-06:00</updated><id>https://lgallardo.com/es/2023/12/18/aws-certified-solutions-architect-professional-2023</id><content type="html" xml:base="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/">&lt;p&gt;&lt;img src=&quot;/assets/images/aws-csap-2023.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Este artículo es para comentar mi experiecia con el examen para AWS Certified Solutions Architect - Professional (recertificación):&lt;/p&gt;
-
-&lt;p&gt;Si  vas a presentar el examen por primera vez o como mi caso buscas una recertificación, te recomiendo que revises los nuevos contenidos y que chequees qué ha cambiado respecto al examen anterior. Ejemplo de estos pueden ser AWS SSO por AWS Identity Center. También te recomiendo que sepas de qué van nuevos servicios como AWS Elastic Desaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, entre otros.&lt;/p&gt;
-
-&lt;p&gt;Fueron 75 preguntas en 180 minutos. Como ya es clásico en las certificaciones profresionales de AWS, el examen es largo y tiene  enunciados extensos y con respuestas también extensas. Para quienes el inglés no es su lengua nativa puede llegar a ser confuso, por lo que seguro te tocará leer varias preguntas mas de una vez (y sus opcione).
-Si  vas a presentar el examen por primera vex o como mi caso buscas una recertificación, te recomiendo que revises los nuevos contenidos y que chequees qué ha cambiado respecto al examen anterior. Ejemplo de estos pueden ser AWS SSO por AWS Identity Center. También te recomiendo que sepas de qué van nuevos servicios como AWS Elastic Desaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, entre otros.
-Mis recomendaciones para ganar tiempo en este examen son:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Las preguntas fáciles respóndelas rápidamente, no te quedes mucho tiempo pensando en si es la respuesta correcta porque seguro lo es.&lt;/li&gt;
-  &lt;li&gt;Marcar las preguntas en las que realmente tienes dudas, así al momento de revisarlas puedes enfocarte en solo esas y si queda tiempo empezar a revisar el resto.&lt;/li&gt;
-  &lt;li&gt;Las preguntas con opciones míltiples márcalas para revisión, incluso si crees que están correctas. Te conviene estar 100% seguro de las opciones porque si te equivocas en una la respuesta puede ser considerada como inclorrecta.&lt;/li&gt;
-  &lt;li&gt;Lee bien las preguntas porque el eneunciado contiene la información que te va a ayudar a descartar opciones, o eligier las opciones correctas.&lt;/li&gt;
-  &lt;li&gt;Piensen que es una certificación de Amazon, en ese sentido siempre preguntarse cuál servicio de Amazon corresponde.&lt;/li&gt;
-  &lt;li&gt;Descartar cosas que se pueden hacer a nivel de S.O. si un servicio de Amazon lo provee, y solo considerarlo cuando no hay mas opción.&lt;/li&gt;
-  &lt;li&gt;No todo se resuelve con Lambda + SQS, aunque suene correcto. Revisa qué opciones o servicios cumplen con lo que se esté solicitando y no dejarse marear por ociones que en principio parecen correctas.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Si estás interesado en esta certificación te recomiendo algunos enlaces:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Cursos en línea&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Para este examen seguí fiel a AWS A Cloud Guru, pero para ser sinceros me parece que los conteidos los tratan superficialmente y el curso tal cual como está hoy en día parece un Frankeinstain ya que hay al menos dos instructores con formatos de contenidos distintos, como si hubiesen agarrado lo mejor de los curso de Linux Academy con los de A Cloud Guru . De Igual forma, si estás interesado acá lo tienes disponible:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.pluralsight.com/courses/aws-certified-solutions-architect-professional-sap-c02&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - AWS Certified Solutions Architect Professional&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Documentación de AWS&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Este artículo es para comentar mi experiecia con el examen para AWS Certified Solutions Architect - Professional (recertificación):</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Hoy en día, el mercado está inundado de una variedad de dispositivos portátiles para la emulación retro, provenientes de varias compañías chinas como ...</summary></entry></feed>

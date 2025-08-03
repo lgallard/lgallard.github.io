@@ -1,4 +1,184 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-07-26T18:48:13-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative</title><link href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="From BugBot's $40/month to CodeBot: Building Your Own AI Code Review Alternative" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: BugBot Alternative&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-02T20:04:35-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Specialized AI Workflows with Claude Code Subagents</title><link href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" rel="alternate" type="text/html" title="Specialized AI Workflows with Claude Code Subagents" /><published>2025-08-01T19:00:00-05:00</published><updated>2025-08-01T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-puppets.png&quot; alt=&quot;Claude Code Subagents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Last week, while exploring Claude Code’s latest features, I stumbled upon something that fundamentally changed how I think about AI assistance: &lt;strong&gt;subagents&lt;/strong&gt;. Instead of having one general-purpose AI trying to handle everything from blog publishing to Terraform optimization, I could create specialized AI assistants—each with focused expertise and dedicated tools.&lt;/p&gt;
+
+&lt;p&gt;It’s like moving from having one overwhelmed generalist to a team of specialists who actually understand their domains. 🎯&lt;/p&gt;
+
+&lt;h2 id=&quot;-what-are-claude-code-subagents&quot;&gt;🤖 What Are Claude Code Subagents?&lt;/h2&gt;
+
+&lt;p&gt;Subagents are specialized AI assistants that operate within Claude Code, each designed for specific types of tasks. Think of them as expert consultants who:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Operate independently&lt;/strong&gt; with their own context windows&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Have specialized knowledge&lt;/strong&gt; through custom system prompts&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Use specific tools&lt;/strong&gt; tailored to their expertise&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Maintain focus&lt;/strong&gt; on their designated problem domains&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The key insight is &lt;strong&gt;context preservation&lt;/strong&gt;. Instead of polluting your main conversation with detailed Jekyll build troubleshooting or Terraform optimization discussions, each subagent handles its specialty in isolation while returning focused results.&lt;/p&gt;
+
+&lt;h2 id=&quot;️-setting-up-your-first-subagent&quot;&gt;⚙️ Setting Up Your First Subagent&lt;/h2&gt;
+
+&lt;p&gt;Getting started is surprisingly straightforward. Claude Code provides an intuitive interface through the &lt;code class=&quot;highlighter-rouge&quot;&gt;/agents&lt;/code&gt; command: 💡&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents.png&quot; alt=&quot;Claude Code Subagents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:50%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-1.png&quot; alt=&quot;Agents Interface&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The setup process guides you through three key decisions:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-2.png&quot; alt=&quot;Creation Process&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Location&lt;/strong&gt;: Project-level (&lt;code class=&quot;highlighter-rouge&quot;&gt;.claude/agents/&lt;/code&gt;) or user-level (&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.claude/agents/&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Creation method&lt;/strong&gt;: Generate with Claude (recommended) or manual configuration&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Specialization&lt;/strong&gt;: Define the subagent’s purpose, tools, and expertise&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I recommend starting with Claude generation—it creates solid foundations you can then customize.&lt;/p&gt;
+
+&lt;h2 id=&quot;-real-world-example-blog-publishing-subagents&quot;&gt;📝 Real-World Example: Blog Publishing Subagents&lt;/h2&gt;
+
+&lt;p&gt;For my Jekyll-based blog, I created six specialized subagents that handle different aspects of the publishing workflow:&lt;/p&gt;
+
+&lt;h3 id=&quot;content-and-quality&quot;&gt;Content and Quality&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;blog-content-reviewer&lt;/code&gt;&lt;/strong&gt;: Technical accuracy, SEO optimization, readability&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;seo-optimizer&lt;/code&gt;&lt;/strong&gt;: Metadata, social sharing, search engine optimization&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;technical-operations&quot;&gt;Technical Operations&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll-site-builder&lt;/code&gt;&lt;/strong&gt;: Build processes, deployment, Docker configurations&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;medium-converter&lt;/code&gt;&lt;/strong&gt;: Jekyll-to-Medium content conversion and formatting&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;maintenance-and-organization&quot;&gt;Maintenance and Organization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;i18n-sync&lt;/code&gt;&lt;/strong&gt;: Bilingual content synchronization (English/Spanish)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;asset-manager&lt;/code&gt;&lt;/strong&gt;: Image optimization, unused file cleanup&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-3.png&quot; alt=&quot;Subagents Configuration&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each subagent has:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Focused tool access&lt;/strong&gt; (only what they need)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Domain-specific prompts&lt;/strong&gt; with detailed instructions&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Proactive activation&lt;/strong&gt; based on context recognition&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example, when I edit a blog post, the &lt;code class=&quot;highlighter-rouge&quot;&gt;blog-content-reviewer&lt;/code&gt; automatically activates to check technical accuracy and SEO elements. When I have build issues, the &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll-site-builder&lt;/code&gt; steps in with deployment expertise.&lt;/p&gt;
+
+&lt;h2 id=&quot;️-terraform-project-subagents&quot;&gt;🏗️ Terraform Project Subagents&lt;/h2&gt;
+
+&lt;p&gt;My most complex example comes from optimizing the &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr&quot;&gt;terraform-aws-ecr module&lt;/a&gt;. This project needed specialized attention across multiple domains:&lt;/p&gt;
+
+&lt;h3 id=&quot;infrastructure-specialization&quot;&gt;Infrastructure Specialization&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-module-optimizer&lt;/code&gt;&lt;/strong&gt;: Code structure, resource organization&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-sre-architect&lt;/code&gt;&lt;/strong&gt;: Monitoring, observability enhancements&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-security-auditor&lt;/code&gt;&lt;/strong&gt;: Security reviews, compliance checking&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-cost-optimizer&lt;/code&gt;&lt;/strong&gt;: Resource efficiency, cost management&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;-the-coordination-challenge&quot;&gt;🎭 The Coordination Challenge&lt;/h3&gt;
+
+&lt;p&gt;Here’s where subagents reveal both their power and limitations. I created a &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/issues/125&quot;&gt;comprehensive roadmap issue&lt;/a&gt; to coordinate the optimization effort:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/github-tacker-0.png&quot; alt=&quot;Terraform Roadmap&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each phase has specific goals and dependencies:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/github-tacker-2.png&quot; alt=&quot;Project Phases&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The subagents helped create detailed task breakdowns and technical specifications, but &lt;strong&gt;coordination required human orchestration&lt;/strong&gt; through the GitHub issue tracker.&lt;/p&gt;
+
+&lt;h2 id=&quot;-what-subagents-are-not&quot;&gt;❌ What Subagents Are NOT&lt;/h2&gt;
+
+&lt;p&gt;It’s important to understand subagents’ limitations:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;❌ They’re not parallel task dispatchers&lt;/strong&gt;&lt;br /&gt;
+Each subagent operates independently with its own context. You can’t say “have three subagents work on this simultaneously.”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;❌ They don’t automatically coordinate&lt;/strong&gt;&lt;br /&gt;
+Subagents don’t communicate with each other or share context between their specialized domains.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;❌ They’re not a replacement for project management&lt;/strong&gt;&lt;br /&gt;
+Complex multi-phase projects still need human coordination and dependency management.&lt;/p&gt;
+
+&lt;h2 id=&quot;-coordinating-multiple-subagents&quot;&gt;🎯 Coordinating Multiple Subagents&lt;/h2&gt;
+
+&lt;p&gt;For complex projects requiring multiple subagents, I’ve found GitHub issues work excellently as coordination mechanisms:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/github-tacker-1.png&quot; alt=&quot;GitHub Issue Coordination&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The pattern:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Create a master issue&lt;/strong&gt; outlining the full project scope&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Break down phases&lt;/strong&gt; with clear dependencies&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Use subagents sequentially&lt;/strong&gt; for each specialized task&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Track progress&lt;/strong&gt; through issue updates and checkboxes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Link related issues&lt;/strong&gt; to maintain project context&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This approach leverages each subagent’s expertise while maintaining project coherence through explicit coordination.&lt;/p&gt;
+
+&lt;h2 id=&quot;-best-practices-ive-learned&quot;&gt;💡 Best Practices I’ve Learned&lt;/h2&gt;
+
+&lt;h3 id=&quot;when-to-create-subagents&quot;&gt;When to Create Subagents&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Repetitive specialized tasks&lt;/strong&gt; (like blog content review)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Complex domain knowledge&lt;/strong&gt; (Terraform optimization, security audits)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Multi-step workflows&lt;/strong&gt; with consistent patterns&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Tasks requiring specific tool combinations&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;organization-tips&quot;&gt;Organization Tips&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Use descriptive names&lt;/strong&gt; that clearly indicate purpose&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Limit tool access&lt;/strong&gt; to only what each subagent needs&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Version control project subagents&lt;/strong&gt; for team collaboration&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Document activation triggers&lt;/strong&gt; in the description field&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tool-selection-strategy&quot;&gt;Tool Selection Strategy&lt;/h3&gt;
+&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gh&quot;&gt;# Example: Limited tool access for security-focused subagent&lt;/span&gt;
+tools: Read, Grep, Bash
+&lt;span class=&quot;gh&quot;&gt;# Excludes Write, Edit to prevent accidental changes&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-the-subagent-advantage&quot;&gt;🚀 The Subagent Advantage&lt;/h2&gt;
+
+&lt;p&gt;After using subagents for a while, the benefits are clear:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;🎯 Focused Expertise&lt;/strong&gt;: Each subagent develops deep knowledge in its domain&lt;br /&gt;
+&lt;strong&gt;🧹 Clean Contexts&lt;/strong&gt;: Main conversations stay focused on high-level objectives&lt;br /&gt;
+&lt;strong&gt;⚡ Efficient Workflows&lt;/strong&gt;: Specialized tools and prompts speed up common tasks&lt;br /&gt;
+&lt;strong&gt;🔄 Reusable Knowledge&lt;/strong&gt;: Subagents work across projects and team members&lt;/p&gt;
+
+&lt;p&gt;The mental model shift is significant: instead of asking Claude to “do everything,” you’re building a team of AI specialists, each excellent at their particular job.&lt;/p&gt;
+
+&lt;h2 id=&quot;-getting-started&quot;&gt;🎬 Getting Started&lt;/h2&gt;
+
+&lt;p&gt;If you’re using Claude Code, try creating your first subagent this week: 🚀&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Start simple&lt;/strong&gt;: Pick one repetitive task you do often&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Use Claude generation&lt;/strong&gt;: Let it create the initial configuration&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Iterate and refine&lt;/strong&gt;: Adjust tools and prompts based on actual usage&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Expand gradually&lt;/strong&gt;: Add more subagents as you identify patterns&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Subagents represent a evolution in how we work with AI—from general assistance to specialized expertise. For complex development workflows, they’re becoming indispensable. ⚡&lt;/p&gt;
+
+&lt;h2 id=&quot;-references&quot;&gt;📚 References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.anthropic.com/en/docs/claude-code/subagents&quot;&gt;Claude Code Subagents Documentation&lt;/a&gt; - Official guide to creating and managing subagents&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.anthropic.com/en/docs/claude-code/cli-reference&quot;&gt;Claude Code CLI Reference&lt;/a&gt; - Complete command reference including &lt;code class=&quot;highlighter-rouge&quot;&gt;/agents&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/issues/125&quot;&gt;Terraform AWS ECR Module Optimization&lt;/a&gt; - Real-world example of coordinating multiple subagents&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="AI Tools" /><category term="Subagents" /><category term="Automation" /><category term="Terraform" /><category term="Blog Automation" /><summary type="html">Transform your development workflow with Claude Code Subagents—specialized AI assistants that bring focused expertise to specific tasks, from blog publishing automation to Terraform optimization projects.</summary></entry><entry><title type="html">From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative</title><link href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="From BugBot's $40/month to CodeBot: Building Your Own AI Code Review Alternative" /><published>2025-07-23T19:00:00-05:00</published><updated>2025-07-23T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/">&lt;p&gt;&lt;img src=&quot;/assets/images/codebot-hunt-bugs.png&quot; alt=&quot;CodeBot: BugBot Alternative&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Yesterday morning, I woke up to an email from Cursor that made me pause over my coffee. &lt;strong&gt;“Bugbot trial is coming to an end”&lt;/strong&gt; — and with it, the news that this feature I’d grown to appreciate would cost &lt;strong&gt;$40 per user per month&lt;/strong&gt; for 200 PR reviews. As a developer who’s always looking for efficient solutions, my immediate reaction was: 🤷&lt;/p&gt;
 
@@ -1619,39 +1799,4 @@ Today, the market is flooded with a variety of handheld devices for retro emulat
   &lt;li&gt;&lt;a href=&quot;https://powkiddy.com/&quot; target=&quot;_blank&quot;&gt;Powkiddy&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://anbernic.com/&quot; target=&quot;_blank&quot;&gt;Anbernic&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powki...</summary></entry><entry><title type="html">AWS (re)Certified Solutions Architect - Professional</title><link href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" rel="alternate" type="text/html" title="AWS (re)Certified Solutions Architect - Professional" /><published>2023-12-18T09:00:55-06:00</published><updated>2023-12-18T09:00:55-06:00</updated><id>https://lgallardo.com/2023/12/18/aws-certified-solutions-architect-professional-2023</id><content type="html" xml:base="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/">&lt;p&gt;&lt;img src=&quot;/assets/images/aws-csap-2023.jpg&quot; alt=&quot;OctoPrints&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:&lt;/p&gt;
-
-&lt;p&gt;If you’re taking the exam for the first time or, as in my case, seeking recertification, I recommend that you review the new content and check what has changed compared to the previous exam. Examples of these changes could be AWS SSO to AWS Identity Center. I also recommend that you familiarize yourself with new services such as AWS Elastic Disaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, among others.&lt;/p&gt;
-
-&lt;p&gt;There were 75 questions in 180 minutes. As is typical with AWS professional certifications, the exam is long and features extensive statements and lengthy answers. For those whose native language is not English, this can be confusing, so you will likely have to read several questions more than once (and their options).
-If you’re taking the exam for the first time or, as in my case, seeking recertification, I recommend that you review the new content and check what has changed compared to the previous exam. Examples of these changes could be AWS SSO to AWS Identity Center. I also recommend that you familiarize yourself with new services such as AWS Elastic Disaster Recovery, EventBridge, Amazon Managed Services for Apache Flink, among others.
-My recommendations for saving time in this exam are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Answer the easy questions quickly; don’t spend too much time pondering whether it’s the correct answer because it most likely is.&lt;/li&gt;
-  &lt;li&gt;Mark the questions where you genuinely have doubts, so when reviewing, you can focus only on those. If time remains, then start reviewing the rest.&lt;/li&gt;
-  &lt;li&gt;Mark multiple-choice questions for review, even if you think they are correct. It’s better to be 100% sure of the options because if you make a mistake in one, the answer can be considered incorrect.&lt;/li&gt;
-  &lt;li&gt;Read the questions carefully because the statement contains the information that will help you eliminate options or choose the correct ones.&lt;/li&gt;
-  &lt;li&gt;Remember that this is an Amazon certification, so always ask yourself which Amazon service is relevant.&lt;/li&gt;
-  &lt;li&gt;Dismiss solutions that can be done at the OS level if an Amazon service provides it, only considering it when there is no other option.&lt;/li&gt;
-  &lt;li&gt;Not everything is solved with Lambda + SQS, even if it seems correct. Review which options or services meet the requirements of the question and don’t be misled by options that initially seem correct.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If you are interested in this certification, I recommend some links:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Online courses&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;For this exam, I stayed loyal to AWS A Cloud Guru, but to be honest, it seems to me that the content is covered superficially, and the course as it stands today looks like a Frankenstein creation. There are at least two instructors with different content formats, as if they had merged the best of Linux Academy’s courses with those of A Cloud Guru. Nonetheless, if you are interested, here it is available:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.pluralsight.com/courses/aws-certified-solutions-architect-professional-sap-c02&quot; target=&quot;_blank&quot;&gt;A Cloud Guru - AWS Certified Solutions Architect Professional&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;AWS Documentation&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/whitepapers/&quot; target=&quot;_blank&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/documentation/&quot; target=&quot;_blank&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/faqs/&quot; target=&quot;_blank&quot;&gt;FAQs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">This article is to share my experience with the AWS Certified Solutions Architect - Professional (recertification) exam:</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powki...</summary></entry></feed>
