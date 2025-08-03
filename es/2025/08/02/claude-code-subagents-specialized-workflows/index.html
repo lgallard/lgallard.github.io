@@ -458,25 +458,37 @@
 
 <p>Los subagentes ayudaron a crear desglose detallado de tareas y especificaciones técnicas, pero <strong>la coordinación requirió orquestación humana</strong> a través del rastreador de issues de GitHub.</p>
 
+<h2 id="-capacidades-de-ejecución-en-paralelo">✅ Capacidades de Ejecución en Paralelo</h2>
+
+<p><strong>✅ Procesamiento Concurrente de Tareas</strong><br />
+Claude Code puede ejecutar hasta 10 tareas en paralelo, procesándolas en lotes. Perfecto para subtareas independientes en bases de código grandes.</p>
+
+<p><strong>✅ Flujos de Trabajo con Múltiples Subagentes</strong><br />
+Puedes lanzar múltiples subagentes simultáneamente—cada uno con su propia ventana de contexto. Por ejemplo: escritor de pruebas + agente de documentación + optimizador de rendimiento trabajando concurrentemente.</p>
+
+<p><strong>✅ Git Worktrees para Desarrollo Paralelo</strong><br />
+Ejecuta sesiones separadas de Claude Code en diferentes ramas usando Git worktrees, habilitando verdaderos flujos de trabajo de desarrollo paralelo.</p>
+
 <h2 id="-lo-que-los-subagentes-no-son">❌ Lo Que los Subagentes NO Son</h2>
 
-<p>Es importante entender las limitaciones de los subagentes:</p>
-
-<p><strong>❌ No son despachadores de tareas paralelas</strong><br />
-Cada subagente opera independientemente con su propio contexto. No puedes decir “que tres subagentes trabajen en esto simultáneamente.”</p>
+<p>Es importante entender las limitaciones restantes:</p>
 
 <p><strong>❌ No se coordinan automáticamente</strong><br />
-Los subagentes no se comunican entre sí ni comparten contexto entre sus dominios especializados.</p>
+Los subagentes no se comunican entre sí ni comparten contexto entre sus dominios especializados—aún necesitas orquestación.</p>
 
 <p><strong>❌ No son un reemplazo para la gestión de proyectos</strong><br />
-Proyectos complejos multifase aún necesitan coordinación humana y gestión de dependencias.</p>
+Los proyectos complejos de múltiples fases aún necesitan coordinación humana y gestión de dependencias.</p>
+
+<p><strong>❌ Paralelismo ilimitado</strong><br />
+El paralelismo está limitado a 10 tareas concurrentes, y la ejecución ocurre en lotes en lugar de paralelismo de transmisión verdadero.</p>
 
 <h2 id="-coordinando-múltiples-subagentes">🎯 Coordinando Múltiples Subagentes</h2>
 
-<p>Para proyectos complejos que requieren múltiples subagentes, he encontrado que los issues de GitHub funcionan excelentemente como mecanismos de coordinación:</p>
+<p>Para proyectos complejos que requieren múltiples subagentes, he encontrado varios patrones de coordinación efectivos:</p>
 
 <p><img src="/assets/images/github-tacker-1.png" alt="Coordinación de Issues de GitHub" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></p>
 
+<h3 id="coordinación-secuencial-issues-de-github">Coordinación Secuencial (Issues de GitHub)</h3>
 <p><strong>El patrón:</strong></p>
 <ol>
   <li><strong>Crear un issue maestro</strong> delineando el alcance completo del proyecto</li>
@@ -486,7 +498,26 @@ Proyectos complejos multifase aún necesitan coordinación humana y gestión de 
   <li><strong>Enlazar issues relacionados</strong> para mantener contexto del proyecto</li>
 </ol>
 
-<p>Este enfoque aprovecha la experiencia de cada subagente mientras mantiene coherencia del proyecto a través de coordinación explícita.</p>
+<h3 id="coordinación-paralela-git-worktrees--múltiples-sesiones">Coordinación Paralela (Git Worktrees + Múltiples Sesiones)</h3>
+<p><strong>Patrón avanzado para flujos de trabajo independientes:</strong></p>
+<ol>
+  <li><strong>Crear Git worktrees</strong> para diferentes features/ramas</li>
+  <li><strong>Lanzar sesiones paralelas de Claude Code</strong> en cada worktree</li>
+  <li><strong>Asignar subagentes especializados</strong> a cada sesión</li>
+  <li><strong>Coordinar a través de pull requests</strong> y revisiones de código</li>
+  <li><strong>Fusionar trabajo completado</strong> de flujos paralelos</li>
+</ol>
+
+<h3 id="procesamiento-concurrente-sesión-única">Procesamiento Concurrente (Sesión Única)</h3>
+<p><strong>Para tareas relacionadas que pueden ejecutarse simultáneamente:</strong></p>
+<ol>
+  <li><strong>Lanzar múltiples subagentes</strong> usando paralelismo de herramienta Task</li>
+  <li><strong>Asignar roles complementarios</strong> (escritor + revisor + optimizador)</li>
+  <li><strong>Monitorear completación de lotes</strong> antes de la siguiente fase</li>
+  <li><strong>Consolidar resultados</strong> de ejecución paralela</li>
+</ol>
+
+<p>Estos enfoques aprovechan la experiencia de cada subagente mientras mantienen coherencia del proyecto a través de coordinación explícita.</p>
 
 <h2 id="-mejores-prácticas-que-he-aprendido">💡 Mejores Prácticas Que He Aprendido</h2>
 

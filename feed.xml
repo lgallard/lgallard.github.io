@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-02T20:15:14-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Specialized AI Workflows with Claude Code Subagents</title><link href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" rel="alternate" type="text/html" title="Specialized AI Workflows with Claude Code Subagents" /><published>2025-08-01T19:00:00-05:00</published><updated>2025-08-01T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-puppets.png&quot; alt=&quot;Claude Code Subagents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-02T20:46:37-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Specialized AI Workflows with Claude Code Subagents</title><link href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" rel="alternate" type="text/html" title="Specialized AI Workflows with Claude Code Subagents" /><published>2025-08-01T19:00:00-05:00</published><updated>2025-08-01T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-puppets.png&quot; alt=&quot;Claude Code Subagents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Last week, while exploring Claude Code’s latest features, I stumbled upon something that fundamentally changed how I think about AI assistance: &lt;strong&gt;subagents&lt;/strong&gt;. Instead of having one general-purpose AI trying to handle everything from blog publishing to Terraform optimization, I could create specialized AI assistants—each with focused expertise and dedicated tools.&lt;/p&gt;
 
@@ -94,25 +94,37 @@
 
 &lt;p&gt;The subagents helped create detailed task breakdowns and technical specifications, but &lt;strong&gt;coordination required human orchestration&lt;/strong&gt; through the GitHub issue tracker.&lt;/p&gt;
 
+&lt;h2 id=&quot;-parallel-execution-capabilities&quot;&gt;✅ Parallel Execution Capabilities&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;✅ Concurrent Task Processing&lt;/strong&gt;&lt;br /&gt;
+Claude Code can run up to 10 tasks in parallel, processing them in batches. Perfect for independent subtasks across large codebases.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;✅ Multiple Subagent Workflows&lt;/strong&gt;&lt;br /&gt;
+You can launch multiple subagents simultaneously—each with its own context window. For example: test writer + docs agent + performance optimizer working concurrently.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;✅ Git Worktrees for Parallel Development&lt;/strong&gt;&lt;br /&gt;
+Run separate Claude Code sessions on different branches using Git worktrees, enabling true parallel development workflows.&lt;/p&gt;
+
 &lt;h2 id=&quot;-what-subagents-are-not&quot;&gt;❌ What Subagents Are NOT&lt;/h2&gt;
 
-&lt;p&gt;It’s important to understand subagents’ limitations:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;❌ They’re not parallel task dispatchers&lt;/strong&gt;&lt;br /&gt;
-Each subagent operates independently with its own context. You can’t say “have three subagents work on this simultaneously.”&lt;/p&gt;
+&lt;p&gt;It’s important to understand remaining limitations:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;❌ They don’t automatically coordinate&lt;/strong&gt;&lt;br /&gt;
-Subagents don’t communicate with each other or share context between their specialized domains.&lt;/p&gt;
+Subagents don’t communicate with each other or share context between their specialized domains—you still need orchestration.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;❌ They’re not a replacement for project management&lt;/strong&gt;&lt;br /&gt;
 Complex multi-phase projects still need human coordination and dependency management.&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;❌ Unlimited parallelism&lt;/strong&gt;&lt;br /&gt;
+Parallelism is capped at 10 concurrent tasks, and execution happens in batches rather than true streaming parallelism.&lt;/p&gt;
+
 &lt;h2 id=&quot;-coordinating-multiple-subagents&quot;&gt;🎯 Coordinating Multiple Subagents&lt;/h2&gt;
 
-&lt;p&gt;For complex projects requiring multiple subagents, I’ve found GitHub issues work excellently as coordination mechanisms:&lt;/p&gt;
+&lt;p&gt;For complex projects requiring multiple subagents, I’ve found several effective coordination patterns:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/github-tacker-1.png&quot; alt=&quot;GitHub Issue Coordination&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/p&gt;
 
+&lt;h3 id=&quot;sequential-coordination-github-issues&quot;&gt;Sequential Coordination (GitHub Issues)&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;The pattern:&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;Create a master issue&lt;/strong&gt; outlining the full project scope&lt;/li&gt;
@@ -122,7 +134,26 @@ Complex multi-phase projects still need human coordination and dependency manage
   &lt;li&gt;&lt;strong&gt;Link related issues&lt;/strong&gt; to maintain project context&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;This approach leverages each subagent’s expertise while maintaining project coherence through explicit coordination.&lt;/p&gt;
+&lt;h3 id=&quot;parallel-coordination-git-worktrees--multiple-sessions&quot;&gt;Parallel Coordination (Git Worktrees + Multiple Sessions)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Advanced pattern for independent workstreams:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Create Git worktrees&lt;/strong&gt; for different features/branches&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Launch parallel Claude Code sessions&lt;/strong&gt; in each worktree&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Assign specialized subagents&lt;/strong&gt; to each session&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Coordinate through pull requests&lt;/strong&gt; and code reviews&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Merge completed work&lt;/strong&gt; from parallel streams&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;concurrent-processing-single-session&quot;&gt;Concurrent Processing (Single Session)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;For related tasks that can run simultaneously:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Launch multiple subagents&lt;/strong&gt; using Task tool parallelism&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Assign complementary roles&lt;/strong&gt; (writer + reviewer + optimizer)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Monitor batch completion&lt;/strong&gt; before next phase&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Consolidate results&lt;/strong&gt; from parallel execution&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;These approaches leverage each subagent’s expertise while maintaining project coherence through explicit coordination.&lt;/p&gt;
 
 &lt;h2 id=&quot;-best-practices-ive-learned&quot;&gt;💡 Best Practices I’ve Learned&lt;/h2&gt;
 

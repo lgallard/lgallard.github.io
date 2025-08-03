@@ -354,7 +354,7 @@
 
 
 
-  4 minute read
+  5 minute read
 </p>
           
         </header>
@@ -457,25 +457,37 @@
 
 <p>The subagents helped create detailed task breakdowns and technical specifications, but <strong>coordination required human orchestration</strong> through the GitHub issue tracker.</p>
 
+<h2 id="-parallel-execution-capabilities">✅ Parallel Execution Capabilities</h2>
+
+<p><strong>✅ Concurrent Task Processing</strong><br />
+Claude Code can run up to 10 tasks in parallel, processing them in batches. Perfect for independent subtasks across large codebases.</p>
+
+<p><strong>✅ Multiple Subagent Workflows</strong><br />
+You can launch multiple subagents simultaneously—each with its own context window. For example: test writer + docs agent + performance optimizer working concurrently.</p>
+
+<p><strong>✅ Git Worktrees for Parallel Development</strong><br />
+Run separate Claude Code sessions on different branches using Git worktrees, enabling true parallel development workflows.</p>
+
 <h2 id="-what-subagents-are-not">❌ What Subagents Are NOT</h2>
 
-<p>It’s important to understand subagents’ limitations:</p>
-
-<p><strong>❌ They’re not parallel task dispatchers</strong><br />
-Each subagent operates independently with its own context. You can’t say “have three subagents work on this simultaneously.”</p>
+<p>It’s important to understand remaining limitations:</p>
 
 <p><strong>❌ They don’t automatically coordinate</strong><br />
-Subagents don’t communicate with each other or share context between their specialized domains.</p>
+Subagents don’t communicate with each other or share context between their specialized domains—you still need orchestration.</p>
 
 <p><strong>❌ They’re not a replacement for project management</strong><br />
 Complex multi-phase projects still need human coordination and dependency management.</p>
 
+<p><strong>❌ Unlimited parallelism</strong><br />
+Parallelism is capped at 10 concurrent tasks, and execution happens in batches rather than true streaming parallelism.</p>
+
 <h2 id="-coordinating-multiple-subagents">🎯 Coordinating Multiple Subagents</h2>
 
-<p>For complex projects requiring multiple subagents, I’ve found GitHub issues work excellently as coordination mechanisms:</p>
+<p>For complex projects requiring multiple subagents, I’ve found several effective coordination patterns:</p>
 
 <p><img src="/assets/images/github-tacker-1.png" alt="GitHub Issue Coordination" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></p>
 
+<h3 id="sequential-coordination-github-issues">Sequential Coordination (GitHub Issues)</h3>
 <p><strong>The pattern:</strong></p>
 <ol>
   <li><strong>Create a master issue</strong> outlining the full project scope</li>
@@ -485,7 +497,26 @@ Complex multi-phase projects still need human coordination and dependency manage
   <li><strong>Link related issues</strong> to maintain project context</li>
 </ol>
 
-<p>This approach leverages each subagent’s expertise while maintaining project coherence through explicit coordination.</p>
+<h3 id="parallel-coordination-git-worktrees--multiple-sessions">Parallel Coordination (Git Worktrees + Multiple Sessions)</h3>
+<p><strong>Advanced pattern for independent workstreams:</strong></p>
+<ol>
+  <li><strong>Create Git worktrees</strong> for different features/branches</li>
+  <li><strong>Launch parallel Claude Code sessions</strong> in each worktree</li>
+  <li><strong>Assign specialized subagents</strong> to each session</li>
+  <li><strong>Coordinate through pull requests</strong> and code reviews</li>
+  <li><strong>Merge completed work</strong> from parallel streams</li>
+</ol>
+
+<h3 id="concurrent-processing-single-session">Concurrent Processing (Single Session)</h3>
+<p><strong>For related tasks that can run simultaneously:</strong></p>
+<ol>
+  <li><strong>Launch multiple subagents</strong> using Task tool parallelism</li>
+  <li><strong>Assign complementary roles</strong> (writer + reviewer + optimizer)</li>
+  <li><strong>Monitor batch completion</strong> before next phase</li>
+  <li><strong>Consolidate results</strong> from parallel execution</li>
+</ol>
+
+<p>These approaches leverage each subagent’s expertise while maintaining project coherence through explicit coordination.</p>
 
 <h2 id="-best-practices-ive-learned">💡 Best Practices I’ve Learned</h2>
 
