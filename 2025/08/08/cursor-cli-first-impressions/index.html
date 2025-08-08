@@ -1,0 +1,752 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Cursor CLI — First impressions on the UX - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="First impressions of Cursor CLI’s user experience: models, workflows, differences vs Cursor IDE and Claude Code CLI, and where it might fit in CI/CD.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="Cursor CLI — First impressions on the UX">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/">
+<meta property="og:url" content="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/">
+
+
+
+<meta property="og:description" content="First impressions of Cursor CLI’s user experience: models, workflows, differences vs Cursor IDE and Claude Code CLI, and where it might fit in CI/CD.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Cursor CLI — First impressions on the UX">
+<meta name="twitter:description" content="First impressions of Cursor CLI’s user experience: models, workflows, differences vs Cursor IDE and Claude Code CLI, and where it might fit in CI/CD.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/cursor-cli-robot.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/cursor-cli-robot.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-08-08T06:45:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="AI Tools">
+
+<meta property="article:tag" content="CLI">
+
+<meta property="article:tag" content="Cursor">
+
+
+<meta property="article:section" content="Blog">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2025/08/08/cursor-cli-first-impressions/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2025/08/08/cursor-cli-first-impressions/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cursor CLI — First impressions on the UX">
+    <meta itemprop="description" content="Hands-on first look at Cursor CLI from a user-experience perspective: why it matters, supported models, how it compares to the IDE and other CLIs, early issues, and where it could shine.">
+    <meta itemprop="datePublished" content="August 08, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Cursor CLI — First impressions on the UX
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/cursor-cli-robot.png" alt="Cursor robot" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
+
+<p>This post captures my <strong>first impressions of the Cursor CLI</strong> from a <strong>user-experience</strong> lens. I’ve been a daily Cursor IDE user, so I was curious to see how the command‑line experience maps to real workflows.</p>
+
+<h2 id="why-cursor-cli">Why Cursor CLI?</h2>
+
+<p><img src="/assets/images/claude-code-cli.png" alt="Claude Code CLI (reference)" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
+
+<ul>
+  <li><strong>Terminal‑native workflows</strong>: when you’re already in a shell (local or remote), it’s convenient to ask for help without context‑switching to an editor.</li>
+  <li><strong>Same mental model as the IDE</strong>: chat first, then approve edits or shell commands the agent proposes.</li>
+  <li><strong>Reuses your Cursor rules and configuration</strong>: the CLI follows the same security posture (ask‑to‑apply) and leverages your existing setup.</li>
+  <li><strong>Fast model switching</strong>: a single slash command to choose models or list what’s available.</li>
+</ul>
+
+<p>Quick start (per docs):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Launch the agent</span>
+cursor-agent
+
+<span class="c"># List available models</span>
+/model <span class="nb">ls</span>
+
+<span class="c"># Switch model for the session</span>
+/model gpt-5
+</code></pre></div></div>
+
+<h2 id="supported-models">Supported models</h2>
+
+<p>On day one, I saw:</p>
+
+<ul>
+  <li><strong>OpenAI GPT‑5</strong> — available thanks to the Cursor × OpenAI partnership (free during the release week).</li>
+  <li><strong>Anthropic Claude 4 Sonnet</strong> and <strong>Claude 4.1 Opus</strong> — also selectable directly from the CLI.</li>
+</ul>
+
+<p>From the current UI it looks like the <strong>listed models are the ones supported</strong>. I expect broader model configuration down the road, similar to what we already have in Cursor IDE.</p>
+
+<p><img src="/assets/images/cursor-cli-models.png" alt="Model selector" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<h2 id="cursor-cli-vs-ide">Cursor CLI vs IDE</h2>
+
+<ul>
+  <li><strong>Where you run it</strong>: despite being a CLI, you can open it from any terminal — the <strong>Cursor IDE terminal</strong>, <strong>VS Code terminal</strong>, iTerm, etc.</li>
+  <li><strong>Context ergonomics</strong>: one notable difference is that the common <code class="highlighter-rouge">@</code> to attach files/folders as context <strong>does not behave the same</strong> as in Cursor IDE (or other CLIs). Some additional integration would help here. A lightweight extension for popular terminals/editors could close this gap.</li>
+</ul>
+
+<h2 id="cursor-cli-ux-vs-others-claude-code-cli-codex-gemini-cli-amazon-q-etc">Cursor CLI UX vs others (Claude Code CLI, Codex, Gemini CLI, Amazon Q, etc.)</h2>
+
+<ul>
+  <li><strong>Overall feel</strong>: the interaction model is familiar if you’ve tried other AI CLIs. That’s actually positive — you get a common mental model across tools.</li>
+  <li><strong>What’s still missing vs Claude Code CLI</strong> (from my early testing): I couldn’t find <code class="highlighter-rouge">/hooks</code>, <code class="highlighter-rouge">/mcp</code>, or a way to define <strong>custom slash commands</strong> yet. If those appear, the CLI would jump a tier in automation flexibility.</li>
+</ul>
+
+<p><img src="/assets/images/cursor-cli-vs.png" alt="Cursor CLI vs other UI" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<h2 id="issues-i-found-early-beta">Issues I found (early beta)</h2>
+
+<p>According to the docs, the CLI <strong>uses the same MCP configuration as the IDE</strong>. In practice, I hit problems:</p>
+
+<ul>
+  <li>Listing <strong>Obsidian notes</strong> via an MCP server that works fine in the IDE — failed.</li>
+  <li>Creating a <strong>GitHub issue</strong> through the GitHub MCP — also failed during my tests.</li>
+</ul>
+
+<p>Screenshots from these attempts:</p>
+
+<p><img src="/assets/images/cursor-cli-obsidian-list.png" alt="Obsidian MCP listing attempt" />
+<img src="/assets/images/cursor-cli-obsidian.png" alt="Obsidian MCP detail" />
+<img src="/assets/images/cursor-cli-mcp-request.png" alt="GitHub MCP request" />
+<img src="/assets/images/cursor-cli-mcp-gh.png" alt="GitHub MCP in list" /></p>
+
+<p>If the CLI truly shares the identical config, these should behave consistently. I’ll retest as updates roll out.</p>
+
+<h2 id="where-it-might-stand-out">Where it might stand out</h2>
+
+<ul>
+  <li><strong>Non‑interactive pipelines</strong>: if/when a non‑interactive mode lands, this could be ideal for <strong>CI/CD</strong> or scripted workflows where you want a constrained agent to generate diffs and propose edits, then let the pipeline gate approvals.</li>
+  <li><strong>Remote servers</strong>: quick on‑box assistance without opening an IDE.</li>
+  <li><strong>Complement to the ecosystem</strong>: it rounds out what Cursor has been building with the IDE, Bug Hunter, and Background Agents.</li>
+</ul>
+
+<h2 id="final-thoughts">Final thoughts</h2>
+
+<p><strong>Cursor CLI</strong> is a welcome addition that aligns with the IDE’s philosophy: concise prompts, safe edit approvals, and fast model switching — now in your terminal. It’s already usable for ad‑hoc terminal sessions, and with improved file context ergonomics and reliable MCP parity, it could become a powerful building block for <strong>repeatable CLI and CI/CD workflows</strong>.</p>
+
+<p><em>First‑impressions verdict: promising, familiar, and evolving. I’ll keep testing as new builds drop.</em></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-tools" class="page__taxonomy-item" rel="tag">AI Tools</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/cli" class="page__taxonomy-item" rel="tag">CLI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/cursor" class="page__taxonomy-item" rel="tag">Cursor</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-08T06:45:00-05:00">August 08, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Cursor+CLI+%E2%80%94+First+impressions+on+the+UX%20https%3A%2F%2Flgallardo.com%2F2025%2F08%2F08%2Fcursor-cli-first-impressions%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F08%2Fcursor-cli-first-impressions%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F08%2Fcursor-cli-first-impressions%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F08%2Fcursor-cli-first-impressions%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" class="pagination--pager" title="Specialized AI Workflows with Claude Code Subagents
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/cloud-code-subagents-puppets.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" rel="permalink">Specialized AI Workflows with Claude Code Subagents
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Transform your development workflow with Claude Code Subagents—specialized AI assistants that bring focused expertise to specific tasks, from blog publishing...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/codebot-hunt-bugs.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="permalink">From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">When Cursor announced BugBot would cost $40/month for 200 PR reviews, I decided to build my own alternative using Claude Code GitHub Actions. Here’s how I tr...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-github-vs.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/" rel="permalink">Automating Code Reviews with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to setting up Claude Code GitHub Actions for intelligent, automated PR reviews and issue handling in your repositories.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/code-cursor-claude.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" rel="permalink">Beyond Cursor: My Experience with Claude Code and Sequential Thinking
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">A hands-on comparison of Claude Code and Cursor, with a deep dive into Sequential Thinking and practical insights for developers choosing their next AI codin...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2025/08/08/cursor-cli-first-impressions"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>

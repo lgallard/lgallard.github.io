@@ -1,4 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-05T18:59:15-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Specialized AI Workflows with Claude Code Subagents</title><link href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" rel="alternate" type="text/html" title="Specialized AI Workflows with Claude Code Subagents" /><published>2025-08-01T19:00:00-05:00</published><updated>2025-08-01T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-puppets.png&quot; alt=&quot;Claude Code Subagents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-08T07:24:54-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Cursor CLI — First impressions on the UX</title><link href="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/" rel="alternate" type="text/html" title="Cursor CLI — First impressions on the UX" /><published>2025-08-08T06:45:00-05:00</published><updated>2025-08-08T06:45:00-05:00</updated><id>https://lgallardo.com/2025/08/08/cursor-cli-first-impressions</id><content type="html" xml:base="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/">&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-cli-robot.png&quot; alt=&quot;Cursor robot&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This post captures my &lt;strong&gt;first impressions of the Cursor CLI&lt;/strong&gt; from a &lt;strong&gt;user-experience&lt;/strong&gt; lens. I’ve been a daily Cursor IDE user, so I was curious to see how the command‑line experience maps to real workflows.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-cursor-cli&quot;&gt;Why Cursor CLI?&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-cli.png&quot; alt=&quot;Claude Code CLI (reference)&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Terminal‑native workflows&lt;/strong&gt;: when you’re already in a shell (local or remote), it’s convenient to ask for help without context‑switching to an editor.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Same mental model as the IDE&lt;/strong&gt;: chat first, then approve edits or shell commands the agent proposes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reuses your Cursor rules and configuration&lt;/strong&gt;: the CLI follows the same security posture (ask‑to‑apply) and leverages your existing setup.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fast model switching&lt;/strong&gt;: a single slash command to choose models or list what’s available.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Quick start (per docs):&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Launch the agent&lt;/span&gt;
+cursor-agent
+
+&lt;span class=&quot;c&quot;&gt;# List available models&lt;/span&gt;
+/model &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Switch model for the session&lt;/span&gt;
+/model gpt-5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;supported-models&quot;&gt;Supported models&lt;/h2&gt;
+
+&lt;p&gt;On day one, I saw:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;OpenAI GPT‑5&lt;/strong&gt; — available thanks to the Cursor × OpenAI partnership (free during the release week).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Anthropic Claude 4 Sonnet&lt;/strong&gt; and &lt;strong&gt;Claude 4.1 Opus&lt;/strong&gt; — also selectable directly from the CLI.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;From the current UI it looks like the &lt;strong&gt;listed models are the ones supported&lt;/strong&gt;. I expect broader model configuration down the road, similar to what we already have in Cursor IDE.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-cli-models.png&quot; alt=&quot;Model selector&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cursor-cli-vs-ide&quot;&gt;Cursor CLI vs IDE&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Where you run it&lt;/strong&gt;: despite being a CLI, you can open it from any terminal — the &lt;strong&gt;Cursor IDE terminal&lt;/strong&gt;, &lt;strong&gt;VS Code terminal&lt;/strong&gt;, iTerm, etc.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Context ergonomics&lt;/strong&gt;: one notable difference is that the common &lt;code class=&quot;highlighter-rouge&quot;&gt;@&lt;/code&gt; to attach files/folders as context &lt;strong&gt;does not behave the same&lt;/strong&gt; as in Cursor IDE (or other CLIs). Some additional integration would help here. A lightweight extension for popular terminals/editors could close this gap.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;cursor-cli-ux-vs-others-claude-code-cli-codex-gemini-cli-amazon-q-etc&quot;&gt;Cursor CLI UX vs others (Claude Code CLI, Codex, Gemini CLI, Amazon Q, etc.)&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Overall feel&lt;/strong&gt;: the interaction model is familiar if you’ve tried other AI CLIs. That’s actually positive — you get a common mental model across tools.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;What’s still missing vs Claude Code CLI&lt;/strong&gt; (from my early testing): I couldn’t find &lt;code class=&quot;highlighter-rouge&quot;&gt;/hooks&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;/mcp&lt;/code&gt;, or a way to define &lt;strong&gt;custom slash commands&lt;/strong&gt; yet. If those appear, the CLI would jump a tier in automation flexibility.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-cli-vs.png&quot; alt=&quot;Cursor CLI vs other UI&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;issues-i-found-early-beta&quot;&gt;Issues I found (early beta)&lt;/h2&gt;
+
+&lt;p&gt;According to the docs, the CLI &lt;strong&gt;uses the same MCP configuration as the IDE&lt;/strong&gt;. In practice, I hit problems:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Listing &lt;strong&gt;Obsidian notes&lt;/strong&gt; via an MCP server that works fine in the IDE — failed.&lt;/li&gt;
+  &lt;li&gt;Creating a &lt;strong&gt;GitHub issue&lt;/strong&gt; through the GitHub MCP — also failed during my tests.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Screenshots from these attempts:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-cli-obsidian-list.png&quot; alt=&quot;Obsidian MCP listing attempt&quot; /&gt;
+&lt;img src=&quot;/assets/images/cursor-cli-obsidian.png&quot; alt=&quot;Obsidian MCP detail&quot; /&gt;
+&lt;img src=&quot;/assets/images/cursor-cli-mcp-request.png&quot; alt=&quot;GitHub MCP request&quot; /&gt;
+&lt;img src=&quot;/assets/images/cursor-cli-mcp-gh.png&quot; alt=&quot;GitHub MCP in list&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If the CLI truly shares the identical config, these should behave consistently. I’ll retest as updates roll out.&lt;/p&gt;
+
+&lt;h2 id=&quot;where-it-might-stand-out&quot;&gt;Where it might stand out&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Non‑interactive pipelines&lt;/strong&gt;: if/when a non‑interactive mode lands, this could be ideal for &lt;strong&gt;CI/CD&lt;/strong&gt; or scripted workflows where you want a constrained agent to generate diffs and propose edits, then let the pipeline gate approvals.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Remote servers&lt;/strong&gt;: quick on‑box assistance without opening an IDE.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Complement to the ecosystem&lt;/strong&gt;: it rounds out what Cursor has been building with the IDE, Bug Hunter, and Background Agents.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;final-thoughts&quot;&gt;Final thoughts&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Cursor CLI&lt;/strong&gt; is a welcome addition that aligns with the IDE’s philosophy: concise prompts, safe edit approvals, and fast model switching — now in your terminal. It’s already usable for ad‑hoc terminal sessions, and with improved file context ergonomics and reliable MCP parity, it could become a powerful building block for &lt;strong&gt;repeatable CLI and CI/CD workflows&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;First‑impressions verdict: promising, familiar, and evolving. I’ll keep testing as new builds drop.&lt;/em&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AI Tools" /><category term="CLI" /><category term="Cursor" /><summary type="html">Hands-on first look at Cursor CLI from a user-experience perspective: why it matters, supported models, how it compares to the IDE and other CLIs, early issues, and where it could shine.</summary></entry><entry><title type="html">Specialized AI Workflows with Claude Code Subagents</title><link href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" rel="alternate" type="text/html" title="Specialized AI Workflows with Claude Code Subagents" /><published>2025-08-01T19:00:00-05:00</published><updated>2025-08-01T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/cloud-code-subagents-puppets.png&quot; alt=&quot;Claude Code Subagents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Last week, while exploring Claude Code’s latest features, I stumbled upon something that fundamentally changed how I think about AI assistance: &lt;strong&gt;subagents&lt;/strong&gt;. Instead of having one general-purpose AI trying to handle everything from blog publishing to Terraform optimization, I could create specialized AI assistants—each with focused expertise and dedicated tools.&lt;/p&gt;
 
@@ -1811,23 +1897,4 @@ Point Copilot to an &lt;strong&gt;MCP server&lt;/strong&gt; that already ingeste
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup module on GitHub&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot;&gt;terraform-aws-backup module on Terraform Registry&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/copilot&quot;&gt;GitHub Copilot Background Agents&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Recently, I had the opportunity to try out GitHub Copilot Coding Agents (Background Agents) on one of my personal projects: the terraform-aws-backup m...</summary></entry><entry><title type="html">Anbernic 35xxH and Batocera</title><link href="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/" rel="alternate" type="text/html" title="Anbernic 35xxH and Batocera" /><published>2024-05-11T19:00:00-05:00</published><updated>2024-05-11T19:00:00-05:00</updated><id>https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera</id><content type="html" xml:base="https://lgallardo.com/2024/05/12/anbernic-35xxh-batocera/">&lt;p&gt;&lt;img src=&quot;/assets/images/anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxH&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;
-Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as &lt;a href=&quot;https://www.goretroid.com/&quot; target=&quot;_blank&quot;&gt;Retroid&lt;/a&gt;, &lt;a href=&quot;https://powkiddy.com/&quot; target=&quot;_blank&quot;&gt;Powkiddy&lt;/a&gt;, and &lt;a href=&quot;https://anbernic.com/&quot; target=&quot;_blank&quot;&gt;Anbernic&lt;/a&gt;. These devices vary in form factors—ranging from compact screens to more powerful computing capabilities and operating systems, some of which are open-source, while others are proprietary and maintained by the manufacturers themselves.&lt;/p&gt;
-
-&lt;p&gt;After watching countless YouTube videos, comparing specifications, and exploring retro consoles on AliExpress priced under $100, I stumbled upon the &lt;strong&gt;Anbernic 35xxH&lt;/strong&gt;. This model, featuring a 3.5-inch screen, is developed by Anbernic. It is similar to the &lt;strong&gt;Anbernic 35xx Plus&lt;/strong&gt; but sports a horizontal orientation. The model name ‘35xxH’ indicates a 3.5-inch screen (‘35xx’) and a horizontal layout (‘H’).&lt;/p&gt;
-
-&lt;p&gt;As mentioned earlier, some operating systems are developed by the device manufacturers, like Anbernic, which offers a proprietary OS. While this OS serves its purpose, it is not without limitations. For example, the way games are displayed and organized can be confusing and cumbersome, and some emulators perform better on RetroArch than on the standalone emulators included with the OS.&lt;/p&gt;
-
-&lt;p&gt;Seeking a more user-friendly interface, I turned to &lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;, an open-source project maintained by the community. Batocera provides a more intuitive and visually appealing user interface.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/batocera-anbernic-35xxh.jpg&quot; alt=&quot;Anbernic 35xxh&quot; style=&quot;display:block; margin-left:auto; margin-right:auto&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;For those interested in using Batocera on your &lt;strong&gt;Anbernic 35xxH&lt;/strong&gt;, there is a repository where you can download the Batocera image, called &lt;a href=&quot;https://github.com/rg35xx-cfw/rg35xx-cfw.github.io/discussions/104&quot; target=&quot;_blank&quot;&gt;Batocera Lite Beta for RG35XX Plus and RG35XX H&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.goretroid.com/&quot; target=&quot;_blank&quot;&gt;Retroid&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://powkiddy.com/&quot; target=&quot;_blank&quot;&gt;Powkiddy&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://anbernic.com/&quot; target=&quot;_blank&quot;&gt;Anbernic&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://batocera.org/&quot; target=&quot;_blank&quot;&gt;Batocera&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Today, the market is flooded with a variety of handheld devices for retro emulation, originating from several Chinese companies such as Retroid, Powki...</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Recently, I had the opportunity to try out GitHub Copilot Coding Agents (Background Agents) on one of my personal projects: the terraform-aws-backup m...</summary></entry></feed>
