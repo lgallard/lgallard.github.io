@@ -1,0 +1,1014 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>MCP Servers Beyond Code: Research-Driven Development with Context7 and Terraform - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Learn how to use MCP servers like Context7 and Terraform MCP for research-driven development. Practical guide to evaluating modules, comparing options, and making informed decisions before implementation.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="MCP Servers Beyond Code: Research-Driven Development with Context7 and Terraform">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2025/08/12/mcp-servers-research-driven-development/">
+<meta property="og:url" content="https://lgallardo.com/2025/08/12/mcp-servers-research-driven-development/">
+
+
+
+<meta property="og:description" content="Learn how to use MCP servers like Context7 and Terraform MCP for research-driven development. Practical guide to evaluating modules, comparing options, and making informed decisions before implementation.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="MCP Servers Beyond Code: Research-Driven Development with Context7 and Terraform">
+<meta name="twitter:description" content="Learn how to use MCP servers like Context7 and Terraform MCP for research-driven development. Practical guide to evaluating modules, comparing options, and making informed decisions before implementation.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/08/12/mcp-servers-research-driven-development/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/mcp-servers-ticker-file.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/mcp-servers-ticker-file.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-08-11T19:00:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="MCP Servers">
+
+<meta property="article:tag" content="Context7">
+
+<meta property="article:tag" content="Terraform">
+
+<meta property="article:tag" content="Research">
+
+<meta property="article:tag" content="AI Tools">
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="Cursor">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2025/08/12/mcp-servers-research-driven-development/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2025/08/12/mcp-servers-research-driven-development/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="MCP Servers Beyond Code: Research-Driven Development with Context7 and Terraform">
+    <meta itemprop="description" content="Discover how MCP servers transform the research phase of development. From evaluating Terraform modules to comparing documentation, learn how Context7 and Terraform MCP servers provide accurate, up-to-date information before you write a single line of code.">
+    <meta itemprop="datePublished" content="August 12, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">MCP Servers Beyond Code: Research-Driven Development with Context7 and Terraform
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/mcp-servers-ticker-file.png" alt="MCP Servers for Research" style="display:block; margin-left:auto; margin-right:auto; width:90%; max-width:1000px;" /></p>
+
+<p>Last week, I wanted to demonstrate the research capabilities of MCP servers, so I decided to analyze the AWS Backup Terraform module ecosystem. As the author of one of the modules in this space, I was curious: <strong>can MCP servers provide objective, comprehensive market analysis and competitive intelligence?</strong></p>
+
+<p>I used two specialized MCP servers for this research:</p>
+<ul>
+  <li><strong>Context7</strong>: Retrieves up-to-date, version-specific documentation and code examples directly from libraries and frameworks, eliminating outdated or hallucinated information</li>
+  <li><strong>Terraform MCP Server</strong>: Provides direct access to the Terraform Registry API, enabling comprehensive searches for modules, providers, and their metadata including download counts and version history</li>
+</ul>
+
+<p>The result? A detailed analysis that showcased not just the modules’ capabilities, but the power of MCP servers for research-driven development. Here’s how these tools are revolutionizing the way we analyze and understand technology ecosystems.</p>
+
+<h2 id="-the-research-first-approach">🔍 The Research-First Approach</h2>
+
+<h3 id="traditional-workflow-manual-and-time-consuming">Traditional Workflow: Manual and Time-Consuming</h3>
+
+<p><img src="/assets/images/traditional-workflow-fixed.png" alt="Traditional Development Workflow" style="display:block; margin-left:auto; margin-right:auto; width:70%; max-width:600px;" /></p>
+
+<p>The traditional approach often leads to:</p>
+<ul>
+  <li><strong>Manual browsing</strong> of https://registry.terraform.io/</li>
+  <li><strong>Outdated documentation</strong> causing confusion</li>
+  <li><strong>Limited information</strong> for decision-making</li>
+  <li><strong>Costly refactoring</strong> when limitations are discovered</li>
+</ul>
+
+<h3 id="mcp-server-workflow-automated-and-comprehensive">MCP Server Workflow: Automated and Comprehensive</h3>
+
+<p><img src="/assets/images/mcp-workflow-fixed.png" alt="MCP Server Development Workflow" style="display:block; margin-left:auto; margin-right:auto; width:70%; max-width:600px;" /></p>
+
+<p>The MCP server approach delivers:</p>
+<ul>
+  <li><strong>Automated searches</strong> across the entire Registry</li>
+  <li><strong>Up-to-date documentation</strong> for all candidates</li>
+  <li><strong>Real adoption metrics</strong> and download counts</li>
+  <li><strong>Comprehensive feature analysis</strong> before coding</li>
+  <li><strong>Data-backed decisions</strong> with confidence</li>
+</ul>
+
+<h2 id="-real-world-case-study-aws-backup-module-ecosystem-analysis">🎯 Real-World Case Study: AWS Backup Module Ecosystem Analysis</h2>
+
+<p>To test the research capabilities of MCP servers, I decided to analyze the AWS Backup Terraform module landscape. As the maintainer of the <code class="highlighter-rouge">lgallard/backup/aws</code> module, I wanted to see if MCP servers could provide objective market analysis and help understand the competitive positioning within this ecosystem.</p>
+
+<h3 id="the-research-query">The Research Query</h3>
+
+<p>Using Claude Code with connected MCP servers, I asked:</p>
+
+<p><img src="/assets/images/mcp-servers-prompt.png" alt="Prompt" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<h3 id="the-analysis-process">The Analysis Process</h3>
+
+<p>The MCP servers immediately went to work:</p>
+
+<ol>
+  <li><strong>Terraform MCP Server</strong>: Searched the Terraform Registry for all AWS Backup modules</li>
+  <li><strong>Context7</strong>: Retrieved up-to-date documentation for each candidate</li>
+  <li><strong>Comparative Analysis</strong>: Generated feature matrices and maturity assessments</li>
+  <li><strong>Market Analysis</strong>: Provided objective positioning and competitive insights</li>
+</ol>
+
+<h3 id="the-results-comprehensive-module-comparison">The Results: Comprehensive Module Comparison</h3>
+
+<p>The analysis revealed five leading AWS Backup modules with detailed breakdown:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Module</th>
+      <th>Downloads</th>
+      <th>Version</th>
+      <th>Key Features</th>
+      <th>Maturity Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>cloudposse/backup/aws</strong></td>
+      <td>1.8M</td>
+      <td>1.1.0</td>
+      <td>Advanced vault lock, Multiple backup rules, Cross-region copy, Comprehensive tagging, Audit framework support</td>
+      <td>⭐⭐⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><strong>lgallard/backup/aws</strong></td>
+      <td>1.1M</td>
+      <td>1.0.2</td>
+      <td>Multiple plans support, Organizations policy, Audit framework, Reporting integration, Windows VSS backup</td>
+      <td>⭐⭐⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><strong>umotif-public/backup/aws</strong></td>
+      <td>29K</td>
+      <td>1.6.0</td>
+      <td>SNS notifications, Basic vault management, Simple configuration, External vault support</td>
+      <td>⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><strong>boldlink/backup/aws</strong></td>
+      <td>14K</td>
+      <td>1.0.1</td>
+      <td>IAM role management, Resource assignments, Modular vault support, Basic features only</td>
+      <td>⭐⭐⭐</td>
+    </tr>
+    <tr>
+      <td><strong>USSBA/backup-plans/aws</strong></td>
+      <td>10K</td>
+      <td>9.0.0</td>
+      <td>Cross-region backup, Government-focused, Simplified configuration, Limited customization</td>
+      <td>⭐⭐⭐</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="detailed-feature-analysis">Detailed Feature Analysis</h3>
+
+<p>The MCP servers provided comprehensive capability breakdowns:</p>
+
+<p><img src="/assets/images/mcp-servers-details.png" alt="Research details" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<h3 id="why-this-module">Why this module?</h3>
+
+<p><img src="/assets/images/mcp-servers-why.png" alt="Why?" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<h3 id="market-analysis-results-competitive-positioning">Market Analysis Results: Competitive Positioning</h3>
+
+<p>The research revealed interesting insights about the competitive landscape:</p>
+
+<blockquote>
+  <p><strong>🏆 Market Leaders: cloudposse/backup/aws and lgallard/backup/aws</strong></p>
+
+  <p><strong>Key findings from the analysis:</strong></p>
+  <ul>
+    <li><strong>Feature Parity</strong>: Both leading modules offer comprehensive enterprise features</li>
+    <li><strong>Adoption Metrics</strong>: Similar download counts (1.8M vs 1.1M) indicate healthy competition</li>
+    <li><strong>Differentiation</strong>: lgallard module excels in Organizations policy and Windows VSS support</li>
+    <li><strong>Market Position</strong>: Clear separation between enterprise-grade modules and basic alternatives</li>
+  </ul>
+</blockquote>
+
+<h2 id="final-recommendation">Final recommendation</h2>
+
+<p><img src="/assets/images/mcp-servers-recomendation.png" alt="Final recommendation" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<h2 id="️-setting-up-mcp-servers-for-research">🛠️ Setting Up MCP Servers for Research</h2>
+
+<p>Now that we’ve seen the power of MCP servers for competitive analysis and market research, let’s get them configured in your development environment. While I used Claude Code for this demonstration, <strong>MCP servers work with any AI tool that supports the Model Context Protocol</strong>—including Claude Desktop, Cursor, VS Code with Copilot, and other MCP-compatible applications. The setup process is straightforward, and once configured, these servers provide instant access to up-to-date documentation and registry data regardless of your chosen tool.</p>
+
+<h3 id="context7-mcp-server-setup">Context7 MCP Server Setup</h3>
+
+<p><strong>For Claude Code:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Context7 MCP server</span>
+npm install <span class="nt">-g</span> @upstash/context7-mcp
+
+<span class="c"># Add to Claude Code MCP configuration</span>
+claude config mcp add context7 npm @upstash/context7-mcp
+</code></pre></div></div>
+
+<p><strong>For Cursor:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">Cursor's</span><span class="w"> </span><span class="err">MCP</span><span class="w"> </span><span class="err">settings</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"context7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npx"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@upstash/context7-mcp"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="terraform-mcp-server-setup">Terraform MCP Server Setup</h3>
+
+<p><strong>For Claude Code:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Terraform MCP server</span>
+claude config mcp add terraform-server docker hashicorp/terraform-mcp-server
+</code></pre></div></div>
+
+<p><strong>For Cursor:</strong></p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">Cursor's</span><span class="w"> </span><span class="err">MCP</span><span class="w"> </span><span class="err">configuration</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"terraform-server"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"run"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--rm"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hashicorp/terraform-mcp-server"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="verification-and-testing">Verification and Testing</h3>
+
+<p><img src="/assets/images/mcp-servers-terraform-context7.png" alt="MCP Server Connection" style="display:block; margin-left:auto; margin-right:auto; width:90%; max-width:1000px;" /></p>
+
+<p>Once configured, verify your MCP servers are connected:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In Claude Code</span>
+/mcp list
+
+<span class="c"># In Cursor  </span>
+Check MCP status <span class="k">in </span>settings <span class="o">&gt;</span> Tools <span class="o">&gt;</span> MCP Servers
+</code></pre></div></div>
+
+<h2 id="-research-workflow-best-practices">📊 Research Workflow Best Practices</h2>
+
+<h3 id="1-start-with-broad-discovery">1. Start with Broad Discovery</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Terraform MCP server, find all available modules for [technology/service]. 
+Include download counts and latest versions.
+</code></pre></div></div>
+
+<h3 id="2-deep-dive-documentation">2. Deep-Dive Documentation</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Context7, compare the documentation quality and feature sets of the 
+top 3 candidates. Focus on [specific requirements].
+</code></pre></div></div>
+
+<h3 id="3-generate-comparison-matrices">3. Generate Comparison Matrices</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Create a detailed comparison table including features, maturity indicators, 
+and suitability for [use case]. Provide a clear recommendation.
+</code></pre></div></div>
+
+<h3 id="4-validate-with-current-information">4. Validate with Current Information</h3>
+<p>The power of MCP servers lies in their real-time data access:</p>
+<ul>
+  <li><strong>Context7</strong> pulls the latest documentation versions</li>
+  <li><strong>Terraform MCP</strong> accesses current registry statistics</li>
+  <li><strong>No hallucinated or outdated information</strong></li>
+</ul>
+
+<h2 id="-advanced-research-techniques">🔬 Advanced Research Techniques</h2>
+
+<h3 id="multi-criteria-decision-analysis">Multi-Criteria Decision Analysis</h3>
+
+<p>Ask your MCP-enabled AI assistant to:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Evaluate these modules using weighted criteria:
+- Feature completeness (40%)
+- Community adoption (25%)  
+- Documentation quality (20%)
+- Maintenance activity (15%)
+
+Provide scores and final ranking.
+</code></pre></div></div>
+
+<h3 id="ecosystem-integration-research">Ecosystem Integration Research</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Context7, research how [chosen module] integrates with:
+- Existing Terraform providers
+- CI/CD pipelines  
+- Monitoring solutions
+- Security frameworks
+</code></pre></div></div>
+
+<h3 id="cost-and-performance-analysis">Cost and Performance Analysis</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Terraform MCP server, analyze the resource efficiency and cost 
+implications of each module approach.
+</code></pre></div></div>
+
+<h2 id="-when-to-use-mcp-servers-for-research">🎯 When to Use MCP Servers for Research</h2>
+
+<h3 id="ideal-scenarios-">Ideal Scenarios ✅</h3>
+<ul>
+  <li><strong>Competitive analysis</strong> - Understanding market positioning and feature gaps</li>
+  <li><strong>Technology stack decisions</strong> - Comparing frameworks, libraries, or tools</li>
+  <li><strong>Market research</strong> - Evaluating community adoption and trends</li>
+  <li><strong>Architecture planning</strong> - Understanding integration patterns and limitations</li>
+  <li><strong>Compliance research</strong> - Finding modules that meet specific regulatory requirements</li>
+</ul>
+
+<h3 id="less-suitable-scenarios-️">Less Suitable Scenarios ⚠️</h3>
+<ul>
+  <li><strong>Simple, well-known implementations</strong> - Basic setups with obvious choices</li>
+  <li><strong>Time-critical prototyping</strong> - When speed matters more than optimization</li>
+  <li><strong>Internal tooling research</strong> - Limited public documentation availability</li>
+</ul>
+
+<h2 id="-research-roi-market-intelligence-benefits">💡 Research ROI: Market Intelligence Benefits</h2>
+
+<p>The AWS Backup module ecosystem analysis took <strong>20 minutes</strong> and delivered:</p>
+
+<p><strong>Market Intelligence:</strong></p>
+<ul>
+  <li><strong>Competitive positioning insights</strong> - Understanding where modules stand in the market</li>
+  <li><strong>Feature gap analysis</strong> - Identifying opportunities for improvement</li>
+  <li><strong>Adoption trend analysis</strong> - Real download metrics and community engagement</li>
+</ul>
+
+<p><strong>Research Quality Improvements:</strong></p>
+<ul>
+  <li><strong>Objective, data-driven analysis</strong> with standardized comparison criteria</li>
+  <li><strong>Up-to-date information</strong> avoiding outdated documentation pitfalls</li>
+  <li><strong>Comprehensive feature mapping</strong> across the entire ecosystem</li>
+  <li><strong>Clear market positioning</strong> based on actual usage and features</li>
+</ul>
+
+<h2 id="-the-future-of-research-driven-development">🚀 The Future of Research-Driven Development</h2>
+
+<p>MCP servers represent a fundamental shift in how we approach technology research and competitive analysis. Instead of intuition-based or anecdotal insights, we can now:</p>
+
+<ul>
+  <li><strong>Access real-time, accurate information</strong> from multiple sources simultaneously</li>
+  <li><strong>Generate comprehensive market analyses</strong> with objective criteria</li>
+  <li><strong>Conduct competitive intelligence</strong> backed by current adoption metrics</li>
+  <li><strong>Identify market opportunities</strong> through thorough ecosystem analysis</li>
+</ul>
+
+<p>The research phase isn’t just about gathering information—it’s about <strong>building comprehensive market understanding</strong> that informs product strategy, competitive positioning, and technology decisions.</p>
+
+<h2 id="-final-thoughts">🧠 Final thoughts</h2>
+
+<p>The future belongs to developers and teams who make informed decisions backed by real-time, accurate market data. MCP servers make this approach not just possible, but practical for everyday research and strategic work.</p>
+
+<h2 id="-references">📚 References</h2>
+
+<ul>
+  <li><a href="https://github.com/upstash/context7">Context7 MCP Server</a> - Up-to-date documentation retrieval for developers</li>
+  <li><a href="https://context7.com/about">Context7 About</a> - Platform mission and features overview</li>
+  <li><a href="https://github.com/hashicorp/terraform-mcp-server">Terraform MCP Server</a> - HashiCorp’s official Terraform MCP implementation</li>
+  <li><a href="https://registry.terraform.io/modules/lgallard/backup/aws/latest">lgallard/backup/aws Module</a> - The winning AWS Backup module from our research</li>
+  <li><a href="https://modelcontextprotocol.io/">MCP Protocol Specification</a> - Official Model Context Protocol documentation</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-tools" class="page__taxonomy-item" rel="tag">AI Tools</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/context7" class="page__taxonomy-item" rel="tag">Context7</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/cursor" class="page__taxonomy-item" rel="tag">Cursor</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/mcp-servers" class="page__taxonomy-item" rel="tag">MCP Servers</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/research" class="page__taxonomy-item" rel="tag">Research</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-11T19:00:00-05:00">August 12, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=MCP+Servers+Beyond+Code%3A+Research-Driven+Development+with+Context7+and+Terraform%20https%3A%2F%2Flgallardo.com%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/" class="pagination--pager" title="Cursor CLI — First impressions on the UX
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/cursor-cli-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/" rel="permalink">Cursor CLI — First impressions on the UX
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Hands-on first look at Cursor CLI from a user-experience perspective: why it matters, supported models, how it compares to the IDE and other CLIs, early issu...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/cloud-code-subagents-puppets.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" rel="permalink">Specialized AI Workflows with Claude Code Subagents
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Transform your development workflow with Claude Code Subagents—specialized AI assistants that bring focused expertise to specific tasks, from blog publishing...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/codebot-hunt-bugs.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="permalink">From BugBot’s $40/month to CodeBot: Building Your Own AI Code Review Alternative
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">When Cursor announced BugBot would cost $40/month for 200 PR reviews, I decided to build my own alternative using Claude Code GitHub Actions. Here’s how I tr...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-github-vs.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/" rel="permalink">Automating Code Reviews with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Step-by-step guide to setting up Claude Code GitHub Actions for intelligent, automated PR reviews and issue handling in your repositories.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lgallardo.com/2025/08/12/mcp-servers-research-driven-development/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2025/08/12/mcp-servers-research-driven-development"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>

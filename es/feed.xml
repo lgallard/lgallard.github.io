@@ -1,10 +1,328 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-08-08T07:38:14-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Cursor CLI — Primeras impresiones sobre la UX</title><link href="https://lgallardo.com/es/2025/08/08/cursor-cli-first-impressions/" rel="alternate" type="text/html" title="Cursor CLI — Primeras impresiones sobre la UX" /><published>2025-08-08T06:45:00-05:00</published><updated>2025-08-08T06:45:00-05:00</updated><id>https://lgallardo.com/es/2025/08/08/cursor-cli-first-impressions</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/08/cursor-cli-first-impressions/">&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-cli-robot.png&quot; alt=&quot;Cursor Agent CLI — terminal&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-08-12T20:30:09-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform</title><link href="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/" rel="alternate" type="text/html" title="Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform" /><published>2025-08-11T19:00:00-05:00</published><updated>2025-08-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/">&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-servers-ticker-file.png&quot; alt=&quot;Servidores MCP para Investigación&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%; max-width:1000px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La semana pasada, quise demostrar las capacidades de investigación de los servidores MCP, así que decidí analizar el ecosistema de módulos de Terraform para AWS Backup. Como autor de uno de los módulos en este espacio, tenía curiosidad: &lt;strong&gt;¿pueden los servidores MCP proporcionar análisis de mercado objetivo e inteligencia competitiva integral?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Utilicé dos servidores MCP especializados para esta investigación:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Context7&lt;/strong&gt;: Obtiene documentación actualizada, específica por versión y ejemplos de código directamente de librerías y frameworks, eliminando información desactualizada o alucinada&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Servidor MCP de Terraform&lt;/strong&gt;: Proporciona acceso directo a la API del Registro de Terraform, permitiendo búsquedas exhaustivas de módulos, providers y sus metadatos incluyendo conteos de descarga e historial de versiones&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;¿El resultado? Un análisis detallado que mostró no solo las capacidades de los módulos, sino el poder de los servidores MCP para el desarrollo basado en investigación. Aquí muestrox cómo estas herramientas están revolucionando la forma en que analizamos y entendemos los ecosistemas tecnológicos.&lt;/p&gt;
+
+&lt;h2 id=&quot;-el-enfoque-de-investigación-primero&quot;&gt;🔍 El Enfoque de Investigación Primero&lt;/h2&gt;
+
+&lt;h3 id=&quot;flujo-tradicional-manual-y-consume-tiempo&quot;&gt;Flujo Tradicional: Manual y Consume Tiempo&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/traditional-workflow-fixed.png&quot; alt=&quot;Flujo de Desarrollo Tradicional&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%; max-width:600px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;El enfoque tradicional a menudo lleva a:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Navegación manual&lt;/strong&gt; de https://registry.terraform.io/&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Documentación desactualizada&lt;/strong&gt; que causa confusión&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Información limitada&lt;/strong&gt; para la toma de decisiones&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Refactorización costosa&lt;/strong&gt; cuando se descubren limitaciones&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;flujo-con-servidores-mcp-automatizado-e-integral&quot;&gt;Flujo con Servidores MCP: Automatizado e Integral&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-workflow-fixed.png&quot; alt=&quot;Flujo de Desarrollo con Servidores MCP&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%; max-width:600px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;El enfoque con servidores MCP entrega:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Búsquedas automatizadas&lt;/strong&gt; en todo el Registro&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Documentación actualizada&lt;/strong&gt; para todos los candidatos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Métricas reales de adopción&lt;/strong&gt; y conteos de descarga&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Análisis integral de características&lt;/strong&gt; antes de codificar&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Decisiones respaldadas por datos&lt;/strong&gt; con confianza&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-caso-de-estudio-del-mundo-real-análisis-del-ecosistema-de-módulos-aws-backup&quot;&gt;🎯 Caso de Estudio del Mundo Real: Análisis del Ecosistema de Módulos AWS Backup&lt;/h2&gt;
+
+&lt;p&gt;Para probar las capacidades de investigación de los servidores MCP, decidí analizar el panorama de módulos de Terraform para AWS Backup. Como mantenedor del módulo &lt;code class=&quot;highlighter-rouge&quot;&gt;lgallard/backup/aws&lt;/code&gt;, quería ver si los servidores MCP podían proporcionar análisis de mercado objetivo y ayudar a entender el posicionamiento competitivo dentro de este ecosistema.&lt;/p&gt;
+
+&lt;h3 id=&quot;la-consulta-de-investigación&quot;&gt;La Consulta de Investigación&lt;/h3&gt;
+
+&lt;p&gt;Usando Claude Code con servidores MCP conectados, pregunté:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-servers-prompt.png&quot; alt=&quot;Prompt&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;el-proceso-de-análisis&quot;&gt;El Proceso de Análisis&lt;/h3&gt;
+
+&lt;p&gt;Los servidores MCP inmediatamente se pusieron a trabajar:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Servidor MCP de Terraform&lt;/strong&gt;: Buscó en el Registro de Terraform todos los módulos de AWS Backup&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Context7&lt;/strong&gt;: Recuperó documentación actualizada para cada candidato&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Análisis Comparativo&lt;/strong&gt;: Generó matrices de características y evaluaciones de madurez&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Análisis de Mercado&lt;/strong&gt;: Proporcionó posicionamiento objetivo e insights competitivos&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;los-resultados-comparación-integral-de-módulos&quot;&gt;Los Resultados: Comparación Integral de Módulos&lt;/h3&gt;
+
+&lt;p&gt;El análisis reveló cinco módulos líderes de AWS Backup con desglose detallado:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Módulo&lt;/th&gt;
+      &lt;th&gt;Descargas&lt;/th&gt;
+      &lt;th&gt;Versión&lt;/th&gt;
+      &lt;th&gt;Características Clave&lt;/th&gt;
+      &lt;th&gt;Puntuación de Madurez&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;cloudposse/backup/aws&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;1.8M&lt;/td&gt;
+      &lt;td&gt;1.1.0&lt;/td&gt;
+      &lt;td&gt;Bloqueo avanzado de vault, Múltiples reglas de backup, Copia entre regiones, Etiquetado integral, Soporte de framework de auditoría&lt;/td&gt;
+      &lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;lgallard/backup/aws&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;1.1M&lt;/td&gt;
+      &lt;td&gt;1.0.2&lt;/td&gt;
+      &lt;td&gt;Soporte de múltiples planes, Política de organizaciones, Framework de auditoría, Integración de reportes, Backup VSS de Windows&lt;/td&gt;
+      &lt;td&gt;⭐⭐⭐⭐⭐&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;umotif-public/backup/aws&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;29K&lt;/td&gt;
+      &lt;td&gt;1.6.0&lt;/td&gt;
+      &lt;td&gt;Notificaciones SNS, Gestión básica de vault, Configuración simple, Soporte de vault externo&lt;/td&gt;
+      &lt;td&gt;⭐⭐⭐&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;boldlink/backup/aws&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;14K&lt;/td&gt;
+      &lt;td&gt;1.0.1&lt;/td&gt;
+      &lt;td&gt;Gestión de roles IAM, Asignaciones de recursos, Soporte modular de vault, Solo características básicas&lt;/td&gt;
+      &lt;td&gt;⭐⭐⭐&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;USSBA/backup-plans/aws&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;10K&lt;/td&gt;
+      &lt;td&gt;9.0.0&lt;/td&gt;
+      &lt;td&gt;Backup entre regiones, Enfoque gubernamental, Configuración simplificada, Personalización limitada&lt;/td&gt;
+      &lt;td&gt;⭐⭐⭐&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;análisis-detallado-de-características&quot;&gt;Análisis Detallado de Características&lt;/h3&gt;
+
+&lt;p&gt;Los servidores MCP proporcionaron desgloses integrales de capacidades:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-servers-details.png&quot; alt=&quot;Detalles de investigación&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;por-qué-este-módulo&quot;&gt;¿Por qué este módulo?&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-servers-why.png&quot; alt=&quot;¿Por qué?&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;resultados-del-análisis-de-mercado-posicionamiento-competitivo&quot;&gt;Resultados del Análisis de Mercado: Posicionamiento Competitivo&lt;/h3&gt;
+
+&lt;p&gt;La investigación reveló insights interesantes sobre el panorama competitivo:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;🏆 Líderes de Mercado: cloudposse/backup/aws y lgallard/backup/aws&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Hallazgos clave del análisis:&lt;/strong&gt;&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Paridad de Características&lt;/strong&gt;: Ambos módulos líderes ofrecen características empresariales integrales&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Métricas de Adopción&lt;/strong&gt;: Conteos de descarga similares (1.8M vs 1.1M) indican competencia saludable&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Diferenciación&lt;/strong&gt;: El módulo lgallard sobresale en política de organizaciones y soporte VSS de Windows&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Posición de Mercado&lt;/strong&gt;: Separación clara entre módulos de nivel empresarial y alternativas básicas&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;recomendación-final&quot;&gt;Recomendación final&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-servers-recomendation.png&quot; alt=&quot;Recomendación final&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;️-configurando-servidores-mcp-para-investigación&quot;&gt;🛠️ Configurando Servidores MCP para Investigación&lt;/h2&gt;
+
+&lt;p&gt;Ahora que hemos visto el poder de los servidores MCP para análisis competitivo e investigación de mercado, vamos a configurarlos en tu entorno de desarrollo. Mientras usé Claude Code para esta demostración, &lt;strong&gt;los servidores MCP funcionan con cualquier herramienta de AI que soporte el Protocolo de Contexto de Modelo&lt;/strong&gt;—incluyendo Claude Desktop, Cursor, VS Code con Copilot, y otras aplicaciones compatibles con MCP. El proceso de configuración es directo, y una vez configurados, estos servidores proporcionan acceso instantáneo a documentación actualizada y datos del registro sin importar la herramienta que elijas.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuración-del-servidor-mcp-context7&quot;&gt;Configuración del Servidor MCP Context7&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Para Claude Code:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Instalar servidor MCP Context7&lt;/span&gt;
+npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @upstash/context7-mcp
+
+&lt;span class=&quot;c&quot;&gt;# Agregar a la configuración MCP de Claude Code&lt;/span&gt;
+claude config mcp add context7 npm @upstash/context7-mcp
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Para Cursor:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Agregar&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;la&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;configuración&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;MCP&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;de&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Cursor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;mcpServers&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;context7&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;npx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;@upstash/context7-mcp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;configuración-del-servidor-mcp-terraform&quot;&gt;Configuración del Servidor MCP Terraform&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Para Claude Code:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Instalar servidor MCP Terraform&lt;/span&gt;
+claude config mcp add terraform-server docker hashicorp/terraform-mcp-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Para Cursor:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Agregar&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;la&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;configuración&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;MCP&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;de&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Cursor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;mcpServers&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;terraform-server&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;command&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;docker&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;args&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;run&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;-i&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;--rm&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;hashicorp/terraform-mcp-server&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;verificación-y-pruebas&quot;&gt;Verificación y Pruebas&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-servers-terraform-context7.png&quot; alt=&quot;Conexión de Servidores MCP&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%; max-width:1000px;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Una vez configurados, verifica que tus servidores MCP estén conectados:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# En Claude Code&lt;/span&gt;
+/mcp list
+
+&lt;span class=&quot;c&quot;&gt;# En Cursor  &lt;/span&gt;
+Verificar estado MCP en configuración &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Herramientas &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; Servidores MCP
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-mejores-prácticas-de-flujo-de-investigación&quot;&gt;📊 Mejores Prácticas de Flujo de Investigación&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-comenzar-con-descubrimiento-amplio&quot;&gt;1. Comenzar con Descubrimiento Amplio&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Usando el servidor MCP de Terraform, encuentra todos los módulos disponibles para [tecnología/servicio]. 
+Incluye conteos de descarga y versiones más recientes.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-documentación-profunda&quot;&gt;2. Documentación Profunda&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Usando Context7, compara la calidad de documentación y conjuntos de características de los 
+3 candidatos principales. Enfócate en [requisitos específicos].
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-generar-matrices-de-comparación&quot;&gt;3. Generar Matrices de Comparación&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Crea una tabla de comparación detallada incluyendo características, indicadores de madurez, 
+y idoneidad para [caso de uso]. Proporciona una recomendación clara.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-validar-con-información-actual&quot;&gt;4. Validar con Información Actual&lt;/h3&gt;
+&lt;p&gt;El poder de los servidores MCP radica en su acceso a datos en tiempo real:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Context7&lt;/strong&gt; extrae las últimas versiones de documentación&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;MCP de Terraform&lt;/strong&gt; accede a estadísticas actuales del registro&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sin información alucinada o desactualizada&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-técnicas-avanzadas-de-investigación&quot;&gt;🔬 Técnicas Avanzadas de Investigación&lt;/h2&gt;
+
+&lt;h3 id=&quot;análisis-de-decisión-multi-criterio&quot;&gt;Análisis de Decisión Multi-Criterio&lt;/h3&gt;
+
+&lt;p&gt;Pide a tu asistente de AI habilitado con MCP que:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Evalúa estos módulos usando criterios ponderados:
+- Completitud de características (40%)
+- Adopción de la comunidad (25%)  
+- Calidad de documentación (20%)
+- Actividad de mantenimiento (15%)
+
+Proporciona puntuaciones y ranking final.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;investigación-de-integración-de-ecosistema&quot;&gt;Investigación de Integración de Ecosistema&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Usando Context7, investiga cómo [módulo elegido] se integra con:
+- Proveedores de Terraform existentes
+- Pipelines de CI/CD  
+- Soluciones de monitoreo
+- Frameworks de seguridad
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;análisis-de-costo-y-rendimiento&quot;&gt;Análisis de Costo y Rendimiento&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Usando el servidor MCP de Terraform, analiza la eficiencia de recursos y las 
+implicaciones de costo de cada enfoque de módulo.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-cuándo-usar-servidores-mcp-para-investigación&quot;&gt;🎯 Cuándo Usar Servidores MCP para Investigación&lt;/h2&gt;
+
+&lt;h3 id=&quot;escenarios-ideales-&quot;&gt;Escenarios Ideales ✅&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Análisis competitivo&lt;/strong&gt; - Entender posicionamiento de mercado y brechas de características&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Decisiones de stack tecnológico&lt;/strong&gt; - Comparar frameworks, librerías o herramientas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Investigación de mercado&lt;/strong&gt; - Evaluar adopción de la comunidad y tendencias&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Planificación de arquitectura&lt;/strong&gt; - Entender patrones de integración y limitaciones&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Investigación de cumplimiento&lt;/strong&gt; - Encontrar módulos que cumplan requisitos regulatorios específicos&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;escenarios-menos-adecuados-️&quot;&gt;Escenarios Menos Adecuados ⚠️&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Implementaciones simples y conocidas&lt;/strong&gt; - Configuraciones básicas con opciones obvias&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Prototipado crítico en tiempo&lt;/strong&gt; - Cuando la velocidad importa más que la optimización&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Investigación de herramientas internas&lt;/strong&gt; - Disponibilidad limitada de documentación pública&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-roi-de-investigación-beneficios-de-inteligencia-de-mercado&quot;&gt;💡 ROI de Investigación: Beneficios de Inteligencia de Mercado&lt;/h2&gt;
+
+&lt;p&gt;El análisis del ecosistema de módulos AWS Backup tomó &lt;strong&gt;20 minutos&lt;/strong&gt; y entregó:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Inteligencia de Mercado:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Insights de posicionamiento competitivo&lt;/strong&gt; - Entender dónde se posicionan los módulos en el mercado&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Análisis de brechas de características&lt;/strong&gt; - Identificar oportunidades de mejora&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Análisis de tendencias de adopción&lt;/strong&gt; - Métricas reales de descarga y engagement de la comunidad&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Mejoras en Calidad de Investigación:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Análisis objetivo basado en datos&lt;/strong&gt; con criterios de comparación estandarizados&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Información actualizada&lt;/strong&gt; evitando trampas de documentación desactualizada&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mapeo integral de características&lt;/strong&gt; en todo el ecosistema&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Posicionamiento claro de mercado&lt;/strong&gt; basado en uso real y características&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-el-futuro-del-desarrollo-basado-en-investigación&quot;&gt;🚀 El Futuro del Desarrollo Basado en Investigación&lt;/h2&gt;
+
+&lt;p&gt;Los servidores MCP representan un cambio fundamental en cómo abordamos la investigación tecnológica y el análisis competitivo. En lugar de insights basados en intuición o anecdóticos, ahora podemos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Acceder a información precisa en tiempo real&lt;/strong&gt; de múltiples fuentes simultáneamente&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Generar análisis integrales de mercado&lt;/strong&gt; con criterios objetivos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Conducir inteligencia competitiva&lt;/strong&gt; respaldada por métricas actuales de adopción&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Identificar oportunidades de mercado&lt;/strong&gt; a través de análisis exhaustivo de ecosistemas&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La fase de investigación no se trata solo de recopilar información—se trata de &lt;strong&gt;construir comprensión integral del mercado&lt;/strong&gt; que informa estrategia de producto, posicionamiento competitivo y decisiones tecnológicas.&lt;/p&gt;
+
+&lt;h2 id=&quot;-reflexiones-finales&quot;&gt;🧠 Reflexiones finales&lt;/h2&gt;
+
+&lt;p&gt;El futuro pertenece a desarrolladores y equipos que toman decisiones informadas respaldadas por datos de mercado precisos y en tiempo real. Los servidores MCP hacen que este enfoque no solo sea posible, sino práctico para investigación cotidiana y trabajo estratégico.&lt;/p&gt;
+
+&lt;h2 id=&quot;-referencias&quot;&gt;📚 Referencias&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/upstash/context7&quot;&gt;Servidor MCP Context7&lt;/a&gt; - Recuperación de documentación actualizada para desarrolladores&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://context7.com/about&quot;&gt;Acerca de Context7&lt;/a&gt; - Misión y características de la plataforma&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/hashicorp/terraform-mcp-server&quot;&gt;Servidor MCP Terraform&lt;/a&gt; - Implementación oficial MCP de Terraform de HashiCorp&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws/latest&quot;&gt;Módulo lgallard/backup/aws&lt;/a&gt; - El módulo AWS Backup ganador de nuestra investigación&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://modelcontextprotocol.io/&quot;&gt;Especificación del Protocolo MCP&lt;/a&gt; - Documentación oficial del Protocolo de Contexto de Modelo&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Servidores MCP" /><category term="Context7" /><category term="Terraform" /><category term="Investigación" /><category term="Herramientas AI" /><category term="Claude Code" /><category term="Cursor" /><summary type="html">Descubre cómo los servidores MCP transforman la fase de investigación del desarrollo. Desde evaluar módulos de Terraform hasta comparar documentación, aprende cómo Context7 y los servidores MCP de Terraform proporcionan información precisa y actualizada antes de escribir una sola línea de código.</summary></entry><entry><title type="html">Cursor CLI — Primeras impresiones sobre la UX</title><link href="https://lgallardo.com/es/2025/08/08/cursor-cli-first-impressions/" rel="alternate" type="text/html" title="Cursor CLI — Primeras impresiones sobre la UX" /><published>2025-08-08T06:45:00-05:00</published><updated>2025-08-08T06:45:00-05:00</updated><id>https://lgallardo.com/es/2025/08/08/cursor-cli-first-impressions</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/08/cursor-cli-first-impressions/">&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-cli-robot.png&quot; alt=&quot;Cursor Agent CLI — terminal&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Este post recoge mis &lt;strong&gt;primeras impresiones de Cursor CLI&lt;/strong&gt; desde la óptica de la &lt;strong&gt;experiencia de usuario&lt;/strong&gt;. Uso Cursor IDE a diario, así que tenía curiosidad por ver cómo se traslada ese flujo al terminal.&lt;/p&gt;
 
 &lt;h2 id=&quot;por-qué-cursor-cli&quot;&gt;¿Por qué Cursor CLI?&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-cli.png&quot; alt=&quot;Claude Code CLI (reference)&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-cli.png&quot; alt=&quot;Claude Code CLI (reference)&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Flujos nativos de terminal&lt;/strong&gt;: cuando ya estás en una shell (local o remota) es cómodo pedir ayuda sin cambiar a un editor.&lt;/li&gt;
@@ -1853,49 +2171,4 @@ Apunta Copilot a un &lt;strong&gt;servidor MCP&lt;/strong&gt; que ya haya ingeri
   &lt;li&gt;&lt;a href=&quot;https://github.com/features/copilot&quot;&gt;GitHub Copilot&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.cursor.so/bugbot&quot;&gt;Cursor BugBot&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/pull/55&quot;&gt;feat: Add support for repository replication &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Recientemente, mientras trabajaba en mis módulos de Terraform, se me ocurrió una idea: ¿Y si uso BugBot para revisar el trabajo de los Coding Agents d...</summary></entry><entry><title type="html">Uso de GitHub Copilot Background Agents</title><link href="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/" rel="alternate" type="text/html" title="Uso de GitHub Copilot Background Agents" /><published>2025-06-04T19:00:00-05:00</published><updated>2025-06-04T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup</id><content type="html" xml:base="https://lgallardo.com/es/2025/06/05/github-copilot-terraform-aws-backup/">&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-coding-agent.png&quot; alt=&quot;GitHub Copilot Background Agents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recientemente tuve la oportunidad de probar los GitHub Copilot Coding Agents (Background Agents) en uno de mis proyectos personales: el módulo &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup&lt;/a&gt;. Este módulo está diseñado para ayudar a los usuarios a gestionar planes de AWS Backup usando Terraform.&lt;/p&gt;
-
-&lt;h2 id=&quot;el-problema&quot;&gt;El problema&lt;/h2&gt;
-
-&lt;p&gt;Un usuario abrió &lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/issues/114&quot;&gt;un issue&lt;/a&gt; solicitando soporte para múltiples planes de backup por vault. Esto requería un refactor importante del módulo, ya que previamente solo soportaba un plan por vault. Decidí asignar el issue a Copilot para ver cómo manejaba un refactor real de infraestructura como código (IaC).&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-assigned-by-lgallard.png&quot; alt=&quot;Asignación del issue a Copilot&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;la-solución-de-copilot&quot;&gt;La solución de Copilot&lt;/h2&gt;
-
-&lt;p&gt;Copilot Background Agents tomó el issue y propuso un pull request (&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup/pull/115&quot;&gt;PR #115&lt;/a&gt;) que introdujo una nueva variable &lt;code class=&quot;highlighter-rouge&quot;&gt;plans&lt;/code&gt; (un mapa de mapas) para soportar múltiples planes de backup. El PR incluyó todos los cambios de código necesarios, actualizaciones de documentación y mantuvo la compatibilidad hacia atrás con el enfoque de un solo plan.&lt;/p&gt;
-
-&lt;p&gt;Interactué con Copilot directamente desde GitHub, haciendo preguntas y solicitando cambios. Por ejemplo, verifiqué la compatibilidad hacia atrás y reporté un caso especial relacionado con la migración del estado de Terraform. Copilot respondió a mis comentarios, resolvió los problemas y actualizó el PR en consecuencia.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-pr.png&quot; alt=&quot;Conversación en el PR de Copilot&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;puntos-destacados&quot;&gt;Puntos destacados&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Automatización de extremo a extremo:&lt;/strong&gt; Casi todo el proceso ocurrió dentro de GitHub, con mínima intervención humana.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Rapidez:&lt;/strong&gt; Todo el proceso de refactor y revisión tomó unos 35 minutos, de los cuales Copilot realizó la mayor parte en solo 13 minutos.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Flexibilidad de dispositivos:&lt;/strong&gt; Gestioné el proceso desde mi iPad mini usando Arc, sin necesidad de un IDE local.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Retroalimentación iterativa:&lt;/strong&gt; Copilot manejó varias rondas de feedback, incluyendo reportes de errores y ajustes de código.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;desventajas&quot;&gt;Desventajas&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Selección de modelo:&lt;/strong&gt; No había opción para elegir qué modelo de IA usaba Copilot para la tarea.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Pruebas necesarias:&lt;/strong&gt; Como con cualquier generación automática de código, fue necesario probar y validar manualmente antes de hacer merge.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Manejo de imágenes:&lt;/strong&gt; Copilot no pudo leer imágenes pegadas en los comentarios, así que los errores debían proporcionarse en texto.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
-
-&lt;p&gt;GitHub Copilot Background Agents demostró ser una herramienta valiosa para tareas automatizadas y desatendidas como el refactor de módulos. Aunque es importante probar y validar el código generado, Copilot puede acelerar significativamente los flujos de trabajo de desarrollo, especialmente para infraestructura como código.&lt;/p&gt;
-
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-backup&quot;&gt;terraform-aws-backup module en GitHub&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://registry.terraform.io/modules/lgallard/backup/aws&quot;&gt;terraform-aws-backup module en Terraform Registry&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/copilot&quot;&gt;GitHub Copilot Background Agents&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Recientemente tuve la oportunidad de probar los GitHub Copilot Coding Agents (Background Agents) en uno de mis proyectos personales: el módulo terrafo...</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Recientemente, mientras trabajaba en mis módulos de Terraform, se me ocurrió una idea: ¿Y si uso BugBot para revisar el trabajo de los Coding Agents d...</summary></entry></feed>
