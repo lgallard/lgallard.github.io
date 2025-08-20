@@ -1,0 +1,39 @@
+flowchart TD
+    A[🎯 Tackle PR #830 Request] --> B[🔍 Initial PR Analysis]
+    B --> C[📋 CI/CD Checks Status]
+    C -->|Passing| D[🤖 Request @coderabbitai Review]
+    C -->|Issues Found| E[❌ State Lock Error Discovered]
+    
+    D --> F[⏳ Wait for CodeRabbit Response]
+    F --> G[📖 Analyze CodeRabbit Findings]
+    G --> H[🔍 Validate HashiCorp Vault Safety]
+    H --> I[✅ Vault Storage Unaffected]
+    
+    E --> J[🚨 DynamoDB State Lock Issue]
+    J --> K[Lock ID: 6fc870fd-b4b9-b0cf-a8aa-2d5534178aed]
+    K --> L[🔧 Activate Leverage CLI Environment]
+    
+    L --> M[📂 Navigate to cli-test-layer]
+    M --> N[🔓 Resolve State Lock]
+    N --> O[✅ Lock Cleared Successfully]
+    
+    I --> P[🧪 Final Validation Phase]
+    O --> P
+    P --> Q[🔍 Test All 3 Affected Layers]
+    Q --> R[✅ Aurora RDS Export Layer]
+    Q --> S[✅ MySQL RDS Export Layer]
+    Q --> T[✅ User File Shares Layer]
+    
+    R --> U[📝 Comprehensive Analysis Report]
+    S --> U
+    T --> U
+    U --> V[✅ Approve PR]
+    V --> W[🎉 Ready to Merge]
+    
+    style A fill:#e1f5fe
+    style W fill:#c8e6c9
+    style I fill:#c8e6c9
+    style O fill:#c8e6c9
+    style J fill:#ffecb3
+    style E fill:#ffcdd2
+

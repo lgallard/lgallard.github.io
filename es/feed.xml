@@ -1,4 +1,251 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-08-15T17:08:05-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform</title><link href="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/" rel="alternate" type="text/html" title="Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform" /><published>2025-08-11T19:00:00-05:00</published><updated>2025-08-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/">&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-servers-ticker-file.png&quot; alt=&quot;Servidores MCP para Investigación&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%; max-width:1000px;&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-08-19T19:35:55-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter</title><link href="https://lgallardo.com/es/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="alternate" type="text/html" title="Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter" /><published>2025-08-19T19:00:00-05:00</published><updated>2025-08-19T19:00:00-05:00</updated><id>https://lgallardo.com/es/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic</id><content type="html" xml:base="https://lgallardo.com/es/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/">&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-robot.png&quot; alt=&quot;Claude Code Router&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;¿Alguna vez te has encontrado con el temido mensaje “Claude usage limit reached” a las 2 AM mientras depurabas un problema crítico? ¿O has deseado poder usar Claude Code con modelos GPT para tareas específicas? Después de experimentar estos problemas en carne propia, descubrí una configuración revolucionaria: &lt;strong&gt;Claude Code Router&lt;/strong&gt; combinado con &lt;strong&gt;OpenRouter&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Esto no se trata solo de tener modelos de respaldo—se trata de enrutar inteligentemente las peticiones al modelo correcto en el momento adecuado, ya sea un modelo Qwen gratuito para tareas simples, una instancia local de Ollama para trabajo sensible, o GPT cuando necesitas capacidades específicas.&lt;/p&gt;
+
+&lt;h2 id=&quot;el-problema-la-limitación-de-un-solo-proveedor-de-claude-code&quot;&gt;El Problema: La Limitación de Un Solo Proveedor de Claude Code&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-limit-reached.png&quot; alt=&quot;Límite de Uso Alcanzado&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Aunque Claude Code es increíblemente poderoso, estar limitado a los modelos de Anthropic crea fricciones reales:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Límites de uso&lt;/strong&gt; que se reinician en momentos inconvenientes (6pm hora de Madrid para mí)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sin acceso a modelos especializados&lt;/strong&gt; que podrían sobresalir en tareas específicas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Acumulación de costos&lt;/strong&gt; cuando podrías usar alternativas gratuitas para consultas más simples&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Preocupaciones de privacidad&lt;/strong&gt; para código sensible que debería permanecer local&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Claude Code Router resuelve estos problemas elegantemente interceptando peticiones y enrutándolas a cualquier proveedor de modelo compatible.&lt;/p&gt;
+
+&lt;h2 id=&quot;qué-es-claude-code-router&quot;&gt;¿Qué es Claude Code Router?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/musistudio/claude-code-router&quot;&gt;Claude Code Router&lt;/a&gt; actúa como un proxy inteligente entre Claude Code y varios proveedores de LLM. Piénsalo como un operador de centralita inteligente que:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Intercepta&lt;/strong&gt; las peticiones API de Claude Code&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enruta&lt;/strong&gt; a diferentes modelos basándose en tus reglas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Transforma&lt;/strong&gt; peticiones/respuestas para compatibilidad API&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Gestiona&lt;/strong&gt; múltiples proveedores de forma transparente&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;¿La belleza? Claude Code ni siquiera sabe que está sucediendo. Desde su perspectiva, sigue hablando con Claude—pero detrás de escena, podrías estar usando un modelo completamente diferente.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-cli.png&quot; alt=&quot;Interfaz CLI&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;openrouter-la-puerta-de-enlace-universal-para-llm&quot;&gt;OpenRouter: La Puerta de Enlace Universal para LLM&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://openrouter.ai&quot;&gt;OpenRouter&lt;/a&gt; lleva esta flexibilidad aún más lejos. Con acceso a más de 400 modelos de más de 60 proveedores a través de una única API, es como tener un control remoto universal para modelos de IA:&lt;/p&gt;
+
+&lt;h3 id=&quot;modelos-gratuitos-que-vale-la-pena-explorar&quot;&gt;Modelos Gratuitos que Vale la Pena Explorar&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-or-free.png&quot; alt=&quot;Modelos Gratuitos en OpenRouter&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Estos modelos no cuestan literalmente nada y manejan tareas rutinarias sorprendentemente bien:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Qwen3 Coder&lt;/strong&gt;: Optimizado para tareas de programación, ventana de contexto de 262K&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DeepSeek R1&lt;/strong&gt;: Fuertes capacidades de razonamiento, especialmente para depuración&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;OpenAI gpt-oss-20b&lt;/strong&gt;: Modelo de peso abierto con sólido rendimiento general&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;modelos-premium-cuando-los-necesitas&quot;&gt;Modelos Premium Cuando los Necesitas&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-or-gpt.png&quot; alt=&quot;Modelos GPT en OpenRouter&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A veces necesitas los pesos pesados. OpenRouter proporciona acceso a:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Modelos GPT&lt;/strong&gt;: Ten en cuenta que GPT-5 requiere BYOK (Bring Your Own Key), mientras que GPT-4o-mini está disponible con la API estándar de OpenRouter&lt;/li&gt;
+  &lt;li&gt;Serie Gemini de Google&lt;/li&gt;
+  &lt;li&gt;Modelos Claude de Anthropic (con potencialmente mejor disponibilidad)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Importante&lt;/strong&gt;: Siempre verifica que tu modelo elegido soporte las funciones que necesitas—consulta la sección Consideraciones de Soporte de Herramientas por Modelo más abajo para detalles sobre limitaciones de herramientas/llamadas de función.&lt;/p&gt;
+
+&lt;h3 id=&quot;autoalojado-con-ollama&quot;&gt;Autoalojado con Ollama&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-ollama.png&quot; alt=&quot;Configuración de Ollama&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Para máxima privacidad y control, ejecuta modelos localmente:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Privacidad completa&lt;/strong&gt;: El código nunca sale de tu máquina&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sin límites de uso&lt;/strong&gt;: Ejecuta tanto como tu hardware permita&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Capacidad offline&lt;/strong&gt;: Trabaja sin conectividad a internet&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;configurando-todo&quot;&gt;Configurando Todo&lt;/h2&gt;
+
+&lt;h3 id=&quot;paso-1-instalar-claude-code-router&quot;&gt;Paso 1: Instalar Claude Code Router&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @musistudio/claude-code-router
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;paso-2-obtén-tu-api-key-de-openrouter&quot;&gt;Paso 2: Obtén tu API Key de OpenRouter&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Dirígete a &lt;a href=&quot;https://openrouter.ai&quot;&gt;openrouter.ai&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Regístrate (autenticación con GitHub/Google disponible)&lt;/li&gt;
+  &lt;li&gt;Añade algunos créditos ($10 rinde mucho con modelos gratuitos)&lt;/li&gt;
+  &lt;li&gt;Genera tu API key&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;paso-3-configurar-el-router&quot;&gt;Paso 3: Configurar el Router&lt;/h3&gt;
+
+&lt;p&gt;Crea &lt;code class=&quot;highlighter-rouge&quot;&gt;.claude-code-router/config.json&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LOG&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;API_TIMEOUT_MS&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;600000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Providers&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;openrouter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;api_base_url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://openrouter.ai/api/v1/chat/completions&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;api_key&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;${OPENROUTER_API_KEY}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;models&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;qwen/qwen3-coder:free&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;openai/gpt-oss-20b:free&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ollama&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;api_base_url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:11434/v1/chat/completions&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;api_key&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ollama&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;models&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;qwen3:4b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;deepseek-coder:6.7b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Nota la sintaxis &lt;code class=&quot;highlighter-rouge&quot;&gt;${OPENROUTER_API_KEY}&lt;/code&gt;—el router lee de variables de entorno por seguridad.&lt;/p&gt;
+
+&lt;h3 id=&quot;paso-4-lanzar-y-usar&quot;&gt;Paso 4: Lanzar y Usar&lt;/h3&gt;
+
+&lt;p&gt;Inicia el router:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ccr start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto lanza el router en el puerto 3456 por defecto. Claude Code ahora enrutará a través de él automáticamente cuando esté configurado con el endpoint local.&lt;/p&gt;
+
+&lt;p&gt;Usa Claude Code como siempre:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ccr code &lt;span class=&quot;s2&quot;&gt;&quot;explica esta función&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;paso-5-configurar-claude-code-para-usar-el-router&quot;&gt;Paso 5: Configurar Claude Code para Usar el Router&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-ui.png&quot; alt=&quot;Interfaz Web de Claude Code Router&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Para hacer que Claude Code enrute a través de tu router local, necesitas configurarlo para usar el endpoint del router. Abre la UI web para configuración visual:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ccr ui
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Esto abre la interfaz web del router en &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:3456&lt;/code&gt; donde puedes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Configurar reglas de enrutamiento&lt;/strong&gt; para diferentes escenarios (Default, Background, Think, Long Context)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Asignar modelos específicos&lt;/strong&gt; a cada categoría de enrutamiento&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Monitorear logs de peticiones&lt;/strong&gt; para ver qué modelos están siendo utilizados&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Probar diferentes configuraciones&lt;/strong&gt; antes de aplicarlas&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La UI web proporciona una forma intuitiva de configurar enrutamiento inteligente sin editar archivos de configuración manualmente. Puedes asignar modelos rentables para tareas simples y modelos premium para operaciones complejas que requieren soporte de herramientas.&lt;/p&gt;
+
+&lt;h2 id=&quot;el-poder-del-enrutamiento-inteligente&quot;&gt;El Poder del Enrutamiento Inteligente&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-ui.png&quot; alt=&quot;Configuración UI del Router&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;La verdadera magia ocurre cuando configuras reglas de enrutamiento. La UI te permite asignar diferentes modelos a diferentes escenarios:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Default&lt;/strong&gt;: Tu modelo principal para consultas generales&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Background&lt;/strong&gt;: Modelo eficiente para procesamiento en segundo plano&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Think&lt;/strong&gt;: Modelo optimizado para razonamiento en problemas complejos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Long Context&lt;/strong&gt;: Modelo con ventanas de contexto grandes para bases de código extensas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Web Search&lt;/strong&gt;: Modelo optimizado para tareas de investigación&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Esto significa que una simple petición de “formatea este JSON” podría ir a un modelo Qwen gratuito, mientras que “arquitectura una solución de microservicios” activa GPT o Claude.&lt;/p&gt;
+
+&lt;h3 id=&quot;consideraciones-de-soporte-de-herramientas-por-modelo&quot;&gt;Consideraciones de Soporte de Herramientas por Modelo&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-endpoints-limitations.png&quot; alt=&quot;Limitaciones de Endpoints de Modelos&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Al configurar reglas de enrutamiento, es crucial entender que Claude Code depende fuertemente de &lt;strong&gt;herramientas/llamadas de función&lt;/strong&gt; para muchas operaciones como edición de archivos, comandos git e interacciones del sistema. No todos los modelos soportan estas capacidades:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Modelos con soporte de herramientas&lt;/strong&gt;: Modelos Claude, serie GPT-4o, algunos modelos Gemini&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Modelos solo de texto&lt;/strong&gt;: Muchos modelos gratuitos (Qwen, DeepSeek, etc.) que pueden manejar explicaciones y generación de código pero no ejecución de herramientas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mejor práctica&lt;/strong&gt;: Enruta tareas que requieren herramientas a modelos confirmados con capacidad de herramientas, y usa modelos solo de texto para explicaciones, revisión de código y documentación&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Como se muestra en los logs de error arriba, encontrarás errores de “No endpoints found that support” cuando intentes usar características avanzadas con modelos que no las soportan. Siempre verifica las capacidades del modelo antes de enrutar tareas críticas.&lt;/p&gt;
+
+&lt;h2 id=&quot;flujo-de-trabajo-del-mundo-real&quot;&gt;Flujo de Trabajo del Mundo Real&lt;/h2&gt;
+
+&lt;p&gt;Así es como uso esta configuración diariamente:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Preparación del standup matutino&lt;/strong&gt;: Modelos Qwen gratuitos resumen los commits de ayer&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Desarrollo de características&lt;/strong&gt;: Claude (a través de suscripción normal) para implementaciones complejas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Correcciones rápidas&lt;/strong&gt;: Ollama local para código privado de clientes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Depuración fuera de horario&lt;/strong&gt;: Créditos de OpenRouter cuando alcanzo límites de Claude&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Escritura de documentación&lt;/strong&gt;: Modelos GPT que sobresalen en escritura técnica&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;El comando &lt;code class=&quot;highlighter-rouge&quot;&gt;/model&lt;/code&gt; me permite cambiar sobre la marcha:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/model ollama,qwen3:4b       &lt;span class=&quot;c&quot;&gt;# Cambiar a Ollama local&lt;/span&gt;
+/model openrouter,gpt-4o     &lt;span class=&quot;c&quot;&gt;# Usar GPT a través de OpenRouter&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;consejos-de-optimización-de-costos&quot;&gt;Consejos de Optimización de Costos&lt;/h2&gt;
+
+&lt;p&gt;Después de un mes de uso, esto es lo que he aprendido:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Empieza con modelos gratuitos&lt;/strong&gt;: Te sorprenderá lo capaces que son para tareas rutinarias&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Usa umbrales de contexto&lt;/strong&gt;: Enruta solo consultas complejas a modelos premium&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Monitorea los logs&lt;/strong&gt;: Los logs del router ayudan a identificar qué consultas realmente necesitan modelos premium&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Aprovecha Ollama&lt;/strong&gt;: Para tareas locales repetitivas, el autoalojamiento es imbatible&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Mi desglose mensual típico:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;70% modelos gratuitos (consultas básicas, formateo, depuración simple, explicaciones de código)&lt;/li&gt;
+  &lt;li&gt;20% Ollama (código privado, trabajo offline, generación de documentación)&lt;/li&gt;
+  &lt;li&gt;10% modelos premium con soporte de herramientas (arquitectura compleja que requiere edición de archivos, operaciones git, interacciones del sistema)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;solución-de-problemas-comunes&quot;&gt;Solución de Problemas Comunes&lt;/h2&gt;
+
+&lt;p&gt;El router registra en &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.claude-code-router.log&lt;/code&gt; por defecto, lo que ayuda a diagnosticar problemas:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Conexión rechazada&lt;/strong&gt;: Verifica si el router está ejecutándose (&lt;code class=&quot;highlighter-rouge&quot;&gt;ccr status&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Modelo no encontrado&lt;/strong&gt;: Verifica que el nombre del modelo coincida con el formato de OpenRouter&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Errores de timeout&lt;/strong&gt;: Aumenta &lt;code class=&quot;highlighter-rouge&quot;&gt;API_TIMEOUT_MS&lt;/code&gt; para modelos más lentos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Problemas con API key&lt;/strong&gt;: Asegúrate de que las variables de entorno estén configuradas correctamente&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;más-allá-del-enrutamiento-básico&quot;&gt;Más Allá del Enrutamiento Básico&lt;/h2&gt;
+
+&lt;p&gt;Claude Code Router soporta características avanzadas que aún estoy explorando:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Transformadores personalizados&lt;/strong&gt;: Modifica peticiones/respuestas programáticamente&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Scripts de enrutamiento JavaScript&lt;/strong&gt;: Lógica compleja para selección de modelos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Integración con GitHub Actions&lt;/strong&gt;: CI/CD con enrutamiento de modelos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Múltiples fallbacks de proveedores&lt;/strong&gt;: Failover automático cuando los proveedores están caídos&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;la-conclusión&quot;&gt;La Conclusión&lt;/h2&gt;
+
+&lt;p&gt;Esta configuración transformó mi experiencia con Claude Code de frustrante (alcanzar límites) a liberadora (flexibilidad infinita). Ya sea que busques reducir costos, evitar limitaciones, o simplemente experimentar con diferentes modelos, Claude Code Router + OpenRouter proporciona la solución perfecta.&lt;/p&gt;
+
+&lt;p&gt;Empieza simple—configura un modelo gratuito como respaldo para cuando alcances límites. Una vez que experimentes la flexibilidad, naturalmente expandirás tus reglas de enrutamiento para optimizar diferentes escenarios.&lt;/p&gt;
+
+&lt;p&gt;El futuro del desarrollo asistido por IA no se trata de elegir el “mejor” modelo—se trata de tener el modelo correcto para cada tarea específica. Esta configuración te lleva allí hoy.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;¿Has probado enrutar Claude Code a través de modelos alternativos? ¿Cuál es tu experiencia con modelos gratuitos para tareas de desarrollo? Comparte tus configuraciones en los comentarios.&lt;/em&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="Herramientas IA" /><category term="OpenRouter" /><category term="Claude Code Router" /><category term="Ollama" /><category term="LLM" /><summary type="html">Desbloquea todo el potencial de Claude Code enrutando peticiones a través de Claude Code Router y OpenRouter—usa modelos gratuitos, soluciones autoalojadas como Ollama, o accede a GPT y otros proveedores cuando alcances los límites de uso.</summary></entry><entry><title type="html">Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform</title><link href="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/" rel="alternate" type="text/html" title="Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform" /><published>2025-08-11T19:00:00-05:00</published><updated>2025-08-11T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/">&lt;p&gt;&lt;img src=&quot;/assets/images/mcp-servers-ticker-file.png&quot; alt=&quot;Servidores MCP para Investigación&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%; max-width:1000px;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;La semana pasada, quise demostrar las capacidades de investigación de los servidores MCP, así que decidí analizar el ecosistema de módulos de Terraform para AWS Backup. Como autor de uno de los módulos en este espacio, tenía curiosidad: &lt;strong&gt;¿pueden los servidores MCP proporcionar análisis de mercado objetivo e inteligencia competitiva integral?&lt;/strong&gt;&lt;/p&gt;
 
@@ -2129,46 +2376,4 @@ Apunta Copilot a un &lt;strong&gt;servidor MCP&lt;/strong&gt; que ya haya ingeri
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Nota:&lt;/strong&gt; Esta experiencia se realizó durante la fase de vista previa de Cursor. Las características y requisitos pueden cambiar a medida que el producto evolucione.&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas de IA" /><category term="Terraform" /><category term="Automatización" /><summary type="html">Decidí probar Cursor Background Agents con uno de mis propios repos (terraform-aws-ecr) tras escuchar sobre sus capacidades. Aquí está toda la experiencia...</summary></entry><entry><title type="html">Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA</title><link href="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/" rel="alternate" type="text/html" title="Cursor BugBot y Copilot Coding Agents: Un flujo de trabajo de revisión e implementación impulsado por IA" /><published>2025-06-07T19:00:00-05:00</published><updated>2025-06-07T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/06/08/coding-agents-bugbot</id><content type="html" xml:base="https://lgallardo.com/es/2025/06/08/coding-agents-bugbot/">&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-ac817363-8710-4b8f-a6a5-15e47cae8f8c.png&quot; alt=&quot;BugBot y Copilot: Revisores IA&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Recientemente, mientras trabajaba en mis módulos de Terraform, se me ocurrió una idea: &lt;strong&gt;¿Y si uso BugBot para revisar el trabajo de los Coding Agents de Copilot?&lt;/strong&gt; Como ya estaba usando Copilot Coding Agents para automatizar PRs y refactorizaciones, decidí probar BugBot como revisor adicional.&lt;/p&gt;
-
-&lt;h2 id=&quot;el-experimento&quot;&gt;El experimento&lt;/h2&gt;
-
-&lt;p&gt;Asigné tareas a Copilot Coding Agents para implementar nuevas funcionalidades y correcciones en mis repositorios. Una vez listos los PRs, ejecuté BugBot para revisar los cambios. Los resultados fueron fascinantes:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_00-46.png&quot; alt=&quot;PR de Copilot con revisión de BugBot&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;BugBot detectó rápidamente problemas que la propia revisión de Copilot no había visto, especialmente en casos límite y uso de variables. Su capacidad de detección de bugs está en otro nivel comparado con las revisiones integradas de Copilot.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_00-47.png&quot; alt=&quot;Reporte detallado de BugBot&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Por ejemplo, BugBot señaló una validación regex demasiado restrictiva y variables no utilizadas en un PR generado por Copilot. Proporcionó retroalimentación accionable, que luego trasladé a Copilot para su corrección.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot2025-06-09_00-48.png&quot; alt=&quot;BugBot y Copilot: Revisores IA&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;puntos-destacados&quot;&gt;Puntos destacados&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;BugBot destaca en la detección de bugs:&lt;/strong&gt; Encontró problemas sutiles en los PRs de Copilot Coding Agents, proporcionando explicaciones y sugerencias detalladas.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Copilot Coding Agents destaca en la implementación:&lt;/strong&gt; Propone e implementa soluciones rápidamente, y puede interpretar y actuar sobre la retroalimentación de BugBot.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;La IA no es infalible:&lt;/strong&gt; Incluso usando ambas herramientas, pueden pasar bugs o código desactualizado. Por ejemplo, Copilot generó un workflow usando una GitHub Action obsoleta, y BugBot tampoco lo detectó.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/coding-agents-bugbot-2025-06-09_01-01.png&quot; alt=&quot;Error de workflow: Acción de GitHub obsoleta&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
-
-&lt;p&gt;Combinar Copilot Coding Agents y BugBot crea un potente flujo de trabajo de revisión e implementación impulsado por IA. Cada herramienta tiene sus fortalezas: BugBot para la detección profunda de bugs, Copilot para la entrega rápida de soluciones. Sin embargo, la supervisión humana sigue siendo esencial para detectar casos límite y cambios en las plataformas.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Nota:&lt;/strong&gt; BugBot es un servicio de pago para revisiones automáticas de código. Mis pruebas y experimentos aquí descritos se realizaron durante el periodo de prueba gratuita, lo que me permitió evaluar sus capacidades sin incurrir en costos.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/features/copilot&quot;&gt;GitHub Copilot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cursor.so/bugbot&quot;&gt;Cursor BugBot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/pull/55&quot;&gt;feat: Add support for repository replication &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">Recientemente, mientras trabajaba en mis módulos de Terraform, se me ocurrió una idea: ¿Y si uso BugBot para revisar el trabajo de los Coding Agents d...</summary></entry></feed>
+&lt;/blockquote&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas de IA" /><category term="Terraform" /><category term="Automatización" /><summary type="html">Decidí probar Cursor Background Agents con uno de mis propios repos (terraform-aws-ecr) tras escuchar sobre sus capacidades. Aquí está toda la experiencia...</summary></entry></feed>
