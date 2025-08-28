@@ -357,7 +357,7 @@
 
 
 
-  5 minute read
+  6 minute read
 </p>
           
         </header>
@@ -399,7 +399,7 @@
 
 <h2 id="️-implementación-github-actions--claude-code">🛠️ Implementación: GitHub Actions + Claude Code</h2>
 
-<p>El flujo de trabajo central es sorprendentemente simple pero poderoso:</p>
+<p>Aquí está una vista conceptual de la estructura del flujo de trabajo:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">ECR Module Feature Discovery</span>
 <span class="na">on</span><span class="pi">:</span>
@@ -425,6 +425,89 @@
             <span class="no">--create-issues \</span>
             <span class="no">--auto-fix-safe</span>
 </code></pre></div></div>
+
+<h3 id="configuración-del-flujo-de-trabajo-en-producción">Configuración del Flujo de Trabajo en Producción</h3>
+
+<p>La implementación real de producción usa la GitHub Action de Claude Code con integración completa de servidores MCP:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">ECR Feature Discovery</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">schedule</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">12</span><span class="nv"> </span><span class="s">21</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+    <span class="na">inputs</span><span class="pi">:</span>
+      <span class="na">provider_version</span><span class="pi">:</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Versión</span><span class="nv"> </span><span class="s">del</span><span class="nv"> </span><span class="s">proveedor</span><span class="nv"> </span><span class="s">AWS</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">verificar</span><span class="nv"> </span><span class="s">(default:</span><span class="nv"> </span><span class="s">latest)'</span>
+        <span class="na">required</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">default</span><span class="pi">:</span> <span class="s1">'</span><span class="s">latest'</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+      <span class="na">dry_run</span><span class="pi">:</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Ejecutar</span><span class="nv"> </span><span class="s">análisis</span><span class="nv"> </span><span class="s">sin</span><span class="nv"> </span><span class="s">crear</span><span class="nv"> </span><span class="s">issues'</span>
+        <span class="na">required</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">default</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">type</span><span class="pi">:</span> <span class="s">boolean</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">discover-ecr-features</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="s">30</span>
+    <span class="na">permissions</span><span class="pi">:</span>
+      <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
+      <span class="na">issues</span><span class="pi">:</span> <span class="s">write</span>
+      <span class="na">pull-requests</span><span class="pi">:</span> <span class="s">read</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code Feature Discovery</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@beta</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">claude_code_oauth_token</span><span class="pi">:</span> <span class="s">$</span>
+          
+          <span class="c1"># Configuración MCP para acceso a documentación</span>
+          <span class="na">mcp_config</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="no">{</span>
+              <span class="no">"mcpServers": {</span>
+                <span class="no">"terraform": {</span>
+                  <span class="no">"command": "npx",</span>
+                  <span class="no">"args": ["-y", "@modelcontextprotocol/server-terraform@latest"]</span>
+                <span class="no">},</span>
+                <span class="no">"context7": {</span>
+                  <span class="no">"command": "npx", </span>
+                  <span class="no">"args": ["-y", "@upstash/context7-mcp@latest"]</span>
+                <span class="no">}</span>
+              <span class="no">}</span>
+            <span class="no">}</span>
+          
+          <span class="c1"># Prompt directo para descubrimiento comprensivo de características</span>
+          <span class="na">direct_prompt</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="no"># Análisis de Descubrimiento de Características ECR</span>
+            
+            <span class="no">Analizar los recursos ECR más recientes del proveedor AWS y compararlos</span>
+            <span class="no">con la implementación actual del módulo para identificar:</span>
+            <span class="no">1. Nuevas Características: recursos/argumentos ECR aún no implementados</span>
+            <span class="no">2. Deprecaciones: Características marcadas como deprecadas en el proveedor</span>
+            <span class="no">3. Corrección de Bugs: Correcciones importantes mencionadas en changelogs</span>
+            
+            <span class="no">Usar servidor MCP de Terraform para obtener documentación ECR más reciente,</span>
+            <span class="no">analizar implementación actual del módulo, y crear issues detallados de GitHub</span>
+            <span class="no">para hallazgos significativos con guía comprensiva de implementación.</span>
+          
+          <span class="na">mode</span><span class="pi">:</span> <span class="s">agent</span>
+</code></pre></div></div>
+
+<p>Las diferencias clave en la versión de producción:</p>
+
+<ul>
+  <li><strong>Servidores MCP</strong>: Integra Terraform y Context7 para acceso en tiempo real a documentación</li>
+  <li><strong>Entradas Avanzadas</strong>: Soporta modo dry-run, especificación de versión del proveedor, y escaneo forzado</li>
+  <li><strong>Análisis Comprensivo</strong>: Usa un prompt detallado que realiza análisis multi-paso</li>
+  <li><strong>Seguimiento de Características</strong>: Mantiene una base de datos JSON de descubrimientos e historial de escaneos</li>
+  <li><strong>Creación Inteligente de Issues</strong>: Genera issues detallados con guía específica de implementación</li>
+</ul>
 
 <p>La magia ocurre en el análisis de Claude Code, que:</p>
 

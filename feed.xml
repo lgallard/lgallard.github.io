@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-27T20:44:34-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Automating Terraform Module Discovery with Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="alternate" type="text/html" title="Automating Terraform Module Discovery with Claude Code GitHub Actions" /><published>2025-08-27T19:00:00-05:00</published><updated>2025-08-27T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions</id><content type="html" xml:base="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-gh-discovery-system-robot.png&quot; alt=&quot;Claude Code &amp;amp; Bugs&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-28T11:20:26-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Automating Terraform Module Discovery with Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="alternate" type="text/html" title="Automating Terraform Module Discovery with Claude Code GitHub Actions" /><published>2025-08-27T19:00:00-05:00</published><updated>2025-08-27T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions</id><content type="html" xml:base="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-gh-discovery-system-robot.png&quot; alt=&quot;Claude Code &amp;amp; Bugs&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As a maintainer of several Terraform modules, I’ve always faced the challenge of keeping up with AWS provider updates. New features are constantly being added, and manually tracking these changes across dozens of resources is both time-consuming and error-prone. What if I could automate this process entirely?&lt;/p&gt;
 
@@ -33,7 +33,7 @@
 
 &lt;h2 id=&quot;️-implementation-github-actions--claude-code&quot;&gt;🛠️ Implementation: GitHub Actions + Claude Code&lt;/h2&gt;
 
-&lt;p&gt;The core workflow is surprisingly simple yet powerful:&lt;/p&gt;
+&lt;p&gt;Here’s a conceptual overview of the workflow structure:&lt;/p&gt;
 
 &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ECR Module Feature Discovery&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
@@ -59,6 +59,89 @@
             &lt;span class=&quot;no&quot;&gt;--create-issues \&lt;/span&gt;
             &lt;span class=&quot;no&quot;&gt;--auto-fix-safe&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;production-workflow-configuration&quot;&gt;Production Workflow Configuration&lt;/h3&gt;
+
+&lt;p&gt;The actual production implementation uses the Claude Code GitHub Action with comprehensive MCP server integration:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ECR Feature Discovery&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;schedule&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;cron&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*'&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;workflow_dispatch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;provider_version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;AWS&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Provider&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;(default:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;latest)'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;latest'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;string&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;dry_run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Run&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;analysis&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;without&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;creating&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;issues'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;required&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;boolean&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;discover-ecr-features&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;timeout-minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;30&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
+
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Run Claude Code Feature Discovery&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;claude_code_oauth_token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          
+          &lt;span class=&quot;c1&quot;&gt;# MCP Configuration for documentation access&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;mcp_config&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;&quot;mcpServers&quot;: {&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;&quot;terraform&quot;: {&lt;/span&gt;
+                  &lt;span class=&quot;no&quot;&gt;&quot;command&quot;: &quot;npx&quot;,&lt;/span&gt;
+                  &lt;span class=&quot;no&quot;&gt;&quot;args&quot;: [&quot;-y&quot;, &quot;@modelcontextprotocol/server-terraform@latest&quot;]&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;},&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;&quot;context7&quot;: {&lt;/span&gt;
+                  &lt;span class=&quot;no&quot;&gt;&quot;command&quot;: &quot;npx&quot;, &lt;/span&gt;
+                  &lt;span class=&quot;no&quot;&gt;&quot;args&quot;: [&quot;-y&quot;, &quot;@upstash/context7-mcp@latest&quot;]&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;}&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;}&lt;/span&gt;
+          
+          &lt;span class=&quot;c1&quot;&gt;# Direct prompt for comprehensive feature discovery&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;direct_prompt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;# ECR Feature Discovery Analysis&lt;/span&gt;
+            
+            &lt;span class=&quot;no&quot;&gt;Analyze the latest AWS provider ECR resources and compare them with &lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;the current module implementation to identify:&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;1. New Features: ECR resources/arguments not yet implemented&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;2. Deprecations: Features marked as deprecated in the provider&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;3. Bug Fixes: Important fixes mentioned in provider changelogs&lt;/span&gt;
+            
+            &lt;span class=&quot;no&quot;&gt;Use Terraform MCP server to get latest ECR documentation, analyze&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;current module implementation, and create detailed GitHub issues&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;for significant findings with comprehensive implementation guidance.&lt;/span&gt;
+          
+          &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;agent&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The key differences in the production version:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;MCP Servers&lt;/strong&gt;: Integrates Terraform and Context7 for real-time documentation access&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Advanced Inputs&lt;/strong&gt;: Supports dry-run mode, provider version specification, and force scanning&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Comprehensive Analysis&lt;/strong&gt;: Uses a detailed prompt that performs multi-step analysis&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Feature Tracking&lt;/strong&gt;: Maintains a JSON database of discoveries and scan history&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Intelligent Issue Creation&lt;/strong&gt;: Generates detailed issues with specific implementation guidance&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;The magic happens in the Claude Code analysis, which:&lt;/p&gt;
 
