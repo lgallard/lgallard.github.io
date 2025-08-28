@@ -1,0 +1,878 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Automating Terraform Module Discovery with Claude Code GitHub Actions - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Learn how to implement automated Terraform module enhancement using Claude Code GitHub Actions workflow for continuous AWS provider feature discovery and bug detection in infrastructure as code.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="Automating Terraform Module Discovery with Claude Code GitHub Actions">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/">
+<meta property="og:url" content="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/">
+
+
+
+<meta property="og:description" content="Learn how to implement automated Terraform module enhancement using Claude Code GitHub Actions workflow for continuous AWS provider feature discovery and bug detection in infrastructure as code.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Automating Terraform Module Discovery with Claude Code GitHub Actions">
+<meta name="twitter:description" content="Learn how to implement automated Terraform module enhancement using Claude Code GitHub Actions workflow for continuous AWS provider feature discovery and bug detection in infrastructure as code.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-08-27T19:00:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Terraform">
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="GitHub Actions">
+
+<meta property="article:tag" content="AWS ECR">
+
+<meta property="article:tag" content="Infrastructure as Code">
+
+<meta property="article:tag" content="Automation">
+
+<meta property="article:tag" content="Agentic Workflows">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Automating Terraform Module Discovery with Claude Code GitHub Actions">
+    <meta itemprop="description" content="How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detection and continuous infrastructure improvements.">
+    <meta itemprop="datePublished" content="August 28, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/claude-code-gh-discovery-system-robot.png" alt="Claude Code &amp; Bugs" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p>As a maintainer of several Terraform modules, I’ve always faced the challenge of keeping up with AWS provider updates. New features are constantly being added, and manually tracking these changes across dozens of resources is both time-consuming and error-prone. What if I could automate this process entirely?</p>
+
+<p>That’s exactly what I did with my <a href="https://github.com/lgallard/terraform-aws-ecr">terraform-aws-ecr module</a>, creating an intelligent discovery system using Claude Code and GitHub Actions that automatically identifies missing features, creates issues, and even proposes fixes. The results have been remarkable.</p>
+
+<h2 id="-the-challenge-staying-current-with-aws-provider-updates">🎯 The Challenge: Staying Current with AWS Provider Updates</h2>
+
+<p>Managing Terraform modules at scale presents unique challenges:</p>
+
+<ul>
+  <li><strong>Constant Evolution</strong>: AWS releases new features regularly, and the Terraform AWS provider must catch up</li>
+  <li><strong>Manual Overhead</strong>: Checking for new resources, attributes, and validation rules is tedious</li>
+  <li><strong>Discovery Lag</strong>: By the time you notice a missing feature, users may have already encountered limitations</li>
+  <li><strong>Quality Assurance</strong>: Each update requires careful testing and validation</li>
+</ul>
+
+<p>For my ECR module specifically, AWS Container Registry has evolved significantly with new security features, lifecycle policies, and tag protection mechanisms. Keeping the module current while ensuring backward compatibility requires constant vigilance.</p>
+
+<h2 id="-the-solution-automated-feature-discovery-with-agentic-workflows">🚀 The Solution: Automated Feature Discovery with Agentic Workflows</h2>
+
+<p>I implemented an automated system that:</p>
+
+<ol>
+  <li><strong>Monitors</strong> the AWS provider for ECR-related updates</li>
+  <li><strong>Analyzes</strong> the current module implementation against latest provider capabilities</li>
+  <li><strong>Identifies</strong> gaps and potential improvements</li>
+  <li><strong>Creates</strong> detailed GitHub issues with fix requirements</li>
+  <li><strong>Proposes</strong> solutions when possible</li>
+</ol>
+
+<p>The architecture leverages Claude Code’s GitHub Actions integration to create what I call “agentic workflows” - autonomous systems that can reason about code, identify problems, and propose solutions.</p>
+
+<h2 id="️-implementation-github-actions--claude-code">🛠️ Implementation: GitHub Actions + Claude Code</h2>
+
+<p>The core workflow is surprisingly simple yet powerful:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">ECR Module Feature Discovery</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">schedule</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">1'</span> <span class="c1"># Weekly on Mondays</span>
+  <span class="na">workflow_dispatch</span><span class="pi">:</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">discover-features</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+      
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code Discovery</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">ANTHROPIC_API_KEY</span><span class="pi">:</span> <span class="s">$</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="no">claude-code analyze-terraform-module \</span>
+            <span class="no">--provider hashicorp/aws \</span>
+            <span class="no">--resource-type aws_ecr_repository \</span>
+            <span class="no">--module-path . \</span>
+            <span class="no">--create-issues \</span>
+            <span class="no">--auto-fix-safe</span>
+</code></pre></div></div>
+
+<p>The magic happens in the Claude Code analysis, which:</p>
+
+<ul>
+  <li>Fetches the latest AWS provider documentation</li>
+  <li>Compares current module variables and outputs</li>
+  <li>Identifies missing attributes, validation rules, and best practices</li>
+  <li>Generates comprehensive issues with implementation details</li>
+</ul>
+
+<h2 id="-first-real-world-discovery-ecr-tag-protection">🔍 First Real-World Discovery: ECR Tag Protection</h2>
+
+<p>The system’s first major finding was a critical validation bug that had been preventing users from leveraging AWS ECR’s latest tag protection features.</p>
+
+<p><img src="/assets/images/claude-code-gh-discovery-system.png" alt="GH Issue with findings" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p><strong>The Problem</strong>: The module’s validation logic only accepted <code class="highlighter-rouge">IMMUTABLE</code> and <code class="highlighter-rouge">MUTABLE</code> values for <code class="highlighter-rouge">image_tag_mutability</code>, but AWS had introduced two new options:</p>
+<ul>
+  <li><code class="highlighter-rouge">IMMUTABLE_WITH_EXCLUSION</code></li>
+  <li><code class="highlighter-rouge">MUTABLE_WITH_EXCLUSION</code></li>
+</ul>
+
+<p><strong>The Discovery</strong>: Claude Code analyzed the AWS provider documentation, compared it with the module’s validation constraints, and immediately identified the discrepancy.</p>
+
+<p><strong>The Solution</strong>: <a href="https://github.com/lgallard/terraform-aws-ecr/pull/160">PR #160</a> was automatically generated with:</p>
+<ul>
+  <li>Updated validation rules</li>
+  <li>Documentation improvements</li>
+  <li>Test cases for the new values</li>
+  <li>Backward compatibility verification</li>
+</ul>
+
+<p>This single discovery prevented potential user frustration and demonstrated the system’s effectiveness in real-world scenarios.</p>
+
+<h2 id="-five-practical-agentic-workflow-scenarios">📊 Five Practical Agentic Workflow Scenarios</h2>
+
+<p>Based on my experience, here are five powerful scenarios where agentic workflows can transform your repository management:</p>
+
+<h3 id="1-issue-triage-and-labeling">1. Issue Triage and Labeling</h3>
+
+<p><strong>Scenario</strong>: Automatically categorize and prioritize incoming issues.</p>
+
+<p><strong>Workflow Description</strong>: “On every new issue, read the issue description and comments, summarize the main problem, assign relevant labels based on content analysis, and suggest appropriate maintainers for review.”</p>
+
+<p><strong>Implementation</strong>:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">issues</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">]</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">triage</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Analyze Issue</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="no">claude-code triage-issue \</span>
+            <span class="no">--issue-number $ \</span>
+            <span class="no">--assign-labels \</span>
+            <span class="no">--suggest-assignees \</span>
+            <span class="no">--create-summary</span>
+</code></pre></div></div>
+
+<p><strong>Benefits</strong>: Reduces manual triage time by 80%, improves response times, ensures consistent labeling.</p>
+
+<h3 id="2-continuous-documentation-updates">2. Continuous Documentation Updates</h3>
+
+<p><strong>Scenario</strong>: Keep documentation synchronized with code changes automatically.</p>
+
+<p><strong>Workflow Description</strong>: “Whenever code is pushed to the main branch, analyze the changes, review existing documentation for accuracy, identify outdated sections, and create pull requests with suggested improvements.”</p>
+
+<p><strong>Real Example</strong>: After adding new ECR lifecycle policy variables, the system automatically updated the README with proper examples and variable descriptions.</p>
+
+<p><strong>Implementation Focus</strong>:</p>
+<ul>
+  <li>Module variable documentation generation</li>
+  <li>Example configuration updates</li>
+  <li>API reference synchronization</li>
+</ul>
+
+<h3 id="3-accessibility-review">3. Accessibility Review</h3>
+
+<p><strong>Scenario</strong>: Ensure code and documentation meet accessibility standards.</p>
+
+<p><strong>Workflow Description</strong>: “Periodically scan the repository for accessibility issues in documentation, code comments, and user-facing outputs. Create actionable issues with specific improvement suggestions.”</p>
+
+<p><strong>Terraform Context</strong>: Particularly valuable for:</p>
+<ul>
+  <li>Output descriptions clarity</li>
+  <li>Variable naming conventions</li>
+  <li>Error message readability</li>
+  <li>Documentation structure</li>
+</ul>
+
+<h3 id="4-continuous-test-improvement">4. Continuous Test Improvement</h3>
+
+<p><strong>Scenario</strong>: Enhance test coverage based on code changes and real usage patterns.</p>
+
+<p><strong>Workflow Description</strong>: “After each merge, analyze the coverage report and code differences, identify untested code paths, propose new test cases to improve coverage, and create pull requests with suggested test implementations.”</p>
+
+<p><strong>ECR Module Example</strong>: The system identified that new tag protection features lacked integration tests and automatically generated test cases covering edge scenarios.</p>
+
+<h3 id="5-continuous-qa-and-code-enhancement">5. Continuous QA and Code Enhancement</h3>
+
+<p><strong>Scenario</strong>: Proactively identify potential bugs and code improvements.</p>
+
+<p><strong>Workflow Description</strong>: “On every pull request, analyze the code for potential issues, suggest additional safety checks, recommend Terraform best practices, and create follow-up issues for broader improvements.”</p>
+
+<p><strong>Key Focus Areas</strong>:</p>
+<ul>
+  <li>Resource naming conflicts</li>
+  <li>Security policy gaps</li>
+  <li>Variable validation improvements</li>
+  <li>Output formatting consistency</li>
+</ul>
+
+<h2 id="-the-future-of-infrastructure-automation">🌟 The Future of Infrastructure Automation</h2>
+
+<p>This experiment has convinced me that agentic workflows represent the future of infrastructure management. The combination of Claude Code’s reasoning capabilities with GitHub’s automation platform creates possibilities that seemed like science fiction just a few years ago.</p>
+
+<p>The key insight is that we’re not replacing human judgment—we’re augmenting it. The system handles the tedious, repetitive analysis work, freeing us to focus on architectural decisions, user experience, and strategic planning.</p>
+
+<hr />
+
+<p><em>Want to explore more about Claude Code and agentic workflows? Check out my previous post on <a href="/2025/08/12/mcp-servers-research-driven-development/">MCP servers for research-driven development</a> or follow my experiments on <a href="https://github.com/lgallard">GitHub</a>.</em></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/agentic-workflows" class="page__taxonomy-item" rel="tag">Agentic Workflows</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/automation" class="page__taxonomy-item" rel="tag">Automation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/aws-ecr" class="page__taxonomy-item" rel="tag">AWS ECR</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/github-actions" class="page__taxonomy-item" rel="tag">GitHub Actions</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/infrastructure-as-code" class="page__taxonomy-item" rel="tag">Infrastructure as Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-27T19:00:00-05:00">August 28, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Automating+Terraform+Module+Discovery+with+Claude+Code+GitHub+Actions%20https%3A%2F%2Flgallardo.com%2F2025%2F08%2F28%2Fterraform-ecr-module-claude-code-github-actions%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F28%2Fterraform-ecr-module-claude-code-github-actions%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F28%2Fterraform-ecr-module-claude-code-github-actions%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F28%2Fterraform-ecr-module-claude-code-github-actions%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" class="pagination--pager" title="Beyond Anthropic: Using Claude Code with Any Model via Claude Code Router and OpenRouter
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread"></section>
+      
+</div>
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/ccr-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="permalink">Beyond Anthropic: Using Claude Code with Any Model via Claude Code Router and OpenRouter
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Unlock the full potential of Claude Code by routing requests through Claude Code Router and OpenRouter—use free models, self-hosted solutions like Ollama, or...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/mcp-servers-ticker-file.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/12/mcp-servers-research-driven-development/" rel="permalink">MCP Servers Beyond Code: Research-Driven Development with Context7 and Terraform
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Discover how MCP servers transform the research phase of development. From evaluating Terraform modules to comparing documentation, learn how Context7 and Te...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/cursor-cli-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/" rel="permalink">Cursor CLI — First impressions on the UX
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Hands-on first look at Cursor CLI from a user-experience perspective: why it matters, supported models, how it compares to the IDE and other CLIs, early issu...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/cloud-code-subagents-puppets.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/02/claude-code-subagents-specialized-workflows/" rel="permalink">Specialized AI Workflows with Claude Code Subagents
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Transform your development workflow with Claude Code Subagents—specialized AI assistants that bring focused expertise to specific tasks, from blog publishing...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+  
+      
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2025/08/28/terraform-ecr-module-claude-code-github-actions"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lgallard.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+    
+
+
+
+  </body>
+</html>

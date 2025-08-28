@@ -1,4 +1,187 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-08-20T19:56:16-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter</title><link href="https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="alternate" type="text/html" title="Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter" /><published>2025-08-19T19:00:00-05:00</published><updated>2025-08-19T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/">&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-robot.png&quot; alt=&quot;Claude Code Router&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-08-27T20:44:48-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions</title><link href="https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="alternate" type="text/html" title="Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions" /><published>2025-08-27T19:00:00-05:00</published><updated>2025-08-27T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-gh-discovery-system-robot.png&quot; alt=&quot;Claude Code &amp;amp; Bugs&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Como creador de varios módulos Terraform, siempre he enfrentado el desafío de mantenerme al día con las actualizaciones del proveedor AWS. Constantemente se agregan nuevas características, y hacer seguimiento manual de estos cambios en docenas de recursos es tanto consume tiempo como propenso a errores. ¿Qué tal si pudiera automatizar completamente este proceso?&lt;/p&gt;
+
+&lt;p&gt;Eso es exactamente lo que hice con mi &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr&quot;&gt;módulo terraform-aws-ecr&lt;/a&gt;, creando un sistema de descubrimiento inteligente usando Claude Code y GitHub Actions que automáticamente identifica características faltantes, crea issues, e incluso propone soluciones. Los resultados han sido notables.&lt;/p&gt;
+
+&lt;h2 id=&quot;-el-desafío-mantenerse-actualizado-con-las-actualizaciones-del-proveedor-aws&quot;&gt;🎯 El Desafío: Mantenerse Actualizado con las Actualizaciones del Proveedor AWS&lt;/h2&gt;
+
+&lt;p&gt;Gestionar módulos Terraform a escala presenta desafíos únicos:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Evolución Constante&lt;/strong&gt;: AWS lanza nuevas características regularmente, y el proveedor AWS de Terraform debe ponerse al día&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sobrecarga Manual&lt;/strong&gt;: Verificar nuevos recursos, atributos y reglas de validación es tedioso&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Retraso en Descubrimiento&lt;/strong&gt;: Para cuando notas una característica faltante, los usuarios pueden ya haber encontrado limitaciones&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Aseguramiento de Calidad&lt;/strong&gt;: Cada actualización requiere pruebas y validación cuidadosas&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Para mi módulo ECR específicamente, AWS Container Registry ha evolucionado significativamente con nuevas características de seguridad, políticas de ciclo de vida y mecanismos de protección de tags. Mantener el módulo actualizado mientras se asegura la compatibilidad hacia atrás requiere vigilancia constante.&lt;/p&gt;
+
+&lt;h2 id=&quot;-la-solución-descubrimiento-automatizado-de-características-con-flujos-agénticos&quot;&gt;🚀 La Solución: Descubrimiento Automatizado de Características con Flujos Agénticos&lt;/h2&gt;
+
+&lt;p&gt;Implementé un sistema automatizado que:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Monitorea&lt;/strong&gt; el proveedor AWS para actualizaciones relacionadas con ECR&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Analiza&lt;/strong&gt; la implementación actual del módulo contra las últimas capacidades del proveedor&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Identifica&lt;/strong&gt; brechas y mejoras potenciales&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Crea&lt;/strong&gt; issues detallados de GitHub con requisitos de corrección&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Propone&lt;/strong&gt; soluciones cuando es posible&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;La arquitectura aprovecha la integración de Claude Code con GitHub Actions para crear lo que llamo “flujos agénticos” - sistemas autónomos que pueden razonar sobre código, identificar problemas y proponer soluciones.&lt;/p&gt;
+
+&lt;h2 id=&quot;️-implementación-github-actions--claude-code&quot;&gt;🛠️ Implementación: GitHub Actions + Claude Code&lt;/h2&gt;
+
+&lt;p&gt;El flujo de trabajo central es sorprendentemente simple pero poderoso:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ECR Module Feature Discovery&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;schedule&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;cron&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;1'&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Semanalmente los lunes&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;workflow_dispatch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;discover-features&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+      
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Run Claude Code Discovery&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;ANTHROPIC_API_KEY&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;claude-code analyze-terraform-module \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--provider hashicorp/aws \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--resource-type aws_ecr_repository \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--module-path . \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--create-issues \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--auto-fix-safe&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;La magia ocurre en el análisis de Claude Code, que:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Obtiene la documentación más reciente del proveedor AWS&lt;/li&gt;
+  &lt;li&gt;Compara las variables y outputs actuales del módulo&lt;/li&gt;
+  &lt;li&gt;Identifica atributos faltantes, reglas de validación y mejores prácticas&lt;/li&gt;
+  &lt;li&gt;Genera issues comprensivos con detalles de implementación&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-primer-descubrimiento-del-mundo-real-protección-de-tags-ecr&quot;&gt;🔍 Primer Descubrimiento del Mundo Real: Protección de Tags ECR&lt;/h2&gt;
+
+&lt;p&gt;El primer hallazgo importante del sistema fue un bug crítico de validación que había estado impidiendo a los usuarios aprovechar las últimas características de protección de tags de AWS ECR.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-gh-discovery-system.png&quot; alt=&quot;GH Issue con descubrimientos&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;El Problema&lt;/strong&gt;: La lógica de validación del módulo solo aceptaba valores &lt;code class=&quot;highlighter-rouge&quot;&gt;IMMUTABLE&lt;/code&gt; y &lt;code class=&quot;highlighter-rouge&quot;&gt;MUTABLE&lt;/code&gt; para &lt;code class=&quot;highlighter-rouge&quot;&gt;image_tag_mutability&lt;/code&gt;, pero AWS había introducido dos nuevas opciones:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;IMMUTABLE_WITH_EXCLUSION&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MUTABLE_WITH_EXCLUSION&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;El Descubrimiento&lt;/strong&gt;: Claude Code analizó la documentación del proveedor AWS, la comparó con las restricciones de validación del módulo, e inmediatamente identificó la discrepancia.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;La Solución&lt;/strong&gt;: &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/pull/160&quot;&gt;PR #160&lt;/a&gt; fue generado automáticamente con:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Reglas de validación actualizadas&lt;/li&gt;
+  &lt;li&gt;Mejoras en documentación&lt;/li&gt;
+  &lt;li&gt;Casos de prueba para los nuevos valores&lt;/li&gt;
+  &lt;li&gt;Verificación de compatibilidad hacia atrás&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Este único descubrimiento previno frustración potencial del usuario y demostró la efectividad del sistema en escenarios del mundo real.&lt;/p&gt;
+
+&lt;h2 id=&quot;-cinco-escenarios-prácticos-de-flujos-agénticos&quot;&gt;📊 Cinco Escenarios Prácticos de Flujos Agénticos&lt;/h2&gt;
+
+&lt;p&gt;Basado en mi experiencia, aquí hay cinco escenarios poderosos donde los flujos agénticos pueden transformar tu gestión de repositorios:&lt;/p&gt;
+
+&lt;h3 id=&quot;1-clasificación-y-etiquetado-de-issues&quot;&gt;1. Clasificación y Etiquetado de Issues&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Escenario&lt;/strong&gt;: Categorizar y priorizar automáticamente los issues entrantes.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Descripción del Flujo&lt;/strong&gt;: “En cada nuevo issue, leer la descripción y comentarios del issue, resumir el problema principal, asignar etiquetas relevantes basadas en análisis de contenido, y sugerir mantenedores apropiados para revisión.”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Implementación&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;triage&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Analyze Issue&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;claude-code triage-issue \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--issue-number $ \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--assign-labels \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--suggest-assignees \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;--create-summary&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Beneficios&lt;/strong&gt;: Reduce tiempo de clasificación manual en 80%, mejora tiempos de respuesta, asegura etiquetado consistente.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-actualizaciones-continuas-de-documentación&quot;&gt;2. Actualizaciones Continuas de Documentación&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Escenario&lt;/strong&gt;: Mantener la documentación sincronizada con cambios de código automáticamente.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Descripción del Flujo&lt;/strong&gt;: “Cuando se empuja código a la rama principal, analizar los cambios, revisar la documentación existente para precisión, identificar secciones desactualizadas, y crear pull requests con mejoras sugeridas.”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ejemplo Real&lt;/strong&gt;: Después de agregar nuevas variables de política de ciclo de vida ECR, el sistema automáticamente actualizó el README con ejemplos apropiados y descripciones de variables.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Enfoque de Implementación&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Generación de documentación de variables del módulo&lt;/li&gt;
+  &lt;li&gt;Actualizaciones de configuración de ejemplo&lt;/li&gt;
+  &lt;li&gt;Sincronización de referencia API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-revisión-de-accesibilidad&quot;&gt;3. Revisión de Accesibilidad&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Escenario&lt;/strong&gt;: Asegurar que código y documentación cumplan estándares de accesibilidad.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Descripción del Flujo&lt;/strong&gt;: “Escanear periódicamente el repositorio para problemas de accesibilidad en documentación, comentarios de código y salidas dirigidas al usuario. Crear issues accionables con sugerencias de mejora específicas.”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Contexto Terraform&lt;/strong&gt;: Particularmente valioso para:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Claridad de descripciones de outputs&lt;/li&gt;
+  &lt;li&gt;Convenciones de nomenclatura de variables&lt;/li&gt;
+  &lt;li&gt;Legibilidad de mensajes de error&lt;/li&gt;
+  &lt;li&gt;Estructura de documentación&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-mejora-continua-de-pruebas&quot;&gt;4. Mejora Continua de Pruebas&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Escenario&lt;/strong&gt;: Mejorar cobertura de pruebas basada en cambios de código y patrones de uso real.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Descripción del Flujo&lt;/strong&gt;: “Después de cada merge, analizar el reporte de cobertura y diferencias de código, identificar rutas de código no probadas, proponer nuevos casos de prueba para mejorar cobertura, y crear pull requests con implementaciones de prueba sugeridas.”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ejemplo Módulo ECR&lt;/strong&gt;: El sistema identificó que las nuevas características de protección de tags carecían de pruebas de integración y automáticamente generó casos de prueba cubriendo escenarios límite.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-qa-continuo-y-mejora-de-código&quot;&gt;5. QA Continuo y Mejora de Código&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Escenario&lt;/strong&gt;: Identificar proactivamente bugs potenciales y mejoras de código.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Descripción del Flujo&lt;/strong&gt;: “En cada pull request, analizar el código para problemas potenciales, sugerir verificaciones de seguridad adicionales, recomendar mejores prácticas de Terraform, y crear issues de seguimiento para mejoras más amplias.”&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Áreas de Enfoque Clave&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Conflictos de nomenclatura de recursos&lt;/li&gt;
+  &lt;li&gt;Brechas de política de seguridad&lt;/li&gt;
+  &lt;li&gt;Mejoras de validación de variables&lt;/li&gt;
+  &lt;li&gt;Consistencia de formato de outputs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-el-futuro-de-la-automatización-de-infraestructura&quot;&gt;🌟 El Futuro de la Automatización de Infraestructura&lt;/h2&gt;
+
+&lt;p&gt;Este experimento me ha convencido que los flujos agénticos representan el futuro de la gestión de infraestructura. La combinación de las capacidades de razonamiento de Claude Code con la plataforma de automatización de GitHub crea posibilidades que parecían ciencia ficción hace solo unos años.&lt;/p&gt;
+
+&lt;p&gt;La perspectiva clave es que no estamos reemplazando el juicio humano—lo estamos aumentando. El sistema maneja el trabajo de análisis tedioso y repetitivo, liberándonos para enfocarnos en decisiones arquitectónicas, experiencia de usuario y planificación estratégica.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;¿Quieres explorar más sobre Claude Code y flujos agénticos? Revisa mi post anterior sobre &lt;a href=&quot;/2025/08/12/mcp-servers-research-driven-development/&quot;&gt;servidores MCP para desarrollo dirigido por investigación&lt;/a&gt; o sigue mis experimentos en &lt;a href=&quot;https://github.com/lgallard&quot;&gt;GitHub&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Terraform" /><category term="Claude Code" /><category term="GitHub Actions" /><category term="AWS ECR" /><category term="Infrastructure as Code" /><category term="Automatización" /><category term="Flujos Agénticos" /><summary type="html">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en detección automatizada de bugs y mejoras continuas de infraestructura.</summary></entry><entry><title type="html">Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter</title><link href="https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="alternate" type="text/html" title="Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter" /><published>2025-08-19T19:00:00-05:00</published><updated>2025-08-19T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic</id><content type="html" xml:base="https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/">&lt;p&gt;&lt;img src=&quot;/assets/images/ccr-robot.png&quot; alt=&quot;Claude Code Router&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;¿Alguna vez te has encontrado con el temido mensaje “Claude usage limit reached” a las 2 AM mientras depurabas un problema crítico? ¿O has deseado poder usar Claude Code con modelos GPT para tareas específicas? Después de experimentar estos problemas en carne propia, descubrí una configuración revolucionaria: &lt;strong&gt;Claude Code Router&lt;/strong&gt; combinado con &lt;strong&gt;OpenRouter&lt;/strong&gt;.&lt;/p&gt;
 
@@ -30,7 +213,7 @@
   &lt;li&gt;&lt;strong&gt;Gestiona&lt;/strong&gt; múltiples proveedores de forma transparente&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;¿La belleza? Claude Code ni siquiera sabe que está sucediendo. Desde su perspectiva, sigue hablando con Claude—pero detrás de escena, podrías estar usando un modelo completamente diferente.&lt;/p&gt;
+&lt;p&gt;¿Lo bello de todo esto? Claude Code ni siquiera sabe que está sucediendo. Desde su perspectiva, sigue hablando con Claude—pero detrás de escena, podrías estar usando un modelo completamente diferente.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/ccr-cli.png&quot; alt=&quot;Interfaz CLI&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
 
@@ -2306,67 +2489,4 @@ Apunta Copilot a un &lt;strong&gt;servidor MCP&lt;/strong&gt; que ya haya ingeri
 
 &lt;p&gt;Cursor sigue siendo el rey para refactorizaciones complejas y multi-módulo. Sin embargo, VS Code ha cerrado gran parte de la brecha al adoptar servidores MCP e Instrucciones Personalizadas, convirtiéndose en una opción perfectamente capaz (y más económica) para el trabajo incremental diario.&lt;/p&gt;
 
-&lt;p&gt;¡Feliz automatización! 🚀&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas de IA" /><category term="Terraform" /><category term="DevOps" /><summary type="html">Notas prácticas comparando VS Code + Copilot con Cursor. Temas: indexación, servidores MCP, Instrucciones Personalizadas y calidad de generación de código.</summary></entry><entry><title type="html">Explorando Cursor Background Agents: Una experiencia práctica</title><link href="https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience/" rel="alternate" type="text/html" title="Explorando Cursor Background Agents: Una experiencia práctica" /><published>2025-06-10T19:00:00-05:00</published><updated>2025-06-10T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience</id><content type="html" xml:base="https://lgallardo.com/es/2025/06/11/cursor-background-agents-experience/">&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-experience.png&quot; alt=&quot;Experiencia con Cursor Background Agents&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;El otro día, alguien en el trabajo comentó que Cursor también tiene agentes en segundo plano. Decidí probarlo con uno de mis propios repos (&lt;code class=&quot;highlighter-rouge&quot;&gt;terraform-aws-ecr&lt;/code&gt;) y esta es toda la experiencia.&lt;/p&gt;
-
-&lt;h2 id=&quot;primeros-pasos&quot;&gt;Primeros pasos&lt;/h2&gt;
-
-&lt;p&gt;Primero, tuve que desactivar el modo de privacidad en Cursor. Esto es un requisito en la fase de vista previa (¿puede que cambie en el futuro?), pero Cursor afirma que todos los entornos están aislados entre sí.&lt;/p&gt;
-
-&lt;p&gt;Para empezar a trabajar con el agente, le pedí a Copilot que sugiriera mejoras para el módulo de Terraform (digamos que fue la fase de “planificación”), luego hice lo mismo en Cursor y le pedí que comparara el resultado (lo copié y pegué desde Copilot) y que creara los issues con el servidor MCP para GitHub.&lt;/p&gt;
-
-&lt;h2 id=&quot;configuración-del-entorno&quot;&gt;Configuración del entorno&lt;/h2&gt;
-
-&lt;p&gt;Para trabajar con los Background Agents, en Cursor hice clic en el icono “Show Background History”. Esto me llevó al proceso de instalación y configuración de la app para la máquina que ejecutará los agentes para este repo. Se abre una interfaz similar a Cursor donde podemos interactuar mientras configuramos el entorno.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents.jpg&quot; alt=&quot;Show Background History&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-new.jpg&quot; alt=&quot;Nuevos Agentes&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Aquí pedí validar los linters y herramientas necesarias para el proyecto. Tras algunos problemas con Python (ahora los módulos deben instalarse en entornos y no en el SO), que solucioné con la propia interfaz de Cursor, tuve mi máquina lista para lanzar los agentes en segundo plano.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-env.jpg&quot; alt=&quot;Background Agents Machine Agents&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;primer-lanzamiento-del-agente&quot;&gt;Primer lanzamiento del agente&lt;/h2&gt;
-
-&lt;p&gt;Al lanzar el primer agente, me advirtieron que los agentes necesitan establecer un precio base 😅. Puse $20 para pruebas y futuros usos.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-price.jpg&quot; alt=&quot;Background Agents Machibe Agents&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Le indiqué al agente que comenzara a trabajar en el &lt;a href=&quot;https://github.com/lgallard/terraform-aws-ecr/issues/33&quot;&gt;issue #33&lt;/a&gt;. Una vez finalizado, vi la marca de verificación verde, lo que significaba que el agente había terminado (después de 3 min).&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-ready.jpg&quot; alt=&quot;Cursor Background Agent done&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Abrí el agente y vi el resultado. También sugirió crear un PR, lo cual acepté.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agents-PR.jpg&quot; alt=&quot;Cursor Background Agents PR&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;El PR fue creado, sin embargo, mi única queja fue que la descripción no estaba completa y el título no seguía el formato de release-please (me di cuenta cuando fusioné el PR y la acción de GH no creó un PR de chore para el release). Completé la descripción usando la opción de resumen de GitHub Copilot. Por cierto, el PR fue coautoría con Cursor.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/cursor-background-agants-coauthored.jpg&quot; alt=&quot;Cursor Background Agents - coauthor&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;análisis-de-costos&quot;&gt;Análisis de costos&lt;/h2&gt;
-
-&lt;p&gt;Finalmente revisé el costo de la prueba: &lt;strong&gt;$4.63 por un PR sencillo&lt;/strong&gt; 🤔. Hay que tener en cuenta que los Background Agents solo usan modelos MAX por el momento.&lt;/p&gt;
-
-&lt;h2 id=&quot;puntos-clave&quot;&gt;Puntos clave&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Proceso de configuración&lt;/strong&gt;: La configuración del entorno es sencilla, aunque hubo que resolver algunos problemas con Python&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Velocidad&lt;/strong&gt;: El agente completó una tarea simple en solo 3 minutos&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Calidad&lt;/strong&gt;: Los cambios de código fueron sólidos, pero el formato del PR podría mejorar&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Costo&lt;/strong&gt;: A $4.63 por un PR simple, los costos pueden aumentar rápidamente con modelos MAX&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Integración&lt;/strong&gt;: Buena integración con GitHub, aunque no se siguió el formato de release-please&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Coautoría&lt;/strong&gt;: Buen detalle que los PRs sean coautoría con Cursor&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;conclusión&quot;&gt;Conclusión&lt;/h2&gt;
-
-&lt;p&gt;Quería compartir esto por si alguien está considerando usar Cursor Background Agents. La experiencia fue en general positiva: los agentes trabajan eficientemente y producen resultados de calidad. Sin embargo, considera las implicaciones de costo y prepárate para algunos requisitos de configuración como desactivar el modo de privacidad.&lt;/p&gt;
-
-&lt;p&gt;La tecnología promete para automatizar tareas rutinarias de desarrollo, pero aún se necesita supervisión humana para el formato adecuado de los PR y el cumplimiento de convenciones específicas del proyecto.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Nota:&lt;/strong&gt; Esta experiencia se realizó durante la fase de vista previa de Cursor. Las características y requisitos pueden cambiar a medida que el producto evolucione.&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas de IA" /><category term="Terraform" /><category term="Automatización" /><summary type="html">Decidí probar Cursor Background Agents con uno de mis propios repos (terraform-aws-ecr) tras escuchar sobre sus capacidades. Aquí está toda la experiencia...</summary></entry></feed>
+&lt;p&gt;¡Feliz automatización! 🚀&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas de IA" /><category term="Terraform" /><category term="DevOps" /><summary type="html">Notas prácticas comparando VS Code + Copilot con Cursor. Temas: indexación, servidores MCP, Instrucciones Personalizadas y calidad de generación de código.</summary></entry></feed>
