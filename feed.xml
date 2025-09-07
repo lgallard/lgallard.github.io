@@ -1,4 +1,908 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-08-28T11:20:26-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Automating Terraform Module Discovery with Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="alternate" type="text/html" title="Automating Terraform Module Discovery with Claude Code GitHub Actions" /><published>2025-08-27T19:00:00-05:00</published><updated>2025-08-27T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions</id><content type="html" xml:base="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-gh-discovery-system-robot.png&quot; alt=&quot;Claude Code &amp;amp; Bugs&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-09-06T19:41:25-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Claude Code Supercharged: Access Any AI Model via MCP Integration</title><link href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="alternate" type="text/html" title="Claude Code Supercharged: Access Any AI Model via MCP Integration" /><published>2025-09-05T19:00:00-05:00</published><updated>2025-09-05T19:00:00-05:00</updated><id>https://lgallardo.com/2025/09/06/ai-clis-inside-claude-code-token-saving-mcp</id><content type="html" xml:base="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/">&lt;p&gt;&lt;img src=&quot;/assets/images/clis-robots.png&quot; alt=&quot;Claude Code Supercharged&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;While debugging a complex Terraform issue last week, I hit my Claude usage limit right when I needed it most. Instead of waiting for the reset, I realized something powerful: &lt;strong&gt;what if I could access other AI models directly from within Claude Code’s interface?&lt;/strong&gt; What if I could use Gemini’s massive context window, OpenAI’s specialized coding models, or repository analysis tools—all without leaving Claude Code?&lt;/p&gt;
+
+&lt;p&gt;This isn’t just about having backup models. It’s about extending Claude Code’s capabilities by integrating specialized AI tools through MCP servers and custom slash commands, giving you access to the right AI for each specific task—all within the familiar Claude Code UI.&lt;/p&gt;
+
+&lt;h2 id=&quot;-the-token-crisis-why-single-model-workflows-break-down&quot;&gt;🎯 The Token Crisis: Why Single-Model Workflows Break Down&lt;/h2&gt;
+
+&lt;p&gt;Every developer using AI tools faces these challenges:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Token depletion&lt;/strong&gt; during critical debugging sessions&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Context window limitations&lt;/strong&gt; when analyzing large codebases&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cost accumulation&lt;/strong&gt; on tasks that could use free alternatives&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Model limitations&lt;/strong&gt; where one AI excels but others struggle&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Vendor lock-in&lt;/strong&gt; restricting your workflow flexibility&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The solution isn’t to abandon Claude Code—it’s to &lt;strong&gt;extend it&lt;/strong&gt; through MCP servers and slash commands that give you access to a complete AI ecosystem, all within the Claude Code interface.&lt;/p&gt;
+
+&lt;h2 id=&quot;-the-mcp-revolution-your-ai-integration-layer&quot;&gt;🔗 The MCP Revolution: Your AI Integration Layer&lt;/h2&gt;
+
+&lt;p&gt;Model Context Protocol (MCP) servers transform Claude Code from a single-model tool into a multi-model orchestration platform. Think of MCP servers as specialized connectors that let Claude Code communicate with any AI service, CLI tool, or local model.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-architecture-of-intelligence&quot;&gt;The Architecture of Intelligence&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Claude Code   │────│   MCP Server    │────│   External AI   │
+│   (Conductor)   │    │  (Translator)   │    │    (Specialist) │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Claude Code UI → Slash Command → MCP Server → External AI → Results back to Claude Code.&lt;/p&gt;
+
+&lt;p&gt;This architecture means you can:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Use slash commands&lt;/strong&gt; to access different AI models&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Stay in Claude Code UI&lt;/strong&gt; while leveraging specialized tools&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Offload routine tasks&lt;/strong&gt; to appropriate models&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Access specialized capabilities&lt;/strong&gt; without switching interfaces&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;️-the-ai-cli-arsenal-your-specialized-tools&quot;&gt;🛠️ The AI CLI Arsenal: Your Specialized Tools&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-gemini-mcp-tool-the-context-window-champion&quot;&gt;1. Gemini MCP Tool: The Context Window Champion&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-gemini.png&quot; alt=&quot;Claude - Gemini MCP server∫&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jamubc/gemini-mcp-tool&quot;&gt;Gemini MCP Tool&lt;/a&gt; connects you to Google’s Gemini models with their impressive context windows—perfect for large codebase analysis.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;MCP Commands (Available in Claude Code UI):&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Once the Gemini MCP server is installed, these commands become available:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/gemini-cli:ask-gemini &quot;analyze this microservices architecture for performance bottlenecks&quot;
+/gemini-cli:brainstorm &quot;How can I optimize this authentication system?&quot;
+/gemini-cli:ping &quot;test message&quot;
+/gemini-cli:Help
+/gemini-cli:fetch-chunk cacheKey 1
+/gemini-cli:timeout-test 5000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Extending with Custom Commands:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;You can create additional workflow commands that leverage the built-in ones:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/gemini-workflow.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Complete&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;analysis&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;workflow&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Gemini&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;MCP&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;🧠 Starting Gemini analysis workflow...&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/gemini-cli:ask-gemini &quot;Analyze @$1 for $2&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;🔬 Getting brainstorming insights...&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/gemini-cli:brainstorm &quot;Based on analysis of @$1, suggest improvements for $2&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Usage Examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Direct MCP commands
+/gemini-cli:ask-gemini &quot;Analyze @microservices.py for optimization opportunities&quot;
+/gemini-cli:brainstorm &quot;How to improve authentication security in @auth.py&quot;
+
+# Custom workflow
+/gemini-workflow microservices.py &quot;performance analysis&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to Use Gemini:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Large file analysis&lt;/strong&gt; requiring extensive context&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Architecture discussions&lt;/strong&gt; needing holistic understanding&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Code exploration&lt;/strong&gt; in unfamiliar codebases&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Brainstorming sessions&lt;/strong&gt; for system design&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Setup:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Install Gemini MCP server&lt;/span&gt;
+npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; gemini-mcp-tool
+
+&lt;span class=&quot;c&quot;&gt;# Configure with Claude Code&lt;/span&gt;
+claude mcp add &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;gemini-cli &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; npx &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; gemini-mcp-tool
+
+&lt;span class=&quot;c&quot;&gt;# Authentication: Use your Google account&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# The MCP server will prompt for Google authentication on first use&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# No manual API key configuration needed&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Test integration in Claude Code UI&lt;/span&gt;
+/gemini-cli: ping
+/gemini-cli: &lt;span class=&quot;nb&quot;&gt;help&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-openai-codex-cli-direct-integration-approach&quot;&gt;2. OpenAI Codex CLI: Direct Integration Approach&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; While researching, I found an existing &lt;a href=&quot;https://github.com/agency-ai-solutions/openai-codex-mcp&quot;&gt;OpenAI Codex MCP server&lt;/a&gt;, but since it’s outdated with older models (o3, o1, gpt-4.1) and requires Python dependencies, I’ll use the official OpenAI Codex CLI directly to access current gpt-5 models.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Available Models (from your screenshot):&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;gpt-5 minimal:&lt;/strong&gt; Fastest responses with limited reasoning&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;gpt-5 low:&lt;/strong&gt; Balances speed with some reasoning&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;gpt-5 medium:&lt;/strong&gt; Default setting with solid reasoning depth (current)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;gpt-5 high:&lt;/strong&gt; Maximizes reasoning depth for complex problems&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Creating Codex CLI Slash Commands:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/codex-write.md&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;---&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Generate&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;OpenAI&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Codex&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;CLI&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;---&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;cd &quot;$(dirname @$1)&quot; &amp;amp;&amp;amp; codex write --language $2 --task &quot;$3&quot; --model gpt-5-medium&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/codex-explain.md&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;---&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Get&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;detailed&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;explanations&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Codex&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;CLI&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;---&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;codex explain @$1 --focus &quot;$2&quot; --model gpt-5-high --detail comprehensive&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/codex-debug.md&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;---&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Debug&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Codex&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;CLI&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;---&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;codex debug @$1 --error &quot;$2&quot; --model gpt-5-high --trace-analysis&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Usage Examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/codex-write . python &quot;implement binary search with edge case handling&quot;
+/codex-explain @algorithm.py &quot;time complexity and optimization opportunities&quot;
+/codex-debug @buggy_function.py &quot;IndexError: list index out of range&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to Use OpenAI Codex CLI:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Algorithm implementation&lt;/strong&gt; requiring optimization&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Code review and debugging&lt;/strong&gt; with detailed explanations&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Complex problem-solving&lt;/strong&gt; needing step-by-step reasoning&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Testing and validation&lt;/strong&gt; with comprehensive coverage&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Setup:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Install OpenAI Codex CLI&lt;/span&gt;
+npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @openai/codex@latest
+
+&lt;span class=&quot;c&quot;&gt;# Authenticate with OpenAI account&lt;/span&gt;
+codex auth login
+
+&lt;span class=&quot;c&quot;&gt;# Test the CLI&lt;/span&gt;
+codex /model  &lt;span class=&quot;c&quot;&gt;# Select your preferred model (gpt-5 medium/high)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-cursor-agent-mcp-the-repository-intelligence-system&quot;&gt;3. Cursor Agent MCP: The Repository Intelligence System&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sailay1996/cursor-agent-mcp&quot;&gt;Cursor Agent MCP&lt;/a&gt; specializes in repository-aware tasks and code search, reducing computational costs for large projects.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Core Functions:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Repository analysis&lt;/strong&gt; with intelligent scoping&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Code search&lt;/strong&gt; across multiple files and directories&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;File editing&lt;/strong&gt; with context awareness&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Project planning&lt;/strong&gt; based on codebase understanding&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Creating Cursor Agent Slash Commands:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/cursor-analyze.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Analyze&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;sections&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Cursor's&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;repository&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;intelligence&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;cursor-agent analyze --path $1 --focus &quot;$2&quot; --scope targeted&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/cursor-search.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Search&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;codebase&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;intelligent&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;context&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;cursor-agent search &quot;$1&quot; --type $2 --context-aware --max-results 10&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/cursor-efficient.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Use&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;cost-effective&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;routine&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tasks&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;cursor-agent chat --model efficient &quot;$ARGUMENTS&quot; --token-limit 1000&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Usage Examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/cursor-analyze src/auth &quot;security vulnerabilities&quot;
+/cursor-search &quot;authentication middleware&quot; function
+/cursor-efficient &quot;explain this function's purpose&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to Use Cursor Agent:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Large codebase exploration&lt;/strong&gt; requiring selective focus&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Code refactoring&lt;/strong&gt; with dependency analysis&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Security audits&lt;/strong&gt; on specific components&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Legacy code understanding&lt;/strong&gt; with minimal token usage&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Setup:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Install Cursor Agent&lt;/span&gt;
+npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @cursor/agent-cli
+
+&lt;span class=&quot;c&quot;&gt;# Configure with Claude Code&lt;/span&gt;
+claude mcp add &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;cursor-agent &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; npx &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; cursor-agent-mcp
+
+&lt;span class=&quot;c&quot;&gt;# Authentication: Use your Cursor account&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Authenticate through cursor-agent login when prompted&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-qwen-mcp-server-the-efficiency-champion&quot;&gt;4. Qwen MCP Server: The Efficiency Champion&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/claude-gemini.png&quot; alt=&quot;Claude - Gemini MCP server∫&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/jamubc/qwen-mcp-tool&quot;&gt;Qwen MCP Tool&lt;/a&gt; provides access to Qwen models for efficient coding tasks and analysis.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;MCP Commands (Available in Claude Code UI):&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Similar to Gemini MCP (same developer), Qwen MCP provides prefixed commands:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/qwen-cli:ask-qwen &quot;What does this regex pattern match?&quot;
+/qwen-cli:analyze @config.json &quot;format and validate this configuration&quot;
+/qwen-cli:sandbox &quot;test this algorithm with edge cases&quot;
+/qwen-cli:help
+/qwen-cli:ping &quot;test connection&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Creating Qwen Workflow Commands:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/qwen-format.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Format&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;efficiently&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Qwen&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;🎯 Efficient formatting with Qwen:&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/qwen-cli:ask-qwen &quot;Format and optimize @$1 according to $2 best practices&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/qwen-quick.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Quick&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;explanations&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Qwen&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;⚡ Quick analysis:&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/qwen-cli:ask-qwen &quot;$ARGUMENTS&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;When to Use Qwen:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Code formatting&lt;/strong&gt; and style consistency&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Quick explanations&lt;/strong&gt; for simple queries&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Documentation generation&lt;/strong&gt; from code comments&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Efficient processing&lt;/strong&gt; for routine tasks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Setup:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Install Qwen MCP server&lt;/span&gt;
+npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; qwen-mcp-tool
+
+&lt;span class=&quot;c&quot;&gt;# Configure with Claude Code&lt;/span&gt;
+claude mcp add &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;qwen-cli &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; npx &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; qwen-mcp-tool
+
+&lt;span class=&quot;c&quot;&gt;# Authentication: Uses Qwen API credentials&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Configure through the MCP server on first use&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Test integration in Claude Code UI&lt;/span&gt;
+/qwen-cli:ping &lt;span class=&quot;s2&quot;&gt;&quot;hello&quot;&lt;/span&gt;
+/qwen-cli:help
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Usage Examples:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Direct MCP commands
+/qwen-cli:ask-qwen &quot;explain this regex pattern: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$&quot;
+/qwen-cli:analyze @package.json &quot;check for outdated dependencies&quot;
+
+# Custom workflow commands
+/qwen-format style.css &quot;CSS formatting standards&quot;
+/qwen-quick &quot;what is the time complexity of bubble sort?&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-advanced-multi-model-workflows&quot;&gt;🚀 Advanced Multi-Model Workflows&lt;/h2&gt;
+
+&lt;h3 id=&quot;smart-routing-within-claude-code-ui&quot;&gt;Smart Routing Within Claude Code UI&lt;/h3&gt;
+
+&lt;p&gt;Instead of complex routing logic, use Claude Code’s natural decision-making with simple helper commands:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/route-helper.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Helper&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;decide&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;which&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tool&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;use&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;🤔 Routing decision for&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$ARGUMENTS&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;File&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$1, Task&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$2&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;📏 File size&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$(wc -l &amp;lt; @$1) lines&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;📁 File type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$(file @$1)&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;💡 Recommendations:&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;if [[ $(wc -l &amp;lt; @$1) -gt 1000 ]]; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;   → Use /analyze for large files (Gemini's extended context)&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;elif [[ &quot;$2&quot; == *&quot;debug&quot;* ]] || [[ &quot;$2&quot; == *&quot;error&quot;* ]]; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;   → Use MCP Codex tools for debugging&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;elif [[ &quot;$2&quot; == *&quot;search&quot;* ]] || [[ &quot;$2&quot; == *&quot;explore&quot;* ]]; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;   → Use Cursor Agent for repository analysis&quot;&lt;/span&gt;  
+&lt;span class=&quot;s&quot;&gt;else&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;   → Use Claude Code directly for balanced tasks&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Usage in Claude Code UI:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/route-helper large_service.py &quot;performance analysis&quot;
+/route-helper auth.py &quot;debug authentication errors&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This gives you informed recommendations while keeping decision-making in the Claude Code interface.&lt;/p&gt;
+
+&lt;h3 id=&quot;sequential-thinking--multi-model-analysis&quot;&gt;Sequential Thinking + Multi-Model Analysis&lt;/h3&gt;
+
+&lt;p&gt;Combine natural sequential thinking prompts with specialized models for deep analysis:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Step 1: Plan analysis using Sequential Thinking approach in Claude Code&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Using sequential thinking and brainstorming, plan a comprehensive security audit for this authentication system&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Step 2: Use Cursor Agent for codebase exploration  &lt;/span&gt;
+/cursor-analyze auth/ &lt;span class=&quot;s2&quot;&gt;&quot;security vulnerabilities&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Step 3: Use Gemini for architectural analysis&lt;/span&gt;
+/analyze @auth_flow.md &lt;span class=&quot;s2&quot;&gt;&quot;Review the overall authentication flow design&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Step 4: Use OpenAI Codex for specific vulnerability detection&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Use MCP server tools for debugging and analysis&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;collaborative-brainstorming-sessions&quot;&gt;Collaborative Brainstorming Sessions&lt;/h3&gt;
+
+&lt;p&gt;Leverage multiple AI perspectives on complex problems:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Round 1: Gemini for initial brainstorming&lt;/span&gt;
+/gemini brainstorm &lt;span class=&quot;s2&quot;&gt;&quot;How to optimize this microservices communication pattern?&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Round 2: OpenAI for technical analysis&lt;/span&gt;
+/codex explain_code communication_layer.py &lt;span class=&quot;nt&quot;&gt;--focus&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;performance bottlenecks&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Round 3: Cursor Agent for implementation planning&lt;/span&gt;
+/cursor plan &lt;span class=&quot;s2&quot;&gt;&quot;Refactor communication layer based on analysis&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Round 4: Claude Code for synthesis and decision-making&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&quot;Based on all analyses, what's our optimal approach?&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-token-optimization-strategies&quot;&gt;💡 Token Optimization Strategies&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-task-classification-framework&quot;&gt;1. Task Classification Framework&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Task Type&lt;/th&gt;
+      &lt;th&gt;Recommended Model&lt;/th&gt;
+      &lt;th&gt;Token Impact&lt;/th&gt;
+      &lt;th&gt;Reasoning&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Code Review&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;OpenAI Codex&lt;/td&gt;
+      &lt;td&gt;Medium&lt;/td&gt;
+      &lt;td&gt;Specialized for code analysis&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Large File Analysis&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Gemini&lt;/td&gt;
+      &lt;td&gt;High → Low&lt;/td&gt;
+      &lt;td&gt;Better context window efficiency&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Repository Exploration&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Cursor Agent&lt;/td&gt;
+      &lt;td&gt;High → Low&lt;/td&gt;
+      &lt;td&gt;Targeted, scoped analysis&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Quick Questions&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Qwen/Local&lt;/td&gt;
+      &lt;td&gt;Low&lt;/td&gt;
+      &lt;td&gt;Free or local processing&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Complex Architecture&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Claude Code&lt;/td&gt;
+      &lt;td&gt;High&lt;/td&gt;
+      &lt;td&gt;Worth the premium for quality&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;2-smart-context-management&quot;&gt;2. Smart Context Management&lt;/h3&gt;
+
+&lt;p&gt;Create slash commands that handle large files intelligently:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/smart-analyze.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Analyze&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;large&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;using&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;appropriate&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;tools&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;file_size=$(wc -l &amp;lt; @$1)&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;if [ $file_size -gt 1000 ]; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;Large file detected ($file_size lines). Using Gemini...&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;/gemini-analyze @$1&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;else&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;Standard file size. Using Claude Code...&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;Analyzing @$1 with Claude Code&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/progressive-analysis.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Progressive&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;analysis&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;details&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;📋 Step 1&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Getting file summary...&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/gemini-analyze @$1 &quot;high-level summary&quot;&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;🔍 Step 2&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Finding key functions...&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/cursor-search &quot;function&quot; function&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;🔧 Step 3&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Detailed analysis of selected parts...&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/codex-explain @$1 &quot;$2&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-cost-optimized-routing-commands&quot;&gt;3. Cost-Optimized Routing Commands&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/try-free-first.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Try&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;premium&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ones&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;Attempting with free models first...&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;if /qwen-quick &quot;$ARGUMENTS&quot; 2&amp;gt;/dev/null; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;✅ Handled by Qwen (free)&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;elif /gemini-brainstorm &quot;$ARGUMENTS&quot; 2&amp;gt;/dev/null; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;✅ Handled by Gemini (free tier)&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;else&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;🔄 Escalating to Claude Code (premium)&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;$ARGUMENTS&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/route-by-task.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Route&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;specialized&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;type&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;case &quot;$1&quot; in&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;*debug*|*error*|*bug*)&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;/codex-debug @$2 &quot;$3&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;;;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;*format*|*style*|*lint*)&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;/qwen-format @$2 $3&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;;;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;*architect*|*design*|*plan*)&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;/gemini-brainstorm &quot;$2 $3&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;;;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;*)&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;echo &quot;Using Claude Code for&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$ARGUMENTS&quot;&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;esac&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-complete-setup-guide&quot;&gt;🔧 Complete Setup Guide&lt;/h2&gt;
+
+&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Ensure you have the base requirements&lt;/span&gt;
+node &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# v16.0.0+&lt;/span&gt;
+claude &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# Latest Claude Code CLI&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-your-ai-cli-command-library&quot;&gt;Create Your AI CLI Command Library&lt;/h3&gt;
+
+&lt;p&gt;Set up a comprehensive slash command library:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create commands directory&lt;/span&gt;
+mkdir &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; ~/.claude/commands
+
+&lt;span class=&quot;c&quot;&gt;# Create your custom commands using the examples throughout this article&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Copy the YAML command definitions and adapt them to your needs&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Each command should be saved as a .md file in ~/.claude/commands/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;command-structure-template&quot;&gt;Command Structure Template&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Template: ~/.claude/commands/your-command.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;What&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;does&quot;&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$1:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;First&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;argument&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;description&quot;&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$2:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Second&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;argument&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;description&quot;&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;$ARGUMENTS:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;All&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;arguments&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Your bash script here&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;Processing&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$ARGUMENTS&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;your-cli-tool $1 --option &quot;$2&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+### MCP Server and CLI Setup
+
+```bash
+# Install MCP servers and CLIs
+npm install -g gemini-mcp-tool                 # Gemini MCP
+npm install -g qwen-mcp-tool                   # Qwen MCP  
+npm install -g @openai/codex@latest           # Codex CLI (direct)
+npm install -g @cursor/agent-cli               # Cursor CLI
+
+# Configure MCP servers with Claude Code
+claude mcp add -s local gemini-cli -- npx -y gemini-mcp-tool
+claude mcp add -s local qwen-cli -- npx -y qwen-mcp-tool
+claude mcp add -s local cursor-agent -- npx -y cursor-agent-mcp
+
+# For Codex: Direct CLI usage (no MCP server needed)
+codex auth login  # Authenticate with OpenAI
+
+# Authentication summary:
+# - Gemini: Google account authentication through MCP
+# - Qwen: API credentials through MCP server
+# - OpenAI Codex: Direct CLI authentication
+# - Cursor: Cursor account through MCP
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;test-your-integration&quot;&gt;Test Your Integration&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Test MCP servers in Claude Code UI&lt;/span&gt;
+/gemini-cli:ping &lt;span class=&quot;s2&quot;&gt;&quot;test message&quot;&lt;/span&gt;
+/qwen-cli:help
+/mcp list  &lt;span class=&quot;c&quot;&gt;# See all connected MCP servers&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Test Codex CLI directly&lt;/span&gt;
+codex /model  &lt;span class=&quot;c&quot;&gt;# Check available models&lt;/span&gt;
+codex /status &lt;span class=&quot;c&quot;&gt;# Verify authentication&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Test custom slash commands (create these first)&lt;/span&gt;
+/gemini-workflow microservices.py &lt;span class=&quot;s2&quot;&gt;&quot;performance analysis&quot;&lt;/span&gt;
+/qwen-quick &lt;span class=&quot;s2&quot;&gt;&quot;what is a closure in JavaScript?&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Test file analysis&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'print(&quot;hello world&quot;)'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; test.py
+/gemini-cli:ask-gemini &lt;span class=&quot;s2&quot;&gt;&quot;Analyze @test.py for best practices&quot;&lt;/span&gt;
+/codex-explain test.py &lt;span class=&quot;s2&quot;&gt;&quot;code structure and improvements&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-real-world-use-cases&quot;&gt;🎯 Real-World Use Cases&lt;/h2&gt;
+
+&lt;h3 id=&quot;use-case-1-large-scale-refactoring-project&quot;&gt;Use Case 1: Large-Scale Refactoring Project&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; Modernizing a legacy Python codebase with 50,000+ lines&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Multi-Model Strategy:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 1. Repository exploration&lt;/span&gt;
+/cursor-analyze &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;deprecated patterns&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 2. Architecture planning&lt;/span&gt;
+/gemini-brainstorm &lt;span class=&quot;s2&quot;&gt;&quot;migration strategy from Flask 1.x to 2.x&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 3. Code generation&lt;/span&gt;
+/codex-write python &lt;span class=&quot;s2&quot;&gt;&quot;modern Flask route decorators with type hints&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 4. Integration planning (Claude Code)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Synthesize all analyses and create migration roadmap&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Token Savings:&lt;/strong&gt; ~70% compared to using Claude Code alone&lt;/p&gt;
+
+&lt;h3 id=&quot;use-case-2-security-audit-workflow&quot;&gt;Use Case 2: Security Audit Workflow&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; Comprehensive security review of authentication system&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Specialized Routing:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 1. Code pattern detection&lt;/span&gt;
+/cursor-search &lt;span class=&quot;s2&quot;&gt;&quot;password|hash|token&quot;&lt;/span&gt; code
+
+&lt;span class=&quot;c&quot;&gt;# 2. Vulnerability analysis&lt;/span&gt;
+/codex-debug auth.py &lt;span class=&quot;s2&quot;&gt;&quot;security vulnerabilities&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 3. Architecture review&lt;/span&gt;
+/gemini-analyze @auth_flow.md &lt;span class=&quot;s2&quot;&gt;&quot;security architecture assessment&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 4. Remediation planning (Claude Code)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Create prioritized security improvement plan based on above analyses&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Benefits:&lt;/strong&gt; Specialized models catch different vulnerability types&lt;/p&gt;
+
+&lt;h3 id=&quot;use-case-3-performance-optimization&quot;&gt;Use Case 3: Performance Optimization&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario:&lt;/strong&gt; Optimizing slow API endpoints&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Model Selection Logic:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 1. Performance profiling&lt;/span&gt;
+/cursor-analyze api/ &lt;span class=&quot;s2&quot;&gt;&quot;performance bottlenecks&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 2. Algorithm optimization&lt;/span&gt;
+/codex-write python &lt;span class=&quot;s2&quot;&gt;&quot;optimize database queries with indexing&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 3. System design review&lt;/span&gt;
+/gemini-brainstorm &lt;span class=&quot;s2&quot;&gt;&quot;API scaling and caching strategies&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 4. Implementation strategy (Claude Code)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Prioritize optimizations by impact vs effort&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-model-selection-decision-tree&quot;&gt;🔍 Model Selection Decision Tree&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Task Complexity?
+├── Simple (formatting, docs) → Qwen/Local
+├── Medium (code review, bugs) → OpenAI Codex  
+└── Complex
+    ├── Large Context → Gemini
+    ├── Repository Analysis → Cursor Agent
+    ├── Architecture Design → Gemini + Claude Code
+    └── Critical Decisions → Claude Code
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-performance--cost-analysis&quot;&gt;📊 Performance &amp;amp; Cost Analysis&lt;/h2&gt;
+
+&lt;h3 id=&quot;token-usage-comparison&quot;&gt;Token Usage Comparison&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Workflow&lt;/th&gt;
+      &lt;th&gt;Single Model (Claude)&lt;/th&gt;
+      &lt;th&gt;Multi-Model&lt;/th&gt;
+      &lt;th&gt;Savings&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Code Review&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;10,000 tokens&lt;/td&gt;
+      &lt;td&gt;3,000 tokens&lt;/td&gt;
+      &lt;td&gt;70%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Large File Analysis&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;25,000 tokens&lt;/td&gt;
+      &lt;td&gt;8,000 tokens&lt;/td&gt;
+      &lt;td&gt;68%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Repository Audit&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;50,000 tokens&lt;/td&gt;
+      &lt;td&gt;15,000 tokens&lt;/td&gt;
+      &lt;td&gt;70%&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Documentation&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;5,000 tokens&lt;/td&gt;
+      &lt;td&gt;1,500 tokens&lt;/td&gt;
+      &lt;td&gt;70%&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;cost-optimization-results&quot;&gt;Cost Optimization Results&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Monthly Development Costs:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Before Multi-Model:&lt;/strong&gt; $150-200 (Claude Pro + overages)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;After Multi-Model:&lt;/strong&gt; $75-100 (Mix of free + premium)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Net Savings:&lt;/strong&gt; ~50% with better coverage&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;️-common-pitfalls-and-solutions&quot;&gt;⚠️ Common Pitfalls and Solutions&lt;/h2&gt;
+
+&lt;h3 id=&quot;model-capability-mismatches&quot;&gt;Model Capability Mismatches&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Problem:&lt;/strong&gt; Not all models support tool/function calling&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# This will fail with basic models&lt;/span&gt;
+cursor edit file.py &lt;span class=&quot;nt&quot;&gt;--function&lt;/span&gt; add_logging
+
+&lt;span class=&quot;c&quot;&gt;# Solution: Route tool-requiring tasks to capable models&lt;/span&gt;
+claude edit file.py &lt;span class=&quot;nt&quot;&gt;--function&lt;/span&gt; add_logging  &lt;span class=&quot;c&quot;&gt;# Claude Code handles tools&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;managing-usage-limits&quot;&gt;Managing Usage Limits&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Approach:&lt;/strong&gt; Manual workflow adaptation in Claude Code UI&lt;/p&gt;
+
+&lt;p&gt;When you encounter usage limits, simply switch to alternative tools:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Gemini limit reached?&lt;/strong&gt; → Use Claude Code directly or try OpenAI Codex MCP&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;OpenAI credits low?&lt;/strong&gt; → Switch to Gemini &lt;code class=&quot;highlighter-rouge&quot;&gt;/analyze&lt;/code&gt; or Claude Code&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Claude limit reached?&lt;/strong&gt; → Use &lt;code class=&quot;highlighter-rouge&quot;&gt;/analyze&lt;/code&gt; for large files or MCP server tools&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The beauty of this setup is having options available directly in the Claude Code interface.&lt;/p&gt;
+
+&lt;h3 id=&quot;context-management-in-interactive-usage&quot;&gt;Context Management in Interactive Usage&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Advantage:&lt;/strong&gt; Claude Code maintains context throughout your session&lt;/p&gt;
+
+&lt;p&gt;In interactive Claude Code usage, context is naturally maintained:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Your conversation history&lt;/strong&gt; provides context for follow-up questions&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Previous slash command results&lt;/strong&gt; remain visible in the chat&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;File references&lt;/strong&gt; using &lt;code class=&quot;highlighter-rouge&quot;&gt;@filename&lt;/code&gt; maintain file context&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Natural conversation flow&lt;/strong&gt; allows you to reference earlier analyses&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Best Practice:&lt;/strong&gt; Reference previous results explicitly:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/analyze @large_file.py &quot;performance issues&quot;
+# After reviewing results...
+&quot;Based on the Gemini analysis above, use OpenAI Codex to optimize the bottleneck functions&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-advanced-techniques&quot;&gt;🚀 Advanced Techniques&lt;/h2&gt;
+
+&lt;h3 id=&quot;dynamic-model-selection-commands&quot;&gt;Dynamic Model Selection Commands&lt;/h3&gt;
+
+&lt;p&gt;Create intelligent routing based on current conditions:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/smart-route.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Dynamically&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;route&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;based&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;usage&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;hour=$(date +%H)&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;usage_file=&quot;~/.claude_usage_today&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Check time-based routing&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;if [ $hour -lt 9 ] || [ $hour -gt 17 ]; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;🌙 Off-peak hours - using Claude Code&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;$ARGUMENTS&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;else&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;# Peak hours - use cost-effective alternatives&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;if [[ &quot;$1&quot; == *&quot;large&quot;* ]]; then&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;/gemini-analyze @$2 &quot;$3&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;elif [[ &quot;$1&quot; == *&quot;debug&quot;* ]]; then&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;/codex-debug @$2 &quot;$3&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;/qwen-quick &quot;$ARGUMENTS&quot;&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;model-ensemble-techniques&quot;&gt;Model Ensemble Techniques&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Consensus Decision Making:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/consensus.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Get&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;multiple&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;AI&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;opinions&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;complex&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;decisions&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;📈 Gathering multiple perspectives on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$ARGUMENTS&quot;&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;Gemini's perspective:&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/gemini-analyze @$1 &quot;$2&quot; &amp;gt; /tmp/gemini_opinion.txt&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;cat /tmp/gemini_opinion.txt&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;\nCodex's perspective:&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/codex-explain @$1 &quot;$2&quot; &amp;gt; /tmp/codex_opinion.txt&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;cat /tmp/codex_opinion.txt&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;\nCursor's perspective:&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/cursor-analyze $1 &quot;$2&quot; &amp;gt; /tmp/cursor_opinion.txt&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;cat /tmp/cursor_opinion.txt&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;\n🧠 Claude Code synthesis (based on above opinions):&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;Please synthesize the best approach from the above analyses&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Specialized Pipeline Assembly:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/pipeline.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Multi-stage&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;analysis&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;pipeline&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;🔄 Starting analysis pipeline for @$1&quot;&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;Stage 1&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Search and discovery&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/cursor-search &quot;$2&quot; function &amp;gt; /tmp/pipeline_search.txt&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;Stage 2&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Architecture analysis&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/gemini-analyze @$1 &quot;based on search results, analyze architecture&quot; &amp;gt; /tmp/pipeline_arch.txt&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;Stage 3&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Code optimization&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/codex-write $3 &quot;optimize based on analysis above&quot; &amp;gt; /tmp/pipeline_opt.txt&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;echo &quot;Stage 4&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Final synthesis&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;Please review all pipeline outputs and provide final recommendations:&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;cat /tmp/pipeline_*.txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-future-roadmap-advanced-slash-command-patterns&quot;&gt;🔮 Future Roadmap: Advanced Slash Command Patterns&lt;/h2&gt;
+
+&lt;h3 id=&quot;emerging-patterns&quot;&gt;Emerging Patterns&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Context-Aware Routing:&lt;/strong&gt; Commands that adapt based on file types and project context
+&lt;strong&gt;2. Collaborative AI Teams:&lt;/strong&gt; Chained slash commands for complex workflows
+&lt;strong&gt;3. Cost-Optimized Pipelines:&lt;/strong&gt; Smart routing to minimize token usage
+&lt;strong&gt;4. Local-First Development:&lt;/strong&gt; Privacy-focused commands with on-premises models&lt;/p&gt;
+
+&lt;h3 id=&quot;advanced-slash-command-techniques&quot;&gt;Advanced Slash Command Techniques&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Context Passing Between Commands:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/context-chain.md&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Chain&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;commands&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;context&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Store context for next command&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;Context&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;analyzing $1 for $2&quot; &amp;gt; /tmp/claude_context&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/gemini-analyze @$1 &quot;$2&quot; | tee -a /tmp/claude_context&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Pass context to next tool&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;echo &quot;Previous analysis context:&quot; &amp;amp;&amp;amp; cat /tmp/claude_context&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;/codex-optimize @$1 &quot;based on Gemini analysis above&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Conditional Command Execution:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.claude/commands/smart-workflow.md  &lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Conditional&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;workflow&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;based&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;characteristics&quot;&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;if [[ &quot;$1&quot; =~ \.py$ ]]; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;/codex-debug @$1 &quot;$2&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;elif [[ &quot;$1&quot; =~ \.(js|ts)$ ]]; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;/cursor-analyze $1 &quot;$2&quot;&lt;/span&gt;  
+&lt;span class=&quot;s&quot;&gt;elif [[ $(wc -l &amp;lt; @$1) -gt 500 ]]; then&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;/gemini-analyze @$1 &quot;$2&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;else&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;echo &quot;Standard analysis with Claude Code&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$ARGUMENTS&quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-getting-started-your-first-multi-model-workflow&quot;&gt;🎯 Getting Started: Your First Multi-Model Workflow&lt;/h2&gt;
+
+&lt;h3 id=&quot;day-1-basic-setup&quot;&gt;Day 1: Basic Setup&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Install one AI CLI&lt;/span&gt;
+npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @google-ai/generativelanguage
+
+&lt;span class=&quot;c&quot;&gt;# Create your first slash command&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ~/.claude/commands/gemini-quick.md &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOF&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;'
+---
+description: &quot;Quick analysis with Gemini&quot;
+---
+gemini-cli analyze &quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ARGUMENTS&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot; --brief
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOF
+
+&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# Test the integration&lt;/span&gt;
+/gemini-quick &lt;span class=&quot;s2&quot;&gt;&quot;explain this code pattern&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;week-1-identify-optimization-opportunities&quot;&gt;Week 1: Identify Optimization Opportunities&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Track your current usage patterns&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;history&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;claude | head &lt;span class=&quot;nt&quot;&gt;-20&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Identify repetitive tasks that could use slash commands&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-E&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;explain|analyze|debug&quot;&lt;/span&gt; ~/.claude_history
+
+&lt;span class=&quot;c&quot;&gt;# Create specialized commands for your most common tasks&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; ~/.claude/commands/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;month-1-implement-intelligent-routing&quot;&gt;Month 1: Implement Intelligent Routing&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create your intelligent routing command&lt;/span&gt;
+cp examples/ai-route.md ~/.claude/commands/
+cp examples/try-free-first.md ~/.claude/commands/
+cp examples/route-by-task.md ~/.claude/commands/
+
+&lt;span class=&quot;c&quot;&gt;# Test intelligent routing&lt;/span&gt;
+/ai-route debug auth.py &lt;span class=&quot;s2&quot;&gt;&quot;authentication errors&quot;&lt;/span&gt;
+/try-free-first &lt;span class=&quot;s2&quot;&gt;&quot;format this JSON file&quot;&lt;/span&gt;
+/route-by-task debug auth.py &lt;span class=&quot;s2&quot;&gt;&quot;security issues&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-the-bottom-line-unlimited-ai-development&quot;&gt;💪 The Bottom Line: Unlimited AI Development&lt;/h2&gt;
+
+&lt;p&gt;By integrating multiple AI CLIs through MCP servers, you’re not just saving tokens—you’re building a &lt;strong&gt;resilient, specialized, and cost-effective development environment&lt;/strong&gt;. Each model contributes its strengths while Claude Code orchestrates the overall workflow.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The results speak for themselves:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;70% token savings&lt;/strong&gt; on routine tasks&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;50% cost reduction&lt;/strong&gt; in monthly AI expenses&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Zero downtime&lt;/strong&gt; when one service has limits&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Specialized capabilities&lt;/strong&gt; for every development need&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Start small:&lt;/strong&gt; Add one MCP server this week and route your most token-intensive tasks through it. Once you experience the flexibility and cost savings, you’ll naturally expand your multi-model toolkit.&lt;/p&gt;
+
+&lt;p&gt;The future of AI-assisted development isn’t about finding the perfect model—it’s about &lt;strong&gt;orchestrating the right model for each specific moment&lt;/strong&gt;. This setup gets you there today.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;What’s your biggest token usage challenge? Which AI models would you want to integrate into your Claude Code workflow? Share your multi-model strategies in the comments below.&lt;/em&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="MCP Servers" /><category term="AI Tools" /><category term="Gemini" /><category term="OpenAI Codex" /><category term="Qwen" /><category term="Cursor" /><category term="Token Optimization" /><category term="Multi-Model" /><summary type="html">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini's massive context, OpenAI's specialized models, or Qwen's efficiency without leaving your familiar interface.</summary></entry><entry><title type="html">Automating Terraform Module Discovery with Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="alternate" type="text/html" title="Automating Terraform Module Discovery with Claude Code GitHub Actions" /><published>2025-08-27T19:00:00-05:00</published><updated>2025-08-27T19:00:00-05:00</updated><id>https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions</id><content type="html" xml:base="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-gh-discovery-system-robot.png&quot; alt=&quot;Claude Code &amp;amp; Bugs&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As a maintainer of several Terraform modules, I’ve always faced the challenge of keeping up with AWS provider updates. New features are constantly being added, and manually tracking these changes across dozens of resources is both time-consuming and error-prone. What if I could automate this process entirely?&lt;/p&gt;
 
@@ -2397,178 +3301,4 @@ claude
   &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/guides/selecting-models&quot;&gt;Cursor - Selecting Models&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/&quot;&gt;Cursor Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/guides/selecting-models#model-behavior&quot;&gt;Model Comparison and Best Practices&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">The other day I commented that I intuitively find O3 better for reasoning, problem solving and troubleshooting, over other models like Claude-4-Sonnet...</summary></entry><entry><title type="html">VS Code vs Cursor AI - Terraform, MCP Servers &amp;amp; Real-World DevOps</title><link href="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/" rel="alternate" type="text/html" title="VS Code vs Cursor AI - Terraform, MCP Servers &amp; Real-World DevOps" /><published>2025-06-20T04:00:00-05:00</published><updated>2025-06-20T04:00:00-05:00</updated><id>https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience</id><content type="html" xml:base="https://lgallardo.com/2025/06/20/vscode-vs-cursor-mcp-experience/">&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-cursor.png&quot; alt=&quot;VS Code &amp;amp; Cursor side-by-side&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In the past few days, I’ve alternated between &lt;strong&gt;Cursor&lt;/strong&gt; and &lt;strong&gt;VS Code + Copilot Enterprise&lt;/strong&gt; while working on multiple Terraform/Terragrunt stacks. Notably, VS Code + Copilot now includes several of the popular models commonly available in Cursor, and since my team at work uses Copilot Enterprise, we benefit from enhanced access and integration at no extra cost, making it even easier to leverage these models.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-models.png&quot; alt=&quot;VS Code models&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:40%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Here are my hands-on notes: what each tool excels at, where they fall short, and the situations where one stands out over the other.&lt;/p&gt;
-
-&lt;h2 id=&quot;indexing--context-awareness-️&quot;&gt;Indexing &amp;amp; Context Awareness 🗂️&lt;/h2&gt;
-
-&lt;p&gt;While VS Code lacks native indexing, Cursor stands out when working with multiple Terraform modules and the Terragrunt approach. Cursor is more aware of how modules relate to each other and can apply changes across several files at once when needed. In contrast, with VS Code, you must manually add all relevant files and folders before making changes—and even then, it may miss some updates. This means you often have to specify exactly which files and edits are required. Leveraging an MCP Server that has already ingested your Terraform modules might help address these limitations.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-cursor-indexing.png&quot; alt=&quot;Cursor Indexing&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The screenshot above shows Cursor’s automatic indexing and module awareness, which is not available in VS Code by default.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt; &lt;/th&gt;
-      &lt;th&gt;Cursor&lt;/th&gt;
-      &lt;th&gt;VS Code + Copilot&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Automatic project indexing&lt;/td&gt;
-      &lt;td&gt;✅ Scans every folder/module once the repo opens.&lt;/td&gt;
-      &lt;td&gt;❌ Absent. You must &lt;em&gt;Add to Chat&lt;/em&gt; each file or folder manually.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Cross-module updates&lt;/td&gt;
-      &lt;td&gt;✅ Understands module dependencies and edits all impacted files in one shot.&lt;/td&gt;
-      &lt;td&gt;⚠️ Needs explicit instructions; sometimes forgets nested modules.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Terragrunt awareness&lt;/td&gt;
-      &lt;td&gt;✅ Parses &lt;code class=&quot;highlighter-rouge&quot;&gt;*.hcl&lt;/code&gt;, keeps remote-state / include chains intact.&lt;/td&gt;
-      &lt;td&gt;💤 Treats &lt;code class=&quot;highlighter-rouge&quot;&gt;terragrunt.hcl&lt;/code&gt; like plain text unless guided.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Work-around for VS Code&lt;/strong&gt;&lt;br /&gt;
-Point Copilot to an &lt;strong&gt;MCP server&lt;/strong&gt; that already ingested your Terraform modules. The additional context reduces missing edits, though it’s still not fully turnkey.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;mcp-servers-everywhere-&quot;&gt;MCP Servers Everywhere 🎉&lt;/h2&gt;
-
-&lt;p&gt;Speaking of MCP Servers, VS Code now supports them as well, and can even leverage the same endpoints you’ve set up in Cursor. 🙂&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-mcp-github.png&quot; alt=&quot;VS COde MCPs&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Cursor introduced &lt;strong&gt;MCP servers&lt;/strong&gt; earlier, letting you pipe custom LLM endpoints or knowledge bases.&lt;/li&gt;
-  &lt;li&gt;Recent VS Code builds can &lt;strong&gt;reuse those exact MCP endpoints&lt;/strong&gt;. One click on “Trust Cursor MCP Servers” and they show up as regular &lt;em&gt;tools&lt;/em&gt; inside Copilot.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Why it matters:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Unified config&lt;/strong&gt; – define the endpoint once, consume it from any IDE.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cost control&lt;/strong&gt; – plan with &lt;code class=&quot;highlighter-rouge&quot;&gt;o3&lt;/code&gt; (cheap, analytical) and code with &lt;code class=&quot;highlighter-rouge&quot;&gt;claude-4x&lt;/code&gt; (pricey, precise) without routing through a middle layer.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Shared memory&lt;/strong&gt; – both editors query the same knowledge store, so answers stay consistent.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;custom-instructions-vs-global-rules-&quot;&gt;Custom Instructions vs Global Rules 📝&lt;/h2&gt;
-
-&lt;p&gt;In Cursor, you can set up global or project-specific rules to define behaviors, coding styles, and even custom commands, allowing Cursor to better tailor its responses and implementations. VS Code offers a similar feature called &lt;a href=&quot;https://code.visualstudio.com/docs/copilot/copilot-customization&quot;&gt;Custom Instructions&lt;/a&gt;, which can be placed in the &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/&lt;/code&gt; folder for project-wide use or stored locally for a global effect without committing them to each repository.&lt;/p&gt;
-
-&lt;p&gt;To get started in VS Code, simply use the “Chat: New Instructions File” command to scaffold a template. In fact, you can instruct Copilot Chat to create one based on what you’ve defined in Cursor&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/vscode-instructions.png&quot; alt=&quot;VS Code Instructions&quot; /&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Feature&lt;/th&gt;
-      &lt;th&gt;Cursor (&lt;code class=&quot;highlighter-rouge&quot;&gt;.cursor/config.yaml&lt;/code&gt;)&lt;/th&gt;
-      &lt;th&gt;VS Code (Custom Instructions)&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Scope&lt;/td&gt;
-      &lt;td&gt;Global or per project&lt;/td&gt;
-      &lt;td&gt;Project (&lt;code class=&quot;highlighter-rouge&quot;&gt;.github/&lt;/code&gt;) or user home&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Format&lt;/td&gt;
-      &lt;td&gt;YAML with rules + shell hooks&lt;/td&gt;
-      &lt;td&gt;Markdown/JSON in “instructions.md”&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Typical usage&lt;/td&gt;
-      &lt;td&gt;Style guides, command macros, branch naming&lt;/td&gt;
-      &lt;td&gt;Same + org-wide conventions&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;From VS Code run &lt;strong&gt;“Chat: New Instructions File”&lt;/strong&gt; to scaffold a template. I keep a repo-level version under &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/ai-instructions.md&lt;/code&gt; and a global fallback in &lt;code class=&quot;highlighter-rouge&quot;&gt;~/ai/instructions.md&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;code-generation-quality-&quot;&gt;Code Generation Quality 🤖&lt;/h2&gt;
-
-&lt;p&gt;When it comes to code generation, Cursor generally outperforms VS Code, despite both often relying on the same underlying models. Cursor tends to deliver more comprehensive and sophisticated solutions, especially for complex tasks. That said, for simpler changes or quick edits, VS Code is more than capable, making it a practical choice if you want to minimize Cursor usage and keep costs down. 💸&lt;/p&gt;
-
-&lt;h3 id=&quot;cursor&quot;&gt;Cursor&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Produces end-to-end scaffolds (Terraform module + Terratest + CI job) with fewer nudges.&lt;/li&gt;
-  &lt;li&gt;Better at refactoring large, interconnected codebases.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;vs-code--copilot&quot;&gt;VS Code + Copilot&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Faster for &lt;strong&gt;single-file&lt;/strong&gt; tweaks, docstrings, variable renames.&lt;/li&gt;
-  &lt;li&gt;Adequate for straightforward modules; you just pay with a bit more hand-holding.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;💸 &lt;strong&gt;Budget hint&lt;/strong&gt;: Draft the architecture in VS Code (cheap tokens), switch to Cursor only when you need the heavy lifting.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;quick-glance-decision-matrix-&quot;&gt;Quick-Glance Decision Matrix 🧐&lt;/h2&gt;
-
-&lt;p&gt;Before diving into the details, here’s a quick decision matrix to help you choose the right tool for common DevOps scenarios. This table summarizes which editor excels for specific tasks, from large-scale refactoring to quick module updates or working offline.&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Need&lt;/th&gt;
-      &lt;th&gt;Suggested Tool&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Mass refactor across 15 Terraform modules&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;Cursor&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Add an S3 bucket + outputs in one module&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;VS Code&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Enforce org-wide branch prefix &amp;amp; PR titles&lt;/td&gt;
-      &lt;td&gt;Either (via Custom Instructions / rules)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Get cheapest “planning” model with same MCP context&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;VS Code&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;You’re offline or air-gapped&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;Cursor&lt;/strong&gt; self-hosted MCP&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;wishlist--next-steps-&quot;&gt;Wishlist &amp;amp; Next Steps 🔮&lt;/h2&gt;
-
-&lt;p&gt;As both tools continue to evolve, there are still a few areas where improvements would make daily DevOps work even smoother. Here are some features and enhancements I’d love to see in future releases:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Native indexing in VS Code&lt;/strong&gt; for Terraform/Terragrunt graphs.&lt;/li&gt;
-  &lt;li&gt;A shared UI to edit &lt;strong&gt;Custom Instructions / Cursor Rules&lt;/strong&gt; once and sync both editors.&lt;/li&gt;
-  &lt;li&gt;Toggle to &lt;strong&gt;auto-include changed files&lt;/strong&gt; during a chat session (currently manual in Code).&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;final-thoughts&quot;&gt;Final Thoughts&lt;/h3&gt;
-
-&lt;p&gt;Cursor still owns the throne for complex, multi-module refactors. VS Code, however, closed much of the gap by embracing MCP servers and Custom Instructions, making it a perfectly capable (and cheaper) daily driver for incremental work.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Happy automating!&lt;/em&gt; 🚀&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="AI Tools" /><category term="Terraform" /><category term="DevOps" /><summary type="html">Hands-on notes comparing VS Code + Copilot to Cursor. Topics: indexing, MCP servers, Custom Instructions, and code-generation quality.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">The other day I commented that I intuitively find O3 better for reasoning, problem solving and troubleshooting, over other models like Claude-4-Sonnet...</summary></entry></feed>

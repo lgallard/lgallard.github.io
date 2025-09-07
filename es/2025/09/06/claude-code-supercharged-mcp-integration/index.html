@@ -1,0 +1,1585 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Aprende cómo potenciar Claude Code con servidores MCP para acceder a múltiples modelos de IA como Gemini, OpenAI Codex y Qwen—ahorra tokens, evita límites de uso y aprovecha capacidades especializadas de IA de manera fluida.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/">
+<meta property="og:url" content="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/">
+
+
+
+<meta property="og:description" content="Aprende cómo potenciar Claude Code con servidores MCP para acceder a múltiples modelos de IA como Gemini, OpenAI Codex y Qwen—ahorra tokens, evita límites de uso y aprovecha capacidades especializadas de IA de manera fluida.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP">
+<meta name="twitter:description" content="Aprende cómo potenciar Claude Code con servidores MCP para acceder a múltiples modelos de IA como Gemini, OpenAI Codex y Qwen—ahorra tokens, evita límites de uso y aprovecha capacidades especializadas de IA de manera fluida.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/clis-robots.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/es/assets/images/clis-robots.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-09-05T19:00:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="Servidores MCP">
+
+<meta property="article:tag" content="Herramientas IA">
+
+<meta property="article:tag" content="Gemini">
+
+<meta property="article:tag" content="OpenAI Codex">
+
+<meta property="article:tag" content="Qwen">
+
+<meta property="article:tag" content="Cursor">
+
+<meta property="article:tag" content="Optimización Tokens">
+
+<meta property="article:tag" content="Multi-Modelo">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com/es",
+      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com/es",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+
+  
+  <a href="/2025/09/06/claude-code-supercharged-mcp-integration/" >English</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/2025/09/06/claude-code-supercharged-mcp-integration/" >English</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP">
+    <meta itemprop="description" content="Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, o la eficiencia de Qwen sin salir de tu interfaz familiar.">
+    <meta itemprop="datePublished" content="September 06, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  19 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/clis-robots.png" alt="Claude Code Potenciado" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p>Mientras debuggeaba un problema complejo de Terraform la semana pasada, alcancé mi límite de uso de Claude justo cuando más lo necesitaba. En lugar de esperar el reset, me di cuenta de algo poderoso: <strong>¿qué pasaría si pudiera acceder a otros modelos de IA directamente desde la interfaz de Claude Code?</strong> ¿Y si pudiera usar la ventana de contexto masiva de Gemini, los modelos especializados de OpenAI para código, o herramientas de análisis de repositorios—todo sin salir de Claude Code?</p>
+
+<p>Esto no se trata solo de tener modelos de respaldo. Se trata de extender las capacidades de Claude Code integrando herramientas especializadas de IA a través de servidores MCP y comandos slash personalizados, dándote acceso a la IA correcta para cada tarea específica—todo dentro de la familiar interfaz de Claude Code.</p>
+
+<h2 id="-la-crisis-de-tokens-por-qué-fallan-los-flujos-de-un-solo-modelo">🎯 La Crisis de Tokens: Por Qué Fallan los Flujos de Un Solo Modelo</h2>
+
+<p>Todo desarrollador que usa herramientas de IA enfrenta estos desafíos:</p>
+
+<ul>
+  <li><strong>Agotamiento de tokens</strong> durante sesiones críticas de debugging</li>
+  <li><strong>Limitaciones de ventana de contexto</strong> al analizar bases de código grandes</li>
+  <li><strong>Acumulación de costos</strong> en tareas que podrían usar alternativas gratuitas</li>
+  <li><strong>Limitaciones del modelo</strong> donde una IA sobresale pero otras tienen dificultades</li>
+  <li><strong>Dependencia del proveedor</strong> que restringe la flexibilidad de tu flujo de trabajo</li>
+</ul>
+
+<p>La solución no es abandonar Claude Code—es <strong>extenderlo</strong> a través de servidores MCP y comandos slash que te dan acceso a un ecosistema completo de IA, todo dentro de la interfaz de Claude Code.</p>
+
+<h2 id="-la-revolución-mcp-tu-capa-de-integración-de-ia">🔗 La Revolución MCP: Tu Capa de Integración de IA</h2>
+
+<p>Los servidores Model Context Protocol (MCP) transforman Claude Code de una herramienta de modelo único en una plataforma de orquestación multi-modelo. Piensa en los servidores MCP como conectores especializados que permiten a Claude Code comunicarse con cualquier servicio de IA, herramienta CLI o modelo local.</p>
+
+<h3 id="la-arquitectura-de-la-inteligencia">La Arquitectura de la Inteligencia</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Claude Code   │────│  Servidor MCP   │────│   IA Externa    │
+│   (Director)    │    │  (Traductor)    │    │ (Especialista)  │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+</code></pre></div></div>
+
+<p>Interfaz Claude Code → Comando Slash → Servidor MCP → IA Externa → Resultados de vuelta a Claude Code.</p>
+
+<p>Esta arquitectura significa que puedes:</p>
+<ul>
+  <li><strong>Usar comandos slash</strong> para acceder a diferentes modelos de IA</li>
+  <li><strong>Permanecer en la interfaz de Claude Code</strong> mientras aprovechas herramientas especializadas</li>
+  <li><strong>Descargar tareas rutinarias</strong> a modelos apropiados</li>
+  <li><strong>Acceder a capacidades especializadas</strong> sin cambiar de interfaces</li>
+</ul>
+
+<h2 id="️-el-arsenal-de-clis-de-ia-tus-herramientas-especializadas">🛠️ El Arsenal de CLIs de IA: Tus Herramientas Especializadas</h2>
+
+<h3 id="1-herramienta-mcp-gemini-el-campeón-de-ventana-de-contexto">1. Herramienta MCP Gemini: El Campeón de Ventana de Contexto</h3>
+
+<p><img src="/assets/images/claude-gemini.png" alt="Claude - servidor MCP Gemini" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
+
+<p><a href="https://github.com/jamubc/gemini-mcp-tool">Herramienta MCP Gemini</a> te conecta a los modelos Gemini de Google con sus impresionantes ventanas de contexto—perfecto para análisis de bases de código grandes.</p>
+
+<p><strong>Comandos MCP (Disponibles en la Interfaz de Claude Code):</strong></p>
+
+<p>Una vez instalado el servidor MCP Gemini, estos comandos están disponibles:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/gemini-cli:ask-gemini "analiza esta arquitectura de microservicios para cuellos de botella de rendimiento"
+/gemini-cli:brainstorm "¿Cómo puedo optimizar este sistema de autenticación?"
+/gemini-cli:ping "mensaje de prueba"
+/gemini-cli:Help
+/gemini-cli:fetch-chunk cacheKey 1
+/gemini-cli:timeout-test 5000
+</code></pre></div></div>
+
+<p><strong>Extendiendo con Comandos Personalizados:</strong></p>
+
+<p>Puedes crear comandos de flujo de trabajo adicionales que aprovechen los integrados:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/gemini-workflow.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Flujo</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">trabajo</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">análisis</span><span class="nv"> </span><span class="s">completo</span><span class="nv"> </span><span class="s">usando</span><span class="nv"> </span><span class="s">MCP</span><span class="nv"> </span><span class="s">Gemini"</span>
+<span class="nn">---</span>
+<span class="s">echo "🧠 Iniciando flujo de trabajo de análisis Gemini..."</span>
+<span class="s">/gemini-cli:ask-gemini "Analiza @$1 para $2"</span>
+<span class="s">echo "🔬 Obteniendo insights de lluvia de ideas..."</span>
+<span class="s">/gemini-cli:brainstorm "Basado en análisis de @$1, sugiere mejoras para $2"</span>
+</code></pre></div></div>
+
+<p><strong>Ejemplos de Uso:</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Comandos MCP directos
+/gemini-cli:ask-gemini "Analiza @microservices.py para oportunidades de optimización"
+/gemini-cli:brainstorm "Cómo mejorar la seguridad de autenticación en @auth.py"
+
+# Flujo de trabajo personalizado
+/gemini-workflow microservices.py "análisis de rendimiento"
+</code></pre></div></div>
+
+<p><strong>Cuándo Usar Gemini:</strong></p>
+<ul>
+  <li><strong>Análisis de archivos grandes</strong> que requieren contexto extenso</li>
+  <li><strong>Discusiones arquitectónicas</strong> que necesitan comprensión holística</li>
+  <li><strong>Exploración de código</strong> en bases de código desconocidas</li>
+  <li><strong>Sesiones de lluvia de ideas</strong> para diseño de sistemas</li>
+</ul>
+
+<p><strong>Configuración:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar servidor MCP Gemini</span>
+npm install <span class="nt">-g</span> gemini-mcp-tool
+
+<span class="c"># Configurar con Claude Code</span>
+claude mcp add <span class="nt">-s</span> <span class="nb">local </span>gemini-cli <span class="nt">--</span> npx <span class="nt">-y</span> gemini-mcp-tool
+
+<span class="c"># Autenticación: Usar tu cuenta de Google</span>
+<span class="c"># El servidor MCP solicitará autenticación de Google en el primer uso</span>
+<span class="c"># No se necesita configuración manual de clave API</span>
+
+<span class="c"># Probar integración en interfaz Claude Code</span>
+/gemini-cli: ping
+/gemini-cli: <span class="nb">help</span>
+</code></pre></div></div>
+
+<h3 id="2-cli-openai-codex-enfoque-de-integración-directa">2. CLI OpenAI Codex: Enfoque de Integración Directa</h3>
+
+<p><strong>Nota:</strong> Durante mi investigación, encontré un <a href="https://github.com/agency-ai-solutions/openai-codex-mcp">servidor MCP OpenAI Codex existente</a>, pero como está desactualizado con modelos antiguos (o3, o1, gpt-4.1) y requiere dependencias Python, usaré el CLI oficial OpenAI Codex directamente para acceder a modelos gpt-5 actuales.</p>
+
+<p><strong>Modelos Disponibles (de tu captura):</strong></p>
+<ul>
+  <li><strong>gpt-5 minimal:</strong> Respuestas más rápidas con razonamiento limitado</li>
+  <li><strong>gpt-5 low:</strong> Equilibra velocidad con algo de razonamiento</li>
+  <li><strong>gpt-5 medium:</strong> Configuración predeterminada con profundidad de razonamiento sólida (actual)</li>
+  <li><strong>gpt-5 high:</strong> Maximiza la profundidad de razonamiento para problemas complejos</li>
+</ul>
+
+<p><strong>Creando Comandos Slash CLI Codex:</strong></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-write.md</span>
+  <span class="s">---</span>
+  <span class="s">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Generar</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">usando</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">OpenAI</span><span class="nv"> </span><span class="s">Codex"</span>
+  <span class="s">---</span>
+  <span class="s">cd "$(dirname @$1)" &amp;&amp; codex write --language $2 --task "$3" --model gpt-5-medium</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-explain.md</span>
+  <span class="s">---</span>
+  <span class="s">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Obtener</span><span class="nv"> </span><span class="s">explicaciones</span><span class="nv"> </span><span class="s">detalladas</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">Codex"</span>
+  <span class="s">---</span>
+  <span class="s">codex explain @$1 --focus "$2" --model gpt-5-high --detail comprehensive</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-debug.md</span>
+  <span class="s">---</span>
+  <span class="s">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Debuggear</span><span class="nv"> </span><span class="s">problemas</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">con</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">Codex"</span>
+  <span class="s">---</span>
+  <span class="s">codex debug @$1 --error "$2" --model gpt-5-high --trace-analysis</span>
+</code></pre></div></div>
+
+<p><strong>Ejemplos de Uso:</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/codex-write . python "implementar búsqueda binaria con manejo de casos límite"
+/codex-explain @algorithm.py "complejidad temporal y oportunidades de optimización"
+/codex-debug @buggy_function.py "IndexError: list index out of range"
+</code></pre></div></div>
+
+<p><strong>Cuándo Usar CLI OpenAI Codex:</strong></p>
+<ul>
+  <li><strong>Implementación de algoritmos</strong> que requiere optimización</li>
+  <li><strong>Revisión de código y debugging</strong> con explicaciones detalladas</li>
+  <li><strong>Resolución de problemas complejos</strong> que necesita razonamiento paso a paso</li>
+  <li><strong>Pruebas y validación</strong> con cobertura integral</li>
+</ul>
+
+<p><strong>Configuración:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar CLI OpenAI Codex</span>
+npm install <span class="nt">-g</span> @openai/codex@latest
+
+<span class="c"># Autenticarse con cuenta OpenAI</span>
+codex auth login
+
+<span class="c"># Probar el CLI</span>
+codex /model  <span class="c"># Seleccionar tu modelo preferido (gpt-5 medium/high)</span>
+
+</code></pre></div></div>
+
+<h3 id="3-mcp-cursor-agent-el-sistema-de-inteligencia-de-repositorio">3. MCP Cursor Agent: El Sistema de Inteligencia de Repositorio</h3>
+
+<p><a href="https://github.com/sailay1996/cursor-agent-mcp">MCP Cursor Agent</a> se especializa en tareas conscientes del repositorio y búsqueda de código, reduciendo costos computacionales para proyectos grandes.</p>
+
+<p><strong>Funciones Principales:</strong></p>
+<ul>
+  <li><strong>Análisis de repositorio</strong> con alcance inteligente</li>
+  <li><strong>Búsqueda de código</strong> a través de múltiples archivos y directorios</li>
+  <li><strong>Edición de archivos</strong> con conciencia del contexto</li>
+  <li><strong>Planificación de proyectos</strong> basada en comprensión de la base de código</li>
+</ul>
+
+<p><strong>Creando Comandos Slash Cursor Agent:</strong></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/cursor-analyze.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Analizar</span><span class="nv"> </span><span class="s">secciones</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">con</span><span class="nv"> </span><span class="s">inteligencia</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">repositorio</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">Cursor"</span>
+<span class="nn">---</span>
+<span class="s">cursor-agent analyze --path $1 --focus "$2" --scope targeted</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/cursor-search.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Buscar</span><span class="nv"> </span><span class="s">en</span><span class="nv"> </span><span class="s">base</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">con</span><span class="nv"> </span><span class="s">contexto</span><span class="nv"> </span><span class="s">inteligente"</span>
+<span class="nn">---</span>
+<span class="s">cursor-agent search "$1" --type $2 --context-aware --max-results 10</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/cursor-efficient.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Usar</span><span class="nv"> </span><span class="s">modelos</span><span class="nv"> </span><span class="s">costo-efectivos</span><span class="nv"> </span><span class="s">para</span><span class="nv"> </span><span class="s">tareas</span><span class="nv"> </span><span class="s">rutinarias"</span>
+<span class="nn">---</span>
+<span class="s">cursor-agent chat --model efficient "$ARGUMENTS" --token-limit 1000</span>
+</code></pre></div></div>
+
+<p><strong>Ejemplos de Uso:</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/cursor-analyze src/auth "vulnerabilidades de seguridad"
+/cursor-search "middleware de autenticación" function
+/cursor-efficient "explica el propósito de esta función"
+</code></pre></div></div>
+
+<p><strong>Cuándo Usar Cursor Agent:</strong></p>
+<ul>
+  <li><strong>Exploración de bases de código grandes</strong> que requiere enfoque selectivo</li>
+  <li><strong>Refactorización de código</strong> con análisis de dependencias</li>
+  <li><strong>Auditorías de seguridad</strong> en componentes específicos</li>
+  <li><strong>Comprensión de código legacy</strong> con uso mínimo de tokens</li>
+</ul>
+
+<p><strong>Configuración:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar Cursor Agent</span>
+npm install <span class="nt">-g</span> @cursor/agent-cli
+
+<span class="c"># Configurar con Claude Code</span>
+claude mcp add <span class="nt">-s</span> <span class="nb">local </span>cursor-agent <span class="nt">--</span> npx <span class="nt">-y</span> cursor-agent-mcp
+
+<span class="c"># Autenticación: Usar tu cuenta de Cursor</span>
+<span class="c"># Autenticarse a través de cursor-agent login cuando se solicite</span>
+</code></pre></div></div>
+
+<h3 id="4-servidor-mcp-qwen-el-campeón-de-la-eficiencia">4. Servidor MCP Qwen: El Campeón de la Eficiencia</h3>
+
+<p><img src="/assets/images/claude-qwen.png" alt="Claude - servidor MCP Qwen" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
+
+<p><a href="https://github.com/jamubc/qwen-mcp-tool">Herramienta MCP Qwen</a> proporciona acceso a modelos Qwen para tareas eficientes de codificación y análisis.</p>
+
+<p><strong>Comandos MCP (Disponibles en la Interfaz de Claude Code):</strong></p>
+
+<p>Similar a MCP Gemini (mismo desarrollador), MCP Qwen proporciona comandos con prefijo:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/qwen-cli:ask-qwen "¿Qué coincide con este patrón regex?"
+/qwen-cli:analyze @config.json "formatear y validar esta configuración"
+/qwen-cli:sandbox "probar este algoritmo con casos límite"
+/qwen-cli:help
+/qwen-cli:ping "probar conexión"
+</code></pre></div></div>
+
+<p><strong>Creando Comandos de Flujo de Trabajo Qwen:</strong></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/qwen-format.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Formatear</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">eficientemente</span><span class="nv"> </span><span class="s">usando</span><span class="nv"> </span><span class="s">Qwen"</span>
+<span class="nn">---</span>
+<span class="s">echo "🎯 Formateo eficiente con Qwen:"</span>
+<span class="s">/qwen-cli:ask-qwen "Formatear y optimizar @$1 según las mejores prácticas de $2"</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/qwen-quick.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Explicaciones</span><span class="nv"> </span><span class="s">rápidas</span><span class="nv"> </span><span class="s">usando</span><span class="nv"> </span><span class="s">Qwen"</span>
+<span class="nn">---</span>
+<span class="s">echo "⚡ Análisis rápido:"</span>
+<span class="s">/qwen-cli:ask-qwen "$ARGUMENTS"</span>
+</code></pre></div></div>
+
+<p><strong>Cuándo Usar Qwen:</strong></p>
+<ul>
+  <li><strong>Formateo de código</strong> y consistencia de estilo</li>
+  <li><strong>Explicaciones rápidas</strong> para consultas simples</li>
+  <li><strong>Generación de documentación</strong> a partir de comentarios de código</li>
+  <li><strong>Procesamiento eficiente</strong> para tareas rutinarias</li>
+</ul>
+
+<p><strong>Configuración:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar servidor MCP Qwen</span>
+npm install <span class="nt">-g</span> qwen-mcp-tool
+
+<span class="c"># Configurar con Claude Code</span>
+claude mcp add <span class="nt">-s</span> <span class="nb">local </span>qwen-cli <span class="nt">--</span> npx <span class="nt">-y</span> qwen-mcp-tool
+
+<span class="c"># Autenticación: Usa credenciales API Qwen</span>
+<span class="c"># Configurar a través del servidor MCP en el primer uso</span>
+
+<span class="c"># Probar integración en interfaz Claude Code</span>
+/qwen-cli:ping <span class="s2">"hola"</span>
+/qwen-cli:help
+</code></pre></div></div>
+
+<p><strong>Ejemplos de Uso:</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Comandos MCP directos
+/qwen-cli:ask-qwen "explica este patrón regex: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+/qwen-cli:analyze @package.json "verificar dependencias desactualizadas"
+
+# Comandos de flujo de trabajo personalizados
+/qwen-format style.css "estándares de formateo CSS"
+/qwen-quick "¿cuál es la complejidad temporal del ordenamiento burbuja?"
+</code></pre></div></div>
+
+<h2 id="-flujos-de-trabajo-multi-modelo-avanzados">🚀 Flujos de Trabajo Multi-Modelo Avanzados</h2>
+
+<h3 id="enrutamiento-inteligente-dentro-de-la-interfaz-claude-code">Enrutamiento Inteligente Dentro de la Interfaz Claude Code</h3>
+
+<p>En lugar de lógica de enrutamiento compleja, usa la toma de decisiones natural de Claude Code con comandos de ayuda simples:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/route-helper.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Ayudante</span><span class="nv"> </span><span class="s">para</span><span class="nv"> </span><span class="s">decidir</span><span class="nv"> </span><span class="s">qué</span><span class="nv"> </span><span class="s">herramienta</span><span class="nv"> </span><span class="s">usar"</span>
+<span class="nn">---</span>
+<span class="s">echo "🤔 Decisión de enrutamiento para</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+<span class="s">echo "Archivo</span><span class="pi">:</span> <span class="err">@</span><span class="s">$1, Tarea</span><span class="pi">:</span> <span class="s">$2"</span>
+<span class="s">echo ""</span>
+<span class="s">echo "📏 Tamaño de archivo</span><span class="pi">:</span> <span class="s">$(wc -l &lt; @$1) líneas"</span>
+<span class="s">echo "📁 Tipo de archivo</span><span class="pi">:</span> <span class="s">$(file @$1)"</span>
+<span class="s">echo ""</span>
+<span class="s">echo "💡 Recomendaciones:"</span>
+<span class="s">if [[ $(wc -l &lt; @$1) -gt 1000 ]]; then</span>
+  <span class="s">echo "   → Usa /analyze para archivos grandes (contexto extendido de Gemini)"</span>
+<span class="s">elif [[ "$2" == *"debug"* ]] || [[ "$2" == *"error"* ]]; then</span>
+  <span class="s">echo "   → Usa herramientas MCP Codex para debugging"</span>
+<span class="s">elif [[ "$2" == *"search"* ]] || [[ "$2" == *"explore"* ]]; then</span>
+  <span class="s">echo "   → Usa Cursor Agent para análisis de repositorio"</span>  
+<span class="s">else</span>
+  <span class="s">echo "   → Usa Claude Code directamente para tareas equilibradas"</span>
+<span class="s">fi</span>
+</code></pre></div></div>
+
+<p><strong>Uso en Interfaz Claude Code:</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/route-helper large_service.py "análisis de rendimiento"
+/route-helper auth.py "debuggear errores de autenticación"
+</code></pre></div></div>
+
+<p>Esto te da recomendaciones informadas mientras mantienes la toma de decisiones en la interfaz de Claude Code.</p>
+
+<h3 id="pensamiento-secuencial--análisis-multi-modelo">Pensamiento Secuencial + Análisis Multi-Modelo</h3>
+
+<p>Combina prompts de pensamiento secuencial natural con modelos especializados para análisis profundo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Paso 1: Planificar análisis usando enfoque de Pensamiento Secuencial en Claude Code</span>
+<span class="nb">echo</span> <span class="s2">"Usando pensamiento secuencial y lluvia de ideas, planifica una auditoría de seguridad integral para este sistema de autenticación"</span>
+
+<span class="c"># Paso 2: Usar Cursor Agent para exploración de base de código  </span>
+/cursor-analyze auth/ <span class="s2">"vulnerabilidades de seguridad"</span>
+
+<span class="c"># Paso 3: Usar Gemini para análisis arquitectónico</span>
+/analyze @auth_flow.md <span class="s2">"Revisar el diseño general del flujo de autenticación"</span>
+
+<span class="c"># Paso 4: Usar OpenAI Codex para detección específica de vulnerabilidades</span>
+<span class="c"># Usar herramientas de servidor MCP para debugging y análisis</span>
+</code></pre></div></div>
+
+<h3 id="sesiones-de-lluvia-de-ideas-colaborativas">Sesiones de Lluvia de Ideas Colaborativas</h3>
+
+<p>Aprovecha múltiples perspectivas de IA en problemas complejos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Ronda 1: Gemini para lluvia de ideas inicial</span>
+/gemini brainstorm <span class="s2">"¿Cómo optimizar este patrón de comunicación de microservicios?"</span>
+
+<span class="c"># Ronda 2: OpenAI para análisis técnico</span>
+/codex explain_code communication_layer.py <span class="nt">--focus</span> <span class="s2">"cuellos de botella de rendimiento"</span>
+
+<span class="c"># Ronda 3: Cursor Agent para planificación de implementación</span>
+/cursor plan <span class="s2">"Refactorizar capa de comunicación basada en análisis"</span>
+
+<span class="c"># Ronda 4: Claude Code para síntesis y toma de decisiones</span>
+<span class="s2">"Basado en todos los análisis, ¿cuál es nuestro enfoque óptimo?"</span>
+</code></pre></div></div>
+
+<h2 id="-estrategias-de-optimización-de-tokens">💡 Estrategias de Optimización de Tokens</h2>
+
+<h3 id="1-marco-de-clasificación-de-tareas">1. Marco de Clasificación de Tareas</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tipo de Tarea</th>
+      <th>Modelo Recomendado</th>
+      <th>Impacto en Tokens</th>
+      <th>Razonamiento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Revisión de Código</strong></td>
+      <td>OpenAI Codex</td>
+      <td>Medio</td>
+      <td>Especializado para análisis de código</td>
+    </tr>
+    <tr>
+      <td><strong>Análisis de Archivos Grandes</strong></td>
+      <td>Gemini</td>
+      <td>Alto → Bajo</td>
+      <td>Mejor eficiencia de ventana de contexto</td>
+    </tr>
+    <tr>
+      <td><strong>Exploración de Repositorio</strong></td>
+      <td>Cursor Agent</td>
+      <td>Alto → Bajo</td>
+      <td>Análisis dirigido y con alcance</td>
+    </tr>
+    <tr>
+      <td><strong>Preguntas Rápidas</strong></td>
+      <td>Qwen/Local</td>
+      <td>Bajo</td>
+      <td>Procesamiento gratuito o local</td>
+    </tr>
+    <tr>
+      <td><strong>Arquitectura Compleja</strong></td>
+      <td>Claude Code</td>
+      <td>Alto</td>
+      <td>Vale la pena el premium por calidad</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="2-gestión-inteligente-de-contexto">2. Gestión Inteligente de Contexto</h3>
+
+<p>Crea comandos slash que manejen archivos grandes de manera inteligente:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/smart-analyze.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Analizar</span><span class="nv"> </span><span class="s">archivos</span><span class="nv"> </span><span class="s">grandes</span><span class="nv"> </span><span class="s">usando</span><span class="nv"> </span><span class="s">herramientas</span><span class="nv"> </span><span class="s">apropiadas"</span>
+<span class="nn">---</span>
+<span class="s">file_size=$(wc -l &lt; @$1)</span>
+<span class="s">if [ $file_size -gt 1000 ]; then</span>
+  <span class="s">echo "Archivo grande detectado ($file_size líneas). Usando Gemini..."</span>
+  <span class="s">/gemini-analyze @$1</span>
+<span class="s">else</span>
+  <span class="s">echo "Tamaño de archivo estándar. Usando Claude Code..."</span>
+  <span class="s">echo "Analizando @$1 con Claude Code"</span>
+<span class="s">fi</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/progressive-analysis.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Análisis</span><span class="nv"> </span><span class="s">progresivo</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">resumen</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">detalles"</span>
+<span class="nn">---</span>
+<span class="s">echo "📋 Paso 1</span><span class="pi">:</span> <span class="s">Obteniendo resumen del archivo..."</span>
+<span class="s">/gemini-analyze @$1 "resumen de alto nivel"</span>
+
+<span class="s">echo "🔍 Paso 2</span><span class="pi">:</span> <span class="s">Encontrando funciones clave..."</span>
+<span class="s">/cursor-search "function" function</span>
+
+<span class="s">echo "🔧 Paso 3</span><span class="pi">:</span> <span class="s">Análisis detallado de partes seleccionadas..."</span>
+<span class="s">/codex-explain @$1 "$2"</span>
+</code></pre></div></div>
+
+<h3 id="3-comandos-de-enrutamiento-optimizado-por-costos">3. Comandos de Enrutamiento Optimizado por Costos</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/try-free-first.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Probar</span><span class="nv"> </span><span class="s">modelos</span><span class="nv"> </span><span class="s">gratuitos</span><span class="nv"> </span><span class="s">antes</span><span class="nv"> </span><span class="s">que</span><span class="nv"> </span><span class="s">los</span><span class="nv"> </span><span class="s">premium"</span>
+<span class="nn">---</span>
+<span class="s">echo "Intentando con modelos gratuitos primero..."</span>
+<span class="s">if /qwen-quick "$ARGUMENTS" 2&gt;/dev/null; then</span>
+  <span class="s">echo "✅ Manejado por Qwen (gratuito)"</span>
+<span class="s">elif /gemini-brainstorm "$ARGUMENTS" 2&gt;/dev/null; then</span>
+  <span class="s">echo "✅ Manejado por Gemini (nivel gratuito)"</span>
+<span class="s">else</span>
+  <span class="s">echo "🔄 Escalando a Claude Code (premium)"</span>
+  <span class="s">echo "$ARGUMENTS"</span>
+<span class="s">fi</span>
+</code></pre></div></div>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/route-by-task.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Enrutar</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">modelos</span><span class="nv"> </span><span class="s">especializados</span><span class="nv"> </span><span class="s">por</span><span class="nv"> </span><span class="s">tipo</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">tarea"</span>
+<span class="nn">---</span>
+<span class="s">case "$1" in</span>
+  <span class="s">*debug*|*error*|*bug*)</span>
+    <span class="s">/codex-debug @$2 "$3"</span>
+    <span class="s">;;</span>
+  <span class="s">*format*|*style*|*lint*)</span>
+    <span class="s">/qwen-format @$2 $3</span>
+    <span class="s">;;</span>
+  <span class="s">*architect*|*design*|*plan*)</span>
+    <span class="s">/gemini-brainstorm "$2 $3"</span>
+    <span class="s">;;</span>
+  <span class="s">*)</span>
+    <span class="s">echo "Usando Claude Code para</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+    <span class="s">;;</span>
+<span class="s">esac</span>
+</code></pre></div></div>
+
+<h2 id="-guía-de-configuración-completa">🔧 Guía de Configuración Completa</h2>
+
+<h3 id="prerequisitos">Prerequisitos</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Asegurar que tienes los requisitos básicos</span>
+node <span class="nt">--version</span>  <span class="c"># v16.0.0+</span>
+claude <span class="nt">--version</span>  <span class="c"># Claude Code CLI más reciente</span>
+</code></pre></div></div>
+
+<h3 id="crear-tu-biblioteca-de-comandos-cli-de-ia">Crear Tu Biblioteca de Comandos CLI de IA</h3>
+
+<p>Configura una biblioteca integral de comandos slash:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Crear directorio de comandos</span>
+mkdir <span class="nt">-p</span> ~/.claude/commands
+
+<span class="c"># Crear tus comandos personalizados usando los ejemplos a lo largo de este artículo</span>
+<span class="c"># Copiar las definiciones de comando YAML y adaptarlas a tus necesidades</span>
+<span class="c"># Cada comando debe guardarse como archivo .md en ~/.claude/commands/</span>
+</code></pre></div></div>
+
+<h3 id="plantilla-de-estructura-de-comando">Plantilla de Estructura de Comando</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plantilla: ~/.claude/commands/tu-comando.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Qué</span><span class="nv"> </span><span class="s">hace</span><span class="nv"> </span><span class="s">este</span><span class="nv"> </span><span class="s">comando"</span>
+<span class="na">arguments</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">$1:</span><span class="nv"> </span><span class="s">Descripción</span><span class="nv"> </span><span class="s">del</span><span class="nv"> </span><span class="s">primer</span><span class="nv"> </span><span class="s">argumento"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">$2:</span><span class="nv"> </span><span class="s">Descripción</span><span class="nv"> </span><span class="s">del</span><span class="nv"> </span><span class="s">segundo</span><span class="nv"> </span><span class="s">argumento"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">$ARGUMENTS:</span><span class="nv"> </span><span class="s">Todos</span><span class="nv"> </span><span class="s">los</span><span class="nv"> </span><span class="s">argumentos"</span>
+<span class="nn">---</span>
+<span class="c1"># Tu script bash aquí</span>
+<span class="s">echo "Procesando</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+<span class="s">tu-herramienta-cli $1 --option "$2"</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+### Configuración de Servidor MCP y CLI
+
+```bash
+# Instalar servidores MCP y CLIs
+npm install -g gemini-mcp-tool                 # MCP Gemini
+npm install -g qwen-mcp-tool                   # MCP Qwen  
+npm install -g @openai/codex@latest           # CLI Codex (directo)
+npm install -g @cursor/agent-cli               # CLI Cursor
+
+# Configurar servidores MCP con Claude Code
+claude mcp add -s local gemini-cli -- npx -y gemini-mcp-tool
+claude mcp add -s local qwen-cli -- npx -y qwen-mcp-tool
+claude mcp add -s local cursor-agent -- npx -y cursor-agent-mcp
+
+# Para Codex: Uso directo de CLI (no se necesita servidor MCP)
+codex auth login  # Autenticarse con OpenAI
+
+# Resumen de autenticación:
+# - Gemini: Autenticación de cuenta Google a través de MCP
+# - Qwen: Credenciales API a través de servidor MCP
+# - OpenAI Codex: Autenticación CLI directa
+# - Cursor: Cuenta Cursor a través de MCP
+</code></pre></div></div>
+
+<h3 id="probar-tu-integración">Probar Tu Integración</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Probar servidores MCP en interfaz Claude Code</span>
+/gemini-cli:ping <span class="s2">"mensaje de prueba"</span>
+/qwen-cli:help
+/mcp list  <span class="c"># Ver todos los servidores MCP conectados</span>
+
+<span class="c"># Probar CLI Codex directamente</span>
+codex /model  <span class="c"># Verificar modelos disponibles</span>
+codex /status <span class="c"># Verificar autenticación</span>
+
+<span class="c"># Probar comandos slash personalizados (crear estos primero)</span>
+/gemini-workflow microservices.py <span class="s2">"análisis de rendimiento"</span>
+/qwen-quick <span class="s2">"¿qué es un closure en JavaScript?"</span>
+
+<span class="c"># Probar análisis de archivos</span>
+<span class="nb">echo</span> <span class="s1">'print("hola mundo")'</span> <span class="o">&gt;</span> test.py
+/gemini-cli:ask-gemini <span class="s2">"Analiza @test.py para mejores prácticas"</span>
+/codex-explain test.py <span class="s2">"estructura de código y mejoras"</span>
+</code></pre></div></div>
+
+<h2 id="-casos-de-uso-del-mundo-real">🎯 Casos de Uso del Mundo Real</h2>
+
+<h3 id="caso-de-uso-1-proyecto-de-refactorización-a-gran-escala">Caso de Uso 1: Proyecto de Refactorización a Gran Escala</h3>
+
+<p><strong>Escenario:</strong> Modernizar una base de código Python legacy con 50,000+ líneas</p>
+
+<p><strong>Estrategia Multi-Modelo:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Exploración de repositorio</span>
+/cursor-analyze <span class="nb">.</span> <span class="s2">"patrones obsoletos"</span>
+
+<span class="c"># 2. Planificación de arquitectura</span>
+/gemini-brainstorm <span class="s2">"estrategia de migración de Flask 1.x a 2.x"</span>
+
+<span class="c"># 3. Generación de código</span>
+/codex-write python <span class="s2">"decoradores de ruta Flask modernos con type hints"</span>
+
+<span class="c"># 4. Planificación de integración (Claude Code)</span>
+<span class="nb">echo</span> <span class="s2">"Sintetizar todos los análisis y crear hoja de ruta de migración"</span>
+</code></pre></div></div>
+
+<p><strong>Ahorro de Tokens:</strong> ~70% comparado con usar solo Claude Code</p>
+
+<h3 id="caso-de-uso-2-flujo-de-trabajo-de-auditoría-de-seguridad">Caso de Uso 2: Flujo de Trabajo de Auditoría de Seguridad</h3>
+
+<p><strong>Escenario:</strong> Revisión integral de seguridad del sistema de autenticación</p>
+
+<p><strong>Enrutamiento Especializado:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Detección de patrones de código</span>
+/cursor-search <span class="s2">"password|hash|token"</span> code
+
+<span class="c"># 2. Análisis de vulnerabilidades</span>
+/codex-debug auth.py <span class="s2">"vulnerabilidades de seguridad"</span>
+
+<span class="c"># 3. Revisión de arquitectura</span>
+/gemini-analyze @auth_flow.md <span class="s2">"evaluación de arquitectura de seguridad"</span>
+
+<span class="c"># 4. Planificación de remediación (Claude Code)</span>
+<span class="nb">echo</span> <span class="s2">"Crear plan priorizado de mejoras de seguridad basado en análisis anteriores"</span>
+</code></pre></div></div>
+
+<p><strong>Beneficios:</strong> Modelos especializados detectan diferentes tipos de vulnerabilidades</p>
+
+<h3 id="caso-de-uso-3-optimización-de-rendimiento">Caso de Uso 3: Optimización de Rendimiento</h3>
+
+<p><strong>Escenario:</strong> Optimizar endpoints API lentos</p>
+
+<p><strong>Lógica de Selección de Modelo:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Perfilado de rendimiento</span>
+/cursor-analyze api/ <span class="s2">"cuellos de botella de rendimiento"</span>
+
+<span class="c"># 2. Optimización de algoritmos</span>
+/codex-write python <span class="s2">"optimizar consultas de base de datos con indexación"</span>
+
+<span class="c"># 3. Revisión de diseño de sistema</span>
+/gemini-brainstorm <span class="s2">"estrategias de escalado y caching de API"</span>
+
+<span class="c"># 4. Estrategia de implementación (Claude Code)</span>
+<span class="nb">echo</span> <span class="s2">"Priorizar optimizaciones por impacto vs esfuerzo"</span>
+</code></pre></div></div>
+
+<h2 id="-árbol-de-decisión-de-selección-de-modelo">🔍 Árbol de Decisión de Selección de Modelo</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>¿Complejidad de Tarea?
+├── Simple (formateo, docs) → Qwen/Local
+├── Media (revisión código, bugs) → OpenAI Codex  
+└── Compleja
+    ├── Contexto Grande → Gemini
+    ├── Análisis Repositorio → Cursor Agent
+    ├── Diseño Arquitectónico → Gemini + Claude Code
+    └── Decisiones Críticas → Claude Code
+</code></pre></div></div>
+
+<h2 id="-análisis-de-rendimiento-y-costos">📊 Análisis de Rendimiento y Costos</h2>
+
+<h3 id="comparación-de-uso-de-tokens">Comparación de Uso de Tokens</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flujo de Trabajo</th>
+      <th>Modelo Único (Claude)</th>
+      <th>Multi-Modelo</th>
+      <th>Ahorro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Revisión de Código</strong></td>
+      <td>10,000 tokens</td>
+      <td>3,000 tokens</td>
+      <td>70%</td>
+    </tr>
+    <tr>
+      <td><strong>Análisis de Archivo Grande</strong></td>
+      <td>25,000 tokens</td>
+      <td>8,000 tokens</td>
+      <td>68%</td>
+    </tr>
+    <tr>
+      <td><strong>Auditoría de Repositorio</strong></td>
+      <td>50,000 tokens</td>
+      <td>15,000 tokens</td>
+      <td>70%</td>
+    </tr>
+    <tr>
+      <td><strong>Documentación</strong></td>
+      <td>5,000 tokens</td>
+      <td>1,500 tokens</td>
+      <td>70%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="resultados-de-optimización-de-costos">Resultados de Optimización de Costos</h3>
+
+<p><strong>Costos Mensuales de Desarrollo:</strong></p>
+<ul>
+  <li><strong>Antes Multi-Modelo:</strong> $150-200 (Claude Pro + excesos)</li>
+  <li><strong>Después Multi-Modelo:</strong> $75-100 (Mezcla de gratuito + premium)</li>
+  <li><strong>Ahorro Neto:</strong> ~50% con mejor cobertura</li>
+</ul>
+
+<h2 id="️-errores-comunes-y-soluciones">⚠️ Errores Comunes y Soluciones</h2>
+
+<h3 id="desajustes-de-capacidades-del-modelo">Desajustes de Capacidades del Modelo</h3>
+
+<p><strong>Problema:</strong> No todos los modelos soportan llamadas a herramientas/funciones</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Esto fallará con modelos básicos</span>
+cursor edit file.py <span class="nt">--function</span> add_logging
+
+<span class="c"># Solución: Enrutar tareas que requieren herramientas a modelos capaces</span>
+claude edit file.py <span class="nt">--function</span> add_logging  <span class="c"># Claude Code maneja herramientas</span>
+</code></pre></div></div>
+
+<h3 id="gestión-de-límites-de-uso">Gestión de Límites de Uso</h3>
+
+<p><strong>Enfoque:</strong> Adaptación manual de flujo de trabajo en interfaz Claude Code</p>
+
+<p>Cuando encuentres límites de uso, simplemente cambia a herramientas alternativas:</p>
+<ul>
+  <li><strong>¿Límite de Gemini alcanzado?</strong> → Usa Claude Code directamente o prueba MCP OpenAI Codex</li>
+  <li><strong>¿Créditos OpenAI bajos?</strong> → Cambia a Gemini <code class="highlighter-rouge">/analyze</code> o Claude Code</li>
+  <li><strong>¿Límite Claude alcanzado?</strong> → Usa <code class="highlighter-rouge">/analyze</code> para archivos grandes o herramientas de servidor MCP</li>
+</ul>
+
+<p>La belleza de esta configuración es tener opciones disponibles directamente en la interfaz de Claude Code.</p>
+
+<h3 id="gestión-de-contexto-en-uso-interactivo">Gestión de Contexto en Uso Interactivo</h3>
+
+<p><strong>Ventaja:</strong> Claude Code mantiene contexto durante tu sesión</p>
+
+<p>En el uso interactivo de Claude Code, el contexto se mantiene naturalmente:</p>
+<ul>
+  <li><strong>Tu historial de conversación</strong> proporciona contexto para preguntas de seguimiento</li>
+  <li><strong>Resultados de comandos slash anteriores</strong> permanecen visibles en el chat</li>
+  <li><strong>Referencias de archivos</strong> usando <code class="highlighter-rouge">@nombrearchivo</code> mantienen contexto del archivo</li>
+  <li><strong>Flujo de conversación natural</strong> te permite referenciar análisis anteriores</li>
+</ul>
+
+<p><strong>Mejor Práctica:</strong> Referenciar resultados anteriores explícitamente:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/analyze @archivo_grande.py "problemas de rendimiento"
+# Después de revisar resultados...
+"Basado en el análisis de Gemini anterior, usa OpenAI Codex para optimizar las funciones de cuello de botella"
+</code></pre></div></div>
+
+<h2 id="-técnicas-avanzadas">🚀 Técnicas Avanzadas</h2>
+
+<h3 id="comandos-de-selección-de-modelo-dinámico">Comandos de Selección de Modelo Dinámico</h3>
+
+<p>Crea enrutamiento inteligente basado en condiciones actuales:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/smart-route.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Enrutar</span><span class="nv"> </span><span class="s">dinámicamente</span><span class="nv"> </span><span class="s">basado</span><span class="nv"> </span><span class="s">en</span><span class="nv"> </span><span class="s">contexto</span><span class="nv"> </span><span class="s">y</span><span class="nv"> </span><span class="s">uso"</span>
+<span class="nn">---</span>
+<span class="s">hour=$(date +%H)</span>
+<span class="s">usage_file="~/.claude_usage_today"</span>
+
+<span class="c1"># Verificar enrutamiento basado en tiempo</span>
+<span class="s">if [ $hour -lt 9 ] || [ $hour -gt 17 ]; then</span>
+  <span class="s">echo "🌙 Horas valle - usando Claude Code"</span>
+  <span class="s">echo "$ARGUMENTS"</span>
+<span class="s">else</span>
+  <span class="s"># Horas pico - usar alternativas costo-efectivas</span>
+  <span class="s">if [[ "$1" == *"large"* ]]; then</span>
+    <span class="s">/gemini-analyze @$2 "$3"</span>
+  <span class="s">elif [[ "$1" == *"debug"* ]]; then</span>
+    <span class="s">/codex-debug @$2 "$3"</span>
+  <span class="s">else</span>
+    <span class="s">/qwen-quick "$ARGUMENTS"</span>
+  <span class="s">fi</span>
+<span class="s">fi</span>
+</code></pre></div></div>
+
+<h3 id="técnicas-de-conjunto-de-modelos">Técnicas de Conjunto de Modelos</h3>
+
+<p><strong>Toma de Decisiones por Consenso:</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/consensus.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Obtener</span><span class="nv"> </span><span class="s">múltiples</span><span class="nv"> </span><span class="s">opiniones</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">IA</span><span class="nv"> </span><span class="s">para</span><span class="nv"> </span><span class="s">decisiones</span><span class="nv"> </span><span class="s">complejas"</span>
+<span class="nn">---</span>
+<span class="s">echo "📈 Reuniendo múltiples perspectivas sobre</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+
+<span class="s">echo "Perspectiva de Gemini:"</span>
+<span class="s">/gemini-analyze @$1 "$2" &gt; /tmp/gemini_opinion.txt</span>
+<span class="s">cat /tmp/gemini_opinion.txt</span>
+
+<span class="s">echo "\nPerspectiva de Codex:"</span>
+<span class="s">/codex-explain @$1 "$2" &gt; /tmp/codex_opinion.txt</span>
+<span class="s">cat /tmp/codex_opinion.txt</span>
+
+<span class="s">echo "\nPerspectiva de Cursor:"</span>
+<span class="s">/cursor-analyze $1 "$2" &gt; /tmp/cursor_opinion.txt</span>
+<span class="s">cat /tmp/cursor_opinion.txt</span>
+
+<span class="s">echo "\n🧠 Síntesis de Claude Code (basada en opiniones anteriores):"</span>
+<span class="s">echo "Por favor sintetiza el mejor enfoque de los análisis anteriores"</span>
+</code></pre></div></div>
+
+<p><strong>Ensamble de Pipeline Especializado:</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/pipeline.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Pipeline</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">análisis</span><span class="nv"> </span><span class="s">multi-etapa"</span>
+<span class="nn">---</span>
+<span class="s">echo "🔄 Iniciando pipeline de análisis para @$1"</span>
+
+<span class="s">echo "Etapa 1</span><span class="pi">:</span> <span class="s">Búsqueda y descubrimiento"</span>
+<span class="s">/cursor-search "$2" function &gt; /tmp/pipeline_search.txt</span>
+
+<span class="s">echo "Etapa 2</span><span class="pi">:</span> <span class="s">Análisis de arquitectura"</span>
+<span class="s">/gemini-analyze @$1 "basado en resultados de búsqueda, analizar arquitectura" &gt; /tmp/pipeline_arch.txt</span>
+
+<span class="s">echo "Etapa 3</span><span class="pi">:</span> <span class="s">Optimización de código"</span>
+<span class="s">/codex-write $3 "optimizar basado en análisis anterior" &gt; /tmp/pipeline_opt.txt</span>
+
+<span class="s">echo "Etapa 4</span><span class="pi">:</span> <span class="s">Síntesis final"</span>
+<span class="s">echo "Por favor revisa todas las salidas del pipeline y proporciona recomendaciones finales:"</span>
+<span class="s">cat /tmp/pipeline_*.txt</span>
+</code></pre></div></div>
+
+<h2 id="-hoja-de-ruta-futura-patrones-avanzados-de-comando-slash">🔮 Hoja de Ruta Futura: Patrones Avanzados de Comando Slash</h2>
+
+<h3 id="patrones-emergentes">Patrones Emergentes</h3>
+
+<p><strong>1. Enrutamiento Consciente de Contexto:</strong> Comandos que se adaptan basados en tipos de archivo y contexto del proyecto
+<strong>2. Equipos de IA Colaborativos:</strong> Comandos slash encadenados para flujos de trabajo complejos
+<strong>3. Pipelines Optimizados por Costos:</strong> Enrutamiento inteligente para minimizar uso de tokens
+<strong>4. Desarrollo Local-First:</strong> Comandos enfocados en privacidad con modelos on-premises</p>
+
+<h3 id="técnicas-avanzadas-de-comando-slash">Técnicas Avanzadas de Comando Slash</h3>
+
+<p><strong>Pasaje de Contexto Entre Comandos:</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/context-chain.md</span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Encadenar</span><span class="nv"> </span><span class="s">comandos</span><span class="nv"> </span><span class="s">con</span><span class="nv"> </span><span class="s">contexto</span><span class="nv"> </span><span class="s">compartido"</span>
+<span class="nn">---</span>
+<span class="c1"># Almacenar contexto para el siguiente comando</span>
+<span class="s">echo "Contexto</span><span class="pi">:</span> <span class="s">analizando $1 para $2" &gt; /tmp/claude_context</span>
+<span class="s">/gemini-analyze @$1 "$2" | tee -a /tmp/claude_context</span>
+
+<span class="c1"># Pasar contexto a la siguiente herramienta</span>
+<span class="s">echo "Contexto de análisis anterior:" &amp;&amp; cat /tmp/claude_context</span>
+<span class="s">/codex-optimize @$1 "basado en análisis de Gemini anterior"</span>
+</code></pre></div></div>
+
+<p><strong>Ejecución Condicional de Comandos:</strong></p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/smart-workflow.md  </span>
+<span class="nn">---</span>
+<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Flujo</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">trabajo</span><span class="nv"> </span><span class="s">condicional</span><span class="nv"> </span><span class="s">basado</span><span class="nv"> </span><span class="s">en</span><span class="nv"> </span><span class="s">características</span><span class="nv"> </span><span class="s">del</span><span class="nv"> </span><span class="s">archivo"</span>
+<span class="nn">---</span>
+<span class="s">if [[ "$1" =~ \.py$ ]]; then</span>
+  <span class="s">/codex-debug @$1 "$2"</span>
+<span class="s">elif [[ "$1" =~ \.(js|ts)$ ]]; then</span>
+  <span class="s">/cursor-analyze $1 "$2"</span>  
+<span class="s">elif [[ $(wc -l &lt; @$1) -gt 500 ]]; then</span>
+  <span class="s">/gemini-analyze @$1 "$2"</span>
+<span class="s">else</span>
+  <span class="s">echo "Análisis estándar con Claude Code</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+<span class="s">fi</span>
+</code></pre></div></div>
+
+<h2 id="-comenzando-tu-primer-flujo-de-trabajo-multi-modelo">🎯 Comenzando: Tu Primer Flujo de Trabajo Multi-Modelo</h2>
+
+<h3 id="día-1-configuración-básica">Día 1: Configuración Básica</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar un CLI de IA</span>
+npm install <span class="nt">-g</span> @google-ai/generativelanguage
+
+<span class="c"># Crear tu primer comando slash</span>
+<span class="nb">cat</span> <span class="o">&gt;</span> ~/.claude/commands/gemini-quick.md <span class="o">&lt;&lt;</span> <span class="sh">'</span><span class="no">EOF</span><span class="sh">'
+---
+description: "Análisis rápido con Gemini"
+---
+gemini-cli analyze "</span><span class="nv">$ARGUMENTS</span><span class="sh">" --brief
+</span><span class="no">EOF
+
+</span><span class="c"># Probar la integración</span>
+/gemini-quick <span class="s2">"explica este patrón de código"</span>
+</code></pre></div></div>
+
+<h3 id="semana-1-identificar-oportunidades-de-optimización">Semana 1: Identificar Oportunidades de Optimización</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Rastrear tus patrones de uso actuales</span>
+<span class="nb">history</span> | <span class="nb">grep </span>claude | head <span class="nt">-20</span>
+
+<span class="c"># Identificar tareas repetitivas que podrían usar comandos slash</span>
+<span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"explain|analyze|debug"</span> ~/.claude_history
+
+<span class="c"># Crear comandos especializados para tus tareas más comunes</span>
+<span class="nb">ls</span> ~/.claude/commands/
+</code></pre></div></div>
+
+<h3 id="mes-1-implementar-enrutamiento-inteligente">Mes 1: Implementar Enrutamiento Inteligente</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Crear tu comando de enrutamiento inteligente</span>
+cp examples/ai-route.md ~/.claude/commands/
+cp examples/try-free-first.md ~/.claude/commands/
+cp examples/route-by-task.md ~/.claude/commands/
+
+<span class="c"># Probar enrutamiento inteligente</span>
+/ai-route debug auth.py <span class="s2">"errores de autenticación"</span>
+/try-free-first <span class="s2">"formatear este archivo JSON"</span>
+/route-by-task debug auth.py <span class="s2">"problemas de seguridad"</span>
+</code></pre></div></div>
+
+<h2 id="-conclusión-desarrollo-con-ia-ilimitada">💪 Conclusión: Desarrollo con IA Ilimitada</h2>
+
+<p>Al integrar múltiples CLIs de IA a través de servidores MCP, no solo estás ahorrando tokens—estás construyendo un <strong>entorno de desarrollo resiliente, especializado y costo-efectivo</strong>. Cada modelo contribuye con sus fortalezas mientras Claude Code orquesta el flujo de trabajo general.</p>
+
+<p><strong>Los resultados hablan por sí mismos:</strong></p>
+<ul>
+  <li><strong>70% ahorro de tokens</strong> en tareas rutinarias</li>
+  <li><strong>50% reducción de costos</strong> en gastos mensuales de IA</li>
+  <li><strong>Cero tiempo de inactividad</strong> cuando un servicio tiene límites</li>
+  <li><strong>Capacidades especializadas</strong> para cada necesidad de desarrollo</li>
+</ul>
+
+<p><strong>Empieza pequeño:</strong> Agrega un servidor MCP esta semana y enruta tus tareas más intensivas en tokens a través de él. Una vez que experimentes la flexibilidad y ahorro de costos, naturalmente expandirás tu kit de herramientas multi-modelo.</p>
+
+<p>El futuro del desarrollo asistido por IA no se trata de encontrar el modelo perfecto—se trata de <strong>orquestar el modelo correcto para cada momento específico</strong>. Esta configuración te lleva ahí hoy.</p>
+
+<hr />
+
+<p><em>¿Cuál es tu mayor desafío de uso de tokens? ¿Qué modelos de IA te gustaría integrar en tu flujo de trabajo de Claude Code? Comparte tus estrategias multi-modelo en los comentarios abajo.</em></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/cursor" class="page__taxonomy-item" rel="tag">Cursor</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/gemini" class="page__taxonomy-item" rel="tag">Gemini</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/herramientas-ia" class="page__taxonomy-item" rel="tag">Herramientas IA</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/multi-modelo" class="page__taxonomy-item" rel="tag">Multi-Modelo</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/openai-codex" class="page__taxonomy-item" rel="tag">OpenAI Codex</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/optimizaci%C3%B3n-tokens" class="page__taxonomy-item" rel="tag">Optimización Tokens</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/qwen" class="page__taxonomy-item" rel="tag">Qwen</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/servidores-mcp" class="page__taxonomy-item" rel="tag">Servidores MCP</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-09-05T19:00:00-05:00">September 06, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Claude+Code+Potenciado%3A+Accede+a+Cualquier+Modelo+de+IA+mediante+Integraci%C3%B3n+MCP%20https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" class="pagination--pager" title="Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/ccr-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="permalink">Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Desbloquea todo el potencial de Claude Code enrutando peticiones a través de Claude Code Router y OpenRouter—usa modelos gratuitos, soluciones autoalojadas c...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/mcp-servers-ticker-file.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/" rel="permalink">Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Descubre cómo los servidores MCP transforman la fase de investigación del desarrollo. Desde evaluar módulos de Terraform hasta comparar documentación, aprend...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/cursor-cli-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/08/08/cursor-cli-first-impressions/" rel="permalink">Cursor CLI — Primeras impresiones sobre la UX
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Primer vistazo práctico a Cursor CLI desde la experiencia de uso: por qué importa, modelos soportados, diferencias vs IDE y otros CLIs, problemas tempranos y...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
