@@ -1,4 +1,484 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-09-08T16:42:29-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP</title><link href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="alternate" type="text/html" title="Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP" /><published>2025-09-05T19:00:00-05:00</published><updated>2025-09-05T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/09/06/ai-clis-inside-claude-code-token-saving-mcp</id><content type="html" xml:base="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/">&lt;p&gt;&lt;img src=&quot;/assets/images/clis-robots.png&quot; alt=&quot;Claude Code Potenciado&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/es/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/es/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-09-22T09:14:31-05:00</updated><id>https://lgallardo.com/es/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">GitHub Models: Integración Sencilla de IA para Flujos DevOps</title><link href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="alternate" type="text/html" title="GitHub Models: Integración Sencilla de IA para Flujos DevOps" /><published>2025-09-18T19:00:00-05:00</published><updated>2025-09-18T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows</id><content type="html" xml:base="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/gh-models-robots.png&quot; alt=&quot;GitHub Models Simple AI Workflows&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Me topé con GitHub Models mientras navegaba las últimas funcionalidades de GitHub y decidí probarlo. Lo que me llamó la atención no fue solo otra API de IA—sino la &lt;strong&gt;integración fluida con GitHub Actions&lt;/strong&gt; y el hecho de que es completamente gratuito para la mayoría de flujos de desarrollo.&lt;/p&gt;
+
+&lt;p&gt;Después de experimentar con él durante un tiempo, me di cuenta de que GitHub Models llena un nicho específico: &lt;strong&gt;integración de IA directa y simple&lt;/strong&gt; sin la complejidad de configurar servicios externos o manejar claves API. Esto es lo que aprendí y cómo se compara con soluciones más sofisticadas.&lt;/p&gt;
+
+&lt;h2 id=&quot;-qué-es-github-models&quot;&gt;🚀 ¿Qué es GitHub Models?&lt;/h2&gt;
+
+&lt;p&gt;GitHub Models es el servicio nativo de inferencia de IA de GitHub que proporciona &lt;strong&gt;acceso gratuito a modelos de nivel empresarial&lt;/strong&gt; directamente dentro de tus repositorios. Piénsalo como IA-como-Servicio, pero integrado en la plataforma donde ya vive tu código.&lt;/p&gt;
+
+&lt;h3 id=&quot;modelos-clave-disponibles&quot;&gt;Modelos Clave Disponibles&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;OpenAI GPT-4o&lt;/strong&gt;: Ideal para análisis complejos y razonamiento&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;GPT-4o mini&lt;/strong&gt;: Más rápido y económico para tareas simples&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Meta Llama 3.1&lt;/strong&gt; (8B, 70B, 405B): Alternativas de código abierto&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Microsoft Phi 3&lt;/strong&gt;: Eficiente para respuestas rápidas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mistral Large&lt;/strong&gt;: Razonamiento multilingüe y especializado&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lo-que-lo-hace-diferente&quot;&gt;Lo Que Lo Hace Diferente&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Sin configuración externa&lt;/strong&gt;: Usa tus credenciales de GitHub&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Nivel gratuito&lt;/strong&gt;: 50,000 tokens/mes en todos los modelos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Integración nativa con Actions&lt;/strong&gt;: Sin claves API en secretos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Privacidad primero&lt;/strong&gt;: Tus prompts no entrenan los modelos&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-primeros-pasos-el-enfoque-oficial-de-github&quot;&gt;🔧 Primeros Pasos: El Enfoque Oficial de GitHub&lt;/h2&gt;
+
+&lt;p&gt;La forma más simple de usar GitHub Models es a través de llamadas directas a la API en GitHub Actions. Aquí está la configuración básica:&lt;/p&gt;
+
+&lt;h3 id=&quot;configuración-de-autenticación&quot;&gt;Configuración de Autenticación&lt;/h3&gt;
+
+&lt;p&gt;GitHub Models usa el &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB_TOKEN&lt;/code&gt; integrado de tu repositorio con el permiso &lt;code class=&quot;highlighter-rouge&quot;&gt;models: read&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Flujo de Análisis con IA&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pull_request&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# Requerido para GitHub Models&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;ai-analysis&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Analizar con IA&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;curl -X POST &quot;https://models.github.ai/inference/chat/completions&quot; \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;-H &quot;Content-Type: application/json&quot; \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;-H &quot;Authorization: Bearer $GITHUB_TOKEN&quot; \&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;-d '{&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;&quot;model&quot;: &quot;openai/gpt-4o&quot;,&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;&quot;messages&quot;: [&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Analiza esto en busca de problemas potenciales&quot;}&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;}'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;usando-la-action-actionsai-inference&quot;&gt;Usando la Action actions/ai-inference&lt;/h3&gt;
+
+&lt;p&gt;GitHub proporciona una action oficial que simplifica las llamadas a la API:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Ejecutar Análisis con IA&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ai-analysis&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/ai-inference@v1&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;gpt-4o'&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;system-prompt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Eres&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;un&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ingeniero&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;DevOps&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;revisando&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;infraestructura'&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;prompt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;Analiza los siguientes resultados de validación de Terraform:&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;$&lt;/span&gt;
+
+      &lt;span class=&quot;no&quot;&gt;Proporciona:&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;1. Evaluación general&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;2. Hallazgos clave&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;3. Recomendaciones&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;4. Consideraciones de seguridad&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-ejemplos-del-mundo-real&quot;&gt;🎯 Ejemplos del Mundo Real&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-análisis-inteligente-de-reportes-de-bugs&quot;&gt;1. Análisis Inteligente de Reportes de Bugs&lt;/h3&gt;
+
+&lt;p&gt;Este flujo analiza reportes de bugs para determinar si contienen suficiente información para reproducirlos:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Análisis de Reporte de Bug&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;edited&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;analyze-bug-report&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;contains(github.event.issue.labels.*.name, 'bug')&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Analizar Reporte de Bug&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;ISSUE_CONTENT=&quot;$ - $&quot;&lt;/span&gt;
+
+        &lt;span class=&quot;no&quot;&gt;ANALYSIS=$(curl -s -X POST &quot;https://models.github.ai/inference/chat/completions&quot; \&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;-H &quot;Content-Type: application/json&quot; \&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;-H &quot;Authorization: Bearer $GITHUB_TOKEN&quot; \&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;-d &quot;{&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;\&quot;model\&quot;: \&quot;openai/gpt-4o\&quot;,&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;\&quot;messages\&quot;: [&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;\&quot;role\&quot;: \&quot;system\&quot;,&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;\&quot;content\&quot;: \&quot;Analiza reportes de bugs para viabilidad de reproducción. Devuelve JSON con reproducible (boolean), missing_info (array), y confidence (0-1).\&quot;&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;},&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;\&quot;role\&quot;: \&quot;user\&quot;,&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;\&quot;content\&quot;: \&quot;$ISSUE_CONTENT\&quot;&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;\&quot;max_tokens\&quot;: 500&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;}&quot;)&lt;/span&gt;
+
+        &lt;span class=&quot;no&quot;&gt;REPRODUCIBLE=$(echo &quot;$ANALYSIS&quot; | jq -r '.choices[0].message.content' | jq -r '.reproducible')&lt;/span&gt;
+
+        &lt;span class=&quot;no&quot;&gt;if [ &quot;$REPRODUCIBLE&quot; = &quot;true&quot; ]; then&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;gh issue edit $ --add-label &quot;ready-for-reproduction&quot;&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;else&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;gh issue edit $ --add-label &quot;needs-more-info&quot;&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-validación-de-infraestructura-con-ia&quot;&gt;2. Validación de Infraestructura con IA&lt;/h3&gt;
+
+&lt;p&gt;Basado en tu ejemplo de flujo, aquí está cómo analizar resultados de validación de Terraform:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Revisión de Infraestructura&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;**.tf'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;**.tfvars'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;terraform-ai-review&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Validar Terraform&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;validate&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;terraform init&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;terraform validate -json &amp;gt; validation.json&lt;/span&gt;
+
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Análisis de Infraestructura con IA&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/ai-inference@v1&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ai-analysis&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;gpt-4o'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;system-prompt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Eres&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;un&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;ingeniero&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;DevOps&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;senior&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;revisando&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;configuraciones&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;de&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Terraform'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;prompt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;Analiza este resultado de validación de Terraform:&lt;/span&gt;
+
+          &lt;span class=&quot;no&quot;&gt;$&lt;/span&gt;
+
+          &lt;span class=&quot;no&quot;&gt;Proporciona:&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;1. **Evaluación General**: Resumen del estado de validación&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;2. **Hallazgos Clave**: Problemas importantes o éxitos identificados&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;3. **Recomendaciones**: Acciones específicas para mejorar la infraestructura&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;4. **Consideraciones de Seguridad**: Cualquier implicación de seguridad&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;5. **Mejores Prácticas**: Sugerencias para seguir las mejores prácticas de AWS/Terraform&lt;/span&gt;
+
+          &lt;span class=&quot;no&quot;&gt;Formatear como secciones markdown claras.&lt;/span&gt;
+
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Publicar Análisis en PR&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;github.event_name == 'pull_request'&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;gh pr comment $ --body &quot;&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;## 🤖 Análisis de Infraestructura con IA&lt;/span&gt;
+
+        &lt;span class=&quot;no&quot;&gt;**Analizado por**: $&lt;/span&gt;
+
+        &lt;span class=&quot;no&quot;&gt;$&lt;/span&gt;
+
+        &lt;span class=&quot;no&quot;&gt;---&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;*Este análisis fue generado por IA usando GitHub Models. Por favor revisa las recomendaciones cuidadosamente antes de implementar.*&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-generación-automatizada-de-changelog&quot;&gt;3. Generación Automatizada de Changelog&lt;/h3&gt;
+
+&lt;p&gt;Simplifica la gestión de releases con changelogs generados por IA:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Generar Changelog&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;v*'&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;generate-changelog&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;fetch-depth&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0&lt;/span&gt;
+
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Obtener Commits Desde Último Tag&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;commits&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;LAST_TAG=$(git describe --tags --abbrev=0 HEAD^)&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;COMMITS=$(git log --pretty=format:&quot;%h %s&quot; $LAST_TAG..HEAD)&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;echo &quot;commits&amp;lt;&amp;lt;EOF&quot; &amp;gt;&amp;gt; $GITHUB_OUTPUT&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;echo &quot;$COMMITS&quot; &amp;gt;&amp;gt; $GITHUB_OUTPUT&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;echo &quot;EOF&quot; &amp;gt;&amp;gt; $GITHUB_OUTPUT&lt;/span&gt;
+
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Generar Changelog con IA&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;no&quot;&gt;CHANGELOG=$(curl -s -X POST &quot;https://models.github.ai/inference/chat/completions&quot; \&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;-H &quot;Content-Type: application/json&quot; \&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;-H &quot;Authorization: Bearer $GITHUB_TOKEN&quot; \&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;-d &quot;{&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;\&quot;model\&quot;: \&quot;openai/gpt-4o\&quot;,&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;\&quot;messages\&quot;: [&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;\&quot;role\&quot;: \&quot;system\&quot;,&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;\&quot;content\&quot;: \&quot;Genera changelogs concisos a partir de commits de git. Agrupa en Funcionalidades, Correcciones de Bugs y Mejoras. Usa viñetas.\&quot;&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;},&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;\&quot;role\&quot;: \&quot;user\&quot;,&lt;/span&gt;
+                &lt;span class=&quot;no&quot;&gt;\&quot;content\&quot;: \&quot;Genera changelog para estos commits:\n$\&quot;&lt;/span&gt;
+              &lt;span class=&quot;no&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;no&quot;&gt;]&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;}&quot;)&lt;/span&gt;
+
+        &lt;span class=&quot;no&quot;&gt;CONTENT=$(echo &quot;$CHANGELOG&quot; | jq -r '.choices[0].message.content')&lt;/span&gt;
+
+        &lt;span class=&quot;no&quot;&gt;gh release create $ \&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;--title &quot;Release $&quot; \&lt;/span&gt;
+          &lt;span class=&quot;no&quot;&gt;--notes &quot;$CONTENT&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;️-github-models-vs-claude-code-cuándo-elegir-qué&quot;&gt;⚖️ GitHub Models vs Claude Code: Cuándo Elegir Qué&lt;/h2&gt;
+
+&lt;p&gt;Después de usar tanto GitHub Models como Claude Code Action, aquí está cómo se comparan:&lt;/p&gt;
+
+&lt;h3 id=&quot;github-models-el-enfoque-de-llamada-de-función&quot;&gt;GitHub Models: El Enfoque de Llamada de Función&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Ideal para:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Tareas simples de análisis y clasificación&lt;/li&gt;
+  &lt;li&gt;✅ Generación y resumen de texto&lt;/li&gt;
+  &lt;li&gt;✅ Flujos de toma de decisiones rápidas&lt;/li&gt;
+  &lt;li&gt;✅ Equipos que quieren cero dependencias externas&lt;/li&gt;
+  &lt;li&gt;✅ Proyectos sensibles al costo (nivel gratuito)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Características:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Menos agéntico&lt;/strong&gt;: Patrón directo prompt → respuesta&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Integración simple&lt;/strong&gt;: Solo llamadas API en flujos&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Contexto limitado&lt;/strong&gt;: Interacciones de prompt único&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Configuración rápida&lt;/strong&gt;: No se necesitan cuentas externas&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Patrón GitHub Models&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Análisis Simple&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;curl -X POST &quot;https://models.github.ai/inference/chat/completions&quot; \&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;-H &quot;Authorization: Bearer $GITHUB_TOKEN&quot; \&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;-d '{&quot;model&quot;: &quot;gpt-4o&quot;, &quot;messages&quot;: [...]}'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;claude-code-action-el-asistente-agéntico&quot;&gt;Claude Code Action: El Asistente Agéntico&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Ideal para:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Revisiones e implementaciones de código complejas&lt;/li&gt;
+  &lt;li&gt;✅ Razonamiento y planificación de múltiples pasos&lt;/li&gt;
+  &lt;li&gt;✅ Resolución interactiva de problemas&lt;/li&gt;
+  &lt;li&gt;✅ Refactorización y mejoras de código&lt;/li&gt;
+  &lt;li&gt;✅ Discusiones conscientes del contexto&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Características:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Más agéntico&lt;/strong&gt;: Puede usar herramientas, implementar cambios, razonar a través de problemas&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interactivo&lt;/strong&gt;: Responde a menciones @claude en PRs/issues&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Consciente del contexto&lt;/strong&gt;: Entiende la estructura del repositorio&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Requiere configuración&lt;/strong&gt;: Clave API y configuración necesarias&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Patrón Claude Code&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Revisión de Código Claude&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@v1&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;anthropic_api_key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;review'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;matriz-de-decisión&quot;&gt;Matriz de Decisión&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Caso de Uso&lt;/th&gt;
+      &lt;th&gt;GitHub Models&lt;/th&gt;
+      &lt;th&gt;Claude Code&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Clasificación de reportes de bug&lt;/td&gt;
+      &lt;td&gt;✅ Perfecto&lt;/td&gt;
+      &lt;td&gt;❌ Exagerado&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Análisis simple de código&lt;/td&gt;
+      &lt;td&gt;✅ Ideal&lt;/td&gt;
+      &lt;td&gt;❌ Muy complejo&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Generación de changelog&lt;/td&gt;
+      &lt;td&gt;✅ Excelente&lt;/td&gt;
+      &lt;td&gt;❌ Innecesario&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Validación de infraestructura&lt;/td&gt;
+      &lt;td&gt;✅ Bueno&lt;/td&gt;
+      &lt;td&gt;✅ Mejor para casos complejos&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Implementación de código&lt;/td&gt;
+      &lt;td&gt;❌ Limitado&lt;/td&gt;
+      &lt;td&gt;✅ Excelente&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Refactorización compleja&lt;/td&gt;
+      &lt;td&gt;❌ No puede implementar&lt;/td&gt;
+      &lt;td&gt;✅ Ideal&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Planificación de múltiples pasos&lt;/td&gt;
+      &lt;td&gt;❌ Solo disparo único&lt;/td&gt;
+      &lt;td&gt;✅ Sobresale aquí&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Debugging interactivo&lt;/td&gt;
+      &lt;td&gt;❌ Sin conversación&lt;/td&gt;
+      &lt;td&gt;✅ Excelentes conversaciones&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;comparación-de-costos&quot;&gt;Comparación de Costos&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Solución&lt;/th&gt;
+      &lt;th&gt;Nivel Gratuito&lt;/th&gt;
+      &lt;th&gt;Precios de Pago&lt;/th&gt;
+      &lt;th&gt;Complejidad de Configuración&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;GitHub Models&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;50K tokens/mes&lt;/td&gt;
+      &lt;td&gt;Parte del plan GitHub (futuro)&lt;/td&gt;
+      &lt;td&gt;⭐⭐⭐⭐⭐ Sin configuración&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Claude Code&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Ninguno&lt;/td&gt;
+      &lt;td&gt;$15/mes (Claude Pro)&lt;/td&gt;
+      &lt;td&gt;⭐⭐⭐ Requiere clave API&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;-comandos-cli-esenciales&quot;&gt;🔧 Comandos CLI Esenciales&lt;/h2&gt;
+
+&lt;p&gt;Si quieres experimentar localmente, aquí están los comandos CLI que funcionan:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Instalar GitHub CLI (si no está instalado)&lt;/span&gt;
+brew install gh  &lt;span class=&quot;c&quot;&gt;# macOS&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt install gh  &lt;span class=&quot;c&quot;&gt;# Ubuntu&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Instalar extensión GitHub Models&lt;/span&gt;
+gh extension install github/gh-models
+
+&lt;span class=&quot;c&quot;&gt;# Listar modelos disponibles&lt;/span&gt;
+gh models list
+
+&lt;span class=&quot;c&quot;&gt;# Probar un prompt simple&lt;/span&gt;
+gh models run openai/gpt-5 &lt;span class=&quot;s2&quot;&gt;&quot;Hola desde CLI&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-primeros-pasos-tu-primer-flujo-con-ia&quot;&gt;🚀 Primeros Pasos: Tu Primer Flujo con IA&lt;/h2&gt;
+
+&lt;h3 id=&quot;semana-1-elige-un-caso-de-uso&quot;&gt;Semana 1: Elige Un Caso de Uso&lt;/h3&gt;
+&lt;p&gt;Selecciona la oportunidad de automatización más simple:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Análisis de reportes de bug&lt;/li&gt;
+  &lt;li&gt;Generación de resúmenes de PR&lt;/li&gt;
+  &lt;li&gt;Comentarios simples de revisión de código&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pasos-de-implementación&quot;&gt;Pasos de Implementación&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Agrega permisos&lt;/strong&gt; a tu flujo:
+    &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Copia un ejemplo básico&lt;/strong&gt; y modifícalo para tus necesidades&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Prueba con prompts pequeños&lt;/strong&gt; para entender el uso de tokens&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Itera y expande&lt;/strong&gt; basado en resultados&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;consejos-pro&quot;&gt;Consejos Pro&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Empieza pequeño&lt;/strong&gt;: Comienza con prompts de 1-2 oraciones&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Monitorea uso&lt;/strong&gt;: Revisa tu consumo de tokens en configuraciones de GitHub&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Agrega respaldos&lt;/strong&gt;: Maneja fallos de API con gracia&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Valida salidas&lt;/strong&gt;: Las respuestas de IA no siempre son correctas&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-en-resumen&quot;&gt;🎯 En Resumen&lt;/h2&gt;
+
+&lt;p&gt;GitHub Models sobresale en &lt;strong&gt;integración de IA simple y directa&lt;/strong&gt; donde necesitas análisis rápido o generación de texto dentro de tus flujos existentes. Es perfecto para equipos que quieren capacidades de IA sin dependencias externas o configuración compleja.&lt;/p&gt;
+
+&lt;p&gt;Elige &lt;strong&gt;GitHub Models&lt;/strong&gt; cuando necesites:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Análisis y clasificación simples&lt;/li&gt;
+  &lt;li&gt;Integración de IA sin configuración&lt;/li&gt;
+  &lt;li&gt;Automatización económica&lt;/li&gt;
+  &lt;li&gt;Control directo de API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Elige &lt;strong&gt;Claude Code&lt;/strong&gt; cuando necesites:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Razonamiento y planificación complejos&lt;/li&gt;
+  &lt;li&gt;Capacidades de implementación de código&lt;/li&gt;
+  &lt;li&gt;Resolución interactiva de problemas&lt;/li&gt;
+  &lt;li&gt;Comportamiento agéntico de múltiples pasos&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La belleza de GitHub Models radica en su &lt;strong&gt;simplicidad y accesibilidad&lt;/strong&gt;. Puedes agregar capacidades de IA a tus flujos en minutos, no horas, y empezar a ver valor inmediatamente.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Empieza con GitHub Models para tareas simples, luego gradúa a Claude Code cuando necesites asistencia de IA más sofisticada.&lt;/strong&gt; Ambos tienen su lugar en el kit de herramientas DevOps moderno.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;¿Has probado GitHub Models en tus flujos? ¿Qué casos de uso te emocionan más? Comparte tus experimentos y resultados en los comentarios abajo.&lt;/em&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="GitHub Models" /><category term="GitHub Actions" /><category term="Integración IA" /><category term="Automatización DevOps" /><category term="GPT-4o" /><category term="Claude Code" /><summary type="html">Me topé con GitHub Models y decidí probarlo. Aquí explico cómo transforma tus GitHub Actions con modelos de IA gratuitos, y cuándo elegirlo sobre soluciones más agénticas como Claude Code.</summary></entry><entry><title type="html">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP</title><link href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="alternate" type="text/html" title="Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP" /><published>2025-09-05T19:00:00-05:00</published><updated>2025-09-05T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/09/06/ai-clis-inside-claude-code-token-saving-mcp</id><content type="html" xml:base="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/">&lt;p&gt;&lt;img src=&quot;/assets/images/clis-robots.png&quot; alt=&quot;Claude Code Potenciado&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Mientras debuggeaba un problema complejo de Terraform la semana pasada, alcancé mi límite de uso de Claude justo cuando más lo necesitaba. En lugar de esperar el reset, me di cuenta de algo poderoso: &lt;strong&gt;¿qué pasaría si pudiera acceder a otros modelos de IA directamente desde la interfaz de Claude Code?&lt;/strong&gt; ¿Y si pudiera usar la ventana de contexto masiva de Gemini, los modelos especializados de OpenAI para código, o herramientas de análisis de repositorios—todo sin salir de Claude Code?&lt;/p&gt;
 
@@ -3093,213 +3573,4 @@ claude
   &lt;li&gt;&lt;a href=&quot;https://docs.anthropic.com/en/docs/claude-code/setup&quot;&gt;Documentación de Configuración de Claude Code&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/sequentialthinking/sequentialthinking&quot;&gt;Sequential Thinking&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.cursor.so/&quot;&gt;Cursor&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas IA" /><category term="Asistentes de Codificación" /><category term="Sequential Thinking" /><summary type="html">Una comparación práctica entre Claude Code y Cursor, con un análisis profundo de Sequential Thinking y perspectivas prácticas para desarrolladores que eligen su próximo asistente de codificación con IA.</summary></entry><entry><title type="html">Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica</title><link href="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/" rel="alternate" type="text/html" title="Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica" /><published>2025-06-30T19:00:00-05:00</published><updated>2025-06-30T19:00:00-05:00</updated><id>https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor</id><content type="html" xml:base="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/">&lt;p&gt;&lt;img src=&quot;/assets/images/choosing-models-cursor.png&quot; alt=&quot;Selección de Modelos en Cursor&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;El otro día comenté que intuitivamente encuentro que &lt;strong&gt;O3&lt;/strong&gt; es mejor para razonamiento, resolución de problemas y troubleshooting, comparado con otros modelos como &lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;. Cursor tiene un árbol de selección para decidir qué modelo elegir basado no solo en el tipo de tarea, sino también en otros factores como cuánto control o interacción quieres tener (prompting), ventana de contexto, etc.&lt;/p&gt;
-
-&lt;h2 id=&quot;-entendiendo-el-comportamiento-de-los-modelos&quot;&gt;🧠 Entendiendo el Comportamiento de los Modelos&lt;/h2&gt;
-
-&lt;p&gt;Según la documentación oficial de Cursor, los modelos pueden categorizarse en dos patrones principales de comportamiento:&lt;/p&gt;
-
-&lt;h3 id=&quot;-modelos-pensantes-thinking-models&quot;&gt;🤖 Modelos Pensantes (Thinking Models)&lt;/h3&gt;
-&lt;p&gt;Estos modelos infieren tu intención, planifican con anticipación y a menudo toman decisiones sin necesidad de guía paso a paso:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;O3&lt;/strong&gt;: Diseñado para razonamiento complejo y problemas ambiguos&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;: Confiado y asertivo en la toma de decisiones&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Gemini-2.5-Pro&lt;/strong&gt;: Toma iniciativa y se mueve rápidamente&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;️-modelos-no-pensantes-non-thinking-models&quot;&gt;🛠️ Modelos No Pensantes (Non-Thinking Models)&lt;/h3&gt;
-&lt;p&gt;Estos modelos esperan instrucciones explícitas y no infieren ni adivinan:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;: También puede operar en este modo&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt;: Predecible y más fácil de guiar&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-mi-experiencia-con-diferentes-modelos&quot;&gt;💡 Mi Experiencia con Diferentes Modelos&lt;/h2&gt;
-
-&lt;h3 id=&quot;-o3-para-resolución-de-problemas-complejos&quot;&gt;🔍 O3 para Resolución de Problemas Complejos&lt;/h3&gt;
-&lt;p&gt;Como mencioné, encuentro que &lt;strong&gt;O3&lt;/strong&gt; es particularmente efectivo para:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Planificación y troubleshooting&lt;/strong&gt;: Cuando necesito razonar a través de problemas complejos de infraestructura&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Análisis profundo&lt;/strong&gt;: Entender relaciones intrincadas de código y dependencias&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Descomposición de problemas&lt;/strong&gt;: Dividir tareas complejas en pasos manejables&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Sin embargo, O3 es más lento y consume más recursos, haciéndolo más adecuado para uso ocasional en problemas desafiantes en lugar de tareas diarias de codificación.&lt;/p&gt;
-
-&lt;h3 id=&quot;-claude-4-sonnet-para-implementación&quot;&gt;⚡ Claude-4-Sonnet para Implementación&lt;/h3&gt;
-&lt;p&gt;Para el trabajo diario de codificación, tiendo a usar &lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt; porque:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Es rápido y eficiente para tareas rutinarias&lt;/li&gt;
-  &lt;li&gt;Proporciona un buen equilibrio entre iniciativa y control&lt;/li&gt;
-  &lt;li&gt;Excelente para generación de código y refactoring&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Pero cuando me quedo atascado en un bucle de “implementación-corrección” con Claude, doy un paso atrás y razono con &lt;strong&gt;O3&lt;/strong&gt; para encontrar otro “punto de vista”, luego continúo con Claude.&lt;/p&gt;
-
-&lt;h2 id=&quot;-marco-de-selección-de-cursor&quot;&gt;📊 Marco de Selección de Cursor&lt;/h2&gt;
-
-&lt;p&gt;Según la &lt;a href=&quot;https://docs.cursor.com/guides/selecting-models&quot;&gt;documentación oficial&lt;/a&gt;, debes considerar:&lt;/p&gt;
-
-&lt;h3 id=&quot;1-estilo-de-prompting&quot;&gt;1. Estilo de Prompting&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;&lt;strong&gt;Si prefieres…&lt;/strong&gt;&lt;/th&gt;
-      &lt;th&gt;&lt;strong&gt;Modelos Recomendados&lt;/strong&gt;&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Tener control, dar instrucciones claras&lt;/td&gt;
-      &lt;td&gt;Claude-4-Sonnet, GPT-4.1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Que el modelo tome iniciativa&lt;/td&gt;
-      &lt;td&gt;Claude-4-Opus, Gemini-2.5-Pro, O3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;2-tipo-de-tarea&quot;&gt;2. Tipo de Tarea&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;&lt;strong&gt;Tarea&lt;/strong&gt;&lt;/th&gt;
-      &lt;th&gt;&lt;strong&gt;Modelos Recomendados&lt;/strong&gt;&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Cambios dirigidos&lt;/td&gt;
-      &lt;td&gt;Claude-4-Sonnet, Gemini-2.5-Pro&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Navegación/búsqueda en codebase&lt;/td&gt;
-      &lt;td&gt;Gemini-2.5-Pro, Claude-4-Opus, O3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Planificación o resolución de problemas&lt;/td&gt;
-      &lt;td&gt;Claude-4-Opus, Gemini-2.5-Pro&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Bugs complejos o razonamiento profundo&lt;/td&gt;
-      &lt;td&gt;O3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;3-características-de-los-modelos&quot;&gt;3. Características de los Modelos&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;&lt;strong&gt;Modelo&lt;/strong&gt;&lt;/th&gt;
-      &lt;th&gt;&lt;strong&gt;Mejor Para&lt;/strong&gt;&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;O3&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;Razonamiento complejo, problemas ambiguos, análisis profundo&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;Claude-4-Sonnet&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;Conductor diario, equilibrio control/iniciativa, implementación rápida&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;Gemini-2.5-Pro&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;Tomar iniciativa, ventanas de contexto grandes, exploración&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;GPT-4.1&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;Comportamiento predecible, control preciso, tareas bien definidas&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;-árbol-de-selección&quot;&gt;🌳 Árbol de Selección&lt;/h2&gt;
-
-&lt;p&gt;La &lt;a href=&quot;https://docs.cursor.com/guides/selecting-models#selection-tree&quot;&gt;documentación oficial de Cursor&lt;/a&gt; proporciona un árbol de decisión útil para guiar la selección de modelos.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/choosing-models-cursor-tree.png&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Aquí está cómo abordarlo:&lt;/p&gt;
-
-&lt;h3 id=&quot;marco-de-decisión&quot;&gt;Marco de Decisión&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;&lt;strong&gt;¿Qué es Más Importante para Ti?&lt;/strong&gt;&lt;/th&gt;
-      &lt;th&gt;&lt;strong&gt;Acción Recomendada&lt;/strong&gt;&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;Quiero control sobre lo que hace el modelo&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;→ Cambios dirigidos&lt;/td&gt;
-      &lt;td&gt;Usa Claude-4-Sonnet&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;→ Tarea más grande con instrucciones claras&lt;/td&gt;
-      &lt;td&gt;Usa Claude-4-Sonnet o GPT-4.1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;Quiero que el modelo lo resuelva&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;→ Rutinaria o uso general&lt;/td&gt;
-      &lt;td&gt;Usa Claude-4-Sonnet, Gemini-2.5-Pro, o GPT-4.1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;→ Muy compleja o ambigua&lt;/td&gt;
-      &lt;td&gt;Usa O3&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Este árbol de decisión te ayuda a identificar rápidamente el modelo correcto basado en tus necesidades inmediatas y la complejidad de tu tarea. Como nota la documentación, estas son recomendaciones subjetivas - debes elegir el modelo que funcione mejor para tu flujo de trabajo específico.&lt;/p&gt;
-
-&lt;h2 id=&quot;-recomendaciones-prácticas&quot;&gt;💡 Recomendaciones Prácticas&lt;/h2&gt;
-
-&lt;p&gt;Basado en mi experiencia y la guía de Cursor:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Comienza con Auto-select&lt;/strong&gt; si no estás seguro - selecciona un modelo confiable del grupo&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Usa O3 estratégicamente&lt;/strong&gt; para problemas complejos que requieren razonamiento profundo&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Claude-4-Sonnet como conductor diario&lt;/strong&gt; para la mayoría de tareas de codificación&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cambia modelos cuando te atasques&lt;/strong&gt; - diferentes perspectivas pueden desbloquear soluciones&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Guarda combinaciones efectivas&lt;/strong&gt; como Modos Personalizados para reutilizar&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;-puntos-destacados&quot;&gt;✨ Puntos Destacados&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;La selección de modelo impacta la productividad&lt;/strong&gt;: Elegir el modelo correcto para la tarea puede mejorar significativamente tanto la velocidad como la calidad&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;O3 sobresale en razonamiento&lt;/strong&gt;: Perfecto para resolución de problemas complejos y cuando necesitas una perspectiva fresca&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Claude-4-Sonnet para implementación&lt;/strong&gt;: Conductor diario confiable para la mayoría de tareas de codificación&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;El cambio de contexto es poderoso&lt;/strong&gt;: Moverse entre modelos puede romper bucles de implementación&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;La preferencia personal importa&lt;/strong&gt;: Tu estilo de interacción debe influir en la elección del modelo&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-conclusión&quot;&gt;🎯 Conclusión&lt;/h2&gt;
-
-&lt;p&gt;Elegir el modelo de IA correcto en Cursor no se trata solo de capacidad - se trata de hacer coincidir las fortalezas del modelo con tu tarea específica y estilo de trabajo. Mientras O3 brilla en escenarios de razonamiento complejo, Claude-4-Sonnet proporciona la velocidad y confiabilidad necesarias para el trabajo diario de desarrollo.&lt;/p&gt;
-
-&lt;p&gt;La clave es desarrollar intuición sobre cómo se comporta cada modelo y saber cuándo cambiar entre ellos. Como he encontrado, a veces dar un paso atrás de los detalles de implementación y razonar con O3 puede proporcionar el avance necesario para avanzar efectivamente.&lt;/p&gt;
-
-&lt;h2 id=&quot;referencias&quot;&gt;Referencias&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/guides/selecting-models&quot;&gt;Cursor - Selecting Models&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/&quot;&gt;Cursor Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.cursor.com/guides/selecting-models#model-behavior&quot;&gt;Model Comparison and Best Practices&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="General" /><summary type="html">El otro día comenté que intuitivamente encuentro que O3 es mejor para razonamiento, resolución de problemas y troubleshooting, comparado con otros modelos como Claude-4-Sonnet...</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="Herramientas IA" /><category term="Asistentes de Codificación" /><category term="Sequential Thinking" /><summary type="html">Una comparación práctica entre Claude Code y Cursor, con un análisis profundo de Sequential Thinking y perspectivas prácticas para desarrolladores que eligen su próximo asistente de codificación con IA.</summary></entry></feed>

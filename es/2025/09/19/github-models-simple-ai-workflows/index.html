@@ -1,0 +1,1143 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>GitHub Models: Integración Sencilla de IA para Flujos DevOps - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Aprende cómo GitHub Models proporciona acceso gratuito a GPT-4o y otros modelos de IA directamente en GitHub Actions, con ejemplos prácticos y comparación con Claude Code para diferentes casos de uso.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="GitHub Models: Integración Sencilla de IA para Flujos DevOps">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/">
+<meta property="og:url" content="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/">
+
+
+
+<meta property="og:description" content="Aprende cómo GitHub Models proporciona acceso gratuito a GPT-4o y otros modelos de IA directamente en GitHub Actions, con ejemplos prácticos y comparación con Claude Code para diferentes casos de uso.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="GitHub Models: Integración Sencilla de IA para Flujos DevOps">
+<meta name="twitter:description" content="Aprende cómo GitHub Models proporciona acceso gratuito a GPT-4o y otros modelos de IA directamente en GitHub Actions, con ejemplos prácticos y comparación con Claude Code para diferentes casos de uso.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/gh-models-robots.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/es/assets/images/gh-models-robots.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-09-18T19:00:00-05:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="GitHub Models">
+
+<meta property="article:tag" content="GitHub Actions">
+
+<meta property="article:tag" content="Integración IA">
+
+<meta property="article:tag" content="Automatización DevOps">
+
+<meta property="article:tag" content="GPT-4o">
+
+<meta property="article:tag" content="Claude Code">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com/es",
+      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com/es",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+
+  
+  <a href="/2025/09/19/github-models-simple-ai-workflows/" >English</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/2025/09/19/github-models-simple-ai-workflows/" >English</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="GitHub Models: Integración Sencilla de IA para Flujos DevOps">
+    <meta itemprop="description" content="Me topé con GitHub Models y decidí probarlo. Aquí explico cómo transforma tus GitHub Actions con modelos de IA gratuitos, y cuándo elegirlo sobre soluciones más agénticas como Claude Code.">
+    <meta itemprop="datePublished" content="September 19, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/gh-models-robots.png" alt="GitHub Models Simple AI Workflows" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p>Me topé con GitHub Models mientras navegaba las últimas funcionalidades de GitHub y decidí probarlo. Lo que me llamó la atención no fue solo otra API de IA—sino la <strong>integración fluida con GitHub Actions</strong> y el hecho de que es completamente gratuito para la mayoría de flujos de desarrollo.</p>
+
+<p>Después de experimentar con él durante un tiempo, me di cuenta de que GitHub Models llena un nicho específico: <strong>integración de IA directa y simple</strong> sin la complejidad de configurar servicios externos o manejar claves API. Esto es lo que aprendí y cómo se compara con soluciones más sofisticadas.</p>
+
+<h2 id="-qué-es-github-models">🚀 ¿Qué es GitHub Models?</h2>
+
+<p>GitHub Models es el servicio nativo de inferencia de IA de GitHub que proporciona <strong>acceso gratuito a modelos de nivel empresarial</strong> directamente dentro de tus repositorios. Piénsalo como IA-como-Servicio, pero integrado en la plataforma donde ya vive tu código.</p>
+
+<h3 id="modelos-clave-disponibles">Modelos Clave Disponibles</h3>
+<ul>
+  <li><strong>OpenAI GPT-4o</strong>: Ideal para análisis complejos y razonamiento</li>
+  <li><strong>GPT-4o mini</strong>: Más rápido y económico para tareas simples</li>
+  <li><strong>Meta Llama 3.1</strong> (8B, 70B, 405B): Alternativas de código abierto</li>
+  <li><strong>Microsoft Phi 3</strong>: Eficiente para respuestas rápidas</li>
+  <li><strong>Mistral Large</strong>: Razonamiento multilingüe y especializado</li>
+</ul>
+
+<h3 id="lo-que-lo-hace-diferente">Lo Que Lo Hace Diferente</h3>
+<ul>
+  <li><strong>Sin configuración externa</strong>: Usa tus credenciales de GitHub</li>
+  <li><strong>Nivel gratuito</strong>: 50,000 tokens/mes en todos los modelos</li>
+  <li><strong>Integración nativa con Actions</strong>: Sin claves API en secretos</li>
+  <li><strong>Privacidad primero</strong>: Tus prompts no entrenan los modelos</li>
+</ul>
+
+<h2 id="-primeros-pasos-el-enfoque-oficial-de-github">🔧 Primeros Pasos: El Enfoque Oficial de GitHub</h2>
+
+<p>La forma más simple de usar GitHub Models es a través de llamadas directas a la API en GitHub Actions. Aquí está la configuración básica:</p>
+
+<h3 id="configuración-de-autenticación">Configuración de Autenticación</h3>
+
+<p>GitHub Models usa el <code class="highlighter-rouge">GITHUB_TOKEN</code> integrado de tu repositorio con el permiso <code class="highlighter-rouge">models: read</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Flujo de Análisis con IA</span>
+
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">push</span><span class="pi">,</span> <span class="nv">pull_request</span><span class="pi">]</span>
+
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">contents</span><span class="pi">:</span> <span class="s">read</span>
+  <span class="na">models</span><span class="pi">:</span> <span class="s">read</span>  <span class="c1"># Requerido para GitHub Models</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">ai-analysis</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Analizar con IA</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="no">curl -X POST "https://models.github.ai/inference/chat/completions" \</span>
+            <span class="no">-H "Content-Type: application/json" \</span>
+            <span class="no">-H "Authorization: Bearer $GITHUB_TOKEN" \</span>
+            <span class="no">-d '{</span>
+              <span class="no">"model": "openai/gpt-4o",</span>
+              <span class="no">"messages": [</span>
+                <span class="no">{"role": "user", "content": "Analiza esto en busca de problemas potenciales"}</span>
+              <span class="no">]</span>
+            <span class="no">}'</span>
+</code></pre></div></div>
+
+<h3 id="usando-la-action-actionsai-inference">Usando la Action actions/ai-inference</h3>
+
+<p>GitHub proporciona una action oficial que simplifica las llamadas a la API:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Ejecutar Análisis con IA</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">ai-analysis</span>
+  <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/ai-inference@v1</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">model</span><span class="pi">:</span> <span class="s1">'</span><span class="s">gpt-4o'</span>
+    <span class="na">system-prompt</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Eres</span><span class="nv"> </span><span class="s">un</span><span class="nv"> </span><span class="s">ingeniero</span><span class="nv"> </span><span class="s">DevOps</span><span class="nv"> </span><span class="s">revisando</span><span class="nv"> </span><span class="s">infraestructura'</span>
+    <span class="na">prompt</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="no">Analiza los siguientes resultados de validación de Terraform:</span>
+      <span class="no">$</span>
+
+      <span class="no">Proporciona:</span>
+      <span class="no">1. Evaluación general</span>
+      <span class="no">2. Hallazgos clave</span>
+      <span class="no">3. Recomendaciones</span>
+      <span class="no">4. Consideraciones de seguridad</span>
+</code></pre></div></div>
+
+<h2 id="-ejemplos-del-mundo-real">🎯 Ejemplos del Mundo Real</h2>
+
+<h3 id="1-análisis-inteligente-de-reportes-de-bugs">1. Análisis Inteligente de Reportes de Bugs</h3>
+
+<p>Este flujo analiza reportes de bugs para determinar si contienen suficiente información para reproducirlos:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Análisis de Reporte de Bug</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">issues</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">,</span> <span class="nv">edited</span><span class="pi">]</span>
+
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">issues</span><span class="pi">:</span> <span class="s">write</span>
+  <span class="na">models</span><span class="pi">:</span> <span class="s">read</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">analyze-bug-report</span><span class="pi">:</span>
+    <span class="na">if</span><span class="pi">:</span> <span class="s">contains(github.event.issue.labels.*.name, 'bug')</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Analizar Reporte de Bug</span>
+      <span class="na">env</span><span class="pi">:</span>
+        <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="no">ISSUE_CONTENT="$ - $"</span>
+
+        <span class="no">ANALYSIS=$(curl -s -X POST "https://models.github.ai/inference/chat/completions" \</span>
+          <span class="no">-H "Content-Type: application/json" \</span>
+          <span class="no">-H "Authorization: Bearer $GITHUB_TOKEN" \</span>
+          <span class="no">-d "{</span>
+            <span class="no">\"model\": \"openai/gpt-4o\",</span>
+            <span class="no">\"messages\": [</span>
+              <span class="no">{</span>
+                <span class="no">\"role\": \"system\",</span>
+                <span class="no">\"content\": \"Analiza reportes de bugs para viabilidad de reproducción. Devuelve JSON con reproducible (boolean), missing_info (array), y confidence (0-1).\"</span>
+              <span class="no">},</span>
+              <span class="no">{</span>
+                <span class="no">\"role\": \"user\",</span>
+                <span class="no">\"content\": \"$ISSUE_CONTENT\"</span>
+              <span class="no">}</span>
+            <span class="no">],</span>
+            <span class="no">\"max_tokens\": 500</span>
+          <span class="no">}")</span>
+
+        <span class="no">REPRODUCIBLE=$(echo "$ANALYSIS" | jq -r '.choices[0].message.content' | jq -r '.reproducible')</span>
+
+        <span class="no">if [ "$REPRODUCIBLE" = "true" ]; then</span>
+          <span class="no">gh issue edit $ --add-label "ready-for-reproduction"</span>
+        <span class="no">else</span>
+          <span class="no">gh issue edit $ --add-label "needs-more-info"</span>
+        <span class="no">fi</span>
+</code></pre></div></div>
+
+<h3 id="2-validación-de-infraestructura-con-ia">2. Validación de Infraestructura con IA</h3>
+
+<p>Basado en tu ejemplo de flujo, aquí está cómo analizar resultados de validación de Terraform:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Revisión de Infraestructura</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">pull_request</span><span class="pi">:</span>
+    <span class="na">paths</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">**.tf'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">**.tfvars'</span><span class="pi">]</span>
+
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">contents</span><span class="pi">:</span> <span class="s">read</span>
+  <span class="na">models</span><span class="pi">:</span> <span class="s">read</span>
+  <span class="na">pull-requests</span><span class="pi">:</span> <span class="s">write</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">terraform-ai-review</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Validar Terraform</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">validate</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="no">terraform init</span>
+        <span class="no">terraform validate -json &gt; validation.json</span>
+
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Análisis de Infraestructura con IA</span>
+      <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/ai-inference@v1</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">ai-analysis</span>
+      <span class="na">with</span><span class="pi">:</span>
+        <span class="na">model</span><span class="pi">:</span> <span class="s1">'</span><span class="s">gpt-4o'</span>
+        <span class="na">system-prompt</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Eres</span><span class="nv"> </span><span class="s">un</span><span class="nv"> </span><span class="s">ingeniero</span><span class="nv"> </span><span class="s">DevOps</span><span class="nv"> </span><span class="s">senior</span><span class="nv"> </span><span class="s">revisando</span><span class="nv"> </span><span class="s">configuraciones</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">Terraform'</span>
+        <span class="na">prompt</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="no">Analiza este resultado de validación de Terraform:</span>
+
+          <span class="no">$</span>
+
+          <span class="no">Proporciona:</span>
+          <span class="no">1. **Evaluación General**: Resumen del estado de validación</span>
+          <span class="no">2. **Hallazgos Clave**: Problemas importantes o éxitos identificados</span>
+          <span class="no">3. **Recomendaciones**: Acciones específicas para mejorar la infraestructura</span>
+          <span class="no">4. **Consideraciones de Seguridad**: Cualquier implicación de seguridad</span>
+          <span class="no">5. **Mejores Prácticas**: Sugerencias para seguir las mejores prácticas de AWS/Terraform</span>
+
+          <span class="no">Formatear como secciones markdown claras.</span>
+
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Publicar Análisis en PR</span>
+      <span class="na">if</span><span class="pi">:</span> <span class="s">github.event_name == 'pull_request'</span>
+      <span class="na">env</span><span class="pi">:</span>
+        <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="no">gh pr comment $ --body "</span>
+        <span class="no">## 🤖 Análisis de Infraestructura con IA</span>
+
+        <span class="no">**Analizado por**: $</span>
+
+        <span class="no">$</span>
+
+        <span class="no">---</span>
+        <span class="no">*Este análisis fue generado por IA usando GitHub Models. Por favor revisa las recomendaciones cuidadosamente antes de implementar.*</span>
+        <span class="no">"</span>
+</code></pre></div></div>
+
+<h3 id="3-generación-automatizada-de-changelog">3. Generación Automatizada de Changelog</h3>
+
+<p>Simplifica la gestión de releases con changelogs generados por IA:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Generar Changelog</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">v*'</span><span class="pi">]</span>
+
+<span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
+  <span class="na">models</span><span class="pi">:</span> <span class="s">read</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">generate-changelog</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+
+    <span class="na">steps</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
+      <span class="na">with</span><span class="pi">:</span>
+        <span class="na">fetch-depth</span><span class="pi">:</span> <span class="s">0</span>
+
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Obtener Commits Desde Último Tag</span>
+      <span class="na">id</span><span class="pi">:</span> <span class="s">commits</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="no">LAST_TAG=$(git describe --tags --abbrev=0 HEAD^)</span>
+        <span class="no">COMMITS=$(git log --pretty=format:"%h %s" $LAST_TAG..HEAD)</span>
+        <span class="no">echo "commits&lt;&lt;EOF" &gt;&gt; $GITHUB_OUTPUT</span>
+        <span class="no">echo "$COMMITS" &gt;&gt; $GITHUB_OUTPUT</span>
+        <span class="no">echo "EOF" &gt;&gt; $GITHUB_OUTPUT</span>
+
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Generar Changelog con IA</span>
+      <span class="na">env</span><span class="pi">:</span>
+        <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="no">CHANGELOG=$(curl -s -X POST "https://models.github.ai/inference/chat/completions" \</span>
+          <span class="no">-H "Content-Type: application/json" \</span>
+          <span class="no">-H "Authorization: Bearer $GITHUB_TOKEN" \</span>
+          <span class="no">-d "{</span>
+            <span class="no">\"model\": \"openai/gpt-4o\",</span>
+            <span class="no">\"messages\": [</span>
+              <span class="no">{</span>
+                <span class="no">\"role\": \"system\",</span>
+                <span class="no">\"content\": \"Genera changelogs concisos a partir de commits de git. Agrupa en Funcionalidades, Correcciones de Bugs y Mejoras. Usa viñetas.\"</span>
+              <span class="no">},</span>
+              <span class="no">{</span>
+                <span class="no">\"role\": \"user\",</span>
+                <span class="no">\"content\": \"Genera changelog para estos commits:\n$\"</span>
+              <span class="no">}</span>
+            <span class="no">]</span>
+          <span class="no">}")</span>
+
+        <span class="no">CONTENT=$(echo "$CHANGELOG" | jq -r '.choices[0].message.content')</span>
+
+        <span class="no">gh release create $ \</span>
+          <span class="no">--title "Release $" \</span>
+          <span class="no">--notes "$CONTENT"</span>
+</code></pre></div></div>
+
+<h2 id="️-github-models-vs-claude-code-cuándo-elegir-qué">⚖️ GitHub Models vs Claude Code: Cuándo Elegir Qué</h2>
+
+<p>Después de usar tanto GitHub Models como Claude Code Action, aquí está cómo se comparan:</p>
+
+<h3 id="github-models-el-enfoque-de-llamada-de-función">GitHub Models: El Enfoque de Llamada de Función</h3>
+
+<p><strong>Ideal para:</strong></p>
+<ul>
+  <li>✅ Tareas simples de análisis y clasificación</li>
+  <li>✅ Generación y resumen de texto</li>
+  <li>✅ Flujos de toma de decisiones rápidas</li>
+  <li>✅ Equipos que quieren cero dependencias externas</li>
+  <li>✅ Proyectos sensibles al costo (nivel gratuito)</li>
+</ul>
+
+<p><strong>Características:</strong></p>
+<ul>
+  <li><strong>Menos agéntico</strong>: Patrón directo prompt → respuesta</li>
+  <li><strong>Integración simple</strong>: Solo llamadas API en flujos</li>
+  <li><strong>Contexto limitado</strong>: Interacciones de prompt único</li>
+  <li><strong>Configuración rápida</strong>: No se necesitan cuentas externas</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Patrón GitHub Models</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Análisis Simple</span>
+  <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="no">curl -X POST "https://models.github.ai/inference/chat/completions" \</span>
+      <span class="no">-H "Authorization: Bearer $GITHUB_TOKEN" \</span>
+      <span class="no">-d '{"model": "gpt-4o", "messages": [...]}'</span>
+</code></pre></div></div>
+
+<h3 id="claude-code-action-el-asistente-agéntico">Claude Code Action: El Asistente Agéntico</h3>
+
+<p><strong>Ideal para:</strong></p>
+<ul>
+  <li>✅ Revisiones e implementaciones de código complejas</li>
+  <li>✅ Razonamiento y planificación de múltiples pasos</li>
+  <li>✅ Resolución interactiva de problemas</li>
+  <li>✅ Refactorización y mejoras de código</li>
+  <li>✅ Discusiones conscientes del contexto</li>
+</ul>
+
+<p><strong>Características:</strong></p>
+<ul>
+  <li><strong>Más agéntico</strong>: Puede usar herramientas, implementar cambios, razonar a través de problemas</li>
+  <li><strong>Interactivo</strong>: Responde a menciones @claude en PRs/issues</li>
+  <li><strong>Consciente del contexto</strong>: Entiende la estructura del repositorio</li>
+  <li><strong>Requiere configuración</strong>: Clave API y configuración necesarias</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Patrón Claude Code</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Revisión de Código Claude</span>
+  <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@v1</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">anthropic_api_key</span><span class="pi">:</span> <span class="s">$</span>
+    <span class="na">mode</span><span class="pi">:</span> <span class="s1">'</span><span class="s">review'</span>
+</code></pre></div></div>
+
+<h3 id="matriz-de-decisión">Matriz de Decisión</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caso de Uso</th>
+      <th>GitHub Models</th>
+      <th>Claude Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Clasificación de reportes de bug</td>
+      <td>✅ Perfecto</td>
+      <td>❌ Exagerado</td>
+    </tr>
+    <tr>
+      <td>Análisis simple de código</td>
+      <td>✅ Ideal</td>
+      <td>❌ Muy complejo</td>
+    </tr>
+    <tr>
+      <td>Generación de changelog</td>
+      <td>✅ Excelente</td>
+      <td>❌ Innecesario</td>
+    </tr>
+    <tr>
+      <td>Validación de infraestructura</td>
+      <td>✅ Bueno</td>
+      <td>✅ Mejor para casos complejos</td>
+    </tr>
+    <tr>
+      <td>Implementación de código</td>
+      <td>❌ Limitado</td>
+      <td>✅ Excelente</td>
+    </tr>
+    <tr>
+      <td>Refactorización compleja</td>
+      <td>❌ No puede implementar</td>
+      <td>✅ Ideal</td>
+    </tr>
+    <tr>
+      <td>Planificación de múltiples pasos</td>
+      <td>❌ Solo disparo único</td>
+      <td>✅ Sobresale aquí</td>
+    </tr>
+    <tr>
+      <td>Debugging interactivo</td>
+      <td>❌ Sin conversación</td>
+      <td>✅ Excelentes conversaciones</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="comparación-de-costos">Comparación de Costos</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Solución</th>
+      <th>Nivel Gratuito</th>
+      <th>Precios de Pago</th>
+      <th>Complejidad de Configuración</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>GitHub Models</strong></td>
+      <td>50K tokens/mes</td>
+      <td>Parte del plan GitHub (futuro)</td>
+      <td>⭐⭐⭐⭐⭐ Sin configuración</td>
+    </tr>
+    <tr>
+      <td><strong>Claude Code</strong></td>
+      <td>Ninguno</td>
+      <td>$15/mes (Claude Pro)</td>
+      <td>⭐⭐⭐ Requiere clave API</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-comandos-cli-esenciales">🔧 Comandos CLI Esenciales</h2>
+
+<p>Si quieres experimentar localmente, aquí están los comandos CLI que funcionan:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar GitHub CLI (si no está instalado)</span>
+brew install gh  <span class="c"># macOS</span>
+<span class="nb">sudo </span>apt install gh  <span class="c"># Ubuntu</span>
+
+<span class="c"># Instalar extensión GitHub Models</span>
+gh extension install github/gh-models
+
+<span class="c"># Listar modelos disponibles</span>
+gh models list
+
+<span class="c"># Probar un prompt simple</span>
+gh models run openai/gpt-5 <span class="s2">"Hola desde CLI"</span>
+</code></pre></div></div>
+
+<h2 id="-primeros-pasos-tu-primer-flujo-con-ia">🚀 Primeros Pasos: Tu Primer Flujo con IA</h2>
+
+<h3 id="semana-1-elige-un-caso-de-uso">Semana 1: Elige Un Caso de Uso</h3>
+<p>Selecciona la oportunidad de automatización más simple:</p>
+<ul>
+  <li>Análisis de reportes de bug</li>
+  <li>Generación de resúmenes de PR</li>
+  <li>Comentarios simples de revisión de código</li>
+</ul>
+
+<h3 id="pasos-de-implementación">Pasos de Implementación</h3>
+<ol>
+  <li><strong>Agrega permisos</strong> a tu flujo:
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">permissions</span><span class="pi">:</span>
+  <span class="na">models</span><span class="pi">:</span> <span class="s">read</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Copia un ejemplo básico</strong> y modifícalo para tus necesidades</p>
+  </li>
+  <li>
+    <p><strong>Prueba con prompts pequeños</strong> para entender el uso de tokens</p>
+  </li>
+  <li><strong>Itera y expande</strong> basado en resultados</li>
+</ol>
+
+<h3 id="consejos-pro">Consejos Pro</h3>
+<ul>
+  <li><strong>Empieza pequeño</strong>: Comienza con prompts de 1-2 oraciones</li>
+  <li><strong>Monitorea uso</strong>: Revisa tu consumo de tokens en configuraciones de GitHub</li>
+  <li><strong>Agrega respaldos</strong>: Maneja fallos de API con gracia</li>
+  <li><strong>Valida salidas</strong>: Las respuestas de IA no siempre son correctas</li>
+</ul>
+
+<h2 id="-en-resumen">🎯 En Resumen</h2>
+
+<p>GitHub Models sobresale en <strong>integración de IA simple y directa</strong> donde necesitas análisis rápido o generación de texto dentro de tus flujos existentes. Es perfecto para equipos que quieren capacidades de IA sin dependencias externas o configuración compleja.</p>
+
+<p>Elige <strong>GitHub Models</strong> cuando necesites:</p>
+<ul>
+  <li>Análisis y clasificación simples</li>
+  <li>Integración de IA sin configuración</li>
+  <li>Automatización económica</li>
+  <li>Control directo de API</li>
+</ul>
+
+<p>Elige <strong>Claude Code</strong> cuando necesites:</p>
+<ul>
+  <li>Razonamiento y planificación complejos</li>
+  <li>Capacidades de implementación de código</li>
+  <li>Resolución interactiva de problemas</li>
+  <li>Comportamiento agéntico de múltiples pasos</li>
+</ul>
+
+<p>La belleza de GitHub Models radica en su <strong>simplicidad y accesibilidad</strong>. Puedes agregar capacidades de IA a tus flujos en minutos, no horas, y empezar a ver valor inmediatamente.</p>
+
+<p><strong>Empieza con GitHub Models para tareas simples, luego gradúa a Claude Code cuando necesites asistencia de IA más sofisticada.</strong> Ambos tienen su lugar en el kit de herramientas DevOps moderno.</p>
+
+<hr />
+
+<p><em>¿Has probado GitHub Models en tus flujos? ¿Qué casos de uso te emocionan más? Comparte tus experimentos y resultados en los comentarios abajo.</em></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/automatizaci%C3%B3n-devops" class="page__taxonomy-item" rel="tag">Automatización DevOps</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/github-actions" class="page__taxonomy-item" rel="tag">GitHub Actions</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/github-models" class="page__taxonomy-item" rel="tag">GitHub Models</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/gpt-4o" class="page__taxonomy-item" rel="tag">GPT-4o</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/integraci%C3%B3n-ia" class="page__taxonomy-item" rel="tag">Integración IA</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-09-18T19:00:00-05:00">September 19, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=GitHub+Models%3A+Integraci%C3%B3n+Sencilla+de+IA+para+Flujos+DevOps%20https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F19%2Fgithub-models-simple-ai-workflows%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F19%2Fgithub-models-simple-ai-workflows%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F19%2Fgithub-models-simple-ai-workflows%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F19%2Fgithub-models-simple-ai-workflows%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" class="pagination--pager" title="Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  19 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/ccr-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="permalink">Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Desbloquea todo el potencial de Claude Code enrutando peticiones a través de Claude Code Router y OpenRouter—usa modelos gratuitos, soluciones autoalojadas c...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/es/assets/images/mcp-servers-ticker-file.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/" rel="permalink">Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Descubre cómo los servidores MCP transforman la fase de investigación del desarrollo. Desde evaluar módulos de Terraform hasta comparar documentación, aprend...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
