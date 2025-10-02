@@ -1,4 +1,490 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-10-02T14:24:09-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">GitHub Models: Simple AI Integration for DevOps Workflows</title><link href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="alternate" type="text/html" title="GitHub Models: Simple AI Integration for DevOps Workflows" /><published>2025-09-18T19:00:00-05:00</published><updated>2025-09-18T19:00:00-05:00</updated><id>https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/gh-models-robots.png&quot; alt=&quot;GitHub Models Simple AI Workflows&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-10-02T15:04:58-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">GitHub Copilot CLI: Terminal-Native AI with Native GitHub Integration</title><link href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="alternate" type="text/html" title="GitHub Copilot CLI: Terminal-Native AI with Native GitHub Integration" /><published>2025-10-01T19:00:00-05:00</published><updated>2025-10-01T19:00:00-05:00</updated><id>https://lgallardo.com/2025/10/02/github-copilot-cli-mcp-integration</id><content type="html" xml:base="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/">&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-cli-robots.png&quot; alt=&quot;GitHub Copilot CLI Terminal&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I stumbled upon GitHub Copilot CLI while catching up on tech news, and the &lt;strong&gt;native GitHub integration&lt;/strong&gt; immediately caught my attention. A terminal-native AI assistant that can interact directly with repositories, issues, and PRs? I decided to give it a try to have in my AI toolbox.&lt;/p&gt;
+
+&lt;p&gt;Copilot CLI is the latest addition to GitHub’s Copilot ecosystem, joining &lt;strong&gt;Copilot in the IDE&lt;/strong&gt; (code completion and chat), &lt;strong&gt;GitHub Copilot Workspace&lt;/strong&gt; (issue-to-PR automation), and &lt;strong&gt;Copilot Extensions&lt;/strong&gt; (custom integrations). This CLI component brings the Copilot experience directly to the terminal, complementing the ecosystem with command-line workflows. Here’s what I learned after testing it.&lt;/p&gt;
+
+&lt;h2 id=&quot;-what-is-github-copilot-cli&quot;&gt;🚀 What is GitHub Copilot CLI?&lt;/h2&gt;
+
+&lt;p&gt;GitHub Copilot CLI is GitHub’s terminal-native AI assistant that brings conversational AI directly to your command line. Think of it as ChatGPT for your terminal, but with &lt;strong&gt;direct access to your file system, MCP servers, and development context&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-makes-it-different&quot;&gt;What Makes It Different&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Terminal-native interface&lt;/strong&gt;: No browser, no context switching&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interactive mode&lt;/strong&gt;: Natural conversations with &lt;code class=&quot;highlighter-rouge&quot;&gt;/&lt;/code&gt; commands&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;MCP integration&lt;/strong&gt;: Connect to Context7, GitHub, and custom MCP servers&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Model flexibility&lt;/strong&gt;: Support for GPT-4o, GPT-5, and other OpenAI models&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Session management&lt;/strong&gt;: Resume conversations and maintain context&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;File system access&lt;/strong&gt;: Direct file reading and analysis&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;current-status-public-preview&quot;&gt;Current Status: Public Preview&lt;/h3&gt;
+
+&lt;p&gt;Copilot CLI is in &lt;strong&gt;public preview&lt;/strong&gt; (version 0.0.332 at the time of writing), which means:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Features are actively evolving&lt;/li&gt;
+  &lt;li&gt;Available to GitHub Copilot subscribers&lt;/li&gt;
+  &lt;li&gt;Some capabilities may change as it approaches stable release&lt;/li&gt;
+  &lt;li&gt;Feedback directly shapes the product direction&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-quick-start-installation--first-run&quot;&gt;🔧 Quick Start: Installation &amp;amp; First Run&lt;/h2&gt;
+
+&lt;p&gt;Getting started with Copilot CLI is straightforward:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Install globally via npm&lt;/span&gt;
+npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @github/copilot
+
+&lt;span class=&quot;c&quot;&gt;# Launch interactive mode&lt;/span&gt;
+copilot
+
+&lt;span class=&quot;c&quot;&gt;# Or use specific model&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-5
+
+&lt;span class=&quot;c&quot;&gt;# Quick one-shot queries&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;analyze terraform module&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--allow-all-tools&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;understanding-the-configuration&quot;&gt;Understanding the Configuration&lt;/h3&gt;
+
+&lt;p&gt;Copilot CLI creates a configuration directory at &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.copilot/&lt;/code&gt; with the following structure:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~/.copilot/
+├── command-history-state.json  # Command history tracking
+├── config.json                  # User preferences and settings
+├── history-session-state/       # Session state management
+├── logs/                        # Debug and activity logs
+└── mcp-config.json             # MCP server configurations
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;mcp-config.json&lt;/code&gt; file is where MCP server integrations are stored. Each time you add an MCP server via &lt;code class=&quot;highlighter-rouge&quot;&gt;/mcp add&lt;/code&gt;, this file is updated automatically.&lt;/p&gt;
+
+&lt;h2 id=&quot;-mcp-integration-the-game-changer&quot;&gt;💡 MCP Integration: The Game Changer&lt;/h2&gt;
+
+&lt;p&gt;Here’s where Copilot CLI really shines—&lt;strong&gt;native MCP support&lt;/strong&gt; that lets you connect to specialized AI servers and tools directly from your terminal.&lt;/p&gt;
+
+&lt;h3 id=&quot;interactive-mcp-commands&quot;&gt;Interactive MCP Commands&lt;/h3&gt;
+
+&lt;p&gt;Once you’re in interactive mode (&lt;code class=&quot;highlighter-rouge&quot;&gt;copilot&lt;/code&gt;), you have access to these MCP management commands:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/mcp add      &lt;span class=&quot;c&quot;&gt;# Add new MCP server interactively&lt;/span&gt;
+/mcp show     &lt;span class=&quot;c&quot;&gt;# Display configured MCP servers&lt;/span&gt;
+/mcp disable  &lt;span class=&quot;c&quot;&gt;# Temporarily disable a server&lt;/span&gt;
+/mcp &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# Re-enable a disabled server&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;adding-mcp-servers-the-interactive-way&quot;&gt;Adding MCP Servers: The Interactive Way&lt;/h3&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;/mcp add&lt;/code&gt; command provides a guided setup experience. Let me show you how I added Context7 and GitHub MCP servers:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-cli-mcp-add-command.png&quot; alt=&quot;MCP Add Command&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The interactive prompt walks you through:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Server Name&lt;/strong&gt;: Unique identifier for the MCP server&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Server Type&lt;/strong&gt;: Local, HTTP, or SSE (Server-Sent Events)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Connection Details&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Local&lt;/strong&gt;: Command to start the server (e.g., &lt;code class=&quot;highlighter-rouge&quot;&gt;npx&lt;/code&gt;)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HTTP&lt;/strong&gt;: Remote server URL&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;SSE&lt;/strong&gt;: Server-sent events endpoint&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Arguments&lt;/strong&gt;: Command-line arguments for local servers&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Environment Variables&lt;/strong&gt;: Optional environment configuration&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Tools Selection&lt;/strong&gt;: Choose which tools to expose (&lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt; for all)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;real-world-example-adding-context7&quot;&gt;Real-World Example: Adding Context7&lt;/h3&gt;
+
+&lt;p&gt;Here’s the actual workflow for adding Context7 MCP server:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-cli-mcp-add.png&quot; alt=&quot;Context7 MCP Configuration&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Server Name: Context7
+Server Type: [2] HTTP
+URL: https://mcp.context7.com/mcp
+HTTP Headers: (optional, for authentication)
+Tools: * (all tools)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once configured, Context7’s documentation search capabilities are immediately available in your Copilot CLI sessions.&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-github-mcp-server&quot;&gt;Adding GitHub MCP Server&lt;/h3&gt;
+
+&lt;p&gt;The GitHub MCP server provides repository access and operations:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-cli-mcp-github-server.png&quot; alt=&quot;GitHub MCP Server Connected&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As shown in the screenshot, once configured, you’ll see:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Connected to GitHub MCP Server&lt;/strong&gt; confirmation&lt;/li&gt;
+  &lt;li&gt;Server listed in your MCP configuration&lt;/li&gt;
+  &lt;li&gt;Available tools and capabilities&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This gives you direct access to:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Repository information and file access&lt;/li&gt;
+  &lt;li&gt;Pull request and issue operations&lt;/li&gt;
+  &lt;li&gt;GitHub Actions workflow data&lt;/li&gt;
+  &lt;li&gt;Commit history and branch management&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mcp-configuration-persistence&quot;&gt;MCP Configuration Persistence&lt;/h3&gt;
+
+&lt;p&gt;All MCP servers are saved to &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.copilot/mcp-config.json&lt;/code&gt;, making them available across all sessions. Your configuration persists and automatically loads when you start Copilot CLI.&lt;/p&gt;
+
+&lt;h2 id=&quot;-essential-interactive-commands&quot;&gt;🎯 Essential Interactive Commands&lt;/h2&gt;
+
+&lt;p&gt;Beyond MCP management, Copilot CLI provides powerful session control commands:&lt;/p&gt;
+
+&lt;h3 id=&quot;model-selection&quot;&gt;Model Selection&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/model gpt-5              &lt;span class=&quot;c&quot;&gt;# Switch to GPT-5 for current session&lt;/span&gt;
+/model gpt-4o             &lt;span class=&quot;c&quot;&gt;# Use GPT-4o for general tasks&lt;/span&gt;
+/model gpt-5 &lt;span class=&quot;nt&quot;&gt;--reasoning&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# Enable extended reasoning mode&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;file-system-access&quot;&gt;File System Access&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/add-dir ~/projects       &lt;span class=&quot;c&quot;&gt;# Grant access to specific directory&lt;/span&gt;
+/add-dir ~/terraform      &lt;span class=&quot;c&quot;&gt;# Add Terraform configurations&lt;/span&gt;
+/add-file config.yaml     &lt;span class=&quot;c&quot;&gt;# Add individual file to context&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;session-management&quot;&gt;Session Management&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/cwd ~/terraform          &lt;span class=&quot;c&quot;&gt;# Change working directory&lt;/span&gt;
+/session                  &lt;span class=&quot;c&quot;&gt;# View current session info&lt;/span&gt;
+/resume                   &lt;span class=&quot;c&quot;&gt;# Resume previous session&lt;/span&gt;
+/history                  &lt;span class=&quot;c&quot;&gt;# Show command history&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;feedback--help&quot;&gt;Feedback &amp;amp; Help&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/feedback                 &lt;span class=&quot;c&quot;&gt;# Provide feedback to GitHub&lt;/span&gt;
+/help                     &lt;span class=&quot;c&quot;&gt;# Show all available commands&lt;/span&gt;
+/exit                     &lt;span class=&quot;c&quot;&gt;# Exit interactive mode&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;️-real-world-devops-workflow&quot;&gt;🛠️ Real-World DevOps Workflow&lt;/h2&gt;
+
+&lt;p&gt;Here’s a practical scenario showing Copilot CLI in action:&lt;/p&gt;
+
+&lt;h3 id=&quot;scenario-terraform-module-analysis&quot;&gt;Scenario: Terraform Module Analysis&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Start Copilot CLI in your Terraform directory&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/git/terraform-aws-ecrpublic
+copilot &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-5
+
+&lt;span class=&quot;c&quot;&gt;# Interactive session begins&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Analyze the module structure and suggest improvements&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Use MCP to fetch documentation&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Using Context7, find AWS ECR Public best practices&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Check GitHub workflows&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Show me the GitHub Actions workflows for this repo&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Generate summary&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Create a summary of potential security improvements&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Save session for later&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /feedback &lt;span class=&quot;s2&quot;&gt;&quot;This analysis was helpful for security audit&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;command-line-flags-for-automation&quot;&gt;Command-Line Flags for Automation&lt;/h3&gt;
+
+&lt;p&gt;For CI/CD or scripted workflows:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Allow all file system operations (for automation)&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;analyze terraform validation output&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--allow-all-tools&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Resume previous session&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;--resume&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-5
+
+&lt;span class=&quot;c&quot;&gt;# Add specific directory access&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;--add-dir&lt;/span&gt; ~/terraform &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;review module configuration&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Specify model and context&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-4o &lt;span class=&quot;nt&quot;&gt;--cwd&lt;/span&gt; ~/projects/api &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;analyze API performance&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;️-when-to-use-copilot-cli-vs-claude-code-vs-cursor-cli&quot;&gt;⚖️ When to Use: Copilot CLI vs Claude Code vs Cursor CLI&lt;/h2&gt;
+
+&lt;p&gt;After using all three terminal-based AI tools, here’s my decision framework:&lt;/p&gt;
+
+&lt;h3 id=&quot;github-copilot-cli&quot;&gt;GitHub Copilot CLI&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Best for:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Terminal-native workflows (no context switching)&lt;/li&gt;
+  &lt;li&gt;✅ MCP server integration and orchestration&lt;/li&gt;
+  &lt;li&gt;✅ GitHub-centric development workflows&lt;/li&gt;
+  &lt;li&gt;✅ Interactive debugging sessions&lt;/li&gt;
+  &lt;li&gt;✅ OpenAI model ecosystem (GPT-4o, GPT-5)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Characteristics:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Strong MCP support&lt;/strong&gt;: Native integration with interactive management&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;GitHub integration&lt;/strong&gt;: Direct repository and Actions access&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Model selection&lt;/strong&gt;: Easy model switching during sessions&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Session persistence&lt;/strong&gt;: Resume and continue conversations&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;claude-code&quot;&gt;Claude Code&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Best for:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Complex multi-step reasoning and planning&lt;/li&gt;
+  &lt;li&gt;✅ Code implementation with tool use&lt;/li&gt;
+  &lt;li&gt;✅ Sequential thinking workflows&lt;/li&gt;
+  &lt;li&gt;✅ Anthropic’s Claude models (Sonnet, Opus)&lt;/li&gt;
+  &lt;li&gt;✅ Extensive file editing and refactoring&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Characteristics:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Agentic capabilities&lt;/strong&gt;: Can use tools and implement changes&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Claude models&lt;/strong&gt;: Access to Anthropic’s model family&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Rich context&lt;/strong&gt;: Strong codebase understanding&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Subagents&lt;/strong&gt;: Specialized agent workflows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cursor-cli&quot;&gt;Cursor CLI&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Best for:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Quick code generation and snippets&lt;/li&gt;
+  &lt;li&gt;✅ Cursor IDE integration&lt;/li&gt;
+  &lt;li&gt;✅ Simple terminal queries&lt;/li&gt;
+  &lt;li&gt;✅ Fast model responses&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Characteristics:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;IDE integration&lt;/strong&gt;: Works with Cursor editor&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Speed focus&lt;/strong&gt;: Quick responses for simple tasks&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cursor ecosystem&lt;/strong&gt;: Part of Cursor’s suite of tools&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;decision-matrix&quot;&gt;Decision Matrix&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Use Case&lt;/th&gt;
+      &lt;th&gt;Copilot CLI&lt;/th&gt;
+      &lt;th&gt;Claude Code&lt;/th&gt;
+      &lt;th&gt;Cursor CLI&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Terminal debugging&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;✅ Perfect&lt;/td&gt;
+      &lt;td&gt;✅ Good&lt;/td&gt;
+      &lt;td&gt;⚠️ Basic&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;MCP orchestration&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;✅ Excellent&lt;/td&gt;
+      &lt;td&gt;✅ Good&lt;/td&gt;
+      &lt;td&gt;❌ Limited&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;GitHub workflows&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;✅ Native&lt;/td&gt;
+      &lt;td&gt;⚠️ Via MCP&lt;/td&gt;
+      &lt;td&gt;❌ Limited&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Complex reasoning&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;✅ GPT-5 capable&lt;/td&gt;
+      &lt;td&gt;✅ Best with Claude&lt;/td&gt;
+      &lt;td&gt;⚠️ Basic&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Code implementation&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;⚠️ Guidance only&lt;/td&gt;
+      &lt;td&gt;✅ Best&lt;/td&gt;
+      &lt;td&gt;✅ Good&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Quick queries&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;✅ Great&lt;/td&gt;
+      &lt;td&gt;✅ Good&lt;/td&gt;
+      &lt;td&gt;✅ Fastest&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;Session continuity&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;✅ Native resume&lt;/td&gt;
+      &lt;td&gt;✅ Context aware&lt;/td&gt;
+      &lt;td&gt;⚠️ Limited&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;-pro-tips-for-maximum-productivity&quot;&gt;🔥 Pro Tips for Maximum Productivity&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-leverage---allow-all-tools-for-cicd&quot;&gt;1. Leverage &lt;code class=&quot;highlighter-rouge&quot;&gt;--allow-all-tools&lt;/code&gt; for CI/CD&lt;/h3&gt;
+
+&lt;p&gt;In automated environments, grant full access to avoid interactive prompts:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# CI/CD pipeline usage&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;analyze test coverage report&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--allow-all-tools&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-5 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--add-dir&lt;/span&gt; ./coverage
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-use---resume-for-session-continuation&quot;&gt;2. Use &lt;code class=&quot;highlighter-rouge&quot;&gt;--resume&lt;/code&gt; for Session Continuation&lt;/h3&gt;
+
+&lt;p&gt;Don’t start from scratch—resume your previous context:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Continue where you left off&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;--resume&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-5
+
+&lt;span class=&quot;c&quot;&gt;# Resume and add new context&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;--resume&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--add-dir&lt;/span&gt; ~/new-project
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-combine---add-dir-with-mcp-servers&quot;&gt;3. Combine &lt;code class=&quot;highlighter-rouge&quot;&gt;--add-dir&lt;/code&gt; with MCP Servers&lt;/h3&gt;
+
+&lt;p&gt;Grant file access and leverage MCP capabilities simultaneously:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;copilot &lt;span class=&quot;nt&quot;&gt;--add-dir&lt;/span&gt; ~/terraform &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-5 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Using Context7, analyze this Terraform module against AWS best practices&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-interactive-mcp-commands-for-dynamic-workflows&quot;&gt;4. Interactive &lt;code class=&quot;highlighter-rouge&quot;&gt;/mcp&lt;/code&gt; Commands for Dynamic Workflows&lt;/h3&gt;
+
+&lt;p&gt;Add MCP servers on-the-fly during interactive sessions:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# In interactive mode&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /mcp add
+&lt;span class=&quot;c&quot;&gt;# Configure new server interactively&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /mcp show
+&lt;span class=&quot;c&quot;&gt;# Verify all connected servers&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Now use the newly added server to analyze X&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-model-switching-during-sessions&quot;&gt;5. Model Switching During Sessions&lt;/h3&gt;
+
+&lt;p&gt;Change models mid-conversation based on task complexity:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Start with GPT-4o for general analysis&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-4o
+
+&lt;span class=&quot;c&quot;&gt;# Switch to GPT-5 for complex reasoning&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /model gpt-5
+
+&lt;span class=&quot;c&quot;&gt;# Continue with enhanced reasoning capabilities&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Now perform deep security analysis of the authentication flow&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/copilot-cli-2025-10-02_16-07.png&quot; alt=&quot;Copilot CLI in Action&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;-quick-takeaways&quot;&gt;📊 Quick Takeaways&lt;/h2&gt;
+
+&lt;p&gt;After a week of intensive usage, here’s what stands out:&lt;/p&gt;
+
+&lt;p&gt;✅ &lt;strong&gt;Terminal-native AI&lt;/strong&gt;: Finally, a conversational AI that lives where developers work
+✅ &lt;strong&gt;MCP integration&lt;/strong&gt;: Best-in-class MCP support with interactive management
+✅ &lt;strong&gt;Session persistence&lt;/strong&gt;: Resume conversations and maintain context across sessions
+✅ &lt;strong&gt;Model flexibility&lt;/strong&gt;: Easy switching between GPT-4o, GPT-5, and other models
+✅ &lt;strong&gt;GitHub ecosystem&lt;/strong&gt;: Native integration with repositories and Actions&lt;/p&gt;
+
+&lt;p&gt;⚠️ &lt;strong&gt;Public preview status&lt;/strong&gt;: Features evolving, expect some rough edges
+⚠️ &lt;strong&gt;Limited to OpenAI models&lt;/strong&gt;: No Anthropic Claude or other model providers (yet)
+⚠️ &lt;strong&gt;Guidance-focused&lt;/strong&gt;: Provides analysis and suggestions rather than direct code implementation&lt;/p&gt;
+
+&lt;h2 id=&quot;-getting-started-your-first-week&quot;&gt;🎯 Getting Started: Your First Week&lt;/h2&gt;
+
+&lt;h3 id=&quot;day-1-basic-setup&quot;&gt;Day 1: Basic Setup&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Install Copilot CLI&lt;/span&gt;
+npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @github/copilot
+
+&lt;span class=&quot;c&quot;&gt;# Launch and explore interactive mode&lt;/span&gt;
+copilot
+
+&lt;span class=&quot;c&quot;&gt;# Try basic commands&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /help
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /model gpt-5
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hello, analyze my current directory structure&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;day-2-3-mcp-integration&quot;&gt;Day 2-3: MCP Integration&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Add your first MCP server&lt;/span&gt;
+copilot
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /mcp add
+
+&lt;span class=&quot;c&quot;&gt;# Configure Context7 or GitHub MCP&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Server Name: Context7&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Type: HTTP&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# URL: https://mcp.context7.com/mcp&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Test the integration&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Using Context7, find documentation on Terraform AWS modules&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;day-4-5-real-workflow-integration&quot;&gt;Day 4-5: Real Workflow Integration&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Use in actual development workflow&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/your-project
+copilot &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-5 &lt;span class=&quot;nt&quot;&gt;--add-dir&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Analyze, debug, and iterate&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Analyze the test coverage in this project&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;What security improvements can be made?&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Review the CI/CD workflow configuration&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;week-1-automate-common-tasks&quot;&gt;Week 1: Automate Common Tasks&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create aliases for frequent workflows&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;copilot-tf&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;copilot --add-dir . --model gpt-5 -p 'Analyze Terraform configuration'&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;copilot-debug&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;copilot --resume --allow-all-tools&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Use in CI/CD&lt;/span&gt;
+copilot &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;analyze build logs&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--allow-all-tools&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--model&lt;/span&gt; gpt-5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;-the-bottom-line&quot;&gt;🔮 The Bottom Line&lt;/h2&gt;
+
+&lt;p&gt;GitHub Copilot CLI represents a significant shift in how we interact with AI during development. By bringing conversational AI directly to the terminal with &lt;strong&gt;native MCP support&lt;/strong&gt;, it eliminates context switching and enables truly integrated workflows.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Choose Copilot CLI when you need:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Terminal-native AI without leaving your workflow&lt;/li&gt;
+  &lt;li&gt;MCP server orchestration with interactive management&lt;/li&gt;
+  &lt;li&gt;GitHub repository and Actions integration&lt;/li&gt;
+  &lt;li&gt;Session persistence and resume capabilities&lt;/li&gt;
+  &lt;li&gt;OpenAI model ecosystem access&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;The public preview status means:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Features are actively improving&lt;/li&gt;
+  &lt;li&gt;Your feedback shapes the product&lt;/li&gt;
+  &lt;li&gt;Some rough edges still exist&lt;/li&gt;
+  &lt;li&gt;Early access to cutting-edge capabilities&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Copilot CLI is a &lt;strong&gt;valid alternative&lt;/strong&gt; for terminal-based development, especially if you’re already using GitHub Copilot. The native GitHub integration, combined with MCP extensibility, makes it a natural choice for workflows that center around GitHub repositories, issues, and pull requests.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Start with the basics, add one MCP server, and see how terminal-native AI changes your workflow.&lt;/strong&gt; You might find yourself reaching for the browser less and solving problems faster—right from where you’re already working.&lt;/p&gt;
+
+&lt;h2 id=&quot;-resources&quot;&gt;📚 Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line&quot;&gt;GitHub Copilot CLI Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://modelcontextprotocol.io/&quot;&gt;Model Context Protocol Specification&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mcp.context7.com/&quot;&gt;Context7 MCP Server&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/modelcontextprotocol/servers/tree/main/src/github&quot;&gt;GitHub MCP Server&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;em&gt;Have you tried GitHub Copilot CLI yet? What MCP servers are you integrating? Share your terminal-native AI workflows in the comments below.&lt;/em&gt;&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="GitHub Copilot" /><category term="CLI" /><category term="AI Tools" /><category term="Terminal" /><category term="DevOps Automation" /><category term="GitHub Integration" /><category term="MCP" /><summary type="html">GitHub's Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving the command line.</summary></entry><entry><title type="html">GitHub Models: Simple AI Integration for DevOps Workflows</title><link href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="alternate" type="text/html" title="GitHub Models: Simple AI Integration for DevOps Workflows" /><published>2025-09-18T19:00:00-05:00</published><updated>2025-09-18T19:00:00-05:00</updated><id>https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/">&lt;p&gt;&lt;img src=&quot;/assets/images/gh-models-robots.png&quot; alt=&quot;GitHub Models Simple AI Workflows&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I stumbled upon GitHub Models while browsing GitHub’s latest features and decided to give it a try. What caught my attention wasn’t just another AI API—it was the &lt;strong&gt;seamless integration with GitHub Actions&lt;/strong&gt; and the fact that it’s completely free for most development workflows.&lt;/p&gt;
 
@@ -3453,131 +3939,4 @@ and add proper ARIA labels
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;strong&gt;Pro Tip&lt;/strong&gt;: Consider using Claude Code locally first to understand its capabilities before deploying it to your CI/CD pipeline. This helps you create better prompts and set up more effective automation rules.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Code Review" /><category term="Automation" /><category term="CI/CD" /><summary type="html">Step-by-step guide to setting up Claude Code GitHub Actions for intelligent, automated PR reviews and issue handling in your repositories.</summary></entry><entry><title type="html">Beyond Cursor: My Experience with Claude Code and Sequential Thinking</title><link href="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" rel="alternate" type="text/html" title="Beyond Cursor: My Experience with Claude Code and Sequential Thinking" /><published>2025-07-08T19:00:00-05:00</published><updated>2025-07-08T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking</id><content type="html" xml:base="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/">&lt;p&gt;&lt;img src=&quot;/assets/images/code-cursor-claude.png&quot; alt=&quot;Claude Code, Cursor, and Sequential Thinking&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The landscape of AI-powered coding assistants is evolving rapidly. As a long-time user of Copilot and Cursor, I’m always on the lookout for new tools that can boost productivity and offer a fresh perspective. Last weekend, curiosity led me to try &lt;strong&gt;Claude Code&lt;/strong&gt; on my personal repositories—a third alternative that’s been gaining traction, especially with its integration of &lt;strong&gt;Sequential Thinking&lt;/strong&gt;. Here’s my experience, how it compares to Cursor, and why it might be worth a look for your workflow.&lt;/p&gt;
-
-&lt;h2 id=&quot;-getting-started-with-claude-code&quot;&gt;🚀 Getting Started with Claude Code&lt;/h2&gt;
-
-&lt;p&gt;Installing Claude Code is straightforward with npm:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;npm install &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; @anthropic-ai/claude-code
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Important&lt;/strong&gt;: Do NOT use &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo npm install -g&lt;/code&gt; as this can lead to permission issues and security risks.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Once installed, navigate to your project and start Claude Code:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;your-awesome-project
-claude
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-authentication-options&quot;&gt;🔐 Authentication Options&lt;/h3&gt;
-
-&lt;p&gt;One of the first things that stood out was the accessibility of Claude Code. You have multiple authentication options:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Claude App (Pro or Max plan)&lt;/strong&gt;: Subscribe to Claude’s Pro plan ($17/month), Pro Max 5x plan ($100/month) or Pro Max 20x plan ($200/month) for a unified subscription that includes both Claude Code and the web interface.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Anthropic’s API&lt;/strong&gt;: Connect through the Anthropic API key.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img src=&quot;/assets/images/claude-code-cli.png&quot; alt=&quot;Claude Code CLI&quot; /&gt;
-&lt;em&gt;Claude Code Cli&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;-cli-vs-ide&quot;&gt;💻 CLI vs IDE&lt;/h3&gt;
-
-&lt;p&gt;Despite being a CLI-first tool, Claude Code offers extensions for &lt;strong&gt;VS Code&lt;/strong&gt; and &lt;strong&gt;Cursor&lt;/strong&gt; (which is based on VS Code). This means you can run Claude Code from a terminal in your editor and use the &lt;code class=&quot;highlighter-rouge&quot;&gt;/ide&lt;/code&gt; command to see changes applied in, let’s say, Cursor—bridging the gap between text-based and GUI workflows.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-ide.png&quot; alt=&quot;Claude Code /ide&quot; /&gt;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Claude Code Cli vs IDE&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;-first-impressions--user-experience&quot;&gt;💭 First Impressions &amp;amp; User Experience&lt;/h2&gt;
-
-&lt;p&gt;Switching from Cursor or VS Code to a CLI-driven tool felt odd at first. The lack of drag-and-drop for images was noticeable, but you can work around it by referencing files directly (e.g., &lt;code class=&quot;highlighter-rouge&quot;&gt;@path_to_image&lt;/code&gt;). The same goes for any file you want to share with Claude Code.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-add-files.png&quot; alt=&quot;Claude Code add files&quot; /&gt;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Adding files&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;What really impressed me was how &lt;strong&gt;Claude Code remembers instructions&lt;/strong&gt;. For example, I only had to tell it once to run &lt;code class=&quot;highlighter-rouge&quot;&gt;pre-commit&lt;/code&gt; on new and modified files—unlike Cursor, which often needs reminders despite having this rule set globally. Another highlight: when I referenced a file named &lt;code class=&quot;highlighter-rouge&quot;&gt;report-23.csv&lt;/code&gt; and later removed it in favor of a new report, Claude Code proactively searched for any &lt;code class=&quot;highlighter-rouge&quot;&gt;report-*.csv&lt;/code&gt; file, showing a level of contextual awareness that felt genuinely helpful.&lt;/p&gt;
-
-&lt;h2 id=&quot;-sequential-thinking-planning-with-ai&quot;&gt;🧠 Sequential Thinking: Planning with AI&lt;/h2&gt;
-
-&lt;p&gt;I’d heard about &lt;strong&gt;Sequential Thinking&lt;/strong&gt; before, but the project’s documentation seemed so simple that I initially overlooked it. However, after seeing it in action with Claude Code, I was genuinely surprised. When you ask for a plan, Claude Code creates a &lt;strong&gt;chain of thoughts&lt;/strong&gt;—a detailed analysis and course of action it can follow. Even better, you can execute the plan step by step, intervene to modify actions, and then continue execution. This interactive, transparent planning process feels more natural and controllable than the planning/agent modes in Cursor.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-plan-on.png&quot; alt=&quot;Claude Code Plan On&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Plan Mode On&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-sequential-thinking.png&quot; alt=&quot;Sequential Thinking&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Sequential Thinking&lt;/em&gt;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;img src=&quot;/assets/images/claude-code-plan.png&quot; alt=&quot;Claude Code Plan&quot; /&gt;
-&lt;em&gt;Claude Code Plan&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-todo-list.png&quot; alt=&quot;Claude Code Todo List&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Generated Todo List&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;️-claude-code-vs-cursor-feature--pricing-comparison&quot;&gt;⚖️ Claude Code vs Cursor: Feature &amp;amp; Pricing Comparison&lt;/h2&gt;
-
-&lt;p&gt;Why consider a CLI/text-based AI tool over Cursor? Isn’t Cursor more flexible, especially since you can choose from multiple models (including Claude’s)? Here’s my take:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Model Flexibility&lt;/strong&gt;: Cursor lets you pick from a range of models, but Claude Code is tightly integrated with Anthropic’s models and Sequential Thinking.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Pricing&lt;/strong&gt;:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Claude Code Pro&lt;/strong&gt;: $20/month, suitable for most casual and non-intensive developers. Limits reset every 5 hours.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Max&lt;/strong&gt;: Up to 20x usage limit for a flat rate ($200 per month).&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;API&lt;/strong&gt;: Pay-as-you-go, predictable costs, but more expensive than Pro or Max in the long run.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Cursor&lt;/strong&gt;: Max mode is powerful but can get expensive, especially after recent pricing changes. Once you hit the limit, you pay on-demand and costs can easily exceed $100/month for heavy users, with no reset period.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Value&lt;/strong&gt;: For my needs, Claude Code’s Pro plan is cost-effective and predictable. Cursor’s flexibility is great, but the pricing model can be a dealbreaker for some.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-limit.png&quot; alt=&quot;Claude Code Limit Reset&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;Usage Limit Reset&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;-coding-experience-real-world-scenarios&quot;&gt;💻 Coding Experience: Real-World Scenarios&lt;/h2&gt;
-
-&lt;p&gt;In practice, Claude Code has met and sometimes exceeded my expectations. I’ve worked on issues where Cursor would get stuck in a loop of planning → implementing → troubleshooting → apologizing (even using different models), while Claude Code solved the same problem in one or two runs. The &lt;strong&gt;planning mode&lt;/strong&gt; in Claude Code, especially when combined with Sequential Thinking, allows you to review and adjust the plan before jumping into implementation. While Cursor offers something similar by switching between Ask and Agent modes, Claude Code’s workflow feels more intuitive and less fragmented.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-code-PR.png&quot; alt=&quot;Claude Code&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Final PR using Cloude Code&lt;/em&gt; {:style=”text-align: center;”}&lt;/p&gt;
-
-&lt;h2 id=&quot;-highlights&quot;&gt;✨ Highlights&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Easy installation&lt;/strong&gt;: Simple npm install with clear system requirements and authentication options&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CLI meets GUI&lt;/strong&gt;: Claude Code bridges the gap between terminal and editor workflows with VS Code/Cursor integration&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Memory that sticks&lt;/strong&gt;: Unlike Cursor, Claude Code remembers instructions without constant reminders&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sequential Thinking&lt;/strong&gt;: Interactive, step-by-step planning that’s more natural than traditional agent modes&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Predictable pricing&lt;/strong&gt;: $20/month Pro plan vs. Cursor’s unpredictable on-demand costs&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Context awareness&lt;/strong&gt;: Proactively searches for files and maintains project context effectively&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-final-thoughts&quot;&gt;🎯 Final Thoughts&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Cursor is great, but it’s not the only way to code.&lt;/strong&gt; There are other AI tools with different approaches that might better fit your needs or budget.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Paying more for less isn’t ideal.&lt;/strong&gt; Predictable, fair pricing matters—Claude Code delivers here.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sequential Thinking is a game changer.&lt;/strong&gt; Transparent, step-by-step planning makes complex tasks more manageable and collaborative.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The AI coding landscape is evolving rapidly. My advice: stay flexible, experiment with new tools, and choose what works best for your workflow and wallet.&lt;/p&gt;
-
-&lt;h2 id=&quot;-references&quot;&gt;📚 References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://claude.ai/code&quot;&gt;Claude Code&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.anthropic.com/en/docs/claude-code/setup&quot;&gt;Claude Code Setup Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/sequentialthinking/sequentialthinking&quot;&gt;Sequential Thinking&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cursor.so/&quot;&gt;Cursor&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Luis Gallardo</name></author><category term="AI Tools" /><category term="Coding Assistants" /><category term="Sequential Thinking" /><summary type="html">A hands-on comparison of Claude Code and Cursor, with a deep dive into Sequential Thinking and practical insights for developers choosing their next AI coding assistant.</summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;Pro Tip&lt;/strong&gt;: Consider using Claude Code locally first to understand its capabilities before deploying it to your CI/CD pipeline. This helps you create better prompts and set up more effective automation rules.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Code Review" /><category term="Automation" /><category term="CI/CD" /><summary type="html">Step-by-step guide to setting up Claude Code GitHub Actions for intelligent, automated PR reviews and issue handling in your repositories.</summary></entry></feed>
