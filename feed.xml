@@ -1,4 +1,458 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-10-02T15:57:12-05:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration</title><link href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="alternate" type="text/html" title="GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration" /><published>2025-10-01T19:00:00-05:00</published><updated>2025-10-01T19:00:00-05:00</updated><id>https://lgallardo.com/2025/10/02/github-copilot-cli-mcp-integration</id><content type="html" xml:base="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/">&lt;p&gt;&lt;a href=&quot;/assets/images/copilot-cli-robots.png&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/assets/images/copilot-cli-robots.png&quot; alt=&quot;GitHub Copilot CLI Terminal&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="3.6.0">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-10T04:44:32-06:00</updated><id>https://lgallardo.com/</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language</title><link href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" rel="alternate" type="text/html" title="Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language" /><published>2025-11-08T18:00:00-06:00</published><updated>2025-11-08T18:00:00-06:00</updated><id>https://lgallardo.com/2025/11/09/pico8-ai-game-development</id><content type="html" xml:base="https://lgallardo.com/2025/11/09/pico8-ai-game-development/">&lt;p&gt;&lt;img src=&quot;/assets/images/pico-8-robot.png&quot; alt=&quot;Claude Robot Handheld&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Last week, I stumbled upon Pico-8 while browsing retro gaming communities. As someone who plays classic games on handheld devices like the Miyoo Mini Plus and Anbernic consoles, the idea of a “fantasy console” immediately caught my attention. But here’s the thing—I had zero interest in learning Lua or spending weeks mastering Pico-8’s constraints.&lt;/p&gt;
+
+&lt;p&gt;So I thought: &lt;strong&gt;what if I just “code-vibed” with Claude Code to build a complete game?&lt;/strong&gt; No tutorials, no language learning, just pure AI-assisted development. The result? A fully functional Mastermind game where the code works flawlessly but the art… well, let’s just say AI hasn’t figured out pixel art yet.&lt;/p&gt;
+
+&lt;p&gt;This isn’t about AI replacing developers. It’s about understanding what AI can do exceptionally well (code logic) and where it completely falls apart (artistic creativity). Here’s what I learned from building a Pico-8 game without knowing the language.&lt;/p&gt;
+
+&lt;h2 id=&quot;-what-is-pico-8&quot;&gt;🎮 What is Pico-8?&lt;/h2&gt;
+
+&lt;p&gt;Pico-8 is a &lt;strong&gt;fantasy console&lt;/strong&gt;—an imaginary video game system with intentional limitations that spark creativity. Think of it as what the Game Boy could have been if it had perfect programming tools and a vibrant online community.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pico-8.png&quot; alt=&quot;Pico-8 Console&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-beautiful-constraints&quot;&gt;The Beautiful Constraints&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Display&lt;/strong&gt;: 128x128 pixels&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Colors&lt;/strong&gt;: 16-color palette&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sound&lt;/strong&gt;: 4-channel chip tune synthesizer&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Code&lt;/strong&gt;: 8,192 tokens of Lua&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Sprites&lt;/strong&gt;: 256 8x8 pixel sprites&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Map&lt;/strong&gt;: 128x64 tile map&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These limitations aren’t bugs—they’re features. They force you to be creative, to make every pixel count, and to build games that feel genuinely retro. The Pico-8 community has created thousands of games, from platformers to RPGs to puzzle games, all within these constraints.&lt;/p&gt;
+
+&lt;p&gt;What really appealed to me was that &lt;strong&gt;Pico-8 games run everywhere&lt;/strong&gt;—not just on desktop, but on handheld retro gaming devices like the Miyoo Mini Plus, Anbernic RG35XX, and other pocket-sized consoles that support custom firmware. There’s something magical about creating a game on your laptop and playing it on a tiny handheld device an hour later.&lt;/p&gt;
+
+&lt;h2 id=&quot;-the-experiment-code-vibing-with-claude-code&quot;&gt;🤖 The Experiment: Code-Vibing with Claude Code&lt;/h2&gt;
+
+&lt;p&gt;I wanted to build a Mastermind game—the classic code-breaking puzzle where you guess a secret pattern of colored pegs. The game gives you feedback after each guess: black pegs for correct colors in correct positions, white pegs for correct colors in wrong positions.&lt;/p&gt;
+
+&lt;p&gt;My approach was simple: &lt;strong&gt;describe what I wanted, let Claude Code do the heavy lifting, and iterate based on testing.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;the-development-process&quot;&gt;The Development Process&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Phase 1: Core Game Logic&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Me: &quot;Create a Pico-8 Mastermind game with 4 colors and 6 attempts.&quot;
+Claude: *Generates complete game logic with initialization, input handling, and feedback*
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Within minutes, I had working code that:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Generated random secret codes&lt;/li&gt;
+  &lt;li&gt;Handled player input for selecting colors&lt;/li&gt;
+  &lt;li&gt;Calculated feedback (correct position vs correct color)&lt;/li&gt;
+  &lt;li&gt;Managed game state (playing, won, lost)&lt;/li&gt;
+  &lt;li&gt;Displayed the game board and attempts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here’s a simplified snippet of what Claude Code generated:&lt;/p&gt;
+
+&lt;div class=&quot;language-lua highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;secret&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;flr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attempts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;current_guess&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;game_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;playing&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;_update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;game_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;playing&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btnp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;⬅️&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btnp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;➡️&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btnp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;⬆️&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_guess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current_guess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btnp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;⬇️&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_guess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current_guess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btnp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;🅾️&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;submit_guess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Phase 2: Polish and Features&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Me: &quot;Add a title screen and instructions.&quot;
+Claude: *Implements menu system with game flow*
+
+Me: &quot;Show the secret code when the game ends.&quot;
+Claude: *Adds reveal logic with proper game state handling*
+
+Me: &quot;Make the feedback clearer with different symbols.&quot;
+Claude: *Updates rendering to use distinct visual indicators*
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The code just… worked. Every iteration was functional. No syntax errors, no logic bugs, no weird edge cases. &lt;strong&gt;Claude Code understood Pico-8’s limitations and API perfectly.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;what-impressed-me-about-the-code&quot;&gt;What Impressed Me About the Code&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Proper Pico-8 conventions&lt;/strong&gt;: Used &lt;code class=&quot;highlighter-rouge&quot;&gt;_init()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;_update()&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;_draw()&lt;/code&gt; correctly&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Efficient token usage&lt;/strong&gt;: Code stayed well under the 8,192 token limit&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Clean state management&lt;/strong&gt;: Game states transitioned smoothly&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Input handling&lt;/strong&gt;: Button presses felt responsive and natural&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Edge cases handled&lt;/strong&gt;: Prevented invalid moves and game state corruption&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I literally wrote zero lines of Lua. I just described features in natural language, and Claude Code translated my intent into working game logic.&lt;/p&gt;
+
+&lt;h2 id=&quot;-where-ai-hit-the-wall-the-art-problem&quot;&gt;🎨 Where AI Hit the Wall: The Art Problem&lt;/h2&gt;
+
+&lt;p&gt;Now here’s where things got interesting—and by interesting, I mean hilariously broken.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Me: &quot;Let's make the UI look more retro, give it that 80s arcade style.&quot;
+Claude: *Generates updated graphics with retro styling*
+
+Me: &quot;The lines are overlapping and the chips look weird.&quot;
+Claude: *Tries again, visual bugs persist*
+
+Me: &quot;Can you fix the overlapping elements?&quot;
+Claude: *Third attempt, still introducing visual glitches*
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pico-8-overlaping.png&quot; alt=&quot;Overlapping Sprites&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:75%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The sprites were a mess. Colors bled into each other, shapes didn’t align properly, and the overall aesthetic looked like a glitch art project gone wrong.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pico-8-chips-overlaping.png&quot; alt=&quot;Chip Overlapping&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:75%&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;why-ai-fails-at-pixel-art&quot;&gt;Why AI Fails at Pixel Art&lt;/h3&gt;
+
+&lt;p&gt;After multiple iterations, I realized the fundamental problem: &lt;strong&gt;Claude Code (and current general-purpose AI models) lack spatial-visual reasoning for pixel-level design.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The AI could:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ Generate perfect code logic&lt;/li&gt;
+  &lt;li&gt;✅ Understand game mechanics&lt;/li&gt;
+  &lt;li&gt;✅ Handle complex state management&lt;/li&gt;
+  &lt;li&gt;✅ Optimize for Pico-8’s constraints&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But it couldn’t:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;❌ Visualize how pixels form recognizable shapes&lt;/li&gt;
+  &lt;li&gt;❌ Understand aesthetic coherence&lt;/li&gt;
+  &lt;li&gt;❌ Apply consistent design language&lt;/li&gt;
+  &lt;li&gt;❌ Create sprites that “feel” like game assets&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Important distinction&lt;/strong&gt;: This limitation is specific to &lt;strong&gt;current general-purpose AI models&lt;/strong&gt; like Claude Sonnet 4.5. Specialized AI art tools like Stable Diffusion, DALL-E, or Midjourney excel at image generation, but they aren’t integrated into coding workflows and don’t understand Pico-8’s specific pixel format constraints.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-pragmatic-decision&quot;&gt;The Pragmatic Decision&lt;/h3&gt;
+
+&lt;p&gt;Here’s where the “code-vibing” philosophy hit a wall. Fixing the visual bugs would have required diving deep into the sprite code, understanding how AI had structured the graphics, and manually debugging pixel-level issues. &lt;strong&gt;That’s the opposite of code-vibing&lt;/strong&gt;—it defeats the whole purpose of building without learning the underlying implementation.&lt;/p&gt;
+
+&lt;p&gt;So I made a practical choice: &lt;strong&gt;I published the game with the original, clean design&lt;/strong&gt; from before I asked for the 80s retro styling. The initial AI-generated graphics were simple but functional. The “improved” versions introduced bugs I couldn’t easily fix without breaking the code-vibing approach.&lt;/p&gt;
+
+&lt;p&gt;This taught me something crucial: &lt;strong&gt;AI dramatically accelerates code development, but artistic “improvements” can introduce complexity that requires deep technical knowledge to fix.&lt;/strong&gt; When AI visual changes break things, you either need to understand the code deeply (losing the code-vibing benefit) or revert to what worked. I chose the latter.&lt;/p&gt;
+
+&lt;h2 id=&quot;️-what-i-actually-learned-the-pico-8-console&quot;&gt;🛠️ What I Actually Learned: The Pico-8 Console&lt;/h2&gt;
+
+&lt;p&gt;While Claude Code handled the coding, I still had to learn Pico-8’s development environment. The console commands became my daily tools:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Load and run your game&lt;/span&gt;
+load mastermind.p8
+run
+
+&lt;span class=&quot;c&quot;&gt;# Save your work&lt;/span&gt;
+save
+
+&lt;span class=&quot;c&quot;&gt;# Export to web or binary&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;mastermind.html
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;mastermind.bin
+
+&lt;span class=&quot;c&quot;&gt;# Sprite and map editors&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Press ESC to toggle between code and sprite editor&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Sound and music tools&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Use the music editor to create chip tune soundtracks&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Debug commands&lt;/span&gt;
+printh&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;debug: &quot;&lt;/span&gt;..tostr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; Print to console
+stop&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; Pause execution
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;essential-workflow-commands&quot;&gt;Essential Workflow Commands&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Development cycle:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Edit code or sprites in Pico-8&lt;/li&gt;
+  &lt;li&gt;Press &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl+R&lt;/code&gt; to run immediately&lt;/li&gt;
+  &lt;li&gt;Test gameplay and identify issues&lt;/li&gt;
+  &lt;li&gt;Press &lt;code class=&quot;highlighter-rouge&quot;&gt;ESC&lt;/code&gt; to return to editor&lt;/li&gt;
+  &lt;li&gt;Iterate&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Publishing:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Create web playable version&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;mastermind.html
+
+&lt;span class=&quot;c&quot;&gt;# Create standalone binary&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;mastermind.bin
+
+&lt;span class=&quot;c&quot;&gt;# Export to PNG (code + sprites embedded)&lt;/span&gt;
+save mastermind.p8.png
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The console became my primary interface. While Claude Code wrote the logic, I was constantly running, testing, and tweaking based on how the game actually felt to play.&lt;/p&gt;
+
+&lt;h2 id=&quot;-publishing-the-game-from-local-to-lexaloffle&quot;&gt;🚀 Publishing the Game: From Local to Lexaloffle&lt;/h2&gt;
+
+&lt;p&gt;Once the game was playable and the art was fixed, I published it to the Pico-8 community platform: &lt;strong&gt;&lt;a href=&quot;https://www.lexaloffle.com/bbs/?pid=177155#p&quot;&gt;BBS Lexaloffle&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/pico-8-mastermind-game.png&quot; alt=&quot;Published Mastermind Game&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The publishing process was surprisingly straightforward:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Create an account&lt;/strong&gt; on Lexaloffle BBS&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Export the cartridge&lt;/strong&gt; as a PNG file (&lt;code class=&quot;highlighter-rouge&quot;&gt;save mastermind.p8.png&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Upload to BBS&lt;/strong&gt; with description and screenshots&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Share with the community&lt;/strong&gt; and gather feedback&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;What’s fascinating about Pico-8’s ecosystem is the &lt;strong&gt;cartridge format&lt;/strong&gt;. Games are distributed as PNG images that contain the code, sprites, music, and map data. You can literally share a game as an image file, and other Pico-8 users can load and play it immediately.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-community-response&quot;&gt;The Community Response&lt;/h3&gt;
+
+&lt;p&gt;Publishing on Lexaloffle gave me immediate access to:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Playable web version&lt;/strong&gt;: Anyone can play directly in their browser&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Download options&lt;/strong&gt;: Users can grab the &lt;code class=&quot;highlighter-rouge&quot;&gt;.p8&lt;/code&gt; file and run it locally&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Community feedback&lt;/strong&gt;: Other developers provide suggestions and bug reports&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Discoverability&lt;/strong&gt;: Games appear in the BBS feed and search results&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Pico-8 community is incredibly welcoming to newcomers. Despite my game being a simple Mastermind implementation built with AI assistance, people played it, left encouraging comments, and even suggested improvements.&lt;/p&gt;
+
+&lt;h2 id=&quot;-the-bigger-picture-what-this-means-for-development&quot;&gt;🎯 The Bigger Picture: What This Means for Development&lt;/h2&gt;
+
+&lt;p&gt;This experiment revealed something important about &lt;strong&gt;AI-assisted development in 2025&lt;/strong&gt;: we’re entering an era of &lt;strong&gt;“code-vibing”&lt;/strong&gt; where developers can create functional software in languages they don’t formally know.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-new-development-model&quot;&gt;The New Development Model&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Traditional Approach:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Learn language syntax and conventions&lt;/li&gt;
+  &lt;li&gt;Study framework documentation&lt;/li&gt;
+  &lt;li&gt;Write code manually&lt;/li&gt;
+  &lt;li&gt;Debug and iterate&lt;/li&gt;
+  &lt;li&gt;Optimize and polish&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;AI-Assisted Approach:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Describe what you want in natural language&lt;/li&gt;
+  &lt;li&gt;AI generates functional code&lt;/li&gt;
+  &lt;li&gt;Test and provide feedback&lt;/li&gt;
+  &lt;li&gt;AI iterates based on your input&lt;/li&gt;
+  &lt;li&gt;You focus on design and experience&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;when-code-vibing-works&quot;&gt;When Code-Vibing Works&lt;/h3&gt;
+
+&lt;p&gt;This approach excels when:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;✅ The problem domain is well-defined (game logic)&lt;/li&gt;
+  &lt;li&gt;✅ The language has clear conventions (Pico-8 API)&lt;/li&gt;
+  &lt;li&gt;✅ You can test and validate quickly (run the game)&lt;/li&gt;
+  &lt;li&gt;✅ Documentation exists for the AI to reference&lt;/li&gt;
+  &lt;li&gt;✅ Logic matters more than creative assets&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;when-code-vibing-fails&quot;&gt;When Code-Vibing Fails&lt;/h3&gt;
+
+&lt;p&gt;The approach struggles with:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;❌ Visual/artistic creativity (sprites, animations)&lt;/li&gt;
+  &lt;li&gt;❌ Highly subjective design decisions (UI aesthetics)&lt;/li&gt;
+  &lt;li&gt;❌ Novel problems without existing patterns&lt;/li&gt;
+  &lt;li&gt;❌ Domains requiring specialized expertise&lt;/li&gt;
+  &lt;li&gt;❌ Physical or spatial reasoning tasks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-hybrid-reality&quot;&gt;The Hybrid Reality&lt;/h3&gt;
+
+&lt;p&gt;The future isn’t “AI replaces developers”—it’s &lt;strong&gt;“AI handles code, humans handle creativity.”&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For my Pico-8 game:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;AI-generated&lt;/strong&gt;: All game logic, state management, input handling&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Human-created&lt;/strong&gt;: Sprites, color schemes, game feel, design decisions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This division makes sense. AI excels at structured, logical tasks with clear rules. Humans excel at creative, aesthetic, and experiential decisions.&lt;/p&gt;
+
+&lt;h2 id=&quot;-key-takeaways-for-developers&quot;&gt;💡 Key Takeaways for Developers&lt;/h2&gt;
+
+&lt;p&gt;After building this game, here’s what I learned about AI-assisted development:&lt;/p&gt;
+
+&lt;h3 id=&quot;1-ai-coding-is-genuinely-excellent&quot;&gt;1. AI Coding is Genuinely Excellent&lt;/h3&gt;
+&lt;p&gt;Claude Code didn’t just generate working code—it generated &lt;strong&gt;good code&lt;/strong&gt;. Proper conventions, clean structure, efficient logic. I could have written this myself after learning Lua, but it would have taken significantly longer.&lt;/p&gt;
+
+&lt;h3 id=&quot;2-art-is-still-a-human-or-specialized-ai-domain&quot;&gt;2. Art is Still a Human (or Specialized AI) Domain&lt;/h3&gt;
+&lt;p&gt;General-purpose AI models struggle with pixel-level visual design. You’ll need:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Manual sprite creation&lt;/li&gt;
+  &lt;li&gt;Specialized AI art tools (Stable Diffusion, DALL-E)&lt;/li&gt;
+  &lt;li&gt;Collaboration with actual artists&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-you-still-need-domain-understanding&quot;&gt;3. You Still Need Domain Understanding&lt;/h3&gt;
+&lt;p&gt;Even though I didn’t write Lua, I needed to:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Understand Pico-8’s constraints&lt;/li&gt;
+  &lt;li&gt;Test the game and identify issues&lt;/li&gt;
+  &lt;li&gt;Communicate feedback clearly&lt;/li&gt;
+  &lt;li&gt;Make design decisions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Code-vibing isn’t passive&lt;/strong&gt;—it’s an active collaboration where you guide the AI’s output.&lt;/p&gt;
+
+&lt;h3 id=&quot;4-iteration-is-fast-and-painless&quot;&gt;4. Iteration is Fast and Painless&lt;/h3&gt;
+&lt;p&gt;Traditionally, making changes requires:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Finding the right code section&lt;/li&gt;
+  &lt;li&gt;Understanding existing implementation&lt;/li&gt;
+  &lt;li&gt;Rewriting logic&lt;/li&gt;
+  &lt;li&gt;Testing for regressions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;With AI assistance:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Describe the change in natural language&lt;/li&gt;
+  &lt;li&gt;AI implements the modification&lt;/li&gt;
+  &lt;li&gt;Test immediately&lt;/li&gt;
+  &lt;li&gt;Iterate until perfect&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;5-the-learning-curve-shifts&quot;&gt;5. The Learning Curve Shifts&lt;/h3&gt;
+&lt;p&gt;Instead of learning:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Language syntax&lt;/li&gt;
+  &lt;li&gt;Framework APIs&lt;/li&gt;
+  &lt;li&gt;Common patterns&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You learn:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;How to describe problems clearly&lt;/li&gt;
+  &lt;li&gt;How to test and validate effectively&lt;/li&gt;
+  &lt;li&gt;How to guide AI iterations&lt;/li&gt;
+  &lt;li&gt;Domain-specific knowledge&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;This is a different skill set&lt;/strong&gt;, but arguably more valuable in an AI-assisted world.&lt;/p&gt;
+
+&lt;h2 id=&quot;-getting-started-with-pico-8-and-ai-development&quot;&gt;🔮 Getting Started with Pico-8 and AI Development&lt;/h2&gt;
+
+&lt;p&gt;If this experiment inspired you to try building your own Pico-8 game with AI assistance, here’s how to start:&lt;/p&gt;
+
+&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Get Pico-8&lt;/strong&gt;: Purchase from &lt;a href=&quot;https://www.lexaloffle.com/pico-8.php&quot;&gt;Lexaloffle&lt;/a&gt; ($15)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Install Claude Code&lt;/strong&gt;: Free for basic usage, Pro for unlimited&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Optional&lt;/strong&gt;: Retro handheld device for testing (Miyoo Mini Plus, Anbernic)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;your-first-ai-generated-game&quot;&gt;Your First AI-Generated Game&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Week 1: Simple Game Loop&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Prompt: &quot;Create a basic Pico-8 game with player movement and a game over screen.&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Week 2: Add Mechanics&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Prompt: &quot;Add collision detection and score tracking.&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Week 3: Polish&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Prompt: &quot;Add a title screen, instructions, and end game sequence.&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Week 4: Manual Art Pass&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Open Pico-8’s sprite editor&lt;/li&gt;
+  &lt;li&gt;Create or refine visual assets&lt;/li&gt;
+  &lt;li&gt;Learn color palette constraints&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;recommended-first-projects&quot;&gt;Recommended First Projects&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Flappy Bird clone&lt;/strong&gt;: Simple physics and collision&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Snake game&lt;/strong&gt;: Grid-based movement and growth&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Memory matching&lt;/strong&gt;: Card flipping and state management&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Breakout&lt;/strong&gt;: Paddle movement and ball physics&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Start simple, iterate quickly, and don’t stress about art until the gameplay feels right.&lt;/p&gt;
+
+&lt;h2 id=&quot;-the-honest-assessment&quot;&gt;🧠 The Honest Assessment&lt;/h2&gt;
+
+&lt;p&gt;Let me be clear about what this experiment proved and didn’t prove:&lt;/p&gt;
+
+&lt;h3 id=&quot;what-worked&quot;&gt;What Worked&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Code generation&lt;/strong&gt;: Claude Code produced production-quality Lua code&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Rapid iteration&lt;/strong&gt;: Changes happened in minutes, not hours&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Learning efficiency&lt;/strong&gt;: I understood Pico-8 concepts without formal study&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Functional completeness&lt;/strong&gt;: The game logic was genuinely good&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;what-didnt-work&quot;&gt;What Didn’t Work&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Sprite generation&lt;/strong&gt;: AI-created graphics were unusable&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Aesthetic decisions&lt;/strong&gt;: AI couldn’t judge “good” vs “bad” design&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Creative direction&lt;/strong&gt;: Human judgment was essential for game feel&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-limitation-reality&quot;&gt;The Limitation Reality&lt;/h3&gt;
+
+&lt;p&gt;This isn’t about &lt;strong&gt;current AI being bad at art&lt;/strong&gt;—it’s about the type of AI I used. General-purpose language models like Claude Sonnet 4.5 aren’t designed for pixel-perfect visual creation.&lt;/p&gt;
+
+&lt;p&gt;Specialized AI art tools exist and work well:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Stable Diffusion&lt;/strong&gt;: Excellent for concept art and illustrations&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DALL-E 3&lt;/strong&gt;: Great for stylized game assets&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Midjourney&lt;/strong&gt;: Perfect for background art and promotional images&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But these tools:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Aren’t integrated into coding workflows yet&lt;/li&gt;
+  &lt;li&gt;Don’t understand Pico-8’s specific sprite format&lt;/li&gt;
+  &lt;li&gt;Require manual export and conversion processes&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;The future is hybrid workflows&lt;/strong&gt;: AI for code, specialized tools or humans for assets, and human judgment for design decisions.&lt;/p&gt;
+
+&lt;h2 id=&quot;-resources-and-community&quot;&gt;📚 Resources and Community&lt;/h2&gt;
+
+&lt;p&gt;If you’re interested in exploring Pico-8 or AI-assisted game development further:&lt;/p&gt;
+
+&lt;h3 id=&quot;pico-8-learning&quot;&gt;Pico-8 Learning&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Official Manual&lt;/strong&gt;: &lt;a href=&quot;https://www.lexaloffle.com/dl/docs/pico-8_manual.html&quot;&gt;Pico-8 User Manual&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Community Forums&lt;/strong&gt;: &lt;a href=&quot;https://www.lexaloffle.com/bbs/&quot;&gt;BBS Lexaloffle&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Game Collection&lt;/strong&gt;: &lt;a href=&quot;https://www.lexaloffle.com/bbs/?cat=7&quot;&gt;Pico-8 Carts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;YouTube Tutorials&lt;/strong&gt;: Lazy Devs Academy, Nerdy Teachers&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ai-coding-tools&quot;&gt;AI Coding Tools&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Claude Code&lt;/strong&gt;: &lt;a href=&quot;https://www.anthropic.com/claude&quot;&gt;Anthropic Claude&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;GitHub Copilot&lt;/strong&gt;: &lt;a href=&quot;https://github.com/features/copilot&quot;&gt;GitHub Copilot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cursor&lt;/strong&gt;: &lt;a href=&quot;https://cursor.sh/&quot;&gt;Cursor IDE&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;retro-handhelds&quot;&gt;Retro Handhelds&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Miyoo Mini Plus&lt;/strong&gt;: Compact, affordable, great Pico-8 support&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Anbernic RG35XX&lt;/strong&gt;: Popular choice with active community&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Retro Game Corps&lt;/strong&gt;: &lt;a href=&quot;https://retrogamecorps.com/&quot;&gt;Setup guides and reviews&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Have you tried building games with AI assistance? What’s been your experience with AI-generated art versus code?&lt;/strong&gt; I’d love to hear about your experiments and whether you’ve found better workflows for handling creative assets in AI-assisted development. Share your thoughts and projects in the comments below.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Pico-8" /><category term="Claude Code" /><category term="AI Coding" /><category term="Game Development" /><category term="Retro Gaming" /><category term="Fantasy Console" /><summary type="html">I discovered Pico-8 and challenged Claude Code to build a Mastermind game without learning Lua. The code? Perfect. The art? A beautiful disaster. Here's what AI can and can't do for game development.</summary></entry><entry><title type="html">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration</title><link href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="alternate" type="text/html" title="GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration" /><published>2025-10-01T19:00:00-05:00</published><updated>2025-10-01T19:00:00-05:00</updated><id>https://lgallardo.com/2025/10/02/github-copilot-cli-mcp-integration</id><content type="html" xml:base="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/">&lt;p&gt;&lt;a href=&quot;/assets/images/copilot-cli-robots.png&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/assets/images/copilot-cli-robots.png&quot; alt=&quot;GitHub Copilot CLI Terminal&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:95%&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;I stumbled upon GitHub Copilot CLI while catching up on tech news, and the &lt;strong&gt;native GitHub integration&lt;/strong&gt; immediately caught my attention. A terminal-native AI assistant that can interact directly with repositories, issues, and PRs? I decided to give it a try to have in my AI toolbox.&lt;/p&gt;
 
@@ -3297,646 +3751,4 @@ codebot performance verbose
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;strong&gt;Pro Tip&lt;/strong&gt;: Start with the basic &lt;code class=&quot;highlighter-rouge&quot;&gt;hunt&lt;/code&gt; mode to get familiar with the workflow, then gradually add more sophisticated review modes as your team gets comfortable with AI-assisted code reviews. The future of development productivity isn’t about finding the perfect tool — it’s about building the perfect workflow for your team.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Code Review" /><category term="Automation" /><category term="BugBot" /><summary type="html">When Cursor announced BugBot would cost $40/month for 200 PR reviews, I decided to build my own alternative using Claude Code GitHub Actions. Here's how I transformed verbose reviews into focused, on-demand code analysis.</summary></entry><entry><title type="html">Automating Code Reviews with Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/" rel="alternate" type="text/html" title="Automating Code Reviews with Claude Code GitHub Actions" /><published>2025-07-17T19:00:00-05:00</published><updated>2025-07-17T19:00:00-05:00</updated><id>https://lgallardo.com/2025/07/18/claude-code-github-actions-setup</id><content type="html" xml:base="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/">&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-vs.png&quot; alt=&quot;Claude Code GitHub Actions Setup&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The evolution of AI-powered development tools continues to accelerate, and now we can bring the power of &lt;strong&gt;Claude Code&lt;/strong&gt; directly into our GitHub workflows. With Claude Code GitHub Actions, you can have an intelligent AI assistant that automatically reviews pull requests, implements features from issues, and helps maintain code quality—all triggered with a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; mention.&lt;/p&gt;
-
-&lt;p&gt;In this comprehensive guide, I’ll walk you through setting up Claude Code GitHub Actions from scratch, covering both the quick start method and enterprise-level configurations for AWS Bedrock and Google Vertex AI.&lt;/p&gt;
-
-&lt;h2 id=&quot;-what-is-claude-code-github-actions&quot;&gt;🚀 What is Claude Code GitHub Actions?&lt;/h2&gt;
-
-&lt;p&gt;Claude Code GitHub Actions brings AI-powered automation to your GitHub workflow. Think of it as having a senior developer on your team who:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Analyzes code&lt;/strong&gt; and provides intelligent feedback&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Creates pull requests&lt;/strong&gt; from issue descriptions&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Implements features&lt;/strong&gt; following your coding standards&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Fixes bugs&lt;/strong&gt; automatically with appropriate tests&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Follows your guidelines&lt;/strong&gt; defined in &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt; files&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Integrates seamlessly&lt;/strong&gt; with your existing GitHub workflow&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The beauty of this approach is that Claude runs on GitHub’s infrastructure, keeping your code secure while providing enterprise-grade automation capabilities.&lt;/p&gt;
-
-&lt;h2 id=&quot;️-prerequisites&quot;&gt;🛠️ Prerequisites&lt;/h2&gt;
-
-&lt;p&gt;Before we begin, make sure you have:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Repository admin access&lt;/strong&gt; (required for installing GitHub apps and managing secrets)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Active Claude Code billing&lt;/strong&gt; (via Anthropic Console, Claude Pro/Max, or enterprise cloud providers)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Basic understanding&lt;/strong&gt; of GitHub Actions and YAML workflows&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-quick-setup-method&quot;&gt;📋 Quick Setup Method&lt;/h2&gt;
-
-&lt;p&gt;The fastest way to get started is through Claude Code’s built-in installer. Let’s walk through this process step by step:&lt;/p&gt;
-
-&lt;h3 id=&quot;step-1-access-github-installation&quot;&gt;Step 1: Access GitHub Installation&lt;/h3&gt;
-
-&lt;p&gt;First, navigate to GitHub and access the installation interface:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github.png&quot; alt=&quot;GitHub Interface&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Open your terminal in your repository directory and run:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;your-repository
-claude
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Then execute the installation command:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/install-github-app
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;step-2-select-your-repository&quot;&gt;Step 2: Select Your Repository&lt;/h3&gt;
-
-&lt;p&gt;The installer will ask you to select which repository to configure:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-repo.png&quot; alt=&quot;Repository Selection&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can use your current repository or specify a different one. This step ensures Claude Code gets the appropriate permissions for your specific project.&lt;/p&gt;
-
-&lt;h3 id=&quot;step-3-configure-api-authentication&quot;&gt;Step 3: Configure API Authentication&lt;/h3&gt;
-
-&lt;p&gt;Next, you’ll need to set up your API authentication method:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-api-subscription.png&quot; alt=&quot;API Subscription Setup&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Choose between:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Create a long-term token&lt;/strong&gt; with your Claude subscription (recommended for personal projects)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Enter a new API key&lt;/strong&gt; (for custom enterprise setups)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;step-4-complete-github-app-installation&quot;&gt;Step 4: Complete GitHub App Installation&lt;/h3&gt;
-
-&lt;p&gt;The installer will open your browser to complete the GitHub App installation:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-enter.png&quot; alt=&quot;Enter Installation&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This redirects you to GitHub’s app installation page where you’ll grant the necessary permissions.&lt;/p&gt;
-
-&lt;h3 id=&quot;step-5-organization-selection&quot;&gt;Step 5: Organization Selection&lt;/h3&gt;
-
-&lt;p&gt;If you’re part of multiple organizations, select the appropriate one:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-org.png&quot; alt=&quot;Organization Selection&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-org-lgallard.png&quot; alt=&quot;Organization Selection - lgallard&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Choose your personal account or the organization that owns the repository you want to configure.&lt;/p&gt;
-
-&lt;h3 id=&quot;step-6-install-claude-github-app&quot;&gt;Step 6: Install Claude GitHub App&lt;/h3&gt;
-
-&lt;p&gt;Complete the Claude GitHub App installation:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-app.png&quot; alt=&quot;Claude GitHub App&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Review and confirm the permissions. The Claude GitHub App needs:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Read access to metadata&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Read and write access to code, issues, and pull requests&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;step-7-final-authentication&quot;&gt;Step 7: Final Authentication&lt;/h3&gt;
-
-&lt;p&gt;Complete the authentication process:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-auth.png&quot; alt=&quot;Complete Authentication&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Once authentication is complete, Claude Code will automatically:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Install the GitHub App to your repository&lt;/li&gt;
-  &lt;li&gt;Add your API key as a repository secret (&lt;code class=&quot;highlighter-rouge&quot;&gt;ANTHROPIC_API_KEY&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;Create the workflow file at &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/workflows/claude.yml&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;step-8-select-github-workflows&quot;&gt;Step 8: Select GitHub Workflows&lt;/h3&gt;
-
-&lt;p&gt;During the installation process, you’ll be prompted to select which workflows to install:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github-workflows.png&quot; alt=&quot;GitHub Workflows Selection&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;You can choose between:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;@Claude Code&lt;/strong&gt;: Interactive workflow triggered by &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; mentions in issues and PR comments&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Claude Code Review&lt;/strong&gt;: Automated review workflow that runs on new pull requests&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Both options provide different approaches to integrating Claude into your development workflow.&lt;/p&gt;
-
-&lt;h3 id=&quot;step-9-review-the-automated-pull-request&quot;&gt;Step 9: Review the Automated Pull Request&lt;/h3&gt;
-
-&lt;p&gt;Claude Code automatically creates a pull request with the necessary workflow files:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr.png&quot; alt=&quot;Claude GitHub PR&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The PR includes comprehensive documentation explaining what Claude Code can do and how to use it effectively.&lt;/p&gt;
-
-&lt;h3 id=&quot;step-10-claude-reviews-its-own-work&quot;&gt;Step 10: Claude Reviews Its Own Work&lt;/h3&gt;
-
-&lt;p&gt;One of the most impressive features is that Claude can review its own pull request, providing detailed analysis:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr-comment.png&quot; alt=&quot;Claude PR Comment&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Claude automatically analyzes the workflow files and provides a comprehensive assessment:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-pr-assessment.png&quot; alt=&quot;Claude PR Assessment&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The review includes detailed feedback on code quality, security practices, and performance considerations:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-github-review.png&quot; alt=&quot;Claude GitHub Review&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Upon completion, Claude provides a comprehensive review summary with detailed analysis:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-review.png&quot; alt=&quot;Claude Review Complete&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This shows Claude’s thorough evaluation including code quality assessment, security analysis, and developer experience considerations.&lt;/p&gt;
-
-&lt;h3 id=&quot;step-11-complete-authentication-setup&quot;&gt;Step 11: Complete Authentication Setup&lt;/h3&gt;
-
-&lt;p&gt;After reviewing the PR, complete the final authentication step:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-claude-auth.png&quot; alt=&quot;Claude Authentication&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;step-12-installation-complete&quot;&gt;Step 12: Installation Complete&lt;/h3&gt;
-
-&lt;p&gt;Once everything is set up, you’ll see a success confirmation:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/claude-github-done.png&quot; alt=&quot;Claude Setup Complete&quot; style=&quot;display:block; margin-left:auto; margin-right:auto; width:70%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The installation process provides clear next steps:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Merge the PR&lt;/strong&gt; to enable Claude Code functionality&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Install the Claude GitHub App&lt;/strong&gt; if not already done&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Start using &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; mentions&lt;/strong&gt; in your issues and PRs&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;-manual-setup-alternative-method&quot;&gt;🔧 Manual Setup (Alternative Method)&lt;/h2&gt;
-
-&lt;p&gt;If the quick setup doesn’t work or you prefer manual configuration, follow these steps:&lt;/p&gt;
-
-&lt;h3 id=&quot;1-install-claude-github-app&quot;&gt;1. Install Claude GitHub App&lt;/h3&gt;
-
-&lt;p&gt;Visit &lt;a href=&quot;https://github.com/apps/claude&quot;&gt;https://github.com/apps/claude&lt;/a&gt; and install the app to your repository.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-add-repository-secrets&quot;&gt;2. Add Repository Secrets&lt;/h3&gt;
-
-&lt;p&gt;Navigate to your repository’s &lt;strong&gt;Settings → Secrets and variables → Actions&lt;/strong&gt; and add:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ANTHROPIC_API_KEY: your_anthropic_api_key_here
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;3-create-workflow-file&quot;&gt;3. Create Workflow File&lt;/h3&gt;
-
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;.github/workflows/claude.yml&lt;/code&gt; with this configuration:&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude Code&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;pull_request_review&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;submitted&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;claude&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
-      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'issue_comment' &amp;amp;&amp;amp; contains(github.event.comment.body, '@claude')) ||&lt;/span&gt;
-      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'pull_request_review_comment' &amp;amp;&amp;amp; contains(github.event.comment.body, '@claude')) ||&lt;/span&gt;
-      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'pull_request_review' &amp;amp;&amp;amp; contains(github.event.review.body, '@claude')) ||&lt;/span&gt;
-      &lt;span class=&quot;no&quot;&gt;(github.event_name == 'issues' &amp;amp;&amp;amp; (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;fetch-depth&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;1&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Run Claude Code&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;anthropic_api_key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;allowed_tools&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;mcp__github__create_pull_request'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;-enterprise-setup-aws-bedrock--google-vertex-ai&quot;&gt;🏢 Enterprise Setup (AWS Bedrock &amp;amp; Google Vertex AI)&lt;/h2&gt;
-
-&lt;p&gt;For enterprise environments, you can configure Claude Code to use your existing cloud infrastructure:&lt;/p&gt;
-
-&lt;h3 id=&quot;aws-bedrock-configuration&quot;&gt;AWS Bedrock Configuration&lt;/h3&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude PR Action (AWS Bedrock)&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;claude-pr&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;AWS_REGION&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-west-2&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Configure AWS Credentials (OIDC)&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;aws-actions/configure-aws-credentials@v4&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;role-to-assume&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;aws-region&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-west-2&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;trigger_phrase&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@claude&quot;&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;timeout_minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;60&quot;&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;use_bedrock&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&quot;&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;us.anthropic.claude-3-7-sonnet-20250219-v1:0&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;google-vertex-ai-configuration&quot;&gt;Google Vertex AI Configuration&lt;/h3&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Claude PR Action (Vertex AI)&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;pull-requests&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;issue_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;pull_request_review_comment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;issues&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;claude-pr&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout repository&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v4&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Authenticate to Google Cloud&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;google-github-actions/auth@v2&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;workload_identity_provider&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;service_account&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
-      
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;anthropics/claude-code-action@beta&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;trigger_phrase&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@claude&quot;&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;timeout_minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;60&quot;&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;use_vertex&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&quot;&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;claude-3-7-sonnet@20250219&quot;&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;ANTHROPIC_VERTEX_PROJECT_ID&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;CLOUD_ML_REGION&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;us-east5&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;-configuration-best-practices&quot;&gt;📝 Configuration Best Practices&lt;/h2&gt;
-
-&lt;h3 id=&quot;create-a-claudemd-file&quot;&gt;Create a CLAUDE.md File&lt;/h3&gt;
-
-&lt;p&gt;Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt; file in your repository root to guide Claude’s behavior:&lt;/p&gt;
-
-&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gh&quot;&gt;# Project Guidelines for Claude Code&lt;/span&gt;
-
-&lt;span class=&quot;gu&quot;&gt;## Code Style&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Use TypeScript for all new code
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Follow ESLint configuration
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Prefer functional components in React
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Use async/await over Promises
-
-&lt;span class=&quot;gu&quot;&gt;## Review Criteria&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Ensure all functions have proper error handling
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Check for type safety (no &lt;span class=&quot;sb&quot;&gt;`any`&lt;/span&gt; types)
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Verify performance implications
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Validate accessibility requirements
-
-&lt;span class=&quot;gu&quot;&gt;## Project Structure&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/src`&lt;/span&gt; - Main application code
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/tests`&lt;/span&gt; - Test files
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/docs`&lt;/span&gt; - Documentation
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`/scripts`&lt;/span&gt; - Build and deployment scripts
-
-&lt;span class=&quot;gu&quot;&gt;## Testing Requirements&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Unit tests for all business logic
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; Integration tests for API endpoints
-&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; E2E tests for critical user flows
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;security-considerations&quot;&gt;Security Considerations&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Never commit API keys&lt;/strong&gt; to your repository&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Use GitHub Secrets&lt;/strong&gt; for all sensitive configuration&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Limit permissions&lt;/strong&gt; to only what’s necessary&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Review Claude’s suggestions&lt;/strong&gt; before merging&lt;/li&gt;
-  &lt;li&gt;✅ &lt;strong&gt;Set appropriate timeouts&lt;/strong&gt; to prevent runaway workflows&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-comprehensive-usage-examples&quot;&gt;🎯 Comprehensive Usage Examples&lt;/h2&gt;
-
-&lt;p&gt;Now that Claude Code is installed, here are practical examples of how to leverage its capabilities in your daily development workflow:&lt;/p&gt;
-
-&lt;h3 id=&quot;-feature-implementation&quot;&gt;🔧 Feature Implementation&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Turn Issues into Pull Requests&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Create an issue with a feature description, then comment:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude implement this feature based on the issue description
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Claude will:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Analyze the issue requirements&lt;/li&gt;
-  &lt;li&gt;Review your existing code patterns&lt;/li&gt;
-  &lt;li&gt;Write the implementation following your coding standards&lt;/li&gt;
-  &lt;li&gt;Create tests if specified in your &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Open a pull request with the complete feature&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;: “Add user avatar upload functionality with S3 integration”&lt;/p&gt;
-
-&lt;h3 id=&quot;-bug-fixing&quot;&gt;🐛 Bug Fixing&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Automatic Bug Resolution&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;When you encounter a bug, create an issue or comment:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude fix the TypeError in the user dashboard component
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Claude will:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Locate the problematic code&lt;/li&gt;
-  &lt;li&gt;Analyze the root cause&lt;/li&gt;
-  &lt;li&gt;Implement an appropriate fix&lt;/li&gt;
-  &lt;li&gt;Add error handling when appropriate&lt;/li&gt;
-  &lt;li&gt;Create a PR with the solution&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Advanced Bug Fixing&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude fix the memory leak in the WebSocket connection manager. 
-The issue occurs when users rapidly switch between channels.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-implementation-guidance&quot;&gt;💡 Implementation Guidance&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Get Architecture Advice&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;In a PR comment:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude how should I implement user authentication for this endpoint?
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Claude provides:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Security best practices&lt;/li&gt;
-  &lt;li&gt;Code examples specific to your stack&lt;/li&gt;
-  &lt;li&gt;Integration patterns with your existing auth system&lt;/li&gt;
-  &lt;li&gt;Performance considerations&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Complex Implementation Help&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude help me implement a rate limiting system for this API. 
-I need to support different limits per user tier and graceful degradation.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-code-review-and-quality-assurance&quot;&gt;📋 Code Review and Quality Assurance&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Comprehensive Code Reviews&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude review this PR for security vulnerabilities and performance issues
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Claude performs:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Security vulnerability scanning&lt;/li&gt;
-  &lt;li&gt;Performance bottleneck identification&lt;/li&gt;
-  &lt;li&gt;Code quality assessment&lt;/li&gt;
-  &lt;li&gt;Best practices validation&lt;/li&gt;
-  &lt;li&gt;Accessibility compliance checks&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Specific Review Focus&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude review this database migration for potential data loss and rollback safety
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-testing-and-documentation&quot;&gt;🧪 Testing and Documentation&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Test Generation&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude write comprehensive tests for this new payment processing module
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Claude creates:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Unit tests for all functions&lt;/li&gt;
-  &lt;li&gt;Integration tests for external APIs&lt;/li&gt;
-  &lt;li&gt;Edge case testing&lt;/li&gt;
-  &lt;li&gt;Mock implementations for dependencies&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Documentation Updates&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude update the API documentation to reflect these new endpoints
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;README Improvements&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude enhance the project README with better setup instructions and examples
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;️-refactoring-and-optimization&quot;&gt;🏗️ Refactoring and Optimization&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Code Modernization&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude refactor this component to use React hooks instead of class components
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Performance Optimization&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude optimize this database query - it's causing timeouts on large datasets
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Legacy Code Updates&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude update this Node.js 14 code to Node.js 20, 
-including dependency updates and deprecated API replacements
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-security-improvements&quot;&gt;🔒 Security Improvements&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Security Audits&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude audit this authentication flow for security vulnerabilities
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Dependency Security&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude check our package.json dependencies for security issues 
-and suggest safer alternatives
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-devops-and-deployment&quot;&gt;🚀 DevOps and Deployment&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;CI/CD Improvements&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude optimize our GitHub Actions workflow to reduce build times
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Docker Optimization&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude improve this Dockerfile for better caching and smaller image size
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Infrastructure as Code&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude review this Terraform configuration for AWS security best practices
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-advanced-workflows&quot;&gt;📊 Advanced Workflows&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Multi-Step Feature Development&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude implement a complete user notification system:
-1. Database schema for notifications
-2. API endpoints for CRUD operations  
-3. WebSocket integration for real-time updates
-4. Email notification worker
-5. Frontend notification component
-6. Comprehensive test suite
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Migration Assistance&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude help migrate our REST API to GraphQL:
-- Create schema definitions
-- Implement resolvers  
-- Update frontend queries
-- Maintain backward compatibility
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-frontend-development&quot;&gt;🎨 Frontend Development&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Component Creation&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude create a reusable data table component with:
-- Sorting and filtering
-- Pagination
-- Row selection
-- Export functionality
-- Responsive design
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Styling and UX&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude improve the accessibility of this form component 
-and add proper ARIA labels
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-analytics-and-monitoring&quot;&gt;📈 Analytics and Monitoring&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Observability Implementation&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude add comprehensive logging and monitoring to this service:
-- Structured logging with correlation IDs
-- Metrics collection for key business events
-- Error tracking and alerting
-- Performance monitoring
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Data Analysis&lt;/strong&gt;:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@claude analyze our user engagement metrics and suggest A/B testing scenarios
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;-pro-tips-for-effective-claude-usage&quot;&gt;💡 Pro Tips for Effective Claude Usage&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Be Specific&lt;/strong&gt;: The more context you provide, the better Claude’s suggestions will be&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Reference Files&lt;/strong&gt;: Use &lt;code class=&quot;highlighter-rouge&quot;&gt;@filename&lt;/code&gt; to help Claude understand your codebase&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Set Expectations&lt;/strong&gt;: Mention your preferred patterns in &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Iterative Feedback&lt;/strong&gt;: Engage in conversation to refine the implementation&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Review Carefully&lt;/strong&gt;: Always review Claude’s suggestions before merging&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;These examples demonstrate Claude Code’s versatility in handling everything from simple bug fixes to complex architectural decisions. The key is treating Claude as a knowledgeable team member who can understand context and follow your project’s established patterns.&lt;/p&gt;
-
-&lt;h2 id=&quot;-cost-considerations&quot;&gt;💰 Cost Considerations&lt;/h2&gt;
-
-&lt;p&gt;When using Claude Code GitHub Actions, be aware of the associated costs:&lt;/p&gt;
-
-&lt;h3 id=&quot;github-actions-costs&quot;&gt;GitHub Actions Costs&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Runs on GitHub-hosted runners&lt;/li&gt;
-  &lt;li&gt;Consumes your GitHub Actions minutes&lt;/li&gt;
-  &lt;li&gt;See &lt;a href=&quot;https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions&quot;&gt;GitHub’s billing documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;api-costs&quot;&gt;API Costs&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Each Claude interaction consumes tokens based on prompt/response length&lt;/li&gt;
-  &lt;li&gt;Usage varies by task complexity and codebase size&lt;/li&gt;
-  &lt;li&gt;See &lt;a href=&quot;https://claude.ai/pricing&quot;&gt;Claude’s pricing page&lt;/a&gt; for current rates&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;cost-optimization-tips&quot;&gt;Cost Optimization Tips&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Use specific &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; commands to reduce unnecessary API calls&lt;/li&gt;
-  &lt;li&gt;Set appropriate &lt;code class=&quot;highlighter-rouge&quot;&gt;max_turns&lt;/code&gt; limits&lt;/li&gt;
-  &lt;li&gt;Establish reasonable &lt;code class=&quot;highlighter-rouge&quot;&gt;timeout_minutes&lt;/code&gt; to prevent runaway workflows&lt;/li&gt;
-  &lt;li&gt;Consider using GitHub’s concurrency controls to limit parallel executions&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-troubleshooting&quot;&gt;🔍 Troubleshooting&lt;/h2&gt;
-
-&lt;h3 id=&quot;claude-doesnt-respond&quot;&gt;Claude Doesn’t Respond&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;✅ Verify GitHub App is installed correctly&lt;/li&gt;
-  &lt;li&gt;✅ Check that workflows are enabled in your repository&lt;/li&gt;
-  &lt;li&gt;✅ Ensure API key is set in repository secrets&lt;/li&gt;
-  &lt;li&gt;✅ Confirm comment contains &lt;code class=&quot;highlighter-rouge&quot;&gt;@claude&lt;/code&gt; (not &lt;code class=&quot;highlighter-rouge&quot;&gt;/claude&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;authentication-errors&quot;&gt;Authentication Errors&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;✅ Confirm API key is valid and has sufficient permissions&lt;/li&gt;
-  &lt;li&gt;✅ For Bedrock/Vertex, verify cloud credential configuration&lt;/li&gt;
-  &lt;li&gt;✅ Ensure secrets are named correctly in workflows&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;workflow-doesnt-trigger&quot;&gt;Workflow Doesn’t Trigger&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;✅ Verify workflow triggers include necessary events&lt;/li&gt;
-  &lt;li&gt;✅ Check that app permissions include CI triggers&lt;/li&gt;
-  &lt;li&gt;✅ Ensure you’re using the GitHub App (not Actions user)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-conclusion&quot;&gt;🎉 Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Claude Code GitHub Actions represents a significant step forward in AI-assisted development workflows. By automating code reviews, feature implementation, and bug fixes, teams can focus on high-level architecture and business logic while maintaining high code quality standards.&lt;/p&gt;
-
-&lt;p&gt;The setup process is straightforward—whether you choose the quick installation method or opt for enterprise cloud provider integration. With proper configuration and the right &lt;code class=&quot;highlighter-rouge&quot;&gt;CLAUDE.md&lt;/code&gt; guidelines, Claude becomes a valuable team member that works around the clock to improve your codebase.&lt;/p&gt;
-
-&lt;p&gt;Start with simple use cases like automated code reviews, then gradually expand to more complex workflows as your team becomes comfortable with AI-assisted development. The future of collaborative coding is here, and it’s more accessible than ever! 🚀&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Pro Tip&lt;/strong&gt;: Consider using Claude Code locally first to understand its capabilities before deploying it to your CI/CD pipeline. This helps you create better prompts and set up more effective automation rules.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Code Review" /><category term="Automation" /><category term="CI/CD" /><summary type="html">Step-by-step guide to setting up Claude Code GitHub Actions for intelligent, automated PR reviews and issue handling in your repositories.</summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;Pro Tip&lt;/strong&gt;: Start with the basic &lt;code class=&quot;highlighter-rouge&quot;&gt;hunt&lt;/code&gt; mode to get familiar with the workflow, then gradually add more sophisticated review modes as your team gets comfortable with AI-assisted code reviews. The future of development productivity isn’t about finding the perfect tool — it’s about building the perfect workflow for your team.&lt;/p&gt;</content><author><name>Luis Gallardo</name></author><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Code Review" /><category term="Automation" /><category term="BugBot" /><summary type="html">When Cursor announced BugBot would cost $40/month for 200 PR reviews, I decided to build my own alternative using Claude Code GitHub Actions. Here's how I transformed verbose reviews into focused, on-demand code analysis.</summary></entry></feed>

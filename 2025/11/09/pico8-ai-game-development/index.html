@@ -1,0 +1,1116 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Using Claude Code (Sonnet 4.5) to build a functional Pico-8 Mastermind game without learning the language. Exploring AI’s coding excellence and artistic limitations in fantasy console game development.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/">
+<meta property="og:url" content="https://lgallardo.com/2025/11/09/pico8-ai-game-development/">
+
+
+
+<meta property="og:description" content="Using Claude Code (Sonnet 4.5) to build a functional Pico-8 Mastermind game without learning the language. Exploring AI’s coding excellence and artistic limitations in fantasy console game development.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language">
+<meta name="twitter:description" content="Using Claude Code (Sonnet 4.5) to build a functional Pico-8 Mastermind game without learning the language. Exploring AI’s coding excellence and artistic limitations in fantasy console game development.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/11/09/pico8-ai-game-development/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/pico-8-robot.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/pico-8-robot.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-11-08T18:00:00-06:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Pico-8">
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="AI Coding">
+
+<meta property="article:tag" content="Game Development">
+
+<meta property="article:tag" content="Retro Gaming">
+
+<meta property="article:tag" content="Fantasy Console">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="Game Development">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2025/11/09/pico8-ai-game-development/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2025/11/09/pico8-ai-game-development/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language">
+    <meta itemprop="description" content="I discovered Pico-8 and challenged Claude Code to build a Mastermind game without learning Lua. The code? Perfect. The art? A beautiful disaster. Here’s what AI can and can’t do for game development.">
+    <meta itemprop="datePublished" content="November 09, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/pico-8-robot.png" alt="Claude Robot Handheld" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p>Last week, I stumbled upon Pico-8 while browsing retro gaming communities. As someone who plays classic games on handheld devices like the Miyoo Mini Plus and Anbernic consoles, the idea of a “fantasy console” immediately caught my attention. But here’s the thing—I had zero interest in learning Lua or spending weeks mastering Pico-8’s constraints.</p>
+
+<p>So I thought: <strong>what if I just “code-vibed” with Claude Code to build a complete game?</strong> No tutorials, no language learning, just pure AI-assisted development. The result? A fully functional Mastermind game where the code works flawlessly but the art… well, let’s just say AI hasn’t figured out pixel art yet.</p>
+
+<p>This isn’t about AI replacing developers. It’s about understanding what AI can do exceptionally well (code logic) and where it completely falls apart (artistic creativity). Here’s what I learned from building a Pico-8 game without knowing the language.</p>
+
+<h2 id="-what-is-pico-8">🎮 What is Pico-8?</h2>
+
+<p>Pico-8 is a <strong>fantasy console</strong>—an imaginary video game system with intentional limitations that spark creativity. Think of it as what the Game Boy could have been if it had perfect programming tools and a vibrant online community.</p>
+
+<p><img src="/assets/images/pico-8.png" alt="Pico-8 Console" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
+
+<h3 id="the-beautiful-constraints">The Beautiful Constraints</h3>
+<ul>
+  <li><strong>Display</strong>: 128x128 pixels</li>
+  <li><strong>Colors</strong>: 16-color palette</li>
+  <li><strong>Sound</strong>: 4-channel chip tune synthesizer</li>
+  <li><strong>Code</strong>: 8,192 tokens of Lua</li>
+  <li><strong>Sprites</strong>: 256 8x8 pixel sprites</li>
+  <li><strong>Map</strong>: 128x64 tile map</li>
+</ul>
+
+<p>These limitations aren’t bugs—they’re features. They force you to be creative, to make every pixel count, and to build games that feel genuinely retro. The Pico-8 community has created thousands of games, from platformers to RPGs to puzzle games, all within these constraints.</p>
+
+<p>What really appealed to me was that <strong>Pico-8 games run everywhere</strong>—not just on desktop, but on handheld retro gaming devices like the Miyoo Mini Plus, Anbernic RG35XX, and other pocket-sized consoles that support custom firmware. There’s something magical about creating a game on your laptop and playing it on a tiny handheld device an hour later.</p>
+
+<h2 id="-the-experiment-code-vibing-with-claude-code">🤖 The Experiment: Code-Vibing with Claude Code</h2>
+
+<p>I wanted to build a Mastermind game—the classic code-breaking puzzle where you guess a secret pattern of colored pegs. The game gives you feedback after each guess: black pegs for correct colors in correct positions, white pegs for correct colors in wrong positions.</p>
+
+<p>My approach was simple: <strong>describe what I wanted, let Claude Code do the heavy lifting, and iterate based on testing.</strong></p>
+
+<h3 id="the-development-process">The Development Process</h3>
+
+<p><strong>Phase 1: Core Game Logic</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Create a Pico-8 Mastermind game with 4 colors and 6 attempts."
+Claude: *Generates complete game logic with initialization, input handling, and feedback*
+</code></pre></div></div>
+
+<p>Within minutes, I had working code that:</p>
+<ul>
+  <li>Generated random secret codes</li>
+  <li>Handled player input for selecting colors</li>
+  <li>Calculated feedback (correct position vs correct color)</li>
+  <li>Managed game state (playing, won, lost)</li>
+  <li>Displayed the game board and attempts</li>
+</ul>
+
+<p>Here’s a simplified snippet of what Claude Code generated:</p>
+
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nf">_init</span><span class="p">()</span>
+    <span class="n">secret</span><span class="o">=</span><span class="p">{</span><span class="n">flr</span><span class="p">(</span><span class="n">rnd</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">flr</span><span class="p">(</span><span class="n">rnd</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">flr</span><span class="p">(</span><span class="n">rnd</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">flr</span><span class="p">(</span><span class="n">rnd</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">}</span>
+    <span class="n">attempts</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">current_guess</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span>
+    <span class="n">cursor</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">game_state</span><span class="o">=</span><span class="s2">"playing"</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="nf">_update</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">game_state</span><span class="o">==</span><span class="s2">"playing"</span> <span class="k">then</span>
+        <span class="k">if</span> <span class="n">btnp</span><span class="p">(</span><span class="err">⬅️</span><span class="p">)</span> <span class="k">then</span> <span class="n">cursor</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">cursor</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">end</span>
+        <span class="k">if</span> <span class="n">btnp</span><span class="p">(</span><span class="err">➡️</span><span class="p">)</span> <span class="k">then</span> <span class="n">cursor</span><span class="o">=</span><span class="n">min</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">cursor</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">end</span>
+        <span class="k">if</span> <span class="n">btnp</span><span class="p">(</span><span class="err">⬆️</span><span class="p">)</span> <span class="k">then</span> <span class="n">current_guess</span><span class="p">[</span><span class="n">cursor</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">current_guess</span><span class="p">[</span><span class="n">cursor</span><span class="p">]</span><span class="o">%</span><span class="mi">6</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="k">end</span>
+        <span class="k">if</span> <span class="n">btnp</span><span class="p">(</span><span class="err">⬇️</span><span class="p">)</span> <span class="k">then</span> <span class="n">current_guess</span><span class="p">[</span><span class="n">cursor</span><span class="p">]</span><span class="o">=</span><span class="p">((</span><span class="n">current_guess</span><span class="p">[</span><span class="n">cursor</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">%</span><span class="mi">6</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span> <span class="k">end</span>
+        <span class="k">if</span> <span class="n">btnp</span><span class="p">(</span><span class="err">🅾️</span><span class="p">)</span> <span class="k">then</span> <span class="n">submit_guess</span><span class="p">()</span> <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p><strong>Phase 2: Polish and Features</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Add a title screen and instructions."
+Claude: *Implements menu system with game flow*
+
+Me: "Show the secret code when the game ends."
+Claude: *Adds reveal logic with proper game state handling*
+
+Me: "Make the feedback clearer with different symbols."
+Claude: *Updates rendering to use distinct visual indicators*
+</code></pre></div></div>
+
+<p>The code just… worked. Every iteration was functional. No syntax errors, no logic bugs, no weird edge cases. <strong>Claude Code understood Pico-8’s limitations and API perfectly.</strong></p>
+
+<h3 id="what-impressed-me-about-the-code">What Impressed Me About the Code</h3>
+
+<ol>
+  <li><strong>Proper Pico-8 conventions</strong>: Used <code class="highlighter-rouge">_init()</code>, <code class="highlighter-rouge">_update()</code>, <code class="highlighter-rouge">_draw()</code> correctly</li>
+  <li><strong>Efficient token usage</strong>: Code stayed well under the 8,192 token limit</li>
+  <li><strong>Clean state management</strong>: Game states transitioned smoothly</li>
+  <li><strong>Input handling</strong>: Button presses felt responsive and natural</li>
+  <li><strong>Edge cases handled</strong>: Prevented invalid moves and game state corruption</li>
+</ol>
+
+<p>I literally wrote zero lines of Lua. I just described features in natural language, and Claude Code translated my intent into working game logic.</p>
+
+<h2 id="-where-ai-hit-the-wall-the-art-problem">🎨 Where AI Hit the Wall: The Art Problem</h2>
+
+<p>Now here’s where things got interesting—and by interesting, I mean hilariously broken.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Let's make the UI look more retro, give it that 80s arcade style."
+Claude: *Generates updated graphics with retro styling*
+
+Me: "The lines are overlapping and the chips look weird."
+Claude: *Tries again, visual bugs persist*
+
+Me: "Can you fix the overlapping elements?"
+Claude: *Third attempt, still introducing visual glitches*
+</code></pre></div></div>
+
+<p><img src="/assets/images/pico-8-overlaping.png" alt="Overlapping Sprites" style="display:block; margin-left:auto; margin-right:auto; width:75%" /></p>
+
+<p>The sprites were a mess. Colors bled into each other, shapes didn’t align properly, and the overall aesthetic looked like a glitch art project gone wrong.</p>
+
+<p><img src="/assets/images/pico-8-chips-overlaping.png" alt="Chip Overlapping" style="display:block; margin-left:auto; margin-right:auto; width:75%" /></p>
+
+<h3 id="why-ai-fails-at-pixel-art">Why AI Fails at Pixel Art</h3>
+
+<p>After multiple iterations, I realized the fundamental problem: <strong>Claude Code (and current general-purpose AI models) lack spatial-visual reasoning for pixel-level design.</strong></p>
+
+<p>The AI could:</p>
+<ul>
+  <li>✅ Generate perfect code logic</li>
+  <li>✅ Understand game mechanics</li>
+  <li>✅ Handle complex state management</li>
+  <li>✅ Optimize for Pico-8’s constraints</li>
+</ul>
+
+<p>But it couldn’t:</p>
+<ul>
+  <li>❌ Visualize how pixels form recognizable shapes</li>
+  <li>❌ Understand aesthetic coherence</li>
+  <li>❌ Apply consistent design language</li>
+  <li>❌ Create sprites that “feel” like game assets</li>
+</ul>
+
+<p><strong>Important distinction</strong>: This limitation is specific to <strong>current general-purpose AI models</strong> like Claude Sonnet 4.5. Specialized AI art tools like Stable Diffusion, DALL-E, or Midjourney excel at image generation, but they aren’t integrated into coding workflows and don’t understand Pico-8’s specific pixel format constraints.</p>
+
+<h3 id="the-pragmatic-decision">The Pragmatic Decision</h3>
+
+<p>Here’s where the “code-vibing” philosophy hit a wall. Fixing the visual bugs would have required diving deep into the sprite code, understanding how AI had structured the graphics, and manually debugging pixel-level issues. <strong>That’s the opposite of code-vibing</strong>—it defeats the whole purpose of building without learning the underlying implementation.</p>
+
+<p>So I made a practical choice: <strong>I published the game with the original, clean design</strong> from before I asked for the 80s retro styling. The initial AI-generated graphics were simple but functional. The “improved” versions introduced bugs I couldn’t easily fix without breaking the code-vibing approach.</p>
+
+<p>This taught me something crucial: <strong>AI dramatically accelerates code development, but artistic “improvements” can introduce complexity that requires deep technical knowledge to fix.</strong> When AI visual changes break things, you either need to understand the code deeply (losing the code-vibing benefit) or revert to what worked. I chose the latter.</p>
+
+<h2 id="️-what-i-actually-learned-the-pico-8-console">🛠️ What I Actually Learned: The Pico-8 Console</h2>
+
+<p>While Claude Code handled the coding, I still had to learn Pico-8’s development environment. The console commands became my daily tools:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Load and run your game</span>
+load mastermind.p8
+run
+
+<span class="c"># Save your work</span>
+save
+
+<span class="c"># Export to web or binary</span>
+<span class="nb">export </span>mastermind.html
+<span class="nb">export </span>mastermind.bin
+
+<span class="c"># Sprite and map editors</span>
+<span class="c"># Press ESC to toggle between code and sprite editor</span>
+
+<span class="c"># Sound and music tools</span>
+<span class="c"># Use the music editor to create chip tune soundtracks</span>
+
+<span class="c"># Debug commands</span>
+printh<span class="o">(</span><span class="s2">"debug: "</span>..tostr<span class="o">(</span>value<span class="o">))</span>  <span class="nt">--</span> Print to console
+stop<span class="o">()</span>  <span class="nt">--</span> Pause execution
+</code></pre></div></div>
+
+<h3 id="essential-workflow-commands">Essential Workflow Commands</h3>
+
+<p><strong>Development cycle:</strong></p>
+<ol>
+  <li>Edit code or sprites in Pico-8</li>
+  <li>Press <code class="highlighter-rouge">Ctrl+R</code> to run immediately</li>
+  <li>Test gameplay and identify issues</li>
+  <li>Press <code class="highlighter-rouge">ESC</code> to return to editor</li>
+  <li>Iterate</li>
+</ol>
+
+<p><strong>Publishing:</strong></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create web playable version</span>
+<span class="nb">export </span>mastermind.html
+
+<span class="c"># Create standalone binary</span>
+<span class="nb">export </span>mastermind.bin
+
+<span class="c"># Export to PNG (code + sprites embedded)</span>
+save mastermind.p8.png
+</code></pre></div></div>
+
+<p>The console became my primary interface. While Claude Code wrote the logic, I was constantly running, testing, and tweaking based on how the game actually felt to play.</p>
+
+<h2 id="-publishing-the-game-from-local-to-lexaloffle">🚀 Publishing the Game: From Local to Lexaloffle</h2>
+
+<p>Once the game was playable and the art was fixed, I published it to the Pico-8 community platform: <strong><a href="https://www.lexaloffle.com/bbs/?pid=177155#p">BBS Lexaloffle</a></strong>.</p>
+
+<p><img src="/assets/images/pico-8-mastermind-game.png" alt="Published Mastermind Game" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
+
+<p>The publishing process was surprisingly straightforward:</p>
+
+<ol>
+  <li><strong>Create an account</strong> on Lexaloffle BBS</li>
+  <li><strong>Export the cartridge</strong> as a PNG file (<code class="highlighter-rouge">save mastermind.p8.png</code>)</li>
+  <li><strong>Upload to BBS</strong> with description and screenshots</li>
+  <li><strong>Share with the community</strong> and gather feedback</li>
+</ol>
+
+<p>What’s fascinating about Pico-8’s ecosystem is the <strong>cartridge format</strong>. Games are distributed as PNG images that contain the code, sprites, music, and map data. You can literally share a game as an image file, and other Pico-8 users can load and play it immediately.</p>
+
+<h3 id="the-community-response">The Community Response</h3>
+
+<p>Publishing on Lexaloffle gave me immediate access to:</p>
+<ul>
+  <li><strong>Playable web version</strong>: Anyone can play directly in their browser</li>
+  <li><strong>Download options</strong>: Users can grab the <code class="highlighter-rouge">.p8</code> file and run it locally</li>
+  <li><strong>Community feedback</strong>: Other developers provide suggestions and bug reports</li>
+  <li><strong>Discoverability</strong>: Games appear in the BBS feed and search results</li>
+</ul>
+
+<p>The Pico-8 community is incredibly welcoming to newcomers. Despite my game being a simple Mastermind implementation built with AI assistance, people played it, left encouraging comments, and even suggested improvements.</p>
+
+<h2 id="-the-bigger-picture-what-this-means-for-development">🎯 The Bigger Picture: What This Means for Development</h2>
+
+<p>This experiment revealed something important about <strong>AI-assisted development in 2025</strong>: we’re entering an era of <strong>“code-vibing”</strong> where developers can create functional software in languages they don’t formally know.</p>
+
+<h3 id="the-new-development-model">The New Development Model</h3>
+
+<p><strong>Traditional Approach:</strong></p>
+<ol>
+  <li>Learn language syntax and conventions</li>
+  <li>Study framework documentation</li>
+  <li>Write code manually</li>
+  <li>Debug and iterate</li>
+  <li>Optimize and polish</li>
+</ol>
+
+<p><strong>AI-Assisted Approach:</strong></p>
+<ol>
+  <li>Describe what you want in natural language</li>
+  <li>AI generates functional code</li>
+  <li>Test and provide feedback</li>
+  <li>AI iterates based on your input</li>
+  <li>You focus on design and experience</li>
+</ol>
+
+<h3 id="when-code-vibing-works">When Code-Vibing Works</h3>
+
+<p>This approach excels when:</p>
+<ul>
+  <li>✅ The problem domain is well-defined (game logic)</li>
+  <li>✅ The language has clear conventions (Pico-8 API)</li>
+  <li>✅ You can test and validate quickly (run the game)</li>
+  <li>✅ Documentation exists for the AI to reference</li>
+  <li>✅ Logic matters more than creative assets</li>
+</ul>
+
+<h3 id="when-code-vibing-fails">When Code-Vibing Fails</h3>
+
+<p>The approach struggles with:</p>
+<ul>
+  <li>❌ Visual/artistic creativity (sprites, animations)</li>
+  <li>❌ Highly subjective design decisions (UI aesthetics)</li>
+  <li>❌ Novel problems without existing patterns</li>
+  <li>❌ Domains requiring specialized expertise</li>
+  <li>❌ Physical or spatial reasoning tasks</li>
+</ul>
+
+<h3 id="the-hybrid-reality">The Hybrid Reality</h3>
+
+<p>The future isn’t “AI replaces developers”—it’s <strong>“AI handles code, humans handle creativity.”</strong></p>
+
+<p>For my Pico-8 game:</p>
+<ul>
+  <li><strong>AI-generated</strong>: All game logic, state management, input handling</li>
+  <li><strong>Human-created</strong>: Sprites, color schemes, game feel, design decisions</li>
+</ul>
+
+<p>This division makes sense. AI excels at structured, logical tasks with clear rules. Humans excel at creative, aesthetic, and experiential decisions.</p>
+
+<h2 id="-key-takeaways-for-developers">💡 Key Takeaways for Developers</h2>
+
+<p>After building this game, here’s what I learned about AI-assisted development:</p>
+
+<h3 id="1-ai-coding-is-genuinely-excellent">1. AI Coding is Genuinely Excellent</h3>
+<p>Claude Code didn’t just generate working code—it generated <strong>good code</strong>. Proper conventions, clean structure, efficient logic. I could have written this myself after learning Lua, but it would have taken significantly longer.</p>
+
+<h3 id="2-art-is-still-a-human-or-specialized-ai-domain">2. Art is Still a Human (or Specialized AI) Domain</h3>
+<p>General-purpose AI models struggle with pixel-level visual design. You’ll need:</p>
+<ul>
+  <li>Manual sprite creation</li>
+  <li>Specialized AI art tools (Stable Diffusion, DALL-E)</li>
+  <li>Collaboration with actual artists</li>
+</ul>
+
+<h3 id="3-you-still-need-domain-understanding">3. You Still Need Domain Understanding</h3>
+<p>Even though I didn’t write Lua, I needed to:</p>
+<ul>
+  <li>Understand Pico-8’s constraints</li>
+  <li>Test the game and identify issues</li>
+  <li>Communicate feedback clearly</li>
+  <li>Make design decisions</li>
+</ul>
+
+<p><strong>Code-vibing isn’t passive</strong>—it’s an active collaboration where you guide the AI’s output.</p>
+
+<h3 id="4-iteration-is-fast-and-painless">4. Iteration is Fast and Painless</h3>
+<p>Traditionally, making changes requires:</p>
+<ul>
+  <li>Finding the right code section</li>
+  <li>Understanding existing implementation</li>
+  <li>Rewriting logic</li>
+  <li>Testing for regressions</li>
+</ul>
+
+<p>With AI assistance:</p>
+<ul>
+  <li>Describe the change in natural language</li>
+  <li>AI implements the modification</li>
+  <li>Test immediately</li>
+  <li>Iterate until perfect</li>
+</ul>
+
+<h3 id="5-the-learning-curve-shifts">5. The Learning Curve Shifts</h3>
+<p>Instead of learning:</p>
+<ul>
+  <li>Language syntax</li>
+  <li>Framework APIs</li>
+  <li>Common patterns</li>
+</ul>
+
+<p>You learn:</p>
+<ul>
+  <li>How to describe problems clearly</li>
+  <li>How to test and validate effectively</li>
+  <li>How to guide AI iterations</li>
+  <li>Domain-specific knowledge</li>
+</ul>
+
+<p><strong>This is a different skill set</strong>, but arguably more valuable in an AI-assisted world.</p>
+
+<h2 id="-getting-started-with-pico-8-and-ai-development">🔮 Getting Started with Pico-8 and AI Development</h2>
+
+<p>If this experiment inspired you to try building your own Pico-8 game with AI assistance, here’s how to start:</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+<ol>
+  <li><strong>Get Pico-8</strong>: Purchase from <a href="https://www.lexaloffle.com/pico-8.php">Lexaloffle</a> ($15)</li>
+  <li><strong>Install Claude Code</strong>: Free for basic usage, Pro for unlimited</li>
+  <li><strong>Optional</strong>: Retro handheld device for testing (Miyoo Mini Plus, Anbernic)</li>
+</ol>
+
+<h3 id="your-first-ai-generated-game">Your First AI-Generated Game</h3>
+
+<p><strong>Week 1: Simple Game Loop</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Create a basic Pico-8 game with player movement and a game over screen."
+</code></pre></div></div>
+
+<p><strong>Week 2: Add Mechanics</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Add collision detection and score tracking."
+</code></pre></div></div>
+
+<p><strong>Week 3: Polish</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Add a title screen, instructions, and end game sequence."
+</code></pre></div></div>
+
+<p><strong>Week 4: Manual Art Pass</strong></p>
+<ul>
+  <li>Open Pico-8’s sprite editor</li>
+  <li>Create or refine visual assets</li>
+  <li>Learn color palette constraints</li>
+</ul>
+
+<h3 id="recommended-first-projects">Recommended First Projects</h3>
+<ul>
+  <li><strong>Flappy Bird clone</strong>: Simple physics and collision</li>
+  <li><strong>Snake game</strong>: Grid-based movement and growth</li>
+  <li><strong>Memory matching</strong>: Card flipping and state management</li>
+  <li><strong>Breakout</strong>: Paddle movement and ball physics</li>
+</ul>
+
+<p>Start simple, iterate quickly, and don’t stress about art until the gameplay feels right.</p>
+
+<h2 id="-the-honest-assessment">🧠 The Honest Assessment</h2>
+
+<p>Let me be clear about what this experiment proved and didn’t prove:</p>
+
+<h3 id="what-worked">What Worked</h3>
+<ul>
+  <li><strong>Code generation</strong>: Claude Code produced production-quality Lua code</li>
+  <li><strong>Rapid iteration</strong>: Changes happened in minutes, not hours</li>
+  <li><strong>Learning efficiency</strong>: I understood Pico-8 concepts without formal study</li>
+  <li><strong>Functional completeness</strong>: The game logic was genuinely good</li>
+</ul>
+
+<h3 id="what-didnt-work">What Didn’t Work</h3>
+<ul>
+  <li><strong>Sprite generation</strong>: AI-created graphics were unusable</li>
+  <li><strong>Aesthetic decisions</strong>: AI couldn’t judge “good” vs “bad” design</li>
+  <li><strong>Creative direction</strong>: Human judgment was essential for game feel</li>
+</ul>
+
+<h3 id="the-limitation-reality">The Limitation Reality</h3>
+
+<p>This isn’t about <strong>current AI being bad at art</strong>—it’s about the type of AI I used. General-purpose language models like Claude Sonnet 4.5 aren’t designed for pixel-perfect visual creation.</p>
+
+<p>Specialized AI art tools exist and work well:</p>
+<ul>
+  <li><strong>Stable Diffusion</strong>: Excellent for concept art and illustrations</li>
+  <li><strong>DALL-E 3</strong>: Great for stylized game assets</li>
+  <li><strong>Midjourney</strong>: Perfect for background art and promotional images</li>
+</ul>
+
+<p>But these tools:</p>
+<ol>
+  <li>Aren’t integrated into coding workflows yet</li>
+  <li>Don’t understand Pico-8’s specific sprite format</li>
+  <li>Require manual export and conversion processes</li>
+</ol>
+
+<p><strong>The future is hybrid workflows</strong>: AI for code, specialized tools or humans for assets, and human judgment for design decisions.</p>
+
+<h2 id="-resources-and-community">📚 Resources and Community</h2>
+
+<p>If you’re interested in exploring Pico-8 or AI-assisted game development further:</p>
+
+<h3 id="pico-8-learning">Pico-8 Learning</h3>
+<ul>
+  <li><strong>Official Manual</strong>: <a href="https://www.lexaloffle.com/dl/docs/pico-8_manual.html">Pico-8 User Manual</a></li>
+  <li><strong>Community Forums</strong>: <a href="https://www.lexaloffle.com/bbs/">BBS Lexaloffle</a></li>
+  <li><strong>Game Collection</strong>: <a href="https://www.lexaloffle.com/bbs/?cat=7">Pico-8 Carts</a></li>
+  <li><strong>YouTube Tutorials</strong>: Lazy Devs Academy, Nerdy Teachers</li>
+</ul>
+
+<h3 id="ai-coding-tools">AI Coding Tools</h3>
+<ul>
+  <li><strong>Claude Code</strong>: <a href="https://www.anthropic.com/claude">Anthropic Claude</a></li>
+  <li><strong>GitHub Copilot</strong>: <a href="https://github.com/features/copilot">GitHub Copilot</a></li>
+  <li><strong>Cursor</strong>: <a href="https://cursor.sh/">Cursor IDE</a></li>
+</ul>
+
+<h3 id="retro-handhelds">Retro Handhelds</h3>
+<ul>
+  <li><strong>Miyoo Mini Plus</strong>: Compact, affordable, great Pico-8 support</li>
+  <li><strong>Anbernic RG35XX</strong>: Popular choice with active community</li>
+  <li><strong>Retro Game Corps</strong>: <a href="https://retrogamecorps.com/">Setup guides and reviews</a></li>
+</ul>
+
+<hr />
+
+<p><strong>Have you tried building games with AI assistance? What’s been your experience with AI-generated art versus code?</strong> I’d love to hear about your experiments and whether you’ve found better workflows for handling creative assets in AI-assisted development. Share your thoughts and projects in the comments below.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-coding" class="page__taxonomy-item" rel="tag">AI Coding</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/fantasy-console" class="page__taxonomy-item" rel="tag">Fantasy Console</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/game-development" class="page__taxonomy-item" rel="tag">Game Development</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/pico-8" class="page__taxonomy-item" rel="tag">Pico-8</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/retro-gaming" class="page__taxonomy-item" rel="tag">Retro Gaming</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/game-development" class="page__taxonomy-item" rel="tag">Game Development</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-08T18:00:00-06:00">November 09, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Code-Vibing+with+AI%3A+Building+a+Pico-8+Game+Without+Learning+the+Language%20https%3A%2F%2Flgallardo.com%2F2025%2F11%2F09%2Fpico8-ai-game-development%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F11%2F09%2Fpico8-ai-game-development%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F11%2F09%2Fpico8-ai-game-development%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F11%2F09%2Fpico8-ai-game-development%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" class="pagination--pager" title="GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Simple AI Integration for DevOps Workflows
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I stumbled upon GitHub Models and decided to give it a try. Here’s how it transforms your GitHub Actions with free AI models, and when to choose it over more...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Supercharged: Access Any AI Model via MCP Integration
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  16 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
