@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2017-11-18T18:00:10-06:00">
+<meta property="article:published_time" content="2017-11-19T00:00:10+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -356,7 +356,7 @@
 
 <p>Just put all your .tf files into a folder, for example:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mymodule/
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mymodule/
 ├── main.tf
 ├── outputs.tf
 ├── README.md
@@ -368,7 +368,7 @@
 <h1 id="how-to-use-the-module">How to use the module?</h1>
 <p>Use the <em>source</em> parameter to specify the path of your module as shown below:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
 
   source = "./modules/mymodule"
 
@@ -380,7 +380,7 @@
 <h1 id="modules-variables">Module’s variables</h1>
 <p>As you can see this module receives two arguments, which can be defined in the <em>mymodule</em>’s <em>variables.tf</em> file.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>variable "var1" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>variable "var1" {
   description = "A string var"
 }
 
@@ -394,7 +394,7 @@ default = 1989
 <h1 id="modules-outputs">Module’s outputs</h1>
 <p>Modules also have outputs that can be used by other modules and resources. You can define them in the outputs.tf file:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 output "id" {
   description = "This is the mymodule's id"
 }
@@ -410,7 +410,7 @@ output "name" {
 
 <p>For example, instead of using a folder you can use a git repository to version your module and call it this way:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
 
   source = "git@bitbucket.org:mygitrepo/mymodule.git"
 
@@ -422,7 +422,7 @@ output "name" {
 <h1 id="module-repo-branch-and-version">Module repo branch and version</h1>
 <p>You can also point to a specific branch or version in a git repository using the <em>?ref</em> query. For example to specify the <em>dev</em> branch:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
 
   source = "git@bitbucket.org:mygitrepo/mymodule.git?ref=dev"
 
@@ -432,7 +432,7 @@ output "name" {
 </code></pre></div></div>
 
 <p>To point to version 0.0.2 use it like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
 
   source = "git@bitbucket.org:mygitrepo/mymodule.git?ref=0.0.2"
 
@@ -448,7 +448,7 @@ output "name" {
 <h1 id="module-version">Module version</h1>
 <p>If your are using Terraform version v0.11.0+ you can use a specific version for a module. This help you to point to a specific version, for example to a an stable version of the module. This only works if you are using a module registry like the <a href="https://www.terraform.io/docs/registry/index.html" target="_blank">Terraform Registry</a></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
   source  = "hashicorp/mymodule"
   version = "0.0.2"
 
@@ -465,7 +465,7 @@ output "name" {
 <h1 id="using-a-terrafile">Using a Terrafile</h1>
 <p>There’s another approach to overcome the version pitfalls which is to write a file to define the modules to use from a git repository, by branch or version. This file si called the <em>Terrafile</em>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
 # VPC
 tf_aws_vpc:
   source : "git@github.com:terraform-community-modules/tf_aws_vpc.git"
@@ -478,7 +478,7 @@ tf_my_module:
 
 <p>These modules will be downloaded into a <em>modules</em> folder and then you can reference your module using this local folder:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "example" {
 
   source = "./modules/mymodule"
 
@@ -544,12 +544,12 @@ tf_my_module:
 
 <p>And download them using the <em>get_modules</em> function:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rake get_modules
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rake get_modules
 </code></pre></div></div>
 
 <p>Finally get the modules in Terraform</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform get
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform get
 </code></pre></div></div>
 
 <h1 id="references">References</h1>
@@ -609,7 +609,7 @@ tf_my_module:
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-11-18T18:00:10-06:00">November 19, 2017</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-11-19T00:00:10+00:00">November 19, 2017</time></p>
         
       </footer>
 
@@ -695,41 +695,6 @@ tf_my_module:
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -786,6 +751,41 @@ tf_my_module:
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2013-08-13T09:40:23-05:00">
+<meta property="article:published_time" content="2013-08-13T14:40:23+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -359,14 +359,14 @@ A ramdisk is like a disk partition but running directly from the system’s RAM.
 
 <p>To create the ramdisk in <em>/tmp/ramdisk</em> type the following commands:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /tmp/ramdisk
-chmod 1777 /tmp/ramdisk
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /tmp/ramdisk
+<span class="nb">chmod </span>1777 /tmp/ramdisk
 mount <span class="nt">-t</span> tmpfs <span class="nt">-o</span> <span class="nv">size</span><span class="o">=</span>8G tmpfs /tmp/ramdisk/
 </code></pre></div></div>
 
 <p>Then you can check it using df or mount:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>df <span class="nt">-h</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">df</span> <span class="nt">-h</span>
 
 Filesystem Size Used Avail Use% Mounted on
 /dev/sda5 9.2G 533M 8.2G 6% /
@@ -448,7 +448,7 @@ tmpfs 8.0G 0 8.0G 0% /tmp/ramdisk
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-08-13T09:40:23-05:00">August 13, 2013</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-08-13T14:40:23+00:00">August 13, 2013</time></p>
         
       </footer>
 
@@ -534,41 +534,6 @@ tmpfs 8.0G 0 8.0G 0% /tmp/ramdisk
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -625,6 +590,41 @@ tmpfs 8.0G 0 8.0G 0% /tmp/ramdisk
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

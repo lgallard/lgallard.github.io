@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2014-08-26T12:45:02-05:00">
+<meta property="article:published_time" content="2014-08-26T17:45:02+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -354,7 +354,7 @@
 
 <p>Sometimes it is necessary to extend a logical volume, expanding the physical volume where it is hosted. If this is the case, you can follow this example extending a volume of 450 GB to 500 GB: First, Let’s check the disk geometry:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# fdisk -l /dev/sdb
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# fdisk -l /dev/sdb
 
 Disk /dev/sdb: 483.2 GB, 483183820800 bytes
  255 heads, 63 sectors/track, 58743 cylinders, total 943718400 sectors
@@ -366,12 +366,12 @@ Disk /dev/sdb: 483.2 GB, 483183820800 bytes
 
 <p>After expanding the volume you must make the system to rescan the volume:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# echo 1 &amp;gt; /sys/block/sdb/device/rescan
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# echo 1 &amp;gt; /sys/block/sdb/device/rescan
 </code></pre></div></div>
 
 <p>Then check the disk geometry one more time:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# fdisk -l /dev/sdb
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# fdisk -l /dev/sdb
 
 Disk /dev/sdb: 536.9 GB, 536870912000 bytes
  255 heads, 63 sectors/track, 65270 cylinders, total 1048576000 sectors
@@ -383,7 +383,7 @@ Disk /dev/sdb: 536.9 GB, 536870912000 bytes
 
 <p>As you can see, the disk size grew up but this is only known by the operating system, because the LVM still has the same information since the physical volume hasn’t been expanded yet:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvs
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvs
  PV VG Fmt Attr PSize PFree
  /dev/sda5 debian lvm2 a-- 3.76g 0
  /dev/sda6 debian lvm2 a-- 13.00g 0
@@ -392,14 +392,14 @@ Disk /dev/sdb: 536.9 GB, 536870912000 bytes
 
 <p>If you extend the physical volume with the following command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvresize /dev/sdb
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvresize /dev/sdb
  Physical volume "/dev/sdb" changed
  1 physical volume(s) resized / 0 physical volume(s) not resized
 </code></pre></div></div>
 
 <p>And check the physical volume sizes you will see the added space:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvs
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# pvs
  PV VG Fmt Attr PSize PFree
  /dev/sda5 debian lvm2 a-- 3.76g 0
  /dev/sda6 debian lvm2 a-- 13.00g 0
@@ -408,7 +408,7 @@ Disk /dev/sdb: 536.9 GB, 536870912000 bytes
 
 <p>Now you have to extend the logical volume and the system file size on the fly. You can do both actions using just one command:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# lvresize -r -L +50G /dev/mapper/svn_vg-svn
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# lvresize -r -L +50G /dev/mapper/svn_vg-svn
 
 Extending logical volume svn to 500.00 GiB
  Logical volume svn successfully resized
@@ -421,7 +421,7 @@ Extending logical volume svn to 500.00 GiB
 
 <p>Finally, check the free space available to see the added 50 GB in the system file:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df -h
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df -h
  Filesystem Size Used Avail Use% Mounted on
  rootfs 993M 287M 655M 31% /
  udev 10M 0 10M 0% /dev
@@ -485,7 +485,7 @@ Extending logical volume svn to 500.00 GiB
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-08-26T12:45:02-05:00">August 26, 2014</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2014-08-26T17:45:02+00:00">August 26, 2014</time></p>
         
       </footer>
 
@@ -571,41 +571,6 @@ Extending logical volume svn to 500.00 GiB
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -662,6 +627,41 @@ Extending logical volume svn to 500.00 GiB
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

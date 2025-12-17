@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/luis.jpg">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/luis.jpg">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/assets/images/luis.jpg">
+<meta property="og:image" content="https://lgallardo.com/assets/images/luis.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2015-06-15T05:10:40-05:00">
+<meta property="article:published_time" content="2015-06-15T10:10:40+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -101,7 +101,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -123,7 +123,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -135,7 +135,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -177,7 +177,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -214,7 +214,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -356,12 +356,12 @@ Si necesitas instalar la versión de Java de Oracle en Debian, puede seguir los 
 
 <p>Una vez descargado el  procedemos a extraerlo en el directorio <em>/opt</em>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># tar xvzf jdk-8u45-linux-x64.tar.gz&lt;/pre&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># tar xvzf jdk-8u45-linux-x64.tar.gz&lt;/pre&gt;
 </code></pre></div></div>
 
 <p>Primero vamos a consultar la versión de <em>java</em> actual:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -version&lt;/pre&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -version&lt;/pre&gt;
  
 java version "1.7.0_79"
 OpenJDK Runtime Environment (IcedTea 2.5.5) (7u79-2.5.5-0ubuntu0.14.04.2)
@@ -370,12 +370,12 @@ OpenJDK 64-Bit Server VM (build 24.79-b02, mixed mode)
 
 <p>Aquí puede verse que la versión a la que se hace referencia actualmente es la 1.7.0_79 de OpenJDK. Ahora vamos agregar la ruta de la nueva versión a usar:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_45/bin/java 1&lt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_45/bin/java 1&lt;
 </code></pre></div></div>
 
 <p>Esta última orden agrega la ruta <em>/opt/jdk1.8.0_45/bin/java</em> al binario <em>/usr/bin/java java</em>, es decir, este será el enlace simbólico a usar en caso de seleccionar esta opción. Vamos a configurar los <em>alternatives</em> para que apunte a la nueva ruta:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update-alternatives --config java
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># update-alternatives --config java
  
    Selection Path Priority Status
 ------------------------------------------------------------
@@ -389,7 +389,7 @@ Enter to keep the current selection[+], or type selection number: 1
 
 <p>Luego de seleccionar la opción 1, verificamos  la versión de <em>java</em> una vez más:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -version
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -version
 
 java version "1.8.0_45"
 Java(TM) SE Runtime Environment (build 1.8.0_45-b14)
@@ -398,7 +398,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)
 
 <p>Ahora el binario de java apunta a la versión de Oracle. Cosa que podemos verificar consultando los enlaces simbólicos:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ls -l /usr/bin/java
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># ls -l /usr/bin/java
 lrwxrwxrwx 1 root root 22 jun  9  2014 /usr/bin/java -&gt;; /etc/alternatives/java
 
 # ls -l /etc/alternatives/java
@@ -424,7 +424,7 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
     
       
       
-      <a href="https://lgallardo.com/es/tags/general" class="page__taxonomy-item" rel="tag">General</a>
+      <a href="https://lgallardo.com/tags/general" class="page__taxonomy-item" rel="tag">General</a>
     
     </span>
   </p>
@@ -445,14 +445,14 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-06-15T05:10:40-05:00">June 15, 2015</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-06-15T10:10:40+00:00">June 15, 2015</time></p>
         
       </footer>
 
@@ -461,24 +461,24 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=C%C3%B3mo+instalar+Oracle+Java+en+Debian%20https%3A%2F%2Flgallardo.com%2Fes%2F2015%2F06%2F15%2Fcomo-instalar-oracle-java-en-debian%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=C%C3%B3mo+instalar+Oracle+Java+en+Debian%20https%3A%2F%2Flgallardo.com%2F2015%2F06%2F15%2Fcomo-instalar-oracle-java-en-debian%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2015%2F06%2F15%2Fcomo-instalar-oracle-java-en-debian%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2015%2F06%2F15%2Fcomo-instalar-oracle-java-en-debian%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2015%2F06%2F15%2Fcomo-instalar-oracle-java-en-debian%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2015%2F06%2F15%2Fcomo-instalar-oracle-java-en-debian%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2015%2F06%2F15%2Fcomo-instalar-oracle-java-en-debian%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2015%2F06%2F15%2Fcomo-instalar-oracle-java-en-debian%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent/" class="pagination--pager" title="Cómo activar la interfaz Web de qBittorrent
+      <a href="https://lgallardo.com/2014/09/29/como-activar-la-interfaz-web-de-qbittorrent/" class="pagination--pager" title="Cómo activar la interfaz Web de qBittorrent
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2015/06/17/como-agregar-apache-http-client-en-android-studio/" class="pagination--pager" title="Cómo agregar Apache HTTP Client en Android Studio
+      <a href="https://lgallardo.com/2015/06/17/como-agregar-apache-http-client-en-android-studio/" class="pagination--pager" title="Cómo agregar Apache HTTP Client en Android Studio
 ">Next</a>
     
   </nav>
@@ -503,14 +503,14 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -538,49 +538,14 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -608,14 +573,14 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -629,6 +594,41 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -660,7 +660,7 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -670,7 +670,7 @@ lrwxrwxrwx 1 root root 25 jun 15 09:21 /etc/alternatives/java -&gt;; /opt/jdk1.8
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

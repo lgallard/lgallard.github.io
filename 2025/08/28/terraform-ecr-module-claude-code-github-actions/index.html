@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2025-08-27T19:00:00-05:00">
+<meta property="article:published_time" content="2025-08-28T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -417,12 +417,12 @@
           <span class="na">ANTHROPIC_API_KEY</span><span class="pi">:</span> <span class="s">$</span>
           <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
         <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="no">claude-code analyze-terraform-module \</span>
-            <span class="no">--provider hashicorp/aws \</span>
-            <span class="no">--resource-type aws_ecr_repository \</span>
-            <span class="no">--module-path . \</span>
-            <span class="no">--create-issues \</span>
-            <span class="no">--auto-fix-safe</span>
+          <span class="s">claude-code analyze-terraform-module \</span>
+            <span class="s">--provider hashicorp/aws \</span>
+            <span class="s">--resource-type aws_ecr_repository \</span>
+            <span class="s">--module-path . \</span>
+            <span class="s">--create-issues \</span>
+            <span class="s">--auto-fix-safe</span>
 </code></pre></div></div>
 
 <h3 id="production-workflow-configuration">Production Workflow Configuration</h3>
@@ -437,19 +437,19 @@
     <span class="na">inputs</span><span class="pi">:</span>
       <span class="na">provider_version</span><span class="pi">:</span>
         <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">AWS</span><span class="nv"> </span><span class="s">Provider</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">check</span><span class="nv"> </span><span class="s">(default:</span><span class="nv"> </span><span class="s">latest)'</span>
-        <span class="na">required</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">required</span><span class="pi">:</span> <span class="kc">false</span>
         <span class="na">default</span><span class="pi">:</span> <span class="s1">'</span><span class="s">latest'</span>
         <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
       <span class="na">dry_run</span><span class="pi">:</span>
         <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Run</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">without</span><span class="nv"> </span><span class="s">creating</span><span class="nv"> </span><span class="s">issues'</span>
-        <span class="na">required</span><span class="pi">:</span> <span class="no">false</span>
-        <span class="na">default</span><span class="pi">:</span> <span class="no">false</span>
+        <span class="na">required</span><span class="pi">:</span> <span class="kc">false</span>
+        <span class="na">default</span><span class="pi">:</span> <span class="kc">false</span>
         <span class="na">type</span><span class="pi">:</span> <span class="s">boolean</span>
 
 <span class="na">jobs</span><span class="pi">:</span>
   <span class="na">discover-ecr-features</span><span class="pi">:</span>
     <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="s">30</span>
+    <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="m">30</span>
     <span class="na">permissions</span><span class="pi">:</span>
       <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
       <span class="na">issues</span><span class="pi">:</span> <span class="s">write</span>
@@ -468,32 +468,32 @@
           
           <span class="c1"># MCP Configuration for documentation access</span>
           <span class="na">mcp_config</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="no">{</span>
-              <span class="no">"mcpServers": {</span>
-                <span class="no">"terraform": {</span>
-                  <span class="no">"command": "npx",</span>
-                  <span class="no">"args": ["-y", "@modelcontextprotocol/server-terraform@latest"]</span>
-                <span class="no">},</span>
-                <span class="no">"context7": {</span>
-                  <span class="no">"command": "npx", </span>
-                  <span class="no">"args": ["-y", "@upstash/context7-mcp@latest"]</span>
-                <span class="no">}</span>
-              <span class="no">}</span>
-            <span class="no">}</span>
+            <span class="s">{</span>
+              <span class="s">"mcpServers": {</span>
+                <span class="s">"terraform": {</span>
+                  <span class="s">"command": "npx",</span>
+                  <span class="s">"args": ["-y", "@modelcontextprotocol/server-terraform@latest"]</span>
+                <span class="s">},</span>
+                <span class="s">"context7": {</span>
+                  <span class="s">"command": "npx", </span>
+                  <span class="s">"args": ["-y", "@upstash/context7-mcp@latest"]</span>
+                <span class="s">}</span>
+              <span class="s">}</span>
+            <span class="s">}</span>
           
           <span class="c1"># Direct prompt for comprehensive feature discovery</span>
           <span class="na">direct_prompt</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="no"># ECR Feature Discovery Analysis</span>
+            <span class="s"># ECR Feature Discovery Analysis</span>
             
-            <span class="no">Analyze the latest AWS provider ECR resources and compare them with </span>
-            <span class="no">the current module implementation to identify:</span>
-            <span class="no">1. New Features: ECR resources/arguments not yet implemented</span>
-            <span class="no">2. Deprecations: Features marked as deprecated in the provider</span>
-            <span class="no">3. Bug Fixes: Important fixes mentioned in provider changelogs</span>
+            <span class="s">Analyze the latest AWS provider ECR resources and compare them with </span>
+            <span class="s">the current module implementation to identify:</span>
+            <span class="s">1. New Features: ECR resources/arguments not yet implemented</span>
+            <span class="s">2. Deprecations: Features marked as deprecated in the provider</span>
+            <span class="s">3. Bug Fixes: Important fixes mentioned in provider changelogs</span>
             
-            <span class="no">Use Terraform MCP server to get latest ECR documentation, analyze</span>
-            <span class="no">current module implementation, and create detailed GitHub issues</span>
-            <span class="no">for significant findings with comprehensive implementation guidance.</span>
+            <span class="s">Use Terraform MCP server to get latest ECR documentation, analyze</span>
+            <span class="s">current module implementation, and create detailed GitHub issues</span>
+            <span class="s">for significant findings with comprehensive implementation guidance.</span>
           
           <span class="na">mode</span><span class="pi">:</span> <span class="s">agent</span>
 </code></pre></div></div>
@@ -523,10 +523,10 @@
 
 <p><img src="/assets/images/claude-code-gh-discovery-system.png" alt="GH Issue with findings" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
 
-<p><strong>The Problem</strong>: The module’s validation logic only accepted <code class="highlighter-rouge">IMMUTABLE</code> and <code class="highlighter-rouge">MUTABLE</code> values for <code class="highlighter-rouge">image_tag_mutability</code>, but AWS had introduced two new options:</p>
+<p><strong>The Problem</strong>: The module’s validation logic only accepted <code class="language-plaintext highlighter-rouge">IMMUTABLE</code> and <code class="language-plaintext highlighter-rouge">MUTABLE</code> values for <code class="language-plaintext highlighter-rouge">image_tag_mutability</code>, but AWS had introduced two new options:</p>
 <ul>
-  <li><code class="highlighter-rouge">IMMUTABLE_WITH_EXCLUSION</code></li>
-  <li><code class="highlighter-rouge">MUTABLE_WITH_EXCLUSION</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IMMUTABLE_WITH_EXCLUSION</code></li>
+  <li><code class="language-plaintext highlighter-rouge">MUTABLE_WITH_EXCLUSION</code></li>
 </ul>
 
 <p><strong>The Discovery</strong>: Claude Code analyzed the AWS provider documentation, compared it with the module’s validation constraints, and immediately identified the discrepancy.</p>
@@ -561,11 +561,11 @@
     <span class="na">steps</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Analyze Issue</span>
         <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="no">claude-code triage-issue \</span>
-            <span class="no">--issue-number $ \</span>
-            <span class="no">--assign-labels \</span>
-            <span class="no">--suggest-assignees \</span>
-            <span class="no">--create-summary</span>
+          <span class="s">claude-code triage-issue \</span>
+            <span class="s">--issue-number $ \</span>
+            <span class="s">--assign-labels \</span>
+            <span class="s">--suggest-assignees \</span>
+            <span class="s">--create-summary</span>
 </code></pre></div></div>
 
 <p><strong>Benefits</strong>: Reduces manual triage time by 80%, improves response times, ensures consistent labeling.</p>
@@ -706,7 +706,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-27T19:00:00-05:00">August 28, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-28T00:00:00+00:00">August 28, 2025</time></p>
         
       </footer>
 
@@ -792,41 +792,6 @@
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -883,6 +848,41 @@
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/ccr-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="permalink">Beyond Anthropic: Using Claude Code with Any Model via Claude Code Router and OpenRouter
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Unlock the full potential of Claude Code by routing requests through Claude Code Router and OpenRouter—use free models, self-hosted solutions like Ollama, or...</p>
       </div>
     </div>
   </article>

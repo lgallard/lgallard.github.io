@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/code-cursor-claude.png">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/code-cursor-claude.png">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/assets/images/code-cursor-claude.png">
+<meta property="og:image" content="https://lgallardo.com/assets/images/code-cursor-claude.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2025-07-08T19:00:00-05:00">
+<meta property="article:published_time" content="2025-07-09T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -105,7 +105,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -127,7 +127,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -139,7 +139,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -181,7 +181,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -218,7 +218,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -362,11 +362,11 @@
 
 <p>Instalar Claude Code es sencillo con npm:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> @anthropic-ai/claude-code
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> @anthropic-ai/claude-code
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Importante</strong>: NO uses <code class="highlighter-rouge">sudo npm install -g</code> ya que esto puede llevar a problemas de permisos y riesgos de seguridad.</p>
+  <p><strong>Importante</strong>: NO uses <code class="language-plaintext highlighter-rouge">sudo npm install -g</code> ya que esto puede llevar a problemas de permisos y riesgos de seguridad.</p>
 </blockquote>
 
 <p>Una vez instalado, navega a tu proyecto e inicia Claude Code:</p>
@@ -389,7 +389,7 @@ claude
 
 <h3 id="-cli-vs-ide">💻 CLI vs IDE</h3>
 
-<p>A pesar de ser una herramienta principalmente CLI, Claude Code ofrece extensiones para <strong>VS Code</strong> y <strong>Cursor</strong> (que está basado en VS Code). Esto significa que puedes ejecutar Claude Code desde una terminal en tu editor y usar el comando <code class="highlighter-rouge">/ide</code> para ver los cambios aplicados en, digamos, Cursor—cerrando la brecha entre los flujos de trabajo basados en texto y GUI.</p>
+<p>A pesar de ser una herramienta principalmente CLI, Claude Code ofrece extensiones para <strong>VS Code</strong> y <strong>Cursor</strong> (que está basado en VS Code). Esto significa que puedes ejecutar Claude Code desde una terminal en tu editor y usar el comando <code class="language-plaintext highlighter-rouge">/ide</code> para ver los cambios aplicados en, digamos, Cursor—cerrando la brecha entre los flujos de trabajo basados en texto y GUI.</p>
 
 <p><img src="/assets/images/claude-code-ide.png" alt="Claude Code /ide" /></p>
 
@@ -397,12 +397,12 @@ claude
 
 <h2 id="-primeras-impresiones-y-experiencia-de-usuario">💭 Primeras Impresiones y Experiencia de Usuario</h2>
 
-<p>Cambiar de Cursor o VS Code a una herramienta dirigida por CLI se sintió extraño al principio. La falta de arrastrar y soltar para imágenes fue notable, pero puedes solucionarlo referenciando archivos directamente (ej., <code class="highlighter-rouge">@path_to_image</code>). Lo mismo aplica para cualquier archivo que quieras compartir con Claude Code.</p>
+<p>Cambiar de Cursor o VS Code a una herramienta dirigida por CLI se sintió extraño al principio. La falta de arrastrar y soltar para imágenes fue notable, pero puedes solucionarlo referenciando archivos directamente (ej., <code class="language-plaintext highlighter-rouge">@path_to_image</code>). Lo mismo aplica para cualquier archivo que quieras compartir con Claude Code.</p>
 
 <p style="text-align: center;"><img src="/assets/images/claude-code-add-files.png" alt="Claude Code add files" />
 <em>Agregando archivos</em></p>
 
-<p>Lo que realmente me impresionó fue cómo <strong>Claude Code recuerda las instrucciones</strong>. Por ejemplo, solo tuve que decirle una vez que ejecutara <code class="highlighter-rouge">pre-commit</code> en archivos nuevos y modificados—a diferencia de Cursor, que a menudo necesita recordatorios a pesar de tener esta regla configurada globalmente. Otro punto destacado: cuando referencié un archivo llamado <code class="highlighter-rouge">report-23.csv</code> y luego lo eliminé en favor de un nuevo reporte, Claude Code buscó proactivamente cualquier archivo <code class="highlighter-rouge">report-*.csv</code>, mostrando un nivel de conciencia contextual que se sintió genuinamente útil.</p>
+<p>Lo que realmente me impresionó fue cómo <strong>Claude Code recuerda las instrucciones</strong>. Por ejemplo, solo tuve que decirle una vez que ejecutara <code class="language-plaintext highlighter-rouge">pre-commit</code> en archivos nuevos y modificados—a diferencia de Cursor, que a menudo necesita recordatorios a pesar de tener esta regla configurada globalmente. Otro punto destacado: cuando referencié un archivo llamado <code class="language-plaintext highlighter-rouge">report-23.csv</code> y luego lo eliminé en favor de un nuevo reporte, Claude Code buscó proactivamente cualquier archivo <code class="language-plaintext highlighter-rouge">report-*.csv</code>, mostrando un nivel de conciencia contextual que se sintió genuinamente útil.</p>
 
 <h2 id="-sequential-thinking-planificación-con-ia">🧠 Sequential Thinking: Planificación con IA</h2>
 
@@ -509,7 +509,7 @@ claude
     
       
       
-      <a href="https://lgallardo.com/es/tags/sequential-thinking" class="page__taxonomy-item" rel="tag">Sequential Thinking</a>
+      <a href="https://lgallardo.com/tags/sequential-thinking" class="page__taxonomy-item" rel="tag">Sequential Thinking</a>
     
     </span>
   </p>
@@ -530,14 +530,14 @@ claude
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-08T19:00:00-05:00">July 09, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-09T00:00:00+00:00">July 09, 2025</time></p>
         
       </footer>
 
@@ -546,24 +546,24 @@ claude
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=M%C3%A1s+all%C3%A1+de+Cursor%3A+Mi+experiencia+con+Claude+Code+y+Sequential+Thinking%20https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F09%2Fbeyond-cursor-claude-code-sequential-thinking%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=M%C3%A1s+all%C3%A1+de+Cursor%3A+Mi+experiencia+con+Claude+Code+y+Sequential+Thinking%20https%3A%2F%2Flgallardo.com%2F2025%2F07%2F09%2Fbeyond-cursor-claude-code-sequential-thinking%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F09%2Fbeyond-cursor-claude-code-sequential-thinking%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F09%2Fbeyond-cursor-claude-code-sequential-thinking%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F09%2Fbeyond-cursor-claude-code-sequential-thinking%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F09%2Fbeyond-cursor-claude-code-sequential-thinking%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F09%2Fbeyond-cursor-claude-code-sequential-thinking%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F09%2Fbeyond-cursor-claude-code-sequential-thinking%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2025/07/01/choosing-right-ai-model-cursor/" class="pagination--pager" title="Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica
+      <a href="https://lgallardo.com/2025/07/01/choosing-right-ai-model-cursor/" class="pagination--pager" title="Eligiendo el Modelo de IA Correcto en Cursor: Una Guía Práctica
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2025/07/18/claude-code-github-actions-setup/" class="pagination--pager" title="Automatizando Revisiones de Código con Claude Code GitHub Actions
+      <a href="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/" class="pagination--pager" title="Automatizando Revisiones de Código con Claude Code GitHub Actions
 ">Next</a>
     
   </nav>
@@ -588,14 +588,14 @@ claude
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -623,49 +623,14 @@ claude
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -693,14 +658,14 @@ claude
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -714,6 +679,41 @@ claude
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -745,7 +745,7 @@ claude
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -755,7 +755,7 @@ claude
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

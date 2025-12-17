@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2013-03-17T14:06:20-05:00">
+<meta property="article:published_time" content="2013-03-17T19:06:20+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -361,21 +361,21 @@ I’ve been using my Raspberry Pi with a 4 GB - class 4  SD card Kingston until
 
 <p>Just dump the Raspbian image as it were a SD card, but instead of using <em>/dev/mmcblk0</em> do it on your  pen drive:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.img <span class="nv">of</span><span class="o">=</span>/dev/sdb
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.img <span class="nv">of</span><span class="o">=</span>/dev/sdb
 </code></pre></div></div>
 
 <h2 id="extracting-the-boot-image">Extracting the boot image</h2>
 
 <p>In order to extract the Raspbian’s boot image just dump the first partition of the pen drive:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/dev/scb1 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/scb1 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img
 </code></pre></div></div>
 
 <h2 id="extracting-the-operating-system">Extracting the operating system</h2>
 
 <p>Do the same to extract the file system where the operating systems resides:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/dev/sdc2 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/sdc2 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img
 </code></pre></div></div>
 
 <h1 id="partition-boot-on-sd-card">Partition /boot on SD card</h1>
@@ -387,7 +387,7 @@ I’ve been using my Raspberry Pi with a 4 GB - class 4  SD card Kingston until
 
 <p>Now copy the content of the first image you dumped previously:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img <span class="nv">of</span><span class="o">=</span>/dev/sdb1
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img <span class="nv">of</span><span class="o">=</span>/dev/sdb1
 </code></pre></div></div>
 
 <p>Once you have copied the data you must mount that partition and then edit file <em>/media/usb0/cmdline.txt  </em>(change <em>/media/usb0</em> according to the mounting point), and put the following:</p>
@@ -409,7 +409,7 @@ I’ve been using my Raspberry Pi with a 4 GB - class 4  SD card Kingston until
 
 <p>Now you can dump the Raspian image you got to the first partition of the USB hard drive. To do so type this:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img <span class="nv">of</span><span class="o">=</span>/dev/sdc1
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img <span class="nv">of</span><span class="o">=</span>/dev/sdc1
 </code></pre></div></div>
 
 <h2 id="fixing-the-size-partition">Fixing the size partition</h2>
@@ -437,7 +437,7 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
 
 <p>After that check the available space. It should report something like this:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df <span class="nt">-h</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">df</span> <span class="nt">-h</span>
 
 /dev/sdc2 285G 191M 271G 1% /media/Data
 /dev/sdc1 8.7G 1.3G 7.0G 16% /media/Raspbian
@@ -502,7 +502,7 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-03-17T14:06:20-05:00">March 17, 2013</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-03-17T19:06:20+00:00">March 17, 2013</time></p>
         
       </footer>
 
@@ -588,41 +588,6 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -679,6 +644,41 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

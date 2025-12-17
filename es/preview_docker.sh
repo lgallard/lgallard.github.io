@@ -1,8 +1,12 @@
 #!/bin/bash
 
-export JEKYLL_VERSION=3.8.6
-# with Clean up (--rm) and future posts
-#docker run --rm --volume="$PWD:/srv/jekyll" -p:4000:4000  -it jekyll/jekyll:$JEKYLL_VERSION jekyll serve --future
+# Jekyll 4.x preview server using bretfisher/jekyll
+# Includes future posts for testing scheduled content
 
-# No clean up, with future posts
-docker run --volume="$PWD:/srv/jekyll" -p:4000:4000  -it jekyll/jekyll:$JEKYLL_VERSION jekyll serve --future
+# First install dependencies
+echo "📦 Installing dependencies..."
+docker run --rm --entrypoint bash -v "$PWD:/site" -w /site bretfisher/jekyll -c "bundle install --retry 5 --jobs 20"
+
+# Start the preview server with future posts enabled
+echo "🚀 Starting Jekyll preview server at http://localhost:4000"
+docker run --rm -p 4000:4000 --entrypoint bash -v "$PWD:/site" -w /site bretfisher/jekyll -c "bundle exec jekyll serve --host 0.0.0.0 --future"

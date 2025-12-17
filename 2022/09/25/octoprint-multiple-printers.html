@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2022-09-24T19:00:00-05:00">
+<meta property="article:published_time" content="2022-09-25T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -398,26 +398,26 @@ One of the most useful tools when managing a 3D printer is <a href="https://octo
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pi@octopi:~<span class="nv">$ </span><span class="nb">sudo </span>su
 root@octopi:~# 
 
-root@octopi:~# apt install curl
+root@octopi:~# apt <span class="nb">install </span>curl
 root@octopi:~# curl <span class="nt">-sSL</span> https://get.docker.com | sh
 
 root@octopi:~# apt update
-root@octopi:~# apt install docker-compose
+root@octopi:~# apt <span class="nb">install </span>docker-compose
 </code></pre></div></div>
 
 <h2 id="octoprint-with-one-printer">OctoPrint with one printer</h2>
 <p>The first thing you need is to create a folder for OctoPrint, and then go into it:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# mkdir octoprint
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# <span class="nb">mkdir </span>octoprint
 root@octopi:~# 
 root@octopi:~# <span class="nb">cd </span>octoprint/
 root@octopi:~/octoprint#
 </code></pre></div></div>
 
-<p>Let’s start with a printer, in this case I’ll start with the <code class="highlighter-rouge">Artillery Genius Pro</code>. For this you can create a folder that identifies this printer:</p>
+<p>Let’s start with a printer, in this case I’ll start with the <code class="language-plaintext highlighter-rouge">Artillery Genius Pro</code>. For this you can create a folder that identifies this printer:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# mkdir geniuspro
-root@octopi:~# chmod <span class="nt">-R</span> 777 geniuspro/
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# <span class="nb">mkdir </span>geniuspro
+root@octopi:~# <span class="nb">chmod</span> <span class="nt">-R</span> 777 geniuspro/
 </code></pre></div></div>
 
 <p>It’s important to know the actual path because you’ll use it later in the container definition along with the name of this folder. To do this, execute the following command:</p>
@@ -426,11 +426,11 @@ root@octopi:~# chmod <span class="nt">-R</span> 777 geniuspro/
 /root/octoprint
 </code></pre></div></div>
 
-<p>With this you can indicate the files of this first instance of OctoPrint will reside in <code class="highlighter-rouge">/root/octoprint/geniuspro</code></p>
+<p>With this you can indicate the files of this first instance of OctoPrint will reside in <code class="language-plaintext highlighter-rouge">/root/octoprint/geniuspro</code></p>
 
-<p>Now to configure the printer you need to use  <code class="highlighter-rouge">docker-compose</code> so you need to create the <code class="highlighter-rouge">docker-compose.yml</code> file with the following information:</p>
+<p>Now to configure the printer you need to use  <code class="language-plaintext highlighter-rouge">docker-compose</code> so you need to create the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file with the following information:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
 
 services:
   geniuspro:
@@ -452,21 +452,21 @@ services:
       - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30
 </code></pre></div></div>
 
-<p>This file defines various things related to OctoPrint, such as the webcam and the printer itself. For example,  <code class="highlighter-rouge">image</code>  indicates which Docker image to use for the <code class="highlighter-rouge">geniuspro</code> service.</p>
+<p>This file defines various things related to OctoPrint, such as the webcam and the printer itself. For example,  <code class="language-plaintext highlighter-rouge">image</code>  indicates which Docker image to use for the <code class="language-plaintext highlighter-rouge">geniuspro</code> service.</p>
 
-<p>Notice the ports definitions, where <code class="highlighter-rouge">5000</code> will be used for the web interface and <code class="highlighter-rouge">8080</code> for webcam streaming video.</p>
+<p>Notice the ports definitions, where <code class="language-plaintext highlighter-rouge">5000</code> will be used for the web interface and <code class="language-plaintext highlighter-rouge">8080</code> for webcam streaming video.</p>
 
-<p>On the other hand, the printer is defined as a device in <code class="highlighter-rouge">/dev/ttyACM0</code>, and the webcam in <code class="highlighter-rouge">/dev/video0</code></p>
+<p>On the other hand, the printer is defined as a device in <code class="language-plaintext highlighter-rouge">/dev/ttyACM0</code>, and the webcam in <code class="language-plaintext highlighter-rouge">/dev/video0</code></p>
 
-<p>Something to keep in mind and that differs from the <a href="https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit" target="_bla￼nk">example on which I based</a>, is that the streamer is now part of the Docker image and is served on port <code class="highlighter-rouge">8080</code>, so there is no need to have a separate definition of another Docker image pointing to the streamer.</p>
+<p>Something to keep in mind and that differs from the <a href="https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit" target="_bla￼nk">example on which I based</a>, is that the streamer is now part of the Docker image and is served on port <code class="language-plaintext highlighter-rouge">8080</code>, so there is no need to have a separate definition of another Docker image pointing to the streamer.</p>
 
-<p><code class="highlighter-rouge">volumes</code>  has the reference to the printer directory that you had created as <code class="highlighter-rouge">/root/octoprint/geniuspro</code>, which will be mapped into the container as the <code class="highlighter-rouge">/octoprint</code> folder. That is, when we launch the container all the OctoPrint files for this printer will be in the <code class="highlighter-rouge">/root/octoprint/geniuspro</code> path of the operating system.</p>
+<p><code class="language-plaintext highlighter-rouge">volumes</code>  has the reference to the printer directory that you had created as <code class="language-plaintext highlighter-rouge">/root/octoprint/geniuspro</code>, which will be mapped into the container as the <code class="language-plaintext highlighter-rouge">/octoprint</code> folder. That is, when we launch the container all the OctoPrint files for this printer will be in the <code class="language-plaintext highlighter-rouge">/root/octoprint/geniuspro</code> path of the operating system.</p>
 
-<p>Finally, <code class="highlighter-rouge">environment</code> has the streamer parameters, like webcam device from the container. In this case both the OS and the container match the path <code class="highlighter-rouge">/dev/video0</code>. Here you also need to provide you webcam parameters, in my case I indicated that the resolution is 1280x960 at 30 frames per second, which is what corresponds to my Logitech C270. For other models you can consult the <a href="https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149">supported cameras list page</a>.</p>
+<p>Finally, <code class="language-plaintext highlighter-rouge">environment</code> has the streamer parameters, like webcam device from the container. In this case both the OS and the container match the path <code class="language-plaintext highlighter-rouge">/dev/video0</code>. Here you also need to provide you webcam parameters, in my case I indicated that the resolution is 1280x960 at 30 frames per second, which is what corresponds to my Logitech C270. For other models you can consult the <a href="https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149">supported cameras list page</a>.</p>
 
-<p>Once the <code class="highlighter-rouge">docker-compose.yml</code> file has been created with the information shown above, all you have to do is start the service with Docker:</p>
+<p>Once the <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file has been created with the information shown above, all you have to do is start the service with Docker:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
   
 Creating octoprint_geniuspro_1 ... done
 </code></pre></div></div>
@@ -479,7 +479,7 @@ Creating octoprint_geniuspro_1 ... done
 
 <p>To add a second printer, you just have to replicate the configuration you had before, but specifying the new printer and the corresponding video camera. So for my Artillery Sidewinder X2 this would be:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
 
 services:
   geniuspro:
@@ -520,11 +520,11 @@ services:
 
 </code></pre></div></div>
 
-<p>Take into account the phycal printer is identified as <code class="highlighter-rouge">/dev/ttyACM1</code> in the Raspberry , but the container internally it will be see it as <code class="highlighter-rouge">/dev/ttyACM0</code>. The same goes for the video camera, where it is physically identified as <code class="highlighter-rouge">/dev/video2</code> but internally the container will see it as <code class="highlighter-rouge">/dev/video0</code>.</p>
+<p>Take into account the phycal printer is identified as <code class="language-plaintext highlighter-rouge">/dev/ttyACM1</code> in the Raspberry , but the container internally it will be see it as <code class="language-plaintext highlighter-rouge">/dev/ttyACM0</code>. The same goes for the video camera, where it is physically identified as <code class="language-plaintext highlighter-rouge">/dev/video2</code> but internally the container will see it as <code class="language-plaintext highlighter-rouge">/dev/video0</code>.</p>
 
 <p>Once the configuration has been created, the container must be run as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
   
 octoprint_geniuspro_1 is up-to-date
 Creating octoprint_sidewinderx2_1 ... done
@@ -535,11 +535,11 @@ Creating octoprint_sidewinderx2_1 ... done
 <p><img src="/assets/images/octoprint-multi-web2.jpg" alt="OctoPrint Web 2" /></p>
 
 <h2 id="how-to-differentiate-printers">How to differentiate printers?</h2>
-<p>In the example above I used the devices <code class="highlighter-rouge">/dev/ttyACM0</code> and <code class="highlighter-rouge">/dev/ttyACM1</code> to reference my first printer, the Artillery Genius Pro, and my second printer, the Artillery SideWinder X2, but the operating system not always takes that order, since it will depend on which one you had turned on first. In order to identify the printers regardless of the connection order we can create a symbolic link using <code class="highlighter-rouge">udev</code> with the manufacturer and product information.</p>
+<p>In the example above I used the devices <code class="language-plaintext highlighter-rouge">/dev/ttyACM0</code> and <code class="language-plaintext highlighter-rouge">/dev/ttyACM1</code> to reference my first printer, the Artillery Genius Pro, and my second printer, the Artillery SideWinder X2, but the operating system not always takes that order, since it will depend on which one you had turned on first. In order to identify the printers regardless of the connection order we can create a symbolic link using <code class="language-plaintext highlighter-rouge">udev</code> with the manufacturer and product information.</p>
 
 <p>For this, you have first list the USB devices:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# lsusb
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# lsusb
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
@@ -552,7 +552,7 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 <p>There are two <strong>STMicroelectronics Virtual COM Port</strong> devices here, corresponding to the two printers, but which is which? We are going to ask for the detail of these devices:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> root@octopi:~/octoprint# lsusb -v -d 0483:5740
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> root@octopi:~/octoprint# lsusb -v -d 0483:5740
 
 Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
 Device Descriptor:
@@ -589,45 +589,45 @@ Device Descriptor:
 ...
 </code></pre></div></div>
 
-<p>What differentiates one printer from another is the serial number of the device. Since the Artillery Genius Pro was initially mapped to <code class="highlighter-rouge">/dev/ttyACM0</code>, we can check what its serial number is:</p>
+<p>What differentiates one printer from another is the serial number of the device. Since the Artillery Genius Pro was initially mapped to <code class="language-plaintext highlighter-rouge">/dev/ttyACM0</code>, we can check what its serial number is:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
     ATTRS{serial}=="3594398F3538"
     ATTRS{serial}=="0000:01:00.0"
 </code></pre></div></div>
 
-<p>Now to see the serial code of the Artillery Sidewinder X2 you have to consult the device <code class="highlighter-rouge">/dev/ttyACM1</code>:</p>
+<p>Now to see the serial code of the Artillery Sidewinder X2 you have to consult the device <code class="language-plaintext highlighter-rouge">/dev/ttyACM1</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM1 | grep serial
     ATTRS{serial}=="386F39543538"
     ATTRS{serial}=="0000:01:00.0" 
 </code></pre></div></div>
 
-<p>For <code class="highlighter-rouge">udev</code> to recognize these rules we must create the following file <code class="highlighter-rouge">/etc/udev/rules.d/40-printers.rules</code> , with this content:</p>
+<p>For <code class="language-plaintext highlighter-rouge">udev</code> to recognize these rules we must create the following file <code class="language-plaintext highlighter-rouge">/etc/udev/rules.d/40-printers.rules</code> , with this content:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Genius Pro
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Genius Pro
 KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="3594398F3538", SYMLINK="ttyGeniusPro"
 
 # Sidewinder X2
 KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="386F39543538", SYMLINK="ttySidewinderX2"
 </code></pre></div></div>
 
-<p>Then <code class="highlighter-rouge">udev</code> must be restarted to take these changes:</p>
+<p>Then <code class="language-plaintext highlighter-rouge">udev</code> must be restarted to take these changes:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
 </code></pre></div></div>
 
 <p>This way the printers will be mapped as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
 lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttyGeniusPro -&gt; ttyACM0
 lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttySidewinderX2 -&gt; ttyACM1
 </code></pre></div></div>
 
 <p>So the Docker configuration can be modified to reflect these changes:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
 
 services:
   geniuspro:
@@ -671,9 +671,9 @@ services:
 <h2 id="webcams">Webcams</h2>
 <p>Unlike printers which have different serial numbers, I have two <strong>Logitech C270</strong> webcams that are exactly the same model. How can we  differente them? How can we make the OS to take the right camera?</p>
 
-<p>Again we do the analysis with <code class="highlighter-rouge">lsusb</code>:</p>
+<p>Again we do the analysis with <code class="language-plaintext highlighter-rouge">lsusb</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# lsusb
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# lsusb
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
@@ -683,9 +683,9 @@ Bus 001 Device 016: ID 0483:5740 STMicroelectronics Virtual COM Port
 Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 </code></pre></div></div>
-<p>Both cameras are on the same bus but identified as different USB devices, which we can take advantage of. In this case we will not use the product id to differentiate them but the USB device id. We’ll be referencing the <code class="highlighter-rouge">video4linux</code> subsystem instead of <code class="highlighter-rouge">tty</code>, so we’ll be using <code class="highlighter-rouge">KERNELS</code> instead of <code class="highlighter-rouge">KERNEL</code> to differentiate cameras. For example, to find out which USB device the camera in <code class="highlighter-rouge">/dev/video0</code> is on, we can run the following:</p>
+<p>Both cameras are on the same bus but identified as different USB devices, which we can take advantage of. In this case we will not use the product id to differentiate them but the USB device id. We’ll be referencing the <code class="language-plaintext highlighter-rouge">video4linux</code> subsystem instead of <code class="language-plaintext highlighter-rouge">tty</code>, so we’ll be using <code class="language-plaintext highlighter-rouge">KERNELS</code> instead of <code class="language-plaintext highlighter-rouge">KERNEL</code> to differentiate cameras. For example, to find out which USB device the camera in <code class="language-plaintext highlighter-rouge">/dev/video0</code> is on, we can run the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
     KERNELS=="1-1.4:1.0"
     KERNELS=="1-1.4"
     KERNELS=="1-1"
@@ -700,7 +700,7 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 <p>For the other camera we do the same:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
     KERNELS=="1-1.3:1.0"
     KERNELS=="1-1.3"
     KERNELS=="1-1"
@@ -713,9 +713,9 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
     KERNELS=="platform"
 </code></pre></div></div>
 
-<p>Now with this information we can modify the <code class="highlighter-rouge">udev</code> rules as follows:</p>
+<p>Now with this information we can modify the <code class="language-plaintext highlighter-rouge">udev</code> rules as follows:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Genius Pro
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Genius Pro
 KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="3594398F3538", SYMLINK="ttyGeniusPro"
 SUBSYSTEM=="video4linux", KERNELS=="1-1.3", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", SYMLINK="videoGeniusPro"
 
@@ -724,14 +724,14 @@ KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProdu
 SUBSYSTEM=="video4linux", KERNELS=="1-1.4", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", SYMLINK="videoSidewinderX2"
 </code></pre></div></div>
 
-<p>Remember to reset the <code class="highlighter-rouge">udev</code> rules with:</p>
+<p>Remember to reset the <code class="language-plaintext highlighter-rouge">udev</code> rules with:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
 </code></pre></div></div>
 
-<p>So now we have the cameras mapped to <code class="highlighter-rouge">/dev/videoGeniusPro</code> and <code class="highlighter-rouge">/dev/videoSidewinderX2</code> respectively. Now we can modify the <strong>docker-compose.yml</strong> file to take this new configuration:</p>
+<p>So now we have the cameras mapped to <code class="language-plaintext highlighter-rouge">/dev/videoGeniusPro</code> and <code class="language-plaintext highlighter-rouge">/dev/videoSidewinderX2</code> respectively. Now we can modify the <strong>docker-compose.yml</strong> file to take this new configuration:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
 
 services:
   geniuspro:
@@ -772,7 +772,7 @@ services:
 </code></pre></div></div>
 
 <h2 id="performance-with-two-instances-of-octoprint">Performance with two instances of OctoPrint</h2>
-<p>Probably you are wondering about the consumption of these containers in the operating system and if the Raspberry can handle it. Here is an image of <code class="highlighter-rouge">htop</code> with the two containers above printing to each of the printers at the same time.</p>
+<p>Probably you are wondering about the consumption of these containers in the operating system and if the Raspberry can handle it. Here is an image of <code class="language-plaintext highlighter-rouge">htop</code> with the two containers above printing to each of the printers at the same time.</p>
 
 <p><img src="/assets/images/octoprint-htop.jpg" alt="htop" /></p>
 
@@ -844,7 +844,7 @@ services:
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-09-24T19:00:00-05:00">September 25, 2022</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-09-25T00:00:00+00:00">September 25, 2022</time></p>
         
       </footer>
 
@@ -930,41 +930,6 @@ services:
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -1021,6 +986,41 @@ services:
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

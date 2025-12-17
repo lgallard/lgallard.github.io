@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2019-06-13T19:00:00-05:00">
+<meta property="article:published_time" content="2019-06-14T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -355,7 +355,7 @@ Some time ago I wrote about <a href="https://lgallardo.com/en/2018/07/30/dynamic
 
 <p>The workaround essentially consisted of defining the blocks dynamically using an assignment to a map list. That is, instead of doing this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 resource "aws_codebuild_project" "codebuild" {
 
   artifacts{
@@ -375,7 +375,7 @@ resource "aws_codebuild_project" "codebuild" {
 
 <p>It was replaced by this other:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
 
   artifacts = ["${local.codebuild_artifacts}"]
 
@@ -385,9 +385,9 @@ resource "aws_codebuild_project" "codebuild" {
 
 </code></pre></div></div>
 
-<p>Where <code class="highlighter-rouge">local.codebuild_artifacts</code> built the block from a map list, which depending on the type defined in the variable <code class="highlighter-rouge">codebuild_artifacts_type</code> it created a different block:</p>
+<p>Where <code class="language-plaintext highlighter-rouge">local.codebuild_artifacts</code> built the block from a map list, which depending on the type defined in the variable <code class="language-plaintext highlighter-rouge">codebuild_artifacts_type</code> it created a different block:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 locals {
   codebuild_artifacts_def = {
     "S3" = [{
@@ -418,9 +418,9 @@ locals {
 <p><br /></p>
 <h1 id="dynamic-blocks-in-terraform-012x">Dynamic blocks in Terraform 0.12.x</h1>
 
-<p>Terraform 0.12.x proposes <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">dynamic blocks</a> to solve this and other cases related to blocks. To use dynamic blocks you have to use <code class="highlighter-rouge">dynamic</code> and<code class="highlighter-rouge"> for-each</code>. For example, for the above definition:</p>
+<p>Terraform 0.12.x proposes <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">dynamic blocks</a> to solve this and other cases related to blocks. To use dynamic blocks you have to use <code class="language-plaintext highlighter-rouge">dynamic</code> and<code class="language-plaintext highlighter-rouge"> for-each</code>. For example, for the above definition:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
     for_each = [local.codebuild_artifacts]
     content {
       type                = artifacts.value.type
@@ -434,9 +434,9 @@ locals {
   }
 </code></pre></div></div>
 
-<p>This way the <code class="highlighter-rouge">local.codebuild_artifacts</code> definition is simplify:</p>
+<p>This way the <code class="language-plaintext highlighter-rouge">local.codebuild_artifacts</code> definition is simplify:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
   codebuild_artifacts = {
     type                = var.codebuild_artifacts_type
     location            = var.codebuild_artifacts_location
@@ -452,9 +452,9 @@ locals {
 
 <p><strong>Where is the magic?</strong></p>
 
-<p>First, in the <code class="highlighter-rouge">null</code> data type, which tells Terraform to ignore the attribute if the<code class="highlighter-rouge"> lookup</code> function doesn’t find the index on the map. Let’s take a look at the the first lines in the <code class="highlighter-rouge">content</code> block, which is what is replaced in the <code class="highlighter-rouge">artifacts</code> block in each iteration:</p>
+<p>First, in the <code class="language-plaintext highlighter-rouge">null</code> data type, which tells Terraform to ignore the attribute if the<code class="language-plaintext highlighter-rouge"> lookup</code> function doesn’t find the index on the map. Let’s take a look at the the first lines in the <code class="language-plaintext highlighter-rouge">content</code> block, which is what is replaced in the <code class="language-plaintext highlighter-rouge">artifacts</code> block in each iteration:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    content {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    content {
       type                = artifacts.value.type
       encryption_disabled = lookup(artifacts.value, "encryption_disabled", null)
       location            = lookup(artifacts.value, "location", null)
@@ -464,14 +464,14 @@ locals {
 <p>Here you can see that:</p>
 
 <ol>
-  <li>The attribute <code class="highlighter-rouge">type</code> is always defined according to the value of<code class="highlighter-rouge"> artifacts.value.type</code>, so it’s not taken from the map.</li>
-  <li>The attribute <code class="highlighter-rouge">encryption_disabled</code> is assigned if something like<code class="highlighter-rouge"> artifacts.value ['encryption_disabled'] </code>is found in the map. If the index doesn’t exist, it’s assigned to <code class="highlighter-rouge">null</code> and therefore it won’t be taken into account by Terraform.</li>
-  <li>And so on for the rest of the attributes, such as <code class="highlighter-rouge">location</code>.</li>
+  <li>The attribute <code class="language-plaintext highlighter-rouge">type</code> is always defined according to the value of<code class="language-plaintext highlighter-rouge"> artifacts.value.type</code>, so it’s not taken from the map.</li>
+  <li>The attribute <code class="language-plaintext highlighter-rouge">encryption_disabled</code> is assigned if something like<code class="language-plaintext highlighter-rouge"> artifacts.value ['encryption_disabled'] </code>is found in the map. If the index doesn’t exist, it’s assigned to <code class="language-plaintext highlighter-rouge">null</code> and therefore it won’t be taken into account by Terraform.</li>
+  <li>And so on for the rest of the attributes, such as <code class="language-plaintext highlighter-rouge">location</code>.</li>
 </ol>
 
-<p>This allows having definitions of dynamic blocks, but you have to take into account that some values must be defined together. For example, for the <code class="highlighter-rouge">S3</code> type you must define the following variables:</p>
+<p>This allows having definitions of dynamic blocks, but you have to take into account that some values must be defined together. For example, for the <code class="language-plaintext highlighter-rouge">S3</code> type you must define the following variables:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebuild_artifacts_type
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebuild_artifacts_type
 codebuild_artifacts_location
 codebuild_artifacts_name
 codebuild_artifacts_namespace_type
@@ -480,19 +480,19 @@ codebuild_artifacts_path
 codebuild_artifacts_encryption_disabled
 </code></pre></div></div>
 
-<p>While for <code class="highlighter-rouge">NO_ARTIFACTS</code> just define this one:</p>
+<p>While for <code class="language-plaintext highlighter-rouge">NO_ARTIFACTS</code> just define this one:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebuild_artifacts_type
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebuild_artifacts_type
 </code></pre></div></div>
 
-<p>On the other hand, the magic is completed by the fact that we are not using an assignment for the a <code class="highlighter-rouge">artifacs</code> block but rather the dynamic block definition. In other words, instead of this:</p>
+<p>On the other hand, the magic is completed by the fact that we are not using an assignment for the a <code class="language-plaintext highlighter-rouge">artifacs</code> block but rather the dynamic block definition. In other words, instead of this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> artifacts = ["${local.codebuild_artifacts}"]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> artifacts = ["${local.codebuild_artifacts}"]
 </code></pre></div></div>
 
 <p>The dynamic block definition is used:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
     for_each = [local.codebuild_artifacts]
     content {
       ...
@@ -553,7 +553,7 @@ codebuild_artifacts_encryption_disabled
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-06-13T19:00:00-05:00">June 14, 2019</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-06-14T00:00:00+00:00">June 14, 2019</time></p>
         
       </footer>
 
@@ -639,41 +639,6 @@ codebuild_artifacts_encryption_disabled
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -730,6 +695,41 @@ codebuild_artifacts_encryption_disabled
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

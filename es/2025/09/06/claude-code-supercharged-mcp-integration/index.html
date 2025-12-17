@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/clis-robots.png">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/clis-robots.png">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/assets/images/clis-robots.png">
+<meta property="og:image" content="https://lgallardo.com/assets/images/clis-robots.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2025-09-05T19:00:00-05:00">
+<meta property="article:published_time" content="2025-09-06T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -119,7 +119,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -141,7 +141,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -153,7 +153,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -195,7 +195,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -232,7 +232,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -394,7 +394,7 @@
 
 <h3 id="la-arquitectura-de-la-inteligencia">La Arquitectura de la Inteligencia</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Claude Code   │────│  Servidor MCP   │────│   IA Externa    │
 │   (Director)    │    │  (Traductor)    │    │ (Especialista)  │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
@@ -422,7 +422,7 @@
 
 <p>Una vez instalado el servidor MCP Gemini, estos comandos están disponibles:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/gemini-cli:ask-gemini "analiza esta arquitectura de microservicios para cuellos de botella de rendimiento"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/gemini-cli:ask-gemini "analiza esta arquitectura de microservicios para cuellos de botella de rendimiento"
 /gemini-cli:brainstorm "¿Cómo puedo optimizar este sistema de autenticación?"
 /gemini-cli:ping "mensaje de prueba"
 /gemini-cli:Help
@@ -445,7 +445,7 @@
 </code></pre></div></div>
 
 <p><strong>Ejemplos de Uso:</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Comandos MCP directos
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Comandos MCP directos
 /gemini-cli:ask-gemini "Analiza @microservices.py para oportunidades de optimización"
 /gemini-cli:brainstorm "Cómo mejorar la seguridad de autenticación en @auth.py"
 
@@ -463,7 +463,7 @@
 
 <p><strong>Configuración:</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar servidor MCP Gemini</span>
-npm install <span class="nt">-g</span> gemini-mcp-tool
+npm <span class="nb">install</span> <span class="nt">-g</span> gemini-mcp-tool
 
 <span class="c"># Configurar con Claude Code</span>
 claude mcp add <span class="nt">-s</span> <span class="nb">local </span>gemini-cli <span class="nt">--</span> npx <span class="nt">-y</span> gemini-mcp-tool
@@ -493,27 +493,27 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>gemini-c
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-write.md</span>
   <span class="s">---</span>
-  <span class="s">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Generar</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">usando</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">OpenAI</span><span class="nv"> </span><span class="s">Codex"</span>
+  <span class="s">description</span><span class="err">:</span> <span class="s2">"</span><span class="s">Generar</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">usando</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">OpenAI</span><span class="nv"> </span><span class="s">Codex"</span>
   <span class="s">---</span>
   <span class="s">cd "$(dirname @$1)" &amp;&amp; codex write --language $2 --task "$3" --model gpt-5-medium</span>
 </code></pre></div></div>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-explain.md</span>
   <span class="s">---</span>
-  <span class="s">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Obtener</span><span class="nv"> </span><span class="s">explicaciones</span><span class="nv"> </span><span class="s">detalladas</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">Codex"</span>
+  <span class="s">description</span><span class="err">:</span> <span class="s2">"</span><span class="s">Obtener</span><span class="nv"> </span><span class="s">explicaciones</span><span class="nv"> </span><span class="s">detalladas</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">Codex"</span>
   <span class="s">---</span>
   <span class="s">codex explain @$1 --focus "$2" --model gpt-5-high --detail comprehensive</span>
 </code></pre></div></div>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-debug.md</span>
   <span class="s">---</span>
-  <span class="s">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Debuggear</span><span class="nv"> </span><span class="s">problemas</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">con</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">Codex"</span>
+  <span class="s">description</span><span class="err">:</span> <span class="s2">"</span><span class="s">Debuggear</span><span class="nv"> </span><span class="s">problemas</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">con</span><span class="nv"> </span><span class="s">CLI</span><span class="nv"> </span><span class="s">Codex"</span>
   <span class="s">---</span>
   <span class="s">codex debug @$1 --error "$2" --model gpt-5-high --trace-analysis</span>
 </code></pre></div></div>
 
 <p><strong>Ejemplos de Uso:</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/codex-write . python "implementar búsqueda binaria con manejo de casos límite"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/codex-write . python "implementar búsqueda binaria con manejo de casos límite"
 /codex-explain @algorithm.py "complejidad temporal y oportunidades de optimización"
 /codex-debug @buggy_function.py "IndexError: list index out of range"
 </code></pre></div></div>
@@ -528,7 +528,7 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>gemini-c
 
 <p><strong>Configuración:</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar CLI OpenAI Codex</span>
-npm install <span class="nt">-g</span> @openai/codex@latest
+npm <span class="nb">install</span> <span class="nt">-g</span> @openai/codex@latest
 
 <span class="c"># Autenticarse con cuenta OpenAI</span>
 codex auth login
@@ -563,18 +563,18 @@ codex /model  <span class="c"># Seleccionar tu modelo preferido (gpt-5 medium/hi
 <span class="nn">---</span>
 <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Buscar</span><span class="nv"> </span><span class="s">en</span><span class="nv"> </span><span class="s">base</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">código</span><span class="nv"> </span><span class="s">con</span><span class="nv"> </span><span class="s">contexto</span><span class="nv"> </span><span class="s">inteligente"</span>
 <span class="nn">---</span>
-<span class="s">cursor-agent search "$1" --type $2 --context-aware --max-results 10</span>
+<span class="s">cursor-agent search "$1" --type $2 --context-aware --max-results </span><span class="m">10</span>
 </code></pre></div></div>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/cursor-efficient.md</span>
 <span class="nn">---</span>
 <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Usar</span><span class="nv"> </span><span class="s">modelos</span><span class="nv"> </span><span class="s">costo-efectivos</span><span class="nv"> </span><span class="s">para</span><span class="nv"> </span><span class="s">tareas</span><span class="nv"> </span><span class="s">rutinarias"</span>
 <span class="nn">---</span>
-<span class="s">cursor-agent chat --model efficient "$ARGUMENTS" --token-limit 1000</span>
+<span class="s">cursor-agent chat --model efficient "$ARGUMENTS" --token-limit </span><span class="m">1000</span>
 </code></pre></div></div>
 
 <p><strong>Ejemplos de Uso:</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/cursor-analyze src/auth "vulnerabilidades de seguridad"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/cursor-analyze src/auth "vulnerabilidades de seguridad"
 /cursor-search "middleware de autenticación" function
 /cursor-efficient "explica el propósito de esta función"
 </code></pre></div></div>
@@ -589,7 +589,7 @@ codex /model  <span class="c"># Seleccionar tu modelo preferido (gpt-5 medium/hi
 
 <p><strong>Configuración:</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar Cursor Agent</span>
-npm install <span class="nt">-g</span> @cursor/agent-cli
+npm <span class="nb">install</span> <span class="nt">-g</span> @cursor/agent-cli
 
 <span class="c"># Configurar con Claude Code</span>
 claude mcp add <span class="nt">-s</span> <span class="nb">local </span>cursor-agent <span class="nt">--</span> npx <span class="nt">-y</span> cursor-agent-mcp
@@ -608,7 +608,7 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>cursor-a
 
 <p>Similar a MCP Gemini (mismo desarrollador), MCP Qwen proporciona comandos con prefijo:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/qwen-cli:ask-qwen "¿Qué coincide con este patrón regex?"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/qwen-cli:ask-qwen "¿Qué coincide con este patrón regex?"
 /qwen-cli:analyze @config.json "formatear y validar esta configuración"
 /qwen-cli:sandbox "probar este algoritmo con casos límite"
 /qwen-cli:help
@@ -643,7 +643,7 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>cursor-a
 
 <p><strong>Configuración:</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar servidor MCP Qwen</span>
-npm install <span class="nt">-g</span> qwen-mcp-tool
+npm <span class="nb">install</span> <span class="nt">-g</span> qwen-mcp-tool
 
 <span class="c"># Configurar con Claude Code</span>
 claude mcp add <span class="nt">-s</span> <span class="nb">local </span>qwen-cli <span class="nt">--</span> npx <span class="nt">-y</span> qwen-mcp-tool
@@ -657,7 +657,7 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>qwen-cli
 </code></pre></div></div>
 
 <p><strong>Ejemplos de Uso:</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Comandos MCP directos
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Comandos MCP directos
 /qwen-cli:ask-qwen "explica este patrón regex: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 /qwen-cli:analyze @package.json "verificar dependencias desactualizadas"
 
@@ -676,11 +676,11 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>qwen-cli
 <span class="nn">---</span>
 <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Ayudante</span><span class="nv"> </span><span class="s">para</span><span class="nv"> </span><span class="s">decidir</span><span class="nv"> </span><span class="s">qué</span><span class="nv"> </span><span class="s">herramienta</span><span class="nv"> </span><span class="s">usar"</span>
 <span class="nn">---</span>
-<span class="s">echo "🤔 Decisión de enrutamiento para</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
-<span class="s">echo "Archivo</span><span class="pi">:</span> <span class="err">@</span><span class="s">$1, Tarea</span><span class="pi">:</span> <span class="s">$2"</span>
+<span class="s">echo "🤔 Decisión de enrutamiento para</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
+<span class="s">echo "Archivo</span><span class="err">:</span> <span class="err">@</span><span class="s">$1, Tarea</span><span class="err">:</span> <span class="s">$2"</span>
 <span class="s">echo ""</span>
-<span class="s">echo "📏 Tamaño de archivo</span><span class="pi">:</span> <span class="s">$(wc -l &lt; @$1) líneas"</span>
-<span class="s">echo "📁 Tipo de archivo</span><span class="pi">:</span> <span class="s">$(file @$1)"</span>
+<span class="s">echo "📏 Tamaño de archivo</span><span class="err">:</span> <span class="s">$(wc -l &lt; @$1) líneas"</span>
+<span class="s">echo "📁 Tipo de archivo</span><span class="err">:</span> <span class="s">$(file @$1)"</span>
 <span class="s">echo ""</span>
 <span class="s">echo "💡 Recomendaciones:"</span>
 <span class="s">if [[ $(wc -l &lt; @$1) -gt 1000 ]]; then</span>
@@ -695,7 +695,7 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>qwen-cli
 </code></pre></div></div>
 
 <p><strong>Uso en Interfaz Claude Code:</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/route-helper large_service.py "análisis de rendimiento"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/route-helper large_service.py "análisis de rendimiento"
 /route-helper auth.py "debuggear errores de autenticación"
 </code></pre></div></div>
 
@@ -804,13 +804,13 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>qwen-cli
 <span class="nn">---</span>
 <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Análisis</span><span class="nv"> </span><span class="s">progresivo</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">resumen</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">detalles"</span>
 <span class="nn">---</span>
-<span class="s">echo "📋 Paso 1</span><span class="pi">:</span> <span class="s">Obteniendo resumen del archivo..."</span>
+<span class="s">echo "📋 Paso 1</span><span class="err">:</span> <span class="s">Obteniendo resumen del archivo..."</span>
 <span class="s">/gemini-analyze @$1 "resumen de alto nivel"</span>
 
-<span class="s">echo "🔍 Paso 2</span><span class="pi">:</span> <span class="s">Encontrando funciones clave..."</span>
+<span class="s">echo "🔍 Paso 2</span><span class="err">:</span> <span class="s">Encontrando funciones clave..."</span>
 <span class="s">/cursor-search "function" function</span>
 
-<span class="s">echo "🔧 Paso 3</span><span class="pi">:</span> <span class="s">Análisis detallado de partes seleccionadas..."</span>
+<span class="s">echo "🔧 Paso 3</span><span class="err">:</span> <span class="s">Análisis detallado de partes seleccionadas..."</span>
 <span class="s">/codex-explain @$1 "$2"</span>
 </code></pre></div></div>
 
@@ -846,7 +846,7 @@ claude mcp add <span class="nt">-s</span> <span class="nb">local </span>qwen-cli
     <span class="s">/gemini-brainstorm "$2 $3"</span>
     <span class="s">;;</span>
   <span class="s">*)</span>
-    <span class="s">echo "Usando Claude Code para</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+    <span class="s">echo "Usando Claude Code para</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
     <span class="s">;;</span>
 <span class="s">esac</span>
 </code></pre></div></div>
@@ -865,7 +865,7 @@ claude <span class="nt">--version</span>  <span class="c"># Claude Code CLI más
 <p>Configura una biblioteca integral de comandos slash:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Crear directorio de comandos</span>
-mkdir <span class="nt">-p</span> ~/.claude/commands
+<span class="nb">mkdir</span> <span class="nt">-p</span> ~/.claude/commands
 
 <span class="c"># Crear tus comandos personalizados usando los ejemplos a lo largo de este artículo</span>
 <span class="c"># Copiar las definiciones de comando YAML y adaptarlas a tus necesidades</span>
@@ -883,10 +883,10 @@ mkdir <span class="nt">-p</span> ~/.claude/commands
   <span class="pi">-</span> <span class="s2">"</span><span class="s">$ARGUMENTS:</span><span class="nv"> </span><span class="s">Todos</span><span class="nv"> </span><span class="s">los</span><span class="nv"> </span><span class="s">argumentos"</span>
 <span class="nn">---</span>
 <span class="c1"># Tu script bash aquí</span>
-<span class="s">echo "Procesando</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+<span class="s">echo "Procesando</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
 <span class="s">tu-herramienta-cli $1 --option "$2"</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 ### Configuración de Servidor MCP y CLI
 
 ```bash
@@ -994,7 +994,7 @@ codex /status <span class="c"># Verificar autenticación</span>
 
 <h2 id="-árbol-de-decisión-de-selección-de-modelo">🔍 Árbol de Decisión de Selección de Modelo</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>¿Complejidad de Tarea?
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>¿Complejidad de Tarea?
 ├── Simple (formateo, docs) → Qwen/Local
 ├── Media (revisión código, bugs) → OpenAI Codex  
 └── Compleja
@@ -1073,8 +1073,8 @@ claude edit file.py <span class="nt">--function</span> add_logging  <span class=
 <p>Cuando encuentres límites de uso, simplemente cambia a herramientas alternativas:</p>
 <ul>
   <li><strong>¿Límite de Gemini alcanzado?</strong> → Usa Claude Code directamente o prueba MCP OpenAI Codex</li>
-  <li><strong>¿Créditos OpenAI bajos?</strong> → Cambia a Gemini <code class="highlighter-rouge">/analyze</code> o Claude Code</li>
-  <li><strong>¿Límite Claude alcanzado?</strong> → Usa <code class="highlighter-rouge">/analyze</code> para archivos grandes o herramientas de servidor MCP</li>
+  <li><strong>¿Créditos OpenAI bajos?</strong> → Cambia a Gemini <code class="language-plaintext highlighter-rouge">/analyze</code> o Claude Code</li>
+  <li><strong>¿Límite Claude alcanzado?</strong> → Usa <code class="language-plaintext highlighter-rouge">/analyze</code> para archivos grandes o herramientas de servidor MCP</li>
 </ul>
 
 <p>La belleza de esta configuración es tener opciones disponibles directamente en la interfaz de Claude Code.</p>
@@ -1087,12 +1087,12 @@ claude edit file.py <span class="nt">--function</span> add_logging  <span class=
 <ul>
   <li><strong>Tu historial de conversación</strong> proporciona contexto para preguntas de seguimiento</li>
   <li><strong>Resultados de comandos slash anteriores</strong> permanecen visibles en el chat</li>
-  <li><strong>Referencias de archivos</strong> usando <code class="highlighter-rouge">@nombrearchivo</code> mantienen contexto del archivo</li>
+  <li><strong>Referencias de archivos</strong> usando <code class="language-plaintext highlighter-rouge">@nombrearchivo</code> mantienen contexto del archivo</li>
   <li><strong>Flujo de conversación natural</strong> te permite referenciar análisis anteriores</li>
 </ul>
 
 <p><strong>Mejor Práctica:</strong> Referenciar resultados anteriores explícitamente:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/analyze @archivo_grande.py "problemas de rendimiento"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/analyze @archivo_grande.py "problemas de rendimiento"
 # Después de revisar resultados...
 "Basado en el análisis de Gemini anterior, usa OpenAI Codex para optimizar las funciones de cuello de botella"
 </code></pre></div></div>
@@ -1133,7 +1133,7 @@ claude edit file.py <span class="nt">--function</span> add_logging  <span class=
 <span class="nn">---</span>
 <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Obtener</span><span class="nv"> </span><span class="s">múltiples</span><span class="nv"> </span><span class="s">opiniones</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">IA</span><span class="nv"> </span><span class="s">para</span><span class="nv"> </span><span class="s">decisiones</span><span class="nv"> </span><span class="s">complejas"</span>
 <span class="nn">---</span>
-<span class="s">echo "📈 Reuniendo múltiples perspectivas sobre</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+<span class="s">echo "📈 Reuniendo múltiples perspectivas sobre</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
 
 <span class="s">echo "Perspectiva de Gemini:"</span>
 <span class="s">/gemini-analyze @$1 "$2" &gt; /tmp/gemini_opinion.txt</span>
@@ -1158,16 +1158,16 @@ claude edit file.py <span class="nt">--function</span> add_logging  <span class=
 <span class="nn">---</span>
 <span class="s">echo "🔄 Iniciando pipeline de análisis para @$1"</span>
 
-<span class="s">echo "Etapa 1</span><span class="pi">:</span> <span class="s">Búsqueda y descubrimiento"</span>
+<span class="s">echo "Etapa 1</span><span class="err">:</span> <span class="s">Búsqueda y descubrimiento"</span>
 <span class="s">/cursor-search "$2" function &gt; /tmp/pipeline_search.txt</span>
 
-<span class="s">echo "Etapa 2</span><span class="pi">:</span> <span class="s">Análisis de arquitectura"</span>
+<span class="s">echo "Etapa 2</span><span class="err">:</span> <span class="s">Análisis de arquitectura"</span>
 <span class="s">/gemini-analyze @$1 "basado en resultados de búsqueda, analizar arquitectura" &gt; /tmp/pipeline_arch.txt</span>
 
-<span class="s">echo "Etapa 3</span><span class="pi">:</span> <span class="s">Optimización de código"</span>
+<span class="s">echo "Etapa 3</span><span class="err">:</span> <span class="s">Optimización de código"</span>
 <span class="s">/codex-write $3 "optimizar basado en análisis anterior" &gt; /tmp/pipeline_opt.txt</span>
 
-<span class="s">echo "Etapa 4</span><span class="pi">:</span> <span class="s">Síntesis final"</span>
+<span class="s">echo "Etapa 4</span><span class="err">:</span> <span class="s">Síntesis final"</span>
 <span class="s">echo "Por favor revisa todas las salidas del pipeline y proporciona recomendaciones finales:"</span>
 <span class="s">cat /tmp/pipeline_*.txt</span>
 </code></pre></div></div>
@@ -1189,7 +1189,7 @@ claude edit file.py <span class="nt">--function</span> add_logging  <span class=
 <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Encadenar</span><span class="nv"> </span><span class="s">comandos</span><span class="nv"> </span><span class="s">con</span><span class="nv"> </span><span class="s">contexto</span><span class="nv"> </span><span class="s">compartido"</span>
 <span class="nn">---</span>
 <span class="c1"># Almacenar contexto para el siguiente comando</span>
-<span class="s">echo "Contexto</span><span class="pi">:</span> <span class="s">analizando $1 para $2" &gt; /tmp/claude_context</span>
+<span class="s">echo "Contexto</span><span class="err">:</span> <span class="s">analizando $1 para $2" &gt; /tmp/claude_context</span>
 <span class="s">/gemini-analyze @$1 "$2" | tee -a /tmp/claude_context</span>
 
 <span class="c1"># Pasar contexto a la siguiente herramienta</span>
@@ -1209,7 +1209,7 @@ claude edit file.py <span class="nt">--function</span> add_logging  <span class=
 <span class="s">elif [[ $(wc -l &lt; @$1) -gt 500 ]]; then</span>
   <span class="s">/gemini-analyze @$1 "$2"</span>
 <span class="s">else</span>
-  <span class="s">echo "Análisis estándar con Claude Code</span><span class="pi">:</span> <span class="s">$ARGUMENTS"</span>
+  <span class="s">echo "Análisis estándar con Claude Code</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
 <span class="s">fi</span>
 </code></pre></div></div>
 
@@ -1217,7 +1217,7 @@ claude edit file.py <span class="nt">--function</span> add_logging  <span class=
 
 <h3 id="día-1-configuración-básica">Día 1: Configuración Básica</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar un CLI de IA</span>
-npm install <span class="nt">-g</span> @google-ai/generativelanguage
+npm <span class="nb">install</span> <span class="nt">-g</span> @google-ai/generativelanguage
 
 <span class="c"># Crear tu primer comando slash</span>
 <span class="nb">cat</span> <span class="o">&gt;</span> ~/.claude/commands/gemini-quick.md <span class="o">&lt;&lt;</span> <span class="sh">'</span><span class="no">EOF</span><span class="sh">'
@@ -1233,7 +1233,7 @@ gemini-cli analyze "</span><span class="nv">$ARGUMENTS</span><span class="sh">" 
 
 <h3 id="semana-1-identificar-oportunidades-de-optimización">Semana 1: Identificar Oportunidades de Optimización</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Rastrear tus patrones de uso actuales</span>
-<span class="nb">history</span> | <span class="nb">grep </span>claude | head <span class="nt">-20</span>
+<span class="nb">history</span> | <span class="nb">grep </span>claude | <span class="nb">head</span> <span class="nt">-20</span>
 
 <span class="c"># Identificar tareas repetitivas que podrían usar comandos slash</span>
 <span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"explain|analyze|debug"</span> ~/.claude_history
@@ -1244,9 +1244,9 @@ gemini-cli analyze "</span><span class="nv">$ARGUMENTS</span><span class="sh">" 
 
 <h3 id="mes-1-implementar-enrutamiento-inteligente">Mes 1: Implementar Enrutamiento Inteligente</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Crear tu comando de enrutamiento inteligente</span>
-cp examples/ai-route.md ~/.claude/commands/
-cp examples/try-free-first.md ~/.claude/commands/
-cp examples/route-by-task.md ~/.claude/commands/
+<span class="nb">cp </span>examples/ai-route.md ~/.claude/commands/
+<span class="nb">cp </span>examples/try-free-first.md ~/.claude/commands/
+<span class="nb">cp </span>examples/route-by-task.md ~/.claude/commands/
 
 <span class="c"># Probar enrutamiento inteligente</span>
 /ai-route debug auth.py <span class="s2">"errores de autenticación"</span>
@@ -1293,15 +1293,15 @@ cp examples/route-by-task.md ~/.claude/commands/
     
       
       
-      <a href="https://lgallardo.com/es/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/cursor" class="page__taxonomy-item" rel="tag">Cursor</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/cursor" class="page__taxonomy-item" rel="tag">Cursor</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/gemini" class="page__taxonomy-item" rel="tag">Gemini</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/gemini" class="page__taxonomy-item" rel="tag">Gemini</a><span class="sep">, </span>
     
       
       
@@ -1313,7 +1313,7 @@ cp examples/route-by-task.md ~/.claude/commands/
     
       
       
-      <a href="https://lgallardo.com/es/tags/openai-codex" class="page__taxonomy-item" rel="tag">OpenAI Codex</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/openai-codex" class="page__taxonomy-item" rel="tag">OpenAI Codex</a><span class="sep">, </span>
     
       
       
@@ -1321,7 +1321,7 @@ cp examples/route-by-task.md ~/.claude/commands/
     
       
       
-      <a href="https://lgallardo.com/es/tags/qwen" class="page__taxonomy-item" rel="tag">Qwen</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/qwen" class="page__taxonomy-item" rel="tag">Qwen</a><span class="sep">, </span>
     
       
       
@@ -1346,18 +1346,18 @@ cp examples/route-by-task.md ~/.claude/commands/
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-09-05T19:00:00-05:00">September 06, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-09-06T00:00:00+00:00">September 06, 2025</time></p>
         
       </footer>
 
@@ -1366,24 +1366,24 @@ cp examples/route-by-task.md ~/.claude/commands/
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Claude+Code+Potenciado%3A+Accede+a+Cualquier+Modelo+de+IA+mediante+Integraci%C3%B3n+MCP%20https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Claude+Code+Potenciado%3A+Accede+a+Cualquier+Modelo+de+IA+mediante+Integraci%C3%B3n+MCP%20https%3A%2F%2Flgallardo.com%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F09%2F06%2Fclaude-code-supercharged-mcp-integration%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" class="pagination--pager" title="Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+      <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" class="pagination--pager" title="Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" class="pagination--pager" title="GitHub Models: Integración Sencilla de IA para Flujos DevOps
+      <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" class="pagination--pager" title="GitHub Models: Integración Sencilla de IA para Flujos DevOps
 ">Next</a>
     
   </nav>
@@ -1408,14 +1408,14 @@ cp examples/route-by-task.md ~/.claude/commands/
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -1443,49 +1443,14 @@ cp examples/route-by-task.md ~/.claude/commands/
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -1513,14 +1478,14 @@ cp examples/route-by-task.md ~/.claude/commands/
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/claude-code-gh-discovery-system-robot.png" 
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
 </a>
           
         </h2>
@@ -1534,6 +1499,41 @@ cp examples/route-by-task.md ~/.claude/commands/
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/ccr-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="permalink">Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Desbloquea todo el potencial de Claude Code enrutando peticiones a través de Claude Code Router y OpenRouter—usa modelos gratuitos, soluciones autoalojadas c...</p>
       </div>
     </div>
   </article>
@@ -1565,7 +1565,7 @@ cp examples/route-by-task.md ~/.claude/commands/
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -1575,7 +1575,7 @@ cp examples/route-by-task.md ~/.claude/commands/
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

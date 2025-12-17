@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2013-09-13T13:40:15-05:00">
+<meta property="article:published_time" content="2013-09-13T18:40:15+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -368,8 +368,8 @@ A friend recommended me this distro for running XBMC which was released by one o
 
 <p>In a similar way as explained in <a href="http://lgallardo.com/2013/03/17/correr-raspberry-pi-desde-un-disco-usb" target="_blank">How to run Raspberry Pi from a USB hard drive</a> article, I dumped the image into a 8 GB pen drive to be able to extract the <em>/boot</em> and the operating system or system file’s root partition. In order to copy the image to the pen drive you must first extract the image and later extract the image and the dump it as raw, as shown next:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunzip raspbmc-final.img.gz
-dd <span class="k">if</span><span class="o">=</span>raspbmc-final.img <span class="nv">of</span><span class="o">=</span>/dev/sdb
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">gunzip </span>raspbmc-final.img.gz
+<span class="nb">dd </span><span class="k">if</span><span class="o">=</span>raspbmc-final.img <span class="nv">of</span><span class="o">=</span>/dev/sdb
 </code></pre></div></div>
 
 <p>If you check it with <em>gparted</em> you should see something like this:</p>
@@ -383,12 +383,12 @@ dd <span class="k">if</span><span class="o">=</span>raspbmc-final.img <span clas
 <p><br />
 To extract the <em>/boot</em> partition from the pen drive you can do this:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dd <span class="k">if</span><span class="o">=</span>/dev/sdb1 <span class="nv">of</span><span class="o">=</span>raspbmc-final_boot.img
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/sdb1 <span class="nv">of</span><span class="o">=</span>raspbmc-final_boot.img
 </code></pre></div></div>
 
 <p>In a similar way extract the file system of 800 MB on the another partition:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dd <span class="k">if</span><span class="o">=</span>/dev/sdb2 <span class="nv">of</span><span class="o">=</span>raspbmc-final_fsext4.img
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/sdb2 <span class="nv">of</span><span class="o">=</span>raspbmc-final_fsext4.img
 </code></pre></div></div>
 
 <h2 id="initial-setting">Initial setting</h2>
@@ -503,7 +503,7 @@ devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid<span class="o">=</span>5,mo
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-09-13T13:40:15-05:00">September 13, 2013</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-09-13T18:40:15+00:00">September 13, 2013</time></p>
         
       </footer>
 
@@ -589,41 +589,6 @@ devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid<span class="o">=</span>5,mo
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -680,6 +645,41 @@ devpts /dev/pts devpts rw,nosuid,noexec,relatime,gid<span class="o">=</span>5,mo
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

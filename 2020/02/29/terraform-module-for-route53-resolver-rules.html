@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2020-02-28T18:00:00-06:00">
+<meta property="article:published_time" content="2020-02-29T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -373,7 +373,7 @@ I wrote this module to be able to create AWS Route53 Resolver rules for outbound
 
 <p>This example creates two rules in a outbound endpoint, using all the parameter expected for building the rules:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Outbound endpoint using the rhythmictech/terraform-aws-route53-endpoint module
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Outbound endpoint using the rhythmictech/terraform-aws-route53-endpoint module
 module "r53-outboud" {
   source            = "git::https://github.com/rhythmictech/terraform-aws-route53-endpoint"
   direction         = "outbound"
@@ -435,22 +435,22 @@ module "r53-resolver-rules" {
     <tr>
       <td>resolver_endpoint_id</td>
       <td>The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.</td>
-      <td><code class="highlighter-rouge">string</code></td>
-      <td><code class="highlighter-rouge">null</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
+      <td><code class="language-plaintext highlighter-rouge">null</code></td>
       <td style="text-align: center">yes</td>
     </tr>
     <tr>
       <td>rules</td>
       <td>List of rules</td>
-      <td><code class="highlighter-rouge">list</code></td>
-      <td><code class="highlighter-rouge">[]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">list</code></td>
+      <td><code class="language-plaintext highlighter-rouge">[]</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>tags</td>
       <td>Map of tags to apply to supported resources</td>
-      <td><code class="highlighter-rouge">map(string)</code></td>
-      <td><code class="highlighter-rouge">{}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">map(string)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{}</code></td>
       <td style="text-align: center">no</td>
     </tr>
   </tbody>
@@ -476,56 +476,56 @@ Each rule accept the following parameters:</p>
       <td>domain_name</td>
       <td>Domain name to forward requests for</td>
       <td style="text-align: center">string</td>
-      <td style="text-align: center"><code class="highlighter-rouge">null</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">null</code></td>
       <td style="text-align: center">yes</td>
     </tr>
     <tr>
       <td>ips</td>
       <td>List of IPs and ports to forward DNS requests to. Use <em>IP:PORT</em> syntax, or just the IP</td>
       <td style="text-align: center">list(string)</td>
-      <td style="text-align: center"><code class="highlighter-rouge">[]</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">[]</code></td>
       <td style="text-align: center">yes</td>
     </tr>
     <tr>
       <td>principals</td>
       <td>List of account IDs to share the resolver rule with</td>
       <td style="text-align: center">list(string)</td>
-      <td style="text-align: center"><code class="highlighter-rouge">[]</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">[]</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>ram_name</td>
       <td>RAM share name</td>
       <td style="text-align: center">string</td>
-      <td style="text-align: center">r53-<code class="highlighter-rouge">domain_name</code>-rule</td>
+      <td style="text-align: center">r53-<code class="language-plaintext highlighter-rouge">domain_name</code>-rule</td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>resolver_endpoint_id</td>
       <td>Resolver endpoint id</td>
       <td style="text-align: center">string</td>
-      <td style="text-align: center"><code class="highlighter-rouge">null</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">null</code></td>
       <td style="text-align: center">yes</td>
     </tr>
     <tr>
       <td>rule_name</td>
       <td>Route53 resolver rule name</td>
       <td style="text-align: center">string</td>
-      <td style="text-align: center"><code class="highlighter-rouge">domain_name</code>-rule</td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">domain_name</code>-rule</td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>tags</td>
       <td>Map of tags to apply to supported resources</td>
       <td style="text-align: center">map(string)</td>
-      <td style="text-align: center"><code class="highlighter-rouge">{}</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">{}</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>vpc_ids</td>
       <td>List of VPC ids to associate to the rule</td>
       <td style="text-align: center">list(string)</td>
-      <td style="text-align: center"><code class="highlighter-rouge">[]</code></td>
+      <td style="text-align: center"><code class="language-plaintext highlighter-rouge">[]</code></td>
       <td style="text-align: center">yes</td>
     </tr>
   </tbody>
@@ -585,7 +585,7 @@ Each rule accept the following parameters:</p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-02-28T18:00:00-06:00">February 29, 2020</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-02-29T00:00:00+00:00">February 29, 2020</time></p>
         
       </footer>
 
@@ -671,41 +671,6 @@ Each rule accept the following parameters:</p>
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -762,6 +727,41 @@ Each rule accept the following parameters:</p>
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/mcp-servers-ticker-file.png">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/mcp-servers-ticker-file.png">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/assets/images/mcp-servers-ticker-file.png">
+<meta property="og:image" content="https://lgallardo.com/assets/images/mcp-servers-ticker-file.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2025-08-11T19:00:00-05:00">
+<meta property="article:published_time" content="2025-08-12T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -115,7 +115,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -137,7 +137,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -149,7 +149,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -191,7 +191,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -228,7 +228,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -405,7 +405,7 @@
 
 <h2 id="-caso-de-estudio-del-mundo-real-análisis-del-ecosistema-de-módulos-aws-backup">🎯 Caso de Estudio del Mundo Real: Análisis del Ecosistema de Módulos AWS Backup</h2>
 
-<p>Para probar las capacidades de investigación de los servidores MCP, decidí analizar el panorama de módulos de Terraform para AWS Backup. Como mantenedor del módulo <code class="highlighter-rouge">lgallard/backup/aws</code>, quería ver si los servidores MCP podían proporcionar análisis de mercado objetivo y ayudar a entender el posicionamiento competitivo dentro de este ecosistema.</p>
+<p>Para probar las capacidades de investigación de los servidores MCP, decidí analizar el panorama de módulos de Terraform para AWS Backup. Como mantenedor del módulo <code class="language-plaintext highlighter-rouge">lgallard/backup/aws</code>, quería ver si los servidores MCP podían proporcionar análisis de mercado objetivo y ayudar a entender el posicionamiento competitivo dentro de este ecosistema.</p>
 
 <h3 id="la-consulta-de-investigación">La Consulta de Investigación</h3>
 
@@ -515,7 +515,7 @@
 
 <p><strong>Para Claude Code:</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar servidor MCP Context7</span>
-npm install <span class="nt">-g</span> @upstash/context7-mcp
+npm <span class="nb">install</span> <span class="nt">-g</span> @upstash/context7-mcp
 
 <span class="c"># Agregar a la configuración MCP de Claude Code</span>
 claude config mcp add context7 npm @upstash/context7-mcp
@@ -524,10 +524,10 @@ claude config mcp add context7 npm @upstash/context7-mcp
 <p><strong>Para Cursor:</strong></p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">Agregar</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">la</span><span class="w"> </span><span class="err">configuración</span><span class="w"> </span><span class="err">MCP</span><span class="w"> </span><span class="err">de</span><span class="w"> </span><span class="err">Cursor</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"context7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npx"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@upstash/context7-mcp"</span><span class="p">]</span><span class="w">
+  </span><span class="nl">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"context7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npx"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@upstash/context7-mcp"</span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -543,10 +543,10 @@ claude config mcp add terraform-server docker hashicorp/terraform-mcp-server
 <p><strong>Para Cursor:</strong></p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">Agregar</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">la</span><span class="w"> </span><span class="err">configuración</span><span class="w"> </span><span class="err">MCP</span><span class="w"> </span><span class="err">de</span><span class="w"> </span><span class="err">Cursor</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"terraform-server"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"run"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--rm"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hashicorp/terraform-mcp-server"</span><span class="p">]</span><span class="w">
+  </span><span class="nl">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"terraform-server"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"run"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--rm"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hashicorp/terraform-mcp-server"</span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -568,17 +568,17 @@ Verificar estado MCP en configuración <span class="o">&gt;</span> Herramientas 
 <h2 id="-mejores-prácticas-de-flujo-de-investigación">📊 Mejores Prácticas de Flujo de Investigación</h2>
 
 <h3 id="1-comenzar-con-descubrimiento-amplio">1. Comenzar con Descubrimiento Amplio</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usando el servidor MCP de Terraform, encuentra todos los módulos disponibles para [tecnología/servicio]. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usando el servidor MCP de Terraform, encuentra todos los módulos disponibles para [tecnología/servicio]. 
 Incluye conteos de descarga y versiones más recientes.
 </code></pre></div></div>
 
 <h3 id="2-documentación-profunda">2. Documentación Profunda</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usando Context7, compara la calidad de documentación y conjuntos de características de los 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usando Context7, compara la calidad de documentación y conjuntos de características de los 
 3 candidatos principales. Enfócate en [requisitos específicos].
 </code></pre></div></div>
 
 <h3 id="3-generar-matrices-de-comparación">3. Generar Matrices de Comparación</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Crea una tabla de comparación detallada incluyendo características, indicadores de madurez, 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Crea una tabla de comparación detallada incluyendo características, indicadores de madurez, 
 y idoneidad para [caso de uso]. Proporciona una recomendación clara.
 </code></pre></div></div>
 
@@ -596,7 +596,7 @@ y idoneidad para [caso de uso]. Proporciona una recomendación clara.
 
 <p>Pide a tu asistente de AI habilitado con MCP que:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Evalúa estos módulos usando criterios ponderados:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Evalúa estos módulos usando criterios ponderados:
 - Completitud de características (40%)
 - Adopción de la comunidad (25%)  
 - Calidad de documentación (20%)
@@ -607,7 +607,7 @@ Proporciona puntuaciones y ranking final.
 
 <h3 id="investigación-de-integración-de-ecosistema">Investigación de Integración de Ecosistema</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usando Context7, investiga cómo [módulo elegido] se integra con:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usando Context7, investiga cómo [módulo elegido] se integra con:
 - Proveedores de Terraform existentes
 - Pipelines de CI/CD  
 - Soluciones de monitoreo
@@ -616,7 +616,7 @@ Proporciona puntuaciones y ranking final.
 
 <h3 id="análisis-de-costo-y-rendimiento">Análisis de Costo y Rendimiento</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usando el servidor MCP de Terraform, analiza la eficiencia de recursos y las 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Usando el servidor MCP de Terraform, analiza la eficiencia de recursos y las 
 implicaciones de costo de cada enfoque de módulo.
 </code></pre></div></div>
 
@@ -703,15 +703,15 @@ implicaciones de costo de cada enfoque de módulo.
     
       
       
-      <a href="https://lgallardo.com/es/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/context7" class="page__taxonomy-item" rel="tag">Context7</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/context7" class="page__taxonomy-item" rel="tag">Context7</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/cursor" class="page__taxonomy-item" rel="tag">Cursor</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/cursor" class="page__taxonomy-item" rel="tag">Cursor</a><span class="sep">, </span>
     
       
       
@@ -727,7 +727,7 @@ implicaciones de costo de cada enfoque de módulo.
     
       
       
-      <a href="https://lgallardo.com/es/tags/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
+      <a href="https://lgallardo.com/tags/terraform" class="page__taxonomy-item" rel="tag">Terraform</a>
     
     </span>
   </p>
@@ -748,18 +748,18 @@ implicaciones de costo de cada enfoque de módulo.
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-11T19:00:00-05:00">August 12, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-12T00:00:00+00:00">August 12, 2025</time></p>
         
       </footer>
 
@@ -768,24 +768,24 @@ implicaciones de costo de cada enfoque de módulo.
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Servidores+MCP+M%C3%A1s+All%C3%A1+del+C%C3%B3digo%3A+Desarrollo+Basado+en+Investigaci%C3%B3n+con+Context7+y+Terraform%20https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Servidores+MCP+M%C3%A1s+All%C3%A1+del+C%C3%B3digo%3A+Desarrollo+Basado+en+Investigaci%C3%B3n+con+Context7+y+Terraform%20https%3A%2F%2Flgallardo.com%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F12%2Fmcp-servers-research-driven-development%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2025/08/08/cursor-cli-first-impressions/" class="pagination--pager" title="Cursor CLI — Primeras impresiones sobre la UX
+      <a href="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/" class="pagination--pager" title="Cursor CLI — Primeras impresiones sobre la UX
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" class="pagination--pager" title="Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter
+      <a href="https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" class="pagination--pager" title="Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter
 ">Next</a>
     
   </nav>
@@ -810,14 +810,14 @@ implicaciones de costo de cada enfoque de módulo.
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -845,49 +845,14 @@ implicaciones de costo de cada enfoque de módulo.
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -915,14 +880,14 @@ implicaciones de costo de cada enfoque de módulo.
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -936,6 +901,41 @@ implicaciones de costo de cada enfoque de módulo.
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -967,7 +967,7 @@ implicaciones de costo de cada enfoque de módulo.
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -977,7 +977,7 @@ implicaciones de costo de cada enfoque de módulo.
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

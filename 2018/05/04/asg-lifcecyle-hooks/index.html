@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2018-05-03T19:00:55-05:00">
+<meta property="article:published_time" content="2018-05-04T00:00:55+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -357,7 +357,7 @@ Recently I needed to execute some actions after a EC2 instance was created by an
 
 <p>The Auto Scaling Groups have <em>Lifecycle hooks</em> where you can perform actions when the instance was launched or terminated. For instance you can a create CloudWatch rule to use the event’s message and get the instance-id or the lifecycle hook’s metadata field. An example how this message looks is shown bellow:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
     "EC2InstanceId": "i-0030f3ac294a5764a",
     "AutoScalingGroupName": "sync-service",
     "LifecycleActionToken": "802cc943-c45a-c8c8-b25d-111222333440",
@@ -390,62 +390,62 @@ Recently I needed to execute some actions after a EC2 instance was created by an
 <h1 id="lambda-function">Lambda function</h1>
 <p>Here you have the lambda function that retrieves the instance-id and the lifecycle hook’s metadata:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">boto3</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">logging</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">boto3</span>
+<span class="kn">import</span> <span class="n">json</span>
+<span class="kn">import</span> <span class="n">logging</span>
 
-<span class="c"># Create AWS clients</span>
-<span class="n">cw</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s">'cloudwatch'</span><span class="p">)</span>
+<span class="c1"># Create AWS clients
+</span><span class="n">cw</span> <span class="o">=</span> <span class="n">boto3</span><span class="p">.</span><span class="nf">client</span><span class="p">(</span><span class="sh">'</span><span class="s">cloudwatch</span><span class="sh">'</span><span class="p">)</span>
 
-<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-<span class="n">LOGGER</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="nf">getLogger</span><span class="p">()</span>
+<span class="n">LOGGER</span><span class="p">.</span><span class="nf">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="p">.</span><span class="n">INFO</span><span class="p">)</span>
 
-<span class="c"># Retrieves instance id from CloudWatch event</span>
-<span class="k">def</span> <span class="nf">get_instance_id</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+<span class="c1"># Retrieves instance id from CloudWatch event
+</span><span class="k">def</span> <span class="nf">get_instance_id</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">event</span><span class="p">[</span><span class="s">'detail'</span><span class="p">][</span><span class="s">'EC2InstanceId'</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">detail</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">EC2InstanceId</span><span class="sh">'</span><span class="p">]</span>
     <span class="k">except</span> <span class="nb">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-        <span class="n">LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="n">LOGGER</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">False</span>
 
 <span class="k">def</span> <span class="nf">get_metadata</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">event</span><span class="p">[</span><span class="s">'detail'</span><span class="p">][</span><span class="s">'NotificationMetadata'</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">event</span><span class="p">[</span><span class="sh">'</span><span class="s">detail</span><span class="sh">'</span><span class="p">][</span><span class="sh">'</span><span class="s">NotificationMetadata</span><span class="sh">'</span><span class="p">]</span>
     <span class="k">except</span> <span class="nb">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-        <span class="n">LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="n">LOGGER</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">False</span>
 
 <span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
 
-    <span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-    <span class="n">instanceid</span> <span class="o">=</span> <span class="n">get_instance_id</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-    <span class="n">metadata</span> <span class="o">=</span> <span class="n">get_metadata</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="p">.</span><span class="n">session</span><span class="p">.</span><span class="nc">Session</span><span class="p">()</span>
+    <span class="n">instanceid</span> <span class="o">=</span> <span class="nf">get_instance_id</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="nf">get_metadata</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     
-    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"instance-id: </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">instanceid</span><span class="p">)</span>
-    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">"metadata: </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="n">metadata</span><span class="p">)</span>
+    <span class="n">LOGGER</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">instance-id: %s</span><span class="sh">"</span> <span class="o">%</span> <span class="n">instanceid</span><span class="p">)</span>
+    <span class="n">LOGGER</span><span class="p">.</span><span class="nf">info</span><span class="p">(</span><span class="sh">"</span><span class="s">metadata: %s</span><span class="sh">"</span> <span class="o">%</span> <span class="n">metadata</span><span class="p">)</span>
 
-    <span class="c"># Create Metric</span>
-    <span class="n">cw</span><span class="o">.</span><span class="n">put_metric_alarm</span><span class="p">(</span>
-    <span class="n">AlarmName</span><span class="o">=</span><span class="s">"</span><span class="si">%</span><span class="s">s-</span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s">'AlarmName'</span><span class="p">],</span> <span class="n">instanceid</span><span class="p">),</span>
-    <span class="n">AlarmDescription</span><span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s">'AlarmDescription'</span><span class="p">],</span>
+    <span class="c1"># Create Metric
+</span>    <span class="n">cw</span><span class="p">.</span><span class="nf">put_metric_alarm</span><span class="p">(</span>
+    <span class="n">AlarmName</span><span class="o">=</span><span class="sh">"</span><span class="s">%s-%s</span><span class="sh">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">AlarmName</span><span class="sh">'</span><span class="p">],</span> <span class="n">instanceid</span><span class="p">),</span>
+    <span class="n">AlarmDescription</span><span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">AlarmDescription</span><span class="sh">'</span><span class="p">],</span>
     <span class="n">ActionsEnabled</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
     <span class="n">AlarmActions</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">metadata</span><span class="p">[</span><span class="s">'AlarmActions'</span><span class="p">]</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">AlarmActions</span><span class="sh">'</span><span class="p">]</span>
     <span class="p">],</span>
-    <span class="n">MetricName</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'MetricName'</span><span class="p">],</span>
-    <span class="n">Namespace</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Namespace'</span><span class="p">],</span>
-    <span class="n">Statistic</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Statistic'</span><span class="p">],</span>
+    <span class="n">MetricName</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">MetricName</span><span class="sh">'</span><span class="p">],</span>
+    <span class="n">Namespace</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">Namespace</span><span class="sh">'</span><span class="p">],</span>
+    <span class="n">Statistic</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">Statistic</span><span class="sh">'</span><span class="p">],</span>
     <span class="n">Dimensions</span><span class="o">=</span><span class="p">[</span>
         <span class="p">{</span>
-            <span class="s">'Name'</span><span class="p">:</span> <span class="s">'InstanceId'</span><span class="p">,</span>
-            <span class="s">'Value'</span><span class="p">:</span> <span class="n">instanceid</span>
+            <span class="sh">'</span><span class="s">Name</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">InstanceId</span><span class="sh">'</span><span class="p">,</span>
+            <span class="sh">'</span><span class="s">Value</span><span class="sh">'</span><span class="p">:</span> <span class="n">instanceid</span>
         <span class="p">},</span>
     <span class="p">],</span>
-    <span class="n">Period</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Period'</span><span class="p">],</span>
-    <span class="n">EvaluationPeriods</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'EvaluationPeriods'</span><span class="p">],</span>
-    <span class="n">Threshold</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Threshold'</span><span class="p">],</span>
-    <span class="n">TreatMissingData</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'Missing_data'</span><span class="p">],</span>
-    <span class="n">ComparisonOperator</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="s">'ComparisonOperator'</span><span class="p">]</span>
+    <span class="n">Period</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">Period</span><span class="sh">'</span><span class="p">],</span>
+    <span class="n">EvaluationPeriods</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">EvaluationPeriods</span><span class="sh">'</span><span class="p">],</span>
+    <span class="n">Threshold</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">Threshold</span><span class="sh">'</span><span class="p">],</span>
+    <span class="n">TreatMissingData</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">Missing_data</span><span class="sh">'</span><span class="p">],</span>
+    <span class="n">ComparisonOperator</span><span class="o">=</span><span class="n">metadata</span><span class="p">[</span><span class="sh">'</span><span class="s">ComparisonOperator</span><span class="sh">'</span><span class="p">]</span>
     <span class="p">)</span>
 </code></pre></div></div>
 <p><br /></p>
@@ -518,7 +518,7 @@ Recently I needed to execute some actions after a EC2 instance was created by an
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-05-03T19:00:55-05:00">May 04, 2018</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-05-04T00:00:55+00:00">May 04, 2018</time></p>
         
       </footer>
 
@@ -604,41 +604,6 @@ Recently I needed to execute some actions after a EC2 instance was created by an
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -695,6 +660,41 @@ Recently I needed to execute some actions after a EC2 instance was created by an
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

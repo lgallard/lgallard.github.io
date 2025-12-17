@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/images/8556210768_fdeb59f794.jpg">
+<meta name="twitter:image" content="https://lgallardo.com/images/8556210768_fdeb59f794.jpg">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/images/8556210768_fdeb59f794.jpg">
+<meta property="og:image" content="https://lgallardo.com/images/8556210768_fdeb59f794.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2013-03-17T14:06:20-05:00">
+<meta property="article:published_time" content="2013-03-17T19:06:20+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -101,7 +101,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -123,7 +123,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -135,7 +135,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -177,7 +177,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -214,7 +214,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -362,21 +362,21 @@ Estuve probando unos días mi Raspberry Pi con una memoria SD clase 4 marca King
 
 <p>Hacemos como si volcaremos la imagen de Raspbian en la tarjeta SD pero en vez de hacerlo sobre <em>/dev/mmcblk0</em> lo hacemos sobre el pendrive:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.img <span class="nv">of</span><span class="o">=</span>/dev/sdb
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="nv">bs</span><span class="o">=</span>4M <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.img <span class="nv">of</span><span class="o">=</span>/dev/sdb
 </code></pre></div></div>
 
 <h2 id="extracciónde-la-imagen-boot">Extracción de la imagen boot</h2>
 
 <p>Para extraer solo el boot de Raspbian basta con volcar solo la primera partición del pendrive:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/dev/scb1 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/scb1 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img
 </code></pre></div></div>
 
 <h2 id="extracción-del-sistema-operativo">Extracción del sistema operativo</h2>
 
 <p>Y hacemos lo mismo con la segunda partición de sistema operativo para extraerlo:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/dev/sdc2 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/sdc2 of<span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img
 </code></pre></div></div>
 
 <h1 id="tarjeta-sd-con-el-boot">Tarjeta SD con el /boot</h1>
@@ -389,7 +389,7 @@ Estuve probando unos días mi Raspberry Pi con una memoria SD clase 4 marca King
 
 <p>Ahora copiamos el contenido de la imagen boot que sacamos previamente:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img <span class="nv">of</span><span class="o">=</span>/dev/sdb1
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.boot.img <span class="nv">of</span><span class="o">=</span>/dev/sdb1
 </code></pre></div></div>
 
 <p>Un vez que se haya copiado los datos, se debe montar esta partición, y  editar el archivo_ /media/usb0/cmdline.txt_ (cambiar <em>/media/usb0</em> de acuerdo al punto de montaje), y colocar lo siguiente:</p>
@@ -411,7 +411,7 @@ Estuve probando unos días mi Raspberry Pi con una memoria SD clase 4 marca King
 
 <p>Ahora procedemos a volcar la imagen que extrajimos de la imagen Rasbian en la primera partición del disco USB. Para ello hacemos lo siguiente:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# dd <span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img <span class="nv">of</span><span class="o">=</span>/dev/sdc1
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/home/lgallard/Projects/RaspberryPi/2013-02-09-wheezy-raspbian.fsext4.img <span class="nv">of</span><span class="o">=</span>/dev/sdc1
 </code></pre></div></div>
 
 <h2 id="ajuste-del-tamaño-de-la-partición">Ajuste del tamaño de la partición</h2>
@@ -439,7 +439,7 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
 
 <p>Luego consultamos el espacio disponible veremos algo como esto:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# df <span class="nt">-h</span><span class="sb">```</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:~# <span class="nb">df</span> <span class="nt">-h</span><span class="sb">```</span>
 
 /dev/sdc2 285G 191M 271G 1% /media/Data
 /dev/sdc1 8.7G 1.3G 7.0G 16% /media/Raspbian
@@ -475,7 +475,7 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     
       
       
-      <a href="https://lgallardo.com/es/tags/general" class="page__taxonomy-item" rel="tag">General</a>
+      <a href="https://lgallardo.com/tags/general" class="page__taxonomy-item" rel="tag">General</a>
     
     </span>
   </p>
@@ -496,14 +496,14 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-03-17T14:06:20-05:00">March 17, 2013</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-03-17T19:06:20+00:00">March 17, 2013</time></p>
         
       </footer>
 
@@ -512,24 +512,24 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=C%C3%B3mo+correr+el+Raspberry+Pi+desde+un+disco+USB%20https%3A%2F%2Flgallardo.com%2Fes%2F2013%2F03%2F17%2Fcorrer-raspberry-pi-desde-un-disco-usb%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=C%C3%B3mo+correr+el+Raspberry+Pi+desde+un+disco+USB%20https%3A%2F%2Flgallardo.com%2F2013%2F03%2F17%2Fcorrer-raspberry-pi-desde-un-disco-usb%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2013%2F03%2F17%2Fcorrer-raspberry-pi-desde-un-disco-usb%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2013%2F03%2F17%2Fcorrer-raspberry-pi-desde-un-disco-usb%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2013%2F03%2F17%2Fcorrer-raspberry-pi-desde-un-disco-usb%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2013%2F03%2F17%2Fcorrer-raspberry-pi-desde-un-disco-usb%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2013%2F03%2F17%2Fcorrer-raspberry-pi-desde-un-disco-usb%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2013%2F03%2F17%2Fcorrer-raspberry-pi-desde-un-disco-usb%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2013/03/14/xbmc-en-raspberry-pi-con-raspbian/" class="pagination--pager" title="XBMC en Raspberry Pi con Raspbian
+      <a href="https://lgallardo.com/2013/03/14/xbmc-en-raspberry-pi-con-raspbian/" class="pagination--pager" title="XBMC en Raspberry Pi con Raspbian
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2013/04/15/donde-pongo-mi-raspberry-pi/" class="pagination--pager" title="¿Dónde pongo mi Raspberry Pi?
+      <a href="https://lgallardo.com/2013/04/15/donde-pongo-mi-raspberry-pi/" class="pagination--pager" title="¿Dónde pongo mi Raspberry Pi?
 ">Next</a>
     
   </nav>
@@ -554,14 +554,14 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -589,49 +589,14 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -659,14 +624,14 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -680,6 +645,41 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -711,7 +711,7 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -721,7 +721,7 @@ The filesystem on /dev/sdc1 is now 2304000 blocks long.
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2025-08-11T19:00:00-05:00">
+<meta property="article:published_time" content="2025-08-12T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -404,7 +404,7 @@
 
 <h2 id="-real-world-case-study-aws-backup-module-ecosystem-analysis">🎯 Real-World Case Study: AWS Backup Module Ecosystem Analysis</h2>
 
-<p>To test the research capabilities of MCP servers, I decided to analyze the AWS Backup Terraform module landscape. As the maintainer of the <code class="highlighter-rouge">lgallard/backup/aws</code> module, I wanted to see if MCP servers could provide objective market analysis and help understand the competitive positioning within this ecosystem.</p>
+<p>To test the research capabilities of MCP servers, I decided to analyze the AWS Backup Terraform module landscape. As the maintainer of the <code class="language-plaintext highlighter-rouge">lgallard/backup/aws</code> module, I wanted to see if MCP servers could provide objective market analysis and help understand the competitive positioning within this ecosystem.</p>
 
 <h3 id="the-research-query">The Research Query</h3>
 
@@ -514,7 +514,7 @@
 
 <p><strong>For Claude Code:</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Context7 MCP server</span>
-npm install <span class="nt">-g</span> @upstash/context7-mcp
+npm <span class="nb">install</span> <span class="nt">-g</span> @upstash/context7-mcp
 
 <span class="c"># Add to Claude Code MCP configuration</span>
 claude config mcp add context7 npm @upstash/context7-mcp
@@ -523,10 +523,10 @@ claude config mcp add context7 npm @upstash/context7-mcp
 <p><strong>For Cursor:</strong></p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">Cursor's</span><span class="w"> </span><span class="err">MCP</span><span class="w"> </span><span class="err">settings</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"context7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npx"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@upstash/context7-mcp"</span><span class="p">]</span><span class="w">
+  </span><span class="nl">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"context7"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"npx"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"@upstash/context7-mcp"</span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -542,10 +542,10 @@ claude config mcp add terraform-server docker hashicorp/terraform-mcp-server
 <p><strong>For Cursor:</strong></p>
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">//</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">Cursor's</span><span class="w"> </span><span class="err">MCP</span><span class="w"> </span><span class="err">configuration</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="s2">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"terraform-server"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"run"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--rm"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hashicorp/terraform-mcp-server"</span><span class="p">]</span><span class="w">
+  </span><span class="nl">"mcpServers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"terraform-server"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"docker"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"run"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-i"</span><span class="p">,</span><span class="w"> </span><span class="s2">"--rm"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hashicorp/terraform-mcp-server"</span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -567,17 +567,17 @@ Check MCP status <span class="k">in </span>settings <span class="o">&gt;</span> 
 <h2 id="-research-workflow-best-practices">📊 Research Workflow Best Practices</h2>
 
 <h3 id="1-start-with-broad-discovery">1. Start with Broad Discovery</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Terraform MCP server, find all available modules for [technology/service]. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Terraform MCP server, find all available modules for [technology/service]. 
 Include download counts and latest versions.
 </code></pre></div></div>
 
 <h3 id="2-deep-dive-documentation">2. Deep-Dive Documentation</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Context7, compare the documentation quality and feature sets of the 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Context7, compare the documentation quality and feature sets of the 
 top 3 candidates. Focus on [specific requirements].
 </code></pre></div></div>
 
 <h3 id="3-generate-comparison-matrices">3. Generate Comparison Matrices</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Create a detailed comparison table including features, maturity indicators, 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Create a detailed comparison table including features, maturity indicators, 
 and suitability for [use case]. Provide a clear recommendation.
 </code></pre></div></div>
 
@@ -595,7 +595,7 @@ and suitability for [use case]. Provide a clear recommendation.
 
 <p>Ask your MCP-enabled AI assistant to:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Evaluate these modules using weighted criteria:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Evaluate these modules using weighted criteria:
 - Feature completeness (40%)
 - Community adoption (25%)  
 - Documentation quality (20%)
@@ -606,7 +606,7 @@ Provide scores and final ranking.
 
 <h3 id="ecosystem-integration-research">Ecosystem Integration Research</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Context7, research how [chosen module] integrates with:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Context7, research how [chosen module] integrates with:
 - Existing Terraform providers
 - CI/CD pipelines  
 - Monitoring solutions
@@ -615,7 +615,7 @@ Provide scores and final ranking.
 
 <h3 id="cost-and-performance-analysis">Cost and Performance Analysis</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Terraform MCP server, analyze the resource efficiency and cost 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using Terraform MCP server, analyze the resource efficiency and cost 
 implications of each module approach.
 </code></pre></div></div>
 
@@ -758,7 +758,7 @@ implications of each module approach.
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-11T19:00:00-05:00">August 12, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-12T00:00:00+00:00">August 12, 2025</time></p>
         
       </footer>
 
@@ -844,41 +844,6 @@ implications of each module approach.
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -935,6 +900,41 @@ implications of each module approach.
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

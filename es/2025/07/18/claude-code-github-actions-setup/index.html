@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/claude-github-vs.png">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/claude-github-vs.png">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/assets/images/claude-github-vs.png">
+<meta property="og:image" content="https://lgallardo.com/assets/images/claude-github-vs.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2025-07-17T19:00:00-05:00">
+<meta property="article:published_time" content="2025-07-18T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -113,7 +113,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -135,7 +135,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -147,7 +147,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -189,7 +189,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -226,7 +226,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -364,7 +364,7 @@
       <section class="page__content" itemprop="text">
         <p><img src="/assets/images/claude-github-vs.png" alt="Configuración de Claude Code GitHub Actions" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
 
-<p>La evolución de las herramientas de desarrollo impulsadas por IA continúa acelerándose, y ahora podemos traer el poder de <strong>Claude Code</strong> directamente a nuestros flujos de trabajo de GitHub. Con Claude Code GitHub Actions, puedes tener un asistente de IA inteligente que automáticamente revisa pull requests, implementa funcionalidades desde issues y ayuda a mantener la calidad del código—todo activado con una simple mención <code class="highlighter-rouge">@claude</code>.</p>
+<p>La evolución de las herramientas de desarrollo impulsadas por IA continúa acelerándose, y ahora podemos traer el poder de <strong>Claude Code</strong> directamente a nuestros flujos de trabajo de GitHub. Con Claude Code GitHub Actions, puedes tener un asistente de IA inteligente que automáticamente revisa pull requests, implementa funcionalidades desde issues y ayuda a mantener la calidad del código—todo activado con una simple mención <code class="language-plaintext highlighter-rouge">@claude</code>.</p>
 
 <p>En esta guía completa, te llevaré paso a paso por la configuración de Claude Code GitHub Actions desde cero, cubriendo tanto el método de inicio rápido como las configuraciones de nivel empresarial para AWS Bedrock y Google Vertex AI.</p>
 
@@ -377,7 +377,7 @@
   <li>✅ <strong>Crea pull requests</strong> a partir de descripciones de issues</li>
   <li>✅ <strong>Implementa funcionalidades</strong> siguiendo tus estándares de codificación</li>
   <li>✅ <strong>Corrige bugs</strong> automáticamente con pruebas apropiadas</li>
-  <li>✅ <strong>Sigue tus directrices</strong> definidas en archivos <code class="highlighter-rouge">CLAUDE.md</code></li>
+  <li>✅ <strong>Sigue tus directrices</strong> definidas en archivos <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
   <li>✅ <strong>Se integra perfectamente</strong> con tu flujo de trabajo existente de GitHub</li>
 </ul>
 
@@ -473,8 +473,8 @@ claude
 <p>Una vez que la autenticación esté completa, Claude Code automáticamente:</p>
 <ul>
   <li>Instalará la Aplicación GitHub en tu repositorio</li>
-  <li>Agregará tu clave API como un secreto del repositorio (<code class="highlighter-rouge">ANTHROPIC_API_KEY</code>)</li>
-  <li>Creará el archivo de flujo de trabajo en <code class="highlighter-rouge">.github/workflows/claude.yml</code></li>
+  <li>Agregará tu clave API como un secreto del repositorio (<code class="language-plaintext highlighter-rouge">ANTHROPIC_API_KEY</code>)</li>
+  <li>Creará el archivo de flujo de trabajo en <code class="language-plaintext highlighter-rouge">.github/workflows/claude.yml</code></li>
 </ul>
 
 <h3 id="paso-8-seleccionar-flujos-de-trabajo-de-github">Paso 8: Seleccionar Flujos de Trabajo de GitHub</h3>
@@ -485,7 +485,7 @@ claude
 
 <p>Puedes elegir entre:</p>
 <ul>
-  <li><strong>@Claude Code</strong>: Flujo de trabajo interactivo activado por menciones <code class="highlighter-rouge">@claude</code> en issues y comentarios de PR</li>
+  <li><strong>@Claude Code</strong>: Flujo de trabajo interactivo activado por menciones <code class="language-plaintext highlighter-rouge">@claude</code> en issues y comentarios de PR</li>
   <li><strong>Claude Code Review</strong>: Flujo de trabajo de revisión automatizada que se ejecuta en nuevos pull requests</li>
 </ul>
 
@@ -535,7 +535,7 @@ claude
 <ol>
   <li><strong>Fusionar el PR</strong> para habilitar la funcionalidad de Claude Code</li>
   <li><strong>Instalar la Aplicación Claude GitHub</strong> si aún no se ha hecho</li>
-  <li><strong>Comenzar a usar menciones <code class="highlighter-rouge">@claude</code></strong> en tus issues y PRs</li>
+  <li><strong>Comenzar a usar menciones <code class="language-plaintext highlighter-rouge">@claude</code></strong> en tus issues y PRs</li>
 </ol>
 
 <h2 id="-configuración-manual-método-alternativo">🔧 Configuración Manual (Método Alternativo)</h2>
@@ -550,12 +550,12 @@ claude
 
 <p>Navega a <strong>Configuraciones → Secretos y variables → Acciones</strong> de tu repositorio y agrega:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ANTHROPIC_API_KEY: tu_clave_api_anthropic_aqui
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ANTHROPIC_API_KEY: tu_clave_api_anthropic_aqui
 </code></pre></div></div>
 
 <h3 id="3-crear-el-archivo-de-flujo-de-trabajo">3. Crear el Archivo de Flujo de Trabajo</h3>
 
-<p>Crea <code class="highlighter-rouge">.github/workflows/claude.yml</code> con esta configuración:</p>
+<p>Crea <code class="language-plaintext highlighter-rouge">.github/workflows/claude.yml</code> con esta configuración:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Claude Code</span>
 
@@ -572,10 +572,10 @@ claude
 <span class="na">jobs</span><span class="pi">:</span>
   <span class="na">claude</span><span class="pi">:</span>
     <span class="na">if</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="no">(github.event_name == 'issue_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
-      <span class="no">(github.event_name == 'pull_request_review_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
-      <span class="no">(github.event_name == 'pull_request_review' &amp;&amp; contains(github.event.review.body, '@claude')) ||</span>
-      <span class="no">(github.event_name == 'issues' &amp;&amp; (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))</span>
+      <span class="s">(github.event_name == 'issue_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
+      <span class="s">(github.event_name == 'pull_request_review_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
+      <span class="s">(github.event_name == 'pull_request_review' &amp;&amp; contains(github.event.review.body, '@claude')) ||</span>
+      <span class="s">(github.event_name == 'issues' &amp;&amp; (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))</span>
     <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
     <span class="na">permissions</span><span class="pi">:</span>
       <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
@@ -586,7 +586,7 @@ claude
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
         <span class="na">with</span><span class="pi">:</span>
-          <span class="na">fetch-depth</span><span class="pi">:</span> <span class="s">1</span>
+          <span class="na">fetch-depth</span><span class="pi">:</span> <span class="m">1</span>
 
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@beta</span>
@@ -688,7 +688,7 @@ claude
 
 <h3 id="crear-un-archivo-claudemd">Crear un Archivo CLAUDE.md</h3>
 
-<p>Crea un archivo <code class="highlighter-rouge">CLAUDE.md</code> en la raíz de tu repositorio para guiar el comportamiento de Claude:</p>
+<p>Crea un archivo <code class="language-plaintext highlighter-rouge">CLAUDE.md</code> en la raíz de tu repositorio para guiar el comportamiento de Claude:</p>
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Directrices del Proyecto para Claude Code</span>
 
@@ -735,7 +735,7 @@ claude
 <p><strong>Convertir Issues en Pull Requests</strong></p>
 
 <p>Crea un issue con una descripción de funcionalidad, luego comenta:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implementa esta funcionalidad basándote en la descripción del issue
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implementa esta funcionalidad basándote en la descripción del issue
 </code></pre></div></div>
 
 <p>Claude:</p>
@@ -743,7 +743,7 @@ claude
   <li>Analizará los requisitos del issue</li>
   <li>Revisará tus patrones de código existentes</li>
   <li>Escribirá la implementación siguiendo tus estándares de codificación</li>
-  <li>Creará pruebas si se especifica en tu <code class="highlighter-rouge">CLAUDE.md</code></li>
+  <li>Creará pruebas si se especifica en tu <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
   <li>Abrirá un pull request con la funcionalidad completa</li>
 </ul>
 
@@ -754,7 +754,7 @@ claude
 <p><strong>Resolución Automática de Bugs</strong></p>
 
 <p>Cuando encuentres un bug, crea un issue o comenta:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude corrige el TypeError en el componente de dashboard de usuario
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude corrige el TypeError en el componente de dashboard de usuario
 </code></pre></div></div>
 
 <p>Claude:</p>
@@ -767,7 +767,7 @@ claude
 </ul>
 
 <p><strong>Corrección Avanzada de Bugs</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude corrige la fuga de memoria en el administrador de conexión WebSocket. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude corrige la fuga de memoria en el administrador de conexión WebSocket. 
 El problema ocurre cuando los usuarios cambian rápidamente entre canales.
 </code></pre></div></div>
 
@@ -776,7 +776,7 @@ El problema ocurre cuando los usuarios cambian rápidamente entre canales.
 <p><strong>Obtener Consejos de Arquitectura</strong></p>
 
 <p>En un comentario de PR:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ¿cómo debería implementar autenticación de usuario para este endpoint?
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ¿cómo debería implementar autenticación de usuario para este endpoint?
 </code></pre></div></div>
 
 <p>Claude proporciona:</p>
@@ -788,7 +788,7 @@ El problema ocurre cuando los usuarios cambian rápidamente entre canales.
 </ul>
 
 <p><strong>Ayuda de Implementación Compleja</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ayúdame a implementar un sistema de limitación de tasa para esta API. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ayúdame a implementar un sistema de limitación de tasa para esta API. 
 Necesito soportar diferentes límites por nivel de usuario y degradación gradual.
 </code></pre></div></div>
 
@@ -796,7 +796,7 @@ Necesito soportar diferentes límites por nivel de usuario y degradación gradua
 
 <p><strong>Revisiones Completas de Código</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa este PR por vulnerabilidades de seguridad y problemas de rendimiento
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa este PR por vulnerabilidades de seguridad y problemas de rendimiento
 </code></pre></div></div>
 
 <p>Claude realiza:</p>
@@ -809,14 +809,14 @@ Necesito soportar diferentes límites por nivel de usuario y degradación gradua
 </ul>
 
 <p><strong>Enfoque Específico de Revisión</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa esta migración de base de datos por pérdida potencial de datos y seguridad de rollback
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa esta migración de base de datos por pérdida potencial de datos y seguridad de rollback
 </code></pre></div></div>
 
 <h3 id="-pruebas-y-documentación">🧪 Pruebas y Documentación</h3>
 
 <p><strong>Generación de Pruebas</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude escribe pruebas completas para este nuevo módulo de procesamiento de pagos
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude escribe pruebas completas para este nuevo módulo de procesamiento de pagos
 </code></pre></div></div>
 
 <p>Claude crea:</p>
@@ -829,26 +829,26 @@ Necesito soportar diferentes límites por nivel de usuario y degradación gradua
 
 <p><strong>Actualizaciones de Documentación</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude actualiza la documentación de la API para reflejar estos nuevos endpoints
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude actualiza la documentación de la API para reflejar estos nuevos endpoints
 </code></pre></div></div>
 
 <p><strong>Mejoras de README</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora el README del proyecto con mejores instrucciones de configuración y ejemplos
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora el README del proyecto con mejores instrucciones de configuración y ejemplos
 </code></pre></div></div>
 
 <h3 id="️-refactorización-y-optimización">🏗️ Refactorización y Optimización</h3>
 
 <p><strong>Modernización de Código</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude refactoriza este componente para usar hooks de React en lugar de componentes de clase
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude refactoriza este componente para usar hooks de React en lugar de componentes de clase
 </code></pre></div></div>
 
 <p><strong>Optimización de Rendimiento</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimiza esta consulta de base de datos - está causando timeouts en datasets grandes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimiza esta consulta de base de datos - está causando timeouts en datasets grandes
 </code></pre></div></div>
 
 <p><strong>Actualizaciones de Código Legacy</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude actualiza este código de Node.js 14 a Node.js 20, 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude actualiza este código de Node.js 14 a Node.js 20, 
 incluyendo actualizaciones de dependencias y reemplazos de APIs obsoletas
 </code></pre></div></div>
 
@@ -856,11 +856,11 @@ incluyendo actualizaciones de dependencias y reemplazos de APIs obsoletas
 
 <p><strong>Auditorías de Seguridad</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude audita este flujo de autenticación por vulnerabilidades de seguridad
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude audita este flujo de autenticación por vulnerabilidades de seguridad
 </code></pre></div></div>
 
 <p><strong>Seguridad de Dependencias</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude verifica problemas de seguridad en nuestras dependencias de package.json 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude verifica problemas de seguridad en nuestras dependencias de package.json 
 y sugiere alternativas más seguras
 </code></pre></div></div>
 
@@ -868,22 +868,22 @@ y sugiere alternativas más seguras
 
 <p><strong>Mejoras de CI/CD</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimiza nuestro flujo de trabajo de GitHub Actions para reducir tiempos de construcción
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimiza nuestro flujo de trabajo de GitHub Actions para reducir tiempos de construcción
 </code></pre></div></div>
 
 <p><strong>Optimización de Docker</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora este Dockerfile para mejor caché y tamaño de imagen más pequeño
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora este Dockerfile para mejor caché y tamaño de imagen más pequeño
 </code></pre></div></div>
 
 <p><strong>Infraestructura como Código</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa esta configuración de Terraform para mejores prácticas de seguridad de AWS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa esta configuración de Terraform para mejores prácticas de seguridad de AWS
 </code></pre></div></div>
 
 <h3 id="-flujos-de-trabajo-avanzados">📊 Flujos de Trabajo Avanzados</h3>
 
 <p><strong>Desarrollo de Funcionalidades Multi-Paso</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implementa un sistema completo de notificaciones de usuario:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implementa un sistema completo de notificaciones de usuario:
 1. Esquema de base de datos para notificaciones
 2. Endpoints de API para operaciones CRUD  
 3. Integración WebSocket para actualizaciones en tiempo real
@@ -893,7 +893,7 @@ y sugiere alternativas más seguras
 </code></pre></div></div>
 
 <p><strong>Asistencia de Migración</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ayuda a migrar nuestra API REST a GraphQL:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ayuda a migrar nuestra API REST a GraphQL:
 - Crear definiciones de esquema
 - Implementar resolvers  
 - Actualizar consultas del frontend
@@ -904,7 +904,7 @@ y sugiere alternativas más seguras
 
 <p><strong>Creación de Componentes</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude crea un componente de tabla de datos reutilizable con:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude crea un componente de tabla de datos reutilizable con:
 - Ordenamiento y filtrado
 - Paginación
 - Selección de filas
@@ -913,7 +913,7 @@ y sugiere alternativas más seguras
 </code></pre></div></div>
 
 <p><strong>Estilizado y UX</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora la accesibilidad de este componente de formulario 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora la accesibilidad de este componente de formulario 
 y agrega etiquetas ARIA apropiadas
 </code></pre></div></div>
 
@@ -921,7 +921,7 @@ y agrega etiquetas ARIA apropiadas
 
 <p><strong>Implementación de Observabilidad</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude agrega logging y monitoreo completo a este servicio:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude agrega logging y monitoreo completo a este servicio:
 - Logging estructurado con IDs de correlación
 - Recolección de métricas para eventos clave de negocio
 - Seguimiento de errores y alertas
@@ -929,15 +929,15 @@ y agrega etiquetas ARIA apropiadas
 </code></pre></div></div>
 
 <p><strong>Análisis de Datos</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude analiza nuestras métricas de engagement de usuario y sugiere escenarios de pruebas A/B
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude analiza nuestras métricas de engagement de usuario y sugiere escenarios de pruebas A/B
 </code></pre></div></div>
 
 <h3 id="-consejos-pro-para-uso-efectivo-de-claude">💡 Consejos Pro para Uso Efectivo de Claude</h3>
 
 <ol>
   <li><strong>Sé Específico</strong>: Mientras más contexto proporciones, mejores serán las sugerencias de Claude</li>
-  <li><strong>Referencia Archivos</strong>: Usa <code class="highlighter-rouge">@nombrearchivo</code> para ayudar a Claude a entender tu código base</li>
-  <li><strong>Establece Expectativas</strong>: Menciona tus patrones preferidos en <code class="highlighter-rouge">CLAUDE.md</code></li>
+  <li><strong>Referencia Archivos</strong>: Usa <code class="language-plaintext highlighter-rouge">@nombrearchivo</code> para ayudar a Claude a entender tu código base</li>
+  <li><strong>Establece Expectativas</strong>: Menciona tus patrones preferidos en <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
   <li><strong>Retroalimentación Iterativa</strong>: Participa en conversación para refinar la implementación</li>
   <li><strong>Revisa Cuidadosamente</strong>: Siempre revisa las sugerencias de Claude antes de fusionar</li>
 </ol>
@@ -964,9 +964,9 @@ y agrega etiquetas ARIA apropiadas
 
 <h3 id="consejos-de-optimización-de-costos">Consejos de Optimización de Costos</h3>
 <ul>
-  <li>Usa comandos específicos de <code class="highlighter-rouge">@claude</code> para reducir llamadas innecesarias a la API</li>
-  <li>Configura límites apropiados de <code class="highlighter-rouge">max_turns</code></li>
-  <li>Establece <code class="highlighter-rouge">timeout_minutes</code> razonables para evitar flujos de trabajo descontrolados</li>
+  <li>Usa comandos específicos de <code class="language-plaintext highlighter-rouge">@claude</code> para reducir llamadas innecesarias a la API</li>
+  <li>Configura límites apropiados de <code class="language-plaintext highlighter-rouge">max_turns</code></li>
+  <li>Establece <code class="language-plaintext highlighter-rouge">timeout_minutes</code> razonables para evitar flujos de trabajo descontrolados</li>
   <li>Considera usar controles de concurrencia de GitHub para limitar ejecuciones paralelas</li>
 </ul>
 
@@ -977,7 +977,7 @@ y agrega etiquetas ARIA apropiadas
   <li>✅ Verifica que la Aplicación GitHub esté instalada correctamente</li>
   <li>✅ Verifica que los flujos de trabajo estén habilitados en tu repositorio</li>
   <li>✅ Asegúrate de que la clave API esté establecida en los secretos del repositorio</li>
-  <li>✅ Confirma que el comentario contenga <code class="highlighter-rouge">@claude</code> (no <code class="highlighter-rouge">/claude</code>)</li>
+  <li>✅ Confirma que el comentario contenga <code class="language-plaintext highlighter-rouge">@claude</code> (no <code class="language-plaintext highlighter-rouge">/claude</code>)</li>
 </ul>
 
 <h3 id="errores-de-autenticación">Errores de Autenticación</h3>
@@ -998,7 +998,7 @@ y agrega etiquetas ARIA apropiadas
 
 <p>Claude Code GitHub Actions representa un paso significativo adelante en flujos de trabajo de desarrollo asistidos por IA. Al automatizar revisiones de código, implementación de funcionalidades y corrección de bugs, los equipos pueden enfocarse en arquitectura de alto nivel y lógica de negocio mientras mantienen altos estándares de calidad de código.</p>
 
-<p>El proceso de configuración es directo—ya sea que elijas el método de instalación rápida o optes por integración de proveedor de nube de nivel empresarial. Con configuración apropiada y las directrices correctas de <code class="highlighter-rouge">CLAUDE.md</code>, Claude se convierte en un miembro valioso del equipo que trabaja las 24 horas para mejorar tu código base.</p>
+<p>El proceso de configuración es directo—ya sea que elijas el método de instalación rápida o optes por integración de proveedor de nube de nivel empresarial. Con configuración apropiada y las directrices correctas de <code class="language-plaintext highlighter-rouge">CLAUDE.md</code>, Claude se convierte en un miembro valioso del equipo que trabaja las 24 horas para mejorar tu código base.</p>
 
 <p>Comienza con casos de uso simples como revisiones automatizadas de código, luego expándete gradualmente a flujos de trabajo más complejos mientras tu equipo se vuelve cómodo con el desarrollo asistido por IA. ¡El futuro de la codificación colaborativa está aquí, y es más accesible que nunca! 🚀</p>
 
@@ -1025,7 +1025,7 @@ y agrega etiquetas ARIA apropiadas
     
       
       
-      <a href="https://lgallardo.com/es/tags/ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
     
       
       
@@ -1033,15 +1033,15 @@ y agrega etiquetas ARIA apropiadas
     
       
       
-      <a href="https://lgallardo.com/es/tags/ci-cd" class="page__taxonomy-item" rel="tag">CI/CD</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/ci-cd" class="page__taxonomy-item" rel="tag">CI/CD</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/github-actions" class="page__taxonomy-item" rel="tag">GitHub Actions</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/github-actions" class="page__taxonomy-item" rel="tag">GitHub Actions</a><span class="sep">, </span>
     
       
       
@@ -1066,18 +1066,18 @@ y agrega etiquetas ARIA apropiadas
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-17T19:00:00-05:00">July 18, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-18T00:00:00+00:00">July 18, 2025</time></p>
         
       </footer>
 
@@ -1086,24 +1086,24 @@ y agrega etiquetas ARIA apropiadas
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Automatizando+Revisiones+de+C%C3%B3digo+con+Claude+Code+GitHub+Actions%20https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F18%2Fclaude-code-github-actions-setup%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Automatizando+Revisiones+de+C%C3%B3digo+con+Claude+Code+GitHub+Actions%20https%3A%2F%2Flgallardo.com%2F2025%2F07%2F18%2Fclaude-code-github-actions-setup%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F18%2Fclaude-code-github-actions-setup%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F18%2Fclaude-code-github-actions-setup%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F18%2Fclaude-code-github-actions-setup%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F18%2Fclaude-code-github-actions-setup%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F07%2F18%2Fclaude-code-github-actions-setup%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F07%2F18%2Fclaude-code-github-actions-setup%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" class="pagination--pager" title="Más allá de Cursor: Mi experiencia con Claude Code y Sequential Thinking
+      <a href="https://lgallardo.com/2025/07/09/beyond-cursor-claude-code-sequential-thinking/" class="pagination--pager" title="Más allá de Cursor: Mi experiencia con Claude Code y Sequential Thinking
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2025/07/24/bugbot-to-codebot-ai-review-alternative/" class="pagination--pager" title="De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA
+      <a href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/" class="pagination--pager" title="De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA
 ">Next</a>
     
   </nav>
@@ -1128,14 +1128,14 @@ y agrega etiquetas ARIA apropiadas
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -1163,49 +1163,14 @@ y agrega etiquetas ARIA apropiadas
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -1233,14 +1198,14 @@ y agrega etiquetas ARIA apropiadas
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -1254,6 +1219,41 @@ y agrega etiquetas ARIA apropiadas
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -1285,7 +1285,7 @@ y agrega etiquetas ARIA apropiadas
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -1295,7 +1295,7 @@ y agrega etiquetas ARIA apropiadas
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

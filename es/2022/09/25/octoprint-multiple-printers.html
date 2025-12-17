@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/OctoPrint.jpg">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/OctoPrint.jpg">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/assets/images/OctoPrint.jpg">
+<meta property="og:image" content="https://lgallardo.com/assets/images/OctoPrint.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2022-09-24T19:00:00-05:00">
+<meta property="article:published_time" content="2022-09-25T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -101,7 +101,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -123,7 +123,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -135,7 +135,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -177,7 +177,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -214,7 +214,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -399,26 +399,26 @@ Una de las herramientas más útiles a la hora de gestionar una impresora 3D es 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pi@octopi:~<span class="nv">$ </span><span class="nb">sudo </span>su
 root@octopi:~# 
 
-root@octopi:~# apt install curl
+root@octopi:~# apt <span class="nb">install </span>curl
 root@octopi:~# curl <span class="nt">-sSL</span> https://get.docker.com | sh
 
 root@octopi:~# apt update
-root@octopi:~# apt install docker-compose
+root@octopi:~# apt <span class="nb">install </span>docker-compose
 </code></pre></div></div>
 
 <h2 id="octoprint-con-una-impresora">OctoPrint con una impresora</h2>
 <p>Lo primero que haremos es crear un carpeta para OctoPrint, y luego entrar en ella:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# mkdir octoprint
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# <span class="nb">mkdir </span>octoprint
 root@octopi:~# 
 root@octopi:~# <span class="nb">cd </span>octoprint/
 root@octopi:~/octoprint#
 </code></pre></div></div>
 
-<p>Vamos a empezar con una impresora, en este caso empezaré con la <code class="highlighter-rouge">Artillery Genius Pro</code>.  Para esto creamos una carpeta que identifique a esta impresora:</p>
+<p>Vamos a empezar con una impresora, en este caso empezaré con la <code class="language-plaintext highlighter-rouge">Artillery Genius Pro</code>.  Para esto creamos una carpeta que identifique a esta impresora:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# mkdir geniuspro
-root@octopi:~# chmod <span class="nt">-R</span> 777 geniuspro/
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~# <span class="nb">mkdir </span>geniuspro
+root@octopi:~# <span class="nb">chmod</span> <span class="nt">-R</span> 777 geniuspro/
 </code></pre></div></div>
 
 <p>Es importante saber la ruta actual porque luego la usaremos en la definición del contenedor junto con el nombre de esta carpeta. Para ello ejecutamos la siguiente orden:</p>
@@ -427,11 +427,11 @@ root@octopi:~# chmod <span class="nt">-R</span> 777 geniuspro/
 /root/octoprint
 </code></pre></div></div>
 
-<p>Ya con esto podemos indicar luego que los archivos de esta primera instancia de OctoPrint residirán en <code class="highlighter-rouge">/root/octoprint/geniuspro</code>.</p>
+<p>Ya con esto podemos indicar luego que los archivos de esta primera instancia de OctoPrint residirán en <code class="language-plaintext highlighter-rouge">/root/octoprint/geniuspro</code>.</p>
 
-<p>Ahora para configurar la impresora vamos a usar <code class="highlighter-rouge">docker-compose</code> por lo que creamos el archivo <code class="highlighter-rouge">docker-compose.yml</code> con la siguiente información:</p>
+<p>Ahora para configurar la impresora vamos a usar <code class="language-plaintext highlighter-rouge">docker-compose</code> por lo que creamos el archivo <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> con la siguiente información:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
 
 services:
   geniuspro:
@@ -453,21 +453,21 @@ services:
       - MJPG_STREAMER_INPUT="-y -n -r 1280x960 -f 30
 </code></pre></div></div>
 
-<p>Este archivo define varias cosas relacionadas a OctoPrint, como la cámara web y la impresora como tal. Por ejemplo, con <code class="highlighter-rouge">image</code> indicamos cuál es la imagen Docker a usar para el servicio <code class="highlighter-rouge">geniuspro</code>.</p>
+<p>Este archivo define varias cosas relacionadas a OctoPrint, como la cámara web y la impresora como tal. Por ejemplo, con <code class="language-plaintext highlighter-rouge">image</code> indicamos cuál es la imagen Docker a usar para el servicio <code class="language-plaintext highlighter-rouge">geniuspro</code>.</p>
 
-<p>En esta definición hay que destacar los puertos, los cuales serán usados para acceder a los servicios, siendo el <code class="highlighter-rouge">5000</code> para la interfaz web y el <code class="highlighter-rouge">8080</code> para el streaming de video de la cámara web.</p>
+<p>En esta definición hay que destacar los puertos, los cuales serán usados para acceder a los servicios, siendo el <code class="language-plaintext highlighter-rouge">5000</code> para la interfaz web y el <code class="language-plaintext highlighter-rouge">8080</code> para el streaming de video de la cámara web.</p>
 
-<p>Por otro lado se define como dispositivo la impresora en <code class="highlighter-rouge">/dev/ttyACM0</code>, y la cámara web en <code class="highlighter-rouge">/dev/video0</code></p>
+<p>Por otro lado se define como dispositivo la impresora en <code class="language-plaintext highlighter-rouge">/dev/ttyACM0</code>, y la cámara web en <code class="language-plaintext highlighter-rouge">/dev/video0</code></p>
 
-<p>Algo a tener en cuenta y que se diferencia del <a href="https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit" target="_bla￼nk">ejemplo en cuál me basé</a>, es que el streamer ahora es parte de la imagen Docker y es atendido en el puerto <code class="highlighter-rouge">8080</code>, por los que no hace falta tener una definición aparte a otra imagen Docker apuntando al streamer.</p>
+<p>Algo a tener en cuenta y que se diferencia del <a href="https://docs.google.com/document/d/1aU7LGYAe6r45LqEBQ8opuXCiNKeJl3XrPTrobvEvdOM/edit" target="_bla￼nk">ejemplo en cuál me basé</a>, es que el streamer ahora es parte de la imagen Docker y es atendido en el puerto <code class="language-plaintext highlighter-rouge">8080</code>, por los que no hace falta tener una definición aparte a otra imagen Docker apuntando al streamer.</p>
 
-<p>Luego en <code class="highlighter-rouge">volumes</code> es donde se hace la referencia al directorio de la impresora que habíamos creado en la ruta  <code class="highlighter-rouge">/root/octoprint/geniuspro</code>, que será mapeada  dentro del contenedor en  la carpeta <code class="highlighter-rouge">/octoprint</code>. Es decir, cuando levantemos el contenedor todos los archivos de OctoPrint para esta impresora quedarán en la ruta <code class="highlighter-rouge">/root/octoprint/geniuspro</code> del sistema operativo.</p>
+<p>Luego en <code class="language-plaintext highlighter-rouge">volumes</code> es donde se hace la referencia al directorio de la impresora que habíamos creado en la ruta  <code class="language-plaintext highlighter-rouge">/root/octoprint/geniuspro</code>, que será mapeada  dentro del contenedor en  la carpeta <code class="language-plaintext highlighter-rouge">/octoprint</code>. Es decir, cuando levantemos el contenedor todos los archivos de OctoPrint para esta impresora quedarán en la ruta <code class="language-plaintext highlighter-rouge">/root/octoprint/geniuspro</code> del sistema operativo.</p>
 
-<p>Por último, en <code class="highlighter-rouge">environment</code> definimos los parámetros para el streamer, pasando la información del dispositivo de la cámara web referido desde el contenedor, que en este caso coincide con el del sistema operativo afitrión, es decir, <code class="highlighter-rouge">/dev/video0</code>. También le proporcionamos los parámetros de la cámara, en mi caso le indico que la resolución es de 1280x960 a 30 frames por segundos, que es lo que corresponde com mi Logitech C270. Para otros modelos puedes consultar el <a href="https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149" target="_bla￼nk">listado desde la  página de cámaras soportadas</a>.</p>
+<p>Por último, en <code class="language-plaintext highlighter-rouge">environment</code> definimos los parámetros para el streamer, pasando la información del dispositivo de la cámara web referido desde el contenedor, que en este caso coincide con el del sistema operativo afitrión, es decir, <code class="language-plaintext highlighter-rouge">/dev/video0</code>. También le proporcionamos los parámetros de la cámara, en mi caso le indico que la resolución es de 1280x960 a 30 frames por segundos, que es lo que corresponde com mi Logitech C270. Para otros modelos puedes consultar el <a href="https://community.octoprint.org/t/usb-webcams-known-to-work-with-mjpg-streamer/21149" target="_bla￼nk">listado desde la  página de cámaras soportadas</a>.</p>
 
-<p>Una vez creado el archivo  <code class="highlighter-rouge">docker-compose.yml</code> con la información mostrada arriba, solo basta con levantar el servicio con Docker:</p>
+<p>Una vez creado el archivo  <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> con la información mostrada arriba, solo basta con levantar el servicio con Docker:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
   
 Creating octoprint_geniuspro_1 ... done
 </code></pre></div></div>
@@ -479,7 +479,7 @@ Creating octoprint_geniuspro_1 ... done
 <h2 id="agregar-una-segunda-impresora">Agregar una segunda impresora</h2>
 <p>Para agregar una segunda impresora solo hay que replicar la configuración que teníamos antes, pero especificando la nueva impresora y la cámara de video correspondiente. Entonces para mi Artillery Sidewinder X2 esto sería:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
 
 services:
   geniuspro:
@@ -520,11 +520,11 @@ services:
 
 </code></pre></div></div>
 
-<p>Aquí hay que aclarar que en el apartado devices físicamente la impresora está identificada en la Raspberry como <code class="highlighter-rouge">/dev/ttyACM1</code>, pero al crear el contenedor internamente se identificará como <code class="highlighter-rouge">/dev/ttyACM0</code>. Lo mismo pasa con la cámara de video, donde físicamente se identifca como <code class="highlighter-rouge">/dev/video2</code> pero internamente el contenedor la verá como <code class="highlighter-rouge">/dev/video0</code>.</p>
+<p>Aquí hay que aclarar que en el apartado devices físicamente la impresora está identificada en la Raspberry como <code class="language-plaintext highlighter-rouge">/dev/ttyACM1</code>, pero al crear el contenedor internamente se identificará como <code class="language-plaintext highlighter-rouge">/dev/ttyACM0</code>. Lo mismo pasa con la cámara de video, donde físicamente se identifca como <code class="language-plaintext highlighter-rouge">/dev/video2</code> pero internamente el contenedor la verá como <code class="language-plaintext highlighter-rouge">/dev/video0</code>.</p>
 
 <p>Una vez creada la configuración se debe levantar el contendor de la siguiente manera:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# docker-compose up -d
   
 octoprint_geniuspro_1 is up-to-date
 Creating octoprint_sidewinderx2_1 ... done
@@ -535,11 +535,11 @@ Creating octoprint_sidewinderx2_1 ... done
 <p><img src="/assets/images/octoprint-multi-web2.jpg" alt="OctoPrint Web 2" /></p>
 
 <h2 id="cómo-diferenciar-las-impresoras">¿Cómo diferenciar las impresoras?</h2>
-<p>En el anterior ejemplo usé los dipositivos <code class="highlighter-rouge">/dev/ttyACM0</code> y <code class="highlighter-rouge">/dev/ttyACM1</code>  para hacer referencia a mi primera impresora, la Artillery Genius Pro, y a la segunda impresora la Artillery SideWinder X2, pero el sistema operativo no siempre las tomará en ese orden, ya que dependerá de cuál encienda primero . Para poder identificar las impresoras sin importar el orden de conexión podemos crear un enlace simbólico usando <code class="highlighter-rouge">udev</code> con la información del fabricante y del producto.</p>
+<p>En el anterior ejemplo usé los dipositivos <code class="language-plaintext highlighter-rouge">/dev/ttyACM0</code> y <code class="language-plaintext highlighter-rouge">/dev/ttyACM1</code>  para hacer referencia a mi primera impresora, la Artillery Genius Pro, y a la segunda impresora la Artillery SideWinder X2, pero el sistema operativo no siempre las tomará en ese orden, ya que dependerá de cuál encienda primero . Para poder identificar las impresoras sin importar el orden de conexión podemos crear un enlace simbólico usando <code class="language-plaintext highlighter-rouge">udev</code> con la información del fabricante y del producto.</p>
 
 <p>Para esto primero hay que listar los dispositivos USB:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# lsusb
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# lsusb
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
@@ -552,7 +552,7 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 <p>Acá hay dos dispositivos de <strong>STMicroelectronics Virtual COM Port</strong>, que corresponden a las dos impresoras, pero cuál es cuál? Vamos a pedir el detalle de estos dispositivos:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> root@octopi:~/octoprint# lsusb -v -d 0483:5740
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> root@octopi:~/octoprint# lsusb -v -d 0483:5740
 
 Bus 001 Device 015: ID 0483:5740 STMicroelectronics Virtual COM Port
 Device Descriptor:
@@ -589,45 +589,45 @@ Device Descriptor:
 ...
 </code></pre></div></div>
 
-<p>Lo que diferenica una impresora de la otra es el número serial del dispositivo. Como inicialmente la Artillery Genius Pro estaba mapeada en <code class="highlighter-rouge">/dev/ttyACM0</code>, podemos consultar cuál es su número de serial:</p>
+<p>Lo que diferenica una impresora de la otra es el número serial del dispositivo. Como inicialmente la Artillery Genius Pro estaba mapeada en <code class="language-plaintext highlighter-rouge">/dev/ttyACM0</code>, podemos consultar cuál es su número de serial:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM0 | grep serial
     ATTRS{serial}=="3594398F3538"
     ATTRS{serial}=="0000:01:00.0"
 </code></pre></div></div>
 
-<p>Ahora para la ver el código serial de la Artillery Sidewinder X2 se debe consultar por el dispositivo <code class="highlighter-rouge">/dev/ttyACM1</code>:</p>
+<p>Ahora para la ver el código serial de la Artillery Sidewinder X2 se debe consultar por el dispositivo <code class="language-plaintext highlighter-rouge">/dev/ttyACM1</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 root@octopi:~/octoprint# udevadm info -a -n /dev/ttyACM1 | grep serial
     ATTRS{serial}=="386F39543538"
     ATTRS{serial}=="0000:01:00.0" 
 </code></pre></div></div>
 
-<p>Para que  <code class="highlighter-rouge">udev</code>  reconozca estas reglas debemos crear el siguiente archivo <code class="highlighter-rouge">/etc/udev/rules.d/40-printers.rules</code> , con este contenido:</p>
+<p>Para que  <code class="language-plaintext highlighter-rouge">udev</code>  reconozca estas reglas debemos crear el siguiente archivo <code class="language-plaintext highlighter-rouge">/etc/udev/rules.d/40-printers.rules</code> , con este contenido:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Genius Pro
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # Genius Pro
 KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="3594398F3538", SYMLINK="ttyGeniusPro"
 
 # Sidewinder X2
 KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="386F39543538", SYMLINK="ttySidewinderX2"
 </code></pre></div></div>
 
-<p>Luego se debe reiniciar <code class="highlighter-rouge">udev</code> para que tome estos cambios:</p>
+<p>Luego se debe reiniciar <code class="language-plaintext highlighter-rouge">udev</code> para que tome estos cambios:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
 </code></pre></div></div>
 
 <p>De esta manera quedarán las impresoras mapeadas de la siguiente forma:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# ls -l  /dev/tty{GeniusPro,Sidewinder}*
 lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttyGeniusPro -&gt; ttyACM0
 lrwxrwxrwx 1 root root 7 Aug 22 21:10 /dev/ttySidewinderX2 -&gt; ttyACM1
 </code></pre></div></div>
 
 <p>Por lo que la configuración de Docker podemos modificarla para reflejar estos cambios:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
 
 services:
   geniuspro:
@@ -671,9 +671,9 @@ services:
 <h2 id="cámaras-de-video">Cámaras de video</h2>
 <p>A diferencia de las impresoras las cuales tienen seriales distintos, tengo dos cámaras de video <strong>Logitech C270</strong> que son exaxtamente iguales. ¿Cómo hacemos para diferenciarlas? ¿Cómo podemos hacer que siempre tome la cámara correcta?</p>
 
-<p>Nuevamente hacemos el análisis con  <code class="highlighter-rouge">lsusb</code>:</p>
+<p>Nuevamente hacemos el análisis con  <code class="language-plaintext highlighter-rouge">lsusb</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# lsusb
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# lsusb
 Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 004: ID 046d:0825 Logitech, Inc. Webcam C270
@@ -684,9 +684,9 @@ Bus 001 Device 002: ID 2109:3431 VIA Labs, Inc. Hub
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 </code></pre></div></div>
 
-<p>Ambas cámaras están en el mismos bus pero identificadas como dispositivos USB diferentes, lo cual podemos aprovechar. En este caso no usaremos el id del producto para diferenciarlas sino el id de dispositivo USB.  Tomaremos como referencia el subsystem <code class="highlighter-rouge">video4linux</code> en vez de <code class="highlighter-rouge">tty</code>, por lo que estaremos usando <code class="highlighter-rouge">KERNELS</code> en vez de <code class="highlighter-rouge">KERNEL</code> para diferenciar las cámaras. Por ejemplo, para saber en qué dispositivo USB está  la cámara en <code class="highlighter-rouge">/dev/video0</code> podemos ejecutar lo siguiente:</p>
+<p>Ambas cámaras están en el mismos bus pero identificadas como dispositivos USB diferentes, lo cual podemos aprovechar. En este caso no usaremos el id del producto para diferenciarlas sino el id de dispositivo USB.  Tomaremos como referencia el subsystem <code class="language-plaintext highlighter-rouge">video4linux</code> en vez de <code class="language-plaintext highlighter-rouge">tty</code>, por lo que estaremos usando <code class="language-plaintext highlighter-rouge">KERNELS</code> en vez de <code class="language-plaintext highlighter-rouge">KERNEL</code> para diferenciar las cámaras. Por ejemplo, para saber en qué dispositivo USB está  la cámara en <code class="language-plaintext highlighter-rouge">/dev/video0</code> podemos ejecutar lo siguiente:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video0) | grep KERNELS
     KERNELS=="1-1.4:1.0"
     KERNELS=="1-1.4"
     KERNELS=="1-1"
@@ -701,7 +701,7 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 <p>Para la otra cámara hacemos lo mismo:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm info -a -p  $(udevadm info -q path -n /dev/video2) | grep KERNELS
     KERNELS=="1-1.3:1.0"
     KERNELS=="1-1.3"
     KERNELS=="1-1"
@@ -714,9 +714,9 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
     KERNELS=="platform"
 </code></pre></div></div>
 
-<p>Ya con esta información podemos modificar las reglas de <code class="highlighter-rouge">udev</code> de la siguiente manera:</p>
+<p>Ya con esta información podemos modificar las reglas de <code class="language-plaintext highlighter-rouge">udev</code> de la siguiente manera:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Genius Pro
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Genius Pro
 KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="5740", ATTRS{serial}=="3594398F3538", SYMLINK="ttyGeniusPro"
 SUBSYSTEM=="video4linux", KERNELS=="1-1.3", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", SYMLINK="videoGeniusPro"
 
@@ -727,12 +727,12 @@ SUBSYSTEM=="video4linux", KERNELS=="1-1.4", ATTRS{idVendor}=="046d", ATTRS{idPro
 
 <p>Recuerden reiniciar las reglas de udev con:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@octopi:~/octoprint# udevadm control --reload-rules &amp;&amp; udevadm trigger
 </code></pre></div></div>
 
-<p>De esta forma ahora tenemos las cámaras mapeadas como <code class="highlighter-rouge">/dev/videoGeniusPro</code>y  <code class="highlighter-rouge">/dev/videoSidewinderX2</code> respectivamente. Ahora podemos modificar el archivo <strong>docker-compose.yml</strong> para que tome esta nueva configuración:</p>
+<p>De esta forma ahora tenemos las cámaras mapeadas como <code class="language-plaintext highlighter-rouge">/dev/videoGeniusPro</code>y  <code class="language-plaintext highlighter-rouge">/dev/videoSidewinderX2</code> respectivamente. Ahora podemos modificar el archivo <strong>docker-compose.yml</strong> para que tome esta nueva configuración:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '2.4'
 
 services:
   geniuspro:
@@ -773,7 +773,7 @@ services:
 </code></pre></div></div>
 
 <h2 id="desempeño-con-dos-instancias-de-octoprint">Desempeño con dos instancias de OctoPrint</h2>
-<p>Seguramente te estarás preguntando sobre el consumo de estos contenedores en el sistema operativo y si las Raspberry puede manejarlo. Aquí te dejo una imagen de <code class="highlighter-rouge">htop</code> con los dos contenedores arriba imprimiendo en cada una de las impresoras a la vez.</p>
+<p>Seguramente te estarás preguntando sobre el consumo de estos contenedores en el sistema operativo y si las Raspberry puede manejarlo. Aquí te dejo una imagen de <code class="language-plaintext highlighter-rouge">htop</code> con los dos contenedores arriba imprimiendo en cada una de las impresoras a la vez.</p>
 
 <p><img src="/assets/images/octoprint-htop.jpg" alt="htop" /></p>
 
@@ -818,7 +818,7 @@ services:
     
       
       
-      <a href="https://lgallardo.com/es/tags/general" class="page__taxonomy-item" rel="tag">General</a>
+      <a href="https://lgallardo.com/tags/general" class="page__taxonomy-item" rel="tag">General</a>
     
     </span>
   </p>
@@ -839,14 +839,14 @@ services:
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-09-24T19:00:00-05:00">September 25, 2022</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-09-25T00:00:00+00:00">September 25, 2022</time></p>
         
       </footer>
 
@@ -855,24 +855,24 @@ services:
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=OctoPrint+con+m%C3%BAltiples+impresoras+3D%20https%3A%2F%2Flgallardo.com%2Fes%2F2022%2F09%2F25%2Foctoprint-multiple-printers" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=OctoPrint+con+m%C3%BAltiples+impresoras+3D%20https%3A%2F%2Flgallardo.com%2F2022%2F09%2F25%2Foctoprint-multiple-printers" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2022%2F09%2F25%2Foctoprint-multiple-printers" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2022%2F09%2F25%2Foctoprint-multiple-printers" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2022%2F09%2F25%2Foctoprint-multiple-printers" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2022%2F09%2F25%2Foctoprint-multiple-printers" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2022%2F09%2F25%2Foctoprint-multiple-printers" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2022%2F09%2F25%2Foctoprint-multiple-printers" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2022/04/17/paperlike-pencil-grips" class="pagination--pager" title="PaperLike Pencil Grips
+      <a href="https://lgallardo.com/2022/04/17/paperlike-pencil-grips" class="pagination--pager" title="PaperLike Pencil Grips
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2023/12/18/aws-recertified-solutions-architect-professional/" class="pagination--pager" title="AWS (re)Certified Solutions Architect - Professional
+      <a href="https://lgallardo.com/2023/12/18/aws-recertified-solutions-architect-professional/" class="pagination--pager" title="AWS (re)Certified Solutions Architect - Professional
 ">Next</a>
     
   </nav>
@@ -897,14 +897,14 @@ services:
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -932,49 +932,14 @@ services:
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -1002,14 +967,14 @@ services:
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -1023,6 +988,41 @@ services:
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -1054,7 +1054,7 @@ services:
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -1064,7 +1064,7 @@ services:
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

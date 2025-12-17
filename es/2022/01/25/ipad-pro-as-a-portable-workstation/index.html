@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/images/ipad-pro-2021.jpg">
+<meta name="twitter:image" content="https://lgallardo.com/images/ipad-pro-2021.jpg">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/images/ipad-pro-2021.jpg">
+<meta property="og:image" content="https://lgallardo.com/images/ipad-pro-2021.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2022-01-24T23:00:07-06:00">
+<meta property="article:published_time" content="2022-01-25T05:00:07+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -101,7 +101,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -123,7 +123,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -135,7 +135,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -177,7 +177,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -214,7 +214,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -359,86 +359,86 @@ Hace un tiempo que no escribía en el blog, primero porque no encontraba algo in
 
 <p>De hecho en un <a href="https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/" target="_blank">artículo</a> que conseguí sugerían la opción de usar un Digital Ocean Droplet para tener una máquina virtual en la nube y desde ahí poder trabajar. Esta opción no es mala, pero teniendo una estación de trabajo en casa no vi la necesidad de irme a la nube.</p>
 
-<p>Siguiendo algunas de estas sugerencias terminé instalando <strong>Blink Shell</strong> que viene con soporte para <code class="highlighter-rouge">mosh</code>, y usando <code class="highlighter-rouge">tmux</code> en mi laptop con Linux como sitio remoto pude hacerlo. A continuación les comento el detalle de esta configuración.</p>
+<p>Siguiendo algunas de estas sugerencias terminé instalando <strong>Blink Shell</strong> que viene con soporte para <code class="language-plaintext highlighter-rouge">mosh</code>, y usando <code class="language-plaintext highlighter-rouge">tmux</code> en mi laptop con Linux como sitio remoto pude hacerlo. A continuación les comento el detalle de esta configuración.</p>
 
 <h1 id="blink-shell-ssh--mosh">Blink Shell (ssh / mosh)</h1>
 
-<p>Lo primero que tuve que buscar fue un cliente <code class="highlighter-rouge">ssh</code> decente para iPad. Dentro de las recomendaciones recurrentes en Internet <strong><a href="https://blink.sh" target="_blank">Blink Shell</a></strong> aparecía como una opción. En principio el hecho de que haya que comprarlo sin  un trial no gustaba pero como insistían en que era la mejor opción decidí probarlo (USD 19,99 a la fecha de publicación de este post).</p>
+<p>Lo primero que tuve que buscar fue un cliente <code class="language-plaintext highlighter-rouge">ssh</code> decente para iPad. Dentro de las recomendaciones recurrentes en Internet <strong><a href="https://blink.sh" target="_blank">Blink Shell</a></strong> aparecía como una opción. En principio el hecho de que haya que comprarlo sin  un trial no gustaba pero como insistían en que era la mejor opción decidí probarlo (USD 19,99 a la fecha de publicación de este post).</p>
 
-<p>Tengo que decir que <strong>Blink Shell</strong> es muy pero muy bueno, está diseñado para dispositivos móviles y tiene soporte para <code class="highlighter-rouge">mosh</code>.</p>
+<p>Tengo que decir que <strong>Blink Shell</strong> es muy pero muy bueno, está diseñado para dispositivos móviles y tiene soporte para <code class="language-plaintext highlighter-rouge">mosh</code>.</p>
 
 <h2 id="mosh">Mosh</h2>
 
-<p>Te estarás preguntando como en su momento lo hice yo ¿Qué es <code class="highlighter-rouge">mosh</code>? La <a href="https://mosh.org" target="_blank">página de mosh</a> dice lo siguiente:</p>
+<p>Te estarás preguntando como en su momento lo hice yo ¿Qué es <code class="language-plaintext highlighter-rouge">mosh</code>? La <a href="https://mosh.org" target="_blank">página de mosh</a> dice lo siguiente:</p>
 
 <blockquote>
   <p>Aplicación de terminal remoto que permite la itinerancia, admite conectividad intermitente y proporciona eco local inteligente y edición de línea de las pulsaciones de teclado del usuario.</p>
 </blockquote>
 
-<p>¿Sigues sin entender para qué sirve <code class="highlighter-rouge">mosh</code> como me pasaba a mí? Es como <code class="highlighter-rouge">screen</code> pero sin tener que aprender comandos para crear y manejar sesiones, además  por debajo utliza <code class="highlighter-rouge">ssh</code>.  En otras palabras, vas a tener la posibilidad de continuar con tu sesión de trabajo donde la dejaste, o si por ejemplo se te cortó la conexión y logras conectarte de nuevo con otra red.</p>
+<p>¿Sigues sin entender para qué sirve <code class="language-plaintext highlighter-rouge">mosh</code> como me pasaba a mí? Es como <code class="language-plaintext highlighter-rouge">screen</code> pero sin tener que aprender comandos para crear y manejar sesiones, además  por debajo utliza <code class="language-plaintext highlighter-rouge">ssh</code>.  En otras palabras, vas a tener la posibilidad de continuar con tu sesión de trabajo donde la dejaste, o si por ejemplo se te cortó la conexión y logras conectarte de nuevo con otra red.</p>
 
-<p>Como por debajo se seguimos teniendo <code class="highlighter-rouge">ssh</code>, para usar <code class="highlighter-rouge">mosh</code> la sintaxis es prácticamente la misma.  Es decir, si antes te conectabas con <code class="highlighter-rouge">ssh</code> a un servidor de esta manera:</p>
+<p>Como por debajo se seguimos teniendo <code class="language-plaintext highlighter-rouge">ssh</code>, para usar <code class="language-plaintext highlighter-rouge">mosh</code> la sintaxis es prácticamente la misma.  Es decir, si antes te conectabas con <code class="language-plaintext highlighter-rouge">ssh</code> a un servidor de esta manera:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh lgallard@192.168.1.65
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh lgallard@192.168.1.65
 </code></pre></div></div>
 
-<p>Ahora con <code class="highlighter-rouge">mosh</code> lo haces de esta forma:</p>
+<p>Ahora con <code class="language-plaintext highlighter-rouge">mosh</code> lo haces de esta forma:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mosh lgallard@192.168.1.65
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mosh lgallard@192.168.1.65
 </code></pre></div></div>
 
-<p>Parece sencillo el cambio y con esto ganamos que al cerrar nuestro iPad o el equipo donde estanos usando el cliente <code class="highlighter-rouge">mosh</code> vamos a poder recuperar mágicamente la sesión de trabajo al volvernos a conectar.</p>
+<p>Parece sencillo el cambio y con esto ganamos que al cerrar nuestro iPad o el equipo donde estanos usando el cliente <code class="language-plaintext highlighter-rouge">mosh</code> vamos a poder recuperar mágicamente la sesión de trabajo al volvernos a conectar.</p>
 
-<p>Puedes configurar las opciones de <strong>Blink Shell</strong> accediendo a un asistente de configuración para tener distintos hosts y facilitar la conexión con un nombre en vez de una dirección IP. Para acceder a este asistente basta con escribir <code class="highlighter-rouge">config</code> desde el terminal:</p>
+<p>Puedes configurar las opciones de <strong>Blink Shell</strong> accediendo a un asistente de configuración para tener distintos hosts y facilitar la conexión con un nombre en vez de una dirección IP. Para acceder a este asistente basta con escribir <code class="language-plaintext highlighter-rouge">config</code> desde el terminal:</p>
 
 <p><img src="/assets/images/Blink_config.png" alt="Blink config" style="display:block; margin-left:auto; margin-right:auto" /></p>
 
 <p>En mi caso ahora me puedo conectar a mi estación de trabajo de la siguiente forma:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mosh dauntless
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mosh dauntless
 </code></pre></div></div>
 
 <h2 id="mosh-lo-malo">Mosh, lo malo</h2>
 
-<p>El gran punto en contra de <code class="highlighter-rouge">mosh</code> es que no puedes hacer scroll del terminal, es decir, si necesitas consultar la salida de comandos que hayas ejecutado previamente y que ya no estén en la pantalla, no los vas a poder ver. Esto para mí era un gran problema porque al usar <code class="highlighter-rouge">terraform</code> perdía los planes con los cambios a ser aplicados.</p>
+<p>El gran punto en contra de <code class="language-plaintext highlighter-rouge">mosh</code> es que no puedes hacer scroll del terminal, es decir, si necesitas consultar la salida de comandos que hayas ejecutado previamente y que ya no estén en la pantalla, no los vas a poder ver. Esto para mí era un gran problema porque al usar <code class="language-plaintext highlighter-rouge">terraform</code> perdía los planes con los cambios a ser aplicados.</p>
 
-<p>Esta es la forma en que trabaja <code class="highlighter-rouge">mosh</code>, para tener un óptimo rendimiento hacen un rendering del texto. Hay un <a href="https://github.com/mobile-shell/mosh/issues/122" target="_blank">issue abierto</a> de varios años donde los desarrolladores comentan que está a modo de referencia pero que no tienen ninguna intención de implementarlo. ¿Entonces no hay solución? Si, <code class="highlighter-rouge">tmux</code>.</p>
+<p>Esta es la forma en que trabaja <code class="language-plaintext highlighter-rouge">mosh</code>, para tener un óptimo rendimiento hacen un rendering del texto. Hay un <a href="https://github.com/mobile-shell/mosh/issues/122" target="_blank">issue abierto</a> de varios años donde los desarrolladores comentan que está a modo de referencia pero que no tienen ninguna intención de implementarlo. ¿Entonces no hay solución? Si, <code class="language-plaintext highlighter-rouge">tmux</code>.</p>
 
 <h1 id="qué-es-tmux">¿Qué es tmux?</h1>
 
-<p><code class="highlighter-rouge">tmux</code> es una herramienta que permite tener varias terminales abiertas (o ventanas) para que sean accedidas y controladas desde un solo terminal como haríamos con <code class="highlighter-rouge">screen</code>.</p>
+<p><code class="language-plaintext highlighter-rouge">tmux</code> es una herramienta que permite tener varias terminales abiertas (o ventanas) para que sean accedidas y controladas desde un solo terminal como haríamos con <code class="language-plaintext highlighter-rouge">screen</code>.</p>
 
-<p>Debes instalar <code class="highlighter-rouge">tmux</code> en el equipo donde deseamos iniciar sesión y una vez instalado basta con ejecutar esto desde el cliente <code class="highlighter-rouge">mosh</code> (el iPad Pro en mi caso):</p>
+<p>Debes instalar <code class="language-plaintext highlighter-rouge">tmux</code> en el equipo donde deseamos iniciar sesión y una vez instalado basta con ejecutar esto desde el cliente <code class="language-plaintext highlighter-rouge">mosh</code> (el iPad Pro en mi caso):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mosh danuntless -- tmux new  -s terminal-1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mosh danuntless -- tmux new  -s terminal-1
 </code></pre></div></div>
 
 <p>De esta forma creamos una sessión nueva cuyo nombre es <strong>terminal-1</strong>. Luego para acceder a esta sesión posteriormente debemos ejecutar lo siguiente:</p>
 
-<p><code class="highlighter-rouge">mosh danuntless -- tmux a  -t terminal-1</code></p>
+<p><code class="language-plaintext highlighter-rouge">mosh danuntless -- tmux a  -t terminal-1</code></p>
 
 <h2 id="activar-scrolling--en-tmux">Activar scrolling  en tmux</h2>
 
-<p>En la estación de trabajo remota se debe configurar <code class="highlighter-rouge">mosh</code> para tener el scrroling con <code class="highlighter-rouge">tmux</code>, esto se consigue editando el archivo <code class="highlighter-rouge">~/.tmux.conf</code> con este contenido:</p>
+<p>En la estación de trabajo remota se debe configurar <code class="language-plaintext highlighter-rouge">mosh</code> para tener el scrroling con <code class="language-plaintext highlighter-rouge">tmux</code>, esto se consigue editando el archivo <code class="language-plaintext highlighter-rouge">~/.tmux.conf</code> con este contenido:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new-session
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new-session
 set -g history-limit 30000
 set -g mouse on
 </code></pre></div></div>
 
 <h2 id="blink--ssh---mosh--tmux--eh">Blink + ssh  + mosh + tmux … eh?</h2>
 
-<p>“Espera un momento… <strong>Blink + ssh + mosh +  tmux</strong>, no es medio complicado todo? No es mejor usar <code class="highlighter-rouge">ssh</code> con <code class="highlighter-rouge">screen</code>? “. Sí, es una alternativa pero con <code class="highlighter-rouge">ssh</code> no te reconectarás automáticamente y tendrás que loguearte nuevamente si por ejemplo cierras el iPad, si tu dirección IP cambia por algún motivo (por ejemplo cambias de WiFI a línea telefónica) o si la sesión <code class="highlighter-rouge">ssh</code> expira.</p>
+<p>“Espera un momento… <strong>Blink + ssh + mosh +  tmux</strong>, no es medio complicado todo? No es mejor usar <code class="language-plaintext highlighter-rouge">ssh</code> con <code class="language-plaintext highlighter-rouge">screen</code>? “. Sí, es una alternativa pero con <code class="language-plaintext highlighter-rouge">ssh</code> no te reconectarás automáticamente y tendrás que loguearte nuevamente si por ejemplo cierras el iPad, si tu dirección IP cambia por algún motivo (por ejemplo cambias de WiFI a línea telefónica) o si la sesión <code class="language-plaintext highlighter-rouge">ssh</code> expira.</p>
 
-<p>Reconozco que hay una curva de aprendizaje con <code class="highlighter-rouge">tmux</code> pero una vez superada te va a encantar y te preguntarás por qué no usaste antes <code class="highlighter-rouge">mosh</code> y <code class="highlighter-rouge">tmux</code></p>
+<p>Reconozco que hay una curva de aprendizaje con <code class="language-plaintext highlighter-rouge">tmux</code> pero una vez superada te va a encantar y te preguntarás por qué no usaste antes <code class="language-plaintext highlighter-rouge">mosh</code> y <code class="language-plaintext highlighter-rouge">tmux</code></p>
 
 <h2 id="más-sobre-tmux">Más sobre tmux</h2>
 
-<p>Si quieres aprender a usar <code class="highlighter-rouge">tmux</code> te dejo una <a href="https://tmuxcheatsheet.com" target="_blank">cheat sheet</a> con los comandos que puedes usar. En particular encontré muy útil la división en paneles y el uso del zoom entre ellos, pero debo admitir que copiar texto entre paneles es algo complicado en el iPad y a veces prefiero usar <code class="highlighter-rouge">vim</code> para esto, pero seguro ya le encontraré la vuelta.</p>
+<p>Si quieres aprender a usar <code class="language-plaintext highlighter-rouge">tmux</code> te dejo una <a href="https://tmuxcheatsheet.com" target="_blank">cheat sheet</a> con los comandos que puedes usar. En particular encontré muy útil la división en paneles y el uso del zoom entre ellos, pero debo admitir que copiar texto entre paneles es algo complicado en el iPad y a veces prefiero usar <code class="language-plaintext highlighter-rouge">vim</code> para esto, pero seguro ya le encontraré la vuelta.</p>
 
 <h1 id="palabras-finales">Palabras finales</h1>
 
-<p>Si bien acá comento la experiencia con el iPad Pro, todo esto se puede replicar en un iPad Air e incluso usar <code class="highlighter-rouge">mosh</code> y <code class="highlighter-rouge">tmux</code> desde otras estaciones de trabajo con Linux o Windows.</p>
+<p>Si bien acá comento la experiencia con el iPad Pro, todo esto se puede replicar en un iPad Air e incluso usar <code class="language-plaintext highlighter-rouge">mosh</code> y <code class="language-plaintext highlighter-rouge">tmux</code> desde otras estaciones de trabajo con Linux o Windows.</p>
 
 <h1 id="referencias">Referencias</h1>
 
@@ -470,7 +470,7 @@ set -g mouse on
     
       
       
-      <a href="https://lgallardo.com/es/tags/general" class="page__taxonomy-item" rel="tag">General</a>
+      <a href="https://lgallardo.com/tags/general" class="page__taxonomy-item" rel="tag">General</a>
     
     </span>
   </p>
@@ -491,14 +491,14 @@ set -g mouse on
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-01-24T23:00:07-06:00">January 25, 2022</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-01-25T05:00:07+00:00">January 25, 2022</time></p>
         
       </footer>
 
@@ -507,24 +507,24 @@ set -g mouse on
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=iPad+Pro+como+estaci%C3%B3n+de+trabajo+port%C3%A1til%20https%3A%2F%2Flgallardo.com%2Fes%2F2022%2F01%2F25%2Fipad-pro-as-a-portable-workstation%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=iPad+Pro+como+estaci%C3%B3n+de+trabajo+port%C3%A1til%20https%3A%2F%2Flgallardo.com%2F2022%2F01%2F25%2Fipad-pro-as-a-portable-workstation%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2022%2F01%2F25%2Fipad-pro-as-a-portable-workstation%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2022%2F01%2F25%2Fipad-pro-as-a-portable-workstation%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2022%2F01%2F25%2Fipad-pro-as-a-portable-workstation%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2022%2F01%2F25%2Fipad-pro-as-a-portable-workstation%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2022%2F01%2F25%2Fipad-pro-as-a-portable-workstation%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2022%2F01%2F25%2Fipad-pro-as-a-portable-workstation%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2021/06/15/helm-local-repo/" class="pagination--pager" title="Repositorio local de Helm 3
+      <a href="https://lgallardo.com/2021/06/15/helm-local-repo/" class="pagination--pager" title="Repositorio local de Helm 3
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2022/04/17/paperlike-pencil-grips" class="pagination--pager" title="PaperLike Pencil Grips
+      <a href="https://lgallardo.com/2022/04/17/paperlike-pencil-grips" class="pagination--pager" title="PaperLike Pencil Grips
 ">Next</a>
     
   </nav>
@@ -549,14 +549,14 @@ set -g mouse on
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -584,49 +584,14 @@ set -g mouse on
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -654,14 +619,14 @@ set -g mouse on
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -675,6 +640,41 @@ set -g mouse on
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -706,7 +706,7 @@ set -g mouse on
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -716,7 +716,7 @@ set -g mouse on
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

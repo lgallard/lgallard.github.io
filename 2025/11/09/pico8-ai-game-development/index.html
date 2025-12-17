@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2025-11-08T18:00:00-06:00">
+<meta property="article:published_time" content="2025-11-09T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -365,7 +365,7 @@
 
 <p>Last week, I stumbled upon Pico-8 while browsing retro gaming communities. As someone who plays classic games on handheld devices like the Miyoo Mini Plus and Anbernic consoles, the idea of a “fantasy console” immediately caught my attention. But here’s the thing—I had zero interest in learning Lua or spending weeks mastering Pico-8’s constraints.</p>
 
-<p>So I thought: <strong>what if I just “code-vibe” with Claude Code to build a complete game?</strong> No tutorials, no language learning, just pure AI-assisted development. The result? A fully functional Mastermind game where the code works flawlessly but the art… well, let’s just say AI hasn’t figured out pixel art yet.</p>
+<p>So I thought: <strong>what if I just “code-vibed” with Claude Code to build a complete game?</strong> No tutorials, no language learning, just pure AI-assisted development. The result? A fully functional Mastermind game where the code works flawlessly but the art… well, let’s just say AI hasn’t figured out pixel art yet.</p>
 
 <p>This isn’t about AI replacing developers. It’s about understanding what AI can do exceptionally well (code logic) and where it completely falls apart (artistic creativity). Here’s what I learned from building a Pico-8 game without knowing the language.</p>
 
@@ -398,7 +398,7 @@
 <h3 id="the-development-process">The Development Process</h3>
 
 <p><strong>Phase 1: Core Game Logic</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Create a Pico-8 Mastermind game with 4 colors and 6 attempts."
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Create a Pico-8 Mastermind game with 4 colors and 6 attempts."
 Claude: *Generates complete game logic with initialization, input handling, and feedback*
 </code></pre></div></div>
 
@@ -434,7 +434,7 @@ Claude: *Generates complete game logic with initialization, input handling, and 
 </code></pre></div></div>
 
 <p><strong>Phase 2: Polish and Features</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Add a title screen and instructions."
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Add a title screen and instructions."
 Claude: *Implements menu system with game flow*
 
 Me: "Show the secret code when the game ends."
@@ -449,7 +449,7 @@ Claude: *Updates rendering to use distinct visual indicators*
 <h3 id="what-impressed-me-about-the-code">What Impressed Me About the Code</h3>
 
 <ol>
-  <li><strong>Proper Pico-8 conventions</strong>: Used <code class="highlighter-rouge">_init()</code>, <code class="highlighter-rouge">_update()</code>, <code class="highlighter-rouge">_draw()</code> correctly</li>
+  <li><strong>Proper Pico-8 conventions</strong>: Used <code class="language-plaintext highlighter-rouge">_init()</code>, <code class="language-plaintext highlighter-rouge">_update()</code>, <code class="language-plaintext highlighter-rouge">_draw()</code> correctly</li>
   <li><strong>Efficient token usage</strong>: Code stayed well under the 8,192 token limit</li>
   <li><strong>Clean state management</strong>: Game states transitioned smoothly</li>
   <li><strong>Input handling</strong>: Button presses felt responsive and natural</li>
@@ -462,7 +462,7 @@ Claude: *Updates rendering to use distinct visual indicators*
 
 <p>Now here’s where things got interesting—and by interesting, I mean hilariously broken.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Let's make the UI look more retro, give it that 80s arcade style."
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Me: "Let's make the UI look more retro, give it that 80s arcade style."
 Claude: *Generates updated graphics with retro styling*
 
 Me: "The lines are overlapping and the chips look weird."
@@ -539,9 +539,9 @@ stop<span class="o">()</span>  <span class="nt">--</span> Pause execution
 <p><strong>Development cycle:</strong></p>
 <ol>
   <li>Edit code or sprites in Pico-8</li>
-  <li>Press <code class="highlighter-rouge">Ctrl+R</code> to run immediately</li>
+  <li>Press <code class="language-plaintext highlighter-rouge">Ctrl+R</code> to run immediately</li>
   <li>Test gameplay and identify issues</li>
-  <li>Press <code class="highlighter-rouge">ESC</code> to return to editor</li>
+  <li>Press <code class="language-plaintext highlighter-rouge">ESC</code> to return to editor</li>
   <li>Iterate</li>
 </ol>
 
@@ -568,7 +568,7 @@ save mastermind.p8.png
 
 <ol>
   <li><strong>Create an account</strong> on Lexaloffle BBS</li>
-  <li><strong>Export the cartridge</strong> as a PNG file (<code class="highlighter-rouge">save mastermind.p8.png</code>)</li>
+  <li><strong>Export the cartridge</strong> as a PNG file (<code class="language-plaintext highlighter-rouge">save mastermind.p8.png</code>)</li>
   <li><strong>Upload to BBS</strong> with description and screenshots</li>
   <li><strong>Share with the community</strong> and gather feedback</li>
 </ol>
@@ -580,7 +580,7 @@ save mastermind.p8.png
 <p>Publishing on Lexaloffle gave me immediate access to:</p>
 <ul>
   <li><strong>Playable web version</strong>: Anyone can play directly in their browser</li>
-  <li><strong>Download options</strong>: Users can grab the <code class="highlighter-rouge">.p8</code> file and run it locally</li>
+  <li><strong>Download options</strong>: Users can grab the <code class="language-plaintext highlighter-rouge">.p8</code> file and run it locally</li>
   <li><strong>Community feedback</strong>: Other developers provide suggestions and bug reports</li>
   <li><strong>Discoverability</strong>: Games appear in the BBS feed and search results</li>
 </ul>
@@ -720,15 +720,15 @@ save mastermind.p8.png
 <h3 id="your-first-ai-generated-game">Your First AI-Generated Game</h3>
 
 <p><strong>Week 1: Simple Game Loop</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Create a basic Pico-8 game with player movement and a game over screen."
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Create a basic Pico-8 game with player movement and a game over screen."
 </code></pre></div></div>
 
 <p><strong>Week 2: Add Mechanics</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Add collision detection and score tracking."
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Add collision detection and score tracking."
 </code></pre></div></div>
 
 <p><strong>Week 3: Polish</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Add a title screen, instructions, and end game sequence."
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: "Add a title screen, instructions, and end game sequence."
 </code></pre></div></div>
 
 <p><strong>Week 4: Manual Art Pass</strong></p>
@@ -888,7 +888,7 @@ save mastermind.p8.png
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-08T18:00:00-06:00">November 09, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-11-09T00:00:00+00:00">November 09, 2025</time></p>
         
       </footer>
 
@@ -910,7 +910,7 @@ save mastermind.p8.png
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" class="pagination--pager" title="GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
+      <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" class="pagination--pager" title="GitHub Models: Simple AI Integration for DevOps Workflows
 ">Previous</a>
     
     
@@ -928,41 +928,6 @@ save mastermind.p8.png
     <div class="page__related">
       <h4 class="page__related-title">You May Also Enjoy</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  9 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
         
           
 
@@ -1064,6 +1029,41 @@ save mastermind.p8.png
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/ccr-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="permalink">Beyond Anthropic: Using Claude Code with Any Model via Claude Code Router and OpenRouter
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Unlock the full potential of Claude Code by routing requests through Claude Code Router and OpenRouter—use free models, self-hosted solutions like Ollama, or...</p>
       </div>
     </div>
   </article>

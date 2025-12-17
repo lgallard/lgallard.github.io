@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/images/terraform.jpg">
+<meta name="twitter:image" content="https://lgallardo.com/images/terraform.jpg">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/images/terraform.jpg">
+<meta property="og:image" content="https://lgallardo.com/images/terraform.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2019-06-13T19:00:00-05:00">
+<meta property="article:published_time" content="2019-06-14T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -101,7 +101,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -123,7 +123,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -135,7 +135,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -177,7 +177,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -214,7 +214,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -356,7 +356,7 @@ Hace un tiempo escribí sobre <a href="https://lgallardo.com/2018/07/30/dynamic-
 
 <p>En esencia lo que hacía era definir los bloques de forma dinámica usando una asiganción a una lista de maps. Es decir, en vez de hacer esto:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
 
 [...]
 
@@ -375,7 +375,7 @@ Hace un tiempo escribí sobre <a href="https://lgallardo.com/2018/07/30/dynamic-
 
 <p>Se sustituía por:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "aws_codebuild_project" "codebuild" {
 
 [...]
 
@@ -385,9 +385,9 @@ Hace un tiempo escribí sobre <a href="https://lgallardo.com/2018/07/30/dynamic-
 
 </code></pre></div></div>
 
-<p>Donde <code class="highlighter-rouge">local.codebuild_artifacts</code> se construida a partir de una lista de maps, que dependiendo del tipo definido en la variable <code class="highlighter-rouge">codebuild_artifacts_type</code> creaba un bloque diferente:</p>
+<p>Donde <code class="language-plaintext highlighter-rouge">local.codebuild_artifacts</code> se construida a partir de una lista de maps, que dependiendo del tipo definido en la variable <code class="language-plaintext highlighter-rouge">codebuild_artifacts_type</code> creaba un bloque diferente:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 locals {
   codebuild_artifacts_def = {
     "S3" = [{
@@ -423,9 +423,9 @@ locals {
 
 <h1 id="bloques-dinámicos-en-terraform-012x">Bloques dinámicos en Terraform 0.12.x</h1>
 
-<p>Terraform 0.12.x propone el uso de <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">bloques dinámicos</a> para solucionar este y otros casos relacionados a bloques. Para esto hay que usar <code class="highlighter-rouge">dynamic</code> y <code class="highlighter-rouge">for-each</code>. Por ejemplo, para la definición de arriba tendriamos lo siguiente:</p>
+<p>Terraform 0.12.x propone el uso de <a href="https://www.hashicorp.com/blog/hashicorp-terraform-0-12-preview-for-and-for-each" target="_blank">bloques dinámicos</a> para solucionar este y otros casos relacionados a bloques. Para esto hay que usar <code class="language-plaintext highlighter-rouge">dynamic</code> y <code class="language-plaintext highlighter-rouge">for-each</code>. Por ejemplo, para la definición de arriba tendriamos lo siguiente:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
     for_each = [local.codebuild_artifacts]
     content {
       type                = artifacts.value.type
@@ -439,9 +439,9 @@ locals {
   }
 </code></pre></div></div>
 
-<p>Y la definición de <code class="highlighter-rouge">local.codebuild_artifacts</code> se simplifica enormemente:</p>
+<p>Y la definición de <code class="language-plaintext highlighter-rouge">local.codebuild_artifacts</code> se simplifica enormemente:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>locals {
   codebuild_artifacts = {
     type                = var.codebuild_artifacts_type
     location            = var.codebuild_artifacts_location
@@ -457,11 +457,11 @@ locals {
 
 <p><strong>¿Dónde está la magia?</strong></p>
 
-<p>Primero, en el tipo de datos <code class="highlighter-rouge">null</code>, el cual le dice a Terraform que ignore el atributo si la función <code class="highlighter-rouge">lookup</code> no encuentra el índice en el map.</p>
+<p>Primero, en el tipo de datos <code class="language-plaintext highlighter-rouge">null</code>, el cual le dice a Terraform que ignore el atributo si la función <code class="language-plaintext highlighter-rouge">lookup</code> no encuentra el índice en el map.</p>
 
-<p>Veamos las primeras línea de la definición del bloque  <code class="highlighter-rouge">content</code>, que es lo que se subsituye en el bloque <code class="highlighter-rouge">artifacts</code> en cada iteración:</p>
+<p>Veamos las primeras línea de la definición del bloque  <code class="language-plaintext highlighter-rouge">content</code>, que es lo que se subsituye en el bloque <code class="language-plaintext highlighter-rouge">artifacts</code> en cada iteración:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    content {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    content {
       type                = artifacts.value.type
       encryption_disabled = lookup(artifacts.value, "encryption_disabled", null)
       location            = lookup(artifacts.value, "location", null)
@@ -471,14 +471,14 @@ locals {
 <p>Acá se puede apreciar que:</p>
 
 <ol>
-  <li>El atributo <code class="highlighter-rouge">type</code> siempre se define acorde al valor de <code class="highlighter-rouge">artifacts.value.type</code>. Es decir, no se toma del map.</li>
-  <li>El atributo <code class="highlighter-rouge">encryption_disabled</code> se asigna si se consigue en el map algo como <code class="highlighter-rouge">artifacts.value['encryption_disabled']</code>. Si este ínidce no existe se le asiga <code class="highlighter-rouge">null</code> y por ende no será tomado en cuenta pot Terraform.</li>
-  <li>Y es igual para el resto de los atributos, como por ejemplo <code class="highlighter-rouge">location</code>.</li>
+  <li>El atributo <code class="language-plaintext highlighter-rouge">type</code> siempre se define acorde al valor de <code class="language-plaintext highlighter-rouge">artifacts.value.type</code>. Es decir, no se toma del map.</li>
+  <li>El atributo <code class="language-plaintext highlighter-rouge">encryption_disabled</code> se asigna si se consigue en el map algo como <code class="language-plaintext highlighter-rouge">artifacts.value['encryption_disabled']</code>. Si este ínidce no existe se le asiga <code class="language-plaintext highlighter-rouge">null</code> y por ende no será tomado en cuenta pot Terraform.</li>
+  <li>Y es igual para el resto de los atributos, como por ejemplo <code class="language-plaintext highlighter-rouge">location</code>.</li>
 </ol>
 
-<p>Esto permite tener definiciones de bloques dinámicas, pero teniendo en cuenta que se deben definir ciertos valores en conjunto. Por ejemplo, para <code class="highlighter-rouge">S3</code>se debe definir las variables:</p>
+<p>Esto permite tener definiciones de bloques dinámicas, pero teniendo en cuenta que se deben definir ciertos valores en conjunto. Por ejemplo, para <code class="language-plaintext highlighter-rouge">S3</code>se debe definir las variables:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var.codebuild_artifacts_type
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var.codebuild_artifacts_type
 var.codebuild_artifacts_location
 var.codebuild_artifacts_name
 var.codebuild_artifacts_namespace_type
@@ -487,19 +487,19 @@ var.codebuild_artifacts_path
 var.codebuild_artifacts_encryption_disabled
 </code></pre></div></div>
 
-<p>Mientras que para <code class="highlighter-rouge">NO_ARTIFACTS</code> basta con:</p>
+<p>Mientras que para <code class="language-plaintext highlighter-rouge">NO_ARTIFACTS</code> basta con:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var.codebuild_artifacts_type
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var.codebuild_artifacts_type
 </code></pre></div></div>
 
-<p>Por otro lado, la magia se completa por el hecho de que no se está usando la asingación para el bloque <code class="highlighter-rouge">artifacts</code> sino por la definición del bloque. Es decir, en vez de usar esta asignación:</p>
+<p>Por otro lado, la magia se completa por el hecho de que no se está usando la asingación para el bloque <code class="language-plaintext highlighter-rouge">artifacts</code> sino por la definición del bloque. Es decir, en vez de usar esta asignación:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> artifacts = ["${local.codebuild_artifacts}"]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> artifacts = ["${local.codebuild_artifacts}"]
 </code></pre></div></div>
 
 <p>Se usa la definición de bloque dinámico.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dynamic "artifacts" {
     for_each = [local.codebuild_artifacts]
     content {
       ...
@@ -532,7 +532,7 @@ var.codebuild_artifacts_encryption_disabled
     
       
       
-      <a href="https://lgallardo.com/es/tags/general" class="page__taxonomy-item" rel="tag">General</a>
+      <a href="https://lgallardo.com/tags/general" class="page__taxonomy-item" rel="tag">General</a>
     
     </span>
   </p>
@@ -553,14 +553,14 @@ var.codebuild_artifacts_encryption_disabled
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-06-13T19:00:00-05:00">June 14, 2019</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-06-14T00:00:00+00:00">June 14, 2019</time></p>
         
       </footer>
 
@@ -569,24 +569,24 @@ var.codebuild_artifacts_encryption_disabled
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Bloques+din%C3%A1micos+en+Terraform+0.12.x%20https%3A%2F%2Flgallardo.com%2Fes%2F2019%2F06%2F14%2Fdynamic-blocks-in-terraform-0.12.x%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Bloques+din%C3%A1micos+en+Terraform+0.12.x%20https%3A%2F%2Flgallardo.com%2F2019%2F06%2F14%2Fdynamic-blocks-in-terraform-0.12.x%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2019%2F06%2F14%2Fdynamic-blocks-in-terraform-0.12.x%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2019%2F06%2F14%2Fdynamic-blocks-in-terraform-0.12.x%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2019%2F06%2F14%2Fdynamic-blocks-in-terraform-0.12.x%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2019%2F06%2F14%2Fdynamic-blocks-in-terraform-0.12.x%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2019%2F06%2F14%2Fdynamic-blocks-in-terraform-0.12.x%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2019%2F06%2F14%2Fdynamic-blocks-in-terraform-0.12.x%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2019/05/13/2019-05-13-guru-of-the-week" class="pagination--pager" title="Guru of the week
+      <a href="https://lgallardo.com/2019/05/13/2019-05-13-guru-of-the-week" class="pagination--pager" title="Guru of the week
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2019/06/25/how-to-migrate-terraform-remote-tfstates/" class="pagination--pager" title="Cómo migrar tfstates remotos en Terraform
+      <a href="https://lgallardo.com/2019/06/25/how-to-migrate-terraform-remote-tfstates/" class="pagination--pager" title="Cómo migrar tfstates remotos en Terraform
 ">Next</a>
     
   </nav>
@@ -611,14 +611,14 @@ var.codebuild_artifacts_encryption_disabled
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -646,49 +646,14 @@ var.codebuild_artifacts_encryption_disabled
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -716,14 +681,14 @@ var.codebuild_artifacts_encryption_disabled
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -737,6 +702,41 @@ var.codebuild_artifacts_encryption_disabled
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -768,7 +768,7 @@ var.codebuild_artifacts_encryption_disabled
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -778,7 +778,7 @@ var.codebuild_artifacts_encryption_disabled
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

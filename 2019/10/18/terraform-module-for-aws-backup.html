@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2019-10-17T19:00:00-05:00">
+<meta property="article:published_time" content="2019-10-18T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -363,17 +363,17 @@ I just published my first open-sourced Terraform module called <strong>terraform
 
 <h2 id="usage">Usage</h2>
 
-<p>You can use this module to create a simple plan using the module’s <code class="highlighter-rouge">rule_*</code> variables. You can also  use the <code class="highlighter-rouge">rules</code> and <code class="highlighter-rouge">selections</code> list of maps variables to build a more complete plan by defining several rules and selections at once.</p>
+<p>You can use this module to create a simple plan using the module’s <code class="language-plaintext highlighter-rouge">rule_*</code> variables. You can also  use the <code class="language-plaintext highlighter-rouge">rules</code> and <code class="language-plaintext highlighter-rouge">selections</code> list of maps variables to build a more complete plan by defining several rules and selections at once.</p>
 
 <p>Check the <a href="https://github.com/lgallard/terraform-aws-backup/tree/master/examples" target="_blank">examples</a> for the  <strong>simple plan</strong>, the <strong>simple plan with list</strong> and the <strong>complete plan</strong> snippets.</p>
 
 <h3 id="example-complete-plan">Example (complete plan)</h3>
 
-<p>This example creates a plan with two rules and two selections at once. It also defines a vault key which is used by the first rule because no <code class="highlighter-rouge">target_vault_name</code> was given (null). Whereas the second rule is using the “Default” vault key.</p>
+<p>This example creates a plan with two rules and two selections at once. It also defines a vault key which is used by the first rule because no <code class="language-plaintext highlighter-rouge">target_vault_name</code> was given (null). Whereas the second rule is using the “Default” vault key.</p>
 
 <p>The first selection has two assignments, the first defined by a resource ARN and the second one defined by a tag condition. The second selection has just one assignment defined by a resource ARN.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "aws_backup_example" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "aws_backup_example" {
 
   source = "../modules/terraform-aws-backup"
 
@@ -619,7 +619,7 @@ I just published my first open-sourced Terraform module called <strong>terraform
 
 <h3 id="related-backup-plan-selections-must-be-deleted-prior-to-backup-plan-deletion">Related backup plan selections must be deleted prior to backup plan deletion</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform destroy
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform destroy
 ...
 module.aws_backup_example.aws_iam_policy.ab_tag_policy: Destruction complete after 2s
 module.aws_backup_example.aws_iam_role.ab_role: Destruction complete after 1s
@@ -639,7 +639,7 @@ Error: error deleting Backup Plan: InvalidRequestException: Related backup plan 
 
 <p>I included and script in the examples that destroys the selections first and then destroys the plan:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> cat terraform_destroy_aws_backup.sh
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> cat terraform_destroy_aws_backup.sh
 
  #!/bin/sh
 targets=""
@@ -655,7 +655,7 @@ terraform destroy
 
 <h3 id="error-creating-backup-selection-iam-role-is-not-authorized-to-call-taggetresources">Error creating Backup Selection: IAM Role is not authorized to call tag:GetResources</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: error creating Backup Selection: InvalidParameterValueException: IAM Role arn:aws:iam::111111111111:role/aws-backup-plan-complete-plan-role is not authorized to call tag:GetResources
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: error creating Backup Selection: InvalidParameterValueException: IAM Role arn:aws:iam::111111111111:role/aws-backup-plan-complete-plan-role is not authorized to call tag:GetResources
 	status code: 400, request id: 07ab775d-8885-4240-bb99-41305df969e0
 
   on .terraform/modules/aws_backup_example/selection.tf line 1, in resource "aws_backup_selection" "ab_selection":
@@ -723,7 +723,7 @@ terraform destroy
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-10-17T19:00:00-05:00">October 18, 2019</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-10-18T00:00:00+00:00">October 18, 2019</time></p>
         
       </footer>
 
@@ -809,41 +809,6 @@ terraform destroy
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -900,6 +865,41 @@ terraform destroy
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

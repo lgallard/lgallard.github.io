@@ -56,7 +56,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 
-<meta name="twitter:image" content="https://lgallardo.com/es/assets/images/ccr-robot.png">
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/ccr-robot.png">
 
 
 
@@ -72,14 +72,14 @@
 
 
 
-<meta property="og:image" content="https://lgallardo.com/es/assets/images/ccr-robot.png">
+<meta property="og:image" content="https://lgallardo.com/assets/images/ccr-robot.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
 
 
 
-<meta property="article:published_time" content="2025-08-19T19:00:00-05:00">
+<meta property="article:published_time" content="2025-08-20T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -113,7 +113,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -135,7 +135,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -147,7 +147,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -189,7 +189,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -226,7 +226,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -442,7 +442,7 @@
 
 <h3 id="paso-1-instalar-claude-code-router">Paso 1: Instalar Claude Code Router</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install <span class="nt">-g</span> @musistudio/claude-code-router
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> @musistudio/claude-code-router
 </code></pre></div></div>
 
 <h3 id="paso-2-obtén-tu-api-key-de-openrouter">Paso 2: Obtén tu API Key de OpenRouter</h3>
@@ -456,29 +456,29 @@
 
 <h3 id="paso-3-configurar-el-router">Paso 3: Configurar el Router</h3>
 
-<p>Crea <code class="highlighter-rouge">.claude-code-router/config.json</code>:</p>
+<p>Crea <code class="language-plaintext highlighter-rouge">.claude-code-router/config.json</code>:</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"LOG"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"API_TIMEOUT_MS"</span><span class="p">:</span><span class="w"> </span><span class="mi">600000</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Providers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"LOG"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"API_TIMEOUT_MS"</span><span class="p">:</span><span class="w"> </span><span class="mi">600000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Providers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openrouter"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"api_base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://openrouter.ai/api/v1/chat/completions"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${OPENROUTER_API_KEY}"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"qwen/qwen3-coder:free"</span><span class="p">,</span><span class="w"> </span><span class="s2">"openai/gpt-oss-20b:free"</span><span class="p">]</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openrouter"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"api_base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://openrouter.ai/api/v1/chat/completions"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${OPENROUTER_API_KEY}"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"qwen/qwen3-coder:free"</span><span class="p">,</span><span class="w"> </span><span class="s2">"openai/gpt-oss-20b:free"</span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"api_base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:11434/v1/chat/completions"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"qwen3:4b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"deepseek-coder:6.7b"</span><span class="p">]</span><span class="w">
+      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"api_base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:11434/v1/chat/completions"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"qwen3:4b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"deepseek-coder:6.7b"</span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Nota la sintaxis <code class="highlighter-rouge">${OPENROUTER_API_KEY}</code>—el router lee de variables de entorno por seguridad.</p>
+<p>Nota la sintaxis <code class="language-plaintext highlighter-rouge">${OPENROUTER_API_KEY}</code>—el router lee de variables de entorno por seguridad.</p>
 
 <h3 id="paso-4-lanzar-y-usar">Paso 4: Lanzar y Usar</h3>
 
@@ -501,7 +501,7 @@
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccr ui
 </code></pre></div></div>
 
-<p>Esto abre la interfaz web del router en <code class="highlighter-rouge">http://localhost:3456</code> donde puedes:</p>
+<p>Esto abre la interfaz web del router en <code class="language-plaintext highlighter-rouge">http://localhost:3456</code> donde puedes:</p>
 
 <ul>
   <li><strong>Configurar reglas de enrutamiento</strong> para diferentes escenarios (Default, Background, Think, Long Context)</li>
@@ -554,7 +554,7 @@
   <li><strong>Escritura de documentación</strong>: Modelos GPT que sobresalen en escritura técnica</li>
 </ol>
 
-<p>El comando <code class="highlighter-rouge">/model</code> me permite cambiar sobre la marcha:</p>
+<p>El comando <code class="language-plaintext highlighter-rouge">/model</code> me permite cambiar sobre la marcha:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/model ollama,qwen3:4b       <span class="c"># Cambiar a Ollama local</span>
 /model openrouter,gpt-4o     <span class="c"># Usar GPT a través de OpenRouter</span>
 </code></pre></div></div>
@@ -572,12 +572,12 @@
 
 <h2 id="solución-de-problemas-comunes">Solución de Problemas Comunes</h2>
 
-<p>El router registra en <code class="highlighter-rouge">~/.claude-code-router.log</code> por defecto, lo que ayuda a diagnosticar problemas:</p>
+<p>El router registra en <code class="language-plaintext highlighter-rouge">~/.claude-code-router.log</code> por defecto, lo que ayuda a diagnosticar problemas:</p>
 
 <ul>
-  <li><strong>Conexión rechazada</strong>: Verifica si el router está ejecutándose (<code class="highlighter-rouge">ccr status</code>)</li>
+  <li><strong>Conexión rechazada</strong>: Verifica si el router está ejecutándose (<code class="language-plaintext highlighter-rouge">ccr status</code>)</li>
   <li><strong>Modelo no encontrado</strong>: Verifica que el nombre del modelo coincida con el formato de OpenRouter</li>
-  <li><strong>Errores de timeout</strong>: Aumenta <code class="highlighter-rouge">API_TIMEOUT_MS</code> para modelos más lentos</li>
+  <li><strong>Errores de timeout</strong>: Aumenta <code class="language-plaintext highlighter-rouge">API_TIMEOUT_MS</code> para modelos más lentos</li>
   <li><strong>Problemas con API key</strong>: Asegúrate de que las variables de entorno estén configuradas correctamente</li>
 </ul>
 
@@ -623,11 +623,11 @@
     
       
       
-      <a href="https://lgallardo.com/es/tags/claude-code-router" class="page__taxonomy-item" rel="tag">Claude Code Router</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/claude-code-router" class="page__taxonomy-item" rel="tag">Claude Code Router</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
     
       
       
@@ -635,15 +635,15 @@
     
       
       
-      <a href="https://lgallardo.com/es/tags/llm" class="page__taxonomy-item" rel="tag">LLM</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/llm" class="page__taxonomy-item" rel="tag">LLM</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/ollama" class="page__taxonomy-item" rel="tag">Ollama</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/tags/ollama" class="page__taxonomy-item" rel="tag">Ollama</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/tags/openrouter" class="page__taxonomy-item" rel="tag">OpenRouter</a>
+      <a href="https://lgallardo.com/tags/openrouter" class="page__taxonomy-item" rel="tag">OpenRouter</a>
     
     </span>
   </p>
@@ -664,18 +664,18 @@
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
     
       
       
-      <a href="https://lgallardo.com/es/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-19T19:00:00-05:00">August 20, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-08-20T00:00:00+00:00">August 20, 2025</time></p>
         
       </footer>
 
@@ -684,24 +684,24 @@
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=M%C3%A1s+All%C3%A1+de+Anthropic%3A+Usando+Claude+Code+con+Cualquier+Modelo+v%C3%ADa+Claude+Code+Router+y+OpenRouter%20https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F08%2F20%2Fclaude-code-router-openrouter-beyond-anthropic%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=M%C3%A1s+All%C3%A1+de+Anthropic%3A+Usando+Claude+Code+con+Cualquier+Modelo+v%C3%ADa+Claude+Code+Router+y+OpenRouter%20https%3A%2F%2Flgallardo.com%2F2025%2F08%2F20%2Fclaude-code-router-openrouter-beyond-anthropic%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F08%2F20%2Fclaude-code-router-openrouter-beyond-anthropic%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F20%2Fclaude-code-router-openrouter-beyond-anthropic%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F08%2F20%2Fclaude-code-router-openrouter-beyond-anthropic%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F20%2Fclaude-code-router-openrouter-beyond-anthropic%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2025%2F08%2F20%2Fclaude-code-router-openrouter-beyond-anthropic%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F08%2F20%2Fclaude-code-router-openrouter-beyond-anthropic%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2025/08/12/mcp-servers-research-driven-development/" class="pagination--pager" title="Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform
+      <a href="https://lgallardo.com/2025/08/12/mcp-servers-research-driven-development/" class="pagination--pager" title="Servidores MCP Más Allá del Código: Desarrollo Basado en Investigación con Context7 y Terraform
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2025/08/28/terraform-ecr-module-claude-code-github-actions/" class="pagination--pager" title="Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+      <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" class="pagination--pager" title="Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
 ">Next</a>
     
   </nav>
@@ -726,14 +726,14 @@
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -761,49 +761,14 @@
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -831,14 +796,14 @@
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -852,6 +817,41 @@
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -883,7 +883,7 @@
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -893,7 +893,7 @@
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

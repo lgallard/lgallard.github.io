@@ -6,10 +6,22 @@ set -e
 echo "🚀 Starting blog publishing process..."
 
 # Configuration
-export JEKYLL_VERSION=3.8.6
 DEPLOY_REPO="lgallard.github.io"
 DEPLOY_BRANCH="master"
 TEMP_DEPLOY_DIR="/tmp/$(basename $PWD)_deploy_$$"
+
+# Cleanup function for trap
+cleanup() {
+    local exit_code=$?
+    if [ -d "$TEMP_DEPLOY_DIR" ]; then
+        echo "🧹 Cleaning up temporary files..."
+        rm -rf "$TEMP_DEPLOY_DIR"
+    fi
+    exit $exit_code
+}
+
+# Set trap to cleanup on EXIT, INT, TERM
+trap cleanup EXIT INT TERM
 
 # Safety check: ensure we're not running from inside the deployment directory
 CURRENT_DIR=$(basename "$PWD")
@@ -19,9 +31,9 @@ if [ "$CURRENT_DIR" = "$DEPLOY_REPO" ]; then
     exit 1
 fi
 
-# Step 1: Build the Jekyll site
-echo "📦 Building Jekyll site..."
-docker run --rm --volume="$PWD:/srv/jekyll" -it jekyll/jekyll:$JEKYLL_VERSION jekyll build -t
+# Step 1: Build the Jekyll site using Jekyll 4.x Docker image
+echo "📦 Building Jekyll site with Jekyll 4.x..."
+docker run --rm --entrypoint bash -v "$PWD:/site" -w /site bretfisher/jekyll -c "bundle install --retry 5 --jobs 20 && bundle exec jekyll build --trace"
 
 # Step 2: Check if _site directory exists
 if [ ! -d "_site" ]; then
@@ -40,7 +52,7 @@ echo "🧹 Preparing clean deployment environment..."
 
 # Remove any existing deployment directory that might be corrupted
 if [ -d "$DEPLOY_REPO" ]; then
-    echo "🗑️ Removing existing deployment directory..."
+    echo "🗑️ Removing existing deployment directory from working dir..."
     rm -rf "$DEPLOY_REPO"
 fi
 
@@ -72,8 +84,6 @@ cd "$TEMP_DEPLOY_DIR"
 # Check if there are any changes
 if [ -z "$(git status --porcelain)" ]; then
     echo "✅ No changes to deploy"
-    cd "$OLDPWD"
-    rm -rf "$TEMP_DEPLOY_DIR"
     exit 0
 fi
 
@@ -86,10 +96,5 @@ if [ -n "$GITTOKEN" ]; then
 else
     git push origin $DEPLOY_BRANCH
 fi
-
-# Step 7: Cleanup
-echo "🧹 Cleaning up temporary files..."
-cd "$OLDPWD"
-rm -rf "$TEMP_DEPLOY_DIR"
 
 echo "✅ Blog published successfully!"

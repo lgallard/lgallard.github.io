@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2025-07-17T19:00:00-05:00">
+<meta property="article:published_time" content="2025-07-18T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -363,7 +363,7 @@
       <section class="page__content" itemprop="text">
         <p><img src="/assets/images/claude-github-vs.png" alt="Claude Code GitHub Actions Setup" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
 
-<p>The evolution of AI-powered development tools continues to accelerate, and now we can bring the power of <strong>Claude Code</strong> directly into our GitHub workflows. With Claude Code GitHub Actions, you can have an intelligent AI assistant that automatically reviews pull requests, implements features from issues, and helps maintain code quality—all triggered with a simple <code class="highlighter-rouge">@claude</code> mention.</p>
+<p>The evolution of AI-powered development tools continues to accelerate, and now we can bring the power of <strong>Claude Code</strong> directly into our GitHub workflows. With Claude Code GitHub Actions, you can have an intelligent AI assistant that automatically reviews pull requests, implements features from issues, and helps maintain code quality—all triggered with a simple <code class="language-plaintext highlighter-rouge">@claude</code> mention.</p>
 
 <p>In this comprehensive guide, I’ll walk you through setting up Claude Code GitHub Actions from scratch, covering both the quick start method and enterprise-level configurations for AWS Bedrock and Google Vertex AI.</p>
 
@@ -376,7 +376,7 @@
   <li>✅ <strong>Creates pull requests</strong> from issue descriptions</li>
   <li>✅ <strong>Implements features</strong> following your coding standards</li>
   <li>✅ <strong>Fixes bugs</strong> automatically with appropriate tests</li>
-  <li>✅ <strong>Follows your guidelines</strong> defined in <code class="highlighter-rouge">CLAUDE.md</code> files</li>
+  <li>✅ <strong>Follows your guidelines</strong> defined in <code class="language-plaintext highlighter-rouge">CLAUDE.md</code> files</li>
   <li>✅ <strong>Integrates seamlessly</strong> with your existing GitHub workflow</li>
 </ul>
 
@@ -472,8 +472,8 @@ claude
 <p>Once authentication is complete, Claude Code will automatically:</p>
 <ul>
   <li>Install the GitHub App to your repository</li>
-  <li>Add your API key as a repository secret (<code class="highlighter-rouge">ANTHROPIC_API_KEY</code>)</li>
-  <li>Create the workflow file at <code class="highlighter-rouge">.github/workflows/claude.yml</code></li>
+  <li>Add your API key as a repository secret (<code class="language-plaintext highlighter-rouge">ANTHROPIC_API_KEY</code>)</li>
+  <li>Create the workflow file at <code class="language-plaintext highlighter-rouge">.github/workflows/claude.yml</code></li>
 </ul>
 
 <h3 id="step-8-select-github-workflows">Step 8: Select GitHub Workflows</h3>
@@ -484,7 +484,7 @@ claude
 
 <p>You can choose between:</p>
 <ul>
-  <li><strong>@Claude Code</strong>: Interactive workflow triggered by <code class="highlighter-rouge">@claude</code> mentions in issues and PR comments</li>
+  <li><strong>@Claude Code</strong>: Interactive workflow triggered by <code class="language-plaintext highlighter-rouge">@claude</code> mentions in issues and PR comments</li>
   <li><strong>Claude Code Review</strong>: Automated review workflow that runs on new pull requests</li>
 </ul>
 
@@ -534,7 +534,7 @@ claude
 <ol>
   <li><strong>Merge the PR</strong> to enable Claude Code functionality</li>
   <li><strong>Install the Claude GitHub App</strong> if not already done</li>
-  <li><strong>Start using <code class="highlighter-rouge">@claude</code> mentions</strong> in your issues and PRs</li>
+  <li><strong>Start using <code class="language-plaintext highlighter-rouge">@claude</code> mentions</strong> in your issues and PRs</li>
 </ol>
 
 <h2 id="-manual-setup-alternative-method">🔧 Manual Setup (Alternative Method)</h2>
@@ -549,12 +549,12 @@ claude
 
 <p>Navigate to your repository’s <strong>Settings → Secrets and variables → Actions</strong> and add:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ANTHROPIC_API_KEY: your_anthropic_api_key_here
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ANTHROPIC_API_KEY: your_anthropic_api_key_here
 </code></pre></div></div>
 
 <h3 id="3-create-workflow-file">3. Create Workflow File</h3>
 
-<p>Create <code class="highlighter-rouge">.github/workflows/claude.yml</code> with this configuration:</p>
+<p>Create <code class="language-plaintext highlighter-rouge">.github/workflows/claude.yml</code> with this configuration:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Claude Code</span>
 
@@ -571,10 +571,10 @@ claude
 <span class="na">jobs</span><span class="pi">:</span>
   <span class="na">claude</span><span class="pi">:</span>
     <span class="na">if</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="no">(github.event_name == 'issue_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
-      <span class="no">(github.event_name == 'pull_request_review_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
-      <span class="no">(github.event_name == 'pull_request_review' &amp;&amp; contains(github.event.review.body, '@claude')) ||</span>
-      <span class="no">(github.event_name == 'issues' &amp;&amp; (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))</span>
+      <span class="s">(github.event_name == 'issue_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
+      <span class="s">(github.event_name == 'pull_request_review_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
+      <span class="s">(github.event_name == 'pull_request_review' &amp;&amp; contains(github.event.review.body, '@claude')) ||</span>
+      <span class="s">(github.event_name == 'issues' &amp;&amp; (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))</span>
     <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
     <span class="na">permissions</span><span class="pi">:</span>
       <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
@@ -585,7 +585,7 @@ claude
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
         <span class="na">with</span><span class="pi">:</span>
-          <span class="na">fetch-depth</span><span class="pi">:</span> <span class="s">1</span>
+          <span class="na">fetch-depth</span><span class="pi">:</span> <span class="m">1</span>
 
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code</span>
         <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@beta</span>
@@ -687,7 +687,7 @@ claude
 
 <h3 id="create-a-claudemd-file">Create a CLAUDE.md File</h3>
 
-<p>Create a <code class="highlighter-rouge">CLAUDE.md</code> file in your repository root to guide Claude’s behavior:</p>
+<p>Create a <code class="language-plaintext highlighter-rouge">CLAUDE.md</code> file in your repository root to guide Claude’s behavior:</p>
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Project Guidelines for Claude Code</span>
 
@@ -734,7 +734,7 @@ claude
 <p><strong>Turn Issues into Pull Requests</strong></p>
 
 <p>Create an issue with a feature description, then comment:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implement this feature based on the issue description
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implement this feature based on the issue description
 </code></pre></div></div>
 
 <p>Claude will:</p>
@@ -742,7 +742,7 @@ claude
   <li>Analyze the issue requirements</li>
   <li>Review your existing code patterns</li>
   <li>Write the implementation following your coding standards</li>
-  <li>Create tests if specified in your <code class="highlighter-rouge">CLAUDE.md</code></li>
+  <li>Create tests if specified in your <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
   <li>Open a pull request with the complete feature</li>
 </ul>
 
@@ -753,7 +753,7 @@ claude
 <p><strong>Automatic Bug Resolution</strong></p>
 
 <p>When you encounter a bug, create an issue or comment:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude fix the TypeError in the user dashboard component
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude fix the TypeError in the user dashboard component
 </code></pre></div></div>
 
 <p>Claude will:</p>
@@ -766,7 +766,7 @@ claude
 </ul>
 
 <p><strong>Advanced Bug Fixing</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude fix the memory leak in the WebSocket connection manager. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude fix the memory leak in the WebSocket connection manager. 
 The issue occurs when users rapidly switch between channels.
 </code></pre></div></div>
 
@@ -775,7 +775,7 @@ The issue occurs when users rapidly switch between channels.
 <p><strong>Get Architecture Advice</strong></p>
 
 <p>In a PR comment:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude how should I implement user authentication for this endpoint?
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude how should I implement user authentication for this endpoint?
 </code></pre></div></div>
 
 <p>Claude provides:</p>
@@ -787,7 +787,7 @@ The issue occurs when users rapidly switch between channels.
 </ul>
 
 <p><strong>Complex Implementation Help</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude help me implement a rate limiting system for this API. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude help me implement a rate limiting system for this API. 
 I need to support different limits per user tier and graceful degradation.
 </code></pre></div></div>
 
@@ -795,7 +795,7 @@ I need to support different limits per user tier and graceful degradation.
 
 <p><strong>Comprehensive Code Reviews</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude review this PR for security vulnerabilities and performance issues
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude review this PR for security vulnerabilities and performance issues
 </code></pre></div></div>
 
 <p>Claude performs:</p>
@@ -808,14 +808,14 @@ I need to support different limits per user tier and graceful degradation.
 </ul>
 
 <p><strong>Specific Review Focus</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude review this database migration for potential data loss and rollback safety
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude review this database migration for potential data loss and rollback safety
 </code></pre></div></div>
 
 <h3 id="-testing-and-documentation">🧪 Testing and Documentation</h3>
 
 <p><strong>Test Generation</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude write comprehensive tests for this new payment processing module
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude write comprehensive tests for this new payment processing module
 </code></pre></div></div>
 
 <p>Claude creates:</p>
@@ -828,26 +828,26 @@ I need to support different limits per user tier and graceful degradation.
 
 <p><strong>Documentation Updates</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude update the API documentation to reflect these new endpoints
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude update the API documentation to reflect these new endpoints
 </code></pre></div></div>
 
 <p><strong>README Improvements</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude enhance the project README with better setup instructions and examples
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude enhance the project README with better setup instructions and examples
 </code></pre></div></div>
 
 <h3 id="️-refactoring-and-optimization">🏗️ Refactoring and Optimization</h3>
 
 <p><strong>Code Modernization</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude refactor this component to use React hooks instead of class components
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude refactor this component to use React hooks instead of class components
 </code></pre></div></div>
 
 <p><strong>Performance Optimization</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimize this database query - it's causing timeouts on large datasets
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimize this database query - it's causing timeouts on large datasets
 </code></pre></div></div>
 
 <p><strong>Legacy Code Updates</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude update this Node.js 14 code to Node.js 20, 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude update this Node.js 14 code to Node.js 20, 
 including dependency updates and deprecated API replacements
 </code></pre></div></div>
 
@@ -855,11 +855,11 @@ including dependency updates and deprecated API replacements
 
 <p><strong>Security Audits</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude audit this authentication flow for security vulnerabilities
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude audit this authentication flow for security vulnerabilities
 </code></pre></div></div>
 
 <p><strong>Dependency Security</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude check our package.json dependencies for security issues 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude check our package.json dependencies for security issues 
 and suggest safer alternatives
 </code></pre></div></div>
 
@@ -867,22 +867,22 @@ and suggest safer alternatives
 
 <p><strong>CI/CD Improvements</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimize our GitHub Actions workflow to reduce build times
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimize our GitHub Actions workflow to reduce build times
 </code></pre></div></div>
 
 <p><strong>Docker Optimization</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude improve this Dockerfile for better caching and smaller image size
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude improve this Dockerfile for better caching and smaller image size
 </code></pre></div></div>
 
 <p><strong>Infrastructure as Code</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude review this Terraform configuration for AWS security best practices
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude review this Terraform configuration for AWS security best practices
 </code></pre></div></div>
 
 <h3 id="-advanced-workflows">📊 Advanced Workflows</h3>
 
 <p><strong>Multi-Step Feature Development</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implement a complete user notification system:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implement a complete user notification system:
 1. Database schema for notifications
 2. API endpoints for CRUD operations  
 3. WebSocket integration for real-time updates
@@ -892,7 +892,7 @@ and suggest safer alternatives
 </code></pre></div></div>
 
 <p><strong>Migration Assistance</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude help migrate our REST API to GraphQL:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude help migrate our REST API to GraphQL:
 - Create schema definitions
 - Implement resolvers  
 - Update frontend queries
@@ -903,7 +903,7 @@ and suggest safer alternatives
 
 <p><strong>Component Creation</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude create a reusable data table component with:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude create a reusable data table component with:
 - Sorting and filtering
 - Pagination
 - Row selection
@@ -912,7 +912,7 @@ and suggest safer alternatives
 </code></pre></div></div>
 
 <p><strong>Styling and UX</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude improve the accessibility of this form component 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude improve the accessibility of this form component 
 and add proper ARIA labels
 </code></pre></div></div>
 
@@ -920,7 +920,7 @@ and add proper ARIA labels
 
 <p><strong>Observability Implementation</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude add comprehensive logging and monitoring to this service:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude add comprehensive logging and monitoring to this service:
 - Structured logging with correlation IDs
 - Metrics collection for key business events
 - Error tracking and alerting
@@ -928,15 +928,15 @@ and add proper ARIA labels
 </code></pre></div></div>
 
 <p><strong>Data Analysis</strong>:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude analyze our user engagement metrics and suggest A/B testing scenarios
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude analyze our user engagement metrics and suggest A/B testing scenarios
 </code></pre></div></div>
 
 <h3 id="-pro-tips-for-effective-claude-usage">💡 Pro Tips for Effective Claude Usage</h3>
 
 <ol>
   <li><strong>Be Specific</strong>: The more context you provide, the better Claude’s suggestions will be</li>
-  <li><strong>Reference Files</strong>: Use <code class="highlighter-rouge">@filename</code> to help Claude understand your codebase</li>
-  <li><strong>Set Expectations</strong>: Mention your preferred patterns in <code class="highlighter-rouge">CLAUDE.md</code></li>
+  <li><strong>Reference Files</strong>: Use <code class="language-plaintext highlighter-rouge">@filename</code> to help Claude understand your codebase</li>
+  <li><strong>Set Expectations</strong>: Mention your preferred patterns in <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
   <li><strong>Iterative Feedback</strong>: Engage in conversation to refine the implementation</li>
   <li><strong>Review Carefully</strong>: Always review Claude’s suggestions before merging</li>
 </ol>
@@ -963,9 +963,9 @@ and add proper ARIA labels
 
 <h3 id="cost-optimization-tips">Cost Optimization Tips</h3>
 <ul>
-  <li>Use specific <code class="highlighter-rouge">@claude</code> commands to reduce unnecessary API calls</li>
-  <li>Set appropriate <code class="highlighter-rouge">max_turns</code> limits</li>
-  <li>Establish reasonable <code class="highlighter-rouge">timeout_minutes</code> to prevent runaway workflows</li>
+  <li>Use specific <code class="language-plaintext highlighter-rouge">@claude</code> commands to reduce unnecessary API calls</li>
+  <li>Set appropriate <code class="language-plaintext highlighter-rouge">max_turns</code> limits</li>
+  <li>Establish reasonable <code class="language-plaintext highlighter-rouge">timeout_minutes</code> to prevent runaway workflows</li>
   <li>Consider using GitHub’s concurrency controls to limit parallel executions</li>
 </ul>
 
@@ -976,7 +976,7 @@ and add proper ARIA labels
   <li>✅ Verify GitHub App is installed correctly</li>
   <li>✅ Check that workflows are enabled in your repository</li>
   <li>✅ Ensure API key is set in repository secrets</li>
-  <li>✅ Confirm comment contains <code class="highlighter-rouge">@claude</code> (not <code class="highlighter-rouge">/claude</code>)</li>
+  <li>✅ Confirm comment contains <code class="language-plaintext highlighter-rouge">@claude</code> (not <code class="language-plaintext highlighter-rouge">/claude</code>)</li>
 </ul>
 
 <h3 id="authentication-errors">Authentication Errors</h3>
@@ -997,7 +997,7 @@ and add proper ARIA labels
 
 <p>Claude Code GitHub Actions represents a significant step forward in AI-assisted development workflows. By automating code reviews, feature implementation, and bug fixes, teams can focus on high-level architecture and business logic while maintaining high code quality standards.</p>
 
-<p>The setup process is straightforward—whether you choose the quick installation method or opt for enterprise cloud provider integration. With proper configuration and the right <code class="highlighter-rouge">CLAUDE.md</code> guidelines, Claude becomes a valuable team member that works around the clock to improve your codebase.</p>
+<p>The setup process is straightforward—whether you choose the quick installation method or opt for enterprise cloud provider integration. With proper configuration and the right <code class="language-plaintext highlighter-rouge">CLAUDE.md</code> guidelines, Claude becomes a valuable team member that works around the clock to improve your codebase.</p>
 
 <p>Start with simple use cases like automated code reviews, then gradually expand to more complex workflows as your team becomes comfortable with AI-assisted development. The future of collaborative coding is here, and it’s more accessible than ever! 🚀</p>
 
@@ -1076,7 +1076,7 @@ and add proper ARIA labels
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-17T19:00:00-05:00">July 18, 2025</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-07-18T00:00:00+00:00">July 18, 2025</time></p>
         
       </footer>
 
@@ -1162,41 +1162,6 @@ and add proper ARIA labels
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -1253,6 +1218,41 @@ and add proper ARIA labels
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>

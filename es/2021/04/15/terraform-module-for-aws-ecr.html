@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2021-04-14T19:00:00-05:00">
+<meta property="article:published_time" content="2021-04-15T00:00:00+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -101,7 +101,7 @@
       "@context": "http://schema.org",
       "@type": "Organization",
       "url": "https://lgallardo.com/es",
-      "logo": "https://lgallardo.com/es/assets/images/luis.jpg"
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
     }
   </script>
 
@@ -123,7 +123,7 @@
 
 
 <!-- end SEO -->
-<link href="https://lgallardo.com/es/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -135,7 +135,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://lgallardo.com/es/assets/css/main.css">
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
 
 <!--[if lte IE 9]>
   <style>
@@ -177,7 +177,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <a class="site-title" href="https://lgallardo.com/es/">lgallardo.com</a>
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
         <ul class="visible-links">
           
             
@@ -214,7 +214,7 @@
   
     <div class="author__avatar">
       
-        <img src="https://lgallardo.com/es/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
       
     </div>
   
@@ -371,7 +371,7 @@ Les comparto acá otro módulo de Terraform que publiqué como código Open Sour
 <h3 id="simple-example">Simple example</h3>
 <p>This example creates an ECR registry using few parameters</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "ecr" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "ecr" {
 
   source = "lgallard/ecr/aws"
 
@@ -390,7 +390,7 @@ Les comparto acá otro módulo de Terraform que publiqué como código Open Sour
 <h3 id="complete-example">Complete example</h3>
 <p>In this example the register is defined in detailed.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "ecr" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module "ecr" {
 
   source = "lgallard/ecr/aws"
 
@@ -507,78 +507,78 @@ EOF
   <tbody>
     <tr>
       <td>encryption_type</td>
-      <td>The encryption type to use for the repository. Valid values are <code class="highlighter-rouge">AES256</code> or <code class="highlighter-rouge">KMS</code></td>
-      <td><code class="highlighter-rouge">string</code></td>
-      <td><code class="highlighter-rouge">"AES256"</code></td>
+      <td>The encryption type to use for the repository. Valid values are <code class="language-plaintext highlighter-rouge">AES256</code> or <code class="language-plaintext highlighter-rouge">KMS</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
+      <td><code class="language-plaintext highlighter-rouge">"AES256"</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>image_scanning_configuration</td>
       <td>Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning.</td>
-      <td><code class="highlighter-rouge">map</code></td>
-      <td><code class="highlighter-rouge">{}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">map</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{}</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>image_tag_mutability</td>
-      <td>The tag mutability setting for the repository. Must be one of: <code class="highlighter-rouge">MUTABLE</code> or <code class="highlighter-rouge">IMMUTABLE</code>.</td>
-      <td><code class="highlighter-rouge">string</code></td>
-      <td><code class="highlighter-rouge">"MUTABLE"</code></td>
+      <td>The tag mutability setting for the repository. Must be one of: <code class="language-plaintext highlighter-rouge">MUTABLE</code> or <code class="language-plaintext highlighter-rouge">IMMUTABLE</code>.</td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
+      <td><code class="language-plaintext highlighter-rouge">"MUTABLE"</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>kms_key</td>
-      <td>The ARN of the KMS key to use when encryption_type is <code class="highlighter-rouge">KMS</code>. If not specified when encryption_type is <code class="highlighter-rouge">KMS</code>, uses a new KMS key. Otherwise, uses the default AWS managed key for ECR.</td>
-      <td><code class="highlighter-rouge">string</code></td>
+      <td>The ARN of the KMS key to use when encryption_type is <code class="language-plaintext highlighter-rouge">KMS</code>. If not specified when encryption_type is <code class="language-plaintext highlighter-rouge">KMS</code>, uses a new KMS key. Otherwise, uses the default AWS managed key for ECR.</td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>n/a</td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>lifecycle_policy</td>
       <td>Manages the ECR repository lifecycle policy</td>
-      <td><code class="highlighter-rouge">string</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>n/a</td>
       <td style="text-align: center">yes</td>
     </tr>
     <tr>
       <td>name</td>
       <td>Name of the repository.</td>
-      <td><code class="highlighter-rouge">string</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>n/a</td>
       <td style="text-align: center">yes</td>
     </tr>
     <tr>
       <td>policy</td>
       <td>Manages the ECR repository policy</td>
-      <td><code class="highlighter-rouge">string</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>n/a</td>
       <td style="text-align: center">yes</td>
     </tr>
     <tr>
       <td>scan_on_push</td>
       <td>Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false).</td>
-      <td><code class="highlighter-rouge">bool</code></td>
-      <td><code class="highlighter-rouge">true</code></td>
+      <td><code class="language-plaintext highlighter-rouge">bool</code></td>
+      <td><code class="language-plaintext highlighter-rouge">true</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>tags</td>
       <td>A mapping of tags to assign to the resource.</td>
-      <td><code class="highlighter-rouge">map(string)</code></td>
-      <td><code class="highlighter-rouge">{}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">map(string)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{}</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>timeouts</td>
       <td>Timeouts map.</td>
-      <td><code class="highlighter-rouge">map</code></td>
-      <td><code class="highlighter-rouge">{}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">map</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{}</code></td>
       <td style="text-align: center">no</td>
     </tr>
     <tr>
       <td>timeouts_delete</td>
       <td>How long to wait for a repository to be deleted.</td>
-      <td><code class="highlighter-rouge">string</code></td>
+      <td><code class="language-plaintext highlighter-rouge">string</code></td>
       <td>n/a</td>
       <td style="text-align: center">no</td>
     </tr>
@@ -609,7 +609,7 @@ EOF
     </tr>
     <tr>
       <td>repository_url</td>
-      <td>The URL of the repository (in the form <code class="highlighter-rouge">aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName</code>)</td>
+      <td>The URL of the repository (in the form <code class="language-plaintext highlighter-rouge">aws_account_id.dkr.ecr.region.amazonaws.com/repositoryName</code>)</td>
     </tr>
   </tbody>
 </table>
@@ -640,7 +640,7 @@ EOF
     
       
       
-      <a href="https://lgallardo.com/es/tags/general" class="page__taxonomy-item" rel="tag">General</a>
+      <a href="https://lgallardo.com/tags/general" class="page__taxonomy-item" rel="tag">General</a>
     
     </span>
   </p>
@@ -661,14 +661,14 @@ EOF
     
       
       
-      <a href="https://lgallardo.com/es/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-14T19:00:00-05:00">April 15, 2021</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-04-15T00:00:00+00:00">April 15, 2021</time></p>
         
       </footer>
 
@@ -677,24 +677,24 @@ EOF
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?via=lgallard&text=M%C3%B3dulo+de+Terraform+para+AWS+ECR%20https%3A%2F%2Flgallardo.com%2Fes%2F2021%2F04%2F15%2Fterraform-module-for-aws-ecr" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=M%C3%B3dulo+de+Terraform+para+AWS+ECR%20https%3A%2F%2Flgallardo.com%2F2021%2F04%2F15%2Fterraform-module-for-aws-ecr" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2Fes%2F2021%2F04%2F15%2Fterraform-module-for-aws-ecr" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2021%2F04%2F15%2Fterraform-module-for-aws-ecr" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2Fes%2F2021%2F04%2F15%2Fterraform-module-for-aws-ecr" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2021%2F04%2F15%2Fterraform-module-for-aws-ecr" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2Fes%2F2021%2F04%2F15%2Fterraform-module-for-aws-ecr" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2021%2F04%2F15%2Fterraform-module-for-aws-ecr" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="https://lgallardo.com/es/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" class="pagination--pager" title="Ratón Logitech MX Anywhere 2s Flounder on Linux
+      <a href="https://lgallardo.com/2020/08/06/2020-08-06-logitech-mx-anywhere-2s-flounder-on-linux/" class="pagination--pager" title="Ratón Logitech MX Anywhere 2s Flounder on Linux
 ">Previous</a>
     
     
-      <a href="https://lgallardo.com/es/2021/06/15/helm-local-repo/" class="pagination--pager" title="Repositorio local de Helm 3
+      <a href="https://lgallardo.com/2021/06/15/helm-local-repo/" class="pagination--pager" title="Repositorio local de Helm 3
 ">Next</a>
     
   </nav>
@@ -719,14 +719,14 @@ EOF
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/pico-8-robot.png" 
+        <img src= "https://lgallardo.com/es/assets/images/pico-8-mastermind-game.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+          <a href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
 </a>
           
         </h2>
@@ -754,49 +754,14 @@ EOF
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/copilot-cli-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  11 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/gh-models-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/es/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
 </a>
           
         </h2>
@@ -824,14 +789,14 @@ EOF
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/es/assets/images/clis-robots.png" 
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
           alt="" />
       </div>
       
       <div class="archive__item-content">
         <h2 class="archive__item-title" itemprop="headline">
           
-          <a href="https://lgallardo.com/es/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
 </a>
           
         </h2>
@@ -845,6 +810,41 @@ EOF
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Cómo construí un sistema inteligente de descubrimiento de características para mi módulo Terraform AWS ECR usando Claude Code y GitHub Actions, resultando en...</p>
       </div>
     </div>
   </article>
@@ -876,7 +876,7 @@ EOF
     
     
     
-    <li><a href="https://lgallardo.com/es/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -886,7 +886,7 @@ EOF
     </div>
 
     
-  <script src="https://lgallardo.com/es/assets/js/main.min.js"></script>
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
 
 
 

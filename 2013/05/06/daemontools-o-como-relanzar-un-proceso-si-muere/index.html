@@ -79,7 +79,7 @@
 
 
 
-<meta property="article:published_time" content="2013-05-06T02:30:09-05:00">
+<meta property="article:published_time" content="2013-05-06T07:30:09+00:00">
 
 
 <meta property="article:author" content="Luis Gallardo">
@@ -359,7 +359,7 @@ Maybe you have been in the situation where a process (program or service) in the
 
 <p>On Debian you can install daemontools as root by typing this:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude install daemontools-run daemontools
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aptitude <span class="nb">install </span>daemontools-run daemontools
 </code></pre></div></div>
 
 <p>For Debian spin-off like Ubuntu would be the same. On Red Hat and alike you must check if there is a package for this tool.</p>
@@ -368,14 +368,14 @@ Maybe you have been in the situation where a process (program or service) in the
 
 <p>After installing the package a called to <em>/usr/bin/svscanboot</em> is created (you can check it in the <em>/etc/init/svscan.conf</em> file) and it will be executed at rebooting the system. If you don’t want to restart your system you can execute <em>svscanboot</em> manually:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nohup /usr/bin/svscanboot &amp;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">nohup</span> /usr/bin/svscanboot &amp;
 </code></pre></div></div>
 
 <h2 id="settingdaemontools">Setting daemontools</h2>
 
 <p>You have to make a directory for the service (program) you want to monitor. In this example I would use <em>qbittorrent-nox</em>, a bittorrent client that runs on the background (nox = no for X environment):</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /etc/service/qbittorrent-nox
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /etc/service/qbittorrent-nox
 </code></pre></div></div>
 
 <p>Then you have to write and script that start the process. It must be called “<em>run</em>“. Use your preferred text editor, for instance <em>vi</em>:</p>
@@ -392,7 +392,7 @@ Maybe you have been in the situation where a process (program or service) in the
 
 <p>Finally change permissions to make it executable:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x /etc/service/qbittorrent-nox/run
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x /etc/service/qbittorrent-nox/run
 </code></pre></div></div>
 
 <h2 id="checking-the-process-with-ps">Checking the process with ps</h2>
@@ -498,7 +498,7 @@ Maybe you have been in the situation where a process (program or service) in the
 
 
         
-          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-05-06T02:30:09-05:00">May 06, 2013</time></p>
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2013-05-06T07:30:09+00:00">May 06, 2013</time></p>
         
       </footer>
 
@@ -584,41 +584,6 @@ Maybe you have been in the situation where a process (program or service) in the
     <div class="archive__item-flex">
       
       <div class="archive__item-teaser--small">
-        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
-          alt="" />
-      </div>
-      
-      <div class="archive__item-content">
-        <h2 class="archive__item-title" itemprop="headline">
-          
-          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
-</a>
-          
-        </h2>
-        
-        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
-
-
-
-
-  10 minute read
-</p>
-        
-        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
-      </div>
-    </div>
-  </article>
-</div>
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <div class="archive__item-flex">
-      
-      <div class="archive__item-teaser--small">
         <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
           alt="" />
       </div>
@@ -675,6 +640,41 @@ Maybe you have been in the situation where a process (program or service) in the
 </p>
         
         <p class="archive__item-excerpt" itemprop="description">Supercharge Claude Code by accessing any AI model through MCP integration—use Gemini’s massive context, OpenAI’s specialized models, or Qwen’s efficiency wit...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-gh-discovery-system-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="permalink">Automating Terraform Module Discovery with Claude Code GitHub Actions
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">How I built an intelligent feature discovery system for my Terraform AWS ECR module using Claude Code and GitHub Actions, resulting in automated bug detectio...</p>
       </div>
     </div>
   </article>
