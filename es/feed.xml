@@ -1,4 +1,417 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-12-17T16:21:45+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje</title><link href="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/" rel="alternate" type="text/html" title="Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje" /><published>2025-11-09T00:00:00+00:00</published><updated>2025-11-09T00:00:00+00:00</updated><id>https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development</id><content type="html" xml:base="https://lgallardo.com/es/es/2025/11/09/pico8-ai-game-development/"><![CDATA[<p><img src="/assets/images/pico-8-mastermind-game.png" alt="Pico-8 Mastermind Game" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2025-12-17T22:34:06+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Cuando Claude Se Queda en Silencio: Navegando Timeouts de API y Selección de Modelos en Claude Code</title><link href="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/" rel="alternate" type="text/html" title="Cuando Claude Se Queda en Silencio: Navegando Timeouts de API y Selección de Modelos en Claude Code" /><published>2025-12-11T00:00:00+00:00</published><updated>2025-12-11T00:00:00+00:00</updated><id>https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching</id><content type="html" xml:base="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/"><![CDATA[<p><img src="/assets/images/claude-model-switching.png" alt="Interfaz de selección de modelos de Claude Code mostrando las opciones Sonnet, Opus y Haiku con sus respectivas capacidades y casos de uso" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p>El otro día, mientras trabajaba en una tarea crítica de refactorización, <strong>Claude Code dejó de responder repentinamente</strong>. La familiar animación de consumo de tokens se congeló, las solicitudes agotaron su tiempo de espera, y mi productividad se detuvo por completo. Si has experimentado este escenario frustrante—viendo cómo los tokens no se consumen mientras tu fecha límite se acerca—no estás solo.</p>
+
+<p>¿El culpable? Problemas de API con modelos específicos de Anthropic. ¿La solución? <strong>Entender cómo diagnosticar el problema, cambiar entre la familia de modelos de Claude, y aprovechar opciones alternativas</strong>. Aquí está lo que aprendí durante mi inmersión inesperada en la flexibilidad de modelos de Claude Code.</p>
+
+<h2 id="-el-fallo-silencioso-cuando-los-tokens-no-fluyen">🔴 El Fallo Silencioso: Cuando los Tokens No Fluyen</h2>
+
+<p>La primera señal de que algo estaba mal llegó sutilmente. Envié una solicitud para refactorizar un módulo complejo de Terraform, y en lugar de la respuesta inmediata habitual, vi:</p>
+
+<ul>
+  <li><strong>Sin consumo de tokens</strong> en la interfaz de Claude Code</li>
+  <li><strong>Indicadores de solicitud girando</strong> que nunca se resolvían</li>
+  <li><strong>Solicitudes fallidas</strong> con mensajes vagos de “API no disponible”</li>
+</ul>
+
+<p>Lo que hizo esto particularmente confuso fue que no era una interrupción completa—Claude Code estaba ejecutándose, autenticado correctamente, y no mostraba errores obvios. Simplemente estaba… en silencio.</p>
+
+<h3 id="el-proceso-de-investigación">El Proceso de Investigación</h3>
+
+<p>Mi primer instinto fue verificar los sospechosos habituales:</p>
+
+<ol>
+  <li><strong>Conectividad de red</strong>: Todo lo demás funcionaba bien</li>
+  <li><strong>Validez de la clave API</strong>: Todavía activa y autenticada</li>
+  <li><strong>Versión de Claude Code</strong>: Actualizada</li>
+  <li><strong>Configuración local</strong>: Sin cambios recientes</li>
+</ol>
+
+<p>Nada parecía estar mal de mi lado, lo que me llevó a la pregunta crítica: <strong>¿Es este un problema con los servicios de Anthropic?</strong></p>
+
+<h2 id="-verificando-la-página-de-estado-de-anthropic">🔍 Verificando la Página de Estado de Anthropic</h2>
+
+<p>Aquí es donde muchos desarrolladores se quedan atascados—asumen que el problema es local y pasan horas solucionando problemas en su configuración. La realidad es que los servicios en la nube experimentan problemas, y Anthropic no es la excepción.</p>
+
+<p><strong>El primer paso para diagnosticar timeouts misteriosos de API: Verificar la página de estado.</strong></p>
+
+<p>Dirígete a <a href="https://status.anthropic.com">status.anthropic.com</a> y busca reportes de incidentes o indicadores de rendimiento degradado.</p>
+
+<p><img src="/assets/images/anthropic-status-page-issues.png" alt="Página de estado de Anthropic mostrando el estado del servicio para los modelos de Claude, mostrando Opus 4.5 y Haiku 4.5 con tasas de error elevadas mientras Sonnet 4.5 permanece operacional" style="display:block; margin-left:auto; margin-right:auto; width:90%" />
+<em>Página de estado de Anthropic mostrando problemas en Opus 4.5 y Haiku 4.5</em></p>
+
+<p>En mi caso, la página de estado reveló inmediatamente el problema:</p>
+
+<ul>
+  <li><strong>Claude Opus 4.5</strong>: Experimentando tasas de error elevadas</li>
+  <li><strong>Claude Haiku 4.5</strong>: Interrupción parcial con timeouts de API</li>
+  <li><strong>Claude Sonnet 4.5</strong>: Operacional</li>
+</ul>
+
+<p>Esto lo explicaba todo. Estaba usando Opus 4.5 para tareas de razonamiento complejo, y actualmente estaba experimentando degradación del servicio. Los tokens no se consumían porque el modelo no respondía—pero críticamente, <strong>otros modelos de Claude todavía estaban disponibles</strong>.</p>
+
+<h3 id="por-qué-importan-las-páginas-de-estado">Por Qué Importan las Páginas de Estado</h3>
+
+<p>En el mundo del desarrollo asistido por IA, nos hemos vuelto tan dependientes de estas herramientas que las interrupciones se sienten catastróficas. Pero entender que:</p>
+
+<ol>
+  <li><strong>Los modelos individuales pueden experimentar problemas</strong> mientras otros permanecen operacionales</li>
+  <li><strong>El mantenimiento planificado</strong> ocurre regularmente (verifica la página de estado para los horarios)</li>
+  <li><strong>Las interrupciones parciales</strong> son a menudo específicas del modelo, no de toda la plataforma</li>
+</ol>
+
+<p>Este conocimiento transforma un misterio que mata la productividad en un problema resoluble con un plan de acción claro: <strong>cambiar de modelo</strong>.</p>
+
+<h2 id="-la-solución-cambiar-a-sonnet-45">🔄 La Solución: Cambiar a Sonnet 4.5</h2>
+
+<p>Claude Code ofrece una característica poderosa que muchos usuarios pasan por alto: <strong>la capacidad de cambiar entre modelos sobre la marcha</strong>. La familia de modelos de Anthropic incluye:</p>
+
+<ul>
+  <li><strong>Claude Opus 4.5</strong>: Inteligencia máxima, mejor para razonamiento complejo, decisiones de arquitectura, y resolución de problemas de múltiples pasos</li>
+  <li><strong>Claude Sonnet 4.5</strong>: Rendimiento equilibrado y velocidad, excelente para la mayoría de tareas de desarrollo</li>
+  <li><strong>Claude Haiku 4.5</strong>: Rápido y eficiente, ideal para consultas simples e iteraciones rápidas</li>
+</ul>
+
+<p>Cuando Opus y Haiku estaban experimentando problemas, Sonnet se convirtió en mi salvavidas.</p>
+
+<h3 id="cómo-cambiar-modelos-en-claude-code">Cómo Cambiar Modelos en Claude Code</h3>
+
+<p>El proceso es sencillo usando el comando <code class="language-plaintext highlighter-rouge">/model</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Verificar modelo actual</span>
+/model
+
+<span class="c"># Cambiar a Sonnet 4.5</span>
+/model sonnet
+
+<span class="c"># Cambiar a Opus 4.5 (cuando está funcionando)</span>
+/model opus
+
+<span class="c"># Cambiar a Haiku 4.5 para velocidad</span>
+/model haiku
+</code></pre></div></div>
+
+<p><img src="/assets/images/claude-code-model-selection.png" alt="CLI de Claude Code mostrando la salida del comando /model con los modelos disponibles: Opus 4.5, Sonnet 4.5 y Haiku 4.5, con Sonnet resaltado como la selección actual" style="display:block; margin-left:auto; margin-right:auto; width:90%" />
+<em>Interfaz de selección de modelos de Claude Code con Sonnet 4.5 resaltado</em></p>
+
+<p>El cambio es instantáneo, y Claude Code continúa sin problemas el contexto de tu conversación con el nuevo modelo. En mi caso, cambiar a Sonnet no solo restauró la funcionalidad sino que también proporcionó resultados sorprendentemente buenos para mi tarea de refactorización.</p>
+
+<h3 id="entendiendo-las-compensaciones-de-los-modelos">Entendiendo las Compensaciones de los Modelos</h3>
+
+<p>Cada modelo tiene características distintas que lo hacen adecuado para diferentes escenarios:</p>
+
+<p><strong>Claude Opus 4.5:</strong></p>
+<ul>
+  <li><strong>Fortalezas</strong>: Arquitectura compleja, refactorización de múltiples archivos, debugging matizado</li>
+  <li><strong>Debilidades</strong>: Respuestas más lentas, mayor costo, problemas ocasionales de disponibilidad</li>
+  <li><strong>Mejor para</strong>: Características críticas, decisiones arquitectónicas, resolución de problemas intrincados</li>
+</ul>
+
+<p><strong>Claude Sonnet 4.5:</strong></p>
+<ul>
+  <li><strong>Fortalezas</strong>: Rápido, confiable, excelente calidad de código, gran equilibrio</li>
+  <li><strong>Debilidades</strong>: Puede tener dificultades con cadenas de razonamiento extremadamente complejas</li>
+  <li><strong>Mejor para</strong>: La mayoría de tareas de desarrollo, implementación de características, corrección de bugs</li>
+</ul>
+
+<p><strong>Claude Haiku 4.5:</strong></p>
+<ul>
+  <li><strong>Fortalezas</strong>: Ultra rápido, económico, excelente para iteraciones</li>
+  <li><strong>Debilidades</strong>: Comprensión de contexto limitada, razonamiento más simple</li>
+  <li><strong>Mejor para</strong>: Correcciones rápidas, documentación, consultas simples</li>
+</ul>
+
+<p>En mi experiencia, <strong>Sonnet 4.5 maneja el 80-90% de las tareas de desarrollo brillantemente</strong>, haciéndolo el respaldo perfecto cuando los modelos premium experimentan problemas.</p>
+
+<h2 id="️-construyendo-resiliencia-el-valor-de-las-opciones-de-modelos">🛡️ Construyendo Resiliencia: El Valor de las Opciones de Modelos</h2>
+
+<p>Este incidente destacó una perspectiva crucial: <strong>tener flexibilidad de modelos no se trata solo de optimización—se trata de continuidad</strong>. Cuando dependes de IA para trabajo de desarrollo, un solo punto de fallo puede descarrilar todo tu flujo de trabajo.</p>
+
+<h3 id="la-estrategia-de-resiliencia-de-tres-niveles">La Estrategia de Resiliencia de Tres Niveles</h3>
+
+<p>Ahora abordo Claude Code con una mentalidad de resiliencia:</p>
+
+<p><strong>Nivel 1: Selección de Modelo Primario</strong></p>
+<ul>
+  <li>Usar Opus 4.5 para tareas genuinamente complejas que requieren razonamiento profundo</li>
+  <li>Predeterminar Sonnet 4.5 para trabajo de desarrollo estándar</li>
+  <li>Reservar Haiku 4.5 para iteraciones rápidas y consultas simples</li>
+</ul>
+
+<p><strong>Nivel 2: Cambio de Modelo Dentro de Anthropic</strong></p>
+<ul>
+  <li>Monitorear tiempos de respuesta y consumo de tokens</li>
+  <li>Cambiar modelos ante la primera señal de rendimiento degradado</li>
+  <li>Verificar página de estado cuando se experimentan timeouts</li>
+</ul>
+
+<p><strong>Nivel 3: Proveedores Alternativos de IA</strong> (discutido abajo)</p>
+<ul>
+  <li>Tener proveedores de respaldo configurados y listos</li>
+  <li>Entender qué alternativas sobresalen en tareas específicas</li>
+  <li>Mantener acceso API a múltiples plataformas</li>
+</ul>
+
+<p>Esta estrategia asegura que un problema con un solo modelo—o incluso un solo proveedor—no detenga tu trabajo.</p>
+
+<h2 id="-más-allá-de-anthropic-respaldo-a-otros-proveedores-de-ia">🌐 Más Allá de Anthropic: Respaldo a Otros Proveedores de IA</h2>
+
+<p>Mientras Claude Code está estrechamente integrado con los modelos de Anthropic, hay momentos cuando necesitas ir más allá del ecosistema por completo. Quizás todos los modelos de Anthropic están experimentando problemas, has alcanzado límites de uso, o necesitas capacidades específicas de otro proveedor.</p>
+
+<h3 id="opciones-de-respaldo-disponibles">Opciones de Respaldo Disponibles</h3>
+
+<p><strong>Google Gemini:</strong></p>
+<ul>
+  <li><strong>Acceso</strong>: API directa o a través de Claude Code Router con OpenRouter</li>
+  <li><strong>Fortalezas</strong>: Excelente generación de código, fuerte en salidas estructuradas, precios competitivos</li>
+  <li><strong>Mejor para</strong>: Cuando necesitas integración con el ecosistema de Google o características específicas de Gemini</li>
+  <li><strong>Configuración</strong>: Configurar vía OpenRouter o API directa de Gemini</li>
+</ul>
+
+<p><strong>OpenAI Codex / Modelos GPT:</strong></p>
+<ul>
+  <li><strong>Acceso</strong>: A través de Claude Code Router + OpenRouter</li>
+  <li><strong>Fortalezas</strong>: GPT-4o sobresale en razonamiento complejo, GPT-4o-mini es económico</li>
+  <li><strong>Mejor para</strong>: Tareas donde has encontrado que GPT funciona mejor, o cuando exploras diferencias entre modelos</li>
+  <li><strong>Nota</strong>: GPT-5 requiere BYOK (Trae Tu Propia Clave) en OpenRouter</li>
+</ul>
+
+<p><strong>Qwen (Alibaba):</strong></p>
+<ul>
+  <li><strong>Acceso</strong>: Nivel gratuito disponible en OpenRouter</li>
+  <li><strong>Fortalezas</strong>: Qwen3 Coder optimizado para tareas de desarrollo, ventana de contexto masiva de 262K</li>
+  <li><strong>Mejor para</strong>: Desarrollo consciente de costos, experimentar con modelos del stack tecnológico chino</li>
+  <li><strong>Calidad sorprendente</strong>: Gratuito no significa inferior—Qwen maneja tareas rutinarias notablemente bien</li>
+</ul>
+
+<p><strong>DeepSeek:</strong></p>
+<ul>
+  <li><strong>Acceso</strong>: Gratuito en OpenRouter, también disponible a través de API</li>
+  <li><strong>Fortalezas</strong>: Fuertes capacidades de razonamiento, particularmente bueno para debugging</li>
+  <li><strong>Mejor para</strong>: Cuando necesitas una perspectiva fresca en bugs complejos</li>
+  <li><strong>Bonus</strong>: Modelo de pesos abiertos con sólido rendimiento general</li>
+</ul>
+
+<h3 id="configurando-claude-code-router-para-acceso-multi-proveedor">Configurando Claude Code Router para Acceso Multi-Proveedor</h3>
+
+<p>Para acceder a estas alternativas, necesitarás <a href="https://github.com/musistudio/claude-code-router">Claude Code Router</a>—un proxy poderoso que enruta las solicitudes de Claude Code a cualquier proveedor de LLM compatible.</p>
+
+<p><strong>Configuración Rápida:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar Claude Code Router</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> @musistudio/claude-code-router
+
+<span class="c"># Iniciar el router</span>
+ccr start
+
+<span class="c"># Abrir la UI de configuración para configurar proveedores</span>
+ccr ui
+</code></pre></div></div>
+
+<p>La UI del router en <code class="language-plaintext highlighter-rouge">http://localhost:3456</code> proporciona configuración visual para reglas de enrutamiento, permitiéndote asignar modelos específicos a diferentes escenarios (Predeterminado, Background, Think, Contexto Largo).</p>
+
+<p>Para una guía completa sobre cómo configurar Claude Code Router con OpenRouter, incluyendo ejemplos de configuración detallados y estrategias avanzadas de enrutamiento, revisa mi post anterior: <strong><a href="/2025/08/20/claude-code-router-openrouter-beyond-anthropic/">Claude Code Router y OpenRouter: Más Allá de Anthropic</a></strong>.</p>
+
+<h3 id="cuándo-usar-proveedores-alternativos">Cuándo Usar Proveedores Alternativos</h3>
+
+<p><strong>Escenarios de Respaldo Inmediato:</strong></p>
+<ul>
+  <li>Todos los modelos de Anthropic experimentando problemas (verificar página de estado)</li>
+  <li>Alcanzaste límites de uso de Claude a mitad del proyecto</li>
+  <li>Tarea específica mejor adaptada a otro modelo (ej., GPT para ciertos tipos de escritura creativa)</li>
+</ul>
+
+<p><strong>Casos de Uso Estratégicos:</strong></p>
+<ul>
+  <li><strong>Optimización de costos</strong>: Usar Qwen/DeepSeek gratuitos para tareas rutinarias, guardar créditos de Claude para trabajo complejo</li>
+  <li><strong>Comparación de modelos</strong>: Probar la misma tarea entre proveedores para encontrar el mejor ajuste</li>
+  <li><strong>Requisitos de privacidad</strong>: Ollama auto-hospedado para código sensible</li>
+  <li><strong>Experimentación</strong>: Explorar diferentes capacidades y enfoques de modelos</li>
+</ul>
+
+<p><strong>Consideración Importante:</strong>
+No todos los modelos soportan las características de llamada de herramientas/funciones de Claude Code. Muchos modelos gratuitos sobresalen en generación y explicación de código pero no pueden ejecutar operaciones de archivos o comandos git. Enruta acordemente:</p>
+<ul>
+  <li><strong>Con capacidad de herramientas</strong>: Modelos Claude, serie GPT-4o, algunos modelos Gemini</li>
+  <li><strong>Solo texto</strong>: La mayoría de modelos gratuitos (excelentes para explicaciones, revisiones, documentación)</li>
+</ul>
+
+<h2 id="-lecciones-aprendidas-mejores-prácticas-para-desarrollo-resiliente-con-ia">💡 Lecciones Aprendidas: Mejores Prácticas para Desarrollo Resiliente con IA</h2>
+
+<p>Después de esta experiencia, he adoptado varias prácticas que han hecho mi flujo de trabajo asistido por IA más robusto:</p>
+
+<h3 id="1-monitorear-no-asumir">1. Monitorear, No Asumir</h3>
+
+<p><strong>Antes de este incidente</strong>, asumía que los timeouts siempre eran problemas locales—mi red, mi configuración, mi código.</p>
+
+<p><strong>Ahora</strong>, mi lista de verificación de solución de problemas comienza con:</p>
+<ol>
+  <li>Verificar página de estado de Anthropic</li>
+  <li>Probar cambio de modelo</li>
+  <li>Verificar red/configuración</li>
+  <li>Considerar proveedores alternativos</li>
+</ol>
+
+<p>Este simple reordenamiento ahorra horas de debugging mal dirigido.</p>
+
+<h3 id="2-diversificar-tu-estrategia-de-modelos">2. Diversificar Tu Estrategia de Modelos</h3>
+
+<p><strong>No sobre-optimices para un solo modelo.</strong> Solía predeterminar Opus para todo, pensando “más potente = mejores resultados.” Esto creaba:</p>
+<ul>
+  <li>Mayores costos</li>
+  <li>Respuestas más lentas</li>
+  <li>Punto único de fallo</li>
+</ul>
+
+<p><strong>Ahora</strong>, emparejo modelos con la complejidad de la tarea:</p>
+<ul>
+  <li>Haiku para iteraciones rápidas y documentación</li>
+  <li>Sonnet para desarrollo de características estándar</li>
+  <li>Opus reservado para trabajo arquitectónico genuinamente complejo</li>
+</ul>
+
+<p>Este enfoque es más rápido, más barato y más resiliente.</p>
+
+<h3 id="3-mantener-opcionalidad-de-proveedores">3. Mantener Opcionalidad de Proveedores</h3>
+
+<p>Incluso si usas principalmente modelos de Anthropic, <strong>tener Claude Code Router configurado con alternativas</strong> proporciona tranquilidad. Yo mantengo:</p>
+<ul>
+  <li>Cuenta de OpenRouter con $10 de crédito (dura meses con modelos gratuitos)</li>
+  <li>Clave API de Gemini para tareas del ecosistema de Google</li>
+  <li>Ollama local para trabajo sensible a la privacidad</li>
+</ul>
+
+<p>Raramente uso estas alternativas, pero cuando las necesito—durante interrupciones o para capacidades específicas—están disponibles inmediatamente.</p>
+
+<h3 id="4-entender-patrones-de-uso">4. Entender Patrones de Uso</h3>
+
+<p>Rastrea qué modelos realmente necesitas para diferentes tareas. Descubrí:</p>
+<ul>
+  <li>70% de mis consultas funcionan perfectamente con Sonnet</li>
+  <li>20% se benefician del razonamiento de Opus</li>
+  <li>10% son lo suficientemente simples para Haiku</li>
+</ul>
+
+<p>Esta conciencia ayuda tanto con la selección de modelos como con la gestión de costos.</p>
+
+<h3 id="5-marcar-la-página-de-estado">5. Marcar la Página de Estado</h3>
+
+<p>Agrega <a href="https://status.anthropic.com">status.anthropic.com</a> a tus marcadores. Cuando encuentres problemas:</p>
+<ul>
+  <li>Verifica la página de estado PRIMERO</li>
+  <li>Ahorra tiempo solucionando problemas fantasma</li>
+  <li>Entiende el alcance del incidente y ETA</li>
+</ul>
+
+<p>Parece obvio en retrospectiva, pero es fácil de olvidar durante un escenario frustrante de timeout.</p>
+
+<h2 id="-flujo-de-trabajo-práctico-de-solución-de-problemas">🔧 Flujo de Trabajo Práctico de Solución de Problemas</h2>
+
+<p>Cuando encuentres timeouts de API o comportamiento sin respuesta en Claude Code, sigue este enfoque sistemático:</p>
+
+<h3 id="paso-1-diagnósticos-rápidos-2-minutos">Paso 1: Diagnósticos Rápidos (2 minutos)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Verificar modelo actual</span>
+/model
+
+<span class="c"># Verificar estado de Claude Code</span>
+claude status
+
+<span class="c"># Verificar tu uso/límites</span>
+<span class="c"># (Disponible en UI de Claude Code o dashboard de API)</span>
+</code></pre></div></div>
+
+<h3 id="paso-2-verificación-de-estado-1-minuto">Paso 2: Verificación de Estado (1 minuto)</h3>
+
+<ul>
+  <li>Abrir <a href="https://status.anthropic.com">status.anthropic.com</a></li>
+  <li>Buscar incidentes que afecten tu modelo actual</li>
+  <li>Notar cualquier ventana de mantenimiento planificado</li>
+</ul>
+
+<h3 id="paso-3-prueba-de-cambio-de-modelo-1-minuto">Paso 3: Prueba de Cambio de Modelo (1 minuto)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Intentar cambiar a diferente modelo de Anthropic</span>
+/model sonnet
+
+<span class="c"># Enviar una consulta de prueba simple</span>
+<span class="s2">"Hola, ¿estás respondiendo correctamente?"</span>
+</code></pre></div></div>
+
+<p>Si esto funciona, el problema es específico del modelo. Continúa con el modelo que funciona.</p>
+
+<h3 id="paso-4-proveedor-alternativo-si-es-necesario">Paso 4: Proveedor Alternativo (si es necesario)</h3>
+
+<p>Si todos los modelos de Anthropic están afectados:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Lanzar Claude Code Router (si está configurado)</span>
+ccr start
+
+<span class="c"># Cambiar a alternativa vía router</span>
+/model openrouter,gemini-2.0-flash-exp
+
+<span class="c"># Continuar tu trabajo</span>
+</code></pre></div></div>
+
+<h3 id="paso-5-resolución-a-largo-plazo">Paso 5: Resolución a Largo Plazo</h3>
+
+<ul>
+  <li>Monitorear página de estado para el todo-despejado</li>
+  <li>Cambiar de vuelta al modelo preferido cuando esté disponible</li>
+  <li>Considerar ajustar el modelo predeterminado basado en patrones de confiabilidad</li>
+</ul>
+
+<h2 id="-pensamientos-finales-abraza-la-diversidad-de-modelos">🧠 Pensamientos Finales: Abraza la Diversidad de Modelos</h2>
+
+<p>El mito del “modelo de IA perfecto” es solo eso—un mito. La realidad es más matizada:</p>
+
+<ul>
+  <li><strong>Diferentes modelos sobresalen en diferentes tareas</strong></li>
+  <li><strong>La disponibilidad y confiabilidad varían con el tiempo</strong></li>
+  <li><strong>Las consideraciones de costo importan para uso sostenible</strong></li>
+  <li><strong>Los requisitos de privacidad y seguridad difieren por proyecto</strong></li>
+</ul>
+
+<p>Mi experiencia de timeout de API fue frustrante en el momento, pero llevó a una realización valiosa: <strong>la característica más poderosa de Claude Code no es el acceso al mejor modelo—es la flexibilidad de elegir el modelo correcto para el momento correcto</strong>.</p>
+
+<h3 id="conclusiones-clave">Conclusiones Clave</h3>
+
+<ol>
+  <li><strong>Las páginas de estado son tu amigo</strong>: Verifica <a href="https://status.anthropic.com">status.anthropic.com</a> cuando surjan problemas</li>
+  <li><strong>El cambio de modelo es simple</strong>: Usa el comando <code class="language-plaintext highlighter-rouge">/model</code> para cambiar entre Sonnet, Opus y Haiku</li>
+  <li><strong>Sonnet está subestimado</strong>: El modelo “equilibrado” maneja la mayoría de tareas brillantemente</li>
+  <li><strong>Construye opciones de respaldo</strong>: Configura Claude Code Router para acceso multi-proveedor</li>
+  <li><strong>Empareja modelos a tareas</strong>: No uses Opus para todo solo porque es “premium”</li>
+  <li><strong>La solución de problemas sistemática ahorra tiempo</strong>: Sigue un proceso de diagnóstico consistente</li>
+</ol>
+
+<h3 id="qué-sigue">¿Qué Sigue?</h3>
+
+<p>El panorama del desarrollo con IA continúa evolucionando rápidamente. Características que estoy observando:</p>
+
+<ul>
+  <li><strong>Failover automático de modelos</strong>: Claude Code detectando problemas y cambiando modelos automáticamente</li>
+  <li><strong>Enrutamiento basado en uso</strong>: Selección inteligente de modelos basada en cuotas restantes</li>
+  <li><strong>Aprendizaje basado en rendimiento</strong>: Sistemas que aprenden qué modelos prefieres para tareas específicas</li>
+  <li><strong>Contexto cross-proveedor</strong>: Continuidad de conversación sin interrupciones entre diferentes proveedores de IA</li>
+</ul>
+
+<p>Hasta entonces, saber cómo navegar manualmente estos escenarios te mantiene productivo independientemente de lo que muestre la página de estado.</p>
+
+<h2 id="-referencias">📚 Referencias</h2>
+
+<ul>
+  <li><a href="https://status.anthropic.com">Página de Estado de Anthropic</a> - Estado del servicio en tiempo real para modelos Claude</li>
+  <li><a href="https://docs.anthropic.com/en/docs/claude-code">Documentación de Claude Code</a> - Guías oficiales de configuración y uso</li>
+  <li><a href="https://github.com/musistudio/claude-code-router">Claude Code Router</a> - Enrutamiento multi-proveedor para Claude Code</li>
+  <li><a href="https://openrouter.ai">OpenRouter</a> - Gateway universal de API para más de 400 modelos de IA</li>
+  <li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a> - Integración estandarizada de herramientas de IA</li>
+  <li><a href="https://ollama.ai">Ollama</a> - Ejecuta modelos de IA localmente para máxima privacidad</li>
+</ul>
+
+<hr />
+
+<p><em>¿Has experimentado timeouts de API con Claude Code u otros asistentes de IA? ¿Cuál es tu estrategia de respaldo cuando tu modelo principal no está disponible? Comparte tus experiencias y consejos de solución de problemas en los comentarios abajo.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="Herramientas IA" /><category term="Anthropic" /><category term="Selección de Modelos" /><category term="Solución de Problemas API" /><category term="Opus 4.5" /><category term="Haiku 4.5" /><category term="Sonnet 4.5" /><category term="OpenRouter" /><category term="Gemini" /><category term="Qwen" /><summary type="html"><![CDATA[Guía para solucionar timeouts de API en Claude Code, verificar el estado de Anthropic, cambiar entre modelos Sonnet, Opus y Haiku, y usar proveedores alternativos de IA como Google Gemini, OpenAI Codex o Qwen.]]></summary></entry><entry><title type="html">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje</title><link href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" rel="alternate" type="text/html" title="Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje" /><published>2025-11-09T00:00:00+00:00</published><updated>2025-11-09T00:00:00+00:00</updated><id>https://lgallardo.com/2025/11/09/pico8-ai-game-development</id><content type="html" xml:base="https://lgallardo.com/2025/11/09/pico8-ai-game-development/"><![CDATA[<p><img src="/assets/images/pico-8-robot.png" alt="Claude Robot Handheld" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
 
 <p>La semana pasada, descubrí Pico-8 mientras navegaba por comunidades de gaming retro. Como alguien que juega juegos clásicos en dispositivos portátiles como el Miyoo Mini Plus y las consolas Anbernic, la idea de una “consola de fantasía” captó inmediatamente mi atención. Pero aquí está el detalle: no tenía ningún interés en aprender Lua ni pasar semanas dominando las restricciones de Pico-8.</p>
 
@@ -10,7 +423,7 @@
 
 <p>Pico-8 es una <strong>consola de fantasía</strong>: un sistema de videojuegos imaginario con limitaciones intencionales que despiertan la creatividad. Piensa en ello como lo que podría haber sido el Game Boy si hubiera tenido herramientas de programación perfectas y una vibrante comunidad en línea.</p>
 
-<p><img src="/assets/images/pico-8-new.png" alt="Pico-8 Console" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
+<p><img src="/assets/images/pico-8.png" alt="Pico-8 Console" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
 
 <h3 id="las-hermosas-restricciones">Las Hermosas Restricciones</h3>
 <ul>
@@ -199,7 +612,7 @@ save mastermind.p8.png
 
 <p>Una vez que el juego era jugable y el arte estaba arreglado, lo publiqué en la plataforma de la comunidad de Pico-8: <strong><a href="https://www.lexaloffle.com/bbs/?pid=177155#p">BBS Lexaloffle</a></strong>.</p>
 
-<p><img src="/assets/images/pico-8-mastermind.png" alt="Published Mastermind Game" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
+<p><img src="/assets/images/pico-8-mastermind-game.png" alt="Published Mastermind Game" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
 
 <p>El proceso de publicación fue sorprendentemente directo:</p>
 
@@ -452,7 +865,493 @@ save mastermind.p8.png
 
 <hr />
 
-<p><strong>¿Has probado construir juegos con asistencia de IA? ¿Cuál ha sido tu experiencia con arte generado por IA versus código?</strong> Me encantaría escuchar sobre tus experimentos y si has encontrado mejores flujos de trabajo para manejar assets creativos en desarrollo asistido por IA. Comparte tus pensamientos y proyectos en los comentarios a continuación.</p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="Game Development" /><category term="Pico-8" /><category term="Claude Code" /><category term="AI Coding" /><category term="Game Development" /><category term="Retro Gaming" /><category term="Fantasy Console" /><summary type="html"><![CDATA[Usando Claude Code (Sonnet 4.5) para crear un juego funcional de Mastermind en Pico-8 sin aprender el lenguaje. Explorando la excelencia en código de la IA y sus limitaciones artísticas en desarrollo de consolas de fantasía.]]></summary></entry><entry><title type="html">GitHub Models: Integración Sencilla de IA para Flujos DevOps</title><link href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="alternate" type="text/html" title="GitHub Models: Integración Sencilla de IA para Flujos DevOps" /><published>2025-09-19T00:00:00+00:00</published><updated>2025-09-19T00:00:00+00:00</updated><id>https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/"><![CDATA[<p><img src="/assets/images/gh-models-robots.png" alt="GitHub Models Simple AI Workflows" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+<p><strong>¿Has probado construir juegos con asistencia de IA? ¿Cuál ha sido tu experiencia con arte generado por IA versus código?</strong> Me encantaría escuchar sobre tus experimentos y si has encontrado mejores flujos de trabajo para manejar assets creativos en desarrollo asistido por IA. Comparte tus pensamientos y proyectos en los comentarios a continuación.</p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="Game Development" /><category term="Pico-8" /><category term="Claude Code" /><category term="AI Coding" /><category term="Game Development" /><category term="Retro Gaming" /><category term="Fantasy Console" /><summary type="html"><![CDATA[Usando Claude Code (Sonnet 4.5) para crear un juego funcional de Mastermind en Pico-8 sin aprender el lenguaje. Explorando la excelencia en código de la IA y sus limitaciones artísticas en desarrollo de consolas de fantasía.]]></summary></entry><entry><title type="html">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub</title><link href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="alternate" type="text/html" title="GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub" /><published>2025-10-02T00:00:00+00:00</published><updated>2025-10-02T00:00:00+00:00</updated><id>https://lgallardo.com/2025/10/02/github-copilot-cli-mcp-integration</id><content type="html" xml:base="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/"><![CDATA[<p><a href="/assets/images/copilot-cli-robots.png" target="_blank"><img src="/assets/images/copilot-cli-robots.png" alt="GitHub Copilot CLI Terminal" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<p>Me topé con GitHub Copilot CLI mientras me ponía al día con noticias tecnológicas, y la <strong>integración nativa con GitHub</strong> inmediatamente captó mi atención. ¿Un asistente de IA terminal-nativo que puede interactuar directamente con repositorios, issues y PRs? Decidí probarlo para tenerlo en mi caja de herramientas de IA.</p>
+
+<p>Copilot CLI es la última incorporación al ecosistema Copilot de GitHub, que se une a <strong>Copilot en el IDE</strong> (completado de código y chat), <strong>GitHub Copilot Workspace</strong> (automatización de issue-a-PR) y <strong>Copilot Extensions</strong> (integraciones personalizadas). Este componente CLI trae la experiencia Copilot directamente a la terminal, complementando el ecosistema con flujos de línea de comandos. Esto es lo que aprendí después de probarlo.</p>
+
+<h2 id="-qué-es-github-copilot-cli">🚀 ¿Qué es GitHub Copilot CLI?</h2>
+
+<p>GitHub Copilot CLI es el asistente de IA terminal-nativo de GitHub que trae IA conversacional directamente a tu línea de comandos. Piénsalo como ChatGPT para tu terminal, pero con <strong>acceso directo a tu sistema de archivos, servidores MCP y contexto de desarrollo</strong>.</p>
+
+<h3 id="lo-que-lo-hace-diferente">Lo Que Lo Hace Diferente</h3>
+
+<ul>
+  <li><strong>Interfaz terminal-nativa</strong>: Sin navegador, sin cambio de contexto</li>
+  <li><strong>Modo interactivo</strong>: Conversaciones naturales con comandos <code class="language-plaintext highlighter-rouge">/</code></li>
+  <li><strong>Integración MCP</strong>: Conéctate a Context7, GitHub y servidores MCP personalizados</li>
+  <li><strong>Flexibilidad de modelos</strong>: Soporte para GPT-4o, GPT-5 y otros modelos OpenAI</li>
+  <li><strong>Gestión de sesiones</strong>: Reanuda conversaciones y mantén el contexto</li>
+  <li><strong>Acceso al sistema de archivos</strong>: Lectura y análisis directo de archivos</li>
+</ul>
+
+<h3 id="estado-actual-vista-previa-pública">Estado Actual: Vista Previa Pública</h3>
+
+<p>Copilot CLI está en <strong>vista previa pública</strong> (versión 0.0.332 al momento de escribir esto), lo que significa:</p>
+<ul>
+  <li>Las funcionalidades están evolucionando activamente</li>
+  <li>Disponible para suscriptores de GitHub Copilot</li>
+  <li>Algunas capacidades pueden cambiar antes del lanzamiento estable</li>
+  <li>Tu retroalimentación moldea directamente la dirección del producto</li>
+</ul>
+
+<h2 id="-inicio-rápido-instalación-y-primera-ejecución">🔧 Inicio Rápido: Instalación y Primera Ejecución</h2>
+
+<p>Comenzar con Copilot CLI es sencillo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar globalmente vía npm</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> @github/copilot
+
+<span class="c"># Lanzar modo interactivo</span>
+copilot
+
+<span class="c"># O usar modelo específico</span>
+copilot <span class="nt">--model</span> gpt-5
+
+<span class="c"># Consultas rápidas de una sola vez</span>
+copilot <span class="nt">-p</span> <span class="s2">"analyze terraform module"</span> <span class="nt">--allow-all-tools</span>
+</code></pre></div></div>
+
+<h3 id="entendiendo-la-configuración">Entendiendo la Configuración</h3>
+
+<p>Copilot CLI crea un directorio de configuración en <code class="language-plaintext highlighter-rouge">~/.copilot/</code> con la siguiente estructura:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.copilot/
+├── command-history-state.json  # Seguimiento del historial de comandos
+├── config.json                  # Preferencias y configuraciones del usuario
+├── history-session-state/       # Gestión del estado de sesión
+├── logs/                        # Logs de debug y actividad
+└── mcp-config.json             # Configuraciones de servidores MCP
+</code></pre></div></div>
+
+<p>El archivo <code class="language-plaintext highlighter-rouge">mcp-config.json</code> es donde se almacenan las integraciones de servidores MCP. Cada vez que agregas un servidor MCP vía <code class="language-plaintext highlighter-rouge">/mcp add</code>, este archivo se actualiza automáticamente.</p>
+
+<h2 id="-integración-mcp-el-cambio-de-juego">💡 Integración MCP: El Cambio de Juego</h2>
+
+<p>Aquí es donde Copilot CLI realmente brilla—<strong>soporte nativo de MCP</strong> que te permite conectarte a servidores y herramientas especializadas de IA directamente desde tu terminal.</p>
+
+<h3 id="comandos-mcp-interactivos">Comandos MCP Interactivos</h3>
+
+<p>Una vez que estás en modo interactivo (<code class="language-plaintext highlighter-rouge">copilot</code>), tienes acceso a estos comandos de gestión MCP:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/mcp add      <span class="c"># Agregar nuevo servidor MCP interactivamente</span>
+/mcp show     <span class="c"># Mostrar servidores MCP configurados</span>
+/mcp disable  <span class="c"># Desactivar temporalmente un servidor</span>
+/mcp <span class="nb">enable</span>   <span class="c"># Reactivar un servidor desactivado</span>
+</code></pre></div></div>
+
+<h3 id="agregando-servidores-mcp-la-forma-interactiva">Agregando Servidores MCP: La Forma Interactiva</h3>
+
+<p>El comando <code class="language-plaintext highlighter-rouge">/mcp add</code> proporciona una experiencia de configuración guiada. Déjame mostrarte cómo agregué los servidores MCP de Context7 y GitHub:</p>
+
+<p><a href="/assets/images/copilot-cli-mcp-add-command.png" target="_blank"><img src="/assets/images/copilot-cli-mcp-add-command.png" alt="MCP Add Command" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<p>El prompt interactivo te guía a través de:</p>
+
+<ol>
+  <li><strong>Nombre del Servidor</strong>: Identificador único para el servidor MCP</li>
+  <li><strong>Tipo de Servidor</strong>: Local, HTTP o SSE (Server-Sent Events)</li>
+  <li><strong>Detalles de Conexión</strong>:
+    <ul>
+      <li><strong>Local</strong>: Comando para iniciar el servidor (ej., <code class="language-plaintext highlighter-rouge">npx</code>)</li>
+      <li><strong>HTTP</strong>: URL del servidor remoto</li>
+      <li><strong>SSE</strong>: Endpoint de eventos enviados por servidor</li>
+    </ul>
+  </li>
+  <li><strong>Argumentos</strong>: Argumentos de línea de comandos para servidores locales</li>
+  <li><strong>Variables de Entorno</strong>: Configuración de entorno opcional</li>
+  <li><strong>Selección de Herramientas</strong>: Elige qué herramientas exponer (<code class="language-plaintext highlighter-rouge">*</code> para todas)</li>
+</ol>
+
+<h3 id="ejemplo-del-mundo-real-agregando-context7">Ejemplo del Mundo Real: Agregando Context7</h3>
+
+<p>Aquí está el flujo de trabajo real para agregar el servidor MCP de Context7:</p>
+
+<p><a href="/assets/images/copilot-cli-mcp-add.png" target="_blank"><img src="/assets/images/copilot-cli-mcp-add.png" alt="Context7 MCP Configuration" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server Name: Context7
+Server Type: [2] HTTP
+URL: https://mcp.context7.com/mcp
+HTTP Headers: (opcional, para autenticación)
+Tools: * (todas las herramientas)
+</code></pre></div></div>
+
+<p>Una vez configurado, las capacidades de búsqueda de documentación de Context7 están inmediatamente disponibles en tus sesiones de Copilot CLI.</p>
+
+<h3 id="agregando-el-servidor-mcp-de-github">Agregando el Servidor MCP de GitHub</h3>
+
+<p>El servidor MCP de GitHub proporciona acceso a repositorios y operaciones:</p>
+
+<p><a href="/assets/images/copilot-cli-mcp-github-server.png" target="_blank"><img src="/assets/images/copilot-cli-mcp-github-server.png" alt="GitHub MCP Server Connected" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<p>Como se muestra en la captura, una vez configurado, verás:</p>
+<ul>
+  <li>Confirmación de <strong>Conectado al Servidor MCP de GitHub</strong></li>
+  <li>Servidor listado en tu configuración MCP</li>
+  <li>Herramientas y capacidades disponibles</li>
+</ul>
+
+<p>Esto te da acceso directo a:</p>
+<ul>
+  <li>Información del repositorio y acceso a archivos</li>
+  <li>Operaciones de pull requests e issues</li>
+  <li>Datos de flujos de GitHub Actions</li>
+  <li>Historial de commits y gestión de ramas</li>
+</ul>
+
+<h3 id="persistencia-de-la-configuración-mcp">Persistencia de la Configuración MCP</h3>
+
+<p>Todos los servidores MCP se guardan en <code class="language-plaintext highlighter-rouge">~/.copilot/mcp-config.json</code>, haciéndolos disponibles en todas las sesiones. Tu configuración persiste y se carga automáticamente cuando inicias Copilot CLI.</p>
+
+<h2 id="-comandos-interactivos-esenciales">🎯 Comandos Interactivos Esenciales</h2>
+
+<p>Más allá de la gestión MCP, Copilot CLI proporciona potentes comandos de control de sesión:</p>
+
+<h3 id="selección-de-modelo">Selección de Modelo</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/model gpt-5              <span class="c"># Cambiar a GPT-5 para la sesión actual</span>
+/model gpt-4o             <span class="c"># Usar GPT-4o para tareas generales</span>
+/model gpt-5 <span class="nt">--reasoning</span>  <span class="c"># Habilitar modo de razonamiento extendido</span>
+</code></pre></div></div>
+
+<h3 id="acceso-al-sistema-de-archivos">Acceso al Sistema de Archivos</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/add-dir ~/projects       <span class="c"># Otorgar acceso a directorio específico</span>
+/add-dir ~/terraform      <span class="c"># Agregar configuraciones Terraform</span>
+/add-file config.yaml     <span class="c"># Agregar archivo individual al contexto</span>
+</code></pre></div></div>
+
+<h3 id="gestión-de-sesiones">Gestión de Sesiones</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/cwd ~/terraform          <span class="c"># Cambiar directorio de trabajo</span>
+/session                  <span class="c"># Ver información de sesión actual</span>
+/resume                   <span class="c"># Reanudar sesión anterior</span>
+/history                  <span class="c"># Mostrar historial de comandos</span>
+</code></pre></div></div>
+
+<h3 id="retroalimentación-y-ayuda">Retroalimentación y Ayuda</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/feedback                 <span class="c"># Proporcionar retroalimentación a GitHub</span>
+/help                     <span class="c"># Mostrar todos los comandos disponibles</span>
+/exit                     <span class="c"># Salir del modo interactivo</span>
+</code></pre></div></div>
+
+<h2 id="️-flujo-devops-del-mundo-real">🛠️ Flujo DevOps del Mundo Real</h2>
+
+<p>Aquí hay un escenario práctico que muestra Copilot CLI en acción:</p>
+
+<h3 id="escenario-análisis-de-módulo-terraform">Escenario: Análisis de Módulo Terraform</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Iniciar Copilot CLI en tu directorio Terraform</span>
+<span class="nb">cd</span> ~/git/terraform-aws-ecrpublic
+copilot <span class="nt">--model</span> gpt-5
+
+<span class="c"># Comienza la sesión interactiva</span>
+<span class="o">&gt;</span> <span class="s2">"Analiza la estructura del módulo y sugiere mejoras"</span>
+
+<span class="c"># Usar MCP para obtener documentación</span>
+<span class="o">&gt;</span> <span class="s2">"Usando Context7, encuentra mejores prácticas de AWS ECR Public"</span>
+
+<span class="c"># Revisar flujos de GitHub</span>
+<span class="o">&gt;</span> <span class="s2">"Muéstrame los flujos de GitHub Actions para este repo"</span>
+
+<span class="c"># Generar resumen</span>
+<span class="o">&gt;</span> <span class="s2">"Crea un resumen de potenciales mejoras de seguridad"</span>
+
+<span class="c"># Guardar sesión para después</span>
+<span class="o">&gt;</span> /feedback <span class="s2">"Este análisis fue útil para la auditoría de seguridad"</span>
+</code></pre></div></div>
+
+<h3 id="flags-de-línea-de-comandos-para-automatización">Flags de Línea de Comandos para Automatización</h3>
+
+<p>Para CI/CD o flujos con scripts:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Permitir todas las operaciones del sistema de archivos (para automatización)</span>
+copilot <span class="nt">-p</span> <span class="s2">"analyze terraform validation output"</span> <span class="nt">--allow-all-tools</span>
+
+<span class="c"># Reanudar sesión anterior</span>
+copilot <span class="nt">--resume</span> <span class="nt">--model</span> gpt-5
+
+<span class="c"># Agregar acceso a directorio específico</span>
+copilot <span class="nt">--add-dir</span> ~/terraform <span class="nt">-p</span> <span class="s2">"review module configuration"</span>
+
+<span class="c"># Especificar modelo y contexto</span>
+copilot <span class="nt">--model</span> gpt-4o <span class="nt">--cwd</span> ~/projects/api <span class="nt">-p</span> <span class="s2">"analyze API performance"</span>
+</code></pre></div></div>
+
+<h2 id="️-cuándo-usar-copilot-cli-vs-claude-code-vs-cursor-cli">⚖️ Cuándo Usar: Copilot CLI vs Claude Code vs Cursor CLI</h2>
+
+<p>Después de usar las tres herramientas de IA basadas en terminal, aquí está mi marco de decisión:</p>
+
+<h3 id="github-copilot-cli">GitHub Copilot CLI</h3>
+<p><strong>Ideal para:</strong></p>
+<ul>
+  <li>✅ Flujos terminal-nativos (sin cambio de contexto)</li>
+  <li>✅ Integración y orquestación de servidores MCP</li>
+  <li>✅ Flujos de desarrollo centrados en GitHub</li>
+  <li>✅ Sesiones de debugging interactivas</li>
+  <li>✅ Ecosistema de modelos OpenAI (GPT-4o, GPT-5)</li>
+</ul>
+
+<p><strong>Características:</strong></p>
+<ul>
+  <li><strong>Soporte MCP robusto</strong>: Integración nativa con gestión interactiva</li>
+  <li><strong>Integración GitHub</strong>: Acceso directo a repositorios y Actions</li>
+  <li><strong>Selección de modelos</strong>: Cambio fácil de modelos durante sesiones</li>
+  <li><strong>Persistencia de sesiones</strong>: Reanuda y continúa conversaciones</li>
+</ul>
+
+<h3 id="claude-code">Claude Code</h3>
+<p><strong>Ideal para:</strong></p>
+<ul>
+  <li>✅ Razonamiento y planificación complejos de múltiples pasos</li>
+  <li>✅ Implementación de código con uso de herramientas</li>
+  <li>✅ Flujos de pensamiento secuencial</li>
+  <li>✅ Modelos Claude de Anthropic (Sonnet, Opus)</li>
+  <li>✅ Edición y refactorización extensiva de archivos</li>
+</ul>
+
+<p><strong>Características:</strong></p>
+<ul>
+  <li><strong>Capacidades agénticas</strong>: Puede usar herramientas e implementar cambios</li>
+  <li><strong>Modelos Claude</strong>: Acceso a la familia de modelos de Anthropic</li>
+  <li><strong>Contexto rico</strong>: Fuerte comprensión de la base de código</li>
+  <li><strong>Subagentes</strong>: Flujos de trabajo de agentes especializados</li>
+</ul>
+
+<h3 id="cursor-cli">Cursor CLI</h3>
+<p><strong>Ideal para:</strong></p>
+<ul>
+  <li>✅ Generación rápida de código y snippets</li>
+  <li>✅ Integración con IDE Cursor</li>
+  <li>✅ Consultas simples de terminal</li>
+  <li>✅ Respuestas rápidas de modelos</li>
+</ul>
+
+<p><strong>Características:</strong></p>
+<ul>
+  <li><strong>Integración IDE</strong>: Funciona con el editor Cursor</li>
+  <li><strong>Enfoque en velocidad</strong>: Respuestas rápidas para tareas simples</li>
+  <li><strong>Ecosistema Cursor</strong>: Parte del conjunto de herramientas de Cursor</li>
+</ul>
+
+<h3 id="matriz-de-decisión">Matriz de Decisión</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caso de Uso</th>
+      <th>Copilot CLI</th>
+      <th>Claude Code</th>
+      <th>Cursor CLI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Debugging en terminal</strong></td>
+      <td>✅ Perfecto</td>
+      <td>✅ Bueno</td>
+      <td>⚠️ Básico</td>
+    </tr>
+    <tr>
+      <td><strong>Orquestación MCP</strong></td>
+      <td>✅ Excelente</td>
+      <td>✅ Bueno</td>
+      <td>❌ Limitado</td>
+    </tr>
+    <tr>
+      <td><strong>Flujos GitHub</strong></td>
+      <td>✅ Nativo</td>
+      <td>⚠️ Vía MCP</td>
+      <td>❌ Limitado</td>
+    </tr>
+    <tr>
+      <td><strong>Razonamiento complejo</strong></td>
+      <td>✅ Capaz con GPT-5</td>
+      <td>✅ Mejor con Claude</td>
+      <td>⚠️ Básico</td>
+    </tr>
+    <tr>
+      <td><strong>Implementación de código</strong></td>
+      <td>⚠️ Solo guía</td>
+      <td>✅ Mejor</td>
+      <td>✅ Bueno</td>
+    </tr>
+    <tr>
+      <td><strong>Consultas rápidas</strong></td>
+      <td>✅ Excelente</td>
+      <td>✅ Bueno</td>
+      <td>✅ Más rápido</td>
+    </tr>
+    <tr>
+      <td><strong>Continuidad de sesión</strong></td>
+      <td>✅ Resumir nativo</td>
+      <td>✅ Consciente del contexto</td>
+      <td>⚠️ Limitado</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-tips-pro-para-máxima-productividad">🔥 Tips Pro para Máxima Productividad</h2>
+
+<h3 id="1-aprovechar---allow-all-tools-para-cicd">1. Aprovechar <code class="language-plaintext highlighter-rouge">--allow-all-tools</code> para CI/CD</h3>
+
+<p>En entornos automatizados, otorga acceso completo para evitar prompts interactivos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Uso en pipeline CI/CD</span>
+copilot <span class="nt">-p</span> <span class="s2">"analyze test coverage report"</span> <span class="se">\</span>
+  <span class="nt">--allow-all-tools</span> <span class="se">\</span>
+  <span class="nt">--model</span> gpt-5 <span class="se">\</span>
+  <span class="nt">--add-dir</span> ./coverage
+</code></pre></div></div>
+
+<h3 id="2-usar---resume-para-continuación-de-sesión">2. Usar <code class="language-plaintext highlighter-rouge">--resume</code> para Continuación de Sesión</h3>
+
+<p>No empieces desde cero—reanuda tu contexto anterior:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Continuar donde lo dejaste</span>
+copilot <span class="nt">--resume</span> <span class="nt">--model</span> gpt-5
+
+<span class="c"># Reanudar y agregar nuevo contexto</span>
+copilot <span class="nt">--resume</span> <span class="nt">--add-dir</span> ~/new-project
+</code></pre></div></div>
+
+<h3 id="3-combinar---add-dir-con-servidores-mcp">3. Combinar <code class="language-plaintext highlighter-rouge">--add-dir</code> con Servidores MCP</h3>
+
+<p>Otorga acceso a archivos y aprovecha capacidades MCP simultáneamente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copilot <span class="nt">--add-dir</span> ~/terraform <span class="se">\</span>
+  <span class="nt">--model</span> gpt-5 <span class="se">\</span>
+  <span class="nt">-p</span> <span class="s2">"Usando Context7, analiza este módulo Terraform contra las mejores prácticas de AWS"</span>
+</code></pre></div></div>
+
+<h3 id="4-comandos-mcp-interactivos-para-flujos-dinámicos">4. Comandos <code class="language-plaintext highlighter-rouge">/mcp</code> Interactivos para Flujos Dinámicos</h3>
+
+<p>Agrega servidores MCP sobre la marcha durante sesiones interactivas:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># En modo interactivo</span>
+<span class="o">&gt;</span> /mcp add
+<span class="c"># Configurar nuevo servidor interactivamente</span>
+
+<span class="o">&gt;</span> /mcp show
+<span class="c"># Verificar todos los servidores conectados</span>
+
+<span class="o">&gt;</span> <span class="s2">"Ahora usa el servidor recién agregado para analizar X"</span>
+</code></pre></div></div>
+
+<h3 id="5-cambio-de-modelos-durante-sesiones">5. Cambio de Modelos Durante Sesiones</h3>
+
+<p>Cambia modelos en medio de la conversación según la complejidad de la tarea:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Empezar con GPT-4o para análisis general</span>
+copilot <span class="nt">--model</span> gpt-4o
+
+<span class="c"># Cambiar a GPT-5 para razonamiento complejo</span>
+<span class="o">&gt;</span> /model gpt-5
+
+<span class="c"># Continuar con capacidades de razonamiento mejoradas</span>
+<span class="o">&gt;</span> <span class="s2">"Ahora realiza análisis profundo de seguridad del flujo de autenticación"</span>
+</code></pre></div></div>
+
+<p><a href="/assets/images/copilot-cli-2025-10-02_16-07.png" target="_blank"><img src="/assets/images/copilot-cli-2025-10-02_16-07.png" alt="Copilot CLI in Action" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<h2 id="-conclusiones-rápidas">📊 Conclusiones Rápidas</h2>
+
+<p>Después de una semana de uso intensivo, esto es lo que destaca:</p>
+
+<p>✅ <strong>IA terminal-nativa</strong>: Finalmente, una IA conversacional que vive donde trabajan los desarrolladores
+✅ <strong>Integración MCP</strong>: Soporte MCP de primera clase con gestión interactiva
+✅ <strong>Persistencia de sesiones</strong>: Reanuda conversaciones y mantén contexto entre sesiones
+✅ <strong>Flexibilidad de modelos</strong>: Cambio fácil entre GPT-4o, GPT-5 y otros modelos
+✅ <strong>Ecosistema GitHub</strong>: Integración nativa con repositorios y Actions</p>
+
+<p>⚠️ <strong>Estado de vista previa pública</strong>: Funcionalidades evolucionando, espera algunos bordes ásperos
+⚠️ <strong>Limitado a modelos OpenAI</strong>: Sin Claude de Anthropic u otros proveedores de modelos (todavía)
+⚠️ <strong>Enfocado en guía</strong>: Proporciona análisis y sugerencias en lugar de implementación directa de código</p>
+
+<h2 id="-empezando-tu-primera-semana">🎯 Empezando: Tu Primera Semana</h2>
+
+<h3 id="día-1-configuración-básica">Día 1: Configuración Básica</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar Copilot CLI</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> @github/copilot
+
+<span class="c"># Lanzar y explorar modo interactivo</span>
+copilot
+
+<span class="c"># Probar comandos básicos</span>
+<span class="o">&gt;</span> /help
+<span class="o">&gt;</span> /model gpt-5
+<span class="o">&gt;</span> <span class="s2">"Hola, analiza la estructura de mi directorio actual"</span>
+</code></pre></div></div>
+
+<h3 id="día-2-3-integración-mcp">Día 2-3: Integración MCP</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Agregar tu primer servidor MCP</span>
+copilot
+<span class="o">&gt;</span> /mcp add
+
+<span class="c"># Configurar Context7 o GitHub MCP</span>
+<span class="c"># Server Name: Context7</span>
+<span class="c"># Type: HTTP</span>
+<span class="c"># URL: https://mcp.context7.com/mcp</span>
+
+<span class="c"># Probar la integración</span>
+<span class="o">&gt;</span> <span class="s2">"Usando Context7, encuentra documentación sobre módulos Terraform AWS"</span>
+</code></pre></div></div>
+
+<h3 id="día-4-5-integración-en-flujo-real">Día 4-5: Integración en Flujo Real</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Usar en flujo de desarrollo real</span>
+<span class="nb">cd</span> ~/your-project
+copilot <span class="nt">--model</span> gpt-5 <span class="nt">--add-dir</span> <span class="nb">.</span>
+
+<span class="c"># Analizar, debuggear e iterar</span>
+<span class="o">&gt;</span> <span class="s2">"Analiza la cobertura de tests en este proyecto"</span>
+<span class="o">&gt;</span> <span class="s2">"¿Qué mejoras de seguridad se pueden hacer?"</span>
+<span class="o">&gt;</span> <span class="s2">"Revisa la configuración del flujo CI/CD"</span>
+</code></pre></div></div>
+
+<h3 id="semana-1-automatizar-tareas-comunes">Semana 1: Automatizar Tareas Comunes</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Crear aliases para flujos frecuentes</span>
+<span class="nb">alias </span>copilot-tf<span class="o">=</span><span class="s2">"copilot --add-dir . --model gpt-5 -p 'Analizar configuración Terraform'"</span>
+<span class="nb">alias </span>copilot-debug<span class="o">=</span><span class="s2">"copilot --resume --allow-all-tools"</span>
+
+<span class="c"># Usar en CI/CD</span>
+copilot <span class="nt">-p</span> <span class="s2">"analyze build logs"</span> <span class="nt">--allow-all-tools</span> <span class="nt">--model</span> gpt-5
+</code></pre></div></div>
+
+<h2 id="-en-resumen">🔮 En Resumen</h2>
+
+<p>GitHub Copilot CLI representa un cambio significativo en cómo interactuamos con IA durante el desarrollo. Al traer IA conversacional directamente a la terminal con <strong>soporte nativo de MCP</strong>, elimina el cambio de contexto y habilita flujos verdaderamente integrados.</p>
+
+<p><strong>Elige Copilot CLI cuando necesites:</strong></p>
+<ul>
+  <li>IA terminal-nativa sin salir de tu flujo de trabajo</li>
+  <li>Orquestación de servidores MCP con gestión interactiva</li>
+  <li>Integración con repositorios y Actions de GitHub</li>
+  <li>Capacidades de persistencia y reanudación de sesiones</li>
+  <li>Acceso al ecosistema de modelos OpenAI</li>
+</ul>
+
+<p><strong>El estado de vista previa pública significa:</strong></p>
+<ul>
+  <li>Las funcionalidades están mejorando activamente</li>
+  <li>Tu retroalimentación moldea el producto</li>
+  <li>Todavía existen algunos bordes ásperos</li>
+  <li>Acceso temprano a capacidades de vanguardia</li>
+</ul>
+
+<p>Copilot CLI es una <strong>alternativa válida</strong> para desarrollo basado en terminal, especialmente si ya estás usando GitHub Copilot. La integración nativa con GitHub, combinada con extensibilidad MCP, lo hace una elección natural para flujos que se centran en repositorios, issues y pull requests de GitHub.</p>
+
+<p><strong>Empieza con lo básico, agrega un servidor MCP, y ve cómo la IA terminal-nativa cambia tu flujo de trabajo.</strong> Podrías encontrarte alcanzando el navegador menos y resolviendo problemas más rápido—justo desde donde ya estás trabajando.</p>
+
+<h2 id="-recursos">📚 Recursos</h2>
+
+<ul>
+  <li><a href="https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line">Documentación de GitHub Copilot CLI</a></li>
+  <li><a href="https://modelcontextprotocol.io/">Especificación del Model Context Protocol</a></li>
+  <li><a href="https://mcp.context7.com/">Servidor MCP de Context7</a></li>
+  <li><a href="https://github.com/modelcontextprotocol/servers/tree/main/src/github">Servidor MCP de GitHub</a></li>
+</ul>
+
+<hr />
+
+<p><em>¿Ya probaste GitHub Copilot CLI? ¿Qué servidores MCP estás integrando? Comparte tus flujos de IA terminal-nativa en los comentarios abajo.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="GitHub Copilot" /><category term="CLI" /><category term="AI Tools" /><category term="Terminal" /><category term="DevOps Automation" /><category term="GitHub Integration" /><category term="MCP" /><summary type="html"><![CDATA[Descubre GitHub Copilot CLI, un asistente de IA terminal-nativo con integración nativa a GitHub y soporte MCP. Aprende cómo aprovechar comandos interactivos, gestionar repositorios y automatizar flujos DevOps desde la terminal.]]></summary></entry><entry><title type="html">GitHub Models: Integración Sencilla de IA para Flujos DevOps</title><link href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="alternate" type="text/html" title="GitHub Models: Integración Sencilla de IA para Flujos DevOps" /><published>2025-09-19T00:00:00+00:00</published><updated>2025-09-19T00:00:00+00:00</updated><id>https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows</id><content type="html" xml:base="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/"><![CDATA[<p><img src="/assets/images/gh-models-robots.png" alt="GitHub Models Simple AI Workflows" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
 
 <p>Me topé con GitHub Models mientras navegaba las últimas funcionalidades de GitHub y decidí probarlo. Lo que me llamó la atención no fue solo otra API de IA—sino la <strong>integración fluida con GitHub Actions</strong> y el hecho de que es completamente gratuito para la mayoría de flujos de desarrollo.</p>
 
@@ -2968,945 +3867,4 @@ tools: Read, Grep, Bash
   <li><a href="https://docs.anthropic.com/en/docs/claude-code/subagents">Documentación de Subagentes de Claude Code</a> - Guía oficial para crear y gestionar subagentes</li>
   <li><a href="https://docs.anthropic.com/en/docs/claude-code/cli-reference">Referencia CLI de Claude Code</a> - Referencia completa de comandos incluyendo <code class="language-plaintext highlighter-rouge">/agents</code></li>
   <li><a href="https://github.com/lgallard/terraform-aws-ecr/issues/125">Optimización del Módulo Terraform AWS ECR</a> - Ejemplo del mundo real de coordinar múltiples subagentes</li>
-</ul>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="Herramientas IA" /><category term="Subagentes" /><category term="Automatización" /><category term="Terraform" /><category term="Blog Automatización" /><summary type="html"><![CDATA[Aprende cómo los Subagentes de Claude Code crean flujos de trabajo de IA especializados para automatización de blog, optimización de Terraform, y tareas complejas de desarrollo con experiencia enfocada y herramientas dedicadas.]]></summary></entry><entry><title type="html">De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA</title><link href="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/" rel="alternate" type="text/html" title="De BugBot a $40/mes a CodeBot: Construyendo Tu Propia Alternativa de Revisión de Código IA" /><published>2025-07-24T00:00:00+00:00</published><updated>2025-07-24T00:00:00+00:00</updated><id>https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative</id><content type="html" xml:base="https://lgallardo.com/2025/07/24/bugbot-to-codebot-ai-review-alternative/"><![CDATA[<p><img src="/assets/images/codebot-hunt-bugs.png" alt="CodeBot: Alternativa a BugBot" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Ayer por la mañana, me desperté con un correo de Cursor que me hizo hacer una pausa mientras tomaba café. <strong>“El trial de Bugbot está llegando a su fin”</strong> — y con él, la noticia de que esta funcionalidad que había llegado a apreciar costaría <strong>$40 por usuario por mes</strong> por 200 revisiones de PR. Como desarrollador que siempre busca soluciones eficientes, mi reacción inmediata fue: 🤷</p>
-
-<p><img src="/assets/images/cursor-bugbot.png" alt="Fin del trial de BugBot" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>No me malinterpreten — BugBot fue genuinamente útil durante el trial. Revisó 112 de mis PRs, marcó 176 issues, y resolví el 74.42% de ellos. ¿Pero $40/mes por una funcionalidad que pensé sería parte del Plan Pro? Eso me hizo pensar en alternativas.</p>
-
-<h2 id="el-atractivo-de-bugbot-lo-que-lo-hacía-digno-de-replicar">El Atractivo de BugBot: Lo Que Lo Hacía Digno de Replicar</h2>
-
-<p>Durante el período beta de Cursor, BugBot tenía algunas cualidades que lo hacían genuinamente valioso:</p>
-
-<ol>
-  <li><strong>Revisiones bajo demanda</strong> — Podía activarlo con un simple comentario cuando realmente quería feedback</li>
-  <li><strong>Reportes concisos y accionables</strong> — Se enfocaba en bugs críticos y problemas de seguridad sin detalles abrumadores</li>
-  <li><strong>Búsqueda rápida de bugs</strong> — Perfecto para capturar problemas antes del merge</li>
-  <li><strong>Factor cool</strong> — Seamos honestos, tener un asistente IA llamado “BugBot” se sentía bastante genial</li>
-</ol>
-
-<p>La clave era que BugBot funcionaba porque era <strong>enfocado y activado bajo demanda</strong>, no porque corriera automáticamente en cada commit.</p>
-
-<h2 id="el-problema-de-claude-code-demasiado-de-algo-bueno">El Problema de Claude Code: Demasiado de Algo Bueno</h2>
-
-<p>Había estado usando Claude Code GitHub Actions por un tiempo, y aunque poderoso, tenía algunos problemas que lo hacían menos que ideal para uso diario:</p>
-
-<p><strong>El Comportamiento por Defecto:</strong></p>
-<ul>
-  <li>Se activaba en <strong>cada commit</strong> en un PR</li>
-  <li>Generaba <strong>reportes comprensivos y verbosos</strong> que podían abarcar páginas</li>
-  <li>Creaba <strong>múltiples comentarios de revisión</strong> mientras iterabas en el código</li>
-  <li>Requería una inversión significativa de tiempo para leer todo el feedback</li>
-</ul>
-
-<p>Así se veía un PR típico después de algunos commits:</p>
-
-<p><img src="/assets/images/claude-review-full.png" alt="Revisión completa de Claude" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></p>
-
-<p><img src="/assets/images/claude-review-full-cont.png" alt="Revisión completa de Claude (cont)" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></p>
-
-<p>Para el tercer o cuarto commit, estaba pasando más tiempo leyendo feedback de IA que codeando. Aunque exhaustivo, no era práctico para flujos de desarrollo diarios.</p>
-
-<h2 id="entra-codebot-la-alternativa-a-bugbot">Entra CodeBot: La Alternativa a BugBot</h2>
-
-<p>Inspirado en el comportamiento enfocado de BugBot, me pregunté: <strong>¿Podría modificar la GitHub Action de Claude Code para comportarse más como el BugBot de Cursor?</strong></p>
-
-<p>La visión era simple:</p>
-<ol>
-  <li><strong>Disparadores bajo demanda</strong> en lugar de revisiones automáticas</li>
-  <li><strong>Reportes concisos y enfocados</strong> adaptados a preocupaciones específicas</li>
-  <li><strong>Múltiples modos de revisión</strong> para diferentes tipos de análisis</li>
-  <li><strong>Interfaz de comandos cool</strong> que se sintiera natural de usar</li>
-</ol>
-
-<p>Trabajando con Claude Code mismo, transformé el workflow por defecto en algo mucho más práctico y similar a BugBot.</p>
-
-<h2 id="la-estructura-de-comandos-de-codebot">La Estructura de Comandos de CodeBot</h2>
-
-<p>La solución resultó en una interfaz de comandos limpia que te da exactamente el tipo de revisión que necesitas:</p>
-
-<h3 id="comandos-rápidos">Comandos Rápidos</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Búsqueda rápida de bugs (como el BugBot de Cursor)</span>
-codebot hunt
-
-<span class="c"># Análisis profundo con salida verbose  </span>
-codebot analyze verbose
-
-<span class="c"># Revisión enfocada en seguridad</span>
-codebot security
-
-<span class="c"># Revisión de optimización de rendimiento</span>
-codebot performance
-
-<span class="c"># Revisión comprensiva</span>
-codebot review
-
-<span class="c"># Por defecto usa el modo hunt</span>
-codebot
-</code></pre></div></div>
-
-<h3 id="comandos-avanzados">Comandos Avanzados</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Búsqueda detallada de bugs con análisis extendido</span>
-codebot hunt verbose
-
-<span class="c"># Análisis profundo enfocado en seguridad  </span>
-codebot analyze security
-
-<span class="c"># Revisión detallada de rendimiento con sugerencias de optimización</span>
-codebot performance verbose
-</code></pre></div></div>
-
-<h2 id="implementación-técnica-los-cambios-clave">Implementación Técnica: Los Cambios Clave</h2>
-
-<p>En lugar de mostrarte todo el workflow de GitHub Action de más de 200 líneas, aquí están las modificaciones esenciales que hacen funcionar a CodeBot:</p>
-
-<h3 id="condiciones-de-activación-inteligentes">Condiciones de Activación Inteligentes</h3>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
-  <span class="na">issue_comment</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>  
-  <span class="na">pull_request_review_comment</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
-  <span class="na">workflow_dispatch</span><span class="pi">:</span>
-    <span class="na">inputs</span><span class="pi">:</span>
-      <span class="na">review_mode</span><span class="pi">:</span>
-        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Modo</span><span class="nv"> </span><span class="s">de</span><span class="nv"> </span><span class="s">revisión'</span>
-        <span class="na">required</span><span class="pi">:</span> <span class="kc">true</span>
-        <span class="na">default</span><span class="pi">:</span> <span class="s1">'</span><span class="s">hunt'</span>
-        <span class="na">type</span><span class="pi">:</span> <span class="s">choice</span>
-        <span class="na">options</span><span class="pi">:</span>
-          <span class="pi">-</span> <span class="s">hunt</span>
-          <span class="pi">-</span> <span class="s">analyze</span>  
-          <span class="pi">-</span> <span class="s">security</span>
-          <span class="pi">-</span> <span class="s">performance</span>
-          <span class="pi">-</span> <span class="s">review</span>
-</code></pre></div></div>
-
-<h3 id="lógica-de-parseo-de-comandos">Lógica de Parseo de Comandos</h3>
-<p>El workflow inteligentemente detecta el modo de revisión del texto del comentario y soporta flags verbose:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Parse review mode</span>
-  <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-    <span class="s">COMMENT_BODY="$"</span>
-    <span class="s">if [[ "$COMMENT_BODY" =~ codebot[[:space:]]+hunt ]]; then</span>
-      <span class="s">echo "REVIEW_MODE=hunt" &gt;&gt; $GITHUB_ENV</span>
-    <span class="s">elif [[ "$COMMENT_BODY" =~ codebot[[:space:]]+analyze ]]; then</span>
-      <span class="s">echo "REVIEW_MODE=analyze" &gt;&gt; $GITHUB_ENV</span>
-    <span class="s">elif [[ "$COMMENT_BODY" =~ codebot[[:space:]]+security ]]; then</span>
-      <span class="s">echo "REVIEW_MODE=security" &gt;&gt; $GITHUB_ENV</span>
-    <span class="s"># ... modos adicionales</span>
-</code></pre></div></div>
-
-<h3 id="prompts-enfocados-por-modo">Prompts Enfocados por Modo</h3>
-<p>Cada modo obtiene un prompt personalizado que enfoca el análisis de Claude:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hunt_prompt</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="s">Busca bugs críticos, vulnerabilidades de seguridad y problemas de rendimiento.</span>
-  <span class="s">Proporciona feedback conciso y accionable enfocándote en:</span>
-  <span class="s">- Errores de lógica y casos límite</span>
-  <span class="s">- Vulnerabilidades de seguridad  </span>
-  <span class="s">- Cuellos de botella de rendimiento</span>
-  <span class="s">- Bugs críticos que podrían causar fallas</span>
-  
-  <span class="s">Sé directo y enfocado. Prioriza los problemas más importantes.</span>
-</code></pre></div></div>
-
-<p><strong>Para la implementación completa, ve el <a href="https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml">workflow completo de GitHub Action</a></strong></p>
-
-<h2 id="codebot-en-acción-revisiones-de-módulos-terraform">CodeBot en Acción: Revisiones de Módulos Terraform</h2>
-
-<p>Es importante mencionar el contexto: principalmente trabajo con <strong>módulos de Terraform</strong> usando Claude Code con el <strong>modelo Sonnet 4</strong>. Esta combinación es especialmente efectiva porque Sonnet 4 tiene un excelente entendimiento de sintaxis HCL y mejores prácticas de infraestructura como código.</p>
-
-<p>Los módulos de Terraform presentan desafíos únicos:</p>
-<ul>
-  <li><strong>Configuraciones complejas</strong> con múltiples proveedores AWS</li>
-  <li><strong>Variables y outputs interdependientes</strong> que requieren análisis cuidadoso</li>
-  <li><strong>Patrones de seguridad específicos</strong> para recursos de infraestructura</li>
-  <li><strong>Validaciones de entrada</strong> que pueden tener edge cases sutiles</li>
-</ul>
-
-<p>Ahora cuando quiero un escaneo rápido de bugs en un PR de Terraform, simplemente comento:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebot hunt
-</code></pre></div></div>
-
-<p>Y obtengo de vuelta un reporte enfocado como este:</p>
-
-<p><img src="/assets/images/codebot-hunt.png" alt="Resultados de CodeBot Hunt" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></p>
-
-<p>La diferencia es notable:</p>
-<ul>
-  <li><strong>Análisis conciso</strong> enfocado en problemas reales</li>
-  <li><strong>Feedback accionable</strong> sin detalles abrumadores</li>
-  <li><strong>Hilo de comentario único</strong> que no desordena el PR</li>
-  <li><strong>Comentarios adhesivos</strong> para mejor organización</li>
-</ul>
-
-<p>Cuando necesito análisis más profundo para cambios complejos:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>codebot analyze verbose
-</code></pre></div></div>
-
-<h2 id="la-verificación-de-costos">La Verificación de Costos</h2>
-
-<p>Hablemos de números. El precio de Cursor para BugBot:</p>
-<ul>
-  <li><strong>$40/mes por usuario</strong></li>
-  <li><strong>200 revisiones de PR incluidas</strong></li>
-  <li><strong>Facturación separada</strong> del plan principal Cursor Pro</li>
-</ul>
-
-<p>Para un equipo pequeño de 3 desarrolladores usando activamente esta funcionalidad, eso son <strong>$120/mes</strong> o <strong>$1,440/año</strong>.</p>
-
-<p><strong>Alternativa CodeBot con Claude Code:</strong></p>
-
-<p>Claude Code ofrece planes de suscripción comenzando en <strong>$20/mes por usuario</strong> que incluyen uso de GitHub Actions con límites generosos que se reinician cada 5 horas. Para mis necesidades, estoy suscrito al <strong>plan de $100/mes</strong>, que proporciona uso amplio para múltiples repositorios y colaboración en equipo.</p>
-
-<p><strong>Por qué esto tiene sentido:</strong></p>
-<ul>
-  <li><strong>Precio todo incluido</strong>: GitHub Actions, uso CLI local, y acceso API en un plan</li>
-  <li><strong>Límites flexibles</strong>: El uso se reinicia cada 5 horas, así que rara vez estás bloqueado</li>
-  <li><strong>Herramienta multipropósito</strong>: No solo para revisiones de código - también maneja implementación de funcionalidades, debugging, y tareas generales de desarrollo</li>
-  <li><strong>Mejor economía</strong>: Mi $100/mes cubre toda la asistencia de desarrollo IA, no solo revisiones de código</li>
-</ul>
-
-<p><strong>Comparación de costos:</strong></p>
-<ul>
-  <li><strong>Cursor BugBot</strong>: $40/mes solo para 200 revisiones</li>
-  <li><strong>Claude Code</strong>: $100/mes para asistencia de desarrollo ilimitada incluyendo revisiones, implementación, debugging, y más</li>
-  <li><strong>Enfoque API puro</strong>: Costaría aproximadamente $0.10-0.50 por revisión pero requiere facturación y gestión separada</li>
-</ul>
-
-<h2 id="funcionalidades-avanzadas-que-emergieron">Funcionalidades Avanzadas que Emergieron</h2>
-
-<p>Mientras construía CodeBot, varias mejoras evolucionaron naturalmente:</p>
-
-<h3 id="detección-de-contexto-inteligente">Detección de Contexto Inteligente</h3>
-<p>CodeBot automáticamente ajusta su enfoque basado en:</p>
-<ul>
-  <li><strong>Tipos de archivo</strong> siendo revisados (frontend vs. backend vs. infraestructura)</li>
-  <li><strong>Alcance de cambios</strong> (ajustes menores vs. refactors mayores)</li>
-  <li><strong>Áreas sensibles a seguridad</strong> (autenticación, manejo de datos, endpoints API)</li>
-</ul>
-
-<h3 id="beneficios-de-integración">Beneficios de Integración</h3>
-<ul>
-  <li><strong>Funciona con cualquier repositorio</strong> que soporte GitHub Actions</li>
-  <li><strong>Sigue tus estándares de código</strong> a través de configuración <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
-  <li><strong>Se integra con workflows existentes</strong> sin disrumpir procesos establecidos</li>
-  <li><strong>Soporta múltiples proveedores cloud</strong> (AWS Bedrock, Google Vertex AI)</li>
-</ul>
-
-<h3 id="mejoras-de-experiencia-de-desarrollador">Mejoras de Experiencia de Desarrollador</h3>
-<ul>
-  <li><strong>Ciclos de feedback más rápidos</strong> con revisiones enfocadas</li>
-  <li><strong>Menos fatiga de revisión</strong> por reportes abrumadores</li>
-  <li><strong>Mejor relación señal-ruido</strong> en discusiones de PR</li>
-  <li><strong>Verbosidad personalizable</strong> basada en la situación</li>
-</ul>
-
-<h2 id="lecciones-aprendidas-qué-funciona-y-qué-no">Lecciones Aprendidas: Qué Funciona y Qué No</h2>
-
-<p>Después de usar CodeBot por varias semanas, aquí están mis conclusiones clave:</p>
-
-<h3 id="lo-que-funciona-muy-bien-">Lo Que Funciona Muy Bien ✅</h3>
-<ul>
-  <li><strong>Revisiones bajo demanda</strong> son significativamente más prácticas que las automáticas</li>
-  <li><strong>Prompts específicos por modo</strong> proporcionan relaciones señal-ruido mucho mejores</li>
-  <li><strong>Ahorros de costo</strong> son sustanciales comparado con alternativas SaaS</li>
-  <li><strong>Flexibilidad de personalización</strong> te permite adaptarte a las necesidades de tu equipo</li>
-</ul>
-
-<h3 id="limitaciones-a-considerar-️">Limitaciones a Considerar ⚠️</h3>
-<ul>
-  <li><strong>Complejidad de setup</strong> — Requiere algo de conocimiento de GitHub Actions</li>
-  <li><strong>Límites de API</strong> — Puede alcanzar límites con codebases muy grandes</li>
-  <li><strong>Ventanas de contexto</strong> — Puede tener dificultades con PRs masivos</li>
-  <li><strong>Overhead de mantenimiento</strong> — Eres responsable de mantenerlo actualizado</li>
-</ul>
-
-<h3 id="beneficios-inesperados-">Beneficios Inesperados 🎯</h3>
-<ul>
-  <li><strong>Oportunidad de aprendizaje</strong> — Entender cómo funcionan las revisiones de código IA bajo el capó</li>
-  <li><strong>Adopción del equipo</strong> — Los desarrolladores aprecian el feedback enfocado y práctico</li>
-  <li><strong>Flexibilidad de integración</strong> — Fácil de combinar con otros workflows de automatización</li>
-</ul>
-
-<h2 id="el-panorama-general-construir-vs-comprar">El Panorama General: Construir vs. Comprar</h2>
-
-<p>Esta experiencia reforzó un principio importante en ingeniería: <strong>a veces la mejor solución es la que construyes tú mismo</strong>.</p>
-
-<p>BugBot fue genuinamente útil, pero a $40/mes por usuario, representa el dilema clásico de precios SaaS. Estás pagando por conveniencia y pulimiento, pero la funcionalidad central a menudo puede ser replicada con herramientas existentes y un poco de trabajo de configuración.</p>
-
-<p><strong>Cuándo construir lo tuyo:</strong></p>
-<ul>
-  <li>Tienes requerimientos específicos que las herramientas SaaS no cumplen</li>
-  <li>El precio no se alinea con tus patrones de uso</li>
-  <li>Quieres control total sobre la implementación</li>
-  <li>El aprendizaje y personalización son valiosos para tu equipo</li>
-</ul>
-
-<p><strong>Cuándo comprar:</strong></p>
-<ul>
-  <li>El tiempo de setup y mantenimiento es más caro que la suscripción</li>
-  <li>Necesitas uptime garantizado y soporte</li>
-  <li>La funcionalidad está fuera de tu competencia central</li>
-  <li>El tiempo al mercado es crítico</li>
-</ul>
-
-<h2 id="conclusión-mejor-valor-mejor-experiencia">Conclusión: Mejor Valor, Mejor Experiencia</h2>
-
-<p>Construir CodeBot transformó lo que habría sido un <strong>gasto de $480/año</strong> (solo por BugBot) en parte de mi <strong>suscripción existente de $100/mes de Claude Code</strong> que cubre todas mis necesidades de desarrollo IA. Más importante, me dio exactamente la experiencia que quería: revisiones de código enfocadas y bajo demanda que realmente ayudan a mejorar la calidad del código sin abrumar el proceso de desarrollo.</p>
-
-<p>La belleza de este enfoque es que no se trata solo de ahorros de costo — se trata de <strong>construir exactamente lo que necesitas</strong>. CodeBot revisa código de la manera que quiero que sea revisado, se enfoca en problemas que importan a mis proyectos, y se integra perfectamente con mi workflow existente.</p>
-
-<p>Si enfrentas una decisión similar con cualquier herramienta SaaS, considera si la funcionalidad central puede ser replicada con APIs existentes y herramientas de automatización. A veces la mejor solución es la que creas tú mismo, adaptada exactamente a tus necesidades.</p>
-
-<p><strong>¿Listo para construir tu propio CodeBot?</strong> Comienza con el <a href="https://github.com/lgallard/terraform-aws-secrets-manager/blob/master/.github/workflows/claude-code-review.yml">workflow completo de GitHub Action</a> y personalízalo para las necesidades específicas de tu equipo.</p>
-
-<hr />
-
-<p><strong>Consejo Pro</strong>: Comienza con el modo básico <code class="language-plaintext highlighter-rouge">hunt</code> para familiarizarte con el workflow, luego gradualmente agrega modos de revisión más sofisticados mientras tu equipo se acostumbra a las revisiones de código asistidas por IA. El futuro de la productividad de desarrollo no se trata de encontrar la herramienta perfecta — se trata de construir el workflow perfecto para tu equipo.</p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Code Review" /><category term="Automatización" /><category term="BugBot" /><summary type="html"><![CDATA[Construye tu propia alternativa de revisión de código IA a BugBot usando Claude Code GitHub Actions. Ahorra $40/mes con análisis enfocado de PR bajo demanda y modos de revisión personalizables.]]></summary></entry><entry><title type="html">Automatizando Revisiones de Código con Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/" rel="alternate" type="text/html" title="Automatizando Revisiones de Código con Claude Code GitHub Actions" /><published>2025-07-18T00:00:00+00:00</published><updated>2025-07-18T00:00:00+00:00</updated><id>https://lgallardo.com/2025/07/18/claude-code-github-actions-setup</id><content type="html" xml:base="https://lgallardo.com/2025/07/18/claude-code-github-actions-setup/"><![CDATA[<p><img src="/assets/images/claude-github-vs.png" alt="Configuración de Claude Code GitHub Actions" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>La evolución de las herramientas de desarrollo impulsadas por IA continúa acelerándose, y ahora podemos traer el poder de <strong>Claude Code</strong> directamente a nuestros flujos de trabajo de GitHub. Con Claude Code GitHub Actions, puedes tener un asistente de IA inteligente que automáticamente revisa pull requests, implementa funcionalidades desde issues y ayuda a mantener la calidad del código—todo activado con una simple mención <code class="language-plaintext highlighter-rouge">@claude</code>.</p>
-
-<p>En esta guía completa, te llevaré paso a paso por la configuración de Claude Code GitHub Actions desde cero, cubriendo tanto el método de inicio rápido como las configuraciones de nivel empresarial para AWS Bedrock y Google Vertex AI.</p>
-
-<h2 id="-qué-es-claude-code-github-actions">🚀 ¿Qué es Claude Code GitHub Actions?</h2>
-
-<p>Claude Code GitHub Actions trae automatización impulsada por IA a tu flujo de trabajo de GitHub. Piénsalo como tener un desarrollador senior en tu equipo que:</p>
-
-<ul>
-  <li>✅ <strong>Analiza código</strong> y proporciona retroalimentación inteligente</li>
-  <li>✅ <strong>Crea pull requests</strong> a partir de descripciones de issues</li>
-  <li>✅ <strong>Implementa funcionalidades</strong> siguiendo tus estándares de codificación</li>
-  <li>✅ <strong>Corrige bugs</strong> automáticamente con pruebas apropiadas</li>
-  <li>✅ <strong>Sigue tus directrices</strong> definidas en archivos <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
-  <li>✅ <strong>Se integra perfectamente</strong> con tu flujo de trabajo existente de GitHub</li>
-</ul>
-
-<p>La belleza de este enfoque es que Claude ejecuta en la infraestructura de GitHub, manteniendo tu código seguro mientras proporciona capacidades de automatización de nivel empresarial.</p>
-
-<h2 id="️-requisitos-previos">🛠️ Requisitos Previos</h2>
-
-<p>Antes de comenzar, asegúrate de tener:</p>
-
-<ul>
-  <li><strong>Acceso de administrador al repositorio</strong> (requerido para instalar aplicaciones de GitHub y manejar secretos)</li>
-  <li><strong>Facturación activa de Claude Code</strong> (vía Anthropic Console, Claude Pro/Max, o proveedores de nube empresariales)</li>
-  <li><strong>Comprensión básica</strong> de GitHub Actions y flujos de trabajo YAML</li>
-</ul>
-
-<h2 id="-método-de-configuración-rápida">📋 Método de Configuración Rápida</h2>
-
-<p>La forma más rápida de comenzar es a través del instalador integrado de Claude Code. Veamos este proceso paso a paso:</p>
-
-<h3 id="paso-1-acceder-a-la-instalación-de-github">Paso 1: Acceder a la Instalación de GitHub</h3>
-
-<p>Primero, navega a GitHub y accede a la interfaz de instalación:</p>
-
-<p><img src="/assets/images/claude-github-github.png" alt="Interfaz de GitHub" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Abre tu terminal en el directorio de tu repositorio y ejecuta:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>tu-repositorio
-claude
-</code></pre></div></div>
-
-<p>Luego ejecuta el comando de instalación:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/install-github-app
-</code></pre></div></div>
-
-<h3 id="paso-2-seleccionar-tu-repositorio">Paso 2: Seleccionar tu Repositorio</h3>
-
-<p>El instalador te pedirá que selecciones qué repositorio configurar:</p>
-
-<p><img src="/assets/images/claude-github-repo.png" alt="Selección de Repositorio" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Puedes usar tu repositorio actual o especificar uno diferente. Este paso asegura que Claude Code obtenga los permisos apropiados para tu proyecto específico.</p>
-
-<h3 id="paso-3-configurar-autenticación-de-api">Paso 3: Configurar Autenticación de API</h3>
-
-<p>A continuación, necesitarás configurar tu método de autenticación de API:</p>
-
-<p><img src="/assets/images/claude-github-api-subscription.png" alt="Configuración de Suscripción API" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Elige entre:</p>
-<ul>
-  <li><strong>Crear un token de larga duración</strong> con tu suscripción de Claude (recomendado para proyectos personales)</li>
-  <li><strong>Ingresar una nueva clave API</strong> (para configuraciones empresariales personalizadas)</li>
-</ul>
-
-<h3 id="paso-4-completar-la-instalación-de-la-aplicación-github">Paso 4: Completar la Instalación de la Aplicación GitHub</h3>
-
-<p>El instalador abrirá tu navegador para completar la instalación de la Aplicación GitHub:</p>
-
-<p><img src="/assets/images/claude-github-enter.png" alt="Ingresar Instalación" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Esto te redirige a la página de instalación de la aplicación de GitHub donde otorgarás los permisos necesarios.</p>
-
-<h3 id="paso-5-selección-de-organización">Paso 5: Selección de Organización</h3>
-
-<p>Si eres parte de múltiples organizaciones, selecciona la apropiada:</p>
-
-<p><img src="/assets/images/claude-github-org.png" alt="Selección de Organización" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p><img src="/assets/images/claude-github-org-lgallard.png" alt="Selección de Organización - lgallard" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Elige tu cuenta personal o la organización que posee el repositorio que deseas configurar.</p>
-
-<h3 id="paso-6-instalar-la-aplicación-claude-github">Paso 6: Instalar la Aplicación Claude GitHub</h3>
-
-<p>Completa la instalación de la Aplicación Claude GitHub:</p>
-
-<p><img src="/assets/images/claude-github-app.png" alt="Aplicación Claude GitHub" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Revisa y confirma los permisos. La Aplicación Claude GitHub necesita:</p>
-<ul>
-  <li><strong>Acceso de lectura a metadatos</strong></li>
-  <li><strong>Acceso de lectura y escritura a código, issues y pull requests</strong></li>
-</ul>
-
-<h3 id="paso-7-autenticación-final">Paso 7: Autenticación Final</h3>
-
-<p>Completa el proceso de autenticación:</p>
-
-<p><img src="/assets/images/claude-github-auth.png" alt="Autenticación Completa" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Una vez que la autenticación esté completa, Claude Code automáticamente:</p>
-<ul>
-  <li>Instalará la Aplicación GitHub en tu repositorio</li>
-  <li>Agregará tu clave API como un secreto del repositorio (<code class="language-plaintext highlighter-rouge">ANTHROPIC_API_KEY</code>)</li>
-  <li>Creará el archivo de flujo de trabajo en <code class="language-plaintext highlighter-rouge">.github/workflows/claude.yml</code></li>
-</ul>
-
-<h3 id="paso-8-seleccionar-flujos-de-trabajo-de-github">Paso 8: Seleccionar Flujos de Trabajo de GitHub</h3>
-
-<p>Durante el proceso de instalación, se te pedirá que selecciones qué flujos de trabajo instalar:</p>
-
-<p><img src="/assets/images/claude-github-github-workflows.png" alt="Selección de Flujos de Trabajo de GitHub" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Puedes elegir entre:</p>
-<ul>
-  <li><strong>@Claude Code</strong>: Flujo de trabajo interactivo activado por menciones <code class="language-plaintext highlighter-rouge">@claude</code> en issues y comentarios de PR</li>
-  <li><strong>Claude Code Review</strong>: Flujo de trabajo de revisión automatizada que se ejecuta en nuevos pull requests</li>
-</ul>
-
-<p>Ambas opciones proporcionan diferentes enfoques para integrar Claude en tu flujo de trabajo de desarrollo.</p>
-
-<h3 id="paso-9-revisar-el-pull-request-automatizado">Paso 9: Revisar el Pull Request Automatizado</h3>
-
-<p>Claude Code automáticamente crea un pull request con los archivos de flujo de trabajo necesarios:</p>
-
-<p><img src="/assets/images/claude-github-pr.png" alt="PR de Claude GitHub" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>El PR incluye documentación completa explicando qué puede hacer Claude Code y cómo usarlo efectivamente.</p>
-
-<h3 id="paso-10-claude-revisa-su-propio-trabajo">Paso 10: Claude Revisa su Propio Trabajo</h3>
-
-<p>Una de las características más impresionantes es que Claude puede revisar su propio pull request, proporcionando análisis detallado:</p>
-
-<p><img src="/assets/images/claude-github-pr-comment.png" alt="Comentario de PR de Claude" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Claude automáticamente analiza los archivos de flujo de trabajo y proporciona una evaluación completa:</p>
-
-<p><img src="/assets/images/claude-github-pr-assessment.png" alt="Evaluación de PR de Claude" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>La revisión incluye retroalimentación detallada sobre calidad de código, prácticas de seguridad y consideraciones de rendimiento:</p>
-
-<p><img src="/assets/images/claude-github-github-review.png" alt="Revisión de Claude GitHub" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Al completarse, Claude proporciona un resumen de revisión completo con análisis detallado:</p>
-
-<p><img src="/assets/images/claude-github-review.png" alt="Revisión Completa de Claude" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>Esto muestra la evaluación exhaustiva de Claude incluyendo evaluación de calidad de código, análisis de seguridad y consideraciones de experiencia del desarrollador.</p>
-
-<h3 id="paso-11-completar-configuración-de-autenticación">Paso 11: Completar Configuración de Autenticación</h3>
-
-<p>Después de revisar el PR, completa el paso final de autenticación:</p>
-
-<p><img src="/assets/images/claude-github-claude-auth.png" alt="Autenticación de Claude" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<h3 id="paso-12-instalación-completa">Paso 12: Instalación Completa</h3>
-
-<p>Una vez que todo esté configurado, verás una confirmación de éxito:</p>
-
-<p><img src="/assets/images/claude-github-done.png" alt="Configuración Completa de Claude" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<p>El proceso de instalación proporciona pasos siguientes claros:</p>
-<ol>
-  <li><strong>Fusionar el PR</strong> para habilitar la funcionalidad de Claude Code</li>
-  <li><strong>Instalar la Aplicación Claude GitHub</strong> si aún no se ha hecho</li>
-  <li><strong>Comenzar a usar menciones <code class="language-plaintext highlighter-rouge">@claude</code></strong> en tus issues y PRs</li>
-</ol>
-
-<h2 id="-configuración-manual-método-alternativo">🔧 Configuración Manual (Método Alternativo)</h2>
-
-<p>Si la configuración rápida no funciona o prefieres configuración manual, sigue estos pasos:</p>
-
-<h3 id="1-instalar-la-aplicación-claude-github">1. Instalar la Aplicación Claude GitHub</h3>
-
-<p>Visita <a href="https://github.com/apps/claude">https://github.com/apps/claude</a> e instala la aplicación en tu repositorio.</p>
-
-<h3 id="2-agregar-secretos-del-repositorio">2. Agregar Secretos del Repositorio</h3>
-
-<p>Navega a <strong>Configuraciones → Secretos y variables → Acciones</strong> de tu repositorio y agrega:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ANTHROPIC_API_KEY: tu_clave_api_anthropic_aqui
-</code></pre></div></div>
-
-<h3 id="3-crear-el-archivo-de-flujo-de-trabajo">3. Crear el Archivo de Flujo de Trabajo</h3>
-
-<p>Crea <code class="language-plaintext highlighter-rouge">.github/workflows/claude.yml</code> con esta configuración:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Claude Code</span>
-
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">issue_comment</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
-  <span class="na">pull_request_review_comment</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
-  <span class="na">issues</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">,</span> <span class="nv">assigned</span><span class="pi">]</span>
-  <span class="na">pull_request_review</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">submitted</span><span class="pi">]</span>
-
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">claude</span><span class="pi">:</span>
-    <span class="na">if</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="s">(github.event_name == 'issue_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
-      <span class="s">(github.event_name == 'pull_request_review_comment' &amp;&amp; contains(github.event.comment.body, '@claude')) ||</span>
-      <span class="s">(github.event_name == 'pull_request_review' &amp;&amp; contains(github.event.review.body, '@claude')) ||</span>
-      <span class="s">(github.event_name == 'issues' &amp;&amp; (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">permissions</span><span class="pi">:</span>
-      <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
-      <span class="na">pull-requests</span><span class="pi">:</span> <span class="s">write</span>
-      <span class="na">issues</span><span class="pi">:</span> <span class="s">write</span>
-      <span class="na">id-token</span><span class="pi">:</span> <span class="s">write</span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">fetch-depth</span><span class="pi">:</span> <span class="m">1</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@beta</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">anthropic_api_key</span><span class="pi">:</span> <span class="s">$</span>
-          <span class="na">allowed_tools</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mcp__github__create_pull_request'</span>
-</code></pre></div></div>
-
-<h2 id="-configuración-empresarial-aws-bedrock-y-google-vertex-ai">🏢 Configuración Empresarial (AWS Bedrock y Google Vertex AI)</h2>
-
-<p>Para entornos empresariales, puedes configurar Claude Code para usar tu infraestructura de nube existente:</p>
-
-<h3 id="configuración-de-aws-bedrock">Configuración de AWS Bedrock</h3>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Claude PR Action (AWS Bedrock)</span>
-
-<span class="na">permissions</span><span class="pi">:</span>
-  <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
-  <span class="na">pull-requests</span><span class="pi">:</span> <span class="s">write</span>
-  <span class="na">issues</span><span class="pi">:</span> <span class="s">write</span>
-  <span class="na">id-token</span><span class="pi">:</span> <span class="s">write</span>
-
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">issue_comment</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
-  <span class="na">pull_request_review_comment</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
-  <span class="na">issues</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">,</span> <span class="nv">assigned</span><span class="pi">]</span>
-
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">claude-pr</span><span class="pi">:</span>
-    <span class="na">if</span><span class="pi">:</span> <span class="s">contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">env</span><span class="pi">:</span>
-      <span class="na">AWS_REGION</span><span class="pi">:</span> <span class="s">us-west-2</span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Configure AWS Credentials (OIDC)</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">aws-actions/configure-aws-credentials@v4</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">role-to-assume</span><span class="pi">:</span> <span class="s">$</span>
-          <span class="na">aws-region</span><span class="pi">:</span> <span class="s">us-west-2</span>
-
-      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@beta</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">trigger_phrase</span><span class="pi">:</span> <span class="s2">"</span><span class="s">@claude"</span>
-          <span class="na">timeout_minutes</span><span class="pi">:</span> <span class="s2">"</span><span class="s">60"</span>
-          <span class="na">use_bedrock</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
-          <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">us.anthropic.claude-3-7-sonnet-20250219-v1:0"</span>
-</code></pre></div></div>
-
-<h3 id="configuración-de-google-vertex-ai">Configuración de Google Vertex AI</h3>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Claude PR Action (Vertex AI)</span>
-
-<span class="na">permissions</span><span class="pi">:</span>
-  <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
-  <span class="na">pull-requests</span><span class="pi">:</span> <span class="s">write</span>
-  <span class="na">issues</span><span class="pi">:</span> <span class="s">write</span>
-  <span class="na">id-token</span><span class="pi">:</span> <span class="s">write</span>
-
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">issue_comment</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
-  <span class="na">pull_request_review_comment</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
-  <span class="na">issues</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">,</span> <span class="nv">assigned</span><span class="pi">]</span>
-
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">claude-pr</span><span class="pi">:</span>
-    <span class="na">if</span><span class="pi">:</span> <span class="s">contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude')</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Authenticate to Google Cloud</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">google-github-actions/auth@v2</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">workload_identity_provider</span><span class="pi">:</span> <span class="s">$</span>
-          <span class="na">service_account</span><span class="pi">:</span> <span class="s">$</span>
-      
-      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@beta</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">trigger_phrase</span><span class="pi">:</span> <span class="s2">"</span><span class="s">@claude"</span>
-          <span class="na">timeout_minutes</span><span class="pi">:</span> <span class="s2">"</span><span class="s">60"</span>
-          <span class="na">use_vertex</span><span class="pi">:</span> <span class="s2">"</span><span class="s">true"</span>
-          <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">claude-3-7-sonnet@20250219"</span>
-        <span class="na">env</span><span class="pi">:</span>
-          <span class="na">ANTHROPIC_VERTEX_PROJECT_ID</span><span class="pi">:</span> <span class="s">$</span>
-          <span class="na">CLOUD_ML_REGION</span><span class="pi">:</span> <span class="s">us-east5</span>
-</code></pre></div></div>
-
-<h2 id="-mejores-prácticas-de-configuración">📝 Mejores Prácticas de Configuración</h2>
-
-<h3 id="crear-un-archivo-claudemd">Crear un Archivo CLAUDE.md</h3>
-
-<p>Crea un archivo <code class="language-plaintext highlighter-rouge">CLAUDE.md</code> en la raíz de tu repositorio para guiar el comportamiento de Claude:</p>
-
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Directrices del Proyecto para Claude Code</span>
-
-<span class="gu">## Estilo de Código</span>
-<span class="p">-</span> Usar TypeScript para todo código nuevo
-<span class="p">-</span> Seguir configuración de ESLint
-<span class="p">-</span> Preferir componentes funcionales en React
-<span class="p">-</span> Usar async/await sobre Promises
-
-<span class="gu">## Criterios de Revisión</span>
-<span class="p">-</span> Asegurar que todas las funciones tengan manejo de errores apropiado
-<span class="p">-</span> Verificar seguridad de tipos (no tipos <span class="sb">`any`</span>)
-<span class="p">-</span> Verificar implicaciones de rendimiento
-<span class="p">-</span> Validar requisitos de accesibilidad
-
-<span class="gu">## Estructura del Proyecto</span>
-<span class="p">-</span> <span class="sb">`/src`</span> - Código principal de la aplicación
-<span class="p">-</span> <span class="sb">`/tests`</span> - Archivos de prueba
-<span class="p">-</span> <span class="sb">`/docs`</span> - Documentación
-<span class="p">-</span> <span class="sb">`/scripts`</span> - Scripts de construcción y despliegue
-
-<span class="gu">## Requisitos de Pruebas</span>
-<span class="p">-</span> Pruebas unitarias para toda lógica de negocio
-<span class="p">-</span> Pruebas de integración para endpoints de API
-<span class="p">-</span> Pruebas E2E para flujos críticos de usuario
-</code></pre></div></div>
-
-<h3 id="consideraciones-de-seguridad">Consideraciones de Seguridad</h3>
-
-<ul>
-  <li>✅ <strong>Nunca confirmes claves API</strong> en tu repositorio</li>
-  <li>✅ <strong>Usa Secretos de GitHub</strong> para toda configuración sensible</li>
-  <li>✅ <strong>Limita permisos</strong> solo a lo necesario</li>
-  <li>✅ <strong>Revisa las sugerencias de Claude</strong> antes de fusionar</li>
-  <li>✅ <strong>Configura timeouts apropiados</strong> para prevenir flujos de trabajo descontrolados</li>
-</ul>
-
-<h2 id="-ejemplos-de-uso-completos">🎯 Ejemplos de Uso Completos</h2>
-
-<p>Ahora que Claude Code está instalado, aquí tienes ejemplos prácticos de cómo aprovechar sus capacidades en tu flujo de trabajo de desarrollo diario:</p>
-
-<h3 id="-implementación-de-funcionalidades">🔧 Implementación de Funcionalidades</h3>
-
-<p><strong>Convertir Issues en Pull Requests</strong></p>
-
-<p>Crea un issue con una descripción de funcionalidad, luego comenta:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implementa esta funcionalidad basándote en la descripción del issue
-</code></pre></div></div>
-
-<p>Claude:</p>
-<ul>
-  <li>Analizará los requisitos del issue</li>
-  <li>Revisará tus patrones de código existentes</li>
-  <li>Escribirá la implementación siguiendo tus estándares de codificación</li>
-  <li>Creará pruebas si se especifica en tu <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
-  <li>Abrirá un pull request con la funcionalidad completa</li>
-</ul>
-
-<p><strong>Ejemplo</strong>: “Agregar funcionalidad de carga de avatar de usuario con integración S3”</p>
-
-<h3 id="-corrección-de-bugs">🐛 Corrección de Bugs</h3>
-
-<p><strong>Resolución Automática de Bugs</strong></p>
-
-<p>Cuando encuentres un bug, crea un issue o comenta:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude corrige el TypeError en el componente de dashboard de usuario
-</code></pre></div></div>
-
-<p>Claude:</p>
-<ul>
-  <li>Localizará el código problemático</li>
-  <li>Analizará la causa raíz</li>
-  <li>Implementará una corrección apropiada</li>
-  <li>Agregará manejo de errores cuando sea apropiado</li>
-  <li>Creará un PR con la solución</li>
-</ul>
-
-<p><strong>Corrección Avanzada de Bugs</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude corrige la fuga de memoria en el administrador de conexión WebSocket. 
-El problema ocurre cuando los usuarios cambian rápidamente entre canales.
-</code></pre></div></div>
-
-<h3 id="-orientación-de-implementación">💡 Orientación de Implementación</h3>
-
-<p><strong>Obtener Consejos de Arquitectura</strong></p>
-
-<p>En un comentario de PR:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ¿cómo debería implementar autenticación de usuario para este endpoint?
-</code></pre></div></div>
-
-<p>Claude proporciona:</p>
-<ul>
-  <li>Mejores prácticas de seguridad</li>
-  <li>Ejemplos de código específicos para tu stack</li>
-  <li>Patrones de integración con tu sistema de autenticación existente</li>
-  <li>Consideraciones de rendimiento</li>
-</ul>
-
-<p><strong>Ayuda de Implementación Compleja</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ayúdame a implementar un sistema de limitación de tasa para esta API. 
-Necesito soportar diferentes límites por nivel de usuario y degradación gradual.
-</code></pre></div></div>
-
-<h3 id="-revisión-de-código-y-aseguramiento-de-calidad">📋 Revisión de Código y Aseguramiento de Calidad</h3>
-
-<p><strong>Revisiones Completas de Código</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa este PR por vulnerabilidades de seguridad y problemas de rendimiento
-</code></pre></div></div>
-
-<p>Claude realiza:</p>
-<ul>
-  <li>Escaneo de vulnerabilidades de seguridad</li>
-  <li>Identificación de cuellos de botella de rendimiento</li>
-  <li>Evaluación de calidad de código</li>
-  <li>Validación de mejores prácticas</li>
-  <li>Verificaciones de cumplimiento de accesibilidad</li>
-</ul>
-
-<p><strong>Enfoque Específico de Revisión</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa esta migración de base de datos por pérdida potencial de datos y seguridad de rollback
-</code></pre></div></div>
-
-<h3 id="-pruebas-y-documentación">🧪 Pruebas y Documentación</h3>
-
-<p><strong>Generación de Pruebas</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude escribe pruebas completas para este nuevo módulo de procesamiento de pagos
-</code></pre></div></div>
-
-<p>Claude crea:</p>
-<ul>
-  <li>Pruebas unitarias para todas las funciones</li>
-  <li>Pruebas de integración para APIs externas</li>
-  <li>Pruebas de casos límite</li>
-  <li>Implementaciones mock para dependencias</li>
-</ul>
-
-<p><strong>Actualizaciones de Documentación</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude actualiza la documentación de la API para reflejar estos nuevos endpoints
-</code></pre></div></div>
-
-<p><strong>Mejoras de README</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora el README del proyecto con mejores instrucciones de configuración y ejemplos
-</code></pre></div></div>
-
-<h3 id="️-refactorización-y-optimización">🏗️ Refactorización y Optimización</h3>
-
-<p><strong>Modernización de Código</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude refactoriza este componente para usar hooks de React en lugar de componentes de clase
-</code></pre></div></div>
-
-<p><strong>Optimización de Rendimiento</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimiza esta consulta de base de datos - está causando timeouts en datasets grandes
-</code></pre></div></div>
-
-<p><strong>Actualizaciones de Código Legacy</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude actualiza este código de Node.js 14 a Node.js 20, 
-incluyendo actualizaciones de dependencias y reemplazos de APIs obsoletas
-</code></pre></div></div>
-
-<h3 id="-mejoras-de-seguridad">🔒 Mejoras de Seguridad</h3>
-
-<p><strong>Auditorías de Seguridad</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude audita este flujo de autenticación por vulnerabilidades de seguridad
-</code></pre></div></div>
-
-<p><strong>Seguridad de Dependencias</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude verifica problemas de seguridad en nuestras dependencias de package.json 
-y sugiere alternativas más seguras
-</code></pre></div></div>
-
-<h3 id="-devops-y-despliegue">🚀 DevOps y Despliegue</h3>
-
-<p><strong>Mejoras de CI/CD</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude optimiza nuestro flujo de trabajo de GitHub Actions para reducir tiempos de construcción
-</code></pre></div></div>
-
-<p><strong>Optimización de Docker</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora este Dockerfile para mejor caché y tamaño de imagen más pequeño
-</code></pre></div></div>
-
-<p><strong>Infraestructura como Código</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude revisa esta configuración de Terraform para mejores prácticas de seguridad de AWS
-</code></pre></div></div>
-
-<h3 id="-flujos-de-trabajo-avanzados">📊 Flujos de Trabajo Avanzados</h3>
-
-<p><strong>Desarrollo de Funcionalidades Multi-Paso</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude implementa un sistema completo de notificaciones de usuario:
-1. Esquema de base de datos para notificaciones
-2. Endpoints de API para operaciones CRUD  
-3. Integración WebSocket para actualizaciones en tiempo real
-4. Worker de notificaciones por email
-5. Componente frontend de notificaciones
-6. Suite completa de pruebas
-</code></pre></div></div>
-
-<p><strong>Asistencia de Migración</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude ayuda a migrar nuestra API REST a GraphQL:
-- Crear definiciones de esquema
-- Implementar resolvers  
-- Actualizar consultas del frontend
-- Mantener compatibilidad hacia atrás
-</code></pre></div></div>
-
-<h3 id="-desarrollo-frontend">🎨 Desarrollo Frontend</h3>
-
-<p><strong>Creación de Componentes</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude crea un componente de tabla de datos reutilizable con:
-- Ordenamiento y filtrado
-- Paginación
-- Selección de filas
-- Funcionalidad de exportación
-- Diseño responsivo
-</code></pre></div></div>
-
-<p><strong>Estilizado y UX</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude mejora la accesibilidad de este componente de formulario 
-y agrega etiquetas ARIA apropiadas
-</code></pre></div></div>
-
-<h3 id="-analíticas-y-monitoreo">📈 Analíticas y Monitoreo</h3>
-
-<p><strong>Implementación de Observabilidad</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude agrega logging y monitoreo completo a este servicio:
-- Logging estructurado con IDs de correlación
-- Recolección de métricas para eventos clave de negocio
-- Seguimiento de errores y alertas
-- Monitoreo de rendimiento
-</code></pre></div></div>
-
-<p><strong>Análisis de Datos</strong>:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@claude analiza nuestras métricas de engagement de usuario y sugiere escenarios de pruebas A/B
-</code></pre></div></div>
-
-<h3 id="-consejos-pro-para-uso-efectivo-de-claude">💡 Consejos Pro para Uso Efectivo de Claude</h3>
-
-<ol>
-  <li><strong>Sé Específico</strong>: Mientras más contexto proporciones, mejores serán las sugerencias de Claude</li>
-  <li><strong>Referencia Archivos</strong>: Usa <code class="language-plaintext highlighter-rouge">@nombrearchivo</code> para ayudar a Claude a entender tu código base</li>
-  <li><strong>Establece Expectativas</strong>: Menciona tus patrones preferidos en <code class="language-plaintext highlighter-rouge">CLAUDE.md</code></li>
-  <li><strong>Retroalimentación Iterativa</strong>: Participa en conversación para refinar la implementación</li>
-  <li><strong>Revisa Cuidadosamente</strong>: Siempre revisa las sugerencias de Claude antes de fusionar</li>
-</ol>
-
-<p>Estos ejemplos demuestran la versatilidad de Claude Code en manejar todo desde correcciones simples de bugs hasta decisiones arquitectónicas complejas. La clave es tratar a Claude como un miembro del equipo conocedor que puede entender contexto y seguir los patrones establecidos de tu proyecto.</p>
-
-<h2 id="-consideraciones-de-costos">💰 Consideraciones de Costos</h2>
-
-<p>Al usar Claude Code GitHub Actions, ten en cuenta los costos asociados:</p>
-
-<h3 id="costos-de-github-actions">Costos de GitHub Actions</h3>
-<ul>
-  <li>Se ejecuta en runners hospedados por GitHub</li>
-  <li>Consume tus minutos de GitHub Actions</li>
-  <li>Ve la <a href="https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions">documentación de facturación de GitHub</a></li>
-</ul>
-
-<h3 id="costos-de-api">Costos de API</h3>
-<ul>
-  <li>Cada interacción de Claude consume tokens basados en la longitud de prompt/respuesta</li>
-  <li>El uso varía por complejidad de tarea y tamaño del código base</li>
-  <li>Ve la <a href="https://claude.ai/pricing">página de precios de Claude</a> para tarifas actuales</li>
-</ul>
-
-<h3 id="consejos-de-optimización-de-costos">Consejos de Optimización de Costos</h3>
-<ul>
-  <li>Usa comandos específicos de <code class="language-plaintext highlighter-rouge">@claude</code> para reducir llamadas innecesarias a la API</li>
-  <li>Configura límites apropiados de <code class="language-plaintext highlighter-rouge">max_turns</code></li>
-  <li>Establece <code class="language-plaintext highlighter-rouge">timeout_minutes</code> razonables para evitar flujos de trabajo descontrolados</li>
-  <li>Considera usar controles de concurrencia de GitHub para limitar ejecuciones paralelas</li>
-</ul>
-
-<h2 id="-solución-de-problemas">🔍 Solución de Problemas</h2>
-
-<h3 id="claude-no-responde">Claude No Responde</h3>
-<ul>
-  <li>✅ Verifica que la Aplicación GitHub esté instalada correctamente</li>
-  <li>✅ Verifica que los flujos de trabajo estén habilitados en tu repositorio</li>
-  <li>✅ Asegúrate de que la clave API esté establecida en los secretos del repositorio</li>
-  <li>✅ Confirma que el comentario contenga <code class="language-plaintext highlighter-rouge">@claude</code> (no <code class="language-plaintext highlighter-rouge">/claude</code>)</li>
-</ul>
-
-<h3 id="errores-de-autenticación">Errores de Autenticación</h3>
-<ul>
-  <li>✅ Confirma que la clave API sea válida y tenga permisos suficientes</li>
-  <li>✅ Para Bedrock/Vertex, verifica la configuración de credenciales de nube</li>
-  <li>✅ Asegúrate de que los secretos estén nombrados correctamente en los flujos de trabajo</li>
-</ul>
-
-<h3 id="flujo-de-trabajo-no-se-activa">Flujo de Trabajo No Se Activa</h3>
-<ul>
-  <li>✅ Verifica que los triggers del flujo de trabajo incluyan los eventos necesarios</li>
-  <li>✅ Verifica que los permisos de la aplicación incluyan triggers de CI</li>
-  <li>✅ Asegúrate de estar usando la Aplicación GitHub (no el usuario Actions)</li>
-</ul>
-
-<h2 id="-conclusión">🎉 Conclusión</h2>
-
-<p>Claude Code GitHub Actions representa un paso significativo adelante en flujos de trabajo de desarrollo asistidos por IA. Al automatizar revisiones de código, implementación de funcionalidades y corrección de bugs, los equipos pueden enfocarse en arquitectura de alto nivel y lógica de negocio mientras mantienen altos estándares de calidad de código.</p>
-
-<p>El proceso de configuración es directo—ya sea que elijas el método de instalación rápida o optes por integración de proveedor de nube de nivel empresarial. Con configuración apropiada y las directrices correctas de <code class="language-plaintext highlighter-rouge">CLAUDE.md</code>, Claude se convierte en un miembro valioso del equipo que trabaja las 24 horas para mejorar tu código base.</p>
-
-<p>Comienza con casos de uso simples como revisiones automatizadas de código, luego expándete gradualmente a flujos de trabajo más complejos mientras tu equipo se vuelve cómodo con el desarrollo asistido por IA. ¡El futuro de la codificación colaborativa está aquí, y es más accesible que nunca! 🚀</p>
-
-<hr />
-
-<p><strong>Consejo Pro</strong>: Considera usar Claude Code localmente primero para entender sus capacidades antes de desplegarlo en tu pipeline de CI/CD. Esto te ayuda a crear mejores prompts y configurar reglas de automatización más efectivas.</p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="GitHub Actions" /><category term="AI" /><category term="Revisión de Código" /><category term="Automatización" /><category term="CI/CD" /><summary type="html"><![CDATA[Guía completa para configurar Claude Code GitHub Actions para revisiones automáticas de PR. Cubre instalación, configuración y mejores prácticas para análisis inteligente de código.]]></summary></entry></feed>
+</ul>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="Herramientas IA" /><category term="Subagentes" /><category term="Automatización" /><category term="Terraform" /><category term="Blog Automatización" /><summary type="html"><![CDATA[Aprende cómo los Subagentes de Claude Code crean flujos de trabajo de IA especializados para automatización de blog, optimización de Terraform, y tareas complejas de desarrollo con experiencia enfocada y herramientas dedicadas.]]></summary></entry></feed>

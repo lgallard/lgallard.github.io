@@ -1,0 +1,1156 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Descubre GitHub Copilot CLI, un asistente de IA terminal-nativo con integración nativa a GitHub y soporte MCP. Aprende cómo aprovechar comandos interactivos, gestionar repositorios y automatizar flujos DevOps desde la terminal.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/">
+<meta property="og:url" content="https://lgallardo.com/es/2025/10/02/github-copilot-cli-terminal-native-ai/">
+
+
+
+<meta property="og:description" content="Descubre GitHub Copilot CLI, un asistente de IA terminal-nativo con integración nativa a GitHub y soporte MCP. Aprende cómo aprovechar comandos interactivos, gestionar repositorios y automatizar flujos DevOps desde la terminal.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub">
+<meta name="twitter:description" content="Descubre GitHub Copilot CLI, un asistente de IA terminal-nativo con integración nativa a GitHub y soporte MCP. Aprende cómo aprovechar comandos interactivos, gestionar repositorios y automatizar flujos DevOps desde la terminal.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/copilot-cli-robots.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/copilot-cli-robots.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-10-02T00:00:00+00:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="GitHub Copilot">
+
+<meta property="article:tag" content="CLI">
+
+<meta property="article:tag" content="AI Tools">
+
+<meta property="article:tag" content="Terminal">
+
+<meta property="article:tag" content="DevOps Automation">
+
+<meta property="article:tag" content="GitHub Integration">
+
+<meta property="article:tag" content="MCP">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com/es",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com/es",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+
+  
+  <a href="/2025/10/02/github-copilot-cli-terminal-native-ai/" >English</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/2025/10/02/github-copilot-cli-terminal-native-ai/" >English</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub">
+    <meta itemprop="description" content="El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la línea de comandos.">
+    <meta itemprop="datePublished" content="October 02, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><a href="/assets/images/copilot-cli-robots.png" target="_blank"><img src="/assets/images/copilot-cli-robots.png" alt="GitHub Copilot CLI Terminal" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<p>Me topé con GitHub Copilot CLI mientras me ponía al día con noticias tecnológicas, y la <strong>integración nativa con GitHub</strong> inmediatamente captó mi atención. ¿Un asistente de IA terminal-nativo que puede interactuar directamente con repositorios, issues y PRs? Decidí probarlo para tenerlo en mi caja de herramientas de IA.</p>
+
+<p>Copilot CLI es la última incorporación al ecosistema Copilot de GitHub, que se une a <strong>Copilot en el IDE</strong> (completado de código y chat), <strong>GitHub Copilot Workspace</strong> (automatización de issue-a-PR) y <strong>Copilot Extensions</strong> (integraciones personalizadas). Este componente CLI trae la experiencia Copilot directamente a la terminal, complementando el ecosistema con flujos de línea de comandos. Esto es lo que aprendí después de probarlo.</p>
+
+<h2 id="-qué-es-github-copilot-cli">🚀 ¿Qué es GitHub Copilot CLI?</h2>
+
+<p>GitHub Copilot CLI es el asistente de IA terminal-nativo de GitHub que trae IA conversacional directamente a tu línea de comandos. Piénsalo como ChatGPT para tu terminal, pero con <strong>acceso directo a tu sistema de archivos, servidores MCP y contexto de desarrollo</strong>.</p>
+
+<h3 id="lo-que-lo-hace-diferente">Lo Que Lo Hace Diferente</h3>
+
+<ul>
+  <li><strong>Interfaz terminal-nativa</strong>: Sin navegador, sin cambio de contexto</li>
+  <li><strong>Modo interactivo</strong>: Conversaciones naturales con comandos <code class="language-plaintext highlighter-rouge">/</code></li>
+  <li><strong>Integración MCP</strong>: Conéctate a Context7, GitHub y servidores MCP personalizados</li>
+  <li><strong>Flexibilidad de modelos</strong>: Soporte para GPT-4o, GPT-5 y otros modelos OpenAI</li>
+  <li><strong>Gestión de sesiones</strong>: Reanuda conversaciones y mantén el contexto</li>
+  <li><strong>Acceso al sistema de archivos</strong>: Lectura y análisis directo de archivos</li>
+</ul>
+
+<h3 id="estado-actual-vista-previa-pública">Estado Actual: Vista Previa Pública</h3>
+
+<p>Copilot CLI está en <strong>vista previa pública</strong> (versión 0.0.332 al momento de escribir esto), lo que significa:</p>
+<ul>
+  <li>Las funcionalidades están evolucionando activamente</li>
+  <li>Disponible para suscriptores de GitHub Copilot</li>
+  <li>Algunas capacidades pueden cambiar antes del lanzamiento estable</li>
+  <li>Tu retroalimentación moldea directamente la dirección del producto</li>
+</ul>
+
+<h2 id="-inicio-rápido-instalación-y-primera-ejecución">🔧 Inicio Rápido: Instalación y Primera Ejecución</h2>
+
+<p>Comenzar con Copilot CLI es sencillo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar globalmente vía npm</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> @github/copilot
+
+<span class="c"># Lanzar modo interactivo</span>
+copilot
+
+<span class="c"># O usar modelo específico</span>
+copilot <span class="nt">--model</span> gpt-5
+
+<span class="c"># Consultas rápidas de una sola vez</span>
+copilot <span class="nt">-p</span> <span class="s2">"analyze terraform module"</span> <span class="nt">--allow-all-tools</span>
+</code></pre></div></div>
+
+<h3 id="entendiendo-la-configuración">Entendiendo la Configuración</h3>
+
+<p>Copilot CLI crea un directorio de configuración en <code class="language-plaintext highlighter-rouge">~/.copilot/</code> con la siguiente estructura:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.copilot/
+├── command-history-state.json  # Seguimiento del historial de comandos
+├── config.json                  # Preferencias y configuraciones del usuario
+├── history-session-state/       # Gestión del estado de sesión
+├── logs/                        # Logs de debug y actividad
+└── mcp-config.json             # Configuraciones de servidores MCP
+</code></pre></div></div>
+
+<p>El archivo <code class="language-plaintext highlighter-rouge">mcp-config.json</code> es donde se almacenan las integraciones de servidores MCP. Cada vez que agregas un servidor MCP vía <code class="language-plaintext highlighter-rouge">/mcp add</code>, este archivo se actualiza automáticamente.</p>
+
+<h2 id="-integración-mcp-el-cambio-de-juego">💡 Integración MCP: El Cambio de Juego</h2>
+
+<p>Aquí es donde Copilot CLI realmente brilla—<strong>soporte nativo de MCP</strong> que te permite conectarte a servidores y herramientas especializadas de IA directamente desde tu terminal.</p>
+
+<h3 id="comandos-mcp-interactivos">Comandos MCP Interactivos</h3>
+
+<p>Una vez que estás en modo interactivo (<code class="language-plaintext highlighter-rouge">copilot</code>), tienes acceso a estos comandos de gestión MCP:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/mcp add      <span class="c"># Agregar nuevo servidor MCP interactivamente</span>
+/mcp show     <span class="c"># Mostrar servidores MCP configurados</span>
+/mcp disable  <span class="c"># Desactivar temporalmente un servidor</span>
+/mcp <span class="nb">enable</span>   <span class="c"># Reactivar un servidor desactivado</span>
+</code></pre></div></div>
+
+<h3 id="agregando-servidores-mcp-la-forma-interactiva">Agregando Servidores MCP: La Forma Interactiva</h3>
+
+<p>El comando <code class="language-plaintext highlighter-rouge">/mcp add</code> proporciona una experiencia de configuración guiada. Déjame mostrarte cómo agregué los servidores MCP de Context7 y GitHub:</p>
+
+<p><a href="/assets/images/copilot-cli-mcp-add-command.png" target="_blank"><img src="/assets/images/copilot-cli-mcp-add-command.png" alt="MCP Add Command" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<p>El prompt interactivo te guía a través de:</p>
+
+<ol>
+  <li><strong>Nombre del Servidor</strong>: Identificador único para el servidor MCP</li>
+  <li><strong>Tipo de Servidor</strong>: Local, HTTP o SSE (Server-Sent Events)</li>
+  <li><strong>Detalles de Conexión</strong>:
+    <ul>
+      <li><strong>Local</strong>: Comando para iniciar el servidor (ej., <code class="language-plaintext highlighter-rouge">npx</code>)</li>
+      <li><strong>HTTP</strong>: URL del servidor remoto</li>
+      <li><strong>SSE</strong>: Endpoint de eventos enviados por servidor</li>
+    </ul>
+  </li>
+  <li><strong>Argumentos</strong>: Argumentos de línea de comandos para servidores locales</li>
+  <li><strong>Variables de Entorno</strong>: Configuración de entorno opcional</li>
+  <li><strong>Selección de Herramientas</strong>: Elige qué herramientas exponer (<code class="language-plaintext highlighter-rouge">*</code> para todas)</li>
+</ol>
+
+<h3 id="ejemplo-del-mundo-real-agregando-context7">Ejemplo del Mundo Real: Agregando Context7</h3>
+
+<p>Aquí está el flujo de trabajo real para agregar el servidor MCP de Context7:</p>
+
+<p><a href="/assets/images/copilot-cli-mcp-add.png" target="_blank"><img src="/assets/images/copilot-cli-mcp-add.png" alt="Context7 MCP Configuration" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Server Name: Context7
+Server Type: [2] HTTP
+URL: https://mcp.context7.com/mcp
+HTTP Headers: (opcional, para autenticación)
+Tools: * (todas las herramientas)
+</code></pre></div></div>
+
+<p>Una vez configurado, las capacidades de búsqueda de documentación de Context7 están inmediatamente disponibles en tus sesiones de Copilot CLI.</p>
+
+<h3 id="agregando-el-servidor-mcp-de-github">Agregando el Servidor MCP de GitHub</h3>
+
+<p>El servidor MCP de GitHub proporciona acceso a repositorios y operaciones:</p>
+
+<p><a href="/assets/images/copilot-cli-mcp-github-server.png" target="_blank"><img src="/assets/images/copilot-cli-mcp-github-server.png" alt="GitHub MCP Server Connected" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<p>Como se muestra en la captura, una vez configurado, verás:</p>
+<ul>
+  <li>Confirmación de <strong>Conectado al Servidor MCP de GitHub</strong></li>
+  <li>Servidor listado en tu configuración MCP</li>
+  <li>Herramientas y capacidades disponibles</li>
+</ul>
+
+<p>Esto te da acceso directo a:</p>
+<ul>
+  <li>Información del repositorio y acceso a archivos</li>
+  <li>Operaciones de pull requests e issues</li>
+  <li>Datos de flujos de GitHub Actions</li>
+  <li>Historial de commits y gestión de ramas</li>
+</ul>
+
+<h3 id="persistencia-de-la-configuración-mcp">Persistencia de la Configuración MCP</h3>
+
+<p>Todos los servidores MCP se guardan en <code class="language-plaintext highlighter-rouge">~/.copilot/mcp-config.json</code>, haciéndolos disponibles en todas las sesiones. Tu configuración persiste y se carga automáticamente cuando inicias Copilot CLI.</p>
+
+<h2 id="-comandos-interactivos-esenciales">🎯 Comandos Interactivos Esenciales</h2>
+
+<p>Más allá de la gestión MCP, Copilot CLI proporciona potentes comandos de control de sesión:</p>
+
+<h3 id="selección-de-modelo">Selección de Modelo</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/model gpt-5              <span class="c"># Cambiar a GPT-5 para la sesión actual</span>
+/model gpt-4o             <span class="c"># Usar GPT-4o para tareas generales</span>
+/model gpt-5 <span class="nt">--reasoning</span>  <span class="c"># Habilitar modo de razonamiento extendido</span>
+</code></pre></div></div>
+
+<h3 id="acceso-al-sistema-de-archivos">Acceso al Sistema de Archivos</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/add-dir ~/projects       <span class="c"># Otorgar acceso a directorio específico</span>
+/add-dir ~/terraform      <span class="c"># Agregar configuraciones Terraform</span>
+/add-file config.yaml     <span class="c"># Agregar archivo individual al contexto</span>
+</code></pre></div></div>
+
+<h3 id="gestión-de-sesiones">Gestión de Sesiones</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/cwd ~/terraform          <span class="c"># Cambiar directorio de trabajo</span>
+/session                  <span class="c"># Ver información de sesión actual</span>
+/resume                   <span class="c"># Reanudar sesión anterior</span>
+/history                  <span class="c"># Mostrar historial de comandos</span>
+</code></pre></div></div>
+
+<h3 id="retroalimentación-y-ayuda">Retroalimentación y Ayuda</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/feedback                 <span class="c"># Proporcionar retroalimentación a GitHub</span>
+/help                     <span class="c"># Mostrar todos los comandos disponibles</span>
+/exit                     <span class="c"># Salir del modo interactivo</span>
+</code></pre></div></div>
+
+<h2 id="️-flujo-devops-del-mundo-real">🛠️ Flujo DevOps del Mundo Real</h2>
+
+<p>Aquí hay un escenario práctico que muestra Copilot CLI en acción:</p>
+
+<h3 id="escenario-análisis-de-módulo-terraform">Escenario: Análisis de Módulo Terraform</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Iniciar Copilot CLI en tu directorio Terraform</span>
+<span class="nb">cd</span> ~/git/terraform-aws-ecrpublic
+copilot <span class="nt">--model</span> gpt-5
+
+<span class="c"># Comienza la sesión interactiva</span>
+<span class="o">&gt;</span> <span class="s2">"Analiza la estructura del módulo y sugiere mejoras"</span>
+
+<span class="c"># Usar MCP para obtener documentación</span>
+<span class="o">&gt;</span> <span class="s2">"Usando Context7, encuentra mejores prácticas de AWS ECR Public"</span>
+
+<span class="c"># Revisar flujos de GitHub</span>
+<span class="o">&gt;</span> <span class="s2">"Muéstrame los flujos de GitHub Actions para este repo"</span>
+
+<span class="c"># Generar resumen</span>
+<span class="o">&gt;</span> <span class="s2">"Crea un resumen de potenciales mejoras de seguridad"</span>
+
+<span class="c"># Guardar sesión para después</span>
+<span class="o">&gt;</span> /feedback <span class="s2">"Este análisis fue útil para la auditoría de seguridad"</span>
+</code></pre></div></div>
+
+<h3 id="flags-de-línea-de-comandos-para-automatización">Flags de Línea de Comandos para Automatización</h3>
+
+<p>Para CI/CD o flujos con scripts:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Permitir todas las operaciones del sistema de archivos (para automatización)</span>
+copilot <span class="nt">-p</span> <span class="s2">"analyze terraform validation output"</span> <span class="nt">--allow-all-tools</span>
+
+<span class="c"># Reanudar sesión anterior</span>
+copilot <span class="nt">--resume</span> <span class="nt">--model</span> gpt-5
+
+<span class="c"># Agregar acceso a directorio específico</span>
+copilot <span class="nt">--add-dir</span> ~/terraform <span class="nt">-p</span> <span class="s2">"review module configuration"</span>
+
+<span class="c"># Especificar modelo y contexto</span>
+copilot <span class="nt">--model</span> gpt-4o <span class="nt">--cwd</span> ~/projects/api <span class="nt">-p</span> <span class="s2">"analyze API performance"</span>
+</code></pre></div></div>
+
+<h2 id="️-cuándo-usar-copilot-cli-vs-claude-code-vs-cursor-cli">⚖️ Cuándo Usar: Copilot CLI vs Claude Code vs Cursor CLI</h2>
+
+<p>Después de usar las tres herramientas de IA basadas en terminal, aquí está mi marco de decisión:</p>
+
+<h3 id="github-copilot-cli">GitHub Copilot CLI</h3>
+<p><strong>Ideal para:</strong></p>
+<ul>
+  <li>✅ Flujos terminal-nativos (sin cambio de contexto)</li>
+  <li>✅ Integración y orquestación de servidores MCP</li>
+  <li>✅ Flujos de desarrollo centrados en GitHub</li>
+  <li>✅ Sesiones de debugging interactivas</li>
+  <li>✅ Ecosistema de modelos OpenAI (GPT-4o, GPT-5)</li>
+</ul>
+
+<p><strong>Características:</strong></p>
+<ul>
+  <li><strong>Soporte MCP robusto</strong>: Integración nativa con gestión interactiva</li>
+  <li><strong>Integración GitHub</strong>: Acceso directo a repositorios y Actions</li>
+  <li><strong>Selección de modelos</strong>: Cambio fácil de modelos durante sesiones</li>
+  <li><strong>Persistencia de sesiones</strong>: Reanuda y continúa conversaciones</li>
+</ul>
+
+<h3 id="claude-code">Claude Code</h3>
+<p><strong>Ideal para:</strong></p>
+<ul>
+  <li>✅ Razonamiento y planificación complejos de múltiples pasos</li>
+  <li>✅ Implementación de código con uso de herramientas</li>
+  <li>✅ Flujos de pensamiento secuencial</li>
+  <li>✅ Modelos Claude de Anthropic (Sonnet, Opus)</li>
+  <li>✅ Edición y refactorización extensiva de archivos</li>
+</ul>
+
+<p><strong>Características:</strong></p>
+<ul>
+  <li><strong>Capacidades agénticas</strong>: Puede usar herramientas e implementar cambios</li>
+  <li><strong>Modelos Claude</strong>: Acceso a la familia de modelos de Anthropic</li>
+  <li><strong>Contexto rico</strong>: Fuerte comprensión de la base de código</li>
+  <li><strong>Subagentes</strong>: Flujos de trabajo de agentes especializados</li>
+</ul>
+
+<h3 id="cursor-cli">Cursor CLI</h3>
+<p><strong>Ideal para:</strong></p>
+<ul>
+  <li>✅ Generación rápida de código y snippets</li>
+  <li>✅ Integración con IDE Cursor</li>
+  <li>✅ Consultas simples de terminal</li>
+  <li>✅ Respuestas rápidas de modelos</li>
+</ul>
+
+<p><strong>Características:</strong></p>
+<ul>
+  <li><strong>Integración IDE</strong>: Funciona con el editor Cursor</li>
+  <li><strong>Enfoque en velocidad</strong>: Respuestas rápidas para tareas simples</li>
+  <li><strong>Ecosistema Cursor</strong>: Parte del conjunto de herramientas de Cursor</li>
+</ul>
+
+<h3 id="matriz-de-decisión">Matriz de Decisión</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caso de Uso</th>
+      <th>Copilot CLI</th>
+      <th>Claude Code</th>
+      <th>Cursor CLI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Debugging en terminal</strong></td>
+      <td>✅ Perfecto</td>
+      <td>✅ Bueno</td>
+      <td>⚠️ Básico</td>
+    </tr>
+    <tr>
+      <td><strong>Orquestación MCP</strong></td>
+      <td>✅ Excelente</td>
+      <td>✅ Bueno</td>
+      <td>❌ Limitado</td>
+    </tr>
+    <tr>
+      <td><strong>Flujos GitHub</strong></td>
+      <td>✅ Nativo</td>
+      <td>⚠️ Vía MCP</td>
+      <td>❌ Limitado</td>
+    </tr>
+    <tr>
+      <td><strong>Razonamiento complejo</strong></td>
+      <td>✅ Capaz con GPT-5</td>
+      <td>✅ Mejor con Claude</td>
+      <td>⚠️ Básico</td>
+    </tr>
+    <tr>
+      <td><strong>Implementación de código</strong></td>
+      <td>⚠️ Solo guía</td>
+      <td>✅ Mejor</td>
+      <td>✅ Bueno</td>
+    </tr>
+    <tr>
+      <td><strong>Consultas rápidas</strong></td>
+      <td>✅ Excelente</td>
+      <td>✅ Bueno</td>
+      <td>✅ Más rápido</td>
+    </tr>
+    <tr>
+      <td><strong>Continuidad de sesión</strong></td>
+      <td>✅ Resumir nativo</td>
+      <td>✅ Consciente del contexto</td>
+      <td>⚠️ Limitado</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-tips-pro-para-máxima-productividad">🔥 Tips Pro para Máxima Productividad</h2>
+
+<h3 id="1-aprovechar---allow-all-tools-para-cicd">1. Aprovechar <code class="language-plaintext highlighter-rouge">--allow-all-tools</code> para CI/CD</h3>
+
+<p>En entornos automatizados, otorga acceso completo para evitar prompts interactivos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Uso en pipeline CI/CD</span>
+copilot <span class="nt">-p</span> <span class="s2">"analyze test coverage report"</span> <span class="se">\</span>
+  <span class="nt">--allow-all-tools</span> <span class="se">\</span>
+  <span class="nt">--model</span> gpt-5 <span class="se">\</span>
+  <span class="nt">--add-dir</span> ./coverage
+</code></pre></div></div>
+
+<h3 id="2-usar---resume-para-continuación-de-sesión">2. Usar <code class="language-plaintext highlighter-rouge">--resume</code> para Continuación de Sesión</h3>
+
+<p>No empieces desde cero—reanuda tu contexto anterior:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Continuar donde lo dejaste</span>
+copilot <span class="nt">--resume</span> <span class="nt">--model</span> gpt-5
+
+<span class="c"># Reanudar y agregar nuevo contexto</span>
+copilot <span class="nt">--resume</span> <span class="nt">--add-dir</span> ~/new-project
+</code></pre></div></div>
+
+<h3 id="3-combinar---add-dir-con-servidores-mcp">3. Combinar <code class="language-plaintext highlighter-rouge">--add-dir</code> con Servidores MCP</h3>
+
+<p>Otorga acceso a archivos y aprovecha capacidades MCP simultáneamente:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copilot <span class="nt">--add-dir</span> ~/terraform <span class="se">\</span>
+  <span class="nt">--model</span> gpt-5 <span class="se">\</span>
+  <span class="nt">-p</span> <span class="s2">"Usando Context7, analiza este módulo Terraform contra las mejores prácticas de AWS"</span>
+</code></pre></div></div>
+
+<h3 id="4-comandos-mcp-interactivos-para-flujos-dinámicos">4. Comandos <code class="language-plaintext highlighter-rouge">/mcp</code> Interactivos para Flujos Dinámicos</h3>
+
+<p>Agrega servidores MCP sobre la marcha durante sesiones interactivas:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># En modo interactivo</span>
+<span class="o">&gt;</span> /mcp add
+<span class="c"># Configurar nuevo servidor interactivamente</span>
+
+<span class="o">&gt;</span> /mcp show
+<span class="c"># Verificar todos los servidores conectados</span>
+
+<span class="o">&gt;</span> <span class="s2">"Ahora usa el servidor recién agregado para analizar X"</span>
+</code></pre></div></div>
+
+<h3 id="5-cambio-de-modelos-durante-sesiones">5. Cambio de Modelos Durante Sesiones</h3>
+
+<p>Cambia modelos en medio de la conversación según la complejidad de la tarea:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Empezar con GPT-4o para análisis general</span>
+copilot <span class="nt">--model</span> gpt-4o
+
+<span class="c"># Cambiar a GPT-5 para razonamiento complejo</span>
+<span class="o">&gt;</span> /model gpt-5
+
+<span class="c"># Continuar con capacidades de razonamiento mejoradas</span>
+<span class="o">&gt;</span> <span class="s2">"Ahora realiza análisis profundo de seguridad del flujo de autenticación"</span>
+</code></pre></div></div>
+
+<p><a href="/assets/images/copilot-cli-2025-10-02_16-07.png" target="_blank"><img src="/assets/images/copilot-cli-2025-10-02_16-07.png" alt="Copilot CLI in Action" style="display:block; margin-left:auto; margin-right:auto; width:95%" /></a></p>
+
+<h2 id="-conclusiones-rápidas">📊 Conclusiones Rápidas</h2>
+
+<p>Después de una semana de uso intensivo, esto es lo que destaca:</p>
+
+<p>✅ <strong>IA terminal-nativa</strong>: Finalmente, una IA conversacional que vive donde trabajan los desarrolladores
+✅ <strong>Integración MCP</strong>: Soporte MCP de primera clase con gestión interactiva
+✅ <strong>Persistencia de sesiones</strong>: Reanuda conversaciones y mantén contexto entre sesiones
+✅ <strong>Flexibilidad de modelos</strong>: Cambio fácil entre GPT-4o, GPT-5 y otros modelos
+✅ <strong>Ecosistema GitHub</strong>: Integración nativa con repositorios y Actions</p>
+
+<p>⚠️ <strong>Estado de vista previa pública</strong>: Funcionalidades evolucionando, espera algunos bordes ásperos
+⚠️ <strong>Limitado a modelos OpenAI</strong>: Sin Claude de Anthropic u otros proveedores de modelos (todavía)
+⚠️ <strong>Enfocado en guía</strong>: Proporciona análisis y sugerencias en lugar de implementación directa de código</p>
+
+<h2 id="-empezando-tu-primera-semana">🎯 Empezando: Tu Primera Semana</h2>
+
+<h3 id="día-1-configuración-básica">Día 1: Configuración Básica</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar Copilot CLI</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> @github/copilot
+
+<span class="c"># Lanzar y explorar modo interactivo</span>
+copilot
+
+<span class="c"># Probar comandos básicos</span>
+<span class="o">&gt;</span> /help
+<span class="o">&gt;</span> /model gpt-5
+<span class="o">&gt;</span> <span class="s2">"Hola, analiza la estructura de mi directorio actual"</span>
+</code></pre></div></div>
+
+<h3 id="día-2-3-integración-mcp">Día 2-3: Integración MCP</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Agregar tu primer servidor MCP</span>
+copilot
+<span class="o">&gt;</span> /mcp add
+
+<span class="c"># Configurar Context7 o GitHub MCP</span>
+<span class="c"># Server Name: Context7</span>
+<span class="c"># Type: HTTP</span>
+<span class="c"># URL: https://mcp.context7.com/mcp</span>
+
+<span class="c"># Probar la integración</span>
+<span class="o">&gt;</span> <span class="s2">"Usando Context7, encuentra documentación sobre módulos Terraform AWS"</span>
+</code></pre></div></div>
+
+<h3 id="día-4-5-integración-en-flujo-real">Día 4-5: Integración en Flujo Real</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Usar en flujo de desarrollo real</span>
+<span class="nb">cd</span> ~/your-project
+copilot <span class="nt">--model</span> gpt-5 <span class="nt">--add-dir</span> <span class="nb">.</span>
+
+<span class="c"># Analizar, debuggear e iterar</span>
+<span class="o">&gt;</span> <span class="s2">"Analiza la cobertura de tests en este proyecto"</span>
+<span class="o">&gt;</span> <span class="s2">"¿Qué mejoras de seguridad se pueden hacer?"</span>
+<span class="o">&gt;</span> <span class="s2">"Revisa la configuración del flujo CI/CD"</span>
+</code></pre></div></div>
+
+<h3 id="semana-1-automatizar-tareas-comunes">Semana 1: Automatizar Tareas Comunes</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Crear aliases para flujos frecuentes</span>
+<span class="nb">alias </span>copilot-tf<span class="o">=</span><span class="s2">"copilot --add-dir . --model gpt-5 -p 'Analizar configuración Terraform'"</span>
+<span class="nb">alias </span>copilot-debug<span class="o">=</span><span class="s2">"copilot --resume --allow-all-tools"</span>
+
+<span class="c"># Usar en CI/CD</span>
+copilot <span class="nt">-p</span> <span class="s2">"analyze build logs"</span> <span class="nt">--allow-all-tools</span> <span class="nt">--model</span> gpt-5
+</code></pre></div></div>
+
+<h2 id="-en-resumen">🔮 En Resumen</h2>
+
+<p>GitHub Copilot CLI representa un cambio significativo en cómo interactuamos con IA durante el desarrollo. Al traer IA conversacional directamente a la terminal con <strong>soporte nativo de MCP</strong>, elimina el cambio de contexto y habilita flujos verdaderamente integrados.</p>
+
+<p><strong>Elige Copilot CLI cuando necesites:</strong></p>
+<ul>
+  <li>IA terminal-nativa sin salir de tu flujo de trabajo</li>
+  <li>Orquestación de servidores MCP con gestión interactiva</li>
+  <li>Integración con repositorios y Actions de GitHub</li>
+  <li>Capacidades de persistencia y reanudación de sesiones</li>
+  <li>Acceso al ecosistema de modelos OpenAI</li>
+</ul>
+
+<p><strong>El estado de vista previa pública significa:</strong></p>
+<ul>
+  <li>Las funcionalidades están mejorando activamente</li>
+  <li>Tu retroalimentación moldea el producto</li>
+  <li>Todavía existen algunos bordes ásperos</li>
+  <li>Acceso temprano a capacidades de vanguardia</li>
+</ul>
+
+<p>Copilot CLI es una <strong>alternativa válida</strong> para desarrollo basado en terminal, especialmente si ya estás usando GitHub Copilot. La integración nativa con GitHub, combinada con extensibilidad MCP, lo hace una elección natural para flujos que se centran en repositorios, issues y pull requests de GitHub.</p>
+
+<p><strong>Empieza con lo básico, agrega un servidor MCP, y ve cómo la IA terminal-nativa cambia tu flujo de trabajo.</strong> Podrías encontrarte alcanzando el navegador menos y resolviendo problemas más rápido—justo desde donde ya estás trabajando.</p>
+
+<h2 id="-recursos">📚 Recursos</h2>
+
+<ul>
+  <li><a href="https://docs.github.com/en/copilot/using-github-copilot/using-github-copilot-in-the-command-line">Documentación de GitHub Copilot CLI</a></li>
+  <li><a href="https://modelcontextprotocol.io/">Especificación del Model Context Protocol</a></li>
+  <li><a href="https://mcp.context7.com/">Servidor MCP de Context7</a></li>
+  <li><a href="https://github.com/modelcontextprotocol/servers/tree/main/src/github">Servidor MCP de GitHub</a></li>
+</ul>
+
+<hr />
+
+<p><em>¿Ya probaste GitHub Copilot CLI? ¿Qué servidores MCP estás integrando? Comparte tus flujos de IA terminal-nativa en los comentarios abajo.</em></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-tools" class="page__taxonomy-item" rel="tag">AI Tools</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/cli" class="page__taxonomy-item" rel="tag">CLI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/devops-automation" class="page__taxonomy-item" rel="tag">DevOps Automation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/github-copilot" class="page__taxonomy-item" rel="tag">GitHub Copilot</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/github-integration" class="page__taxonomy-item" rel="tag">GitHub Integration</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/mcp" class="page__taxonomy-item" rel="tag">MCP</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/terminal" class="page__taxonomy-item" rel="tag">Terminal</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-10-02T00:00:00+00:00">October 02, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=GitHub+Copilot+CLI%3A+IA+Terminal-Nativa+con+Integraci%C3%B3n+Fluida+a+GitHub%20https%3A%2F%2Flgallardo.com%2F2025%2F10%2F02%2Fgithub-copilot-cli-terminal-native-ai%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F10%2F02%2Fgithub-copilot-cli-terminal-native-ai%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F10%2F02%2Fgithub-copilot-cli-terminal-native-ai%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F10%2F02%2Fgithub-copilot-cli-terminal-native-ai%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" class="pagination--pager" title="GitHub Models: Integración Sencilla de IA para Flujos DevOps
+">Previous</a>
+    
+    
+      <a href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" class="pagination--pager" title="Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-model-switching.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/" rel="permalink">Cuando Claude Se Queda en Silencio: Navegando Timeouts de API y Selección de Modelos en Claude Code
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  13 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">¿Experimentando timeouts de API con Opus 4.5 y Haiku 4.5? Aprende cómo diagnosticar problemas usando la página de estado de Anthropic, cambiar entre modelos ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/pico-8-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  14 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Descubrí Pico-8 y desafié a Claude Code a crear un juego de Mastermind sin aprender Lua. ¿El código? Perfecto. ¿El arte? Un hermoso desastre. Esto es lo que ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Me topé con GitHub Models y decidí probarlo. Aquí explico cómo transforma tus GitHub Actions con modelos de IA gratuitos, y cuándo elegirlo sobre soluciones ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  19 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

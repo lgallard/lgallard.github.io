@@ -1,0 +1,1106 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Cuando Claude Se Queda en Silencio: Navegando Timeouts de API y Selección de Modelos en Claude Code - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Guía para solucionar timeouts de API en Claude Code, verificar el estado de Anthropic, cambiar entre modelos Sonnet, Opus y Haiku, y usar proveedores alternativos de IA como Google Gemini, OpenAI Codex o Qwen.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="Cuando Claude Se Queda en Silencio: Navegando Timeouts de API y Selección de Modelos en Claude Code">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/es/2025/12/11/claude-code-api-timeouts-model-switching/">
+<meta property="og:url" content="https://lgallardo.com/es/2025/12/11/claude-code-api-timeouts-model-switching/">
+
+
+
+<meta property="og:description" content="Guía para solucionar timeouts de API en Claude Code, verificar el estado de Anthropic, cambiar entre modelos Sonnet, Opus y Haiku, y usar proveedores alternativos de IA como Google Gemini, OpenAI Codex o Qwen.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Cuando Claude Se Queda en Silencio: Navegando Timeouts de API y Selección de Modelos en Claude Code">
+<meta name="twitter:description" content="Guía para solucionar timeouts de API en Claude Code, verificar el estado de Anthropic, cambiar entre modelos Sonnet, Opus y Haiku, y usar proveedores alternativos de IA como Google Gemini, OpenAI Codex o Qwen.">
+<meta name="twitter:url" content="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/claude-model-switching.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/claude-model-switching.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2025-12-11T00:00:00+00:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="Herramientas IA">
+
+<meta property="article:tag" content="Anthropic">
+
+<meta property="article:tag" content="Selección de Modelos">
+
+<meta property="article:tag" content="Solución de Problemas API">
+
+<meta property="article:tag" content="Opus 4.5">
+
+<meta property="article:tag" content="Haiku 4.5">
+
+<meta property="article:tag" content="Sonnet 4.5">
+
+<meta property="article:tag" content="OpenRouter">
+
+<meta property="article:tag" content="Gemini">
+
+<meta property="article:tag" content="Qwen">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com/es",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com/es",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+
+  
+  <a href="/2025/12/11/claude-code-api-timeouts-model-switching/" >English</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/es/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/2025/12/11/claude-code-api-timeouts-model-switching/" >English</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cuando Claude Se Queda en Silencio: Navegando Timeouts de API y Selección de Modelos en Claude Code">
+    <meta itemprop="description" content="¿Experimentando timeouts de API con Opus 4.5 y Haiku 4.5? Aprende cómo diagnosticar problemas usando la página de estado de Anthropic, cambiar entre modelos de Claude, y aprovechar opciones alternativas de otros proveedores de IA cuando necesitas productividad ininterrumpida.">
+    <meta itemprop="datePublished" content="December 11, 2025">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Cuando Claude Se Queda en Silencio: Navegando Timeouts de API y Selección de Modelos en Claude Code
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  12 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/claude-model-switching.png" alt="Interfaz de selección de modelos de Claude Code mostrando las opciones Sonnet, Opus y Haiku con sus respectivas capacidades y casos de uso" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p>El otro día, mientras trabajaba en una tarea crítica de refactorización, <strong>Claude Code dejó de responder repentinamente</strong>. La familiar animación de consumo de tokens se congeló, las solicitudes agotaron su tiempo de espera, y mi productividad se detuvo por completo. Si has experimentado este escenario frustrante—viendo cómo los tokens no se consumen mientras tu fecha límite se acerca—no estás solo.</p>
+
+<p>¿El culpable? Problemas de API con modelos específicos de Anthropic. ¿La solución? <strong>Entender cómo diagnosticar el problema, cambiar entre la familia de modelos de Claude, y aprovechar opciones alternativas</strong>. Aquí está lo que aprendí durante mi inmersión inesperada en la flexibilidad de modelos de Claude Code.</p>
+
+<h2 id="-el-fallo-silencioso-cuando-los-tokens-no-fluyen">🔴 El Fallo Silencioso: Cuando los Tokens No Fluyen</h2>
+
+<p>La primera señal de que algo estaba mal llegó sutilmente. Envié una solicitud para refactorizar un módulo complejo de Terraform, y en lugar de la respuesta inmediata habitual, vi:</p>
+
+<ul>
+  <li><strong>Sin consumo de tokens</strong> en la interfaz de Claude Code</li>
+  <li><strong>Indicadores de solicitud girando</strong> que nunca se resolvían</li>
+  <li><strong>Solicitudes fallidas</strong> con mensajes vagos de “API no disponible”</li>
+</ul>
+
+<p>Lo que hizo esto particularmente confuso fue que no era una interrupción completa—Claude Code estaba ejecutándose, autenticado correctamente, y no mostraba errores obvios. Simplemente estaba… en silencio.</p>
+
+<h3 id="el-proceso-de-investigación">El Proceso de Investigación</h3>
+
+<p>Mi primer instinto fue verificar los sospechosos habituales:</p>
+
+<ol>
+  <li><strong>Conectividad de red</strong>: Todo lo demás funcionaba bien</li>
+  <li><strong>Validez de la clave API</strong>: Todavía activa y autenticada</li>
+  <li><strong>Versión de Claude Code</strong>: Actualizada</li>
+  <li><strong>Configuración local</strong>: Sin cambios recientes</li>
+</ol>
+
+<p>Nada parecía estar mal de mi lado, lo que me llevó a la pregunta crítica: <strong>¿Es este un problema con los servicios de Anthropic?</strong></p>
+
+<h2 id="-verificando-la-página-de-estado-de-anthropic">🔍 Verificando la Página de Estado de Anthropic</h2>
+
+<p>Aquí es donde muchos desarrolladores se quedan atascados—asumen que el problema es local y pasan horas solucionando problemas en su configuración. La realidad es que los servicios en la nube experimentan problemas, y Anthropic no es la excepción.</p>
+
+<p><strong>El primer paso para diagnosticar timeouts misteriosos de API: Verificar la página de estado.</strong></p>
+
+<p>Dirígete a <a href="https://status.anthropic.com">status.anthropic.com</a> y busca reportes de incidentes o indicadores de rendimiento degradado.</p>
+
+<p><img src="/assets/images/anthropic-status-page-issues.png" alt="Página de estado de Anthropic mostrando el estado del servicio para los modelos de Claude, mostrando Opus 4.5 y Haiku 4.5 con tasas de error elevadas mientras Sonnet 4.5 permanece operacional" style="display:block; margin-left:auto; margin-right:auto; width:90%" />
+<em>Página de estado de Anthropic mostrando problemas en Opus 4.5 y Haiku 4.5</em></p>
+
+<p>En mi caso, la página de estado reveló inmediatamente el problema:</p>
+
+<ul>
+  <li><strong>Claude Opus 4.5</strong>: Experimentando tasas de error elevadas</li>
+  <li><strong>Claude Haiku 4.5</strong>: Interrupción parcial con timeouts de API</li>
+  <li><strong>Claude Sonnet 4.5</strong>: Operacional</li>
+</ul>
+
+<p>Esto lo explicaba todo. Estaba usando Opus 4.5 para tareas de razonamiento complejo, y actualmente estaba experimentando degradación del servicio. Los tokens no se consumían porque el modelo no respondía—pero críticamente, <strong>otros modelos de Claude todavía estaban disponibles</strong>.</p>
+
+<h3 id="por-qué-importan-las-páginas-de-estado">Por Qué Importan las Páginas de Estado</h3>
+
+<p>En el mundo del desarrollo asistido por IA, nos hemos vuelto tan dependientes de estas herramientas que las interrupciones se sienten catastróficas. Pero entender que:</p>
+
+<ol>
+  <li><strong>Los modelos individuales pueden experimentar problemas</strong> mientras otros permanecen operacionales</li>
+  <li><strong>El mantenimiento planificado</strong> ocurre regularmente (verifica la página de estado para los horarios)</li>
+  <li><strong>Las interrupciones parciales</strong> son a menudo específicas del modelo, no de toda la plataforma</li>
+</ol>
+
+<p>Este conocimiento transforma un misterio que mata la productividad en un problema resoluble con un plan de acción claro: <strong>cambiar de modelo</strong>.</p>
+
+<h2 id="-la-solución-cambiar-a-sonnet-45">🔄 La Solución: Cambiar a Sonnet 4.5</h2>
+
+<p>Claude Code ofrece una característica poderosa que muchos usuarios pasan por alto: <strong>la capacidad de cambiar entre modelos sobre la marcha</strong>. La familia de modelos de Anthropic incluye:</p>
+
+<ul>
+  <li><strong>Claude Opus 4.5</strong>: Inteligencia máxima, mejor para razonamiento complejo, decisiones de arquitectura, y resolución de problemas de múltiples pasos</li>
+  <li><strong>Claude Sonnet 4.5</strong>: Rendimiento equilibrado y velocidad, excelente para la mayoría de tareas de desarrollo</li>
+  <li><strong>Claude Haiku 4.5</strong>: Rápido y eficiente, ideal para consultas simples e iteraciones rápidas</li>
+</ul>
+
+<p>Cuando Opus y Haiku estaban experimentando problemas, Sonnet se convirtió en mi salvavidas.</p>
+
+<h3 id="cómo-cambiar-modelos-en-claude-code">Cómo Cambiar Modelos en Claude Code</h3>
+
+<p>El proceso es sencillo usando el comando <code class="language-plaintext highlighter-rouge">/model</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Verificar modelo actual</span>
+/model
+
+<span class="c"># Cambiar a Sonnet 4.5</span>
+/model sonnet
+
+<span class="c"># Cambiar a Opus 4.5 (cuando está funcionando)</span>
+/model opus
+
+<span class="c"># Cambiar a Haiku 4.5 para velocidad</span>
+/model haiku
+</code></pre></div></div>
+
+<p><img src="/assets/images/claude-code-model-selection.png" alt="CLI de Claude Code mostrando la salida del comando /model con los modelos disponibles: Opus 4.5, Sonnet 4.5 y Haiku 4.5, con Sonnet resaltado como la selección actual" style="display:block; margin-left:auto; margin-right:auto; width:90%" />
+<em>Interfaz de selección de modelos de Claude Code con Sonnet 4.5 resaltado</em></p>
+
+<p>El cambio es instantáneo, y Claude Code continúa sin problemas el contexto de tu conversación con el nuevo modelo. En mi caso, cambiar a Sonnet no solo restauró la funcionalidad sino que también proporcionó resultados sorprendentemente buenos para mi tarea de refactorización.</p>
+
+<h3 id="entendiendo-las-compensaciones-de-los-modelos">Entendiendo las Compensaciones de los Modelos</h3>
+
+<p>Cada modelo tiene características distintas que lo hacen adecuado para diferentes escenarios:</p>
+
+<p><strong>Claude Opus 4.5:</strong></p>
+<ul>
+  <li><strong>Fortalezas</strong>: Arquitectura compleja, refactorización de múltiples archivos, debugging matizado</li>
+  <li><strong>Debilidades</strong>: Respuestas más lentas, mayor costo, problemas ocasionales de disponibilidad</li>
+  <li><strong>Mejor para</strong>: Características críticas, decisiones arquitectónicas, resolución de problemas intrincados</li>
+</ul>
+
+<p><strong>Claude Sonnet 4.5:</strong></p>
+<ul>
+  <li><strong>Fortalezas</strong>: Rápido, confiable, excelente calidad de código, gran equilibrio</li>
+  <li><strong>Debilidades</strong>: Puede tener dificultades con cadenas de razonamiento extremadamente complejas</li>
+  <li><strong>Mejor para</strong>: La mayoría de tareas de desarrollo, implementación de características, corrección de bugs</li>
+</ul>
+
+<p><strong>Claude Haiku 4.5:</strong></p>
+<ul>
+  <li><strong>Fortalezas</strong>: Ultra rápido, económico, excelente para iteraciones</li>
+  <li><strong>Debilidades</strong>: Comprensión de contexto limitada, razonamiento más simple</li>
+  <li><strong>Mejor para</strong>: Correcciones rápidas, documentación, consultas simples</li>
+</ul>
+
+<p>En mi experiencia, <strong>Sonnet 4.5 maneja el 80-90% de las tareas de desarrollo brillantemente</strong>, haciéndolo el respaldo perfecto cuando los modelos premium experimentan problemas.</p>
+
+<h2 id="️-construyendo-resiliencia-el-valor-de-las-opciones-de-modelos">🛡️ Construyendo Resiliencia: El Valor de las Opciones de Modelos</h2>
+
+<p>Este incidente destacó una perspectiva crucial: <strong>tener flexibilidad de modelos no se trata solo de optimización—se trata de continuidad</strong>. Cuando dependes de IA para trabajo de desarrollo, un solo punto de fallo puede descarrilar todo tu flujo de trabajo.</p>
+
+<h3 id="la-estrategia-de-resiliencia-de-tres-niveles">La Estrategia de Resiliencia de Tres Niveles</h3>
+
+<p>Ahora abordo Claude Code con una mentalidad de resiliencia:</p>
+
+<p><strong>Nivel 1: Selección de Modelo Primario</strong></p>
+<ul>
+  <li>Usar Opus 4.5 para tareas genuinamente complejas que requieren razonamiento profundo</li>
+  <li>Predeterminar Sonnet 4.5 para trabajo de desarrollo estándar</li>
+  <li>Reservar Haiku 4.5 para iteraciones rápidas y consultas simples</li>
+</ul>
+
+<p><strong>Nivel 2: Cambio de Modelo Dentro de Anthropic</strong></p>
+<ul>
+  <li>Monitorear tiempos de respuesta y consumo de tokens</li>
+  <li>Cambiar modelos ante la primera señal de rendimiento degradado</li>
+  <li>Verificar página de estado cuando se experimentan timeouts</li>
+</ul>
+
+<p><strong>Nivel 3: Proveedores Alternativos de IA</strong> (discutido abajo)</p>
+<ul>
+  <li>Tener proveedores de respaldo configurados y listos</li>
+  <li>Entender qué alternativas sobresalen en tareas específicas</li>
+  <li>Mantener acceso API a múltiples plataformas</li>
+</ul>
+
+<p>Esta estrategia asegura que un problema con un solo modelo—o incluso un solo proveedor—no detenga tu trabajo.</p>
+
+<h2 id="-más-allá-de-anthropic-respaldo-a-otros-proveedores-de-ia">🌐 Más Allá de Anthropic: Respaldo a Otros Proveedores de IA</h2>
+
+<p>Mientras Claude Code está estrechamente integrado con los modelos de Anthropic, hay momentos cuando necesitas ir más allá del ecosistema por completo. Quizás todos los modelos de Anthropic están experimentando problemas, has alcanzado límites de uso, o necesitas capacidades específicas de otro proveedor.</p>
+
+<h3 id="opciones-de-respaldo-disponibles">Opciones de Respaldo Disponibles</h3>
+
+<p><strong>Google Gemini:</strong></p>
+<ul>
+  <li><strong>Acceso</strong>: API directa o a través de Claude Code Router con OpenRouter</li>
+  <li><strong>Fortalezas</strong>: Excelente generación de código, fuerte en salidas estructuradas, precios competitivos</li>
+  <li><strong>Mejor para</strong>: Cuando necesitas integración con el ecosistema de Google o características específicas de Gemini</li>
+  <li><strong>Configuración</strong>: Configurar vía OpenRouter o API directa de Gemini</li>
+</ul>
+
+<p><strong>OpenAI Codex / Modelos GPT:</strong></p>
+<ul>
+  <li><strong>Acceso</strong>: A través de Claude Code Router + OpenRouter</li>
+  <li><strong>Fortalezas</strong>: GPT-4o sobresale en razonamiento complejo, GPT-4o-mini es económico</li>
+  <li><strong>Mejor para</strong>: Tareas donde has encontrado que GPT funciona mejor, o cuando exploras diferencias entre modelos</li>
+  <li><strong>Nota</strong>: GPT-5 requiere BYOK (Trae Tu Propia Clave) en OpenRouter</li>
+</ul>
+
+<p><strong>Qwen (Alibaba):</strong></p>
+<ul>
+  <li><strong>Acceso</strong>: Nivel gratuito disponible en OpenRouter</li>
+  <li><strong>Fortalezas</strong>: Qwen3 Coder optimizado para tareas de desarrollo, ventana de contexto masiva de 262K</li>
+  <li><strong>Mejor para</strong>: Desarrollo consciente de costos, experimentar con modelos del stack tecnológico chino</li>
+  <li><strong>Calidad sorprendente</strong>: Gratuito no significa inferior—Qwen maneja tareas rutinarias notablemente bien</li>
+</ul>
+
+<p><strong>DeepSeek:</strong></p>
+<ul>
+  <li><strong>Acceso</strong>: Gratuito en OpenRouter, también disponible a través de API</li>
+  <li><strong>Fortalezas</strong>: Fuertes capacidades de razonamiento, particularmente bueno para debugging</li>
+  <li><strong>Mejor para</strong>: Cuando necesitas una perspectiva fresca en bugs complejos</li>
+  <li><strong>Bonus</strong>: Modelo de pesos abiertos con sólido rendimiento general</li>
+</ul>
+
+<h3 id="configurando-claude-code-router-para-acceso-multi-proveedor">Configurando Claude Code Router para Acceso Multi-Proveedor</h3>
+
+<p>Para acceder a estas alternativas, necesitarás <a href="https://github.com/musistudio/claude-code-router">Claude Code Router</a>—un proxy poderoso que enruta las solicitudes de Claude Code a cualquier proveedor de LLM compatible.</p>
+
+<p><strong>Configuración Rápida:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar Claude Code Router</span>
+npm <span class="nb">install</span> <span class="nt">-g</span> @musistudio/claude-code-router
+
+<span class="c"># Iniciar el router</span>
+ccr start
+
+<span class="c"># Abrir la UI de configuración para configurar proveedores</span>
+ccr ui
+</code></pre></div></div>
+
+<p>La UI del router en <code class="language-plaintext highlighter-rouge">http://localhost:3456</code> proporciona configuración visual para reglas de enrutamiento, permitiéndote asignar modelos específicos a diferentes escenarios (Predeterminado, Background, Think, Contexto Largo).</p>
+
+<p>Para una guía completa sobre cómo configurar Claude Code Router con OpenRouter, incluyendo ejemplos de configuración detallados y estrategias avanzadas de enrutamiento, revisa mi post anterior: <strong><a href="/2025/08/20/claude-code-router-openrouter-beyond-anthropic/">Claude Code Router y OpenRouter: Más Allá de Anthropic</a></strong>.</p>
+
+<h3 id="cuándo-usar-proveedores-alternativos">Cuándo Usar Proveedores Alternativos</h3>
+
+<p><strong>Escenarios de Respaldo Inmediato:</strong></p>
+<ul>
+  <li>Todos los modelos de Anthropic experimentando problemas (verificar página de estado)</li>
+  <li>Alcanzaste límites de uso de Claude a mitad del proyecto</li>
+  <li>Tarea específica mejor adaptada a otro modelo (ej., GPT para ciertos tipos de escritura creativa)</li>
+</ul>
+
+<p><strong>Casos de Uso Estratégicos:</strong></p>
+<ul>
+  <li><strong>Optimización de costos</strong>: Usar Qwen/DeepSeek gratuitos para tareas rutinarias, guardar créditos de Claude para trabajo complejo</li>
+  <li><strong>Comparación de modelos</strong>: Probar la misma tarea entre proveedores para encontrar el mejor ajuste</li>
+  <li><strong>Requisitos de privacidad</strong>: Ollama auto-hospedado para código sensible</li>
+  <li><strong>Experimentación</strong>: Explorar diferentes capacidades y enfoques de modelos</li>
+</ul>
+
+<p><strong>Consideración Importante:</strong>
+No todos los modelos soportan las características de llamada de herramientas/funciones de Claude Code. Muchos modelos gratuitos sobresalen en generación y explicación de código pero no pueden ejecutar operaciones de archivos o comandos git. Enruta acordemente:</p>
+<ul>
+  <li><strong>Con capacidad de herramientas</strong>: Modelos Claude, serie GPT-4o, algunos modelos Gemini</li>
+  <li><strong>Solo texto</strong>: La mayoría de modelos gratuitos (excelentes para explicaciones, revisiones, documentación)</li>
+</ul>
+
+<h2 id="-lecciones-aprendidas-mejores-prácticas-para-desarrollo-resiliente-con-ia">💡 Lecciones Aprendidas: Mejores Prácticas para Desarrollo Resiliente con IA</h2>
+
+<p>Después de esta experiencia, he adoptado varias prácticas que han hecho mi flujo de trabajo asistido por IA más robusto:</p>
+
+<h3 id="1-monitorear-no-asumir">1. Monitorear, No Asumir</h3>
+
+<p><strong>Antes de este incidente</strong>, asumía que los timeouts siempre eran problemas locales—mi red, mi configuración, mi código.</p>
+
+<p><strong>Ahora</strong>, mi lista de verificación de solución de problemas comienza con:</p>
+<ol>
+  <li>Verificar página de estado de Anthropic</li>
+  <li>Probar cambio de modelo</li>
+  <li>Verificar red/configuración</li>
+  <li>Considerar proveedores alternativos</li>
+</ol>
+
+<p>Este simple reordenamiento ahorra horas de debugging mal dirigido.</p>
+
+<h3 id="2-diversificar-tu-estrategia-de-modelos">2. Diversificar Tu Estrategia de Modelos</h3>
+
+<p><strong>No sobre-optimices para un solo modelo.</strong> Solía predeterminar Opus para todo, pensando “más potente = mejores resultados.” Esto creaba:</p>
+<ul>
+  <li>Mayores costos</li>
+  <li>Respuestas más lentas</li>
+  <li>Punto único de fallo</li>
+</ul>
+
+<p><strong>Ahora</strong>, emparejo modelos con la complejidad de la tarea:</p>
+<ul>
+  <li>Haiku para iteraciones rápidas y documentación</li>
+  <li>Sonnet para desarrollo de características estándar</li>
+  <li>Opus reservado para trabajo arquitectónico genuinamente complejo</li>
+</ul>
+
+<p>Este enfoque es más rápido, más barato y más resiliente.</p>
+
+<h3 id="3-mantener-opcionalidad-de-proveedores">3. Mantener Opcionalidad de Proveedores</h3>
+
+<p>Incluso si usas principalmente modelos de Anthropic, <strong>tener Claude Code Router configurado con alternativas</strong> proporciona tranquilidad. Yo mantengo:</p>
+<ul>
+  <li>Cuenta de OpenRouter con $10 de crédito (dura meses con modelos gratuitos)</li>
+  <li>Clave API de Gemini para tareas del ecosistema de Google</li>
+  <li>Ollama local para trabajo sensible a la privacidad</li>
+</ul>
+
+<p>Raramente uso estas alternativas, pero cuando las necesito—durante interrupciones o para capacidades específicas—están disponibles inmediatamente.</p>
+
+<h3 id="4-entender-patrones-de-uso">4. Entender Patrones de Uso</h3>
+
+<p>Rastrea qué modelos realmente necesitas para diferentes tareas. Descubrí:</p>
+<ul>
+  <li>70% de mis consultas funcionan perfectamente con Sonnet</li>
+  <li>20% se benefician del razonamiento de Opus</li>
+  <li>10% son lo suficientemente simples para Haiku</li>
+</ul>
+
+<p>Esta conciencia ayuda tanto con la selección de modelos como con la gestión de costos.</p>
+
+<h3 id="5-marcar-la-página-de-estado">5. Marcar la Página de Estado</h3>
+
+<p>Agrega <a href="https://status.anthropic.com">status.anthropic.com</a> a tus marcadores. Cuando encuentres problemas:</p>
+<ul>
+  <li>Verifica la página de estado PRIMERO</li>
+  <li>Ahorra tiempo solucionando problemas fantasma</li>
+  <li>Entiende el alcance del incidente y ETA</li>
+</ul>
+
+<p>Parece obvio en retrospectiva, pero es fácil de olvidar durante un escenario frustrante de timeout.</p>
+
+<h2 id="-flujo-de-trabajo-práctico-de-solución-de-problemas">🔧 Flujo de Trabajo Práctico de Solución de Problemas</h2>
+
+<p>Cuando encuentres timeouts de API o comportamiento sin respuesta en Claude Code, sigue este enfoque sistemático:</p>
+
+<h3 id="paso-1-diagnósticos-rápidos-2-minutos">Paso 1: Diagnósticos Rápidos (2 minutos)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Verificar modelo actual</span>
+/model
+
+<span class="c"># Verificar estado de Claude Code</span>
+claude status
+
+<span class="c"># Verificar tu uso/límites</span>
+<span class="c"># (Disponible en UI de Claude Code o dashboard de API)</span>
+</code></pre></div></div>
+
+<h3 id="paso-2-verificación-de-estado-1-minuto">Paso 2: Verificación de Estado (1 minuto)</h3>
+
+<ul>
+  <li>Abrir <a href="https://status.anthropic.com">status.anthropic.com</a></li>
+  <li>Buscar incidentes que afecten tu modelo actual</li>
+  <li>Notar cualquier ventana de mantenimiento planificado</li>
+</ul>
+
+<h3 id="paso-3-prueba-de-cambio-de-modelo-1-minuto">Paso 3: Prueba de Cambio de Modelo (1 minuto)</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Intentar cambiar a diferente modelo de Anthropic</span>
+/model sonnet
+
+<span class="c"># Enviar una consulta de prueba simple</span>
+<span class="s2">"Hola, ¿estás respondiendo correctamente?"</span>
+</code></pre></div></div>
+
+<p>Si esto funciona, el problema es específico del modelo. Continúa con el modelo que funciona.</p>
+
+<h3 id="paso-4-proveedor-alternativo-si-es-necesario">Paso 4: Proveedor Alternativo (si es necesario)</h3>
+
+<p>Si todos los modelos de Anthropic están afectados:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Lanzar Claude Code Router (si está configurado)</span>
+ccr start
+
+<span class="c"># Cambiar a alternativa vía router</span>
+/model openrouter,gemini-2.0-flash-exp
+
+<span class="c"># Continuar tu trabajo</span>
+</code></pre></div></div>
+
+<h3 id="paso-5-resolución-a-largo-plazo">Paso 5: Resolución a Largo Plazo</h3>
+
+<ul>
+  <li>Monitorear página de estado para el todo-despejado</li>
+  <li>Cambiar de vuelta al modelo preferido cuando esté disponible</li>
+  <li>Considerar ajustar el modelo predeterminado basado en patrones de confiabilidad</li>
+</ul>
+
+<h2 id="-pensamientos-finales-abraza-la-diversidad-de-modelos">🧠 Pensamientos Finales: Abraza la Diversidad de Modelos</h2>
+
+<p>El mito del “modelo de IA perfecto” es solo eso—un mito. La realidad es más matizada:</p>
+
+<ul>
+  <li><strong>Diferentes modelos sobresalen en diferentes tareas</strong></li>
+  <li><strong>La disponibilidad y confiabilidad varían con el tiempo</strong></li>
+  <li><strong>Las consideraciones de costo importan para uso sostenible</strong></li>
+  <li><strong>Los requisitos de privacidad y seguridad difieren por proyecto</strong></li>
+</ul>
+
+<p>Mi experiencia de timeout de API fue frustrante en el momento, pero llevó a una realización valiosa: <strong>la característica más poderosa de Claude Code no es el acceso al mejor modelo—es la flexibilidad de elegir el modelo correcto para el momento correcto</strong>.</p>
+
+<h3 id="conclusiones-clave">Conclusiones Clave</h3>
+
+<ol>
+  <li><strong>Las páginas de estado son tu amigo</strong>: Verifica <a href="https://status.anthropic.com">status.anthropic.com</a> cuando surjan problemas</li>
+  <li><strong>El cambio de modelo es simple</strong>: Usa el comando <code class="language-plaintext highlighter-rouge">/model</code> para cambiar entre Sonnet, Opus y Haiku</li>
+  <li><strong>Sonnet está subestimado</strong>: El modelo “equilibrado” maneja la mayoría de tareas brillantemente</li>
+  <li><strong>Construye opciones de respaldo</strong>: Configura Claude Code Router para acceso multi-proveedor</li>
+  <li><strong>Empareja modelos a tareas</strong>: No uses Opus para todo solo porque es “premium”</li>
+  <li><strong>La solución de problemas sistemática ahorra tiempo</strong>: Sigue un proceso de diagnóstico consistente</li>
+</ol>
+
+<h3 id="qué-sigue">¿Qué Sigue?</h3>
+
+<p>El panorama del desarrollo con IA continúa evolucionando rápidamente. Características que estoy observando:</p>
+
+<ul>
+  <li><strong>Failover automático de modelos</strong>: Claude Code detectando problemas y cambiando modelos automáticamente</li>
+  <li><strong>Enrutamiento basado en uso</strong>: Selección inteligente de modelos basada en cuotas restantes</li>
+  <li><strong>Aprendizaje basado en rendimiento</strong>: Sistemas que aprenden qué modelos prefieres para tareas específicas</li>
+  <li><strong>Contexto cross-proveedor</strong>: Continuidad de conversación sin interrupciones entre diferentes proveedores de IA</li>
+</ul>
+
+<p>Hasta entonces, saber cómo navegar manualmente estos escenarios te mantiene productivo independientemente de lo que muestre la página de estado.</p>
+
+<h2 id="-referencias">📚 Referencias</h2>
+
+<ul>
+  <li><a href="https://status.anthropic.com">Página de Estado de Anthropic</a> - Estado del servicio en tiempo real para modelos Claude</li>
+  <li><a href="https://docs.anthropic.com/en/docs/claude-code">Documentación de Claude Code</a> - Guías oficiales de configuración y uso</li>
+  <li><a href="https://github.com/musistudio/claude-code-router">Claude Code Router</a> - Enrutamiento multi-proveedor para Claude Code</li>
+  <li><a href="https://openrouter.ai">OpenRouter</a> - Gateway universal de API para más de 400 modelos de IA</li>
+  <li><a href="https://modelcontextprotocol.io/">Model Context Protocol</a> - Integración estandarizada de herramientas de IA</li>
+  <li><a href="https://ollama.ai">Ollama</a> - Ejecuta modelos de IA localmente para máxima privacidad</li>
+</ul>
+
+<hr />
+
+<p><em>¿Has experimentado timeouts de API con Claude Code u otros asistentes de IA? ¿Cuál es tu estrategia de respaldo cuando tu modelo principal no está disponible? Comparte tus experiencias y consejos de solución de problemas en los comentarios abajo.</em></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/anthropic" class="page__taxonomy-item" rel="tag">Anthropic</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/gemini" class="page__taxonomy-item" rel="tag">Gemini</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/haiku-4-5" class="page__taxonomy-item" rel="tag">Haiku 4.5</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/herramientas-ia" class="page__taxonomy-item" rel="tag">Herramientas IA</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/openrouter" class="page__taxonomy-item" rel="tag">OpenRouter</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/opus-4-5" class="page__taxonomy-item" rel="tag">Opus 4.5</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/qwen" class="page__taxonomy-item" rel="tag">Qwen</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/selecci%C3%B3n-de-modelos" class="page__taxonomy-item" rel="tag">Selección de Modelos</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/es/tags/soluci%C3%B3n-de-problemas-api" class="page__taxonomy-item" rel="tag">Solución de Problemas API</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/sonnet-4-5" class="page__taxonomy-item" rel="tag">Sonnet 4.5</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2025-12-11T00:00:00+00:00">December 11, 2025</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Cuando+Claude+Se+Queda+en+Silencio%3A+Navegando+Timeouts+de+API+y+Selecci%C3%B3n+de+Modelos+en+Claude+Code%20https%3A%2F%2Flgallardo.com%2F2025%2F12%2F11%2Fclaude-code-api-timeouts-model-switching%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2025%2F12%2F11%2Fclaude-code-api-timeouts-model-switching%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2025%2F12%2F11%2Fclaude-code-api-timeouts-model-switching%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2025%2F12%2F11%2Fclaude-code-api-timeouts-model-switching%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" class="pagination--pager" title="Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/pico-8-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing con IA: Creando un Juego en Pico-8 Sin Aprender el Lenguaje
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  13 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Descubrí Pico-8 y desafié a Claude Code a crear un juego de Mastermind sin aprender Lua. ¿El código? Perfecto. ¿El arte? Un hermoso desastre. Esto es lo que ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: IA Terminal-Nativa con Integración Fluida a GitHub
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">El Copilot CLI de GitHub trae IA conversacional directamente a tu terminal con integración fluida a GitHub—interactúa con repos, issues y PRs sin salir de la...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Integración Sencilla de IA para Flujos DevOps
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Me topé con GitHub Models y decidí probarlo. Aquí explico cómo transforma tus GitHub Actions con modelos de IA gratuitos, y cuándo elegirlo sobre soluciones ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/clis-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="permalink">Claude Code Potenciado: Accede a Cualquier Modelo de IA mediante Integración MCP
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  19 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Potencia Claude Code accediendo a cualquier modelo de IA a través de integración MCP—usa el contexto masivo de Gemini, los modelos especializados de OpenAI, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2025 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
