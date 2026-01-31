@@ -1,0 +1,1026 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="How I vibecoded an Anki flashcard generator that uses multiple AI models (Claude, Gemini, OpenAI, Qwen, ElevenLabs, Chatterbox) to automatically create vocabulary cards with definitions, images, and audio.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/">
+<meta property="og:url" content="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/">
+
+
+
+<meta property="og:description" content="How I vibecoded an Anki flashcard generator that uses multiple AI models (Claude, Gemini, OpenAI, Qwen, ElevenLabs, Chatterbox) to automatically create vocabulary cards with definitions, images, and audio.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator">
+<meta name="twitter:description" content="How I vibecoded an Anki flashcard generator that uses multiple AI models (Claude, Gemini, OpenAI, Qwen, ElevenLabs, Chatterbox) to automatically create vocabulary cards with definitions, images, and audio.">
+<meta name="twitter:url" content="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/anki-card-generator-robot-og.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/anki-card-generator-robot-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2026-01-30T00:00:00+00:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Anki">
+
+<meta property="article:tag" content="Flashcards">
+
+<meta property="article:tag" content="AI Tools">
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="Vibecoding">
+
+<meta property="article:tag" content="Prompt Engineering">
+
+<meta property="article:tag" content="ElevenLabs">
+
+<meta property="article:tag" content="Text-to-Speech">
+
+<meta property="article:tag" content="Spaced Repetition">
+
+<meta property="article:tag" content="Language Learning">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="AI">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator">
+    <meta itemprop="description" content="Tired of manually copying definitions, generating images, and pasting SSML into ElevenLabs? I built an app that does it all automatically using Claude, Gemini, OpenAI, Qwen, and more—powered by prompt engineering on top of foundation models.">
+    <meta itemprop="datePublished" content="January 30, 2026">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <!-- IMAGE: Main app screenshot showing the Anki Vocabulary Card Generator interface -->
+<p><a href="/assets/images/anki-card-generator-main.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-card-generator-main.png" alt="Anki Vocabulary Card Generator main interface" /></a></p>
+
+<p>Learning English vocabulary with Anki has been part of my routine for years. But creating quality flashcards? That was a nightmare. Until I decided to <strong>vibecode</strong> my way out of it.</p>
+
+<h2 id="the-problem-copy-paste-hell">The Problem: Copy-Paste Hell</h2>
+
+<p>Before this app existed, creating a single vocabulary card meant:</p>
+
+<ol>
+  <li><strong>Ask ChatGPT</strong> for a definition using Cambridge Dictionary style</li>
+  <li><strong>Copy</strong> the definition, synonyms, and example sentences</li>
+  <li><strong>Generate an image</strong> with DALL-E or another service</li>
+  <li><strong>Download</strong> the image and add the word as overlay text</li>
+  <li><strong>Copy SSML markup</strong> that ChatGPT generated</li>
+  <li><strong>Paste it into ElevenLabs</strong> to generate audio</li>
+  <li><strong>Download</strong> the audio file</li>
+  <li><strong>Manually add</strong> everything to Anki</li>
+</ol>
+
+<p>For ONE card. Now multiply that by hundreds of words.</p>
+
+<!-- IMAGE: ChatGPT project instructions showing the manual process -->
+<p><a href="/assets/images/anki-chatgpt-instructions.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-chatgpt-instructions.png" alt="ChatGPT project with flashcard instructions" /></a></p>
+
+<p>Here’s what my ChatGPT project instructions looked like—a detailed prompt asking for definitions, cloze examples, SSML markup, and image descriptions:</p>
+
+<!-- IMAGE: ChatGPT generating card content for "fidgeting" -->
+<p><a href="/assets/images/anki-chatgpt-fidgeting.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-chatgpt-fidgeting.png" alt="ChatGPT generating flashcard content" /></a></p>
+
+<p>And the generated SSML that I had to manually paste into ElevenLabs:</p>
+
+<!-- IMAGE: ElevenLabs interface with SSML pasted -->
+<p><a href="/assets/images/anki-elevenlabs-ssml.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-elevenlabs-ssml.png" alt="ElevenLabs TTS interface with SSML" /></a></p>
+
+<p>The whole process took <strong>5-10 minutes per card</strong>. It was exhausting.</p>
+
+<h2 id="the-spark-chatterbox-tts">The Spark: Chatterbox TTS</h2>
+
+<p>One day, someone mentioned <a href="https://github.com/resemble-ai/chatterbox">Chatterbox</a>—an open-source TTS model from Resemble AI that runs locally. Free. Unlimited. With voice cloning.</p>
+
+<p>That got me thinking: <strong>What if I could automate the entire process?</strong></p>
+
+<p>So I started vibecoding.</p>
+
+<h2 id="what-is-vibecoding">What is Vibecoding?</h2>
+
+<p>Vibecoding is building software by describing what you want to an AI coding assistant and letting it write the code. You guide the “vibe” of what you want, iterate on the results, and end up with working software—often without writing much code yourself.</p>
+
+<p>I used <a href="https://github.com/anthropics/claude-code">Claude Code</a> (Anthropic’s CLI tool) to build this entire app. The process was conversational: I described features, Claude wrote the code, I tested it, and we iterated.</p>
+
+<h2 id="the-result-one-click-flashcard-generation">The Result: One-Click Flashcard Generation</h2>
+
+<p>Now, creating a card looks like this:</p>
+
+<ol>
+  <li>Type a word or phrase</li>
+  <li>Click “Generate All”</li>
+  <li>Done.</li>
+</ol>
+
+<!-- IMAGE: App interface showing "too far into the weeds" example -->
+<p><a href="/assets/images/anki-app-too-far-weeds.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-app-too-far-weeds.png" alt="App generating &quot;too far into the weeds&quot; flashcard" /></a></p>
+
+<p>The app automatically:</p>
+
+<ul>
+  <li><strong>Generates a definition</strong> using Cambridge Dictionary style</li>
+  <li><strong>Creates a cloze example</strong> with proper  markup</li>
+  <li><strong>Produces an image prompt</strong> describing the example scene</li>
+  <li><strong>Generates an anime-style image</strong> from the prompt</li>
+  <li><strong>Adds text overlay</strong> with the phrase</li>
+  <li><strong>Creates audio</strong> with natural pauses using SSML</li>
+</ul>
+
+<!-- IMAGE: Generated image prompt for "too far into the weeds" -->
+<p><a href="/assets/images/anki-app-image-prompt.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-app-image-prompt.png" alt="Image prompt generation" /></a></p>
+
+<p>And the final card in Anki:</p>
+
+<!-- IMAGE: Final card preview in Anki -->
+<p><a href="/assets/images/anki-card-preview.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-card-preview.png" alt="Final Anki card preview" /></a></p>
+
+<h2 id="how-it-works-prompt-engineering-on-foundation-models">How It Works: Prompt Engineering on Foundation Models</h2>
+
+<p>The magic is <strong>prompt engineering</strong>—crafting specific instructions that foundation models follow to produce consistent, high-quality outputs.</p>
+
+<h3 id="text-generation-multiple-llm-providers">Text Generation (Multiple LLM Providers)</h3>
+
+<p>The app supports several LLM providers:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Model</th>
+      <th>How It’s Called</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Anthropic</strong></td>
+      <td>Claude</td>
+      <td><code class="language-plaintext highlighter-rouge">claude -p</code> CLI</td>
+    </tr>
+    <tr>
+      <td><strong>Google</strong></td>
+      <td>Gemini</td>
+      <td>Via MCP integration</td>
+    </tr>
+    <tr>
+      <td><strong>OpenAI</strong></td>
+      <td>Codex/GPT</td>
+      <td><code class="language-plaintext highlighter-rouge">codex exec</code> CLI</td>
+    </tr>
+    <tr>
+      <td><strong>Ollama</strong></td>
+      <td>Mistral, Llama, etc.</td>
+      <td>Local API</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Behind the scenes, when you click “Generate All”, the app runs something like:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">run</span><span class="p">(</span>
+    <span class="p">[</span><span class="sh">"</span><span class="s">claude</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">-p</span><span class="sh">"</span><span class="p">,</span> <span class="n">prompt</span><span class="p">,</span> <span class="sh">"</span><span class="s">--no-session-persistence</span><span class="sh">"</span><span class="p">],</span>
+    <span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">timeout</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>The prompt itself is carefully engineered:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">system_prompt</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">You are a vocabulary expert creating English learning flashcards.</span>
+  <span class="s">You always respond with valid JSON matching the exact schema requested.</span>
+
+  <span class="s">CRITICAL FOR EXAMPLES:</span>
+  <span class="s">- Each example MUST correctly demonstrate the definition's meaning</span>
+  <span class="s">- For IDIOMS: Use the FIGURATIVE meaning, not the literal meaning</span>
+  <span class="s">- Test: "Would a native English speaker use this phrase exactly this way?"</span>
+</code></pre></div></div>
+
+<h3 id="image-generation-multiple-providers">Image Generation (Multiple Providers)</h3>
+
+<p>The app generates an image prompt, then sends it to your chosen provider:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Model</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Pollinations.ai</strong></td>
+      <td>FLUX</td>
+      <td>Free</td>
+    </tr>
+    <tr>
+      <td><strong>Alibaba</strong></td>
+      <td>Qwen</td>
+      <td>~$0.015/img</td>
+    </tr>
+    <tr>
+      <td><strong>OpenAI</strong></td>
+      <td>DALL-E 3</td>
+      <td>~$0.04/img</td>
+    </tr>
+    <tr>
+      <td><strong>Google</strong></td>
+      <td>Imagen</td>
+      <td>~$0.02/img</td>
+    </tr>
+    <tr>
+      <td><strong>Stability AI</strong></td>
+      <td>SDXL</td>
+      <td>~$0.002/img</td>
+    </tr>
+    <tr>
+      <td><strong>Local</strong></td>
+      <td>Stable Diffusion</td>
+      <td>Free</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="audio-generation-tts-providers">Audio Generation (TTS Providers)</h3>
+
+<p>For audio, you can choose between:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Model</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Chatterbox</strong></td>
+      <td>Local TTS</td>
+      <td>Free</td>
+    </tr>
+    <tr>
+      <td><strong>ElevenLabs</strong></td>
+      <td>Eleven Multilingual v2</td>
+      <td>Per character</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The app handles SSML parsing, pause timing, and audio normalization automatically.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">audio_generator</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">text_to_speech</span><span class="p">.</span><span class="nf">convert</span><span class="p">(</span>
+    <span class="n">text</span><span class="o">=</span><span class="n">processed_text</span><span class="p">,</span>
+    <span class="n">voice_id</span><span class="o">=</span><span class="n">voice_id</span><span class="p">,</span>
+    <span class="n">model_id</span><span class="o">=</span><span class="sh">"</span><span class="s">eleven_multilingual_v2</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">voice_settings</span><span class="o">=</span><span class="n">voice_settings</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="bonus-custom-voice-cloning">Bonus: Custom Voice Cloning</h2>
+
+<p>Want to learn with a familiar voice? The app supports voice cloning using Chatterbox. You can:</p>
+
+<ol>
+  <li><strong>Record your own voice</strong> (or a friend’s with permission)</li>
+  <li><strong>Upload an audio file</strong> as a reference sample</li>
+  <li><strong>Extract audio from YouTube</strong> for royalty-free content or personal samples</li>
+  <li><strong>Generate all your flashcards</strong> with that custom voice</li>
+</ol>
+
+<p>The app even analyzes audio quality and recommends optimal clip length (10-30 seconds) for best results.</p>
+
+<!-- IMAGE: Voice cloning interface -->
+<p><a href="/assets/images/anki-voice-cloning.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-voice-cloning.png" alt="Custom voice cloning interface" /></a></p>
+
+<h2 id="what-about-anki">What About Anki?</h2>
+
+<p>Anki is a free, open-source flashcard app that uses <strong>Spaced Repetition System (SRS)</strong> to optimize learning. Based on the forgetting curve research by Hermann Ebbinghaus, SRS shows you cards just before you’re about to forget them.</p>
+
+<!-- IMAGE: Forgetting curve diagram -->
+<p><a href="/assets/images/anki-forgetting-curve.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-forgetting-curve.png" alt="The forgetting curve and spaced repetition" /></a></p>
+
+<p>The app connects directly to Anki via <a href="https://ankiweb.net/shared/info/2055492159">AnkiConnect</a>, so cards are added with one click—no manual import needed.</p>
+
+<h2 id="foundation-models-summary">Foundation Models Summary</h2>
+
+<p>Here’s what powers the app:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>Model</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Anthropic</strong></td>
+      <td>Claude (via CLI)</td>
+      <td>Text/LLM</td>
+    </tr>
+    <tr>
+      <td><strong>Google</strong></td>
+      <td>Gemini (via MCP)</td>
+      <td>Text/LLM</td>
+    </tr>
+    <tr>
+      <td><strong>OpenAI</strong></td>
+      <td>Codex/GPT (via CLI)</td>
+      <td>Text/LLM</td>
+    </tr>
+    <tr>
+      <td><strong>OpenAI</strong></td>
+      <td>DALL-E 3</td>
+      <td>Image</td>
+    </tr>
+    <tr>
+      <td><strong>Google</strong></td>
+      <td>Imagen</td>
+      <td>Image</td>
+    </tr>
+    <tr>
+      <td><strong>Stability AI</strong></td>
+      <td>Stable Diffusion XL</td>
+      <td>Image</td>
+    </tr>
+    <tr>
+      <td><strong>Alibaba</strong></td>
+      <td>Qwen (DashScope)</td>
+      <td>Image</td>
+    </tr>
+    <tr>
+      <td><strong>Pollinations.ai</strong></td>
+      <td>FLUX</td>
+      <td>Image (Free)</td>
+    </tr>
+    <tr>
+      <td><strong>Hugging Face</strong></td>
+      <td>Stable Diffusion v1.5</td>
+      <td>Image (Local)</td>
+    </tr>
+    <tr>
+      <td><strong>Hugging Face</strong></td>
+      <td>Chatterbox (Resemble AI)</td>
+      <td>TTS (Local)</td>
+    </tr>
+    <tr>
+      <td><strong>ElevenLabs</strong></td>
+      <td>Eleven Multilingual v2</td>
+      <td>TTS</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>What used to take 5-10 minutes per card now takes <strong>10 seconds</strong>. And the quality is better because the prompts are refined and consistent.</p>
+
+<p>This project is a perfect example of what’s possible when you combine:</p>
+
+<ul>
+  <li><strong>Prompt engineering</strong> to guide AI behavior</li>
+  <li><strong>Foundation models</strong> from multiple providers</li>
+  <li><strong>Vibecoding</strong> to build the app itself</li>
+  <li><strong>Local and cloud tools</strong> like Gradio, Chatterbox, and AnkiConnect</li>
+</ul>
+
+<p>The future of personal productivity tools is building exactly what you need, with AI as your coding partner.</p>
+
+<hr />
+
+<p><em>Have questions or want to discuss AI-powered learning tools? Feel free to reach out on <a href="https://www.linkedin.com/in/lgallard/">LinkedIn</a>.</em></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-tools" class="page__taxonomy-item" rel="tag">AI Tools</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/anki" class="page__taxonomy-item" rel="tag">Anki</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/elevenlabs" class="page__taxonomy-item" rel="tag">ElevenLabs</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/flashcards" class="page__taxonomy-item" rel="tag">Flashcards</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/language-learning" class="page__taxonomy-item" rel="tag">Language Learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/prompt-engineering" class="page__taxonomy-item" rel="tag">Prompt Engineering</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/spaced-repetition" class="page__taxonomy-item" rel="tag">Spaced Repetition</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/text-to-speech" class="page__taxonomy-item" rel="tag">Text-to-Speech</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/vibecoding" class="page__taxonomy-item" rel="tag">Vibecoding</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-01-30T00:00:00+00:00">January 30, 2026</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=From+Copy-Paste+Hell+to+One-Click+Magic%3A+How+I+Vibecoded+an+AI-Powered+Anki+Flashcard+Generator%20https%3A%2F%2Flgallardo.com%2F2026%2F01%2F30%2Fanki-card-generator-vibecoding-ai-flashcards%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2026%2F01%2F30%2Fanki-card-generator-vibecoding-ai-flashcards%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2026%2F01%2F30%2Fanki-card-generator-vibecoding-ai-flashcards%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2026%2F01%2F30%2Fanki-card-generator-vibecoding-ai-flashcards%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/" class="pagination--pager" title="When Claude Goes Silent: Navigating API Timeouts and Model Selection in Claude Code
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-model-switching.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/" rel="permalink">When Claude Goes Silent: Navigating API Timeouts and Model Selection in Claude Code
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Experiencing API timeouts with Opus 4.5 and Haiku 4.5? Learn how to diagnose issues using Anthropic’s status page, switch between Claude models, and leverage...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/pico-8-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I discovered Pico-8 and challenged Claude Code to build a Mastermind game without learning Lua. The code? Perfect. The art? A beautiful disaster. Here’s what...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/gh-models-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/09/19/github-models-simple-ai-workflows/" rel="permalink">GitHub Models: Simple AI Integration for DevOps Workflows
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I stumbled upon GitHub Models and decided to give it a try. Here’s how it transforms your GitHub Actions with free AI models, and when to choose it over more...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
