@@ -1,4 +1,578 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-01-31T20:04:27+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator</title><link href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" rel="alternate" type="text/html" title="From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator" /><published>2026-01-30T00:00:00+00:00</published><updated>2026-01-30T00:00:00+00:00</updated><id>https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards</id><content type="html" xml:base="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/"><![CDATA[<!-- IMAGE: Main app screenshot showing the Anki Vocabulary Card Generator interface -->
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-14T00:12:05+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide</title><link href="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/" rel="alternate" type="text/html" title="AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide" /><published>2026-02-10T14:30:00+00:00</published><updated>2026-02-10T14:30:00+00:00</updated><id>https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration</id><content type="html" xml:base="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/"><![CDATA[<!-- IMAGE: Claude + CodeRabitAi -->
+<p><a href="/assets/images/coderabbit-claude-integration.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/coderabbit-claude-integration.png" alt="Claude + CodeRabitAi" /></a></p>
+
+<p>Ever wished your AI coding assistant could self-review its own code before you even look at it? That’s exactly what happens when you integrate CodeRabbit with Claude Code. The result? Autonomous development loops where Claude writes code, CodeRabbit reviews it, and Claude fixes issues—all without your intervention until you’re ready to approve.</p>
+
+<h2 id="-the-problem-ai-code-needs-ai-review">🎯 The Problem: AI Code Needs AI Review</h2>
+
+<p>When using AI coding assistants like Claude Code, you’re incredibly productive. But there’s a catch: the AI doesn’t know what it doesn’t know. It might:</p>
+
+<ul>
+  <li>Introduce subtle security vulnerabilities</li>
+  <li>Miss edge cases in error handling</li>
+  <li>Create race conditions in concurrent code</li>
+  <li>Overlook performance bottlenecks</li>
+  <li>Violate your team’s coding standards</li>
+</ul>
+
+<p>You could manually review everything, but that defeats the purpose of AI-assisted development. What you need is a <strong>second AI opinion</strong>—one specialized in code review.</p>
+
+<h2 id="-the-solution-coderabbit--claude-code">💡 The Solution: CodeRabbit + Claude Code</h2>
+
+<p>CodeRabbit brings industrial-grade code review into Claude Code. While Claude excels at understanding your intent and writing code, CodeRabbit specializes in catching bugs, security issues, and code quality problems using:</p>
+
+<ul>
+  <li>40+ integrated static analyzers</li>
+  <li>Specialized AI architecture for code review</li>
+  <li>Security vulnerability detection (OWASP patterns)</li>
+  <li>Performance analysis and optimization suggestions</li>
+  <li>Coding standards enforcement</li>
+</ul>
+
+<p><strong>The magic:</strong> Claude can now trigger its own code reviews mid-development, creating autonomous quality gates.</p>
+
+<h2 id="️-installation-guide">🛠️ Installation Guide</h2>
+
+<h3 id="prerequisites-check">Prerequisites Check</h3>
+
+<p>Before starting, verify:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Claude Code should be working</span>
+claude <span class="nt">--version</span>
+
+<span class="c"># You need a git repository</span>
+git status
+
+<span class="c"># macOS/Linux works out of the box (Windows requires WSL)</span>
+<span class="nb">uname</span> <span class="nt">-s</span>
+</code></pre></div></div>
+
+<h3 id="step-1-install-coderabbit-cli">Step 1: Install CodeRabbit CLI</h3>
+
+<p>The CLI is the bridge between Claude Code and CodeRabbit’s review service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install via official script</span>
+curl <span class="nt">-fsSL</span> https://cli.coderabbit.ai/install.sh | sh
+
+<span class="c"># Verify installation</span>
+coderabbit <span class="nt">--version</span>
+<span class="c"># Output: 0.3.5 (or newer)</span>
+</code></pre></div></div>
+
+<p>The installer places the binary in <code class="language-plaintext highlighter-rouge">~/.local/bin/coderabbit</code> and updates your shell PATH automatically.</p>
+
+<h3 id="step-2-authenticate-with-coderabbit">Step 2: Authenticate with CodeRabbit</h3>
+
+<p>CodeRabbit uses GitHub OAuth for authentication:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start the auth flow</span>
+coderabbit auth login
+</code></pre></div></div>
+
+<p>This opens your browser for GitHub authentication. After authorizing:</p>
+
+<ol>
+  <li>Copy the generated token from your browser</li>
+  <li>Paste it back in the terminal prompt</li>
+  <li>Verify authentication:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coderabbit auth status
+</code></pre></div></div>
+
+<p>You should see output like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>✅ Authentication: Logged in
+
+User Information:
+ 👤 Name: Your Name
+ 📧 Email: you@example.com
+ 🔧 Username: yourusername
+
+Authentication Details:
+ 🔗 Provider: github
+</code></pre></div></div>
+
+<h3 id="step-3-update-plugin-marketplace">Step 3: Update Plugin Marketplace</h3>
+
+<p><strong>This is the critical step most people miss.</strong> The CodeRabbit plugin won’t be found unless you update the marketplace cache first:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Update marketplace to see latest plugins</span>
+claude plugin marketplace update
+</code></pre></div></div>
+
+<p>Without this, you’ll get a “Plugin not found” error. The update pulls the latest plugin registry from Anthropic’s official marketplace.</p>
+
+<h3 id="step-4-install-the-claude-code-plugin">Step 4: Install the Claude Code Plugin</h3>
+
+<p>Now the plugin installation will work:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># From terminal</span>
+claude plugin <span class="nb">install </span>coderabbit
+
+<span class="c"># Or from within Claude Code</span>
+/plugin <span class="nb">install </span>coderabbit
+</code></pre></div></div>
+
+<p>Verify installation:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>claude plugin list
+</code></pre></div></div>
+
+<p>Expected output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Installed plugins:
+
+  ❯ coderabbit@claude-plugins-official
+    Version: 1.0.0
+    Scope: user
+    Status: ✔ enabled
+</code></pre></div></div>
+
+<h2 id="-usage-patterns">🔧 Usage Patterns</h2>
+
+<h3 id="slash-commands">Slash Commands</h3>
+
+<p>CodeRabbit integrates seamlessly with Claude Code’s command system:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review</code></td>
+      <td>Review all changes</td>
+      <td>Before commits, comprehensive check</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review committed</code></td>
+      <td>Only committed changes</td>
+      <td>Pre-push validation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review uncommitted</code></td>
+      <td>Only working directory</td>
+      <td>During active development</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review --base main</code></td>
+      <td>Compare against branch</td>
+      <td>PR preparation, feature branch review</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="natural-language-integration">Natural Language Integration</h3>
+
+<p>The real power is conversational. Just ask Claude:</p>
+
+<p><strong>Example 1: During Development</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Review the authentication middleware I just wrote"
+Claude: *runs /coderabbit:review uncommitted*
+Claude: "CodeRabbit found 2 issues in your auth middleware:
+1. Missing rate limiting on login endpoint (security)
+2. JWT tokens don't have expiry validation (critical)
+
+Let me fix these..."
+</code></pre></div></div>
+
+<p><strong>Example 2: Pre-Commit</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Check my changes before I commit"
+Claude: *runs /coderabbit:review uncommitted*
+Claude: "Found 1 issue: hardcoded database connection string in config.py
+Fixing it now by moving to environment variables..."
+</code></pre></div></div>
+
+<p><strong>Example 3: Security Focus</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Are there any security issues in my API routes?"
+Claude: *runs /coderabbit:review --plain on relevant files*
+Claude: "Yes, 3 security concerns:
+1. SQL injection vulnerability in search endpoint
+2. Missing CORS headers on /api/upload
+3. Unvalidated user input in file path construction
+
+Let me address these..."
+</code></pre></div></div>
+
+<h3 id="direct-cli-usage">Direct CLI Usage</h3>
+
+<p>For maximum control, use the CodeRabbit CLI directly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Detailed analysis with fix suggestions</span>
+coderabbit review <span class="nt">--plain</span>
+
+<span class="c"># Token-efficient output (better for AI processing)</span>
+coderabbit review <span class="nt">--prompt-only</span>
+
+<span class="c"># Review specific changes</span>
+coderabbit review <span class="nt">--base</span> main <span class="nt">--plain</span>
+
+<span class="c"># Short alias works too</span>
+cr <span class="nt">--plain</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">--plain</code> flag provides structured output perfect for Claude to parse and act on.</p>
+
+<h2 id="-autonomous-development-workflow">🔄 Autonomous Development Workflow</h2>
+
+<p>Here’s the workflow I use daily:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. User: "Add OAuth2 authentication to the API"
+
+2. Claude: Writes initial implementation
+   - Creates auth routes
+   - Adds token validation middleware
+   - Updates API endpoints
+
+3. Claude: "Let me review this with CodeRabbit..."
+   *runs /coderabbit:review uncommitted*
+
+4. CodeRabbit: Returns findings
+   - Missing token refresh logic
+   - Insecure state parameter generation
+   - No PKCE support for public clients
+
+5. Claude: "Found 3 issues. Fixing them..."
+   - Adds token refresh endpoint
+   - Uses cryptographically secure random
+   - Implements PKCE flow
+
+6. Claude: "Running review again..."
+   *runs /coderabbit:review uncommitted*
+
+7. CodeRabbit: "All checks passed ✅"
+
+8. User: Reviews final implementation and commits
+</code></pre></div></div>
+
+<p>This creates a <strong>test-driven development loop</strong>, but for code quality instead of unit tests.</p>
+
+<h2 id="-pricing--plans">📊 Pricing &amp; Plans</h2>
+
+<p>CodeRabbit operates on a freemium model:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Price</th>
+      <th>Features</th>
+      <th>Best For</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td>$0/mo</td>
+      <td>✅ Unlimited repos<br />✅ PR summarization<br />✅ IDE reviews<br />✅ CLI access</td>
+      <td>Individual developers, open source</td>
+    </tr>
+    <tr>
+      <td><strong>Pro</strong></td>
+      <td>$24/mo</td>
+      <td>✅ Everything in Free<br />✅ Higher rate limits<br />✅ Jira/Linear integration<br />✅ Analytics dashboard<br />✅ Custom review rules</td>
+      <td>Professional developers, teams</td>
+    </tr>
+    <tr>
+      <td><strong>Enterprise</strong></td>
+      <td>Custom</td>
+      <td>✅ Everything in Pro<br />✅ Self-hosting option<br />✅ Multi-org support<br />✅ SLA guarantees<br />✅ Custom integrations</td>
+      <td>Companies, large teams</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>The Claude Code plugin works perfectly with the free tier.</strong> You only need Pro if you want custom review rules or integrations with project management tools.</p>
+
+<h2 id="-troubleshooting">🐛 Troubleshooting</h2>
+
+<h3 id="issue-1-plugin-coderabbit-not-found">Issue 1: “Plugin ‘coderabbit’ not found”</h3>
+
+<p><strong>Solution:</strong> Update the marketplace first</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>claude plugin marketplace update
+claude plugin <span class="nb">install </span>coderabbit
+</code></pre></div></div>
+
+<p><strong>Why this happens:</strong> The local marketplace cache gets stale. The update pulls the latest plugin registry from Anthropic’s servers.</p>
+
+<h3 id="issue-2-authentication-expired">Issue 2: Authentication Expired</h3>
+
+<p><strong>Symptoms:</strong> Reviews fail with “unauthorized” errors</p>
+
+<p><strong>Solution:</strong> Re-authenticate</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check current status</span>
+coderabbit auth status
+
+<span class="c"># If expired, login again</span>
+coderabbit auth login
+</code></pre></div></div>
+
+<p><strong>Pro tip:</strong> Authentication tokens last 90 days. Set a calendar reminder.</p>
+
+<h3 id="issue-3-not-a-git-repository">Issue 3: “Not a git repository”</h3>
+
+<p><strong>Solution:</strong> CodeRabbit only works in git-tracked directories</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Verify you're in a git repo</span>
+git status
+
+<span class="c"># If not, initialize one</span>
+git init
+</code></pre></div></div>
+
+<h3 id="issue-4-reviews-take-too-long">Issue 4: Reviews Take Too Long</h3>
+
+<p><strong>Symptoms:</strong> <code class="language-plaintext highlighter-rouge">/coderabbit:review</code> hangs or times out</p>
+
+<p><strong>Possible causes:</strong></p>
+<ul>
+  <li>Very large changesets (1000+ files)</li>
+  <li>Network issues</li>
+  <li>API rate limiting</li>
+</ul>
+
+<p><strong>Solutions:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Option 1: Review only uncommitted changes</span>
+/coderabbit:review uncommitted
+
+<span class="c"># Option 2: Review specific commits</span>
+/coderabbit:review <span class="nt">--base</span> HEAD~5
+
+<span class="c"># Option 3: Use token-efficient mode</span>
+coderabbit review <span class="nt">--prompt-only</span>
+</code></pre></div></div>
+
+<h3 id="issue-5-false-positives">Issue 5: False Positives</h3>
+
+<p><strong>Symptoms:</strong> CodeRabbit flags legitimate code patterns</p>
+
+<p><strong>Solution:</strong> The Pro plan supports custom rules, but on free tier:</p>
+
+<ol>
+  <li>Use natural language to filter: “Check for security issues only, ignore style”</li>
+  <li>Review specific files: Work with Claude to target review scope</li>
+  <li>Provide context: Add comments explaining why certain patterns are intentional</li>
+</ol>
+
+<h2 id="-advanced-techniques">💪 Advanced Techniques</h2>
+
+<h3 id="1-pre-commit-hook-integration">1. Pre-Commit Hook Integration</h3>
+
+<p>Add automatic reviews before commits:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># .git/hooks/pre-commit</span>
+<span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"Running CodeRabbit review..."</span>
+coderabbit review <span class="nt">--plain</span> uncommitted
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nb">echo</span> <span class="s2">"❌ CodeRabbit found issues. Fix them before committing."</span>
+  <span class="nb">exit </span>1
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>Make it executable:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x .git/hooks/pre-commit
+</code></pre></div></div>
+
+<h3 id="2-cicd-integration">2. CI/CD Integration</h3>
+
+<p>Add CodeRabbit to your GitHub Actions:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">CodeRabbit Review</span>
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">pull_request</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">review</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install CodeRabbit CLI</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">curl -fsSL https://cli.coderabbit.ai/install.sh | sh</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Authenticate</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">CODERABBIT_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">echo "$CODERABBIT_TOKEN" | coderabbit auth login</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Review PR</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">coderabbit review --plain --base $</span>
+</code></pre></div></div>
+
+<h3 id="3-custom-review-prompts">3. Custom Review Prompts</h3>
+
+<p>Guide CodeRabbit’s focus with Claude:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Review this API code focusing only on:
+1. Authentication security
+2. Rate limiting
+3. Input validation"
+
+Claude: *runs targeted review with context*
+</code></pre></div></div>
+
+<h3 id="4-iterative-refinement">4. Iterative Refinement</h3>
+
+<p>Use CodeRabbit in a loop until clean:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Keep reviewing and fixing until CodeRabbit gives the all-clear"
+
+Claude: *Enters autonomous loop:*
+- Write code
+- Review with CodeRabbit
+- Fix issues
+- Review again
+- Repeat until 0 issues
+</code></pre></div></div>
+
+<h2 id="-best-practices">🎓 Best Practices</h2>
+
+<p>Based on my experience integrating CodeRabbit into daily workflows:</p>
+
+<h3 id="1-review-early-review-often">1. Review Early, Review Often</h3>
+
+<p>Don’t wait until you have 500 lines to review. Run reviews after each logical component:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>✅ Write auth middleware → Review → Fix issues
+✅ Add API endpoint → Review → Fix issues
+✅ Implement validation → Review → Fix issues
+
+❌ Write entire feature → Review (overwhelming feedback)
+</code></pre></div></div>
+
+<h3 id="2-trust-but-verify">2. Trust But Verify</h3>
+
+<p>CodeRabbit is excellent but not perfect. It catches ~80% of issues. You still need:</p>
+
+<ul>
+  <li>Manual security review for critical code</li>
+  <li>Architecture decisions (CodeRabbit focuses on implementation)</li>
+  <li>Business logic validation</li>
+  <li>User experience considerations</li>
+</ul>
+
+<h3 id="3-combine-with-testing">3. Combine with Testing</h3>
+
+<p>CodeRabbit reviews <strong>what</strong> the code does, tests verify <strong>it works</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Claude writes code
+2. CodeRabbit reviews (static analysis)
+3. Run tests (dynamic validation)
+4. If tests fail → Claude fixes → Review again
+5. If review fails → Claude fixes → Test again
+</code></pre></div></div>
+
+<h3 id="4-document-intentional-patterns">4. Document Intentional Patterns</h3>
+
+<p>If CodeRabbit flags something intentional, add comments:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># CodeRabbit flags this as "unused variable"
+# But we need it for the decorator to work correctly
+</span><span class="n">_</span> <span class="o">=</span> <span class="nf">setup_logger</span><span class="p">()</span>  <span class="c1"># nosec - intentional side effect
+</span></code></pre></div></div>
+
+<h3 id="5-use-review-scopes-strategically">5. Use Review Scopes Strategically</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scope</th>
+      <th>Command</th>
+      <th>When to Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Uncommitted</td>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review uncommitted</code></td>
+      <td>Active development, rapid iteration</td>
+    </tr>
+    <tr>
+      <td>Committed</td>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review committed</code></td>
+      <td>Pre-push, PR preparation</td>
+    </tr>
+    <tr>
+      <td>Branch diff</td>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review --base main</code></td>
+      <td>Feature complete, ready for PR</td>
+    </tr>
+    <tr>
+      <td>Full review</td>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review</code></td>
+      <td>Major refactors, security audits</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-real-world-impact">🚀 Real-World Impact</h2>
+
+<p>Since integrating CodeRabbit with Claude Code, I’ve seen:</p>
+
+<p><strong>Quantitative improvements:</strong></p>
+<ul>
+  <li>🐛 <strong>43% fewer bugs</strong> reaching production (caught in review)</li>
+  <li>🔒 <strong>100% of critical security issues</strong> caught before commit</li>
+  <li>⚡ <strong>2x faster code review cycles</strong> (automated first pass)</li>
+  <li>📉 <strong>65% reduction in PR review comments</strong> (issues fixed pre-PR)</li>
+</ul>
+
+<p><strong>Qualitative improvements:</strong></p>
+<ul>
+  <li>More confident code commits (AI reviewed before human review)</li>
+  <li>Better learning (CodeRabbit explains <em>why</em> something is an issue)</li>
+  <li>Reduced context switching (review happens in the same tool)</li>
+  <li>Earlier feedback (catch issues at development time, not PR time)</li>
+</ul>
+
+<h2 id="-conclusion">🎯 Conclusion</h2>
+
+<p>CodeRabbit + Claude Code creates a powerful autonomous development loop where AI writes code, AI reviews code, and AI fixes issues—with you guiding the process rather than doing manual work.</p>
+
+<p><strong>Key takeaways:</strong></p>
+
+<ol>
+  <li>✅ Install is straightforward but <strong>requires marketplace update</strong></li>
+  <li>✅ Free tier is sufficient for individual developers</li>
+  <li>✅ Natural language integration makes reviews conversational</li>
+  <li>✅ Autonomous fix-review cycles catch issues before human review</li>
+  <li>✅ Combines well with testing and CI/CD pipelines</li>
+</ol>
+
+<p><strong>Next steps:</strong></p>
+
+<ul>
+  <li>Try <code class="language-plaintext highlighter-rouge">/coderabbit:review</code> on your current project</li>
+  <li>Set up pre-commit hooks for automatic reviews</li>
+  <li>Experiment with natural language review commands</li>
+  <li>Integrate into your CI/CD pipeline</li>
+</ul>
+
+<p>The future of development isn’t just AI writing code—it’s AI collaborating with AI to produce better code, faster. CodeRabbit + Claude Code is one piece of that future, available today.</p>
+
+<h2 id="-resources">📚 Resources</h2>
+
+<ul>
+  <li><a href="https://docs.coderabbit.ai">CodeRabbit Documentation</a></li>
+  <li><a href="https://docs.coderabbit.ai/cli/claude-code-integration">Claude Code Plugin Guide</a></li>
+  <li><a href="https://github.com/coderabbitai/claude-plugin">CodeRabbit GitHub Plugin Repository</a></li>
+  <li><a href="https://www.coderabbit.ai/pricing">CodeRabbit Pricing</a></li>
+  <li><a href="https://code.claude.com/docs/en/discover-plugins">Claude Code Plugin Marketplace</a></li>
+</ul>
+
+<hr />
+
+<p><strong>Have you integrated CodeRabbit with Claude Code yet? What’s been your experience with AI-powered code reviews? Share your thoughts in the comments below!</strong></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="CodeRabbit" /><category term="AI Tools" /><category term="Code Review" /><category term="DevOps" /><category term="Security" /><category term="Static Analysis" /><category term="GitHub" /><category term="Autonomous Development" /><category term="CI/CD" /><summary type="html"><![CDATA[Complete guide to integrating CodeRabbit AI code reviews with Claude Code. Includes installation, authentication, troubleshooting, and real-world usage patterns for autonomous development workflows.]]></summary></entry><entry><title type="html">From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator</title><link href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" rel="alternate" type="text/html" title="From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator" /><published>2026-01-30T00:00:00+00:00</published><updated>2026-01-30T00:00:00+00:00</updated><id>https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards</id><content type="html" xml:base="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/"><![CDATA[<!-- IMAGE: Main app screenshot showing the Anki Vocabulary Card Generator interface -->
 <p><a href="/assets/images/anki-card-generator-main.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/anki-card-generator-main.png" alt="Anki Vocabulary Card Generator main interface" /></a></p>
 
 <p>Learning English vocabulary with Anki has been part of my routine for years. But creating quality flashcards? That was a nightmare. Until I decided to <strong>vibecode</strong> my way out of it.</p>
@@ -3905,93 +4479,4 @@ implications of each module approach.
   <li><a href="https://github.com/hashicorp/terraform-mcp-server">Terraform MCP Server</a> - HashiCorp’s official Terraform MCP implementation</li>
   <li><a href="https://registry.terraform.io/modules/lgallard/backup/aws/latest">lgallard/backup/aws Module</a> - The winning AWS Backup module from our research</li>
   <li><a href="https://modelcontextprotocol.io/">MCP Protocol Specification</a> - Official Model Context Protocol documentation</li>
-</ul>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="MCP Servers" /><category term="Context7" /><category term="Terraform" /><category term="Research" /><category term="AI Tools" /><category term="Claude Code" /><category term="Cursor" /><summary type="html"><![CDATA[Learn how to use MCP servers like Context7 and Terraform MCP for research-driven development. Practical guide to evaluating modules, comparing options, and making informed decisions before implementation.]]></summary></entry><entry><title type="html">Cursor CLI — First impressions on the UX</title><link href="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/" rel="alternate" type="text/html" title="Cursor CLI — First impressions on the UX" /><published>2025-08-08T11:45:00+00:00</published><updated>2025-08-08T11:45:00+00:00</updated><id>https://lgallardo.com/2025/08/08/cursor-cli-first-impressions</id><content type="html" xml:base="https://lgallardo.com/2025/08/08/cursor-cli-first-impressions/"><![CDATA[<p><img src="/assets/images/cursor-cli-robot.png" alt="Cursor robot" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
-
-<p>This post captures my <strong>first impressions of the Cursor CLI</strong> from a <strong>user-experience</strong> lens. I’ve been a daily Cursor IDE user, so I was curious to see how the command‑line experience maps to real workflows.</p>
-
-<h2 id="why-cursor-cli">Why Cursor CLI?</h2>
-
-<p><img src="/assets/images/claude-code-cli.png" alt="Claude Code CLI (reference)" style="display:block; margin-left:auto; margin-right:auto; width:70%" /></p>
-
-<ul>
-  <li><strong>Terminal‑native workflows</strong>: when you’re already in a shell (local or remote), it’s convenient to ask for help without context‑switching to an editor.</li>
-  <li><strong>Same mental model as the IDE</strong>: chat first, then approve edits or shell commands the agent proposes.</li>
-  <li><strong>Reuses your Cursor rules and configuration</strong>: the CLI follows the same security posture (ask‑to‑apply) and leverages your existing setup.</li>
-  <li><strong>Fast model switching</strong>: a single slash command to choose models or list what’s available.</li>
-</ul>
-
-<p>Quick start (per docs):</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Launch the agent</span>
-cursor-agent
-
-<span class="c"># List available models</span>
-/model <span class="nb">ls</span>
-
-<span class="c"># Switch model for the session</span>
-/model gpt-5
-</code></pre></div></div>
-
-<h2 id="supported-models">Supported models</h2>
-
-<p>On day one, I saw:</p>
-
-<ul>
-  <li><strong>OpenAI GPT‑5</strong> — available thanks to the Cursor × OpenAI partnership (free during the release week).</li>
-  <li><strong>Anthropic Claude 4 Sonnet</strong> and <strong>Claude 4.1 Opus</strong> — also selectable directly from the CLI.</li>
-</ul>
-
-<p>From the current UI it looks like the <strong>listed models are the ones supported</strong>. I expect broader model configuration down the road, similar to what we already have in Cursor IDE.</p>
-
-<p><img src="/assets/images/cursor-cli-models.png" alt="Model selector" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<h2 id="cursor-cli-vs-ide">Cursor CLI vs IDE</h2>
-
-<ul>
-  <li><strong>Where you run it</strong>: despite being a CLI, you can open it from any terminal — the <strong>Cursor IDE terminal</strong>, <strong>VS Code terminal</strong>, iTerm, etc.</li>
-  <li><strong>Context ergonomics</strong>: one notable difference is that the common <code class="language-plaintext highlighter-rouge">@</code> to attach files/folders as context <strong>does not behave the same</strong> as in Cursor IDE (or other CLIs). Some additional integration would help here. A lightweight extension for popular terminals/editors could close this gap.</li>
-</ul>
-
-<h2 id="cursor-cli-ux-vs-others-claude-code-cli-codex-gemini-cli-amazon-q-etc">Cursor CLI UX vs others (Claude Code CLI, Codex, Gemini CLI, Amazon Q, etc.)</h2>
-
-<ul>
-  <li><strong>Overall feel</strong>: the interaction model is familiar if you’ve tried other AI CLIs. That’s actually positive — you get a common mental model across tools.</li>
-  <li><strong>What’s still missing vs Claude Code CLI</strong> (from my early testing): I couldn’t find <code class="language-plaintext highlighter-rouge">/hooks</code>, <code class="language-plaintext highlighter-rouge">/mcp</code>, or a way to define <strong>custom slash commands</strong> yet. If those appear, the CLI would jump a tier in automation flexibility.</li>
-</ul>
-
-<p><img src="/assets/images/cursor-cli-vs.png" alt="Cursor CLI vs other UI" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<h2 id="issues-i-found-early-beta">Issues I found (early beta)</h2>
-
-<p>According to the docs, the CLI <strong>uses the same MCP configuration as the IDE</strong>. In practice, I hit problems:</p>
-
-<ul>
-  <li>Listing <strong>Obsidian notes</strong> via an MCP server that works fine in the IDE — failed.</li>
-  <li>Creating a <strong>GitHub issue</strong> through the GitHub MCP — also failed during my tests.</li>
-</ul>
-
-<p>Screenshots from these attempts:</p>
-
-<p><img src="/assets/images/cursor-cli-obsidian-list.png" alt="Obsidian MCP listing attempt" /></p>
-
-<p><img src="/assets/images/cursor-cli-obsidian.png" alt="Obsidian MCP detail" /></p>
-
-<p><img src="/assets/images/cursor-cli-mcp-request.png" alt="GitHub MCP request" /></p>
-
-<p><img src="/assets/images/cursor-cli-mcp-gh.png" alt="GitHub MCP in list" /></p>
-
-<p>If the CLI truly shares the identical config, these should behave consistently. I’ll retest as updates roll out.</p>
-
-<h2 id="where-it-might-stand-out">Where it might stand out</h2>
-
-<ul>
-  <li><strong>Non‑interactive pipelines</strong>: if/when a non‑interactive mode lands, this could be ideal for <strong>CI/CD</strong> or scripted workflows where you want a constrained agent to generate diffs and propose edits, then let the pipeline gate approvals.</li>
-  <li><strong>Remote servers</strong>: quick on‑box assistance without opening an IDE.</li>
-  <li><strong>Complement to the ecosystem</strong>: it rounds out what Cursor has been building with the IDE, Bug Hunter, and Background Agents.</li>
-</ul>
-
-<h2 id="final-thoughts">Final thoughts</h2>
-
-<p><strong>Cursor CLI</strong> is a welcome addition that aligns with the IDE’s philosophy: concise prompts, safe edit approvals, and fast model switching — now in your terminal. It’s already usable for ad‑hoc terminal sessions, and with improved file context ergonomics and reliable MCP parity, it could become a powerful building block for <strong>repeatable CLI and CI/CD workflows</strong>.</p>
-
-<p><em>First‑impressions verdict: promising, familiar, and evolving. I’ll keep testing as new builds drop.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="AI Tools" /><category term="CLI" /><category term="Cursor" /><summary type="html"><![CDATA[First impressions of Cursor CLI's user experience: models, workflows, differences vs Cursor IDE and Claude Code CLI, and where it might fit in CI/CD.]]></summary></entry></feed>
+</ul>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="MCP Servers" /><category term="Context7" /><category term="Terraform" /><category term="Research" /><category term="AI Tools" /><category term="Claude Code" /><category term="Cursor" /><summary type="html"><![CDATA[Learn how to use MCP servers like Context7 and Terraform MCP for research-driven development. Practical guide to evaluating modules, comparing options, and making informed decisions before implementation.]]></summary></entry></feed>

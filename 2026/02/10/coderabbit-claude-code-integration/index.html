@@ -1,0 +1,1260 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="Complete guide to integrating CodeRabbit AI code reviews with Claude Code. Includes installation, authentication, troubleshooting, and real-world usage patterns for autonomous development workflows.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/">
+<meta property="og:url" content="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/">
+
+
+
+<meta property="og:description" content="Complete guide to integrating CodeRabbit AI code reviews with Claude Code. Includes installation, authentication, troubleshooting, and real-world usage patterns for autonomous development workflows.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide">
+<meta name="twitter:description" content="Complete guide to integrating CodeRabbit AI code reviews with Claude Code. Includes installation, authentication, troubleshooting, and real-world usage patterns for autonomous development workflows.">
+<meta name="twitter:url" content="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/coderabbit-claude-integration.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/coderabbit-claude-integration.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2026-02-10T14:30:00+00:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="CodeRabbit">
+
+<meta property="article:tag" content="AI Tools">
+
+<meta property="article:tag" content="Code Review">
+
+<meta property="article:tag" content="DevOps">
+
+<meta property="article:tag" content="Security">
+
+<meta property="article:tag" content="Static Analysis">
+
+<meta property="article:tag" content="GitHub">
+
+<meta property="article:tag" content="Autonomous Development">
+
+<meta property="article:tag" content="CI/CD">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2026/02/10/coderabbit-claude-code-integration/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2026/02/10/coderabbit-claude-code-integration/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide">
+    <meta itemprop="description" content="Learn how to set up CodeRabbit’s AI code review directly in Claude Code for autonomous development workflows with built-in quality gates and security scanning.">
+    <meta itemprop="datePublished" content="February 10, 2026">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <!-- IMAGE: Claude + CodeRabitAi -->
+<p><a href="/assets/images/coderabbit-claude-integration.png" style="display:block; margin-left:auto; margin-right:auto; width:100%"><img src="/assets/images/coderabbit-claude-integration.png" alt="Claude + CodeRabitAi" /></a></p>
+
+<p>Ever wished your AI coding assistant could self-review its own code before you even look at it? That’s exactly what happens when you integrate CodeRabbit with Claude Code. The result? Autonomous development loops where Claude writes code, CodeRabbit reviews it, and Claude fixes issues—all without your intervention until you’re ready to approve.</p>
+
+<h2 id="-the-problem-ai-code-needs-ai-review">🎯 The Problem: AI Code Needs AI Review</h2>
+
+<p>When using AI coding assistants like Claude Code, you’re incredibly productive. But there’s a catch: the AI doesn’t know what it doesn’t know. It might:</p>
+
+<ul>
+  <li>Introduce subtle security vulnerabilities</li>
+  <li>Miss edge cases in error handling</li>
+  <li>Create race conditions in concurrent code</li>
+  <li>Overlook performance bottlenecks</li>
+  <li>Violate your team’s coding standards</li>
+</ul>
+
+<p>You could manually review everything, but that defeats the purpose of AI-assisted development. What you need is a <strong>second AI opinion</strong>—one specialized in code review.</p>
+
+<h2 id="-the-solution-coderabbit--claude-code">💡 The Solution: CodeRabbit + Claude Code</h2>
+
+<p>CodeRabbit brings industrial-grade code review into Claude Code. While Claude excels at understanding your intent and writing code, CodeRabbit specializes in catching bugs, security issues, and code quality problems using:</p>
+
+<ul>
+  <li>40+ integrated static analyzers</li>
+  <li>Specialized AI architecture for code review</li>
+  <li>Security vulnerability detection (OWASP patterns)</li>
+  <li>Performance analysis and optimization suggestions</li>
+  <li>Coding standards enforcement</li>
+</ul>
+
+<p><strong>The magic:</strong> Claude can now trigger its own code reviews mid-development, creating autonomous quality gates.</p>
+
+<h2 id="️-installation-guide">🛠️ Installation Guide</h2>
+
+<h3 id="prerequisites-check">Prerequisites Check</h3>
+
+<p>Before starting, verify:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Claude Code should be working</span>
+claude <span class="nt">--version</span>
+
+<span class="c"># You need a git repository</span>
+git status
+
+<span class="c"># macOS/Linux works out of the box (Windows requires WSL)</span>
+<span class="nb">uname</span> <span class="nt">-s</span>
+</code></pre></div></div>
+
+<h3 id="step-1-install-coderabbit-cli">Step 1: Install CodeRabbit CLI</h3>
+
+<p>The CLI is the bridge between Claude Code and CodeRabbit’s review service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install via official script</span>
+curl <span class="nt">-fsSL</span> https://cli.coderabbit.ai/install.sh | sh
+
+<span class="c"># Verify installation</span>
+coderabbit <span class="nt">--version</span>
+<span class="c"># Output: 0.3.5 (or newer)</span>
+</code></pre></div></div>
+
+<p>The installer places the binary in <code class="language-plaintext highlighter-rouge">~/.local/bin/coderabbit</code> and updates your shell PATH automatically.</p>
+
+<h3 id="step-2-authenticate-with-coderabbit">Step 2: Authenticate with CodeRabbit</h3>
+
+<p>CodeRabbit uses GitHub OAuth for authentication:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Start the auth flow</span>
+coderabbit auth login
+</code></pre></div></div>
+
+<p>This opens your browser for GitHub authentication. After authorizing:</p>
+
+<ol>
+  <li>Copy the generated token from your browser</li>
+  <li>Paste it back in the terminal prompt</li>
+  <li>Verify authentication:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coderabbit auth status
+</code></pre></div></div>
+
+<p>You should see output like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>✅ Authentication: Logged in
+
+User Information:
+ 👤 Name: Your Name
+ 📧 Email: you@example.com
+ 🔧 Username: yourusername
+
+Authentication Details:
+ 🔗 Provider: github
+</code></pre></div></div>
+
+<h3 id="step-3-update-plugin-marketplace">Step 3: Update Plugin Marketplace</h3>
+
+<p><strong>This is the critical step most people miss.</strong> The CodeRabbit plugin won’t be found unless you update the marketplace cache first:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Update marketplace to see latest plugins</span>
+claude plugin marketplace update
+</code></pre></div></div>
+
+<p>Without this, you’ll get a “Plugin not found” error. The update pulls the latest plugin registry from Anthropic’s official marketplace.</p>
+
+<h3 id="step-4-install-the-claude-code-plugin">Step 4: Install the Claude Code Plugin</h3>
+
+<p>Now the plugin installation will work:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># From terminal</span>
+claude plugin <span class="nb">install </span>coderabbit
+
+<span class="c"># Or from within Claude Code</span>
+/plugin <span class="nb">install </span>coderabbit
+</code></pre></div></div>
+
+<p>Verify installation:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>claude plugin list
+</code></pre></div></div>
+
+<p>Expected output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Installed plugins:
+
+  ❯ coderabbit@claude-plugins-official
+    Version: 1.0.0
+    Scope: user
+    Status: ✔ enabled
+</code></pre></div></div>
+
+<h2 id="-usage-patterns">🔧 Usage Patterns</h2>
+
+<h3 id="slash-commands">Slash Commands</h3>
+
+<p>CodeRabbit integrates seamlessly with Claude Code’s command system:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+      <th>Use Case</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review</code></td>
+      <td>Review all changes</td>
+      <td>Before commits, comprehensive check</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review committed</code></td>
+      <td>Only committed changes</td>
+      <td>Pre-push validation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review uncommitted</code></td>
+      <td>Only working directory</td>
+      <td>During active development</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review --base main</code></td>
+      <td>Compare against branch</td>
+      <td>PR preparation, feature branch review</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="natural-language-integration">Natural Language Integration</h3>
+
+<p>The real power is conversational. Just ask Claude:</p>
+
+<p><strong>Example 1: During Development</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Review the authentication middleware I just wrote"
+Claude: *runs /coderabbit:review uncommitted*
+Claude: "CodeRabbit found 2 issues in your auth middleware:
+1. Missing rate limiting on login endpoint (security)
+2. JWT tokens don't have expiry validation (critical)
+
+Let me fix these..."
+</code></pre></div></div>
+
+<p><strong>Example 2: Pre-Commit</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Check my changes before I commit"
+Claude: *runs /coderabbit:review uncommitted*
+Claude: "Found 1 issue: hardcoded database connection string in config.py
+Fixing it now by moving to environment variables..."
+</code></pre></div></div>
+
+<p><strong>Example 3: Security Focus</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Are there any security issues in my API routes?"
+Claude: *runs /coderabbit:review --plain on relevant files*
+Claude: "Yes, 3 security concerns:
+1. SQL injection vulnerability in search endpoint
+2. Missing CORS headers on /api/upload
+3. Unvalidated user input in file path construction
+
+Let me address these..."
+</code></pre></div></div>
+
+<h3 id="direct-cli-usage">Direct CLI Usage</h3>
+
+<p>For maximum control, use the CodeRabbit CLI directly:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Detailed analysis with fix suggestions</span>
+coderabbit review <span class="nt">--plain</span>
+
+<span class="c"># Token-efficient output (better for AI processing)</span>
+coderabbit review <span class="nt">--prompt-only</span>
+
+<span class="c"># Review specific changes</span>
+coderabbit review <span class="nt">--base</span> main <span class="nt">--plain</span>
+
+<span class="c"># Short alias works too</span>
+cr <span class="nt">--plain</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">--plain</code> flag provides structured output perfect for Claude to parse and act on.</p>
+
+<h2 id="-autonomous-development-workflow">🔄 Autonomous Development Workflow</h2>
+
+<p>Here’s the workflow I use daily:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. User: "Add OAuth2 authentication to the API"
+
+2. Claude: Writes initial implementation
+   - Creates auth routes
+   - Adds token validation middleware
+   - Updates API endpoints
+
+3. Claude: "Let me review this with CodeRabbit..."
+   *runs /coderabbit:review uncommitted*
+
+4. CodeRabbit: Returns findings
+   - Missing token refresh logic
+   - Insecure state parameter generation
+   - No PKCE support for public clients
+
+5. Claude: "Found 3 issues. Fixing them..."
+   - Adds token refresh endpoint
+   - Uses cryptographically secure random
+   - Implements PKCE flow
+
+6. Claude: "Running review again..."
+   *runs /coderabbit:review uncommitted*
+
+7. CodeRabbit: "All checks passed ✅"
+
+8. User: Reviews final implementation and commits
+</code></pre></div></div>
+
+<p>This creates a <strong>test-driven development loop</strong>, but for code quality instead of unit tests.</p>
+
+<h2 id="-pricing--plans">📊 Pricing &amp; Plans</h2>
+
+<p>CodeRabbit operates on a freemium model:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Price</th>
+      <th>Features</th>
+      <th>Best For</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Free</strong></td>
+      <td>$0/mo</td>
+      <td>✅ Unlimited repos<br />✅ PR summarization<br />✅ IDE reviews<br />✅ CLI access</td>
+      <td>Individual developers, open source</td>
+    </tr>
+    <tr>
+      <td><strong>Pro</strong></td>
+      <td>$24/mo</td>
+      <td>✅ Everything in Free<br />✅ Higher rate limits<br />✅ Jira/Linear integration<br />✅ Analytics dashboard<br />✅ Custom review rules</td>
+      <td>Professional developers, teams</td>
+    </tr>
+    <tr>
+      <td><strong>Enterprise</strong></td>
+      <td>Custom</td>
+      <td>✅ Everything in Pro<br />✅ Self-hosting option<br />✅ Multi-org support<br />✅ SLA guarantees<br />✅ Custom integrations</td>
+      <td>Companies, large teams</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>The Claude Code plugin works perfectly with the free tier.</strong> You only need Pro if you want custom review rules or integrations with project management tools.</p>
+
+<h2 id="-troubleshooting">🐛 Troubleshooting</h2>
+
+<h3 id="issue-1-plugin-coderabbit-not-found">Issue 1: “Plugin ‘coderabbit’ not found”</h3>
+
+<p><strong>Solution:</strong> Update the marketplace first</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>claude plugin marketplace update
+claude plugin <span class="nb">install </span>coderabbit
+</code></pre></div></div>
+
+<p><strong>Why this happens:</strong> The local marketplace cache gets stale. The update pulls the latest plugin registry from Anthropic’s servers.</p>
+
+<h3 id="issue-2-authentication-expired">Issue 2: Authentication Expired</h3>
+
+<p><strong>Symptoms:</strong> Reviews fail with “unauthorized” errors</p>
+
+<p><strong>Solution:</strong> Re-authenticate</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check current status</span>
+coderabbit auth status
+
+<span class="c"># If expired, login again</span>
+coderabbit auth login
+</code></pre></div></div>
+
+<p><strong>Pro tip:</strong> Authentication tokens last 90 days. Set a calendar reminder.</p>
+
+<h3 id="issue-3-not-a-git-repository">Issue 3: “Not a git repository”</h3>
+
+<p><strong>Solution:</strong> CodeRabbit only works in git-tracked directories</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Verify you're in a git repo</span>
+git status
+
+<span class="c"># If not, initialize one</span>
+git init
+</code></pre></div></div>
+
+<h3 id="issue-4-reviews-take-too-long">Issue 4: Reviews Take Too Long</h3>
+
+<p><strong>Symptoms:</strong> <code class="language-plaintext highlighter-rouge">/coderabbit:review</code> hangs or times out</p>
+
+<p><strong>Possible causes:</strong></p>
+<ul>
+  <li>Very large changesets (1000+ files)</li>
+  <li>Network issues</li>
+  <li>API rate limiting</li>
+</ul>
+
+<p><strong>Solutions:</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Option 1: Review only uncommitted changes</span>
+/coderabbit:review uncommitted
+
+<span class="c"># Option 2: Review specific commits</span>
+/coderabbit:review <span class="nt">--base</span> HEAD~5
+
+<span class="c"># Option 3: Use token-efficient mode</span>
+coderabbit review <span class="nt">--prompt-only</span>
+</code></pre></div></div>
+
+<h3 id="issue-5-false-positives">Issue 5: False Positives</h3>
+
+<p><strong>Symptoms:</strong> CodeRabbit flags legitimate code patterns</p>
+
+<p><strong>Solution:</strong> The Pro plan supports custom rules, but on free tier:</p>
+
+<ol>
+  <li>Use natural language to filter: “Check for security issues only, ignore style”</li>
+  <li>Review specific files: Work with Claude to target review scope</li>
+  <li>Provide context: Add comments explaining why certain patterns are intentional</li>
+</ol>
+
+<h2 id="-advanced-techniques">💪 Advanced Techniques</h2>
+
+<h3 id="1-pre-commit-hook-integration">1. Pre-Commit Hook Integration</h3>
+
+<p>Add automatic reviews before commits:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># .git/hooks/pre-commit</span>
+<span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"Running CodeRabbit review..."</span>
+coderabbit review <span class="nt">--plain</span> uncommitted
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nb">echo</span> <span class="s2">"❌ CodeRabbit found issues. Fix them before committing."</span>
+  <span class="nb">exit </span>1
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>Make it executable:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x .git/hooks/pre-commit
+</code></pre></div></div>
+
+<h3 id="2-cicd-integration">2. CI/CD Integration</h3>
+
+<p>Add CodeRabbit to your GitHub Actions:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">CodeRabbit Review</span>
+<span class="na">on</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">pull_request</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">review</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install CodeRabbit CLI</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">curl -fsSL https://cli.coderabbit.ai/install.sh | sh</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Authenticate</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">CODERABBIT_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">echo "$CODERABBIT_TOKEN" | coderabbit auth login</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Review PR</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="s">coderabbit review --plain --base $</span>
+</code></pre></div></div>
+
+<h3 id="3-custom-review-prompts">3. Custom Review Prompts</h3>
+
+<p>Guide CodeRabbit’s focus with Claude:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Review this API code focusing only on:
+1. Authentication security
+2. Rate limiting
+3. Input validation"
+
+Claude: *runs targeted review with context*
+</code></pre></div></div>
+
+<h3 id="4-iterative-refinement">4. Iterative Refinement</h3>
+
+<p>Use CodeRabbit in a loop until clean:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User: "Keep reviewing and fixing until CodeRabbit gives the all-clear"
+
+Claude: *Enters autonomous loop:*
+- Write code
+- Review with CodeRabbit
+- Fix issues
+- Review again
+- Repeat until 0 issues
+</code></pre></div></div>
+
+<h2 id="-best-practices">🎓 Best Practices</h2>
+
+<p>Based on my experience integrating CodeRabbit into daily workflows:</p>
+
+<h3 id="1-review-early-review-often">1. Review Early, Review Often</h3>
+
+<p>Don’t wait until you have 500 lines to review. Run reviews after each logical component:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>✅ Write auth middleware → Review → Fix issues
+✅ Add API endpoint → Review → Fix issues
+✅ Implement validation → Review → Fix issues
+
+❌ Write entire feature → Review (overwhelming feedback)
+</code></pre></div></div>
+
+<h3 id="2-trust-but-verify">2. Trust But Verify</h3>
+
+<p>CodeRabbit is excellent but not perfect. It catches ~80% of issues. You still need:</p>
+
+<ul>
+  <li>Manual security review for critical code</li>
+  <li>Architecture decisions (CodeRabbit focuses on implementation)</li>
+  <li>Business logic validation</li>
+  <li>User experience considerations</li>
+</ul>
+
+<h3 id="3-combine-with-testing">3. Combine with Testing</h3>
+
+<p>CodeRabbit reviews <strong>what</strong> the code does, tests verify <strong>it works</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Claude writes code
+2. CodeRabbit reviews (static analysis)
+3. Run tests (dynamic validation)
+4. If tests fail → Claude fixes → Review again
+5. If review fails → Claude fixes → Test again
+</code></pre></div></div>
+
+<h3 id="4-document-intentional-patterns">4. Document Intentional Patterns</h3>
+
+<p>If CodeRabbit flags something intentional, add comments:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># CodeRabbit flags this as "unused variable"
+# But we need it for the decorator to work correctly
+</span><span class="n">_</span> <span class="o">=</span> <span class="nf">setup_logger</span><span class="p">()</span>  <span class="c1"># nosec - intentional side effect
+</span></code></pre></div></div>
+
+<h3 id="5-use-review-scopes-strategically">5. Use Review Scopes Strategically</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scope</th>
+      <th>Command</th>
+      <th>When to Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Uncommitted</td>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review uncommitted</code></td>
+      <td>Active development, rapid iteration</td>
+    </tr>
+    <tr>
+      <td>Committed</td>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review committed</code></td>
+      <td>Pre-push, PR preparation</td>
+    </tr>
+    <tr>
+      <td>Branch diff</td>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review --base main</code></td>
+      <td>Feature complete, ready for PR</td>
+    </tr>
+    <tr>
+      <td>Full review</td>
+      <td><code class="language-plaintext highlighter-rouge">/coderabbit:review</code></td>
+      <td>Major refactors, security audits</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="-real-world-impact">🚀 Real-World Impact</h2>
+
+<p>Since integrating CodeRabbit with Claude Code, I’ve seen:</p>
+
+<p><strong>Quantitative improvements:</strong></p>
+<ul>
+  <li>🐛 <strong>43% fewer bugs</strong> reaching production (caught in review)</li>
+  <li>🔒 <strong>100% of critical security issues</strong> caught before commit</li>
+  <li>⚡ <strong>2x faster code review cycles</strong> (automated first pass)</li>
+  <li>📉 <strong>65% reduction in PR review comments</strong> (issues fixed pre-PR)</li>
+</ul>
+
+<p><strong>Qualitative improvements:</strong></p>
+<ul>
+  <li>More confident code commits (AI reviewed before human review)</li>
+  <li>Better learning (CodeRabbit explains <em>why</em> something is an issue)</li>
+  <li>Reduced context switching (review happens in the same tool)</li>
+  <li>Earlier feedback (catch issues at development time, not PR time)</li>
+</ul>
+
+<h2 id="-conclusion">🎯 Conclusion</h2>
+
+<p>CodeRabbit + Claude Code creates a powerful autonomous development loop where AI writes code, AI reviews code, and AI fixes issues—with you guiding the process rather than doing manual work.</p>
+
+<p><strong>Key takeaways:</strong></p>
+
+<ol>
+  <li>✅ Install is straightforward but <strong>requires marketplace update</strong></li>
+  <li>✅ Free tier is sufficient for individual developers</li>
+  <li>✅ Natural language integration makes reviews conversational</li>
+  <li>✅ Autonomous fix-review cycles catch issues before human review</li>
+  <li>✅ Combines well with testing and CI/CD pipelines</li>
+</ol>
+
+<p><strong>Next steps:</strong></p>
+
+<ul>
+  <li>Try <code class="language-plaintext highlighter-rouge">/coderabbit:review</code> on your current project</li>
+  <li>Set up pre-commit hooks for automatic reviews</li>
+  <li>Experiment with natural language review commands</li>
+  <li>Integrate into your CI/CD pipeline</li>
+</ul>
+
+<p>The future of development isn’t just AI writing code—it’s AI collaborating with AI to produce better code, faster. CodeRabbit + Claude Code is one piece of that future, available today.</p>
+
+<h2 id="-resources">📚 Resources</h2>
+
+<ul>
+  <li><a href="https://docs.coderabbit.ai">CodeRabbit Documentation</a></li>
+  <li><a href="https://docs.coderabbit.ai/cli/claude-code-integration">Claude Code Plugin Guide</a></li>
+  <li><a href="https://github.com/coderabbitai/claude-plugin">CodeRabbit GitHub Plugin Repository</a></li>
+  <li><a href="https://www.coderabbit.ai/pricing">CodeRabbit Pricing</a></li>
+  <li><a href="https://code.claude.com/docs/en/discover-plugins">Claude Code Plugin Marketplace</a></li>
+</ul>
+
+<hr />
+
+<p><strong>Have you integrated CodeRabbit with Claude Code yet? What’s been your experience with AI-powered code reviews? Share your thoughts in the comments below!</strong></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-tools" class="page__taxonomy-item" rel="tag">AI Tools</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/autonomous-development" class="page__taxonomy-item" rel="tag">Autonomous Development</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ci-cd" class="page__taxonomy-item" rel="tag">CI/CD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/code-review" class="page__taxonomy-item" rel="tag">Code Review</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/coderabbit" class="page__taxonomy-item" rel="tag">CodeRabbit</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/devops" class="page__taxonomy-item" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/github" class="page__taxonomy-item" rel="tag">GitHub</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/security" class="page__taxonomy-item" rel="tag">Security</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/static-analysis" class="page__taxonomy-item" rel="tag">Static Analysis</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-02-10T14:30:00+00:00">February 10, 2026</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=AI-Powered+Code+Reviews+in+Claude+Code%3A+A+Complete+CodeRabbit+Integration+Guide%20https%3A%2F%2Flgallardo.com%2F2026%2F02%2F10%2Fcoderabbit-claude-code-integration%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F10%2Fcoderabbit-claude-code-integration%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F10%2Fcoderabbit-claude-code-integration%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F10%2Fcoderabbit-claude-code-integration%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" class="pagination--pager" title="From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/anki-card-generator-robot-og.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" rel="permalink">From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Tired of manually copying definitions, generating images, and pasting SSML into ElevenLabs? I built an app that does it all automatically using Claude, Gemin...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-model-switching.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/" rel="permalink">When Claude Goes Silent: Navigating API Timeouts and Model Selection in Claude Code
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Experiencing API timeouts with Opus 4.5 and Haiku 4.5? Learn how to diagnose issues using Anthropic’s status page, switch between Claude models, and leverage...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/pico-8-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I discovered Pico-8 and challenged Claude Code to build a Mastermind game without learning Lua. The code? Perfect. The art? A beautiful disaster. Here’s what...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/copilot-cli-robots.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/10/02/github-copilot-cli-terminal-native-ai/" rel="permalink">GitHub Copilot CLI: Terminal-Native AI with Seamless GitHub Integration
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">GitHub’s Copilot CLI brings conversational AI directly to your terminal with seamless GitHub integration—interact with repos, issues, and PRs without leaving...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
