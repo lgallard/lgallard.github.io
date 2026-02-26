@@ -1,0 +1,759 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>AI Flashcards While You Read: Building a KOReader Plugin for Anki - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="How I built a KOReader plugin that generates AI-powered Anki flashcards from highlighted text on a Kobo e-reader, using Qwen to generate definitions, IPA, synonyms, example sentences, and anime-style images.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="AI Flashcards While You Read: Building a KOReader Plugin for Anki">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/">
+<meta property="og:url" content="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/">
+
+
+
+<meta property="og:description" content="How I built a KOReader plugin that generates AI-powered Anki flashcards from highlighted text on a Kobo e-reader, using Qwen to generate definitions, IPA, synonyms, example sentences, and anime-style images.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="AI Flashcards While You Read: Building a KOReader Plugin for Anki">
+<meta name="twitter:description" content="How I built a KOReader plugin that generates AI-powered Anki flashcards from highlighted text on a Kobo e-reader, using Qwen to generate definitions, IPA, synonyms, example sentences, and anime-style images.">
+<meta name="twitter:url" content="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/KOreader-Qwen-robot.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/KOreader-Qwen-robot.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2026-02-25T00:00:00+00:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Anki">
+
+<meta property="article:tag" content="Flashcards">
+
+<meta property="article:tag" content="KOReader">
+
+<meta property="article:tag" content="Kobo">
+
+<meta property="article:tag" content="AI Tools">
+
+<meta property="article:tag" content="Language Learning">
+
+<meta property="article:tag" content="Qwen">
+
+<meta property="article:tag" content="Spaced Repetition">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="AI">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2026/02/25/koreader-anki-flashcard-plugin/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2026/02/25/koreader-anki-flashcard-plugin/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="AI Flashcards While You Read: Building a KOReader Plugin for Anki">
+    <meta itemprop="description" content="I extended my Anki Vocabulary Card Generator idea to the Kobo e-reader. Highlight a phrase, tap Anki Card, and get a full AI-generated flashcard—definition, synonyms, image, and cloze sentence—sent directly to Anki.">
+    <meta itemprop="datePublished" content="February 25, 2026">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">AI Flashcards While You Read: Building a KOReader Plugin for Anki
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><a href="/assets/images/KOreader-Qwen-robot.png" style="display:block; margin-left:auto; margin-right:auto; width:60%"><img src="/assets/images/KOreader-Qwen-robot.png" alt="Qwen AI robot holding a Kobo e-reader" /></a></p>
+
+<p>After building my <a href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/">Anki Vocabulary Card Generator</a>, the natural next step was: what if I could do the same thing directly on my Kobo while I’m reading?</p>
+
+<h2 id="the-idea">The Idea</h2>
+
+<p>When I read in English, I highlight phrases I don’t know—especially phrasal verbs and idioms. The Kobo’s built-in dictionary is decent for single words, but it falls short for:</p>
+
+<ul>
+  <li><strong>Phrasal verbs</strong> — <em>send in</em>, <em>crank up</em>, <em>call off</em></li>
+  <li><strong>Idioms</strong> — context-dependent meaning that dictionaries often miss</li>
+  <li><strong>The actual sentence context</strong> — the reason the phrase matters to me</li>
+</ul>
+
+<p>I wanted the same AI card generation I had on the desktop, but triggered directly from the highlight menu on the device.</p>
+
+<p><a href="/assets/images/KOreader-Anki-Phrase.png" style="display:block; margin-left:auto; margin-right:auto; width:80%"><img src="/assets/images/KOreader-Anki-Phrase.png" alt="Highlighting &quot;send in&quot; on a Kobo e-reader" /></a>
+<em class="text-center">Extract from “The Power of Habit” by Charles Duhigg</em></p>
+
+<h2 id="what-already-existed">What Already Existed</h2>
+
+<p>Before writing a single line of code, I looked at what was out there:</p>
+
+<ol>
+  <li>
+    <p><strong><a href="https://github.com/SahandMalaei/ai-dictionary-koreader">ai-dictionary-koreader</a></strong> — AI-powered dictionary plugin with multiple LLM support. Great concept, but it only gives you a dictionary lookup, not an Anki card. Qwen and Claude didn’t work for me even via OpenRouter.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://github.com/Ajatt-Tools/anki.koplugin">anki.koplugin</a></strong> — Sends cards to Anki, but generates them from the internal KOReader dictionary. No AI involved—so no context-aware definitions, no example sentences, no images.</p>
+  </li>
+</ol>
+
+<p>Neither did exactly what I needed, so I built my own.</p>
+
+<h2 id="the-plugin">The Plugin</h2>
+
+<p>The <strong>AnkiFlashcards</strong> KOReader plugin adds three entries to the highlight dialog:</p>
+
+<p><a href="/assets/images/KOreader-Anki-Menu.png" style="display:block; margin-left:auto; margin-right:auto; width:80%"><img src="/assets/images/KOreader-Anki-Menu.png" alt="KOReader highlight dialog with Anki Card, Anki Manage, and My Cards options" /></a></p>
+
+<ul>
+  <li><strong>Anki Card</strong> — the main action: generates a full flashcard for the highlighted phrase via AI</li>
+  <li><strong>My Cards</strong> — browse and manage saved cards, filter by book</li>
+  <li><strong>Anki Manage</strong> — settings, bulk send, stats, and batch import from highlights</li>
+</ul>
+
+<p>Tap <strong>Anki Card</strong>, wait a few seconds, and the card appears:</p>
+
+<p><a href="/assets/images/KOreader-Anki-Front.png" style="display:block; margin-left:auto; margin-right:auto; width:80%"><img src="/assets/images/KOreader-Anki-Front.png" alt="Front of the flashcard (question side)" /></a></p>
+
+<p>The front shows the definition and a cloze sentence—the phrase is hidden. Tap <strong>Show Answer</strong> to reveal the full card:</p>
+
+<p><a href="/assets/images/KOreader-Anki-Back.png" style="display:block; margin-left:auto; margin-right:auto; width:80%"><img src="/assets/images/KOreader-Anki-Back.png" alt="Back of the flashcard showing phrase, IPA, image, and cloze sentence" /></a></p>
+
+<p>The back has the canonical phrase (normalized to base form), the American English IPA, an anime-style illustration generated from the example sentence, and the full cloze with the phrase revealed in bold.</p>
+
+<h2 id="how-it-works">How It Works</h2>
+
+<p>The plugin is a reduced version of my desktop card generator. It uses <strong>Qwen</strong> (via DashScope) for everything:</p>
+
+<ul>
+  <li>Normalizes the phrase to its canonical form (<em>sent in</em> → <em>send in</em>)</li>
+  <li>Generates a context-aware definition (up to 20 words)</li>
+  <li>Produces 3–4 synonyms</li>
+  <li>Writes a cloze example sentence using the phrase in its original form</li>
+  <li>Creates an image prompt for an anime-style 16:9 scene</li>
+  <li>Generates the IPA automatically</li>
+</ul>
+
+<p>Images are generated asynchronously in the background using a separate image API call, so the card appears immediately while the image loads in.</p>
+
+<h2 id="why-this-is-better-than-the-dictionary">Why This is Better Than the Dictionary</h2>
+
+<p>The built-in dictionary on a Kobo will give you a definition for <em>send</em>. It won’t tell you what <em>send in</em> means in the context of a corporate email culture in 1987. The AI card does—because it sees the sentence around the highlight and generates a definition grounded in that context.</p>
+
+<p>Cards are saved locally on the device, and can be:</p>
+
+<ul>
+  <li><strong>Sent to Anki</strong> directly via <a href="https://ankiweb.net/shared/info/2055492159">AnkiConnect</a>—synced to all your devices automatically</li>
+  <li><strong>Edited</strong> on the device (phrase, definition, synonyms, cloze)</li>
+  <li><strong>Imported in bulk</strong> from all highlights in a book at once</li>
+</ul>
+
+<p>The template it uses is the same one from my desktop app, so cards land in Anki looking exactly the same—or can be refined there if needed.</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-tools" class="page__taxonomy-item" rel="tag">AI Tools</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/anki" class="page__taxonomy-item" rel="tag">Anki</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/flashcards" class="page__taxonomy-item" rel="tag">Flashcards</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/kobo" class="page__taxonomy-item" rel="tag">Kobo</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/koreader" class="page__taxonomy-item" rel="tag">KOReader</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/language-learning" class="page__taxonomy-item" rel="tag">Language Learning</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/qwen" class="page__taxonomy-item" rel="tag">Qwen</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/spaced-repetition" class="page__taxonomy-item" rel="tag">Spaced Repetition</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-02-25T00:00:00+00:00">February 25, 2026</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=AI+Flashcards+While+You+Read%3A+Building+a+KOReader+Plugin+for+Anki%20https%3A%2F%2Flgallardo.com%2F2026%2F02%2F25%2Fkoreader-anki-flashcard-plugin%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F25%2Fkoreader-anki-flashcard-plugin%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F25%2Fkoreader-anki-flashcard-plugin%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F25%2Fkoreader-anki-flashcard-plugin%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/" class="pagination--pager" title="AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/coderabbit-claude-integration.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/" rel="permalink">AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Learn how to set up CodeRabbit’s AI code review directly in Claude Code for autonomous development workflows with built-in quality gates and security scanning.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/anki-card-generator-robot-og.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" rel="permalink">From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Tired of manually copying definitions, generating images, and pasting SSML into ElevenLabs? I built an app that does it all automatically using Claude, Gemin...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-model-switching.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/" rel="permalink">When Claude Goes Silent: Navigating API Timeouts and Model Selection in Claude Code
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Experiencing API timeouts with Opus 4.5 and Haiku 4.5? Learn how to diagnose issues using Anthropic’s status page, switch between Claude models, and leverage...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/pico-8-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/11/09/pico8-ai-game-development/" rel="permalink">Code-Vibing with AI: Building a Pico-8 Game Without Learning the Language
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  11 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I discovered Pico-8 and challenged Claude Code to build a Mastermind game without learning Lua. The code? Perfect. The art? A beautiful disaster. Here’s what...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
