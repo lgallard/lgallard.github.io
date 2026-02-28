@@ -1,4 +1,147 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2026-02-26T15:19:02+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Flashcards con IA Mientras Lees: Un Plugin de KOReader para Anki</title><link href="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/" rel="alternate" type="text/html" title="Flashcards con IA Mientras Lees: Un Plugin de KOReader para Anki" /><published>2026-02-25T00:00:00+00:00</published><updated>2026-02-25T00:00:00+00:00</updated><id>https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin</id><content type="html" xml:base="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/"><![CDATA[<p><a href="/assets/images/KOreader-Qwen-robot.png" style="display:block; margin-left:auto; margin-right:auto; width:60%"><img src="/assets/images/KOreader-Qwen-robot.png" alt="Robot IA de Qwen sosteniendo un e-reader Kobo" /></a></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2026-02-28T22:01:34+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Claude Code Remote Control + Ollama: Controla tu Servidor GPU desde el Movil</title><link href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/" rel="alternate" type="text/html" title="Claude Code Remote Control + Ollama: Controla tu Servidor GPU desde el Movil" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-02-28T00:00:00+00:00</updated><id>https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama</id><content type="html" xml:base="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/"><![CDATA[<p><img src="/assets/images/claude-code-remote-robot.png" alt="Claude Code Remote Control con Ollama" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p>Si tienes un servidor GPU en casa o en la nube corriendo Ollama, puedes combinarlo con la funcion Remote Control de Claude Code para gestionar sesiones de programacion desde el movil mientras la inferencia ocurre en tu propio hardware. Asi es como funciona y por que es una configuracion muy practica.</p>
+
+<h2 id="que-es-remote-control">Que es Remote Control?</h2>
+
+<p>Remote Control es una funcion en preview de Claude Code (disponible en planes Max) que permite continuar una sesion local de terminal desde el movil, tablet o cualquier navegador.</p>
+
+<p>Los puntos clave:</p>
+
+<ul>
+  <li>Todo se ejecuta localmente en tu maquina – los archivos nunca salen de ella</li>
+  <li>Los servidores MCP y todo tu entorno de desarrollo siguen disponibles</li>
+  <li>Solo la conversacion fluye a traves de la API de Anthropic por HTTPS</li>
+  <li>No se abren puertos entrantes en tu maquina</li>
+</ul>
+
+<p>Lo inicias con <code class="language-plaintext highlighter-rouge">claude remote-control</code> desde la terminal, o <code class="language-plaintext highlighter-rouge">/rc</code> desde una sesion existente. Te da una URL de sesion y un codigo QR que puedes escanear con la app de Claude.</p>
+
+<h2 id="como-se-conecta-todo">Como se Conecta Todo</h2>
+
+<p><img src="/assets/images/rc-ollama-architecture.png" alt="Arquitectura Remote Control + Ollama" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<h2 id="el-caso-de-uso-ollama-remoto--remote-control">El Caso de Uso: Ollama Remoto + Remote Control</h2>
+
+<p>Este es el escenario. Tienes un servidor GPU (quizas una estacion de trabajo con una tarjeta NVIDIA, o una instancia en la nube) corriendo Ollama. Quieres:</p>
+
+<ol>
+  <li>Ejecutar Claude Code en tu portatil, apuntando a la instancia remota de Ollama</li>
+  <li>Iniciar una sesion de Remote Control para monitorear e interactuar desde tu movil o tablet</li>
+  <li>Alejarte del escritorio mientras la sesion sigue corriendo</li>
+</ol>
+
+<p>Esto te da modelos self-hosted potentes haciendo la inferencia, con la comodidad de controlar la sesion desde cualquier lugar de tu casa (o mas alla).</p>
+
+<h2 id="configuracion-rapida">Configuracion Rapida</h2>
+
+<h3 id="paso-1-ollama-en-tu-servidor-gpu">Paso 1: Ollama en tu Servidor GPU</h3>
+
+<p>Asegurate de que Ollama esta corriendo y accesible en tu red. En el servidor GPU:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Instalar Ollama si no lo tienes</span>
+curl <span class="nt">-fsSL</span> https://ollama.com/install.sh | sh
+
+<span class="c"># Descargar un modelo con ventana de contexto grande</span>
+ollama pull qwen3-coder
+
+<span class="c"># Iniciar Ollama escuchando en todas las interfaces</span>
+<span class="nv">OLLAMA_HOST</span><span class="o">=</span>0.0.0.0 ollama serve
+</code></pre></div></div>
+
+<h3 id="paso-2-apuntar-claude-code-al-ollama-remoto">Paso 2: Apuntar Claude Code al Ollama Remoto</h3>
+
+<p>En tu portatil, apunta a la instancia remota de Ollama y lanza Claude Code. Hay dos formas de hacerlo:</p>
+
+<p><strong>Opcion A: Usando <code class="language-plaintext highlighter-rouge">ollama launch claude</code> (recomendado)</strong></p>
+
+<p>La forma mas sencilla – Ollama se encarga de toda la configuracion:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">OLLAMA_HOST</span><span class="o">=</span>http://&lt;ip-servidor-gpu&gt;:11434
+ollama launch claude <span class="nt">--model</span> qwen3-coder
+</code></pre></div></div>
+
+<p><strong>Opcion B: Variables de entorno manuales</strong></p>
+
+<p>Si prefieres control total sobre la configuracion:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ANTHROPIC_AUTH_TOKEN</span><span class="o">=</span>ollama
+<span class="nb">export </span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span><span class="s2">""</span>
+<span class="nb">export </span><span class="nv">ANTHROPIC_BASE_URL</span><span class="o">=</span>http://&lt;ip-servidor-gpu&gt;:11434
+claude <span class="nt">--model</span> qwen3-coder
+</code></pre></div></div>
+
+<p>Reemplaza <code class="language-plaintext highlighter-rouge">&lt;ip-servidor-gpu&gt;</code> con la IP o hostname real de tu servidor GPU. Los modelos que funcionan bien con esta configuracion incluyen <code class="language-plaintext highlighter-rouge">qwen3-coder</code>, <code class="language-plaintext highlighter-rouge">glm-4.7</code>, y otros con ventanas de contexto de 64K+ tokens.</p>
+
+<h3 id="paso-3-iniciar-remote-control">Paso 3: Iniciar Remote Control</h3>
+
+<p>Una vez que Claude Code esta corriendo y conectado a Ollama, inicia una sesion de Remote Control:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/rc
+</code></pre></div></div>
+
+<p>Veras una URL de sesion y un codigo QR. Escanea el codigo QR con la app de Claude en tu movil, o abre la URL en cualquier navegador. Ahora estas controlando tu sesion local de Claude Code – respaldada por la instancia de Ollama en tu servidor GPU – desde otro dispositivo.</p>
+
+<p>Asi se ve en la practica, usando <code class="language-plaintext highlighter-rouge">mistral:7b</code> como modelo. Observa la URL de sesion y el indicador “Remote Control active” en la barra de estado:</p>
+
+<p><img src="/assets/images/claude-code-remote-inference.png" alt="Remote Control activo con inferencia Ollama" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<p>Puedes verificar la conexion ejecutando <code class="language-plaintext highlighter-rouge">/status</code> – muestra el modelo, la URL base de Anthropic apuntando a tu instancia de Ollama, y todos tus servidores MCP aun corriendo:</p>
+
+<p><img src="/assets/images/claude-code-remote-status.png" alt="Estado de Claude Code mostrando configuracion Ollama" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<h3 id="paso-4-alejate-del-escritorio">Paso 4: Alejate del Escritorio</h3>
+
+<p>Tu terminal necesita quedarse abierta, pero no necesitas estar sentado frente a ella. Envia prompts desde tu movil, revisa resultados y sigue trabajando. La sesion sobrevive interrupciones breves de red y se reconecta automaticamente.</p>
+
+<h2 id="cosas-a-tener-en-cuenta">Cosas a Tener en Cuenta</h2>
+
+<ul>
+  <li>
+    <p><strong>La terminal debe quedarse abierta</strong>: Si la cierras, la sesion termina. Considera correrla dentro de <code class="language-plaintext highlighter-rouge">tmux</code> o <code class="language-plaintext highlighter-rouge">screen</code>. En macOS, tambien puedes configurar hooks de Claude Code para ejecutar <code class="language-plaintext highlighter-rouge">caffeinate</code> automaticamente y evitar que tu Mac entre en suspension. Agrega esto a tu <code class="language-plaintext highlighter-rouge">~/.claude/settings.json</code>:</p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"SessionStart"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"command"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"caffeinate -dims &amp;"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"SessionEnd"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"command"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pkill -f 'caffeinate -dims'"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li><strong>Una sesion remota a la vez</strong>: Cada instancia de Claude Code soporta una unica conexion remota.</li>
+  <li><strong>Timeout de red</strong>: Si tu maquina pierde conectividad por aproximadamente 10 minutos, la sesion expira.</li>
+  <li><strong>Seguridad de red de Ollama</strong>: Exponer Ollama en <code class="language-plaintext highlighter-rouge">0.0.0.0</code> lo abre a toda tu red. Usa reglas de firewall o una VPN si estas fuera de una LAN de confianza.</li>
+  <li><strong>Limitaciones de modelos</strong>: Los modelos open-source via Ollama pueden no soportar todas las funciones de tool/function calling de Claude Code. Funcionan bien para generacion de codigo, explicaciones y revision, pero operaciones complejas con multiples herramientas pueden no comportarse como se espera.</li>
+</ul>
+
+<h2 id="conclusiones">Conclusiones</h2>
+
+<p>Remote Control + Ollama es una forma directa de obtener lo mejor de ambos mundos: inferencia GPU potente y self-hosted con la flexibilidad de controlar tu sesion desde cualquier dispositivo. Sin costos de API, sin dependencia de la nube para la inferencia, y tu codigo se queda en tus maquinas.</p>
+
+<p>Si ya tienes un servidor GPU corriendo Ollama, agregar Remote Control encima toma unos dos minutos. Pruebalo.</p>
+
+<hr />
+
+<h2 id="referencias">Referencias</h2>
+
+<ul>
+  <li><a href="https://code.claude.com/docs/en/remote-control">Documentacion de Claude Code Remote Control</a></li>
+  <li><a href="https://code.claude.com/docs/en/model-config">Configuracion de Modelos en Claude Code</a></li>
+  <li><a href="https://code.claude.com/docs/en/llm-gateway">Configuracion de LLM Gateway en Claude Code</a></li>
+  <li><a href="https://ollama.com">Ollama</a></li>
+</ul>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="Remote Control" /><category term="Ollama" /><category term="AI Tools" /><category term="LLM" /><category term="Self-hosted" /><category term="GPU" /><summary type="html"><![CDATA[Como usar Claude Code Remote Control con Ollama corriendo en un servidor GPU remoto. Controla sesiones de programacion con IA desde tu movil o navegador aprovechando modelos self-hosted.]]></summary></entry><entry><title type="html">Flashcards con IA Mientras Lees: Un Plugin de KOReader para Anki</title><link href="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/" rel="alternate" type="text/html" title="Flashcards con IA Mientras Lees: Un Plugin de KOReader para Anki" /><published>2026-02-25T00:00:00+00:00</published><updated>2026-02-25T00:00:00+00:00</updated><id>https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin</id><content type="html" xml:base="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/"><![CDATA[<p><a href="/assets/images/KOreader-Qwen-robot.png" style="display:block; margin-left:auto; margin-right:auto; width:60%"><img src="/assets/images/KOreader-Qwen-robot.png" alt="Robot IA de Qwen sosteniendo un e-reader Kobo" /></a></p>
 
 <p>Después de construir mi <a href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/">Generador de Vocabulario Anki</a>, el siguiente paso natural fue: ¿y si pudiera hacer lo mismo directamente en mi Kobo mientras leo?</p>
 
@@ -4023,244 +4166,4 @@ gemini-cli analyze "</span><span class="nv">$ARGUMENTS</span><span class="sh">" 
 
 <hr />
 
-<p><em>¿Quieres explorar más sobre Claude Code y flujos agénticos? Revisa mi post anterior sobre <a href="/2025/08/12/mcp-servers-research-driven-development/">servidores MCP para desarrollo dirigido por investigación</a> o sigue mis experimentos en <a href="https://github.com/lgallard">GitHub</a>.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Terraform" /><category term="Claude Code" /><category term="GitHub Actions" /><category term="AWS ECR" /><category term="Infrastructure as Code" /><category term="Automatización" /><category term="Flujos Agénticos" /><summary type="html"><![CDATA[Aprende a implementar mejoras automáticas de módulos Terraform usando flujos de trabajo de Claude Code GitHub Actions para descubrimiento continuo de características del proveedor AWS y detección de bugs en infraestructura como código.]]></summary></entry><entry><title type="html">Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter</title><link href="https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic/" rel="alternate" type="text/html" title="Más Allá de Anthropic: Usando Claude Code con Cualquier Modelo vía Claude Code Router y OpenRouter" /><published>2025-08-20T00:00:00+00:00</published><updated>2025-08-20T00:00:00+00:00</updated><id>https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic</id><content type="html" xml:base="https://lgallardo.com/2025/08/20/claude-code-router-openrouter-beyond-anthropic/"><![CDATA[<p><img src="/assets/images/ccr-robot.png" alt="Claude Code Router" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>¿Alguna vez te has encontrado con el temido mensaje “Claude usage limit reached” a las 2 AM mientras depurabas un problema crítico? ¿O has deseado poder usar Claude Code con modelos GPT para tareas específicas? Después de experimentar estos problemas en carne propia, descubrí una configuración revolucionaria: <strong>Claude Code Router</strong> combinado con <strong>OpenRouter</strong>.</p>
-
-<p>Esto no se trata solo de tener modelos de respaldo—se trata de enrutar inteligentemente las peticiones al modelo correcto en el momento adecuado, ya sea un modelo Qwen gratuito para tareas simples, una instancia local de Ollama para trabajo sensible, o GPT cuando necesitas capacidades específicas.</p>
-
-<h2 id="el-problema-la-limitación-de-un-solo-proveedor-de-claude-code">El Problema: La Limitación de Un Solo Proveedor de Claude Code</h2>
-
-<p><img src="/assets/images/ccr-limit-reached.png" alt="Límite de Uso Alcanzado" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
-
-<p>Aunque Claude Code es increíblemente poderoso, estar limitado a los modelos de Anthropic crea fricciones reales:</p>
-
-<ul>
-  <li><strong>Límites de uso</strong> que se reinician en momentos inconvenientes (6pm hora de Madrid para mí)</li>
-  <li><strong>Sin acceso a modelos especializados</strong> que podrían sobresalir en tareas específicas</li>
-  <li><strong>Acumulación de costos</strong> cuando podrías usar alternativas gratuitas para consultas más simples</li>
-  <li><strong>Preocupaciones de privacidad</strong> para código sensible que debería permanecer local</li>
-</ul>
-
-<p>Claude Code Router resuelve estos problemas elegantemente interceptando peticiones y enrutándolas a cualquier proveedor de modelo compatible.</p>
-
-<h2 id="qué-es-claude-code-router">¿Qué es Claude Code Router?</h2>
-
-<p><a href="https://github.com/musistudio/claude-code-router">Claude Code Router</a> actúa como un proxy inteligente entre Claude Code y varios proveedores de LLM. Piénsalo como un operador de centralita inteligente que:</p>
-
-<ul>
-  <li><strong>Intercepta</strong> las peticiones API de Claude Code</li>
-  <li><strong>Enruta</strong> a diferentes modelos basándose en tus reglas</li>
-  <li><strong>Transforma</strong> peticiones/respuestas para compatibilidad API</li>
-  <li><strong>Gestiona</strong> múltiples proveedores de forma transparente</li>
-</ul>
-
-<p>¿Lo bello de todo esto? Claude Code ni siquiera sabe que está sucediendo. Desde su perspectiva, sigue hablando con Claude—pero detrás de escena, podrías estar usando un modelo completamente diferente.</p>
-
-<p><img src="/assets/images/ccr-cli.png" alt="Interfaz CLI" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<h2 id="openrouter-la-puerta-de-enlace-universal-para-llm">OpenRouter: La Puerta de Enlace Universal para LLM</h2>
-
-<p><a href="https://openrouter.ai">OpenRouter</a> lleva esta flexibilidad aún más lejos. Con acceso a más de 400 modelos de más de 60 proveedores a través de una única API, es como tener un control remoto universal para modelos de IA:</p>
-
-<h3 id="modelos-gratuitos-que-vale-la-pena-explorar">Modelos Gratuitos que Vale la Pena Explorar</h3>
-
-<p><img src="/assets/images/ccr-or-free.png" alt="Modelos Gratuitos en OpenRouter" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>Estos modelos no cuestan literalmente nada y manejan tareas rutinarias sorprendentemente bien:</p>
-
-<ul>
-  <li><strong>Qwen3 Coder</strong>: Optimizado para tareas de programación, ventana de contexto de 262K</li>
-  <li><strong>DeepSeek R1</strong>: Fuertes capacidades de razonamiento, especialmente para depuración</li>
-  <li><strong>OpenAI gpt-oss-20b</strong>: Modelo de peso abierto con sólido rendimiento general</li>
-</ul>
-
-<h3 id="modelos-premium-cuando-los-necesitas">Modelos Premium Cuando los Necesitas</h3>
-
-<p><img src="/assets/images/ccr-or-gpt.png" alt="Modelos GPT en OpenRouter" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>A veces necesitas los pesos pesados. OpenRouter proporciona acceso a:</p>
-<ul>
-  <li><strong>Modelos GPT</strong>: Ten en cuenta que GPT-5 requiere BYOK (Bring Your Own Key), mientras que GPT-4o-mini está disponible con la API estándar de OpenRouter</li>
-  <li>Serie Gemini de Google</li>
-  <li>Modelos Claude de Anthropic (con potencialmente mejor disponibilidad)</li>
-</ul>
-
-<p><strong>Importante</strong>: Siempre verifica que tu modelo elegido soporte las funciones que necesitas—consulta la sección Consideraciones de Soporte de Herramientas por Modelo más abajo para detalles sobre limitaciones de herramientas/llamadas de función.</p>
-
-<h3 id="autoalojado-con-ollama">Autoalojado con Ollama</h3>
-
-<p><img src="/assets/images/ccr-ollama.png" alt="Configuración de Ollama" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>Para máxima privacidad y control, ejecuta modelos localmente:</p>
-<ul>
-  <li><strong>Privacidad completa</strong>: El código nunca sale de tu máquina</li>
-  <li><strong>Sin límites de uso</strong>: Ejecuta tanto como tu hardware permita</li>
-  <li><strong>Capacidad offline</strong>: Trabaja sin conectividad a internet</li>
-</ul>
-
-<h2 id="configurando-todo">Configurando Todo</h2>
-
-<h3 id="paso-1-instalar-claude-code-router">Paso 1: Instalar Claude Code Router</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-g</span> @musistudio/claude-code-router
-</code></pre></div></div>
-
-<h3 id="paso-2-obtén-tu-api-key-de-openrouter">Paso 2: Obtén tu API Key de OpenRouter</h3>
-
-<ol>
-  <li>Dirígete a <a href="https://openrouter.ai">openrouter.ai</a></li>
-  <li>Regístrate (autenticación con GitHub/Google disponible)</li>
-  <li>Añade algunos créditos ($10 rinde mucho con modelos gratuitos)</li>
-  <li>Genera tu API key</li>
-</ol>
-
-<h3 id="paso-3-configurar-el-router">Paso 3: Configurar el Router</h3>
-
-<p>Crea <code class="language-plaintext highlighter-rouge">.claude-code-router/config.json</code>:</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"LOG"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"API_TIMEOUT_MS"</span><span class="p">:</span><span class="w"> </span><span class="mi">600000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Providers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openrouter"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"api_base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://openrouter.ai/api/v1/chat/completions"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${OPENROUTER_API_KEY}"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"qwen/qwen3-coder:free"</span><span class="p">,</span><span class="w"> </span><span class="s2">"openai/gpt-oss-20b:free"</span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"api_base_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://localhost:11434/v1/chat/completions"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ollama"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"qwen3:4b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"deepseek-coder:6.7b"</span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Nota la sintaxis <code class="language-plaintext highlighter-rouge">${OPENROUTER_API_KEY}</code>—el router lee de variables de entorno por seguridad.</p>
-
-<h3 id="paso-4-lanzar-y-usar">Paso 4: Lanzar y Usar</h3>
-
-<p>Inicia el router:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccr start
-</code></pre></div></div>
-
-<p>Esto lanza el router en el puerto 3456 por defecto. Claude Code ahora enrutará a través de él automáticamente cuando esté configurado con el endpoint local.</p>
-
-<p>Usa Claude Code como siempre:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccr code <span class="s2">"explica esta función"</span>
-</code></pre></div></div>
-
-<h3 id="paso-5-configurar-claude-code-para-usar-el-router">Paso 5: Configurar Claude Code para Usar el Router</h3>
-
-<p><img src="/assets/images/ccr-ui.png" alt="Interfaz Web de Claude Code Router" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>Para hacer que Claude Code enrute a través de tu router local, necesitas configurarlo para usar el endpoint del router. Abre la UI web para configuración visual:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ccr ui
-</code></pre></div></div>
-
-<p>Esto abre la interfaz web del router en <code class="language-plaintext highlighter-rouge">http://localhost:3456</code> donde puedes:</p>
-
-<ul>
-  <li><strong>Configurar reglas de enrutamiento</strong> para diferentes escenarios (Default, Background, Think, Long Context)</li>
-  <li><strong>Asignar modelos específicos</strong> a cada categoría de enrutamiento</li>
-  <li><strong>Monitorear logs de peticiones</strong> para ver qué modelos están siendo utilizados</li>
-  <li><strong>Probar diferentes configuraciones</strong> antes de aplicarlas</li>
-</ul>
-
-<p>La UI web proporciona una forma intuitiva de configurar enrutamiento inteligente sin editar archivos de configuración manualmente. Puedes asignar modelos rentables para tareas simples y modelos premium para operaciones complejas que requieren soporte de herramientas.</p>
-
-<h2 id="el-poder-del-enrutamiento-inteligente">El Poder del Enrutamiento Inteligente</h2>
-
-<p><img src="/assets/images/ccr-ui.png" alt="Configuración UI del Router" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>La verdadera magia ocurre cuando configuras reglas de enrutamiento. La UI te permite asignar diferentes modelos a diferentes escenarios:</p>
-
-<ul>
-  <li><strong>Default</strong>: Tu modelo principal para consultas generales</li>
-  <li><strong>Background</strong>: Modelo eficiente para procesamiento en segundo plano</li>
-  <li><strong>Think</strong>: Modelo optimizado para razonamiento en problemas complejos</li>
-  <li><strong>Long Context</strong>: Modelo con ventanas de contexto grandes para bases de código extensas</li>
-  <li><strong>Web Search</strong>: Modelo optimizado para tareas de investigación</li>
-</ul>
-
-<p>Esto significa que una simple petición de “formatea este JSON” podría ir a un modelo Qwen gratuito, mientras que “arquitectura una solución de microservicios” activa GPT o Claude.</p>
-
-<h3 id="consideraciones-de-soporte-de-herramientas-por-modelo">Consideraciones de Soporte de Herramientas por Modelo</h3>
-
-<p><img src="/assets/images/ccr-endpoints-limitations.png" alt="Limitaciones de Endpoints de Modelos" style="display:block; margin-left:auto; margin-right:auto; width:100%" /></p>
-
-<p>Al configurar reglas de enrutamiento, es crucial entender que Claude Code depende fuertemente de <strong>herramientas/llamadas de función</strong> para muchas operaciones como edición de archivos, comandos git e interacciones del sistema. No todos los modelos soportan estas capacidades:</p>
-
-<ul>
-  <li><strong>Modelos con soporte de herramientas</strong>: Modelos Claude, serie GPT-4o, algunos modelos Gemini</li>
-  <li><strong>Modelos solo de texto</strong>: Muchos modelos gratuitos (Qwen, DeepSeek, etc.) que pueden manejar explicaciones y generación de código pero no ejecución de herramientas</li>
-  <li><strong>Mejor práctica</strong>: Enruta tareas que requieren herramientas a modelos confirmados con capacidad de herramientas, y usa modelos solo de texto para explicaciones, revisión de código y documentación</li>
-</ul>
-
-<p>Como se muestra en los logs de error arriba, encontrarás errores de “No endpoints found that support” cuando intentes usar características avanzadas con modelos que no las soportan. Siempre verifica las capacidades del modelo antes de enrutar tareas críticas.</p>
-
-<h2 id="flujo-de-trabajo-del-mundo-real">Flujo de Trabajo del Mundo Real</h2>
-
-<p>Así es como uso esta configuración diariamente:</p>
-
-<ol>
-  <li><strong>Preparación del standup matutino</strong>: Modelos Qwen gratuitos resumen los commits de ayer</li>
-  <li><strong>Desarrollo de características</strong>: Claude (a través de suscripción normal) para implementaciones complejas</li>
-  <li><strong>Correcciones rápidas</strong>: Ollama local para código privado de clientes</li>
-  <li><strong>Depuración fuera de horario</strong>: Créditos de OpenRouter cuando alcanzo límites de Claude</li>
-  <li><strong>Escritura de documentación</strong>: Modelos GPT que sobresalen en escritura técnica</li>
-</ol>
-
-<p>El comando <code class="language-plaintext highlighter-rouge">/model</code> me permite cambiar sobre la marcha:</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/model ollama,qwen3:4b       <span class="c"># Cambiar a Ollama local</span>
-/model openrouter,gpt-4o     <span class="c"># Usar GPT a través de OpenRouter</span>
-</code></pre></div></div>
-
-<h2 id="consejos-de-optimización-de-costos">Consejos de Optimización de Costos</h2>
-
-<p>Después de un mes de uso, esto es lo que he aprendido:</p>
-
-<ol>
-  <li><strong>Empieza con modelos gratuitos</strong>: Te sorprenderá lo capaces que son para tareas rutinarias</li>
-  <li><strong>Usa umbrales de contexto</strong>: Enruta solo consultas complejas a modelos premium</li>
-  <li><strong>Monitorea los logs</strong>: Los logs del router ayudan a identificar qué consultas realmente necesitan modelos premium</li>
-  <li><strong>Aprovecha Ollama</strong>: Para tareas locales repetitivas, el autoalojamiento es imbatible (si tu hardware lo permite)</li>
-</ol>
-
-<h2 id="solución-de-problemas-comunes">Solución de Problemas Comunes</h2>
-
-<p>El router registra en <code class="language-plaintext highlighter-rouge">~/.claude-code-router.log</code> por defecto, lo que ayuda a diagnosticar problemas:</p>
-
-<ul>
-  <li><strong>Conexión rechazada</strong>: Verifica si el router está ejecutándose (<code class="language-plaintext highlighter-rouge">ccr status</code>)</li>
-  <li><strong>Modelo no encontrado</strong>: Verifica que el nombre del modelo coincida con el formato de OpenRouter</li>
-  <li><strong>Errores de timeout</strong>: Aumenta <code class="language-plaintext highlighter-rouge">API_TIMEOUT_MS</code> para modelos más lentos</li>
-  <li><strong>Problemas con API key</strong>: Asegúrate de que las variables de entorno estén configuradas correctamente</li>
-</ul>
-
-<h2 id="más-allá-del-enrutamiento-básico">Más Allá del Enrutamiento Básico</h2>
-
-<p>Claude Code Router soporta características avanzadas que aún estoy explorando:</p>
-
-<ul>
-  <li><strong>Transformadores personalizados</strong>: Modifica peticiones/respuestas programáticamente</li>
-  <li><strong>Scripts de enrutamiento JavaScript</strong>: Lógica compleja para selección de modelos</li>
-  <li><strong>Integración con GitHub Actions</strong>: CI/CD con enrutamiento de modelos</li>
-  <li><strong>Múltiples fallbacks de proveedores</strong>: Failover automático cuando los proveedores están caídos</li>
-</ul>
-
-<h2 id="la-conclusión">La Conclusión</h2>
-
-<p>Esta configuración transformó mi experiencia con Claude Code de frustrante (alcanzar límites) a liberadora (flexibilidad infinita). Ya sea que busques reducir costos, evitar limitaciones, o simplemente experimentar con diferentes modelos, Claude Code Router + OpenRouter proporciona la solución perfecta.</p>
-
-<p>Empieza simple—configura un modelo gratuito como respaldo para cuando alcances límites. Una vez que experimentes la flexibilidad, naturalmente expandirás tus reglas de enrutamiento para optimizar diferentes escenarios.</p>
-
-<p>El futuro del desarrollo asistido por IA no se trata de elegir el “mejor” modelo—se trata de tener el modelo correcto para cada tarea específica. Esta configuración te lleva allí hoy.</p>
-
-<hr />
-
-<p><em>¿Has probado enrutar Claude Code a través de modelos alternativos? ¿Cuál es tu experiencia con modelos gratuitos para tareas de desarrollo? Comparte tus configuraciones en los comentarios.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="Herramientas IA" /><category term="OpenRouter" /><category term="Claude Code Router" /><category term="Ollama" /><category term="LLM" /><summary type="html"><![CDATA[Aprende cómo extender Claude Code más allá de los modelos de Anthropic usando Claude Code Router y OpenRouter. Accede a modelos gratuitos, Ollama autoalojado y proveedores alternativos cuando alcances los límites de uso.]]></summary></entry></feed>
+<p><em>¿Quieres explorar más sobre Claude Code y flujos agénticos? Revisa mi post anterior sobre <a href="/2025/08/12/mcp-servers-research-driven-development/">servidores MCP para desarrollo dirigido por investigación</a> o sigue mis experimentos en <a href="https://github.com/lgallard">GitHub</a>.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Terraform" /><category term="Claude Code" /><category term="GitHub Actions" /><category term="AWS ECR" /><category term="Infrastructure as Code" /><category term="Automatización" /><category term="Flujos Agénticos" /><summary type="html"><![CDATA[Aprende a implementar mejoras automáticas de módulos Terraform usando flujos de trabajo de Claude Code GitHub Actions para descubrimiento continuo de características del proveedor AWS y detección de bugs en infraestructura como código.]]></summary></entry></feed>

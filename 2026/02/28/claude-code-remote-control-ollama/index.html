@@ -1,0 +1,812 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="How to use Claude Code Remote Control with Ollama running on a remote GPU server. Control local AI coding sessions from your phone or browser while leveraging powerful self-hosted models.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/">
+<meta property="og:url" content="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/">
+
+
+
+<meta property="og:description" content="How to use Claude Code Remote Control with Ollama running on a remote GPU server. Control local AI coding sessions from your phone or browser while leveraging powerful self-hosted models.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone">
+<meta name="twitter:description" content="How to use Claude Code Remote Control with Ollama running on a remote GPU server. Control local AI coding sessions from your phone or browser while leveraging powerful self-hosted models.">
+<meta name="twitter:url" content="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/claude-code-remote-robot.png">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/claude-code-remote-robot.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2026-02-28T00:00:00+00:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Claude Code">
+
+<meta property="article:tag" content="Remote Control">
+
+<meta property="article:tag" content="Ollama">
+
+<meta property="article:tag" content="AI Tools">
+
+<meta property="article:tag" content="LLM">
+
+<meta property="article:tag" content="Self-hosted">
+
+<meta property="article:tag" content="GPU">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2026/02/28/claude-code-remote-control-ollama/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2026/02/28/claude-code-remote-control-ollama/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone">
+    <meta itemprop="description" content="Combine Claude Code’s Remote Control with a remote Ollama instance to control powerful GPU models from your phone or tablet – no cloud dependency required.">
+    <meta itemprop="datePublished" content="February 28, 2026">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><img src="/assets/images/claude-code-remote-robot.png" alt="Claude Code Remote Control with Ollama" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+
+<p>If you have a GPU server at home or in the cloud running Ollama, you can combine it with Claude Code’s Remote Control feature to manage coding sessions from your phone while the inference happens on your own hardware. Here is how that works and why it is a useful setup.</p>
+
+<h2 id="what-is-remote-control">What is Remote Control?</h2>
+
+<p>Remote Control is a research preview feature in Claude Code (available on Max plans) that lets you continue a local terminal session from your phone, tablet, or any browser.</p>
+
+<p>The key points:</p>
+
+<ul>
+  <li>Everything runs locally on your machine – files never leave it</li>
+  <li>MCP servers and your full dev environment stay available</li>
+  <li>Only the conversation flows through the Anthropic API over HTTPS</li>
+  <li>No inbound ports are opened on your machine</li>
+</ul>
+
+<p>You start it with <code class="language-plaintext highlighter-rouge">claude remote-control</code> from the terminal, or <code class="language-plaintext highlighter-rouge">/rc</code> from within an existing session. It gives you a session URL and a QR code you can scan with the Claude mobile app.</p>
+
+<h2 id="how-it-all-connects">How It All Connects</h2>
+
+<p><img src="/assets/images/rc-ollama-architecture.png" alt="Remote Control + Ollama Architecture" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<h2 id="the-use-case-remote-ollama--remote-control">The Use Case: Remote Ollama + Remote Control</h2>
+
+<p>Here is the scenario. You have a GPU server (maybe a workstation with an NVIDIA card, or a cloud instance) running Ollama. You want to:</p>
+
+<ol>
+  <li>Run Claude Code on your laptop, pointed at the remote Ollama instance</li>
+  <li>Start a Remote Control session so you can monitor and interact from your phone or tablet</li>
+  <li>Walk away from your desk while the session keeps running</li>
+</ol>
+
+<p>This gives you powerful self-hosted models doing the actual inference, with the convenience of controlling the session from anywhere in your house (or beyond).</p>
+
+<h2 id="quick-setup">Quick Setup</h2>
+
+<h3 id="step-1-ollama-on-your-gpu-server">Step 1: Ollama on Your GPU Server</h3>
+
+<p>Make sure Ollama is running and accessible on your network. On the GPU server:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Ollama if you haven't</span>
+curl <span class="nt">-fsSL</span> https://ollama.com/install.sh | sh
+
+<span class="c"># Pull a model with a large context window</span>
+ollama pull qwen3-coder
+
+<span class="c"># Start Ollama listening on all interfaces</span>
+<span class="nv">OLLAMA_HOST</span><span class="o">=</span>0.0.0.0 ollama serve
+</code></pre></div></div>
+
+<h3 id="step-2-point-claude-code-at-remote-ollama">Step 2: Point Claude Code at Remote Ollama</h3>
+
+<p>On your laptop, point to the remote Ollama instance and launch Claude Code. There are two ways to do this:</p>
+
+<p><strong>Option A: Using <code class="language-plaintext highlighter-rouge">ollama launch claude</code> (recommended)</strong></p>
+
+<p>The simplest approach – Ollama handles all the wiring for you:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">OLLAMA_HOST</span><span class="o">=</span>http://&lt;gpu-server-ip&gt;:11434
+ollama launch claude <span class="nt">--model</span> qwen3-coder
+</code></pre></div></div>
+
+<p><strong>Option B: Manual environment variables</strong></p>
+
+<p>If you prefer full control over the configuration:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">ANTHROPIC_AUTH_TOKEN</span><span class="o">=</span>ollama
+<span class="nb">export </span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span><span class="s2">""</span>
+<span class="nb">export </span><span class="nv">ANTHROPIC_BASE_URL</span><span class="o">=</span>http://&lt;gpu-server-ip&gt;:11434
+claude <span class="nt">--model</span> qwen3-coder
+</code></pre></div></div>
+
+<p>Replace <code class="language-plaintext highlighter-rouge">&lt;gpu-server-ip&gt;</code> with the actual IP or hostname of your GPU server. Models that work well with this setup include <code class="language-plaintext highlighter-rouge">qwen3-coder</code>, <code class="language-plaintext highlighter-rouge">glm-4.7</code>, and others with 64K+ token context windows.</p>
+
+<h3 id="step-3-start-remote-control">Step 3: Start Remote Control</h3>
+
+<p>Once Claude Code is running and connected to Ollama, start a Remote Control session:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/rc
+</code></pre></div></div>
+
+<p>You will see a session URL and a QR code. Scan the QR code with the Claude mobile app on your phone, or open the URL in any browser. You are now controlling your local Claude Code session – backed by your GPU server’s Ollama instance – from another device.</p>
+
+<p>Here is what it looks like in practice, using <code class="language-plaintext highlighter-rouge">mistral:7b</code> as the model. Notice the session URL and the “Remote Control active” indicator in the status bar:</p>
+
+<p><img src="/assets/images/claude-code-remote-inference.png" alt="Remote Control active with Ollama inference" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<p>You can verify the connection by running <code class="language-plaintext highlighter-rouge">/status</code> – it shows the model, the Anthropic base URL pointing to your Ollama instance, and all your MCP servers still running:</p>
+
+<p><img src="/assets/images/claude-code-remote-status.png" alt="Claude Code status showing Ollama configuration" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px;" /></p>
+
+<h3 id="step-4-walk-away">Step 4: Walk Away</h3>
+
+<p>Your terminal needs to stay open, but you do not need to be sitting in front of it. Send prompts from your phone, review results, and keep working. The session survives brief network hiccups and reconnects automatically.</p>
+
+<h2 id="things-to-keep-in-mind">Things to Keep in Mind</h2>
+
+<ul>
+  <li>
+    <p><strong>Terminal must stay open</strong>: If you close it, the session ends. Consider running inside <code class="language-plaintext highlighter-rouge">tmux</code> or <code class="language-plaintext highlighter-rouge">screen</code>. On macOS, you can also set up Claude Code hooks to run <code class="language-plaintext highlighter-rouge">caffeinate</code> automatically so your Mac will not sleep mid-session. Add this to your <code class="language-plaintext highlighter-rouge">~/.claude/settings.json</code>:</p>
+
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"SessionStart"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"command"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"caffeinate -dims &amp;"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nl">"SessionEnd"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+      </span><span class="nl">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"command"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pkill -f 'caffeinate -dims'"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timeout"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+      </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li><strong>One remote session at a time</strong>: Each Claude Code instance supports a single remote connection.</li>
+  <li><strong>Network timeout</strong>: If your machine loses connectivity for roughly 10 minutes, the session times out.</li>
+  <li><strong>Ollama network security</strong>: Exposing Ollama on <code class="language-plaintext highlighter-rouge">0.0.0.0</code> opens it to your network. Use firewall rules or a VPN if you are outside a trusted LAN.</li>
+  <li><strong>Model limitations</strong>: Open-source models via Ollama may not support all Claude Code tool/function calling features. They work well for code generation, explanation, and review, but complex multi-tool operations may not behave as expected.</li>
+</ul>
+
+<h2 id="wrapping-up">Wrapping Up</h2>
+
+<p>Remote Control + Ollama is a straightforward way to get the best of both worlds: powerful self-hosted GPU inference with the flexibility of controlling your session from any device. No API costs, no cloud dependency for inference, and your code stays on your machines.</p>
+
+<p>If you already have a GPU server running Ollama, adding Remote Control on top takes about two minutes. Give it a try.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://code.claude.com/docs/en/remote-control">Claude Code Remote Control Documentation</a></li>
+  <li><a href="https://code.claude.com/docs/en/model-config">Claude Code Model Configuration</a></li>
+  <li><a href="https://code.claude.com/docs/en/llm-gateway">Claude Code LLM Gateway Configuration</a></li>
+  <li><a href="https://ollama.com">Ollama</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-tools" class="page__taxonomy-item" rel="tag">AI Tools</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/claude-code" class="page__taxonomy-item" rel="tag">Claude Code</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/gpu" class="page__taxonomy-item" rel="tag">GPU</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/llm" class="page__taxonomy-item" rel="tag">LLM</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ollama" class="page__taxonomy-item" rel="tag">Ollama</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/remote-control" class="page__taxonomy-item" rel="tag">Remote Control</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/self-hosted" class="page__taxonomy-item" rel="tag">Self-hosted</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-02-28T00:00:00+00:00">February 28, 2026</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Claude+Code+Remote+Control+%2B+Ollama%3A+Control+Your+GPU+Server+from+Your+Phone%20https%3A%2F%2Flgallardo.com%2F2026%2F02%2F28%2Fclaude-code-remote-control-ollama%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F28%2Fclaude-code-remote-control-ollama%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F28%2Fclaude-code-remote-control-ollama%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2026%2F02%2F28%2Fclaude-code-remote-control-ollama%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/" class="pagination--pager" title="AI Flashcards While You Read: Building a KOReader Plugin for Anki
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/KOreader-Qwen-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/" rel="permalink">AI Flashcards While You Read: Building a KOReader Plugin for Anki
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I extended my Anki Vocabulary Card Generator idea to the Kobo e-reader. Highlight a phrase, tap Anki Card, and get a full AI-generated flashcard—definition, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/coderabbit-claude-integration.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/" rel="permalink">AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Learn how to set up CodeRabbit’s AI code review directly in Claude Code for autonomous development workflows with built-in quality gates and security scanning.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/anki-card-generator-robot-og.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" rel="permalink">From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Tired of manually copying definitions, generating images, and pasting SSML into ElevenLabs? I built an app that does it all automatically using Claude, Gemin...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-model-switching.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2025/12/11/claude-code-api-timeouts-model-switching/" rel="permalink">When Claude Goes Silent: Navigating API Timeouts and Model Selection in Claude Code
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Experiencing API timeouts with Opus 4.5 and Haiku 4.5? Learn how to diagnose issues using Anthropic’s status page, switch between Claude models, and leverage...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
