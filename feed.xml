@@ -1,4 +1,222 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-03-10T13:41:06+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone</title><link href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/" rel="alternate" type="text/html" title="Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-02-28T00:00:00+00:00</updated><id>https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama</id><content type="html" xml:base="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/"><![CDATA[<p><img src="/assets/images/claude-code-remote-robot.png" alt="Claude Code Remote Control with Ollama" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-27T23:47:01+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Hermes Agent Profiles: Isolating Agents in Practice</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Hermes Agent Profiles: Isolating Agents in Practice" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Hermes Agent cloning into an isolated profile" /></a></p>
+
+<p>The other day I was setting up a couple of Hermes agents and something obvious finally clicked. I was not creating two copies of the same assistant. I was creating two workers with very different jobs.</p>
+
+<p>One agent was focused on <a href="https://ankivocab.com/">AnkiVocab</a>, my platform for generating Anki flashcards with AI. It needs product context, GitHub issues, browser-extension details, Lambda deployment notes, and the kind of memory that helps it move a SaaS product forward. The other agent was for my Terraform modules. That one needs provider docs, infrastructure conventions, AWS context, and a much lower tolerance for creative improvisation.</p>
+
+<p>Those agents should not share the same brain.</p>
+
+<p>If both agents run against the same <code class="language-plaintext highlighter-rouge">~/.hermes</code> directory, they read the same <code class="language-plaintext highlighter-rouge">config.yaml</code>, the same <code class="language-plaintext highlighter-rouge">.env</code>, and they accumulate memories and sessions in the same folders. The AnkiVocab agent starts carrying infrastructure assumptions it does not need. The Terraform agent may see product memories, product credentials, or gateway state that should never affect infrastructure work. If both gateway processes point at the same bot token, one of them crashes in a way that takes time to diagnose.</p>
+
+<p>Hermes profiles solve this with a simple model: one directory per agent, one environment variable to switch between them.</p>
+
+<h2 id="why-isolation-makes-agents-better">Why Isolation Makes Agents Better</h2>
+
+<p>Running agents in isolation is not just housekeeping. It has direct effects on focus, safety, and operational reliability.</p>
+
+<p><strong>Context pollution.</strong> Without profiles, every workstream writes into the same long-lived agent state: the same memories, the same session database, the same skills, and the same identity file. An agent asked to review a pull request can be influenced by memories from a previous agent that was summarizing personal messages. That irrelevant context consumes tokens and nudges the model toward wrong associations. A separate profile keeps the durable context aligned with the job.</p>
+
+<p><strong>Credential scoping.</strong> A shared <code class="language-plaintext highlighter-rouge">.env</code> file is an all-or-nothing secret store. Every agent on the machine can read every API key and bot token in it. With profiles, each agent’s <code class="language-plaintext highlighter-rouge">.env</code> contains only the credentials it actually needs. If an agent is compromised or misbehaves, the blast radius is limited to the secrets in its own profile directory – not every key on the machine.</p>
+
+<p><strong>Reproducibility.</strong> When an agent produces an unexpected result, you need to be able to reproduce the run. A profile that starts from a known baseline – specific <code class="language-plaintext highlighter-rouge">config.yaml</code>, specific <code class="language-plaintext highlighter-rouge">SOUL.md</code>, no prior memories unless you explicitly clone them – gives you a deterministic starting state. Debugging becomes a matter of replaying a run against a known profile rather than untangling shared mutable state.</p>
+
+<p><strong>Parallelism.</strong> Independent profiles let you run multiple agents concurrently without any coordination overhead. Two agents writing to the same profile can interfere with each other through shared memory, cron state, gateway state, and logs. Two agents running in separate profiles write to separate directories, which means you can run them in parallel without treating the profile as a coordination bottleneck.</p>
+
+<h2 id="two-profiles-in-practice">Two Profiles in Practice</h2>
+
+<p>Here is a minimal example contrasting an <code class="language-plaintext highlighter-rouge">ankivocab</code> agent (product, GitHub, extension context, SaaS operations) and a <code class="language-plaintext highlighter-rouge">terraform</code> agent (AWS, Terraform providers, modules, monitoring). The separation lives in each profile’s <code class="language-plaintext highlighter-rouge">.env</code>, <code class="language-plaintext highlighter-rouge">config.yaml</code>, <code class="language-plaintext highlighter-rouge">SOUL.md</code>, and <code class="language-plaintext highlighter-rouge">skills/</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ~/.hermes/profiles/ankivocab/.env</span>
+<span class="nv">GITHUB_TOKEN</span><span class="o">=</span>&lt;ankivocab_repo_token&gt;
+<span class="nv">STRIPE_API_KEY</span><span class="o">=</span>&lt;ankivocab_billing_token&gt;
+<span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>&lt;ankivocab_llm_token&gt;
+<span class="nv">CLOUDFLARE_API_TOKEN</span><span class="o">=</span>&lt;ankivocab_dns_token&gt;
+<span class="c"># No broad Terraform credentials -- this agent should stay focused on the product</span>
+
+<span class="c"># ~/.hermes/profiles/terraform/.env</span>
+<span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>&lt;infra_access_key_id&gt;
+<span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>&lt;infra_secret_access_key&gt;
+<span class="nv">AWS_DEFAULT_REGION</span><span class="o">=</span>us-east-1
+<span class="nv">TF_VAR_environment</span><span class="o">=</span>production
+<span class="nv">GRAFANA_API_KEY</span><span class="o">=</span>&lt;grafana_readonly_token&gt;
+<span class="c"># No AnkiVocab product tokens -- this agent is here to work on infrastructure modules</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">ankivocab</code> agent runs with <code class="language-plaintext highlighter-rouge">hermes -p ankivocab chat</code> (or just <code class="language-plaintext highlighter-rouge">ankivocab chat</code> via alias) and loads the product lane’s credentials, memory, skills, and identity. The <code class="language-plaintext highlighter-rouge">terraform</code> agent runs independently with its own gateway process and its own operational guardrails. Neither accidentally uses the other’s long-lived state, and both can run at the same time without sharing a profile.</p>
+
+<h2 id="what-a-profile-is">What a Profile Is</h2>
+
+<p>A profile is a separate Hermes home directory at <code class="language-plaintext highlighter-rouge">~/.hermes/profiles/&lt;name&gt;/</code>. Each profile is a complete, self-contained environment with its own configuration, state, and runtime.</p>
+
+<p>The mechanism behind this is the <code class="language-plaintext highlighter-rouge">HERMES_HOME</code> environment variable. Over 119 files in the Hermes codebase resolve their paths through <code class="language-plaintext highlighter-rouge">get_hermes_home()</code>. When you run an agent under a specific profile, every file read and write happens inside that profile’s directory – config, memories, sessions, skills, cron jobs, and gateway state.</p>
+
+<p>The default profile is <code class="language-plaintext highlighter-rouge">~/.hermes</code> itself. You do not migrate anything to start using profiles; the default continues to work as before.</p>
+
+<p>When you create a profile named <code class="language-plaintext highlighter-rouge">coder</code>, Hermes also creates a shell alias at <code class="language-plaintext highlighter-rouge">~/.local/bin/coder</code>. That alias is <code class="language-plaintext highlighter-rouge">hermes -p coder</code> under the hood, so typing <code class="language-plaintext highlighter-rouge">coder chat</code> is the same as <code class="language-plaintext highlighter-rouge">hermes -p coder chat</code>.</p>
+
+<h2 id="creating-a-profile">Creating a Profile</h2>
+
+<p>There are four creation modes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile create coder                  <span class="c"># blank profile, creates "coder" alias</span>
+hermes profile create work <span class="nt">--clone</span>           <span class="c"># copy config.yaml, .env, SOUL.md only</span>
+hermes profile create backup <span class="nt">--clone-all</span>     <span class="c"># copy everything including memories and sessions</span>
+hermes profile create work <span class="nt">--clone</span> <span class="nt">--clone-from</span> coder  <span class="c"># clone from a specific profile</span>
+</code></pre></div></div>
+
+<p>Blank creation gives you a clean slate. The <code class="language-plaintext highlighter-rouge">--clone</code> flag is useful when you want a new agent to start with the same model and API keys but no prior context. The <code class="language-plaintext highlighter-rouge">--clone-all</code> flag is useful for backups or branching off an agent that already has useful memories.</p>
+
+<h2 id="isolated-vs-shared-state">Isolated vs. Shared State</h2>
+
+<p>Without profiles, all agents converge on the same state. With profiles, each agent operates in its own lane.</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  subgraph mixed["Single agent (no profiles)"]
+    direction TB
+    m_config["config.yaml (shared)"]
+    m_env[".env (shared token)"]
+    m_mem["memories/ (mixed context)"]
+    m_sess["sessions/ (all agents)"]
+    m_soul["SOUL.md (one persona)"]
+    m_config --- m_env
+    m_env --- m_mem
+    m_mem --- m_sess
+    m_sess --- m_soul
+  end
+
+  subgraph coder["Profile: coder"]
+    direction TB
+    c_config["config.yaml"]
+    c_env[".env (token A)"]
+    c_mem["memories/"]
+    c_sess["sessions/"]
+    c_soul["SOUL.md"]
+    c_config --- c_env
+    c_env --- c_mem
+    c_mem --- c_sess
+    c_sess --- c_soul
+  end
+
+  subgraph assistant["Profile: assistant"]
+    direction TB
+    a_config["config.yaml"]
+    a_env[".env (token B)"]
+    a_mem["memories/"]
+    a_sess["sessions/"]
+    a_soul["SOUL.md"]
+    a_config --- a_env
+    a_env --- a_mem
+    a_mem --- a_sess
+    a_sess --- a_soul
+  end
+
+  mixed --&gt;|"split into profiles"| coder
+  mixed --&gt;|"split into profiles"| assistant
+</code></pre>
+
+<h2 id="what-each-profile-owns">What Each Profile Owns</h2>
+
+<p>Every profile directory contains:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">config.yaml</code> – model, provider, and all Hermes settings</li>
+  <li><code class="language-plaintext highlighter-rouge">.env</code> – API keys, bot tokens, and environment-specific secrets</li>
+  <li><code class="language-plaintext highlighter-rouge">SOUL.md</code> – the system prompt that shapes the agent’s persona</li>
+  <li><code class="language-plaintext highlighter-rouge">memories/</code> – persistent facts the agent has stored</li>
+  <li><code class="language-plaintext highlighter-rouge">sessions/</code> – conversation history</li>
+  <li><code class="language-plaintext highlighter-rouge">skills/</code> – profile-specific procedures and capabilities</li>
+  <li><code class="language-plaintext highlighter-rouge">cron/</code> – scheduled tasks</li>
+  <li>gateway state – PID file and SQLite database for the running gateway process</li>
+</ul>
+
+<h2 id="profiles-are-not-sandboxes">Profiles Are Not Sandboxes</h2>
+
+<p>This is worth stating clearly: profiles isolate Hermes state, not filesystem access.</p>
+
+<p>On the <code class="language-plaintext highlighter-rouge">local</code> terminal backend, the agent still runs as your user and has full access to your home directory and every file your user can read or write. Setting up a <code class="language-plaintext highlighter-rouge">coder</code> profile does not prevent that agent from touching files outside <code class="language-plaintext highlighter-rouge">~/.hermes/profiles/coder/</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">SOUL.md</code> in a profile guides the model toward a certain behavior, but it does not enforce any boundaries at the OS level.</p>
+
+<p>If you want a predictable working directory per agent – so that terminal commands start in the right project folder – set <code class="language-plaintext highlighter-rouge">terminal.cwd</code> explicitly in that profile’s <code class="language-plaintext highlighter-rouge">config.yaml</code>. That controls where the agent’s shell starts, which is a separate concern from <code class="language-plaintext highlighter-rouge">HERMES_HOME</code>.</p>
+
+<h2 id="gateway-isolation">Gateway Isolation</h2>
+
+<p>Each profile runs its own gateway process with its own bot token defined in its <code class="language-plaintext highlighter-rouge">.env</code> file. Telegram, Discord, Slack, WhatsApp, and Signal are all supported.</p>
+
+<p>When you start a gateway for a profile, it reads its token from that profile’s <code class="language-plaintext highlighter-rouge">.env</code>. If two profiles accidentally share the same bot token, Hermes detects the conflict through a token lock mechanism. The second gateway is blocked immediately with a clear error message that names the conflicting profile, so you can fix the <code class="language-plaintext highlighter-rouge">.env</code> before anything unexpected happens.</p>
+
+<pre><code class="language-mermaid">flowchart TD
+  telegram["Telegram / Discord"]
+  telegram --&gt; gw_coder["gateway-coder&lt;br/&gt;(token A)"]
+  telegram --&gt; gw_assistant["gateway-assistant&lt;br/&gt;(token B)"]
+
+  gw_coder --&gt; agent_coder["coder agent&lt;br/&gt;~/.hermes/profiles/coder"]
+  gw_assistant --&gt; agent_assistant["assistant agent&lt;br/&gt;~/.hermes/profiles/assistant"]
+
+  gw_coder -. blocked if token conflict .-&gt; lock["token lock"]
+  gw_assistant -. blocked if token conflict .-&gt; lock
+</code></pre>
+
+<p>You can install each gateway as a separate system service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coder gateway <span class="nb">install</span>       <span class="c"># installs coder profile gateway as systemd/launchd service</span>
+assistant gateway <span class="nb">install</span>   <span class="c"># installs assistant profile gateway as systemd/launchd service</span>
+</code></pre></div></div>
+
+<p>Inside Docker, s6-overlay supervises per-profile gateways and restarts them automatically on crash.</p>
+
+<h2 id="day-to-day-usage">Day-to-Day Usage</h2>
+
+<p>Once you have profiles set up, you interact with them through the alias, the <code class="language-plaintext highlighter-rouge">-p</code> flag, or the sticky default:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coder chat                    <span class="c"># alias targets coder profile directly</span>
+coder gateway start           <span class="c"># start the coder gateway</span>
+hermes <span class="nt">-p</span> coder chat          <span class="c"># explicit flag, same result</span>
+hermes profile use coder      <span class="c"># set coder as the sticky default (like kubectl use-context)</span>
+hermes profile use default    <span class="c"># switch back to the default profile</span>
+</code></pre></div></div>
+
+<p>To inspect what a profile looks like at any point:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile show coder
+</code></pre></div></div>
+
+<p>That gives you output like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Profile: coder
+Path:    ~/.hermes/profiles/coder
+Model:   anthropic/claude-sonnet-4 (anthropic)
+Gateway: stopped
+Skills:  12
+.env:    exists
+SOUL.md: exists
+Alias:   ~/.local/bin/coder
+</code></pre></div></div>
+
+<p>Other management commands are straightforward:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile list
+hermes profile rename coder dev-bot
+hermes profile <span class="nb">export </span>coder          <span class="c"># produces coder.tar.gz</span>
+hermes profile import coder.tar.gz
+hermes profile delete coder          <span class="c"># stops gateway, removes alias, deletes all data</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">delete</code> command handles cleanup atomically – it stops the gateway, removes the shell alias from <code class="language-plaintext highlighter-rouge">~/.local/bin/</code>, and removes the profile directory.</p>
+
+<h2 id="wrapping-up">Wrapping Up</h2>
+
+<p>Profiles give you a clean separation of agent state without requiring any infrastructure changes. The mechanism is simple enough that you can reason about what each agent owns just by looking at its directory. If you are running more than one Hermes agent on the same machine, the time to create profiles is before the memories start accumulating in the wrong place.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://hermes-agent.nousresearch.com/docs">Hermes Documentation</a></li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/profiles">Hermes Profiles Guide</a></li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging/">Hermes Messaging Gateway</a></li>
+</ul>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="AI" /><category term="Hermes" /><category term="AI" /><category term="AI Agents" /><category term="Agent Isolation" /><category term="LLM" /><category term="DevOps" /><category term="Multi-agent" /><summary type="html"><![CDATA[How to use Hermes agent profiles to isolate state, memories, and gateway processes across multiple AI agents on the same machine. Covers HERMES_HOME, profile creation, gateway isolation, and day-to-day usage.]]></summary></entry><entry><title type="html">Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone</title><link href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/" rel="alternate" type="text/html" title="Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-02-28T00:00:00+00:00</updated><id>https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama</id><content type="html" xml:base="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/"><![CDATA[<p><img src="/assets/images/claude-code-remote-robot.png" alt="Claude Code Remote Control with Ollama" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
 
 <p>If you have a GPU server at home or in the cloud running Ollama, you can combine it with Claude Code’s Remote Control feature to manage coding sessions from your phone while the inference happens on your own hardware. Here is how that works and why it is a useful setup.</p>
 
@@ -3904,270 +4122,4 @@ gemini-cli analyze "</span><span class="nv">$ARGUMENTS</span><span class="sh">" 
 
 <hr />
 
-<p><em>What’s your biggest token usage challenge? Which AI models would you want to integrate into your Claude Code workflow? Share your multi-model strategies in the comments below.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="MCP Servers" /><category term="AI Tools" /><category term="Gemini" /><category term="OpenAI Codex" /><category term="Qwen" /><category term="Cursor" /><category term="Token Optimization" /><category term="Multi-Model" /><summary type="html"><![CDATA[Learn how to supercharge Claude Code with MCP servers to access multiple AI models like Gemini, OpenAI Codex, and Qwen—save tokens, bypass usage limits, and leverage specialized AI capabilities seamlessly.]]></summary></entry><entry><title type="html">Automating Terraform Module Discovery with Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="alternate" type="text/html" title="Automating Terraform Module Discovery with Claude Code GitHub Actions" /><published>2025-08-28T00:00:00+00:00</published><updated>2025-08-28T00:00:00+00:00</updated><id>https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions</id><content type="html" xml:base="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/"><![CDATA[<p><img src="/assets/images/claude-code-gh-discovery-system-robot.png" alt="Claude Code &amp; Bugs" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>As a maintainer of several Terraform modules, I’ve always faced the challenge of keeping up with AWS provider updates. New features are constantly being added, and manually tracking these changes across dozens of resources is both time-consuming and error-prone. What if I could automate this process entirely?</p>
-
-<p>That’s exactly what I did with my <a href="https://github.com/lgallard/terraform-aws-ecr">terraform-aws-ecr module</a>, creating an intelligent discovery system using Claude Code and GitHub Actions that automatically identifies missing features, creates issues, and even proposes fixes. The results have been remarkable.</p>
-
-<h2 id="-the-challenge-staying-current-with-aws-provider-updates">🎯 The Challenge: Staying Current with AWS Provider Updates</h2>
-
-<p>Managing Terraform modules at scale presents unique challenges:</p>
-
-<ul>
-  <li><strong>Constant Evolution</strong>: AWS releases new features regularly, and the Terraform AWS provider must catch up</li>
-  <li><strong>Manual Overhead</strong>: Checking for new resources, attributes, and validation rules is tedious</li>
-  <li><strong>Discovery Lag</strong>: By the time you notice a missing feature, users may have already encountered limitations</li>
-  <li><strong>Quality Assurance</strong>: Each update requires careful testing and validation</li>
-</ul>
-
-<p>For my ECR module specifically, AWS Container Registry has evolved significantly with new security features, lifecycle policies, and tag protection mechanisms. Keeping the module current while ensuring backward compatibility requires constant vigilance.</p>
-
-<h2 id="-the-solution-automated-feature-discovery-with-agentic-workflows">🚀 The Solution: Automated Feature Discovery with Agentic Workflows</h2>
-
-<p>I implemented an automated system that:</p>
-
-<ol>
-  <li><strong>Monitors</strong> the AWS provider for ECR-related updates</li>
-  <li><strong>Analyzes</strong> the current module implementation against latest provider capabilities</li>
-  <li><strong>Identifies</strong> gaps and potential improvements</li>
-  <li><strong>Creates</strong> detailed GitHub issues with fix requirements</li>
-  <li><strong>Proposes</strong> solutions when possible</li>
-</ol>
-
-<p>The architecture leverages Claude Code’s GitHub Actions integration to create what I call “agentic workflows” - autonomous systems that can reason about code, identify problems, and propose solutions.</p>
-
-<h2 id="️-implementation-github-actions--claude-code">🛠️ Implementation: GitHub Actions + Claude Code</h2>
-
-<p>Here’s a conceptual overview of the workflow structure:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">ECR Module Feature Discovery</span>
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">schedule</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">1'</span> <span class="c1"># Weekly on Mondays</span>
-  <span class="na">workflow_dispatch</span><span class="pi">:</span>
-
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">discover-features</span><span class="pi">:</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
-      
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code Discovery</span>
-        <span class="na">env</span><span class="pi">:</span>
-          <span class="na">ANTHROPIC_API_KEY</span><span class="pi">:</span> <span class="s">$</span>
-          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">claude-code analyze-terraform-module \</span>
-            <span class="s">--provider hashicorp/aws \</span>
-            <span class="s">--resource-type aws_ecr_repository \</span>
-            <span class="s">--module-path . \</span>
-            <span class="s">--create-issues \</span>
-            <span class="s">--auto-fix-safe</span>
-</code></pre></div></div>
-
-<h3 id="production-workflow-configuration">Production Workflow Configuration</h3>
-
-<p>The actual production implementation uses the Claude Code GitHub Action with comprehensive MCP server integration:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">ECR Feature Discovery</span>
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">schedule</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">12</span><span class="nv"> </span><span class="s">21</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
-  <span class="na">workflow_dispatch</span><span class="pi">:</span>
-    <span class="na">inputs</span><span class="pi">:</span>
-      <span class="na">provider_version</span><span class="pi">:</span>
-        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">AWS</span><span class="nv"> </span><span class="s">Provider</span><span class="nv"> </span><span class="s">version</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">check</span><span class="nv"> </span><span class="s">(default:</span><span class="nv"> </span><span class="s">latest)'</span>
-        <span class="na">required</span><span class="pi">:</span> <span class="kc">false</span>
-        <span class="na">default</span><span class="pi">:</span> <span class="s1">'</span><span class="s">latest'</span>
-        <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
-      <span class="na">dry_run</span><span class="pi">:</span>
-        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Run</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">without</span><span class="nv"> </span><span class="s">creating</span><span class="nv"> </span><span class="s">issues'</span>
-        <span class="na">required</span><span class="pi">:</span> <span class="kc">false</span>
-        <span class="na">default</span><span class="pi">:</span> <span class="kc">false</span>
-        <span class="na">type</span><span class="pi">:</span> <span class="s">boolean</span>
-
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">discover-ecr-features</span><span class="pi">:</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="m">30</span>
-    <span class="na">permissions</span><span class="pi">:</span>
-      <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
-      <span class="na">issues</span><span class="pi">:</span> <span class="s">write</span>
-      <span class="na">pull-requests</span><span class="pi">:</span> <span class="s">read</span>
-
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code Feature Discovery</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@beta</span>
-        <span class="na">env</span><span class="pi">:</span>
-          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">claude_code_oauth_token</span><span class="pi">:</span> <span class="s">$</span>
-          
-          <span class="c1"># MCP Configuration for documentation access</span>
-          <span class="na">mcp_config</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="s">{</span>
-              <span class="s">"mcpServers": {</span>
-                <span class="s">"terraform": {</span>
-                  <span class="s">"command": "npx",</span>
-                  <span class="s">"args": ["-y", "@modelcontextprotocol/server-terraform@latest"]</span>
-                <span class="s">},</span>
-                <span class="s">"context7": {</span>
-                  <span class="s">"command": "npx", </span>
-                  <span class="s">"args": ["-y", "@upstash/context7-mcp@latest"]</span>
-                <span class="s">}</span>
-              <span class="s">}</span>
-            <span class="s">}</span>
-          
-          <span class="c1"># Direct prompt for comprehensive feature discovery</span>
-          <span class="na">direct_prompt</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="s"># ECR Feature Discovery Analysis</span>
-            
-            <span class="s">Analyze the latest AWS provider ECR resources and compare them with </span>
-            <span class="s">the current module implementation to identify:</span>
-            <span class="s">1. New Features: ECR resources/arguments not yet implemented</span>
-            <span class="s">2. Deprecations: Features marked as deprecated in the provider</span>
-            <span class="s">3. Bug Fixes: Important fixes mentioned in provider changelogs</span>
-            
-            <span class="s">Use Terraform MCP server to get latest ECR documentation, analyze</span>
-            <span class="s">current module implementation, and create detailed GitHub issues</span>
-            <span class="s">for significant findings with comprehensive implementation guidance.</span>
-          
-          <span class="na">mode</span><span class="pi">:</span> <span class="s">agent</span>
-</code></pre></div></div>
-
-<p>The key differences in the production version:</p>
-
-<ul>
-  <li><strong>MCP Servers</strong>: Integrates Terraform and Context7 for real-time documentation access</li>
-  <li><strong>Advanced Inputs</strong>: Supports dry-run mode, provider version specification, and force scanning</li>
-  <li><strong>Comprehensive Analysis</strong>: Uses a detailed prompt that performs multi-step analysis</li>
-  <li><strong>Feature Tracking</strong>: Maintains a JSON database of discoveries and scan history</li>
-  <li><strong>Intelligent Issue Creation</strong>: Generates detailed issues with specific implementation guidance</li>
-</ul>
-
-<p>The magic happens in the Claude Code analysis, which:</p>
-
-<ul>
-  <li>Fetches the latest AWS provider documentation</li>
-  <li>Compares current module variables and outputs</li>
-  <li>Identifies missing attributes, validation rules, and best practices</li>
-  <li>Generates comprehensive issues with implementation details</li>
-</ul>
-
-<h2 id="-first-real-world-discovery-ecr-tag-protection">🔍 First Real-World Discovery: ECR Tag Protection</h2>
-
-<p>The system’s first major finding was a critical validation bug that had been preventing users from leveraging AWS ECR’s latest tag protection features.</p>
-
-<p><img src="/assets/images/claude-code-gh-discovery-system.png" alt="GH Issue with findings" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p><strong>The Problem</strong>: The module’s validation logic only accepted <code class="language-plaintext highlighter-rouge">IMMUTABLE</code> and <code class="language-plaintext highlighter-rouge">MUTABLE</code> values for <code class="language-plaintext highlighter-rouge">image_tag_mutability</code>, but AWS had introduced two new options:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">IMMUTABLE_WITH_EXCLUSION</code></li>
-  <li><code class="language-plaintext highlighter-rouge">MUTABLE_WITH_EXCLUSION</code></li>
-</ul>
-
-<p><strong>The Discovery</strong>: Claude Code analyzed the AWS provider documentation, compared it with the module’s validation constraints, and immediately identified the discrepancy.</p>
-
-<p><strong>The Solution</strong>: <a href="https://github.com/lgallard/terraform-aws-ecr/pull/160">PR #160</a> was automatically generated with:</p>
-<ul>
-  <li>Updated validation rules</li>
-  <li>Documentation improvements</li>
-  <li>Test cases for the new values</li>
-  <li>Backward compatibility verification</li>
-</ul>
-
-<p>This single discovery prevented potential user frustration and demonstrated the system’s effectiveness in real-world scenarios.</p>
-
-<h2 id="-five-practical-agentic-workflow-scenarios">📊 Five Practical Agentic Workflow Scenarios</h2>
-
-<p>Based on my experience, here are five powerful scenarios where agentic workflows can transform your repository management:</p>
-
-<h3 id="1-issue-triage-and-labeling">1. Issue Triage and Labeling</h3>
-
-<p><strong>Scenario</strong>: Automatically categorize and prioritize incoming issues.</p>
-
-<p><strong>Workflow Description</strong>: “On every new issue, read the issue description and comments, summarize the main problem, assign relevant labels based on content analysis, and suggest appropriate maintainers for review.”</p>
-
-<p><strong>Implementation</strong>:</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
-  <span class="na">issues</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">]</span>
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">triage</span><span class="pi">:</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Analyze Issue</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">claude-code triage-issue \</span>
-            <span class="s">--issue-number $ \</span>
-            <span class="s">--assign-labels \</span>
-            <span class="s">--suggest-assignees \</span>
-            <span class="s">--create-summary</span>
-</code></pre></div></div>
-
-<p><strong>Benefits</strong>: Reduces manual triage time by 80%, improves response times, ensures consistent labeling.</p>
-
-<h3 id="2-continuous-documentation-updates">2. Continuous Documentation Updates</h3>
-
-<p><strong>Scenario</strong>: Keep documentation synchronized with code changes automatically.</p>
-
-<p><strong>Workflow Description</strong>: “Whenever code is pushed to the main branch, analyze the changes, review existing documentation for accuracy, identify outdated sections, and create pull requests with suggested improvements.”</p>
-
-<p><strong>Real Example</strong>: After adding new ECR lifecycle policy variables, the system automatically updated the README with proper examples and variable descriptions.</p>
-
-<p><strong>Implementation Focus</strong>:</p>
-<ul>
-  <li>Module variable documentation generation</li>
-  <li>Example configuration updates</li>
-  <li>API reference synchronization</li>
-</ul>
-
-<h3 id="3-accessibility-review">3. Accessibility Review</h3>
-
-<p><strong>Scenario</strong>: Ensure code and documentation meet accessibility standards.</p>
-
-<p><strong>Workflow Description</strong>: “Periodically scan the repository for accessibility issues in documentation, code comments, and user-facing outputs. Create actionable issues with specific improvement suggestions.”</p>
-
-<p><strong>Terraform Context</strong>: Particularly valuable for:</p>
-<ul>
-  <li>Output descriptions clarity</li>
-  <li>Variable naming conventions</li>
-  <li>Error message readability</li>
-  <li>Documentation structure</li>
-</ul>
-
-<h3 id="4-continuous-test-improvement">4. Continuous Test Improvement</h3>
-
-<p><strong>Scenario</strong>: Enhance test coverage based on code changes and real usage patterns.</p>
-
-<p><strong>Workflow Description</strong>: “After each merge, analyze the coverage report and code differences, identify untested code paths, propose new test cases to improve coverage, and create pull requests with suggested test implementations.”</p>
-
-<p><strong>ECR Module Example</strong>: The system identified that new tag protection features lacked integration tests and automatically generated test cases covering edge scenarios.</p>
-
-<h3 id="5-continuous-qa-and-code-enhancement">5. Continuous QA and Code Enhancement</h3>
-
-<p><strong>Scenario</strong>: Proactively identify potential bugs and code improvements.</p>
-
-<p><strong>Workflow Description</strong>: “On every pull request, analyze the code for potential issues, suggest additional safety checks, recommend Terraform best practices, and create follow-up issues for broader improvements.”</p>
-
-<p><strong>Key Focus Areas</strong>:</p>
-<ul>
-  <li>Resource naming conflicts</li>
-  <li>Security policy gaps</li>
-  <li>Variable validation improvements</li>
-  <li>Output formatting consistency</li>
-</ul>
-
-<h2 id="-the-future-of-infrastructure-automation">🌟 The Future of Infrastructure Automation</h2>
-
-<p>This experiment has convinced me that agentic workflows represent the future of infrastructure management. The combination of Claude Code’s reasoning capabilities with GitHub’s automation platform creates possibilities that seemed like science fiction just a few years ago.</p>
-
-<p>The key insight is that we’re not replacing human judgment—we’re augmenting it. The system handles the tedious, repetitive analysis work, freeing us to focus on architectural decisions, user experience, and strategic planning.</p>
-
-<hr />
-
-<p><em>Want to explore more about Claude Code and agentic workflows? Check out my previous post on <a href="/2025/08/12/mcp-servers-research-driven-development/">MCP servers for research-driven development</a> or follow my experiments on <a href="https://github.com/lgallard">GitHub</a>.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Terraform" /><category term="Claude Code" /><category term="GitHub Actions" /><category term="AWS ECR" /><category term="Infrastructure as Code" /><category term="Automation" /><category term="Agentic Workflows" /><summary type="html"><![CDATA[Learn how to implement automated Terraform module enhancement using Claude Code GitHub Actions workflow for continuous AWS provider feature discovery and bug detection in infrastructure as code.]]></summary></entry></feed>
+<p><em>What’s your biggest token usage challenge? Which AI models would you want to integrate into your Claude Code workflow? Share your multi-model strategies in the comments below.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="MCP Servers" /><category term="AI Tools" /><category term="Gemini" /><category term="OpenAI Codex" /><category term="Qwen" /><category term="Cursor" /><category term="Token Optimization" /><category term="Multi-Model" /><summary type="html"><![CDATA[Learn how to supercharge Claude Code with MCP servers to access multiple AI models like Gemini, OpenAI Codex, and Qwen—save tokens, bypass usage limits, and leverage specialized AI capabilities seamlessly.]]></summary></entry></feed>

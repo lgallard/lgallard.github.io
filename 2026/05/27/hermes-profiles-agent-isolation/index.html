@@ -1,0 +1,894 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Hermes Agent Profiles: Isolating Agents in Practice - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="How to use Hermes agent profiles to isolate state, memories, and gateway processes across multiple AI agents on the same machine. Covers HERMES_HOME, profile creation, gateway isolation, and day-to-day usage.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="Hermes Agent Profiles: Isolating Agents in Practice">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/">
+<meta property="og:url" content="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/">
+
+
+
+<meta property="og:description" content="How to use Hermes agent profiles to isolate state, memories, and gateway processes across multiple AI agents on the same machine. Covers HERMES_HOME, profile creation, gateway isolation, and day-to-day usage.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="Hermes Agent Profiles: Isolating Agents in Practice">
+<meta name="twitter:description" content="How to use Hermes agent profiles to isolate state, memories, and gateway processes across multiple AI agents on the same machine. Covers HERMES_HOME, profile creation, gateway isolation, and day-to-day usage.">
+<meta name="twitter:url" content="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/hermes-profiles-agent-cloning-banner.jpg">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/hermes-profiles-agent-cloning-banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2026-05-27T00:00:00+00:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Hermes">
+
+<meta property="article:tag" content="AI">
+
+<meta property="article:tag" content="AI Agents">
+
+<meta property="article:tag" content="Agent Isolation">
+
+<meta property="article:tag" content="LLM">
+
+<meta property="article:tag" content="DevOps">
+
+<meta property="article:tag" content="Multi-agent">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+<meta property="article:section" content="AI">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2026/05/27/hermes-profiles-agent-isolation/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2026/05/27/hermes-profiles-agent-isolation/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Hermes Agent Profiles: Isolating Agents in Practice">
+    <meta itemprop="description" content="While setting up separate Hermes agents for AnkiVocab and Terraform work, I ran into the real reason profiles matter: agents get better when their context, credentials, and runtime state stay isolated.">
+    <meta itemprop="datePublished" content="May 27, 2026">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">Hermes Agent Profiles: Isolating Agents in Practice
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Hermes Agent cloning into an isolated profile" /></a></p>
+
+<p>The other day I was setting up a couple of Hermes agents and something obvious finally clicked. I was not creating two copies of the same assistant. I was creating two workers with very different jobs.</p>
+
+<p>One agent was focused on <a href="https://ankivocab.com/">AnkiVocab</a>, my platform for generating Anki flashcards with AI. It needs product context, GitHub issues, browser-extension details, Lambda deployment notes, and the kind of memory that helps it move a SaaS product forward. The other agent was for my Terraform modules. That one needs provider docs, infrastructure conventions, AWS context, and a much lower tolerance for creative improvisation.</p>
+
+<p>Those agents should not share the same brain.</p>
+
+<p>If both agents run against the same <code class="language-plaintext highlighter-rouge">~/.hermes</code> directory, they read the same <code class="language-plaintext highlighter-rouge">config.yaml</code>, the same <code class="language-plaintext highlighter-rouge">.env</code>, and they accumulate memories and sessions in the same folders. The AnkiVocab agent starts carrying infrastructure assumptions it does not need. The Terraform agent may see product memories, product credentials, or gateway state that should never affect infrastructure work. If both gateway processes point at the same bot token, one of them crashes in a way that takes time to diagnose.</p>
+
+<p>Hermes profiles solve this with a simple model: one directory per agent, one environment variable to switch between them.</p>
+
+<h2 id="why-isolation-makes-agents-better">Why Isolation Makes Agents Better</h2>
+
+<p>Running agents in isolation is not just housekeeping. It has direct effects on focus, safety, and operational reliability.</p>
+
+<p><strong>Context pollution.</strong> Without profiles, every workstream writes into the same long-lived agent state: the same memories, the same session database, the same skills, and the same identity file. An agent asked to review a pull request can be influenced by memories from a previous agent that was summarizing personal messages. That irrelevant context consumes tokens and nudges the model toward wrong associations. A separate profile keeps the durable context aligned with the job.</p>
+
+<p><strong>Credential scoping.</strong> A shared <code class="language-plaintext highlighter-rouge">.env</code> file is an all-or-nothing secret store. Every agent on the machine can read every API key and bot token in it. With profiles, each agent’s <code class="language-plaintext highlighter-rouge">.env</code> contains only the credentials it actually needs. If an agent is compromised or misbehaves, the blast radius is limited to the secrets in its own profile directory – not every key on the machine.</p>
+
+<p><strong>Reproducibility.</strong> When an agent produces an unexpected result, you need to be able to reproduce the run. A profile that starts from a known baseline – specific <code class="language-plaintext highlighter-rouge">config.yaml</code>, specific <code class="language-plaintext highlighter-rouge">SOUL.md</code>, no prior memories unless you explicitly clone them – gives you a deterministic starting state. Debugging becomes a matter of replaying a run against a known profile rather than untangling shared mutable state.</p>
+
+<p><strong>Parallelism.</strong> Independent profiles let you run multiple agents concurrently without any coordination overhead. Two agents writing to the same profile can interfere with each other through shared memory, cron state, gateway state, and logs. Two agents running in separate profiles write to separate directories, which means you can run them in parallel without treating the profile as a coordination bottleneck.</p>
+
+<h2 id="two-profiles-in-practice">Two Profiles in Practice</h2>
+
+<p>Here is a minimal example contrasting an <code class="language-plaintext highlighter-rouge">ankivocab</code> agent (product, GitHub, extension context, SaaS operations) and a <code class="language-plaintext highlighter-rouge">terraform</code> agent (AWS, Terraform providers, modules, monitoring). The separation lives in each profile’s <code class="language-plaintext highlighter-rouge">.env</code>, <code class="language-plaintext highlighter-rouge">config.yaml</code>, <code class="language-plaintext highlighter-rouge">SOUL.md</code>, and <code class="language-plaintext highlighter-rouge">skills/</code> directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ~/.hermes/profiles/ankivocab/.env</span>
+<span class="nv">GITHUB_TOKEN</span><span class="o">=</span>&lt;ankivocab_repo_token&gt;
+<span class="nv">STRIPE_API_KEY</span><span class="o">=</span>&lt;ankivocab_billing_token&gt;
+<span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>&lt;ankivocab_llm_token&gt;
+<span class="nv">CLOUDFLARE_API_TOKEN</span><span class="o">=</span>&lt;ankivocab_dns_token&gt;
+<span class="c"># No broad Terraform credentials -- this agent should stay focused on the product</span>
+
+<span class="c"># ~/.hermes/profiles/terraform/.env</span>
+<span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>&lt;infra_access_key_id&gt;
+<span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>&lt;infra_secret_access_key&gt;
+<span class="nv">AWS_DEFAULT_REGION</span><span class="o">=</span>us-east-1
+<span class="nv">TF_VAR_environment</span><span class="o">=</span>production
+<span class="nv">GRAFANA_API_KEY</span><span class="o">=</span>&lt;grafana_readonly_token&gt;
+<span class="c"># No AnkiVocab product tokens -- this agent is here to work on infrastructure modules</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">ankivocab</code> agent runs with <code class="language-plaintext highlighter-rouge">hermes -p ankivocab chat</code> (or just <code class="language-plaintext highlighter-rouge">ankivocab chat</code> via alias) and loads the product lane’s credentials, memory, skills, and identity. The <code class="language-plaintext highlighter-rouge">terraform</code> agent runs independently with its own gateway process and its own operational guardrails. Neither accidentally uses the other’s long-lived state, and both can run at the same time without sharing a profile.</p>
+
+<h2 id="what-a-profile-is">What a Profile Is</h2>
+
+<p>A profile is a separate Hermes home directory at <code class="language-plaintext highlighter-rouge">~/.hermes/profiles/&lt;name&gt;/</code>. Each profile is a complete, self-contained environment with its own configuration, state, and runtime.</p>
+
+<p>The mechanism behind this is the <code class="language-plaintext highlighter-rouge">HERMES_HOME</code> environment variable. Over 119 files in the Hermes codebase resolve their paths through <code class="language-plaintext highlighter-rouge">get_hermes_home()</code>. When you run an agent under a specific profile, every file read and write happens inside that profile’s directory – config, memories, sessions, skills, cron jobs, and gateway state.</p>
+
+<p>The default profile is <code class="language-plaintext highlighter-rouge">~/.hermes</code> itself. You do not migrate anything to start using profiles; the default continues to work as before.</p>
+
+<p>When you create a profile named <code class="language-plaintext highlighter-rouge">coder</code>, Hermes also creates a shell alias at <code class="language-plaintext highlighter-rouge">~/.local/bin/coder</code>. That alias is <code class="language-plaintext highlighter-rouge">hermes -p coder</code> under the hood, so typing <code class="language-plaintext highlighter-rouge">coder chat</code> is the same as <code class="language-plaintext highlighter-rouge">hermes -p coder chat</code>.</p>
+
+<h2 id="creating-a-profile">Creating a Profile</h2>
+
+<p>There are four creation modes:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile create coder                  <span class="c"># blank profile, creates "coder" alias</span>
+hermes profile create work <span class="nt">--clone</span>           <span class="c"># copy config.yaml, .env, SOUL.md only</span>
+hermes profile create backup <span class="nt">--clone-all</span>     <span class="c"># copy everything including memories and sessions</span>
+hermes profile create work <span class="nt">--clone</span> <span class="nt">--clone-from</span> coder  <span class="c"># clone from a specific profile</span>
+</code></pre></div></div>
+
+<p>Blank creation gives you a clean slate. The <code class="language-plaintext highlighter-rouge">--clone</code> flag is useful when you want a new agent to start with the same model and API keys but no prior context. The <code class="language-plaintext highlighter-rouge">--clone-all</code> flag is useful for backups or branching off an agent that already has useful memories.</p>
+
+<h2 id="isolated-vs-shared-state">Isolated vs. Shared State</h2>
+
+<p>Without profiles, all agents converge on the same state. With profiles, each agent operates in its own lane.</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  subgraph mixed["Single agent (no profiles)"]
+    direction TB
+    m_config["config.yaml (shared)"]
+    m_env[".env (shared token)"]
+    m_mem["memories/ (mixed context)"]
+    m_sess["sessions/ (all agents)"]
+    m_soul["SOUL.md (one persona)"]
+    m_config --- m_env
+    m_env --- m_mem
+    m_mem --- m_sess
+    m_sess --- m_soul
+  end
+
+  subgraph coder["Profile: coder"]
+    direction TB
+    c_config["config.yaml"]
+    c_env[".env (token A)"]
+    c_mem["memories/"]
+    c_sess["sessions/"]
+    c_soul["SOUL.md"]
+    c_config --- c_env
+    c_env --- c_mem
+    c_mem --- c_sess
+    c_sess --- c_soul
+  end
+
+  subgraph assistant["Profile: assistant"]
+    direction TB
+    a_config["config.yaml"]
+    a_env[".env (token B)"]
+    a_mem["memories/"]
+    a_sess["sessions/"]
+    a_soul["SOUL.md"]
+    a_config --- a_env
+    a_env --- a_mem
+    a_mem --- a_sess
+    a_sess --- a_soul
+  end
+
+  mixed --&gt;|"split into profiles"| coder
+  mixed --&gt;|"split into profiles"| assistant
+</code></pre>
+
+<h2 id="what-each-profile-owns">What Each Profile Owns</h2>
+
+<p>Every profile directory contains:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">config.yaml</code> – model, provider, and all Hermes settings</li>
+  <li><code class="language-plaintext highlighter-rouge">.env</code> – API keys, bot tokens, and environment-specific secrets</li>
+  <li><code class="language-plaintext highlighter-rouge">SOUL.md</code> – the system prompt that shapes the agent’s persona</li>
+  <li><code class="language-plaintext highlighter-rouge">memories/</code> – persistent facts the agent has stored</li>
+  <li><code class="language-plaintext highlighter-rouge">sessions/</code> – conversation history</li>
+  <li><code class="language-plaintext highlighter-rouge">skills/</code> – profile-specific procedures and capabilities</li>
+  <li><code class="language-plaintext highlighter-rouge">cron/</code> – scheduled tasks</li>
+  <li>gateway state – PID file and SQLite database for the running gateway process</li>
+</ul>
+
+<h2 id="profiles-are-not-sandboxes">Profiles Are Not Sandboxes</h2>
+
+<p>This is worth stating clearly: profiles isolate Hermes state, not filesystem access.</p>
+
+<p>On the <code class="language-plaintext highlighter-rouge">local</code> terminal backend, the agent still runs as your user and has full access to your home directory and every file your user can read or write. Setting up a <code class="language-plaintext highlighter-rouge">coder</code> profile does not prevent that agent from touching files outside <code class="language-plaintext highlighter-rouge">~/.hermes/profiles/coder/</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">SOUL.md</code> in a profile guides the model toward a certain behavior, but it does not enforce any boundaries at the OS level.</p>
+
+<p>If you want a predictable working directory per agent – so that terminal commands start in the right project folder – set <code class="language-plaintext highlighter-rouge">terminal.cwd</code> explicitly in that profile’s <code class="language-plaintext highlighter-rouge">config.yaml</code>. That controls where the agent’s shell starts, which is a separate concern from <code class="language-plaintext highlighter-rouge">HERMES_HOME</code>.</p>
+
+<h2 id="gateway-isolation">Gateway Isolation</h2>
+
+<p>Each profile runs its own gateway process with its own bot token defined in its <code class="language-plaintext highlighter-rouge">.env</code> file. Telegram, Discord, Slack, WhatsApp, and Signal are all supported.</p>
+
+<p>When you start a gateway for a profile, it reads its token from that profile’s <code class="language-plaintext highlighter-rouge">.env</code>. If two profiles accidentally share the same bot token, Hermes detects the conflict through a token lock mechanism. The second gateway is blocked immediately with a clear error message that names the conflicting profile, so you can fix the <code class="language-plaintext highlighter-rouge">.env</code> before anything unexpected happens.</p>
+
+<pre><code class="language-mermaid">flowchart TD
+  telegram["Telegram / Discord"]
+  telegram --&gt; gw_coder["gateway-coder&lt;br/&gt;(token A)"]
+  telegram --&gt; gw_assistant["gateway-assistant&lt;br/&gt;(token B)"]
+
+  gw_coder --&gt; agent_coder["coder agent&lt;br/&gt;~/.hermes/profiles/coder"]
+  gw_assistant --&gt; agent_assistant["assistant agent&lt;br/&gt;~/.hermes/profiles/assistant"]
+
+  gw_coder -. blocked if token conflict .-&gt; lock["token lock"]
+  gw_assistant -. blocked if token conflict .-&gt; lock
+</code></pre>
+
+<p>You can install each gateway as a separate system service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coder gateway <span class="nb">install</span>       <span class="c"># installs coder profile gateway as systemd/launchd service</span>
+assistant gateway <span class="nb">install</span>   <span class="c"># installs assistant profile gateway as systemd/launchd service</span>
+</code></pre></div></div>
+
+<p>Inside Docker, s6-overlay supervises per-profile gateways and restarts them automatically on crash.</p>
+
+<h2 id="day-to-day-usage">Day-to-Day Usage</h2>
+
+<p>Once you have profiles set up, you interact with them through the alias, the <code class="language-plaintext highlighter-rouge">-p</code> flag, or the sticky default:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coder chat                    <span class="c"># alias targets coder profile directly</span>
+coder gateway start           <span class="c"># start the coder gateway</span>
+hermes <span class="nt">-p</span> coder chat          <span class="c"># explicit flag, same result</span>
+hermes profile use coder      <span class="c"># set coder as the sticky default (like kubectl use-context)</span>
+hermes profile use default    <span class="c"># switch back to the default profile</span>
+</code></pre></div></div>
+
+<p>To inspect what a profile looks like at any point:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile show coder
+</code></pre></div></div>
+
+<p>That gives you output like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Profile: coder
+Path:    ~/.hermes/profiles/coder
+Model:   anthropic/claude-sonnet-4 (anthropic)
+Gateway: stopped
+Skills:  12
+.env:    exists
+SOUL.md: exists
+Alias:   ~/.local/bin/coder
+</code></pre></div></div>
+
+<p>Other management commands are straightforward:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile list
+hermes profile rename coder dev-bot
+hermes profile <span class="nb">export </span>coder          <span class="c"># produces coder.tar.gz</span>
+hermes profile import coder.tar.gz
+hermes profile delete coder          <span class="c"># stops gateway, removes alias, deletes all data</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">delete</code> command handles cleanup atomically – it stops the gateway, removes the shell alias from <code class="language-plaintext highlighter-rouge">~/.local/bin/</code>, and removes the profile directory.</p>
+
+<h2 id="wrapping-up">Wrapping Up</h2>
+
+<p>Profiles give you a clean separation of agent state without requiring any infrastructure changes. The mechanism is simple enough that you can reason about what each agent owns just by looking at its directory. If you are running more than one Hermes agent on the same machine, the time to create profiles is before the memories start accumulating in the wrong place.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="https://hermes-agent.nousresearch.com/docs">Hermes Documentation</a></li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/profiles">Hermes Profiles Guide</a></li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging/">Hermes Messaging Gateway</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/agent-isolation" class="page__taxonomy-item" rel="tag">Agent Isolation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-agents" class="page__taxonomy-item" rel="tag">AI Agents</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/devops" class="page__taxonomy-item" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/hermes" class="page__taxonomy-item" rel="tag">Hermes</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/llm" class="page__taxonomy-item" rel="tag">LLM</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/multi-agent" class="page__taxonomy-item" rel="tag">Multi-agent</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-05-27T00:00:00+00:00">May 27, 2026</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=Hermes+Agent+Profiles%3A+Isolating+Agents+in+Practice%20https%3A%2F%2Flgallardo.com%2F2026%2F05%2F27%2Fhermes-profiles-agent-isolation%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2026%2F05%2F27%2Fhermes-profiles-agent-isolation%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2026%2F05%2F27%2Fhermes-profiles-agent-isolation%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2026%2F05%2F27%2Fhermes-profiles-agent-isolation%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/" class="pagination--pager" title="Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-remote-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/" rel="permalink">Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Combine Claude Code’s Remote Control with a remote Ollama instance to control powerful GPU models from your phone or tablet – no cloud dependency required.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/KOreader-Qwen-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/" rel="permalink">AI Flashcards While You Read: Building a KOReader Plugin for Anki
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I extended my Anki Vocabulary Card Generator idea to the Kobo e-reader. Highlight a phrase, tap Anki Card, and get a full AI-generated flashcard—definition, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/coderabbit-claude-integration.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/" rel="permalink">AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Learn how to set up CodeRabbit’s AI code review directly in Claude Code for autonomous development workflows with built-in quality gates and security scanning.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/anki-card-generator-robot-og.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/01/30/anki-card-generator-vibecoding-ai-flashcards/" rel="permalink">From Copy-Paste Hell to One-Click Magic: How I Vibecoded an AI-Powered Anki Flashcard Generator
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Tired of manually copying definitions, generating images, and pasting SSML into ElevenLabs? I built an app that does it all automatically using Claude, Gemin...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>

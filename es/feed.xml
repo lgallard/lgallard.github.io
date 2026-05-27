@@ -1,4 +1,222 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2026-03-10T13:41:17+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Claude Code Remote Control + Ollama: Controla tu Servidor GPU desde el Movil</title><link href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/" rel="alternate" type="text/html" title="Claude Code Remote Control + Ollama: Controla tu Servidor GPU desde el Movil" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-02-28T00:00:00+00:00</updated><id>https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama</id><content type="html" xml:base="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/"><![CDATA[<p><img src="/assets/images/claude-code-remote-robot.png" alt="Claude Code Remote Control con Ollama" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2026-05-27T23:47:04+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Perfiles de Agente en Hermes: Aislamiento en la Práctica</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Perfiles de Agente en Hermes: Aislamiento en la Práctica" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Agente Hermes clonándose en un perfil aislado" /></a></p>
+
+<p>El otro día estaba configurando un par de agentes Hermes y algo obvio terminó de encajar. No estaba creando dos copias del mismo asistente. Estaba creando dos trabajadores con trabajos muy distintos.</p>
+
+<p>Uno de los agentes estaba centrado en <a href="https://ankivocab.com/">AnkiVocab</a>, mi plataforma para generar flashcards de Anki con IA. Necesita contexto de producto, issues de GitHub, detalles de la extensión de navegador, notas de despliegue en Lambda y el tipo de memoria que ayuda a avanzar un SaaS. El otro agente era para mis módulos de Terraform. Ese necesita documentación de providers, convenciones de infraestructura, contexto de AWS y mucha menos tolerancia a la improvisación creativa.</p>
+
+<p>Esos agentes no deberían compartir el mismo cerebro.</p>
+
+<p>Si ambos agentes corren contra el mismo directorio <code class="language-plaintext highlighter-rouge">~/.hermes</code>, leen el mismo <code class="language-plaintext highlighter-rouge">config.yaml</code>, el mismo <code class="language-plaintext highlighter-rouge">.env</code>, y acumulan memorias y sesiones en las mismas carpetas. El agente de AnkiVocab empieza a cargar supuestos de infraestructura que no necesita. El agente de Terraform puede ver memorias de producto, credenciales de producto o estado de gateway que nunca debería afectar el trabajo de infraestructura. Si ambos procesos de gateway apuntan al mismo token de bot, uno de ellos falla de una forma que toma tiempo diagnosticar.</p>
+
+<p>Los perfiles de Hermes resuelven esto con un modelo simple: un directorio por agente, una variable de entorno para cambiar entre ellos.</p>
+
+<h2 id="por-qué-el-aislamiento-mejora-los-agentes">Por qué el Aislamiento Mejora los Agentes</h2>
+
+<p>Ejecutar agentes en aislamiento no es simplemente una cuestión de orden. Tiene efectos directos en el foco, la seguridad y la fiabilidad operativa.</p>
+
+<p><strong>Contaminación de contexto.</strong> Sin perfiles, cada línea de trabajo escribe en el mismo estado persistente del agente: las mismas memorias, la misma base de sesiones, las mismas habilidades y el mismo archivo de identidad. Un agente encargado de revisar un pull request puede verse influido por memorias de un agente anterior que resumía mensajes personales. Ese contexto irrelevante consume tokens y empuja al modelo hacia asociaciones incorrectas. Un perfil separado mantiene el contexto duradero alineado con el trabajo.</p>
+
+<p><strong>Alcance de credenciales.</strong> Un archivo <code class="language-plaintext highlighter-rouge">.env</code> compartido es un almacén de secretos de todo o nada. Cada agente en la máquina puede leer cada clave de API y token de bot que contiene. Con perfiles, el <code class="language-plaintext highlighter-rouge">.env</code> de cada agente contiene únicamente las credenciales que realmente necesita. Si un agente se ve comprometido o se comporta mal, el radio de daño se limita a los secretos de su propio directorio de perfil, no a todas las claves de la máquina.</p>
+
+<p><strong>Reproducibilidad.</strong> Cuando un agente produce un resultado inesperado, necesitas poder reproducir la ejecución. Un perfil que parte de una línea base conocida – <code class="language-plaintext highlighter-rouge">config.yaml</code> específico, <code class="language-plaintext highlighter-rouge">SOUL.md</code> específico, sin memorias previas a menos que las clones explícitamente – ofrece un estado de inicio determinista. Depurar se convierte en reproducir una ejecución contra un perfil conocido, en lugar de desenredar estado mutable compartido.</p>
+
+<p><strong>Paralelismo.</strong> Los perfiles independientes permiten ejecutar múltiples agentes de forma concurrente sin convertir el perfil en un punto de coordinación. Dos agentes usando el mismo perfil pueden interferirse a través de memoria, estado de cron, estado de gateway y logs compartidos. Dos agentes corriendo en perfiles separados escriben en directorios distintos, así que puedes ejecutarlos en paralelo sin bloqueos ni secuenciación.</p>
+
+<h2 id="dos-perfiles-en-la-práctica">Dos Perfiles en la Práctica</h2>
+
+<p>A continuación un ejemplo mínimo que contrasta un agente <code class="language-plaintext highlighter-rouge">ankivocab</code> (producto, GitHub, contexto de extensión, operación SaaS) y un agente <code class="language-plaintext highlighter-rouge">terraform</code> (AWS, providers de Terraform, módulos, monitoreo). La separación reside en el <code class="language-plaintext highlighter-rouge">.env</code>, el <code class="language-plaintext highlighter-rouge">config.yaml</code>, el <code class="language-plaintext highlighter-rouge">SOUL.md</code> y el directorio <code class="language-plaintext highlighter-rouge">skills/</code> de cada perfil.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ~/.hermes/profiles/ankivocab/.env</span>
+<span class="nv">GITHUB_TOKEN</span><span class="o">=</span>&lt;token_repo_ankivocab&gt;
+<span class="nv">STRIPE_API_KEY</span><span class="o">=</span>&lt;token_billing_ankivocab&gt;
+<span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>&lt;token_llm_ankivocab&gt;
+<span class="nv">CLOUDFLARE_API_TOKEN</span><span class="o">=</span>&lt;token_dns_ankivocab&gt;
+<span class="c"># Sin credenciales amplias de Terraform -- este agente debe mantenerse centrado en el producto</span>
+
+<span class="c"># ~/.hermes/profiles/terraform/.env</span>
+<span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>&lt;id_clave_infra&gt;
+<span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>&lt;clave_secreta_infra&gt;
+<span class="nv">AWS_DEFAULT_REGION</span><span class="o">=</span>us-east-1
+<span class="nv">TF_VAR_environment</span><span class="o">=</span>production
+<span class="nv">GRAFANA_API_KEY</span><span class="o">=</span>&lt;token_grafana_readonly&gt;
+<span class="c"># Sin tokens de producto de AnkiVocab -- este agente está para trabajar en módulos de infraestructura</span>
+</code></pre></div></div>
+
+<p>El agente <code class="language-plaintext highlighter-rouge">ankivocab</code> se ejecuta con <code class="language-plaintext highlighter-rouge">hermes -p ankivocab chat</code> (o simplemente <code class="language-plaintext highlighter-rouge">ankivocab chat</code> mediante el alias) y carga las credenciales, memoria, habilidades e identidad de la línea de producto. El agente <code class="language-plaintext highlighter-rouge">terraform</code> corre de forma independiente con su propio proceso de gateway y sus propias reglas operativas. Ninguno usa accidentalmente el estado duradero del otro, y ambos pueden ejecutarse al mismo tiempo sin compartir un perfil.</p>
+
+<h2 id="qué-es-un-perfil">Qué es un Perfil</h2>
+
+<p>Un perfil es un directorio home separado de Hermes en <code class="language-plaintext highlighter-rouge">~/.hermes/profiles/&lt;nombre&gt;/</code>. Cada perfil es un entorno completo y autocontenido con su propia configuración, estado y tiempo de ejecución.</p>
+
+<p>El mecanismo detrás de esto es la variable de entorno <code class="language-plaintext highlighter-rouge">HERMES_HOME</code>. Más de 119 archivos en el código de Hermes resuelven sus rutas a través de <code class="language-plaintext highlighter-rouge">get_hermes_home()</code>. Cuando ejecutas un agente bajo un perfil específico, cada lectura y escritura de archivos ocurre dentro del directorio de ese perfil – configuración, memorias, sesiones, habilidades, tareas cron y estado del gateway.</p>
+
+<p>El perfil por defecto es <code class="language-plaintext highlighter-rouge">~/.hermes</code> en sí mismo. No necesitas migrar nada para empezar a usar perfiles; el perfil por defecto sigue funcionando como antes.</p>
+
+<p>Cuando creas un perfil llamado <code class="language-plaintext highlighter-rouge">coder</code>, Hermes también crea un alias de shell en <code class="language-plaintext highlighter-rouge">~/.local/bin/coder</code>. Ese alias es <code class="language-plaintext highlighter-rouge">hermes -p coder</code> por debajo, por lo que escribir <code class="language-plaintext highlighter-rouge">coder chat</code> es equivalente a <code class="language-plaintext highlighter-rouge">hermes -p coder chat</code>.</p>
+
+<h2 id="crear-un-perfil">Crear un Perfil</h2>
+
+<p>Hay cuatro modos de creación:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile create coder                  <span class="c"># perfil en blanco, crea el alias "coder"</span>
+hermes profile create work <span class="nt">--clone</span>           <span class="c"># copia config.yaml, .env y SOUL.md solamente</span>
+hermes profile create backup <span class="nt">--clone-all</span>     <span class="c"># copia todo, incluyendo memorias y sesiones</span>
+hermes profile create work <span class="nt">--clone</span> <span class="nt">--clone-from</span> coder  <span class="c"># clonar desde un perfil específico</span>
+</code></pre></div></div>
+
+<p>La creación en blanco da un punto de partida limpio. El flag <code class="language-plaintext highlighter-rouge">--clone</code> es útil cuando quieres que un nuevo agente empiece con las mismas claves y modelo pero sin contexto previo. El flag <code class="language-plaintext highlighter-rouge">--clone-all</code> es útil para respaldos o para crear una variante de un agente que ya tiene memorias útiles.</p>
+
+<h2 id="estado-aislado-vs-compartido">Estado Aislado vs. Compartido</h2>
+
+<p>Sin perfiles, todos los agentes convergen en el mismo estado. Con perfiles, cada agente opera en su propio carril.</p>
+
+<pre><code class="language-mermaid">flowchart LR
+  subgraph mixed["Single agent (no profiles)"]
+    direction TB
+    m_config["config.yaml (shared)"]
+    m_env[".env (shared token)"]
+    m_mem["memories/ (mixed context)"]
+    m_sess["sessions/ (all agents)"]
+    m_soul["SOUL.md (one persona)"]
+    m_config --- m_env
+    m_env --- m_mem
+    m_mem --- m_sess
+    m_sess --- m_soul
+  end
+
+  subgraph coder["Profile: coder"]
+    direction TB
+    c_config["config.yaml"]
+    c_env[".env (token A)"]
+    c_mem["memories/"]
+    c_sess["sessions/"]
+    c_soul["SOUL.md"]
+    c_config --- c_env
+    c_env --- c_mem
+    c_mem --- c_sess
+    c_sess --- c_soul
+  end
+
+  subgraph assistant["Profile: assistant"]
+    direction TB
+    a_config["config.yaml"]
+    a_env[".env (token B)"]
+    a_mem["memories/"]
+    a_sess["sessions/"]
+    a_soul["SOUL.md"]
+    a_config --- a_env
+    a_env --- a_mem
+    a_mem --- a_sess
+    a_sess --- a_soul
+  end
+
+  mixed --&gt;|"split into profiles"| coder
+  mixed --&gt;|"split into profiles"| assistant
+</code></pre>
+
+<h2 id="qué-contiene-cada-perfil">Qué Contiene Cada Perfil</h2>
+
+<p>Cada directorio de perfil contiene:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">config.yaml</code> – modelo, proveedor y toda la configuración de Hermes</li>
+  <li><code class="language-plaintext highlighter-rouge">.env</code> – claves de API, tokens de bot y secretos específicos del entorno</li>
+  <li><code class="language-plaintext highlighter-rouge">SOUL.md</code> – el prompt de sistema que define la personalidad del agente</li>
+  <li><code class="language-plaintext highlighter-rouge">memories/</code> – hechos persistentes que el agente ha almacenado</li>
+  <li><code class="language-plaintext highlighter-rouge">sessions/</code> – historial de conversaciones</li>
+  <li><code class="language-plaintext highlighter-rouge">skills/</code> – procedimientos y capacidades específicos del perfil</li>
+  <li><code class="language-plaintext highlighter-rouge">cron/</code> – tareas programadas</li>
+  <li>estado del gateway – archivo PID y base de datos SQLite del proceso gateway en ejecución</li>
+</ul>
+
+<h2 id="los-perfiles-no-son-sandboxes">Los Perfiles No Son Sandboxes</h2>
+
+<p>Vale la pena decirlo claramente: los perfiles aislan el estado de Hermes, no el acceso al sistema de archivos.</p>
+
+<p>En el backend de terminal <code class="language-plaintext highlighter-rouge">local</code>, el agente sigue corriendo como tu usuario y tiene acceso completo a tu directorio home y a todos los archivos que tu usuario puede leer o escribir. Crear un perfil <code class="language-plaintext highlighter-rouge">coder</code> no impide que ese agente toque archivos fuera de <code class="language-plaintext highlighter-rouge">~/.hermes/profiles/coder/</code>.</p>
+
+<p>El <code class="language-plaintext highlighter-rouge">SOUL.md</code> de un perfil orienta al modelo hacia un comportamiento determinado, pero no aplica ningún límite a nivel del sistema operativo.</p>
+
+<p>Si quieres un directorio de trabajo predecible por agente – para que los comandos de terminal empiecen en la carpeta de proyecto correcta – configura <code class="language-plaintext highlighter-rouge">terminal.cwd</code> explícitamente en el <code class="language-plaintext highlighter-rouge">config.yaml</code> de ese perfil. Eso controla dónde empieza la shell del agente, lo cual es una preocupación separada de <code class="language-plaintext highlighter-rouge">HERMES_HOME</code>.</p>
+
+<h2 id="aislamiento-del-gateway">Aislamiento del Gateway</h2>
+
+<p>Cada perfil corre su propio proceso de gateway con su propio token de bot definido en su archivo <code class="language-plaintext highlighter-rouge">.env</code>. Telegram, Discord, Slack, WhatsApp y Signal están todos soportados.</p>
+
+<p>Cuando inicias un gateway para un perfil, lee su token del <code class="language-plaintext highlighter-rouge">.env</code> de ese perfil. Si dos perfiles comparten accidentalmente el mismo token de bot, Hermes detecta el conflicto a través de un mecanismo de bloqueo de token. El segundo gateway se bloquea inmediatamente con un mensaje de error claro que nombra el perfil en conflicto, para que puedas corregir el <code class="language-plaintext highlighter-rouge">.env</code> antes de que ocurra algo inesperado.</p>
+
+<pre><code class="language-mermaid">flowchart TD
+  telegram["Telegram / Discord"]
+  telegram --&gt; gw_coder["gateway-coder&lt;br/&gt;(token A)"]
+  telegram --&gt; gw_assistant["gateway-assistant&lt;br/&gt;(token B)"]
+
+  gw_coder --&gt; agent_coder["coder agent&lt;br/&gt;~/.hermes/profiles/coder"]
+  gw_assistant --&gt; agent_assistant["assistant agent&lt;br/&gt;~/.hermes/profiles/assistant"]
+
+  gw_coder -. blocked if token conflict .-&gt; lock["token lock"]
+  gw_assistant -. blocked if token conflict .-&gt; lock
+</code></pre>
+
+<p>Puedes instalar cada gateway como un servicio del sistema separado:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coder gateway <span class="nb">install</span>       <span class="c"># instala el gateway del perfil coder como servicio systemd/launchd</span>
+assistant gateway <span class="nb">install</span>   <span class="c"># instala el gateway del perfil assistant como servicio systemd/launchd</span>
+</code></pre></div></div>
+
+<p>Dentro de Docker, s6-overlay supervisa los gateways por perfil y los reinicia automáticamente ante una caída.</p>
+
+<h2 id="uso-diario">Uso Diario</h2>
+
+<p>Una vez que tienes los perfiles configurados, interactúas con ellos mediante el alias, el flag <code class="language-plaintext highlighter-rouge">-p</code> o el perfil predeterminado fijo:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>coder chat                    <span class="c"># el alias apunta directamente al perfil coder</span>
+coder gateway start           <span class="c"># iniciar el gateway del perfil coder</span>
+hermes <span class="nt">-p</span> coder chat          <span class="c"># flag explícito, mismo resultado</span>
+hermes profile use coder      <span class="c"># establece coder como predeterminado fijo (como kubectl use-context)</span>
+hermes profile use default    <span class="c"># volver al perfil por defecto</span>
+</code></pre></div></div>
+
+<p>Para inspeccionar el estado de un perfil en cualquier momento:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile show coder
+</code></pre></div></div>
+
+<p>Eso produce una salida como esta:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Profile: coder
+Path:    ~/.hermes/profiles/coder
+Model:   anthropic/claude-sonnet-4 (anthropic)
+Gateway: stopped
+Skills:  12
+.env:    exists
+SOUL.md: exists
+Alias:   ~/.local/bin/coder
+</code></pre></div></div>
+
+<p>Los demás comandos de gestión son directos:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hermes profile list
+hermes profile rename coder dev-bot
+hermes profile <span class="nb">export </span>coder          <span class="c"># produce coder.tar.gz</span>
+hermes profile import coder.tar.gz
+hermes profile delete coder          <span class="c"># detiene el gateway, elimina el alias y borra todos los datos</span>
+</code></pre></div></div>
+
+<p>El comando <code class="language-plaintext highlighter-rouge">delete</code> maneja la limpieza de forma atómica – detiene el gateway, elimina el alias de shell de <code class="language-plaintext highlighter-rouge">~/.local/bin/</code> y elimina el directorio del perfil.</p>
+
+<h2 id="conclusiones">Conclusiones</h2>
+
+<p>Los perfiles ofrecen una separación limpia del estado de cada agente sin requerir cambios en la infraestructura. El mecanismo es lo suficientemente simple como para entender qué posee cada agente con solo mirar su directorio. Si estás corriendo más de un agente Hermes en la misma máquina, el momento de crear los perfiles es antes de que las memorias empiecen a acumularse en el lugar equivocado.</p>
+
+<hr />
+
+<h2 id="referencias">Referencias</h2>
+
+<ul>
+  <li><a href="https://hermes-agent.nousresearch.com/docs">Documentación de Hermes</a></li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/profiles">Guía de Perfiles de Hermes</a></li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging/">Gateway de Mensajería de Hermes</a></li>
+</ul>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="AI" /><category term="Hermes" /><category term="AI" /><category term="AI Agents" /><category term="Agent Isolation" /><category term="LLM" /><category term="DevOps" /><category term="Multi-agent" /><summary type="html"><![CDATA[Cómo usar perfiles de Hermes para aislar estado, memorias y procesos de gateway entre múltiples agentes de IA en la misma máquina. Cubre HERMES_HOME, creación de perfiles, aislamiento de gateway y uso diario.]]></summary></entry><entry><title type="html">Claude Code Remote Control + Ollama: Controla tu Servidor GPU desde el Movil</title><link href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/" rel="alternate" type="text/html" title="Claude Code Remote Control + Ollama: Controla tu Servidor GPU desde el Movil" /><published>2026-02-28T00:00:00+00:00</published><updated>2026-02-28T00:00:00+00:00</updated><id>https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama</id><content type="html" xml:base="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/"><![CDATA[<p><img src="/assets/images/claude-code-remote-robot.png" alt="Claude Code Remote Control con Ollama" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
 
 <p>Si tienes un servidor GPU en casa o en la nube corriendo Ollama, puedes combinarlo con la funcion Remote Control de Claude Code para gestionar sesiones de programacion desde el movil mientras la inferencia ocurre en tu propio hardware. Asi es como funciona y por que es una configuracion muy practica.</p>
 
@@ -3904,270 +4122,4 @@ gemini-cli analyze "</span><span class="nv">$ARGUMENTS</span><span class="sh">" 
 
 <hr />
 
-<p><em>¿Cuál es tu mayor desafío de uso de tokens? ¿Qué modelos de IA te gustaría integrar en tu flujo de trabajo de Claude Code? Comparte tus estrategias multi-modelo en los comentarios abajo.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="Servidores MCP" /><category term="Herramientas IA" /><category term="Gemini" /><category term="OpenAI Codex" /><category term="Qwen" /><category term="Cursor" /><category term="Optimización Tokens" /><category term="Multi-Modelo" /><summary type="html"><![CDATA[Aprende cómo potenciar Claude Code con servidores MCP para acceder a múltiples modelos de IA como Gemini, OpenAI Codex y Qwen—ahorra tokens, evita límites de uso y aprovecha capacidades especializadas de IA de manera fluida.]]></summary></entry><entry><title type="html">Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions</title><link href="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/" rel="alternate" type="text/html" title="Automatizando el Descubrimiento de Módulos Terraform con Claude Code GitHub Actions" /><published>2025-08-28T00:00:00+00:00</published><updated>2025-08-28T00:00:00+00:00</updated><id>https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions</id><content type="html" xml:base="https://lgallardo.com/2025/08/28/terraform-ecr-module-claude-code-github-actions/"><![CDATA[<p><img src="/assets/images/claude-code-gh-discovery-system-robot.png" alt="Claude Code &amp; Bugs" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>Como creador de varios módulos Terraform, siempre he enfrentado el desafío de mantenerme al día con las actualizaciones del proveedor AWS. Constantemente se agregan nuevas características, y hacer seguimiento manual de estos cambios en docenas de recursos es tanto consume tiempo como propenso a errores. ¿Qué tal si pudiera automatizar completamente este proceso?</p>
-
-<p>Eso es exactamente lo que hice con mi <a href="https://github.com/lgallard/terraform-aws-ecr">módulo terraform-aws-ecr</a>, creando un sistema de descubrimiento inteligente usando Claude Code y GitHub Actions que automáticamente identifica características faltantes, crea issues, e incluso propone soluciones. Los resultados han sido notables.</p>
-
-<h2 id="-el-desafío-mantenerse-actualizado-con-las-actualizaciones-del-proveedor-aws">🎯 El Desafío: Mantenerse Actualizado con las Actualizaciones del Proveedor AWS</h2>
-
-<p>Gestionar módulos Terraform a escala presenta desafíos únicos:</p>
-
-<ul>
-  <li><strong>Evolución Constante</strong>: AWS lanza nuevas características regularmente, y el proveedor AWS de Terraform debe ponerse al día</li>
-  <li><strong>Sobrecarga Manual</strong>: Verificar nuevos recursos, atributos y reglas de validación es tedioso</li>
-  <li><strong>Retraso en Descubrimiento</strong>: Para cuando notas una característica faltante, los usuarios pueden ya haber encontrado limitaciones</li>
-  <li><strong>Aseguramiento de Calidad</strong>: Cada actualización requiere pruebas y validación cuidadosas</li>
-</ul>
-
-<p>Para mi módulo ECR específicamente, AWS Container Registry ha evolucionado significativamente con nuevas características de seguridad, políticas de ciclo de vida y mecanismos de protección de tags. Mantener el módulo actualizado mientras se asegura la compatibilidad hacia atrás requiere vigilancia constante.</p>
-
-<h2 id="-la-solución-descubrimiento-automatizado-de-características-con-flujos-agénticos">🚀 La Solución: Descubrimiento Automatizado de Características con Flujos Agénticos</h2>
-
-<p>Implementé un sistema automatizado que:</p>
-
-<ol>
-  <li><strong>Monitorea</strong> el proveedor AWS para actualizaciones relacionadas con ECR</li>
-  <li><strong>Analiza</strong> la implementación actual del módulo contra las últimas capacidades del proveedor</li>
-  <li><strong>Identifica</strong> brechas y mejoras potenciales</li>
-  <li><strong>Crea</strong> issues detallados de GitHub con requisitos de corrección</li>
-  <li><strong>Propone</strong> soluciones cuando es posible</li>
-</ol>
-
-<p>La arquitectura aprovecha la integración de Claude Code con GitHub Actions para crear lo que llamo “flujos agénticos” - sistemas autónomos que pueden razonar sobre código, identificar problemas y proponer soluciones.</p>
-
-<h2 id="️-implementación-github-actions--claude-code">🛠️ Implementación: GitHub Actions + Claude Code</h2>
-
-<p>Aquí está una vista conceptual de la estructura del flujo de trabajo:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">ECR Module Feature Discovery</span>
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">schedule</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">1'</span> <span class="c1"># Semanalmente los lunes</span>
-  <span class="na">workflow_dispatch</span><span class="pi">:</span>
-
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">discover-features</span><span class="pi">:</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
-      
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code Discovery</span>
-        <span class="na">env</span><span class="pi">:</span>
-          <span class="na">ANTHROPIC_API_KEY</span><span class="pi">:</span> <span class="s">$</span>
-          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">claude-code analyze-terraform-module \</span>
-            <span class="s">--provider hashicorp/aws \</span>
-            <span class="s">--resource-type aws_ecr_repository \</span>
-            <span class="s">--module-path . \</span>
-            <span class="s">--create-issues \</span>
-            <span class="s">--auto-fix-safe</span>
-</code></pre></div></div>
-
-<h3 id="configuración-del-flujo-de-trabajo-en-producción">Configuración del Flujo de Trabajo en Producción</h3>
-
-<p>La implementación real de producción usa la GitHub Action de Claude Code con integración completa de servidores MCP:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">ECR Feature Discovery</span>
-<span class="na">on</span><span class="pi">:</span>
-  <span class="na">schedule</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">12</span><span class="nv"> </span><span class="s">21</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
-  <span class="na">workflow_dispatch</span><span class="pi">:</span>
-    <span class="na">inputs</span><span class="pi">:</span>
-      <span class="na">provider_version</span><span class="pi">:</span>
-        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Versión</span><span class="nv"> </span><span class="s">del</span><span class="nv"> </span><span class="s">proveedor</span><span class="nv"> </span><span class="s">AWS</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">verificar</span><span class="nv"> </span><span class="s">(default:</span><span class="nv"> </span><span class="s">latest)'</span>
-        <span class="na">required</span><span class="pi">:</span> <span class="kc">false</span>
-        <span class="na">default</span><span class="pi">:</span> <span class="s1">'</span><span class="s">latest'</span>
-        <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
-      <span class="na">dry_run</span><span class="pi">:</span>
-        <span class="na">description</span><span class="pi">:</span> <span class="s1">'</span><span class="s">Ejecutar</span><span class="nv"> </span><span class="s">análisis</span><span class="nv"> </span><span class="s">sin</span><span class="nv"> </span><span class="s">crear</span><span class="nv"> </span><span class="s">issues'</span>
-        <span class="na">required</span><span class="pi">:</span> <span class="kc">false</span>
-        <span class="na">default</span><span class="pi">:</span> <span class="kc">false</span>
-        <span class="na">type</span><span class="pi">:</span> <span class="s">boolean</span>
-
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">discover-ecr-features</span><span class="pi">:</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="m">30</span>
-    <span class="na">permissions</span><span class="pi">:</span>
-      <span class="na">contents</span><span class="pi">:</span> <span class="s">write</span>
-      <span class="na">issues</span><span class="pi">:</span> <span class="s">write</span>
-      <span class="na">pull-requests</span><span class="pi">:</span> <span class="s">read</span>
-
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Checkout repository</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v4</span>
-
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Run Claude Code Feature Discovery</span>
-        <span class="na">uses</span><span class="pi">:</span> <span class="s">anthropics/claude-code-action@beta</span>
-        <span class="na">env</span><span class="pi">:</span>
-          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">$</span>
-        <span class="na">with</span><span class="pi">:</span>
-          <span class="na">claude_code_oauth_token</span><span class="pi">:</span> <span class="s">$</span>
-          
-          <span class="c1"># Configuración MCP para acceso a documentación</span>
-          <span class="na">mcp_config</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="s">{</span>
-              <span class="s">"mcpServers": {</span>
-                <span class="s">"terraform": {</span>
-                  <span class="s">"command": "npx",</span>
-                  <span class="s">"args": ["-y", "@modelcontextprotocol/server-terraform@latest"]</span>
-                <span class="s">},</span>
-                <span class="s">"context7": {</span>
-                  <span class="s">"command": "npx", </span>
-                  <span class="s">"args": ["-y", "@upstash/context7-mcp@latest"]</span>
-                <span class="s">}</span>
-              <span class="s">}</span>
-            <span class="s">}</span>
-          
-          <span class="c1"># Prompt directo para descubrimiento comprensivo de características</span>
-          <span class="na">direct_prompt</span><span class="pi">:</span> <span class="pi">|</span>
-            <span class="s"># Análisis de Descubrimiento de Características ECR</span>
-            
-            <span class="s">Analizar los recursos ECR más recientes del proveedor AWS y compararlos</span>
-            <span class="s">con la implementación actual del módulo para identificar:</span>
-            <span class="s">1. Nuevas Características: recursos/argumentos ECR aún no implementados</span>
-            <span class="s">2. Deprecaciones: Características marcadas como deprecadas en el proveedor</span>
-            <span class="s">3. Corrección de Bugs: Correcciones importantes mencionadas en changelogs</span>
-            
-            <span class="s">Usar servidor MCP de Terraform para obtener documentación ECR más reciente,</span>
-            <span class="s">analizar implementación actual del módulo, y crear issues detallados de GitHub</span>
-            <span class="s">para hallazgos significativos con guía comprensiva de implementación.</span>
-          
-          <span class="na">mode</span><span class="pi">:</span> <span class="s">agent</span>
-</code></pre></div></div>
-
-<p>Las diferencias clave en la versión de producción:</p>
-
-<ul>
-  <li><strong>Servidores MCP</strong>: Integra Terraform y Context7 para acceso en tiempo real a documentación</li>
-  <li><strong>Entradas Avanzadas</strong>: Soporta modo dry-run, especificación de versión del proveedor, y escaneo forzado</li>
-  <li><strong>Análisis Comprensivo</strong>: Usa un prompt detallado que realiza análisis multi-paso</li>
-  <li><strong>Seguimiento de Características</strong>: Mantiene una base de datos JSON de descubrimientos e historial de escaneos</li>
-  <li><strong>Creación Inteligente de Issues</strong>: Genera issues detallados con guía específica de implementación</li>
-</ul>
-
-<p>La magia ocurre en el análisis de Claude Code, que:</p>
-
-<ul>
-  <li>Obtiene la documentación más reciente del proveedor AWS</li>
-  <li>Compara las variables y outputs actuales del módulo</li>
-  <li>Identifica atributos faltantes, reglas de validación y mejores prácticas</li>
-  <li>Genera issues comprensivos con detalles de implementación</li>
-</ul>
-
-<h2 id="-primer-descubrimiento-del-mundo-real-protección-de-tags-ecr">🔍 Primer Descubrimiento del Mundo Real: Protección de Tags ECR</h2>
-
-<p>El primer hallazgo importante del sistema fue un bug crítico de validación que había estado impidiendo a los usuarios aprovechar las últimas características de protección de tags de AWS ECR.</p>
-
-<p><img src="/assets/images/claude-code-gh-discovery-system.png" alt="GH Issue con descubrimientos" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p><strong>El Problema</strong>: La lógica de validación del módulo solo aceptaba valores <code class="language-plaintext highlighter-rouge">IMMUTABLE</code> y <code class="language-plaintext highlighter-rouge">MUTABLE</code> para <code class="language-plaintext highlighter-rouge">image_tag_mutability</code>, pero AWS había introducido dos nuevas opciones:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">IMMUTABLE_WITH_EXCLUSION</code></li>
-  <li><code class="language-plaintext highlighter-rouge">MUTABLE_WITH_EXCLUSION</code></li>
-</ul>
-
-<p><strong>El Descubrimiento</strong>: Claude Code analizó la documentación del proveedor AWS, la comparó con las restricciones de validación del módulo, e inmediatamente identificó la discrepancia.</p>
-
-<p><strong>La Solución</strong>: <a href="https://github.com/lgallard/terraform-aws-ecr/pull/160">PR #160</a> fue generado automáticamente con:</p>
-<ul>
-  <li>Reglas de validación actualizadas</li>
-  <li>Mejoras en documentación</li>
-  <li>Casos de prueba para los nuevos valores</li>
-  <li>Verificación de compatibilidad hacia atrás</li>
-</ul>
-
-<p>Este único descubrimiento previno frustración potencial del usuario y demostró la efectividad del sistema en escenarios del mundo real.</p>
-
-<h2 id="-cinco-escenarios-prácticos-de-flujos-agénticos">📊 Cinco Escenarios Prácticos de Flujos Agénticos</h2>
-
-<p>Basado en mi experiencia, aquí hay cinco escenarios poderosos donde los flujos agénticos pueden transformar tu gestión de repositorios:</p>
-
-<h3 id="1-clasificación-y-etiquetado-de-issues">1. Clasificación y Etiquetado de Issues</h3>
-
-<p><strong>Escenario</strong>: Categorizar y priorizar automáticamente los issues entrantes.</p>
-
-<p><strong>Descripción del Flujo</strong>: “En cada nuevo issue, leer la descripción y comentarios del issue, resumir el problema principal, asignar etiquetas relevantes basadas en análisis de contenido, y sugerir mantenedores apropiados para revisión.”</p>
-
-<p><strong>Implementación</strong>:</p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
-  <span class="na">issues</span><span class="pi">:</span>
-    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">opened</span><span class="pi">]</span>
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">triage</span><span class="pi">:</span>
-    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
-    <span class="na">steps</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Analyze Issue</span>
-        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
-          <span class="s">claude-code triage-issue \</span>
-            <span class="s">--issue-number $ \</span>
-            <span class="s">--assign-labels \</span>
-            <span class="s">--suggest-assignees \</span>
-            <span class="s">--create-summary</span>
-</code></pre></div></div>
-
-<p><strong>Beneficios</strong>: Reduce tiempo de clasificación manual en 80%, mejora tiempos de respuesta, asegura etiquetado consistente.</p>
-
-<h3 id="2-actualizaciones-continuas-de-documentación">2. Actualizaciones Continuas de Documentación</h3>
-
-<p><strong>Escenario</strong>: Mantener la documentación sincronizada con cambios de código automáticamente.</p>
-
-<p><strong>Descripción del Flujo</strong>: “Cuando se empuja código a la rama principal, analizar los cambios, revisar la documentación existente para precisión, identificar secciones desactualizadas, y crear pull requests con mejoras sugeridas.”</p>
-
-<p><strong>Ejemplo Real</strong>: Después de agregar nuevas variables de política de ciclo de vida ECR, el sistema automáticamente actualizó el README con ejemplos apropiados y descripciones de variables.</p>
-
-<p><strong>Enfoque de Implementación</strong>:</p>
-<ul>
-  <li>Generación de documentación de variables del módulo</li>
-  <li>Actualizaciones de configuración de ejemplo</li>
-  <li>Sincronización de referencia API</li>
-</ul>
-
-<h3 id="3-revisión-de-accesibilidad">3. Revisión de Accesibilidad</h3>
-
-<p><strong>Escenario</strong>: Asegurar que código y documentación cumplan estándares de accesibilidad.</p>
-
-<p><strong>Descripción del Flujo</strong>: “Escanear periódicamente el repositorio para problemas de accesibilidad en documentación, comentarios de código y salidas dirigidas al usuario. Crear issues accionables con sugerencias de mejora específicas.”</p>
-
-<p><strong>Contexto Terraform</strong>: Particularmente valioso para:</p>
-<ul>
-  <li>Claridad de descripciones de outputs</li>
-  <li>Convenciones de nomenclatura de variables</li>
-  <li>Legibilidad de mensajes de error</li>
-  <li>Estructura de documentación</li>
-</ul>
-
-<h3 id="4-mejora-continua-de-pruebas">4. Mejora Continua de Pruebas</h3>
-
-<p><strong>Escenario</strong>: Mejorar cobertura de pruebas basada en cambios de código y patrones de uso real.</p>
-
-<p><strong>Descripción del Flujo</strong>: “Después de cada merge, analizar el reporte de cobertura y diferencias de código, identificar rutas de código no probadas, proponer nuevos casos de prueba para mejorar cobertura, y crear pull requests con implementaciones de prueba sugeridas.”</p>
-
-<p><strong>Ejemplo Módulo ECR</strong>: El sistema identificó que las nuevas características de protección de tags carecían de pruebas de integración y automáticamente generó casos de prueba cubriendo escenarios límite.</p>
-
-<h3 id="5-qa-continuo-y-mejora-de-código">5. QA Continuo y Mejora de Código</h3>
-
-<p><strong>Escenario</strong>: Identificar proactivamente bugs potenciales y mejoras de código.</p>
-
-<p><strong>Descripción del Flujo</strong>: “En cada pull request, analizar el código para problemas potenciales, sugerir verificaciones de seguridad adicionales, recomendar mejores prácticas de Terraform, y crear issues de seguimiento para mejoras más amplias.”</p>
-
-<p><strong>Áreas de Enfoque Clave</strong>:</p>
-<ul>
-  <li>Conflictos de nomenclatura de recursos</li>
-  <li>Brechas de política de seguridad</li>
-  <li>Mejoras de validación de variables</li>
-  <li>Consistencia de formato de outputs</li>
-</ul>
-
-<h2 id="-el-futuro-de-la-automatización-de-infraestructura">🌟 El Futuro de la Automatización de Infraestructura</h2>
-
-<p>Este experimento me ha convencido que los flujos agénticos representan el futuro de la gestión de infraestructura. La combinación de las capacidades de razonamiento de Claude Code con la plataforma de automatización de GitHub crea posibilidades que parecían ciencia ficción hace solo unos años.</p>
-
-<p>La perspectiva clave es que no estamos reemplazando el juicio humano—lo estamos aumentando. El sistema maneja el trabajo de análisis tedioso y repetitivo, liberándonos para enfocarnos en decisiones arquitectónicas, experiencia de usuario y planificación estratégica.</p>
-
-<hr />
-
-<p><em>¿Quieres explorar más sobre Claude Code y flujos agénticos? Revisa mi post anterior sobre <a href="/2025/08/12/mcp-servers-research-driven-development/">servidores MCP para desarrollo dirigido por investigación</a> o sigue mis experimentos en <a href="https://github.com/lgallard">GitHub</a>.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Terraform" /><category term="Claude Code" /><category term="GitHub Actions" /><category term="AWS ECR" /><category term="Infrastructure as Code" /><category term="Automatización" /><category term="Flujos Agénticos" /><summary type="html"><![CDATA[Aprende a implementar mejoras automáticas de módulos Terraform usando flujos de trabajo de Claude Code GitHub Actions para descubrimiento continuo de características del proveedor AWS y detección de bugs en infraestructura como código.]]></summary></entry></feed>
+<p><em>¿Cuál es tu mayor desafío de uso de tokens? ¿Qué modelos de IA te gustaría integrar en tu flujo de trabajo de Claude Code? Comparte tus estrategias multi-modelo en los comentarios abajo.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="Servidores MCP" /><category term="Herramientas IA" /><category term="Gemini" /><category term="OpenAI Codex" /><category term="Qwen" /><category term="Cursor" /><category term="Optimización Tokens" /><category term="Multi-Modelo" /><summary type="html"><![CDATA[Aprende cómo potenciar Claude Code con servidores MCP para acceder a múltiples modelos de IA como Gemini, OpenAI Codex y Qwen—ahorra tokens, evita límites de uso y aprovecha capacidades especializadas de IA de manera fluida.]]></summary></entry></feed>
