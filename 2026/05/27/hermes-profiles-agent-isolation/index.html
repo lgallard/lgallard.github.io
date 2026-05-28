@@ -415,7 +415,7 @@
 
 <p>A profile is a separate Hermes home directory at <code class="language-plaintext highlighter-rouge">~/.hermes/profiles/&lt;name&gt;/</code>. Each profile is a complete, self-contained environment with its own configuration, state, and runtime.</p>
 
-<p>The mechanism behind this is the <code class="language-plaintext highlighter-rouge">HERMES_HOME</code> environment variable. Over 119 files in the Hermes codebase resolve their paths through <code class="language-plaintext highlighter-rouge">get_hermes_home()</code>. When you run an agent under a specific profile, every file read and write happens inside that profile’s directory – config, memories, sessions, skills, cron jobs, and gateway state.</p>
+<p>The mechanism behind this is the <code class="language-plaintext highlighter-rouge">HERMES_HOME</code> environment variable. Throughout the Hermes codebase, path resolution goes through <code class="language-plaintext highlighter-rouge">get_hermes_home()</code> instead of assuming a single global <code class="language-plaintext highlighter-rouge">~/.hermes</code> directory. When you run an agent under a specific profile, every file read and write happens inside that profile’s directory – config, memories, sessions, skills, cron jobs, and gateway state.</p>
 
 <p>The default profile is <code class="language-plaintext highlighter-rouge">~/.hermes</code> itself. You do not migrate anything to start using profiles; the default continues to work as before.</p>
 
@@ -554,7 +554,7 @@ hermes profile use default    <span class="c"># switch back to the default profi
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Profile: coder
 Path:    ~/.hermes/profiles/coder
-Model:   anthropic/claude-sonnet-4 (anthropic)
+Model:   &lt;model&gt; (&lt;provider&gt;)
 Gateway: stopped
 Skills:  12
 .env:    exists

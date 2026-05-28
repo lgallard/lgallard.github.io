@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2026-05-28T00:06:51+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Perfiles de Agente en Hermes: Aislamiento en la Práctica</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Perfiles de Agente en Hermes: Aislamiento en la Práctica" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Agente Hermes clonándose en un perfil aislado" /></a></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2026-05-28T07:46:55+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Perfiles de Agente en Hermes: Aislamiento en la Práctica</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Perfiles de Agente en Hermes: Aislamiento en la Práctica" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Agente Hermes clonándose en un perfil aislado" /></a></p>
 
 <p>El otro día estaba configurando un par de agentes Hermes y algo obvio terminó de encajar. No estaba creando dos copias del mismo asistente. Estaba creando dos trabajadores con trabajos muy distintos.</p>
 
@@ -48,7 +48,7 @@
 
 <p>Un perfil es un directorio home separado de Hermes en <code class="language-plaintext highlighter-rouge">~/.hermes/profiles/&lt;nombre&gt;/</code>. Cada perfil es un entorno completo y autocontenido con su propia configuración, estado y tiempo de ejecución.</p>
 
-<p>El mecanismo detrás de esto es la variable de entorno <code class="language-plaintext highlighter-rouge">HERMES_HOME</code>. Más de 119 archivos en el código de Hermes resuelven sus rutas a través de <code class="language-plaintext highlighter-rouge">get_hermes_home()</code>. Cuando ejecutas un agente bajo un perfil específico, cada lectura y escritura de archivos ocurre dentro del directorio de ese perfil – configuración, memorias, sesiones, habilidades, tareas cron y estado del gateway.</p>
+<p>El mecanismo detrás de esto es la variable de entorno <code class="language-plaintext highlighter-rouge">HERMES_HOME</code>. En todo el código de Hermes, la resolución de rutas pasa por <code class="language-plaintext highlighter-rouge">get_hermes_home()</code> en vez de asumir un único directorio global <code class="language-plaintext highlighter-rouge">~/.hermes</code>. Cuando ejecutas un agente bajo un perfil específico, cada lectura y escritura de archivos ocurre dentro del directorio de ese perfil – configuración, memorias, sesiones, habilidades, tareas cron y estado del gateway.</p>
 
 <p>El perfil por defecto es <code class="language-plaintext highlighter-rouge">~/.hermes</code> en sí mismo. No necesitas migrar nada para empezar a usar perfiles; el perfil por defecto sigue funcionando como antes.</p>
 
@@ -72,20 +72,20 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
 <div class="mermaid">
 flowchart LR
-  subgraph mixed["Single agent (no profiles)"]
+  subgraph mixed["Agente único (sin perfiles)"]
     direction TB
-    m_config["config.yaml (shared)"]
-    m_env[".env (shared token)"]
-    m_mem["memories/ (mixed context)"]
-    m_sess["sessions/ (all agents)"]
-    m_soul["SOUL.md (one persona)"]
+    m_config["config.yaml (compartido)"]
+    m_env[".env (token compartido)"]
+    m_mem["memories/ (contexto mezclado)"]
+    m_sess["sessions/ (todos los agentes)"]
+    m_soul["SOUL.md (una personalidad)"]
     m_config --- m_env
     m_env --- m_mem
     m_mem --- m_sess
     m_sess --- m_soul
   end
 
-  subgraph coder["Profile: coder"]
+  subgraph coder["Perfil: coder"]
     direction TB
     c_config["config.yaml"]
     c_env[".env (token A)"]
@@ -98,7 +98,7 @@ flowchart LR
     c_sess --- c_soul
   end
 
-  subgraph assistant["Profile: assistant"]
+  subgraph assistant["Perfil: assistant"]
     direction TB
     a_config["config.yaml"]
     a_env[".env (token B)"]
@@ -111,8 +111,8 @@ flowchart LR
     a_sess --- a_soul
   end
 
-  mixed --&gt;|"split into profiles"| coder
-  mixed --&gt;|"split into profiles"| assistant
+  mixed --&gt;|"separar en perfiles"| coder
+  mixed --&gt;|"separar en perfiles"| assistant
 </div>
 
 <h2 id="qué-contiene-cada-perfil">Qué Contiene Cada Perfil</h2>
@@ -152,11 +152,11 @@ flowchart TD
   telegram --&gt; gw_coder["gateway-coder (token A)"]
   telegram --&gt; gw_assistant["gateway-assistant (token B)"]
 
-  gw_coder --&gt; agent_coder["coder agent ~/.hermes/profiles/coder"]
-  gw_assistant --&gt; agent_assistant["assistant agent ~/.hermes/profiles/assistant"]
+  gw_coder --&gt; agent_coder["agente coder ~/.hermes/profiles/coder"]
+  gw_assistant --&gt; agent_assistant["agente assistant ~/.hermes/profiles/assistant"]
 
-  gw_coder -. blocked if token conflict .-&gt; lock["token lock"]
-  gw_assistant -. blocked if token conflict .-&gt; lock
+  gw_coder -. bloqueado si hay conflicto de token .-&gt; lock["bloqueo de token"]
+  gw_assistant -. bloqueado si hay conflicto de token .-&gt; lock
 </div>
 
 <p>Puedes instalar cada gateway como un servicio del sistema separado:</p>
@@ -187,7 +187,7 @@ hermes profile use default    <span class="c"># volver al perfil por defecto</sp
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Profile: coder
 Path:    ~/.hermes/profiles/coder
-Model:   anthropic/claude-sonnet-4 (anthropic)
+Model:   &lt;modelo&gt; (&lt;proveedor&gt;)
 Gateway: stopped
 Skills:  12
 .env:    exists
