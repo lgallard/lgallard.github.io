@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-27T23:47:01+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Hermes Agent Profiles: Isolating Agents in Practice</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Hermes Agent Profiles: Isolating Agents in Practice" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Hermes Agent cloning into an isolated profile" /></a></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-28T00:06:47+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Hermes Agent Profiles: Isolating Agents in Practice</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Hermes Agent Profiles: Isolating Agents in Practice" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Hermes Agent cloning into an isolated profile" /></a></p>
 
 <p>The other day I was setting up a couple of Hermes agents and something obvious finally clicked. I was not creating two copies of the same assistant. I was creating two workers with very different jobs.</p>
 
@@ -70,7 +70,8 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
 <p>Without profiles, all agents converge on the same state. With profiles, each agent operates in its own lane.</p>
 
-<pre><code class="language-mermaid">flowchart LR
+<div class="mermaid">
+flowchart LR
   subgraph mixed["Single agent (no profiles)"]
     direction TB
     m_config["config.yaml (shared)"]
@@ -112,7 +113,7 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
   mixed --&gt;|"split into profiles"| coder
   mixed --&gt;|"split into profiles"| assistant
-</code></pre>
+</div>
 
 <h2 id="what-each-profile-owns">What Each Profile Owns</h2>
 
@@ -145,17 +146,18 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
 <p>When you start a gateway for a profile, it reads its token from that profile’s <code class="language-plaintext highlighter-rouge">.env</code>. If two profiles accidentally share the same bot token, Hermes detects the conflict through a token lock mechanism. The second gateway is blocked immediately with a clear error message that names the conflicting profile, so you can fix the <code class="language-plaintext highlighter-rouge">.env</code> before anything unexpected happens.</p>
 
-<pre><code class="language-mermaid">flowchart TD
+<div class="mermaid">
+flowchart TD
   telegram["Telegram / Discord"]
-  telegram --&gt; gw_coder["gateway-coder&lt;br/&gt;(token A)"]
-  telegram --&gt; gw_assistant["gateway-assistant&lt;br/&gt;(token B)"]
+  telegram --&gt; gw_coder["gateway-coder (token A)"]
+  telegram --&gt; gw_assistant["gateway-assistant (token B)"]
 
-  gw_coder --&gt; agent_coder["coder agent&lt;br/&gt;~/.hermes/profiles/coder"]
-  gw_assistant --&gt; agent_assistant["assistant agent&lt;br/&gt;~/.hermes/profiles/assistant"]
+  gw_coder --&gt; agent_coder["coder agent ~/.hermes/profiles/coder"]
+  gw_assistant --&gt; agent_assistant["assistant agent ~/.hermes/profiles/assistant"]
 
   gw_coder -. blocked if token conflict .-&gt; lock["token lock"]
   gw_assistant -. blocked if token conflict .-&gt; lock
-</code></pre>
+</div>
 
 <p>You can install each gateway as a separate system service:</p>
 
@@ -207,6 +209,11 @@ hermes profile delete coder          <span class="c"># stops gateway, removes al
 <h2 id="wrapping-up">Wrapping Up</h2>
 
 <p>Profiles give you a clean separation of agent state without requiring any infrastructure changes. The mechanism is simple enough that you can reason about what each agent owns just by looking at its directory. If you are running more than one Hermes agent on the same machine, the time to create profiles is before the memories start accumulating in the wrong place.</p>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
 
 <hr />
 

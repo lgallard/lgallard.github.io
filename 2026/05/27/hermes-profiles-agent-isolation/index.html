@@ -437,7 +437,8 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
 <p>Without profiles, all agents converge on the same state. With profiles, each agent operates in its own lane.</p>
 
-<pre><code class="language-mermaid">flowchart LR
+<div class="mermaid">
+flowchart LR
   subgraph mixed["Single agent (no profiles)"]
     direction TB
     m_config["config.yaml (shared)"]
@@ -479,7 +480,7 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
   mixed --&gt;|"split into profiles"| coder
   mixed --&gt;|"split into profiles"| assistant
-</code></pre>
+</div>
 
 <h2 id="what-each-profile-owns">What Each Profile Owns</h2>
 
@@ -512,17 +513,18 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
 <p>When you start a gateway for a profile, it reads its token from that profile’s <code class="language-plaintext highlighter-rouge">.env</code>. If two profiles accidentally share the same bot token, Hermes detects the conflict through a token lock mechanism. The second gateway is blocked immediately with a clear error message that names the conflicting profile, so you can fix the <code class="language-plaintext highlighter-rouge">.env</code> before anything unexpected happens.</p>
 
-<pre><code class="language-mermaid">flowchart TD
+<div class="mermaid">
+flowchart TD
   telegram["Telegram / Discord"]
-  telegram --&gt; gw_coder["gateway-coder&lt;br/&gt;(token A)"]
-  telegram --&gt; gw_assistant["gateway-assistant&lt;br/&gt;(token B)"]
+  telegram --&gt; gw_coder["gateway-coder (token A)"]
+  telegram --&gt; gw_assistant["gateway-assistant (token B)"]
 
-  gw_coder --&gt; agent_coder["coder agent&lt;br/&gt;~/.hermes/profiles/coder"]
-  gw_assistant --&gt; agent_assistant["assistant agent&lt;br/&gt;~/.hermes/profiles/assistant"]
+  gw_coder --&gt; agent_coder["coder agent ~/.hermes/profiles/coder"]
+  gw_assistant --&gt; agent_assistant["assistant agent ~/.hermes/profiles/assistant"]
 
   gw_coder -. blocked if token conflict .-&gt; lock["token lock"]
   gw_assistant -. blocked if token conflict .-&gt; lock
-</code></pre>
+</div>
 
 <p>You can install each gateway as a separate system service:</p>
 
@@ -574,6 +576,11 @@ hermes profile delete coder          <span class="c"># stops gateway, removes al
 <h2 id="wrapping-up">Wrapping Up</h2>
 
 <p>Profiles give you a clean separation of agent state without requiring any infrastructure changes. The mechanism is simple enough that you can reason about what each agent owns just by looking at its directory. If you are running more than one Hermes agent on the same machine, the time to create profiles is before the memories start accumulating in the wrong place.</p>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
 
 <hr />
 

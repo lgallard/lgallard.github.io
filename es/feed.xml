@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2026-05-27T23:47:04+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Perfiles de Agente en Hermes: Aislamiento en la Práctica</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Perfiles de Agente en Hermes: Aislamiento en la Práctica" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Agente Hermes clonándose en un perfil aislado" /></a></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="es"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="es" /><updated>2026-05-28T00:06:51+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Perfiles de Agente en Hermes: Aislamiento en la Práctica</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Perfiles de Agente en Hermes: Aislamiento en la Práctica" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Agente Hermes clonándose en un perfil aislado" /></a></p>
 
 <p>El otro día estaba configurando un par de agentes Hermes y algo obvio terminó de encajar. No estaba creando dos copias del mismo asistente. Estaba creando dos trabajadores con trabajos muy distintos.</p>
 
@@ -70,7 +70,8 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
 <p>Sin perfiles, todos los agentes convergen en el mismo estado. Con perfiles, cada agente opera en su propio carril.</p>
 
-<pre><code class="language-mermaid">flowchart LR
+<div class="mermaid">
+flowchart LR
   subgraph mixed["Single agent (no profiles)"]
     direction TB
     m_config["config.yaml (shared)"]
@@ -112,7 +113,7 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
   mixed --&gt;|"split into profiles"| coder
   mixed --&gt;|"split into profiles"| assistant
-</code></pre>
+</div>
 
 <h2 id="qué-contiene-cada-perfil">Qué Contiene Cada Perfil</h2>
 
@@ -145,17 +146,18 @@ hermes profile create work <span class="nt">--clone</span> <span class="nt">--cl
 
 <p>Cuando inicias un gateway para un perfil, lee su token del <code class="language-plaintext highlighter-rouge">.env</code> de ese perfil. Si dos perfiles comparten accidentalmente el mismo token de bot, Hermes detecta el conflicto a través de un mecanismo de bloqueo de token. El segundo gateway se bloquea inmediatamente con un mensaje de error claro que nombra el perfil en conflicto, para que puedas corregir el <code class="language-plaintext highlighter-rouge">.env</code> antes de que ocurra algo inesperado.</p>
 
-<pre><code class="language-mermaid">flowchart TD
+<div class="mermaid">
+flowchart TD
   telegram["Telegram / Discord"]
-  telegram --&gt; gw_coder["gateway-coder&lt;br/&gt;(token A)"]
-  telegram --&gt; gw_assistant["gateway-assistant&lt;br/&gt;(token B)"]
+  telegram --&gt; gw_coder["gateway-coder (token A)"]
+  telegram --&gt; gw_assistant["gateway-assistant (token B)"]
 
-  gw_coder --&gt; agent_coder["coder agent&lt;br/&gt;~/.hermes/profiles/coder"]
-  gw_assistant --&gt; agent_assistant["assistant agent&lt;br/&gt;~/.hermes/profiles/assistant"]
+  gw_coder --&gt; agent_coder["coder agent ~/.hermes/profiles/coder"]
+  gw_assistant --&gt; agent_assistant["assistant agent ~/.hermes/profiles/assistant"]
 
   gw_coder -. blocked if token conflict .-&gt; lock["token lock"]
   gw_assistant -. blocked if token conflict .-&gt; lock
-</code></pre>
+</div>
 
 <p>Puedes instalar cada gateway como un servicio del sistema separado:</p>
 
@@ -207,6 +209,11 @@ hermes profile delete coder          <span class="c"># detiene el gateway, elimi
 <h2 id="conclusiones">Conclusiones</h2>
 
 <p>Los perfiles ofrecen una separación limpia del estado de cada agente sin requerir cambios en la infraestructura. El mecanismo es lo suficientemente simple como para entender qué posee cada agente con solo mirar su directorio. Si estás corriendo más de un agente Hermes en la misma máquina, el momento de crear los perfiles es antes de que las memorias empiecen a acumularse en el lugar equivocado.</p>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'default' });
+</script>
 
 <hr />
 
