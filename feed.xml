@@ -1,4 +1,156 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-05-28T08:50:30+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">Hermes Agent Profiles: Isolating Agents in Practice</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Hermes Agent Profiles: Isolating Agents in Practice" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Hermes Agent cloning into an isolated profile" /></a></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://lgallardo.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://lgallardo.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-06-10T22:51:43+00:00</updated><id>https://lgallardo.com/feed.xml</id><title type="html">lgallardo.com</title><subtitle>DevOps Engineer and Backend Solutions Developer specializing in Kubernetes, AWS, Python, and Terraform. Sharing insights on cloud infrastructure, automation, and system architecture.</subtitle><author><name>Luis M. Gallardo D.</name></author><entry><title type="html">From Idea to Draft PR with Hermes Kanban</title><link href="https://lgallardo.com/2026/06/10/hermes-kanban-ai-agent-delivery/" rel="alternate" type="text/html" title="From Idea to Draft PR with Hermes Kanban" /><published>2026-06-10T17:58:04+00:00</published><updated>2026-06-10T17:58:04+00:00</updated><id>https://lgallardo.com/2026/06/10/hermes-kanban-ai-agent-delivery</id><content type="html" xml:base="https://lgallardo.com/2026/06/10/hermes-kanban-ai-agent-delivery/"><![CDATA[<p><a href="/assets/images/hermes-kanban-ai-agent-delivery.jpg" style="display:block; margin-left:auto; margin-right:auto; width:70%; max-width:700px"><img src="/assets/images/hermes-kanban-ai-agent-delivery.jpg" alt="Hermes Kanban AI agent delivery header" /></a></p>
+
+<p>I am experimenting with a more structured way to use AI coding agents.</p>
+
+<p>Not as a one-shot assistant where I say “fix this bug” and hope the result is good, but as a delivery workflow:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>goal -&gt; plan -&gt; implementation -&gt; review -&gt; draft PR -&gt; human approval
+</code></pre></div></div>
+
+<p>The tool I am using for this is <strong>Hermes Kanban</strong>.</p>
+
+<p>The idea is simple: every feature or fix becomes a durable task, with clear ownership, review steps, and handoffs between agents. Instead of keeping everything inside a long chat, Hermes Kanban gives the work a lifecycle.</p>
+
+<p><a href="/assets/images/hermes-kanban-ai-agent-workflow-diagram.jpg" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px"><img src="/assets/images/hermes-kanban-ai-agent-workflow-diagram.jpg" alt="Goal-driven coding agent workflow with Hermes Kanban" /></a></p>
+
+<h2 id="why-not-just-ask-an-agent-to-code">Why Not Just Ask an Agent to Code?</h2>
+
+<p>AI coding agents are powerful, but they can still fail in predictable ways:</p>
+
+<ul>
+  <li>They jump into code too early</li>
+  <li>They misunderstand the actual goal</li>
+  <li>They make plausible but incomplete changes</li>
+  <li>They review their own work too generously</li>
+  <li>They lose context across long conversations</li>
+</ul>
+
+<p>For small tasks, that may be acceptable.</p>
+
+<p>For real product work, I want something more reliable. So I am building a workflow where the agent does not start by editing files. It starts by understanding the goal.</p>
+
+<h2 id="the-workflow">The Workflow</h2>
+
+<p>The process begins with a feature request, bug, or product goal.</p>
+
+<p>From there, the orchestrator creates a plan:</p>
+
+<ul>
+  <li>What needs to change?</li>
+  <li>What is the expected behavior?</li>
+  <li>What areas of the codebase are involved?</li>
+  <li>What does “done” mean?</li>
+  <li>What should be tested or reviewed?</li>
+</ul>
+
+<p>Once the plan is clear, Hermes Kanban creates the implementation task.</p>
+
+<p>The implementation agent works on the change, usually inside a dedicated branch or worktree. When it finishes, it does not mark the work as done immediately. Instead, it hands the result to one or more reviewer agents.</p>
+
+<p>The reviewers check the diff, the tests, and whether the change actually satisfies the original goal.</p>
+
+<p>If something is wrong, the task goes back into the loop:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implement -&gt; review -&gt; fix -&gt; review again
+</code></pre></div></div>
+
+<p>Only when the review passes does the workflow produce a <strong>GitHub draft PR</strong>.</p>
+
+<p>That draft PR is the handoff point for me.</p>
+
+<p>The agents can investigate, implement, test, and review, but I still decide whether the change should be merged.</p>
+
+<h2 id="human-approval-stays-in-the-loop">Human Approval Stays in the Loop</h2>
+
+<p>This is an important boundary.</p>
+
+<p>I do not want agents silently merging code or promoting changes to production. The goal is not full automation without control.</p>
+
+<p>The goal is leverage.</p>
+
+<p>I want AI agents to handle the repetitive engineering work:</p>
+
+<ul>
+  <li>Investigating issues</li>
+  <li>Editing code</li>
+  <li>Writing or updating tests</li>
+  <li>Checking diffs</li>
+  <li>Preparing PRs</li>
+  <li>Summarizing what changed</li>
+  <li>Surfacing blockers</li>
+</ul>
+
+<p>But I still want human approval for decisions that matter:</p>
+
+<ul>
+  <li>Product behavior</li>
+  <li>Architecture tradeoffs</li>
+  <li>Merge approval</li>
+  <li>Production releases</li>
+</ul>
+
+<p>In this setup, the agents move the work from idea to review-ready PR. I remain the final gate.</p>
+
+<h2 id="why-hermes-kanban-helps">Why Hermes Kanban Helps</h2>
+
+<p>A normal chat session is temporary. It can be useful, but it is not a great structure for multi-step delivery.</p>
+
+<p>Hermes Kanban gives each task a state: ready, running, blocked, or done. Review can be another explicit task instead of a vague comment buried in a chat.</p>
+
+<p>That makes handoffs visible. One agent can implement, another can review, and a later task can handle deployment or follow-up work.</p>
+
+<p>That matters because real engineering work is rarely just “write code”. It involves decisions, review, feedback, and iteration.</p>
+
+<p>Kanban gives the agents a shared operating model.</p>
+
+<h2 id="the-pattern-i-am-aiming-for">The Pattern I Am Aiming For</h2>
+
+<p>The workflow I want is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Start with a goal
+2. Challenge assumptions
+3. Create a plan
+4. Define success criteria
+5. Implement autonomously
+6. Review independently
+7. Produce a draft PR
+8. Wait for human approval
+</code></pre></div></div>
+
+<p>That is the shift I care about.</p>
+
+<p>Not “AI writes code”.</p>
+
+<p>More like:</p>
+
+<blockquote>
+  <p>AI agents move a task through an engineering delivery pipeline, while the human keeps control of the important decisions.</p>
+</blockquote>
+
+<h2 id="early-lessons">Early Lessons</h2>
+
+<p>A few things are already clear.</p>
+
+<p>First, the plan matters more than the model. A strong model with a vague task still produces vague results.</p>
+
+<p>Second, review must be explicit. If the same agent that wrote the code is the only reviewer, problems are easier to miss.</p>
+
+<p>Third, agents need boundaries. In my case, the boundary is the draft PR. They can prepare the work, but they do not merge without approval.</p>
+
+<p>Finally, feedback should go back into the workflow. If I request changes, that feedback becomes new input for the next iteration, not just a random chat message.</p>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>AI coding agents are becoming good enough to do meaningful engineering work, but the workflow around them matters.</p>
+
+<p>For me, Hermes Kanban is a way to make that workflow more reliable.</p>
+
+<p>It turns agent work into something closer to a delivery system:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>goal -&gt; plan -&gt; build -&gt; review -&gt; draft PR -&gt; human sign-off
+</code></pre></div></div>
+
+<p>That structure is what makes the difference between an impressive demo and something I can actually use to ship features and fixes.</p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="AI" /><category term="Hermes" /><category term="AI Agents" /><category term="Coding Agents" /><category term="Kanban" /><category term="Developer Productivity" /><category term="Automation" /><category term="Software Engineering" /><summary type="html"><![CDATA[A practical look at using Hermes Kanban to coordinate AI coding agents for feature delivery, bug fixes, independent review, and human-approved draft pull requests.]]></summary></entry><entry><title type="html">Hermes Agent Profiles: Isolating Agents in Practice</title><link href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="alternate" type="text/html" title="Hermes Agent Profiles: Isolating Agents in Practice" /><published>2026-05-27T00:00:00+00:00</published><updated>2026-05-27T00:00:00+00:00</updated><id>https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation</id><content type="html" xml:base="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/"><![CDATA[<p><a href="/assets/images/hermes-profiles-agent-cloning-banner.jpg" style="display:block; margin-left:auto; margin-right:auto; width:90%"><img src="/assets/images/hermes-profiles-agent-cloning-banner.jpg" alt="Hermes Agent cloning into an isolated profile" /></a></p>
 
 <p>The other day I was setting up a couple of Hermes agents and something obvious finally clicked. I was not creating two copies of the same assistant. I was creating two workers with very different jobs.</p>
 
@@ -3225,908 +3377,4 @@ gh models run openai/gpt-5 <span class="s2">"Hello from CLI"</span>
 
 <hr />
 
-<p><em>Have you tried GitHub Models in your workflows? What use cases are you most excited about? Share your experiments and results in the comments below.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="GitHub Models" /><category term="GitHub Actions" /><category term="AI Integration" /><category term="DevOps Automation" /><category term="GPT-4o" /><category term="Claude Code" /><summary type="html"><![CDATA[Learn how GitHub Models provides free access to GPT-4o and other AI models directly in GitHub Actions, with practical examples and comparison to Claude Code for different use cases.]]></summary></entry><entry><title type="html">Claude Code Supercharged: Access Any AI Model via MCP Integration</title><link href="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/" rel="alternate" type="text/html" title="Claude Code Supercharged: Access Any AI Model via MCP Integration" /><published>2025-09-06T00:00:00+00:00</published><updated>2025-09-06T00:00:00+00:00</updated><id>https://lgallardo.com/2025/09/06/ai-clis-inside-claude-code-token-saving-mcp</id><content type="html" xml:base="https://lgallardo.com/2025/09/06/claude-code-supercharged-mcp-integration/"><![CDATA[<p><img src="/assets/images/clis-robots.png" alt="Claude Code Supercharged" style="display:block; margin-left:auto; margin-right:auto; width:90%" /></p>
-
-<p>While debugging a complex Terraform issue last week, I hit my Claude usage limit right when I needed it most. Instead of waiting for the reset, I realized something powerful: <strong>what if I could access other AI models directly from within Claude Code’s interface?</strong> What if I could use Gemini’s massive context window, OpenAI’s specialized coding models, or repository analysis tools—all without leaving Claude Code?</p>
-
-<p>This isn’t just about having backup models. It’s about extending Claude Code’s capabilities by integrating specialized AI tools through MCP servers and custom slash commands, giving you access to the right AI for each specific task—all within the familiar Claude Code UI.</p>
-
-<h2 id="-the-token-crisis-why-single-model-workflows-break-down">🎯 The Token Crisis: Why Single-Model Workflows Break Down</h2>
-
-<p>Every developer using AI tools faces these challenges:</p>
-
-<ul>
-  <li><strong>Token depletion</strong> during critical debugging sessions</li>
-  <li><strong>Context window limitations</strong> when analyzing large codebases</li>
-  <li><strong>Cost accumulation</strong> on tasks that could use free alternatives</li>
-  <li><strong>Model limitations</strong> where one AI excels but others struggle</li>
-  <li><strong>Vendor lock-in</strong> restricting your workflow flexibility</li>
-</ul>
-
-<p>The solution isn’t to abandon Claude Code—it’s to <strong>extend it</strong> through MCP servers and slash commands that give you access to a complete AI ecosystem, all within the Claude Code interface.</p>
-
-<h2 id="-the-mcp-revolution-your-ai-integration-layer">🔗 The MCP Revolution: Your AI Integration Layer</h2>
-
-<p>Model Context Protocol (MCP) servers transform Claude Code from a single-model tool into a multi-model orchestration platform. Think of MCP servers as specialized connectors that let Claude Code communicate with any AI service, CLI tool, or local model.</p>
-
-<h3 id="the-architecture-of-intelligence">The Architecture of Intelligence</h3>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Claude Code   │────│   MCP Server    │────│   External AI   │
-│   (Conductor)   │    │  (Translator)   │    │    (Specialist) │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-</code></pre></div></div>
-
-<p>Claude Code UI → Slash Command → MCP Server → External AI → Results back to Claude Code.</p>
-
-<p>This architecture means you can:</p>
-<ul>
-  <li><strong>Use slash commands</strong> to access different AI models</li>
-  <li><strong>Stay in Claude Code UI</strong> while leveraging specialized tools</li>
-  <li><strong>Offload routine tasks</strong> to appropriate models</li>
-  <li><strong>Access specialized capabilities</strong> without switching interfaces</li>
-</ul>
-
-<h2 id="️-the-ai-cli-arsenal-your-specialized-tools">🛠️ The AI CLI Arsenal: Your Specialized Tools</h2>
-
-<h3 id="1-gemini-mcp-tool-the-context-window-champion">1. Gemini MCP Tool: The Context Window Champion</h3>
-
-<p><img src="/assets/images/claude-gemini.png" alt="Claude - Gemini MCP server∫" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
-
-<p><a href="https://github.com/jamubc/gemini-mcp-tool">Gemini MCP Tool</a> connects you to Google’s Gemini models with their impressive context windows—perfect for large codebase analysis.</p>
-
-<p><strong>MCP Commands (Available in Claude Code UI):</strong></p>
-
-<p>Once the Gemini MCP server is installed, these commands become available:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/gemini-cli:ask-gemini "analyze this microservices architecture for performance bottlenecks"
-/gemini-cli:brainstorm "How can I optimize this authentication system?"
-/gemini-cli:ping "test message"
-/gemini-cli:Help
-/gemini-cli:fetch-chunk cacheKey 1
-/gemini-cli:timeout-test 5000
-</code></pre></div></div>
-
-<p><strong>Extending with Custom Commands:</strong></p>
-
-<p>You can create additional workflow commands that leverage the built-in ones:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/gemini-workflow.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Complete</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">workflow</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">Gemini</span><span class="nv"> </span><span class="s">MCP"</span>
-<span class="nn">---</span>
-<span class="s">echo "🧠 Starting Gemini analysis workflow..."</span>
-<span class="s">/gemini-cli:ask-gemini "Analyze @$1 for $2"</span>
-<span class="s">echo "🔬 Getting brainstorming insights..."</span>
-<span class="s">/gemini-cli:brainstorm "Based on analysis of @$1, suggest improvements for $2"</span>
-</code></pre></div></div>
-
-<p><strong>Usage Examples:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Direct MCP commands
-/gemini-cli:ask-gemini "Analyze @microservices.py for optimization opportunities"
-/gemini-cli:brainstorm "How to improve authentication security in @auth.py"
-
-# Custom workflow
-/gemini-workflow microservices.py "performance analysis"
-</code></pre></div></div>
-
-<p><strong>When to Use Gemini:</strong></p>
-<ul>
-  <li><strong>Large file analysis</strong> requiring extensive context</li>
-  <li><strong>Architecture discussions</strong> needing holistic understanding</li>
-  <li><strong>Code exploration</strong> in unfamiliar codebases</li>
-  <li><strong>Brainstorming sessions</strong> for system design</li>
-</ul>
-
-<p><strong>Setup:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Gemini MCP server</span>
-npm <span class="nb">install</span> <span class="nt">-g</span> gemini-mcp-tool
-
-<span class="c"># Configure with Claude Code</span>
-claude mcp add <span class="nt">-s</span> <span class="nb">local </span>gemini-cli <span class="nt">--</span> npx <span class="nt">-y</span> gemini-mcp-tool
-
-<span class="c"># Authentication: Use your Google account</span>
-<span class="c"># The MCP server will prompt for Google authentication on first use</span>
-<span class="c"># No manual API key configuration needed</span>
-
-<span class="c"># Test integration in Claude Code UI</span>
-/gemini-cli: ping
-/gemini-cli: <span class="nb">help</span>
-</code></pre></div></div>
-
-<h3 id="2-openai-codex-cli-direct-integration-approach">2. OpenAI Codex CLI: Direct Integration Approach</h3>
-
-<p><strong>Note:</strong> While researching, I found an existing <a href="https://github.com/agency-ai-solutions/openai-codex-mcp">OpenAI Codex MCP server</a>, but since it’s outdated with older models (o3, o1, gpt-4.1) and requires Python dependencies, I’ll use the official OpenAI Codex CLI directly to access current gpt-5 models.</p>
-
-<p><strong>Available Models:</strong></p>
-<ul>
-  <li><strong>gpt-5 minimal:</strong> Fastest responses with limited reasoning</li>
-  <li><strong>gpt-5 low:</strong> Balances speed with some reasoning</li>
-  <li><strong>gpt-5 medium:</strong> Default setting with solid reasoning depth</li>
-  <li><strong>gpt-5 high:</strong> Maximizes reasoning depth for complex problems</li>
-</ul>
-
-<p><strong>Creating Codex CLI Slash Commands:</strong></p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-write.md</span>
-  <span class="s">---</span>
-  <span class="s">description</span><span class="err">:</span> <span class="s2">"</span><span class="s">Generate</span><span class="nv"> </span><span class="s">code</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">OpenAI</span><span class="nv"> </span><span class="s">Codex</span><span class="nv"> </span><span class="s">CLI"</span>
-  <span class="s">---</span>
-  <span class="s">cd "$(dirname @$1)" &amp;&amp; codex write --language $2 --task "$3" --model gpt-5-medium</span>
-</code></pre></div></div>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-explain.md</span>
-  <span class="s">---</span>
-  <span class="s">description</span><span class="err">:</span> <span class="s2">"</span><span class="s">Get</span><span class="nv"> </span><span class="s">detailed</span><span class="nv"> </span><span class="s">code</span><span class="nv"> </span><span class="s">explanations</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">Codex</span><span class="nv"> </span><span class="s">CLI"</span>
-  <span class="s">---</span>
-  <span class="s">codex explain @$1 --focus "$2" --model gpt-5-high --detail comprehensive</span>
-</code></pre></div></div>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1"># ~/.claude/commands/codex-debug.md</span>
-  <span class="s">---</span>
-  <span class="s">description</span><span class="err">:</span> <span class="s2">"</span><span class="s">Debug</span><span class="nv"> </span><span class="s">code</span><span class="nv"> </span><span class="s">issues</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">Codex</span><span class="nv"> </span><span class="s">CLI"</span>
-  <span class="s">---</span>
-  <span class="s">codex debug @$1 --error "$2" --model gpt-5-high --trace-analysis</span>
-</code></pre></div></div>
-
-<p><strong>Usage Examples:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/codex-write . python "implement binary search with edge case handling"
-/codex-explain @algorithm.py "time complexity and optimization opportunities"
-/codex-debug @buggy_function.py "IndexError: list index out of range"
-</code></pre></div></div>
-
-<p><strong>When to Use OpenAI Codex CLI:</strong></p>
-<ul>
-  <li><strong>Algorithm implementation</strong> requiring optimization</li>
-  <li><strong>Code review and debugging</strong> with detailed explanations</li>
-  <li><strong>Complex problem-solving</strong> needing step-by-step reasoning</li>
-  <li><strong>Testing and validation</strong> with comprehensive coverage</li>
-</ul>
-
-<p><strong>Setup:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install OpenAI Codex CLI</span>
-npm <span class="nb">install</span> <span class="nt">-g</span> @openai/codex@latest
-
-<span class="c"># Authenticate with OpenAI account</span>
-codex auth login
-
-<span class="c"># Test the CLI</span>
-codex /model  <span class="c"># Select your preferred model (gpt-5 medium/high)</span>
-
-</code></pre></div></div>
-
-<h3 id="3-cursor-agent-mcp-the-repository-intelligence-system">3. Cursor Agent MCP: The Repository Intelligence System</h3>
-
-<p><a href="https://github.com/sailay1996/cursor-agent-mcp">Cursor Agent MCP</a> specializes in repository-aware tasks and code search, reducing computational costs for large projects.</p>
-
-<p><strong>Core Functions:</strong></p>
-<ul>
-  <li><strong>Repository analysis</strong> with intelligent scoping</li>
-  <li><strong>Code search</strong> across multiple files and directories</li>
-  <li><strong>File editing</strong> with context awareness</li>
-  <li><strong>Project planning</strong> based on codebase understanding</li>
-</ul>
-
-<p><strong>Creating Cursor Agent Slash Commands:</strong></p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/cursor-analyze.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Analyze</span><span class="nv"> </span><span class="s">code</span><span class="nv"> </span><span class="s">sections</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">Cursor's</span><span class="nv"> </span><span class="s">repository</span><span class="nv"> </span><span class="s">intelligence"</span>
-<span class="nn">---</span>
-<span class="s">cursor-agent analyze --path $1 --focus "$2" --scope targeted</span>
-</code></pre></div></div>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/cursor-search.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Search</span><span class="nv"> </span><span class="s">codebase</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">intelligent</span><span class="nv"> </span><span class="s">context"</span>
-<span class="nn">---</span>
-<span class="s">cursor-agent search "$1" --type $2 --context-aware --max-results </span><span class="m">10</span>
-</code></pre></div></div>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/cursor-efficient.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Use</span><span class="nv"> </span><span class="s">cost-effective</span><span class="nv"> </span><span class="s">models</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">routine</span><span class="nv"> </span><span class="s">tasks"</span>
-<span class="nn">---</span>
-<span class="s">cursor-agent chat --model efficient "$ARGUMENTS" --token-limit </span><span class="m">1000</span>
-</code></pre></div></div>
-
-<p><strong>Usage Examples:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/cursor-analyze src/auth "security vulnerabilities"
-/cursor-search "authentication middleware" function
-/cursor-efficient "explain this function's purpose"
-</code></pre></div></div>
-
-<p><strong>When to Use Cursor Agent:</strong></p>
-<ul>
-  <li><strong>Large codebase exploration</strong> requiring selective focus</li>
-  <li><strong>Code refactoring</strong> with dependency analysis</li>
-  <li><strong>Security audits</strong> on specific components</li>
-  <li><strong>Legacy code understanding</strong> with minimal token usage</li>
-</ul>
-
-<p><strong>Setup:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Cursor Agent</span>
-npm <span class="nb">install</span> <span class="nt">-g</span> @cursor/agent-cli
-
-<span class="c"># Configure with Claude Code</span>
-claude mcp add <span class="nt">-s</span> <span class="nb">local </span>cursor-agent <span class="nt">--</span> npx <span class="nt">-y</span> cursor-agent-mcp
-
-<span class="c"># Authentication: Use your Cursor account</span>
-<span class="c"># Authenticate through cursor-agent login when prompted</span>
-</code></pre></div></div>
-
-<h3 id="4-qwen-mcp-server-the-efficiency-champion">4. Qwen MCP Server: The Efficiency Champion</h3>
-
-<p><img src="/assets/images/claude-gemini.png" alt="Claude - Gemini MCP server∫" style="display:block; margin-left:auto; margin-right:auto; width:80%" /></p>
-
-<p><a href="https://github.com/jamubc/qwen-mcp-tool">Qwen MCP Tool</a> provides access to Qwen models for efficient coding tasks and analysis.</p>
-
-<p><strong>MCP Commands (Available in Claude Code UI):</strong></p>
-
-<p>Similar to Gemini MCP (same developer), Qwen MCP provides prefixed commands:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/qwen-cli:ask-qwen "What does this regex pattern match?"
-/qwen-cli:analyze @config.json "format and validate this configuration"
-/qwen-cli:sandbox "test this algorithm with edge cases"
-/qwen-cli:help
-/qwen-cli:ping "test connection"
-</code></pre></div></div>
-
-<p><strong>Creating Qwen Workflow Commands:</strong></p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/qwen-format.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Format</span><span class="nv"> </span><span class="s">code</span><span class="nv"> </span><span class="s">efficiently</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">Qwen"</span>
-<span class="nn">---</span>
-<span class="s">echo "🎯 Efficient formatting with Qwen:"</span>
-<span class="s">/qwen-cli:ask-qwen "Format and optimize @$1 according to $2 best practices"</span>
-</code></pre></div></div>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/qwen-quick.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Quick</span><span class="nv"> </span><span class="s">explanations</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">Qwen"</span>
-<span class="nn">---</span>
-<span class="s">echo "⚡ Quick analysis:"</span>
-<span class="s">/qwen-cli:ask-qwen "$ARGUMENTS"</span>
-</code></pre></div></div>
-
-<p><strong>When to Use Qwen:</strong></p>
-<ul>
-  <li><strong>Code formatting</strong> and style consistency</li>
-  <li><strong>Quick explanations</strong> for simple queries</li>
-  <li><strong>Documentation generation</strong> from code comments</li>
-  <li><strong>Efficient processing</strong> for routine tasks</li>
-</ul>
-
-<p><strong>Setup:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install Qwen MCP server</span>
-npm <span class="nb">install</span> <span class="nt">-g</span> qwen-mcp-tool
-
-<span class="c"># Configure with Claude Code</span>
-claude mcp add <span class="nt">-s</span> <span class="nb">local </span>qwen-cli <span class="nt">--</span> npx <span class="nt">-y</span> qwen-mcp-tool
-
-<span class="c"># Authentication: Uses Qwen API credentials</span>
-<span class="c"># Configure through the MCP server on first use</span>
-
-<span class="c"># Test integration in Claude Code UI</span>
-/qwen-cli:ping <span class="s2">"hello"</span>
-/qwen-cli:help
-</code></pre></div></div>
-
-<p><strong>Usage Examples:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Direct MCP commands
-/qwen-cli:ask-qwen "explain this regex pattern: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-/qwen-cli:analyze @package.json "check for outdated dependencies"
-
-# Custom workflow commands
-/qwen-format style.css "CSS formatting standards"
-/qwen-quick "what is the time complexity of bubble sort?"
-</code></pre></div></div>
-
-<h2 id="-advanced-multi-model-workflows">🚀 Advanced Multi-Model Workflows</h2>
-
-<h3 id="smart-routing-within-claude-code-ui">Smart Routing Within Claude Code UI</h3>
-
-<p>Instead of complex routing logic, use Claude Code’s natural decision-making with simple helper commands:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/route-helper.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Helper</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">decide</span><span class="nv"> </span><span class="s">which</span><span class="nv"> </span><span class="s">tool</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">use"</span>
-<span class="nn">---</span>
-<span class="s">echo "🤔 Routing decision for</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
-<span class="s">echo "File</span><span class="err">:</span> <span class="err">@</span><span class="s">$1, Task</span><span class="err">:</span> <span class="s">$2"</span>
-<span class="s">echo ""</span>
-<span class="s">echo "📏 File size</span><span class="err">:</span> <span class="s">$(wc -l &lt; @$1) lines"</span>
-<span class="s">echo "📁 File type</span><span class="err">:</span> <span class="s">$(file @$1)"</span>
-<span class="s">echo ""</span>
-<span class="s">echo "💡 Recommendations:"</span>
-<span class="s">if [[ $(wc -l &lt; @$1) -gt 1000 ]]; then</span>
-  <span class="s">echo "   → Use /analyze for large files (Gemini's extended context)"</span>
-<span class="s">elif [[ "$2" == *"debug"* ]] || [[ "$2" == *"error"* ]]; then</span>
-  <span class="s">echo "   → Use MCP Codex tools for debugging"</span>
-<span class="s">elif [[ "$2" == *"search"* ]] || [[ "$2" == *"explore"* ]]; then</span>
-  <span class="s">echo "   → Use Cursor Agent for repository analysis"</span>  
-<span class="s">else</span>
-  <span class="s">echo "   → Use Claude Code directly for balanced tasks"</span>
-<span class="s">fi</span>
-</code></pre></div></div>
-
-<p><strong>Usage in Claude Code UI:</strong></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/route-helper large_service.py "performance analysis"
-/route-helper auth.py "debug authentication errors"
-</code></pre></div></div>
-
-<p>This gives you informed recommendations while keeping decision-making in the Claude Code interface.</p>
-
-<h3 id="sequential-thinking--multi-model-analysis">Sequential Thinking + Multi-Model Analysis</h3>
-
-<p>Combine natural sequential thinking prompts with specialized models for deep analysis:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Step 1: Plan analysis using Sequential Thinking approach in Claude Code</span>
-<span class="nb">echo</span> <span class="s2">"Using sequential thinking and brainstorming, plan a comprehensive security audit for this authentication system"</span>
-
-<span class="c"># Step 2: Use Cursor Agent for codebase exploration  </span>
-/cursor-analyze auth/ <span class="s2">"security vulnerabilities"</span>
-
-<span class="c"># Step 3: Use Gemini for architectural analysis</span>
-/analyze @auth_flow.md <span class="s2">"Review the overall authentication flow design"</span>
-
-<span class="c"># Step 4: Use OpenAI Codex for specific vulnerability detection</span>
-<span class="c"># Use MCP server tools for debugging and analysis</span>
-</code></pre></div></div>
-
-<h3 id="collaborative-brainstorming-sessions">Collaborative Brainstorming Sessions</h3>
-
-<p>Leverage multiple AI perspectives on complex problems:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Round 1: Gemini for initial brainstorming</span>
-/gemini brainstorm <span class="s2">"How to optimize this microservices communication pattern?"</span>
-
-<span class="c"># Round 2: OpenAI for technical analysis</span>
-/codex explain_code communication_layer.py <span class="nt">--focus</span> <span class="s2">"performance bottlenecks"</span>
-
-<span class="c"># Round 3: Cursor Agent for implementation planning</span>
-/cursor plan <span class="s2">"Refactor communication layer based on analysis"</span>
-
-<span class="c"># Round 4: Claude Code for synthesis and decision-making</span>
-<span class="s2">"Based on all analyses, what's our optimal approach?"</span>
-</code></pre></div></div>
-
-<h2 id="-token-optimization-strategies">💡 Token Optimization Strategies</h2>
-
-<h3 id="1-task-classification-framework">1. Task Classification Framework</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Task Type</th>
-      <th>Recommended Model</th>
-      <th>Token Impact</th>
-      <th>Reasoning</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Code Review</strong></td>
-      <td>OpenAI Codex</td>
-      <td>Medium</td>
-      <td>Specialized for code analysis</td>
-    </tr>
-    <tr>
-      <td><strong>Large File Analysis</strong></td>
-      <td>Gemini</td>
-      <td>High → Low</td>
-      <td>Better context window efficiency</td>
-    </tr>
-    <tr>
-      <td><strong>Repository Exploration</strong></td>
-      <td>Cursor Agent</td>
-      <td>High → Low</td>
-      <td>Targeted, scoped analysis</td>
-    </tr>
-    <tr>
-      <td><strong>Quick Questions</strong></td>
-      <td>Qwen/Local</td>
-      <td>Low</td>
-      <td>Free or local processing</td>
-    </tr>
-    <tr>
-      <td><strong>Complex Architecture</strong></td>
-      <td>Claude Code</td>
-      <td>High</td>
-      <td>Worth the premium for quality</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="2-smart-context-management">2. Smart Context Management</h3>
-
-<p>Create slash commands that handle large files intelligently:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/smart-analyze.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Analyze</span><span class="nv"> </span><span class="s">large</span><span class="nv"> </span><span class="s">files</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">appropriate</span><span class="nv"> </span><span class="s">tools"</span>
-<span class="nn">---</span>
-<span class="s">file_size=$(wc -l &lt; @$1)</span>
-<span class="s">if [ $file_size -gt 1000 ]; then</span>
-  <span class="s">echo "Large file detected ($file_size lines). Using Gemini..."</span>
-  <span class="s">/gemini-analyze @$1</span>
-<span class="s">else</span>
-  <span class="s">echo "Standard file size. Using Claude Code..."</span>
-  <span class="s">echo "Analyzing @$1 with Claude Code"</span>
-<span class="s">fi</span>
-</code></pre></div></div>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/progressive-analysis.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Progressive</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">summary</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">details"</span>
-<span class="nn">---</span>
-<span class="s">echo "📋 Step 1</span><span class="err">:</span> <span class="s">Getting file summary..."</span>
-<span class="s">/gemini-analyze @$1 "high-level summary"</span>
-
-<span class="s">echo "🔍 Step 2</span><span class="err">:</span> <span class="s">Finding key functions..."</span>
-<span class="s">/cursor-search "function" function</span>
-
-<span class="s">echo "🔧 Step 3</span><span class="err">:</span> <span class="s">Detailed analysis of selected parts..."</span>
-<span class="s">/codex-explain @$1 "$2"</span>
-</code></pre></div></div>
-
-<h3 id="3-cost-optimized-routing-commands">3. Cost-Optimized Routing Commands</h3>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/try-free-first.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Try</span><span class="nv"> </span><span class="s">free</span><span class="nv"> </span><span class="s">models</span><span class="nv"> </span><span class="s">before</span><span class="nv"> </span><span class="s">premium</span><span class="nv"> </span><span class="s">ones"</span>
-<span class="nn">---</span>
-<span class="s">echo "Attempting with free models first..."</span>
-<span class="s">if /qwen-quick "$ARGUMENTS" 2&gt;/dev/null; then</span>
-  <span class="s">echo "✅ Handled by Qwen (free)"</span>
-<span class="s">elif /gemini-brainstorm "$ARGUMENTS" 2&gt;/dev/null; then</span>
-  <span class="s">echo "✅ Handled by Gemini (free tier)"</span>
-<span class="s">else</span>
-  <span class="s">echo "🔄 Escalating to Claude Code (premium)"</span>
-  <span class="s">echo "$ARGUMENTS"</span>
-<span class="s">fi</span>
-</code></pre></div></div>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/route-by-task.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Route</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">specialized</span><span class="nv"> </span><span class="s">models</span><span class="nv"> </span><span class="s">by</span><span class="nv"> </span><span class="s">task</span><span class="nv"> </span><span class="s">type"</span>
-<span class="nn">---</span>
-<span class="s">case "$1" in</span>
-  <span class="s">*debug*|*error*|*bug*)</span>
-    <span class="s">/codex-debug @$2 "$3"</span>
-    <span class="s">;;</span>
-  <span class="s">*format*|*style*|*lint*)</span>
-    <span class="s">/qwen-format @$2 $3</span>
-    <span class="s">;;</span>
-  <span class="s">*architect*|*design*|*plan*)</span>
-    <span class="s">/gemini-brainstorm "$2 $3"</span>
-    <span class="s">;;</span>
-  <span class="s">*)</span>
-    <span class="s">echo "Using Claude Code for</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
-    <span class="s">;;</span>
-<span class="s">esac</span>
-</code></pre></div></div>
-
-<h2 id="-complete-setup-guide">🔧 Complete Setup Guide</h2>
-
-<h3 id="prerequisites">Prerequisites</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Ensure you have the base requirements</span>
-node <span class="nt">--version</span>  <span class="c"># v16.0.0+</span>
-claude <span class="nt">--version</span>  <span class="c"># Latest Claude Code CLI</span>
-</code></pre></div></div>
-
-<h3 id="create-your-ai-cli-command-library">Create Your AI CLI Command Library</h3>
-
-<p>Set up a comprehensive slash command library:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create commands directory</span>
-<span class="nb">mkdir</span> <span class="nt">-p</span> ~/.claude/commands
-
-<span class="c"># Create your custom commands using the examples throughout this article</span>
-<span class="c"># Copy the YAML command definitions and adapt them to your needs</span>
-<span class="c"># Each command should be saved as a .md file in ~/.claude/commands/</span>
-</code></pre></div></div>
-
-<h3 id="command-structure-template">Command Structure Template</h3>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Template: ~/.claude/commands/your-command.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">What</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">command</span><span class="nv"> </span><span class="s">does"</span>
-<span class="na">arguments</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">$1:</span><span class="nv"> </span><span class="s">First</span><span class="nv"> </span><span class="s">argument</span><span class="nv"> </span><span class="s">description"</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">$2:</span><span class="nv"> </span><span class="s">Second</span><span class="nv"> </span><span class="s">argument</span><span class="nv"> </span><span class="s">description"</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">$ARGUMENTS:</span><span class="nv"> </span><span class="s">All</span><span class="nv"> </span><span class="s">arguments"</span>
-<span class="nn">---</span>
-<span class="c1"># Your bash script here</span>
-<span class="s">echo "Processing</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
-<span class="s">your-cli-tool $1 --option "$2"</span>
-</code></pre></div></div>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-### MCP Server and CLI Setup
-
-```bash
-# Install MCP servers and CLIs
-npm install -g gemini-mcp-tool                 # Gemini MCP
-npm install -g qwen-mcp-tool                   # Qwen MCP  
-npm install -g @openai/codex@latest           # Codex CLI (direct)
-npm install -g @cursor/agent-cli               # Cursor CLI
-
-# Configure MCP servers with Claude Code
-claude mcp add -s local gemini-cli -- npx -y gemini-mcp-tool
-claude mcp add -s local qwen-cli -- npx -y qwen-mcp-tool
-claude mcp add -s local cursor-agent -- npx -y cursor-agent-mcp
-
-# For Codex: Direct CLI usage (no MCP server needed)
-codex auth login  # Authenticate with OpenAI
-
-# Authentication summary:
-# - Gemini: Google account authentication through MCP
-# - Qwen: API credentials through MCP server
-# - OpenAI Codex: Direct CLI authentication
-# - Cursor: Cursor account through MCP
-</code></pre></div></div>
-
-<h3 id="test-your-integration">Test Your Integration</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Test MCP servers in Claude Code UI</span>
-/gemini-cli:ping <span class="s2">"test message"</span>
-/qwen-cli:help
-/mcp list  <span class="c"># See all connected MCP servers</span>
-
-<span class="c"># Test Codex CLI directly</span>
-codex /model  <span class="c"># Check available models</span>
-codex /status <span class="c"># Verify authentication</span>
-
-<span class="c"># Test custom slash commands (create these first)</span>
-/gemini-workflow microservices.py <span class="s2">"performance analysis"</span>
-/qwen-quick <span class="s2">"what is a closure in JavaScript?"</span>
-
-<span class="c"># Test file analysis</span>
-<span class="nb">echo</span> <span class="s1">'print("hello world")'</span> <span class="o">&gt;</span> test.py
-/gemini-cli:ask-gemini <span class="s2">"Analyze @test.py for best practices"</span>
-/codex-explain test.py <span class="s2">"code structure and improvements"</span>
-</code></pre></div></div>
-
-<h2 id="-real-world-use-cases">🎯 Real-World Use Cases</h2>
-
-<h3 id="use-case-1-large-scale-refactoring-project">Use Case 1: Large-Scale Refactoring Project</h3>
-
-<p><strong>Scenario:</strong> Modernizing a legacy Python codebase with 50,000+ lines</p>
-
-<p><strong>Multi-Model Strategy:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Repository exploration</span>
-/cursor-analyze <span class="nb">.</span> <span class="s2">"deprecated patterns"</span>
-
-<span class="c"># 2. Architecture planning</span>
-/gemini-brainstorm <span class="s2">"migration strategy from Flask 1.x to 2.x"</span>
-
-<span class="c"># 3. Code generation</span>
-/codex-write python <span class="s2">"modern Flask route decorators with type hints"</span>
-
-<span class="c"># 4. Integration planning (Claude Code)</span>
-<span class="nb">echo</span> <span class="s2">"Synthesize all analyses and create migration roadmap"</span>
-</code></pre></div></div>
-
-<p><strong>Token Savings:</strong> ~70% compared to using Claude Code alone</p>
-
-<h3 id="use-case-2-security-audit-workflow">Use Case 2: Security Audit Workflow</h3>
-
-<p><strong>Scenario:</strong> Comprehensive security review of authentication system</p>
-
-<p><strong>Specialized Routing:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Code pattern detection</span>
-/cursor-search <span class="s2">"password|hash|token"</span> code
-
-<span class="c"># 2. Vulnerability analysis</span>
-/codex-debug auth.py <span class="s2">"security vulnerabilities"</span>
-
-<span class="c"># 3. Architecture review</span>
-/gemini-analyze @auth_flow.md <span class="s2">"security architecture assessment"</span>
-
-<span class="c"># 4. Remediation planning (Claude Code)</span>
-<span class="nb">echo</span> <span class="s2">"Create prioritized security improvement plan based on above analyses"</span>
-</code></pre></div></div>
-
-<p><strong>Benefits:</strong> Specialized models catch different vulnerability types</p>
-
-<h3 id="use-case-3-performance-optimization">Use Case 3: Performance Optimization</h3>
-
-<p><strong>Scenario:</strong> Optimizing slow API endpoints</p>
-
-<p><strong>Model Selection Logic:</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1. Performance profiling</span>
-/cursor-analyze api/ <span class="s2">"performance bottlenecks"</span>
-
-<span class="c"># 2. Algorithm optimization</span>
-/codex-write python <span class="s2">"optimize database queries with indexing"</span>
-
-<span class="c"># 3. System design review</span>
-/gemini-brainstorm <span class="s2">"API scaling and caching strategies"</span>
-
-<span class="c"># 4. Implementation strategy (Claude Code)</span>
-<span class="nb">echo</span> <span class="s2">"Prioritize optimizations by impact vs effort"</span>
-</code></pre></div></div>
-
-<h2 id="-model-selection-decision-tree">🔍 Model Selection Decision Tree</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Task Complexity?
-├── Simple (formatting, docs) → Qwen/Local
-├── Medium (code review, bugs) → OpenAI Codex  
-└── Complex
-    ├── Large Context → Gemini
-    ├── Repository Analysis → Cursor Agent
-    ├── Architecture Design → Gemini + Claude Code
-    └── Critical Decisions → Claude Code
-</code></pre></div></div>
-
-<h2 id="-performance--cost-analysis">📊 Performance &amp; Cost Analysis</h2>
-
-<h3 id="token-usage-comparison">Token Usage Comparison</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Workflow</th>
-      <th>Single Model (Claude)</th>
-      <th>Multi-Model</th>
-      <th>Savings</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Code Review</strong></td>
-      <td>10,000 tokens</td>
-      <td>3,000 tokens</td>
-      <td>70%</td>
-    </tr>
-    <tr>
-      <td><strong>Large File Analysis</strong></td>
-      <td>25,000 tokens</td>
-      <td>8,000 tokens</td>
-      <td>68%</td>
-    </tr>
-    <tr>
-      <td><strong>Repository Audit</strong></td>
-      <td>50,000 tokens</td>
-      <td>15,000 tokens</td>
-      <td>70%</td>
-    </tr>
-    <tr>
-      <td><strong>Documentation</strong></td>
-      <td>5,000 tokens</td>
-      <td>1,500 tokens</td>
-      <td>70%</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="cost-optimization-results">Cost Optimization Results</h3>
-
-<p><strong>Monthly Development Costs:</strong></p>
-<ul>
-  <li><strong>Before Multi-Model:</strong> $150-200 (Claude Pro + overages)</li>
-  <li><strong>After Multi-Model:</strong> $75-100 (Mix of free + premium)</li>
-  <li><strong>Net Savings:</strong> ~50% with better coverage</li>
-</ul>
-
-<h2 id="️-common-pitfalls-and-solutions">⚠️ Common Pitfalls and Solutions</h2>
-
-<h3 id="model-capability-mismatches">Model Capability Mismatches</h3>
-
-<p><strong>Problem:</strong> Not all models support tool/function calling</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># This will fail with basic models</span>
-cursor edit file.py <span class="nt">--function</span> add_logging
-
-<span class="c"># Solution: Route tool-requiring tasks to capable models</span>
-claude edit file.py <span class="nt">--function</span> add_logging  <span class="c"># Claude Code handles tools</span>
-</code></pre></div></div>
-
-<h3 id="managing-usage-limits">Managing Usage Limits</h3>
-
-<p><strong>Approach:</strong> Manual workflow adaptation in Claude Code UI</p>
-
-<p>When you encounter usage limits, simply switch to alternative tools:</p>
-<ul>
-  <li><strong>Gemini limit reached?</strong> → Use Claude Code directly or try OpenAI Codex MCP</li>
-  <li><strong>OpenAI credits low?</strong> → Switch to Gemini <code class="language-plaintext highlighter-rouge">/analyze</code> or Claude Code</li>
-  <li><strong>Claude limit reached?</strong> → Use <code class="language-plaintext highlighter-rouge">/analyze</code> for large files or MCP server tools</li>
-</ul>
-
-<p>The beauty of this setup is having options available directly in the Claude Code interface.</p>
-
-<h3 id="context-management-in-interactive-usage">Context Management in Interactive Usage</h3>
-
-<p><strong>Advantage:</strong> Claude Code maintains context throughout your session</p>
-
-<p>In interactive Claude Code usage, context is naturally maintained:</p>
-<ul>
-  <li><strong>Your conversation history</strong> provides context for follow-up questions</li>
-  <li><strong>Previous slash command results</strong> remain visible in the chat</li>
-  <li><strong>File references</strong> using <code class="language-plaintext highlighter-rouge">@filename</code> maintain file context</li>
-  <li><strong>Natural conversation flow</strong> allows you to reference earlier analyses</li>
-</ul>
-
-<p><strong>Best Practice:</strong> Reference previous results explicitly:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/analyze @large_file.py "performance issues"
-# After reviewing results...
-"Based on the Gemini analysis above, use OpenAI Codex to optimize the bottleneck functions"
-</code></pre></div></div>
-
-<h2 id="-advanced-techniques">🚀 Advanced Techniques</h2>
-
-<h3 id="dynamic-model-selection-commands">Dynamic Model Selection Commands</h3>
-
-<p>Create intelligent routing based on current conditions:</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/smart-route.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Dynamically</span><span class="nv"> </span><span class="s">route</span><span class="nv"> </span><span class="s">based</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">context</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">usage"</span>
-<span class="nn">---</span>
-<span class="s">hour=$(date +%H)</span>
-<span class="s">usage_file="~/.claude_usage_today"</span>
-
-<span class="c1"># Check time-based routing</span>
-<span class="s">if [ $hour -lt 9 ] || [ $hour -gt 17 ]; then</span>
-  <span class="s">echo "🌙 Off-peak hours - using Claude Code"</span>
-  <span class="s">echo "$ARGUMENTS"</span>
-<span class="s">else</span>
-  <span class="s"># Peak hours - use cost-effective alternatives</span>
-  <span class="s">if [[ "$1" == *"large"* ]]; then</span>
-    <span class="s">/gemini-analyze @$2 "$3"</span>
-  <span class="s">elif [[ "$1" == *"debug"* ]]; then</span>
-    <span class="s">/codex-debug @$2 "$3"</span>
-  <span class="s">else</span>
-    <span class="s">/qwen-quick "$ARGUMENTS"</span>
-  <span class="s">fi</span>
-<span class="s">fi</span>
-</code></pre></div></div>
-
-<h3 id="model-ensemble-techniques">Model Ensemble Techniques</h3>
-
-<p><strong>Consensus Decision Making:</strong></p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/consensus.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Get</span><span class="nv"> </span><span class="s">multiple</span><span class="nv"> </span><span class="s">AI</span><span class="nv"> </span><span class="s">opinions</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">complex</span><span class="nv"> </span><span class="s">decisions"</span>
-<span class="nn">---</span>
-<span class="s">echo "📈 Gathering multiple perspectives on</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
-
-<span class="s">echo "Gemini's perspective:"</span>
-<span class="s">/gemini-analyze @$1 "$2" &gt; /tmp/gemini_opinion.txt</span>
-<span class="s">cat /tmp/gemini_opinion.txt</span>
-
-<span class="s">echo "\nCodex's perspective:"</span>
-<span class="s">/codex-explain @$1 "$2" &gt; /tmp/codex_opinion.txt</span>
-<span class="s">cat /tmp/codex_opinion.txt</span>
-
-<span class="s">echo "\nCursor's perspective:"</span>
-<span class="s">/cursor-analyze $1 "$2" &gt; /tmp/cursor_opinion.txt</span>
-<span class="s">cat /tmp/cursor_opinion.txt</span>
-
-<span class="s">echo "\n🧠 Claude Code synthesis (based on above opinions):"</span>
-<span class="s">echo "Please synthesize the best approach from the above analyses"</span>
-</code></pre></div></div>
-
-<p><strong>Specialized Pipeline Assembly:</strong></p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/pipeline.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Multi-stage</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">pipeline"</span>
-<span class="nn">---</span>
-<span class="s">echo "🔄 Starting analysis pipeline for @$1"</span>
-
-<span class="s">echo "Stage 1</span><span class="err">:</span> <span class="s">Search and discovery"</span>
-<span class="s">/cursor-search "$2" function &gt; /tmp/pipeline_search.txt</span>
-
-<span class="s">echo "Stage 2</span><span class="err">:</span> <span class="s">Architecture analysis"</span>
-<span class="s">/gemini-analyze @$1 "based on search results, analyze architecture" &gt; /tmp/pipeline_arch.txt</span>
-
-<span class="s">echo "Stage 3</span><span class="err">:</span> <span class="s">Code optimization"</span>
-<span class="s">/codex-write $3 "optimize based on analysis above" &gt; /tmp/pipeline_opt.txt</span>
-
-<span class="s">echo "Stage 4</span><span class="err">:</span> <span class="s">Final synthesis"</span>
-<span class="s">echo "Please review all pipeline outputs and provide final recommendations:"</span>
-<span class="s">cat /tmp/pipeline_*.txt</span>
-</code></pre></div></div>
-
-<h2 id="-future-roadmap-advanced-slash-command-patterns">🔮 Future Roadmap: Advanced Slash Command Patterns</h2>
-
-<h3 id="emerging-patterns">Emerging Patterns</h3>
-
-<p><strong>1. Context-Aware Routing:</strong> Commands that adapt based on file types and project context
-<strong>2. Collaborative AI Teams:</strong> Chained slash commands for complex workflows
-<strong>3. Cost-Optimized Pipelines:</strong> Smart routing to minimize token usage
-<strong>4. Local-First Development:</strong> Privacy-focused commands with on-premises models</p>
-
-<h3 id="advanced-slash-command-techniques">Advanced Slash Command Techniques</h3>
-
-<p><strong>Context Passing Between Commands:</strong></p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/context-chain.md</span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Chain</span><span class="nv"> </span><span class="s">commands</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">shared</span><span class="nv"> </span><span class="s">context"</span>
-<span class="nn">---</span>
-<span class="c1"># Store context for next command</span>
-<span class="s">echo "Context</span><span class="err">:</span> <span class="s">analyzing $1 for $2" &gt; /tmp/claude_context</span>
-<span class="s">/gemini-analyze @$1 "$2" | tee -a /tmp/claude_context</span>
-
-<span class="c1"># Pass context to next tool</span>
-<span class="s">echo "Previous analysis context:" &amp;&amp; cat /tmp/claude_context</span>
-<span class="s">/codex-optimize @$1 "based on Gemini analysis above"</span>
-</code></pre></div></div>
-
-<p><strong>Conditional Command Execution:</strong></p>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.claude/commands/smart-workflow.md  </span>
-<span class="nn">---</span>
-<span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Conditional</span><span class="nv"> </span><span class="s">workflow</span><span class="nv"> </span><span class="s">based</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">characteristics"</span>
-<span class="nn">---</span>
-<span class="s">if [[ "$1" =~ \.py$ ]]; then</span>
-  <span class="s">/codex-debug @$1 "$2"</span>
-<span class="s">elif [[ "$1" =~ \.(js|ts)$ ]]; then</span>
-  <span class="s">/cursor-analyze $1 "$2"</span>  
-<span class="s">elif [[ $(wc -l &lt; @$1) -gt 500 ]]; then</span>
-  <span class="s">/gemini-analyze @$1 "$2"</span>
-<span class="s">else</span>
-  <span class="s">echo "Standard analysis with Claude Code</span><span class="err">:</span> <span class="s">$ARGUMENTS"</span>
-<span class="s">fi</span>
-</code></pre></div></div>
-
-<h2 id="-getting-started-your-first-multi-model-workflow">🎯 Getting Started: Your First Multi-Model Workflow</h2>
-
-<h3 id="day-1-basic-setup">Day 1: Basic Setup</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install one AI CLI</span>
-npm <span class="nb">install</span> <span class="nt">-g</span> @google-ai/generativelanguage
-
-<span class="c"># Create your first slash command</span>
-<span class="nb">cat</span> <span class="o">&gt;</span> ~/.claude/commands/gemini-quick.md <span class="o">&lt;&lt;</span> <span class="sh">'</span><span class="no">EOF</span><span class="sh">'
----
-description: "Quick analysis with Gemini"
----
-gemini-cli analyze "</span><span class="nv">$ARGUMENTS</span><span class="sh">" --brief
-</span><span class="no">EOF
-
-</span><span class="c"># Test the integration</span>
-/gemini-quick <span class="s2">"explain this code pattern"</span>
-</code></pre></div></div>
-
-<h3 id="week-1-identify-optimization-opportunities">Week 1: Identify Optimization Opportunities</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Track your current usage patterns</span>
-<span class="nb">history</span> | <span class="nb">grep </span>claude | <span class="nb">head</span> <span class="nt">-20</span>
-
-<span class="c"># Identify repetitive tasks that could use slash commands</span>
-<span class="nb">grep</span> <span class="nt">-E</span> <span class="s2">"explain|analyze|debug"</span> ~/.claude_history
-
-<span class="c"># Create specialized commands for your most common tasks</span>
-<span class="nb">ls</span> ~/.claude/commands/
-</code></pre></div></div>
-
-<h3 id="month-1-implement-intelligent-routing">Month 1: Implement Intelligent Routing</h3>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create your intelligent routing command</span>
-<span class="nb">cp </span>examples/ai-route.md ~/.claude/commands/
-<span class="nb">cp </span>examples/try-free-first.md ~/.claude/commands/
-<span class="nb">cp </span>examples/route-by-task.md ~/.claude/commands/
-
-<span class="c"># Test intelligent routing</span>
-/ai-route debug auth.py <span class="s2">"authentication errors"</span>
-/try-free-first <span class="s2">"format this JSON file"</span>
-/route-by-task debug auth.py <span class="s2">"security issues"</span>
-</code></pre></div></div>
-
-<h2 id="-the-bottom-line-unlimited-ai-development">💪 The Bottom Line: Unlimited AI Development</h2>
-
-<p>By integrating multiple AI CLIs through MCP servers, you’re not just saving tokens—you’re building a <strong>resilient, specialized, and cost-effective development environment</strong>. Each model contributes its strengths while Claude Code orchestrates the overall workflow.</p>
-
-<p><strong>The results speak for themselves:</strong></p>
-<ul>
-  <li><strong>70% token savings</strong> on routine tasks</li>
-  <li><strong>50% cost reduction</strong> in monthly AI expenses</li>
-  <li><strong>Zero downtime</strong> when one service has limits</li>
-  <li><strong>Specialized capabilities</strong> for every development need</li>
-</ul>
-
-<p><strong>Start small:</strong> Add one MCP server this week and route your most token-intensive tasks through it. Once you experience the flexibility and cost savings, you’ll naturally expand your multi-model toolkit.</p>
-
-<p>The future of AI-assisted development isn’t about finding the perfect model—it’s about <strong>orchestrating the right model for each specific moment</strong>. This setup gets you there today.</p>
-
-<hr />
-
-<p><em>What’s your biggest token usage challenge? Which AI models would you want to integrate into your Claude Code workflow? Share your multi-model strategies in the comments below.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="Claude Code" /><category term="MCP Servers" /><category term="AI Tools" /><category term="Gemini" /><category term="OpenAI Codex" /><category term="Qwen" /><category term="Cursor" /><category term="Token Optimization" /><category term="Multi-Model" /><summary type="html"><![CDATA[Learn how to supercharge Claude Code with MCP servers to access multiple AI models like Gemini, OpenAI Codex, and Qwen—save tokens, bypass usage limits, and leverage specialized AI capabilities seamlessly.]]></summary></entry></feed>
+<p><em>Have you tried GitHub Models in your workflows? What use cases are you most excited about? Share your experiments and results in the comments below.</em></p>]]></content><author><name>Luis Gallardo</name></author><category term="Blog" /><category term="DevOps" /><category term="GitHub Models" /><category term="GitHub Actions" /><category term="AI Integration" /><category term="DevOps Automation" /><category term="GPT-4o" /><category term="Claude Code" /><summary type="html"><![CDATA[Learn how GitHub Models provides free access to GPT-4o and other AI models directly in GitHub Actions, with practical examples and comparison to Claude Code for different use cases.]]></summary></entry></feed>

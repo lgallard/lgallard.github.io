@@ -1,0 +1,828 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>From Idea to Draft PR with Hermes Kanban - lgallardo.com</title>
+
+
+
+
+<meta name="description" content="A practical look at using Hermes Kanban to coordinate AI coding agents for feature delivery, bug fixes, independent review, and human-approved draft pull requests.">
+
+
+
+
+<meta name="author" content="Luis Gallardo">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="lgallardo.com">
+<meta property="og:title"
+  content="From Idea to Draft PR with Hermes Kanban">
+<meta property="og:type" content="article">
+
+
+<link rel="canonical" href="https://lgallardo.com/2026/06/10/hermes-kanban-ai-agent-delivery/">
+<meta property="og:url" content="https://lgallardo.com/2026/06/10/hermes-kanban-ai-agent-delivery/">
+
+
+
+<meta property="og:description" content="A practical look at using Hermes Kanban to coordinate AI coding agents for feature delivery, bug fixes, independent review, and human-approved draft pull requests.">
+
+
+
+<meta name="twitter:site" content="@lgallard">
+<meta name="twitter:title"
+  content="From Idea to Draft PR with Hermes Kanban">
+<meta name="twitter:description" content="A practical look at using Hermes Kanban to coordinate AI coding agents for feature delivery, bug fixes, independent review, and human-approved draft pull requests.">
+<meta name="twitter:url" content="https://lgallardo.com/2026/06/10/hermes-kanban-ai-agent-delivery/">
+
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:image" content="https://lgallardo.com/assets/images/hermes-kanban-ai-agent-delivery.jpg">
+
+
+
+
+<meta name="twitter:creator" content="@Luis Gallardo">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:image" content="https://lgallardo.com/assets/images/hermes-kanban-ai-agent-delivery.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+
+
+
+<meta property="article:published_time" content="2026-06-10T17:58:04+00:00">
+
+
+<meta property="article:author" content="Luis Gallardo">
+
+
+<meta property="article:tag" content="Hermes">
+
+<meta property="article:tag" content="AI Agents">
+
+<meta property="article:tag" content="Coding Agents">
+
+<meta property="article:tag" content="Kanban">
+
+<meta property="article:tag" content="Developer Productivity">
+
+<meta property="article:tag" content="Automation">
+
+<meta property="article:tag" content="Software Engineering">
+
+
+<meta property="article:section" content="Blog">
+
+<meta property="article:section" content="DevOps">
+
+<meta property="article:section" content="AI">
+
+
+
+
+
+
+
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://lgallardo.com",
+      "logo": "https://lgallardo.com/assets/images/luis.jpg"
+    }
+  </script>
+
+
+
+<script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Luis M. Gallardo D.",
+      "url" : "https://lgallardo.com",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+<link href="https://lgallardo.com/feed.xml" type="application/atom+xml" rel="alternate" title="lgallardo.com Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://lgallardo.com/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+
+    <!-- start custom head snippets -->
+<!-- 
+  
+  <a href="/es/2026/06/10/hermes-kanban-ai-agent-delivery/" >Español</a>
+
+-->
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://lgallardo.com/">lgallardo.com</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/categories/">Categories</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://lgallardo.com/tags/">Tags</a></li>
+          
+          
+            
+            <a href="/es/2026/06/10/hermes-kanban-ai-agent-delivery/" >Español</a>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://lgallardo.com/assets/images/luis.jpg" class="author__avatar" alt="Luis M. Gallardo D." itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">Luis M. Gallardo D.</h3>
+    
+      <p class="author__bio" itemprop="description">
+        
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> <span itemprop="name">Alicante, Spain</span>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-linkedin-square" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.stackoverflow.com/users/3229508/lgallard" itemprop="sameAs">
+            <i class="fa fa-fw fa-stack-overflow" aria-hidden="true"></i> Stackoverflow
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="From Idea to Draft PR with Hermes Kanban">
+    <meta itemprop="description" content="How I am using Hermes Kanban to turn AI coding agents into a structured delivery workflow: goal, plan, implementation, review, and draft PR for human approval.">
+    <meta itemprop="datePublished" content="June 10, 2026">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">From Idea to Draft PR with Hermes Kanban
+</h1>
+          
+            <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p><a href="/assets/images/hermes-kanban-ai-agent-delivery.jpg" style="display:block; margin-left:auto; margin-right:auto; width:70%; max-width:700px"><img src="/assets/images/hermes-kanban-ai-agent-delivery.jpg" alt="Hermes Kanban AI agent delivery header" /></a></p>
+
+<p>I am experimenting with a more structured way to use AI coding agents.</p>
+
+<p>Not as a one-shot assistant where I say “fix this bug” and hope the result is good, but as a delivery workflow:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>goal -&gt; plan -&gt; implementation -&gt; review -&gt; draft PR -&gt; human approval
+</code></pre></div></div>
+
+<p>The tool I am using for this is <strong>Hermes Kanban</strong>.</p>
+
+<p>The idea is simple: every feature or fix becomes a durable task, with clear ownership, review steps, and handoffs between agents. Instead of keeping everything inside a long chat, Hermes Kanban gives the work a lifecycle.</p>
+
+<p><a href="/assets/images/hermes-kanban-ai-agent-workflow-diagram.jpg" style="display:block; margin-left:auto; margin-right:auto; width:100%; max-width:1200px"><img src="/assets/images/hermes-kanban-ai-agent-workflow-diagram.jpg" alt="Goal-driven coding agent workflow with Hermes Kanban" /></a></p>
+
+<h2 id="why-not-just-ask-an-agent-to-code">Why Not Just Ask an Agent to Code?</h2>
+
+<p>AI coding agents are powerful, but they can still fail in predictable ways:</p>
+
+<ul>
+  <li>They jump into code too early</li>
+  <li>They misunderstand the actual goal</li>
+  <li>They make plausible but incomplete changes</li>
+  <li>They review their own work too generously</li>
+  <li>They lose context across long conversations</li>
+</ul>
+
+<p>For small tasks, that may be acceptable.</p>
+
+<p>For real product work, I want something more reliable. So I am building a workflow where the agent does not start by editing files. It starts by understanding the goal.</p>
+
+<h2 id="the-workflow">The Workflow</h2>
+
+<p>The process begins with a feature request, bug, or product goal.</p>
+
+<p>From there, the orchestrator creates a plan:</p>
+
+<ul>
+  <li>What needs to change?</li>
+  <li>What is the expected behavior?</li>
+  <li>What areas of the codebase are involved?</li>
+  <li>What does “done” mean?</li>
+  <li>What should be tested or reviewed?</li>
+</ul>
+
+<p>Once the plan is clear, Hermes Kanban creates the implementation task.</p>
+
+<p>The implementation agent works on the change, usually inside a dedicated branch or worktree. When it finishes, it does not mark the work as done immediately. Instead, it hands the result to one or more reviewer agents.</p>
+
+<p>The reviewers check the diff, the tests, and whether the change actually satisfies the original goal.</p>
+
+<p>If something is wrong, the task goes back into the loop:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implement -&gt; review -&gt; fix -&gt; review again
+</code></pre></div></div>
+
+<p>Only when the review passes does the workflow produce a <strong>GitHub draft PR</strong>.</p>
+
+<p>That draft PR is the handoff point for me.</p>
+
+<p>The agents can investigate, implement, test, and review, but I still decide whether the change should be merged.</p>
+
+<h2 id="human-approval-stays-in-the-loop">Human Approval Stays in the Loop</h2>
+
+<p>This is an important boundary.</p>
+
+<p>I do not want agents silently merging code or promoting changes to production. The goal is not full automation without control.</p>
+
+<p>The goal is leverage.</p>
+
+<p>I want AI agents to handle the repetitive engineering work:</p>
+
+<ul>
+  <li>Investigating issues</li>
+  <li>Editing code</li>
+  <li>Writing or updating tests</li>
+  <li>Checking diffs</li>
+  <li>Preparing PRs</li>
+  <li>Summarizing what changed</li>
+  <li>Surfacing blockers</li>
+</ul>
+
+<p>But I still want human approval for decisions that matter:</p>
+
+<ul>
+  <li>Product behavior</li>
+  <li>Architecture tradeoffs</li>
+  <li>Merge approval</li>
+  <li>Production releases</li>
+</ul>
+
+<p>In this setup, the agents move the work from idea to review-ready PR. I remain the final gate.</p>
+
+<h2 id="why-hermes-kanban-helps">Why Hermes Kanban Helps</h2>
+
+<p>A normal chat session is temporary. It can be useful, but it is not a great structure for multi-step delivery.</p>
+
+<p>Hermes Kanban gives each task a state: ready, running, blocked, or done. Review can be another explicit task instead of a vague comment buried in a chat.</p>
+
+<p>That makes handoffs visible. One agent can implement, another can review, and a later task can handle deployment or follow-up work.</p>
+
+<p>That matters because real engineering work is rarely just “write code”. It involves decisions, review, feedback, and iteration.</p>
+
+<p>Kanban gives the agents a shared operating model.</p>
+
+<h2 id="the-pattern-i-am-aiming-for">The Pattern I Am Aiming For</h2>
+
+<p>The workflow I want is:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Start with a goal
+2. Challenge assumptions
+3. Create a plan
+4. Define success criteria
+5. Implement autonomously
+6. Review independently
+7. Produce a draft PR
+8. Wait for human approval
+</code></pre></div></div>
+
+<p>That is the shift I care about.</p>
+
+<p>Not “AI writes code”.</p>
+
+<p>More like:</p>
+
+<blockquote>
+  <p>AI agents move a task through an engineering delivery pipeline, while the human keeps control of the important decisions.</p>
+</blockquote>
+
+<h2 id="early-lessons">Early Lessons</h2>
+
+<p>A few things are already clear.</p>
+
+<p>First, the plan matters more than the model. A strong model with a vague task still produces vague results.</p>
+
+<p>Second, review must be explicit. If the same agent that wrote the code is the only reviewer, problems are easier to miss.</p>
+
+<p>Third, agents need boundaries. In my case, the boundary is the draft PR. They can prepare the work, but they do not merge without approval.</p>
+
+<p>Finally, feedback should go back into the workflow. If I request changes, that feedback becomes new input for the next iteration, not just a random chat message.</p>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>AI coding agents are becoming good enough to do meaningful engineering work, but the workflow around them matters.</p>
+
+<p>For me, Hermes Kanban is a way to make that workflow more reliable.</p>
+
+<p>It turns agent work into something closer to a delivery system:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>goal -&gt; plan -&gt; build -&gt; review -&gt; draft PR -&gt; human sign-off
+</code></pre></div></div>
+
+<p>That structure is what makes the difference between an impressive demo and something I can actually use to ship features and fixes.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/tags/ai-agents" class="page__taxonomy-item" rel="tag">AI Agents</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/automation" class="page__taxonomy-item" rel="tag">Automation</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/coding-agents" class="page__taxonomy-item" rel="tag">Coding Agents</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/developer-productivity" class="page__taxonomy-item" rel="tag">Developer Productivity</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/hermes" class="page__taxonomy-item" rel="tag">Hermes</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/kanban" class="page__taxonomy-item" rel="tag">Kanban</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/tags/software-engineering" class="page__taxonomy-item" rel="tag">Software Engineering</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fa fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="https://lgallardo.com/categories/ai" class="page__taxonomy-item" rel="tag">AI</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/blog" class="page__taxonomy-item" rel="tag">Blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="https://lgallardo.com/categories/devops" class="page__taxonomy-item" rel="tag">DevOps</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2026-06-10T17:58:04+00:00">June 10, 2026</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lgallard&text=From+Idea+to+Draft+PR+with+Hermes+Kanban%20https%3A%2F%2Flgallardo.com%2F2026%2F06%2F10%2Fhermes-kanban-ai-agent-delivery%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flgallardo.com%2F2026%2F06%2F10%2Fhermes-kanban-ai-agent-delivery%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Flgallardo.com%2F2026%2F06%2F10%2Fhermes-kanban-ai-agent-delivery%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Flgallardo.com%2F2026%2F06%2F10%2Fhermes-kanban-ai-agent-delivery%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" class="pagination--pager" title="Hermes Agent Profiles: Isolating Agents in Practice
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/hermes-profiles-agent-cloning-banner.jpg" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/05/27/hermes-profiles-agent-isolation/" rel="permalink">Hermes Agent Profiles: Isolating Agents in Practice
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">While setting up separate Hermes agents for AnkiVocab and Terraform work, I ran into the real reason profiles matter: agents get better when their context, c...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/claude-code-remote-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/28/claude-code-remote-control-ollama/" rel="permalink">Claude Code Remote Control + Ollama: Control Your GPU Server from Your Phone
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Combine Claude Code’s Remote Control with a remote Ollama instance to control powerful GPU models from your phone or tablet – no cloud dependency required.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/KOreader-Qwen-robot.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/25/koreader-anki-flashcard-plugin/" rel="permalink">AI Flashcards While You Read: Building a KOReader Plugin for Anki
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">I extended my Anki Vocabulary Card Generator idea to the Kobo e-reader. Highlight a phrase, tap Anki Card, and get a full AI-generated flashcard—definition, ...</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    <div class="archive__item-flex">
+      
+      <div class="archive__item-teaser--small">
+        <img src= "https://lgallardo.com/assets/images/coderabbit-claude-integration.png" 
+          alt="" />
+      </div>
+      
+      <div class="archive__item-content">
+        <h2 class="archive__item-title" itemprop="headline">
+          
+          <a href="https://lgallardo.com/2026/02/10/coderabbit-claude-code-integration/" rel="permalink">AI-Powered Code Reviews in Claude Code: A Complete CodeRabbit Integration Guide
+</a>
+          
+        </h2>
+        
+        <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+        
+        <p class="archive__item-excerpt" itemprop="description">Learn how to set up CodeRabbit’s AI code review directly in Claude Code for autonomous development workflows with built-in quality gates and security scanning.
+</p>
+      </div>
+    </div>
+  </article>
+</div>
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lgallard"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+      <li><a href="http://github.com/lgallard"><i class="fa fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+    
+    <li><a href="https://lgallardo.com/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2026 Luis M. Gallardo D.. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="https://lgallardo.com/assets/js/main.min.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
